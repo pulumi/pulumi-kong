@@ -1,0 +1,3 @@
+name: consumer
+runtime: nodejs
+description: A minimal TypeScript Pulumi program that creates a kong consumer
