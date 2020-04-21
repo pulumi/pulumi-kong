@@ -16,11 +16,16 @@ class Provider(pulumi.ProviderResource):
         settings, however an explicit `Provider` instance may be created and passed during resource
         construction to achieve fine-grained programmatic control over provider settings. See the
         [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
-        
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-
-        > This content is derived from https://github.com/kevholditch/terraform-provider-kong/blob/master/website/docs/index.html.markdown.
+        :param pulumi.Input[str] kong_admin_password: An basic auth password for kong admin
+        :param pulumi.Input[str] kong_admin_token: API key for the kong api (Enterprise Edition)
+        :param pulumi.Input[str] kong_admin_uri: The address of the kong admin url e.g. http://localhost:8001
+        :param pulumi.Input[str] kong_admin_username: An basic auth user for kong admin
+        :param pulumi.Input[str] kong_api_key: API key for the kong api (if you have locked it down)
+        :param pulumi.Input[bool] strict_plugins_match: Should plugins `config_json` field strictly match plugin configuration
+        :param pulumi.Input[bool] tls_skip_verify: Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -66,22 +71,6 @@ class Provider(pulumi.ProviderResource):
             __props__,
             opts)
 
-    @staticmethod
-    def get(resource_name, id, opts=None):
-        """
-        Get an existing Provider resource's state with the given name, id, and optional extra
-        properties used to qualify the lookup.
-        
-        :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
-        :param pulumi.ResourceOptions opts: Options for the resource.
-
-        > This content is derived from https://github.com/kevholditch/terraform-provider-kong/blob/master/website/docs/index.html.markdown.
-        """
-        opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
-
-        __props__ = dict()
-        return Provider(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):
         return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 

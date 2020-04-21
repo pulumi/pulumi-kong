@@ -12,6 +12,9 @@ from . import utilities, tables
 class Plugin(pulumi.CustomResource):
     computed_config: pulumi.Output[str]
     config_json: pulumi.Output[str]
+    """
+    plugin configuration in JSON format, configuration must be a valid JSON object.
+    """
     consumer_id: pulumi.Output[str]
     enabled: pulumi.Output[bool]
     name: pulumi.Output[str]
@@ -21,9 +24,9 @@ class Plugin(pulumi.CustomResource):
     def __init__(__self__, resource_name, opts=None, config_json=None, consumer_id=None, enabled=None, name=None, route_id=None, service_id=None, strict_match=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a Plugin resource with the given unique name, props, and options.
-        
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -61,14 +64,16 @@ class Plugin(pulumi.CustomResource):
         """
         Get an existing Plugin resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["computed_config"] = computed_config
         __props__["config_json"] = config_json
         __props__["consumer_id"] = consumer_id

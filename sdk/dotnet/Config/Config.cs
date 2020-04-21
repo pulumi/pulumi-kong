@@ -8,7 +8,6 @@ namespace Pulumi.Kong
     public static class Config
     {
         private static readonly Pulumi.Config __config = new Pulumi.Config("kong");
-
         /// <summary>
         /// An basic auth password for kong admin
         /// </summary>
@@ -44,8 +43,5 @@ namespace Pulumi.Kong
         /// </summary>
         public static bool? TlsSkipVerify { get; set; } = __config.GetBoolean("tlsSkipVerify") ?? Utilities.GetEnvBoolean("TLS_SKIP_VERIFY") ?? false;
 
-    }
-    namespace ConfigTypes
-    {
     }
 }

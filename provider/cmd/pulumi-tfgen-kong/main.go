@@ -15,13 +15,12 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform/pkg/tfbridge"
-
-	kong "github.com/pulumi/pulumi-kong"
-	"github.com/pulumi/pulumi-kong/pkg/version"
+	"github.com/pulumi/pulumi-kong/provider/v2/pkg/version"
+	kong "github.com/pulumi/pulumi-kong/provider/v2"
+	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfgen"
 )
 
 func main() {
 	// Modify the path to point to the new provider
-	tfbridge.Main("kong", version.Version, kong.Provider())
+	tfgen.Main("kong", version.Version, kong.Provider())
 }

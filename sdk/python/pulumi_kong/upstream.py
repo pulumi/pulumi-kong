@@ -22,44 +22,37 @@ class Upstream(pulumi.CustomResource):
     def __init__(__self__, resource_name, opts=None, hash_fallback=None, hash_fallback_header=None, hash_on=None, hash_on_cookie=None, hash_on_cookie_path=None, hash_on_header=None, healthchecks=None, name=None, slots=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a Upstream resource with the given unique name, props, and options.
-        
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        
+
         The **healthchecks** object supports the following:
-        
+
           * `active` (`pulumi.Input[dict]`)
-        
             * `concurrency` (`pulumi.Input[float]`)
             * `healthy` (`pulumi.Input[dict]`)
-        
               * `httpStatuses` (`pulumi.Input[list]`)
               * `interval` (`pulumi.Input[float]`)
               * `successes` (`pulumi.Input[float]`)
-        
+
             * `httpPath` (`pulumi.Input[str]`)
             * `httpsSni` (`pulumi.Input[str]`)
             * `httpsVerifyCertificate` (`pulumi.Input[bool]`)
             * `timeout` (`pulumi.Input[float]`)
             * `type` (`pulumi.Input[str]`)
             * `unhealthy` (`pulumi.Input[dict]`)
-        
               * `httpFailures` (`pulumi.Input[float]`)
               * `httpStatuses` (`pulumi.Input[list]`)
               * `interval` (`pulumi.Input[float]`)
               * `tcpFailures` (`pulumi.Input[float]`)
               * `timeouts` (`pulumi.Input[float]`)
-        
+
           * `passive` (`pulumi.Input[dict]`)
-        
             * `healthy` (`pulumi.Input[dict]`)
-        
               * `httpStatuses` (`pulumi.Input[list]`)
               * `successes` (`pulumi.Input[float]`)
-        
+
             * `type` (`pulumi.Input[str]`)
             * `unhealthy` (`pulumi.Input[dict]`)
-        
               * `httpFailures` (`pulumi.Input[float]`)
               * `httpStatuses` (`pulumi.Input[list]`)
               * `tcpFailures` (`pulumi.Input[float]`)
@@ -102,45 +95,39 @@ class Upstream(pulumi.CustomResource):
         """
         Get an existing Upstream resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        
+
         The **healthchecks** object supports the following:
-        
+
           * `active` (`pulumi.Input[dict]`)
-        
             * `concurrency` (`pulumi.Input[float]`)
             * `healthy` (`pulumi.Input[dict]`)
-        
               * `httpStatuses` (`pulumi.Input[list]`)
               * `interval` (`pulumi.Input[float]`)
               * `successes` (`pulumi.Input[float]`)
-        
+
             * `httpPath` (`pulumi.Input[str]`)
             * `httpsSni` (`pulumi.Input[str]`)
             * `httpsVerifyCertificate` (`pulumi.Input[bool]`)
             * `timeout` (`pulumi.Input[float]`)
             * `type` (`pulumi.Input[str]`)
             * `unhealthy` (`pulumi.Input[dict]`)
-        
               * `httpFailures` (`pulumi.Input[float]`)
               * `httpStatuses` (`pulumi.Input[list]`)
               * `interval` (`pulumi.Input[float]`)
               * `tcpFailures` (`pulumi.Input[float]`)
               * `timeouts` (`pulumi.Input[float]`)
-        
+
           * `passive` (`pulumi.Input[dict]`)
-        
             * `healthy` (`pulumi.Input[dict]`)
-        
               * `httpStatuses` (`pulumi.Input[list]`)
               * `successes` (`pulumi.Input[float]`)
-        
+
             * `type` (`pulumi.Input[str]`)
             * `unhealthy` (`pulumi.Input[dict]`)
-        
               * `httpFailures` (`pulumi.Input[float]`)
               * `httpStatuses` (`pulumi.Input[list]`)
               * `tcpFailures` (`pulumi.Input[float]`)
@@ -149,6 +136,7 @@ class Upstream(pulumi.CustomResource):
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["hash_fallback"] = hash_fallback
         __props__["hash_fallback_header"] = hash_fallback_header
         __props__["hash_on"] = hash_on

@@ -4,136 +4,105 @@
 package kong
 
 import (
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type Upstream struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	HashFallback       pulumi.StringPtrOutput     `pulumi:"hashFallback"`
+	HashFallbackHeader pulumi.StringPtrOutput     `pulumi:"hashFallbackHeader"`
+	HashOn             pulumi.StringPtrOutput     `pulumi:"hashOn"`
+	HashOnCookie       pulumi.StringPtrOutput     `pulumi:"hashOnCookie"`
+	HashOnCookiePath   pulumi.StringPtrOutput     `pulumi:"hashOnCookiePath"`
+	HashOnHeader       pulumi.StringPtrOutput     `pulumi:"hashOnHeader"`
+	Healthchecks       UpstreamHealthchecksOutput `pulumi:"healthchecks"`
+	Name               pulumi.StringOutput        `pulumi:"name"`
+	Slots              pulumi.IntPtrOutput        `pulumi:"slots"`
 }
 
 // NewUpstream registers a new resource with the given unique name, arguments, and options.
 func NewUpstream(ctx *pulumi.Context,
-	name string, args *UpstreamArgs, opts ...pulumi.ResourceOpt) (*Upstream, error) {
-	inputs := make(map[string]interface{})
+	name string, args *UpstreamArgs, opts ...pulumi.ResourceOption) (*Upstream, error) {
 	if args == nil {
-		inputs["hashFallback"] = nil
-		inputs["hashFallbackHeader"] = nil
-		inputs["hashOn"] = nil
-		inputs["hashOnCookie"] = nil
-		inputs["hashOnCookiePath"] = nil
-		inputs["hashOnHeader"] = nil
-		inputs["healthchecks"] = nil
-		inputs["name"] = nil
-		inputs["slots"] = nil
-	} else {
-		inputs["hashFallback"] = args.HashFallback
-		inputs["hashFallbackHeader"] = args.HashFallbackHeader
-		inputs["hashOn"] = args.HashOn
-		inputs["hashOnCookie"] = args.HashOnCookie
-		inputs["hashOnCookiePath"] = args.HashOnCookiePath
-		inputs["hashOnHeader"] = args.HashOnHeader
-		inputs["healthchecks"] = args.Healthchecks
-		inputs["name"] = args.Name
-		inputs["slots"] = args.Slots
+		args = &UpstreamArgs{}
 	}
-	s, err := ctx.RegisterResource("kong:index/upstream:Upstream", name, true, inputs, opts...)
+	var resource Upstream
+	err := ctx.RegisterResource("kong:index/upstream:Upstream", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Upstream{s: s}, nil
+	return &resource, nil
 }
 
 // GetUpstream gets an existing Upstream resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetUpstream(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *UpstreamState, opts ...pulumi.ResourceOpt) (*Upstream, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["hashFallback"] = state.HashFallback
-		inputs["hashFallbackHeader"] = state.HashFallbackHeader
-		inputs["hashOn"] = state.HashOn
-		inputs["hashOnCookie"] = state.HashOnCookie
-		inputs["hashOnCookiePath"] = state.HashOnCookiePath
-		inputs["hashOnHeader"] = state.HashOnHeader
-		inputs["healthchecks"] = state.Healthchecks
-		inputs["name"] = state.Name
-		inputs["slots"] = state.Slots
-	}
-	s, err := ctx.ReadResource("kong:index/upstream:Upstream", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *UpstreamState, opts ...pulumi.ResourceOption) (*Upstream, error) {
+	var resource Upstream
+	err := ctx.ReadResource("kong:index/upstream:Upstream", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Upstream{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *Upstream) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *Upstream) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *Upstream) HashFallback() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["hashFallback"])
-}
-
-func (r *Upstream) HashFallbackHeader() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["hashFallbackHeader"])
-}
-
-func (r *Upstream) HashOn() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["hashOn"])
-}
-
-func (r *Upstream) HashOnCookie() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["hashOnCookie"])
-}
-
-func (r *Upstream) HashOnCookiePath() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["hashOnCookiePath"])
-}
-
-func (r *Upstream) HashOnHeader() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["hashOnHeader"])
-}
-
-func (r *Upstream) Healthchecks() pulumi.Output {
-	return r.s.State["healthchecks"]
-}
-
-func (r *Upstream) Name() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["name"])
-}
-
-func (r *Upstream) Slots() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["slots"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering Upstream resources.
+type upstreamState struct {
+	HashFallback       *string               `pulumi:"hashFallback"`
+	HashFallbackHeader *string               `pulumi:"hashFallbackHeader"`
+	HashOn             *string               `pulumi:"hashOn"`
+	HashOnCookie       *string               `pulumi:"hashOnCookie"`
+	HashOnCookiePath   *string               `pulumi:"hashOnCookiePath"`
+	HashOnHeader       *string               `pulumi:"hashOnHeader"`
+	Healthchecks       *UpstreamHealthchecks `pulumi:"healthchecks"`
+	Name               *string               `pulumi:"name"`
+	Slots              *int                  `pulumi:"slots"`
+}
+
 type UpstreamState struct {
-	HashFallback interface{}
-	HashFallbackHeader interface{}
-	HashOn interface{}
-	HashOnCookie interface{}
-	HashOnCookiePath interface{}
-	HashOnHeader interface{}
-	Healthchecks interface{}
-	Name interface{}
-	Slots interface{}
+	HashFallback       pulumi.StringPtrInput
+	HashFallbackHeader pulumi.StringPtrInput
+	HashOn             pulumi.StringPtrInput
+	HashOnCookie       pulumi.StringPtrInput
+	HashOnCookiePath   pulumi.StringPtrInput
+	HashOnHeader       pulumi.StringPtrInput
+	Healthchecks       UpstreamHealthchecksPtrInput
+	Name               pulumi.StringPtrInput
+	Slots              pulumi.IntPtrInput
+}
+
+func (UpstreamState) ElementType() reflect.Type {
+	return reflect.TypeOf((*upstreamState)(nil)).Elem()
+}
+
+type upstreamArgs struct {
+	HashFallback       *string               `pulumi:"hashFallback"`
+	HashFallbackHeader *string               `pulumi:"hashFallbackHeader"`
+	HashOn             *string               `pulumi:"hashOn"`
+	HashOnCookie       *string               `pulumi:"hashOnCookie"`
+	HashOnCookiePath   *string               `pulumi:"hashOnCookiePath"`
+	HashOnHeader       *string               `pulumi:"hashOnHeader"`
+	Healthchecks       *UpstreamHealthchecks `pulumi:"healthchecks"`
+	Name               *string               `pulumi:"name"`
+	Slots              *int                  `pulumi:"slots"`
 }
 
 // The set of arguments for constructing a Upstream resource.
 type UpstreamArgs struct {
-	HashFallback interface{}
-	HashFallbackHeader interface{}
-	HashOn interface{}
-	HashOnCookie interface{}
-	HashOnCookiePath interface{}
-	HashOnHeader interface{}
-	Healthchecks interface{}
-	Name interface{}
-	Slots interface{}
+	HashFallback       pulumi.StringPtrInput
+	HashFallbackHeader pulumi.StringPtrInput
+	HashOn             pulumi.StringPtrInput
+	HashOnCookie       pulumi.StringPtrInput
+	HashOnCookiePath   pulumi.StringPtrInput
+	HashOnHeader       pulumi.StringPtrInput
+	Healthchecks       UpstreamHealthchecksPtrInput
+	Name               pulumi.StringPtrInput
+	Slots              pulumi.IntPtrInput
+}
+
+func (UpstreamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*upstreamArgs)(nil)).Elem()
 }

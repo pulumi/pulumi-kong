@@ -15,7 +15,6 @@ class Consumer(pulumi.CustomResource):
     def __init__(__self__, resource_name, opts=None, custom_id=None, username=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a Consumer resource with the given unique name, props, and options.
-        
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
@@ -51,7 +50,7 @@ class Consumer(pulumi.CustomResource):
         """
         Get an existing Consumer resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -59,6 +58,7 @@ class Consumer(pulumi.CustomResource):
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["custom_id"] = custom_id
         __props__["username"] = username
         return Consumer(resource_name, opts=opts, __props__=__props__)
