@@ -4,17 +4,23 @@
 package kong
 
 import (
+	"reflect"
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type Target struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	Target     pulumi.StringOutput `pulumi:"target"`
+	UpstreamId pulumi.StringOutput `pulumi:"upstreamId"`
+	Weight     pulumi.IntOutput    `pulumi:"weight"`
 }
 
 // NewTarget registers a new resource with the given unique name, arguments, and options.
 func NewTarget(ctx *pulumi.Context,
-	name string, args *TargetArgs, opts ...pulumi.ResourceOpt) (*Target, error) {
+	name string, args *TargetArgs, opts ...pulumi.ResourceOption) (*Target, error) {
 	if args == nil || args.Target == nil {
 		return nil, errors.New("missing required argument 'Target'")
 	}
@@ -24,72 +30,59 @@ func NewTarget(ctx *pulumi.Context,
 	if args == nil || args.Weight == nil {
 		return nil, errors.New("missing required argument 'Weight'")
 	}
-	inputs := make(map[string]interface{})
 	if args == nil {
-		inputs["target"] = nil
-		inputs["upstreamId"] = nil
-		inputs["weight"] = nil
-	} else {
-		inputs["target"] = args.Target
-		inputs["upstreamId"] = args.UpstreamId
-		inputs["weight"] = args.Weight
+		args = &TargetArgs{}
 	}
-	s, err := ctx.RegisterResource("kong:index/target:Target", name, true, inputs, opts...)
+	var resource Target
+	err := ctx.RegisterResource("kong:index/target:Target", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Target{s: s}, nil
+	return &resource, nil
 }
 
 // GetTarget gets an existing Target resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetTarget(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *TargetState, opts ...pulumi.ResourceOpt) (*Target, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["target"] = state.Target
-		inputs["upstreamId"] = state.UpstreamId
-		inputs["weight"] = state.Weight
-	}
-	s, err := ctx.ReadResource("kong:index/target:Target", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *TargetState, opts ...pulumi.ResourceOption) (*Target, error) {
+	var resource Target
+	err := ctx.ReadResource("kong:index/target:Target", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Target{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *Target) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *Target) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *Target) Target() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["target"])
-}
-
-func (r *Target) UpstreamId() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["upstreamId"])
-}
-
-func (r *Target) Weight() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["weight"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering Target resources.
+type targetState struct {
+	Target     *string `pulumi:"target"`
+	UpstreamId *string `pulumi:"upstreamId"`
+	Weight     *int    `pulumi:"weight"`
+}
+
 type TargetState struct {
-	Target interface{}
-	UpstreamId interface{}
-	Weight interface{}
+	Target     pulumi.StringPtrInput
+	UpstreamId pulumi.StringPtrInput
+	Weight     pulumi.IntPtrInput
+}
+
+func (TargetState) ElementType() reflect.Type {
+	return reflect.TypeOf((*targetState)(nil)).Elem()
+}
+
+type targetArgs struct {
+	Target     string `pulumi:"target"`
+	UpstreamId string `pulumi:"upstreamId"`
+	Weight     int    `pulumi:"weight"`
 }
 
 // The set of arguments for constructing a Target resource.
 type TargetArgs struct {
-	Target interface{}
-	UpstreamId interface{}
-	Weight interface{}
+	Target     pulumi.StringInput
+	UpstreamId pulumi.StringInput
+	Weight     pulumi.IntInput
+}
+
+func (TargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*targetArgs)(nil)).Elem()
 }

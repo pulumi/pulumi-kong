@@ -14,9 +14,9 @@ from .certificate import *
 from .consumer import *
 from .consumer_plugin_config import *
 from .plugin import *
+from .provider import *
 from .route import *
 from .service import *
 from .sni import *
 from .target import *
 from .upstream import *
-from .provider import *

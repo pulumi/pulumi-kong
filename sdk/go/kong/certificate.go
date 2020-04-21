@@ -4,77 +4,74 @@
 package kong
 
 import (
+	"reflect"
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type Certificate struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	Certificate pulumi.StringOutput    `pulumi:"certificate"`
+	PrivateKey  pulumi.StringPtrOutput `pulumi:"privateKey"`
 }
 
 // NewCertificate registers a new resource with the given unique name, arguments, and options.
 func NewCertificate(ctx *pulumi.Context,
-	name string, args *CertificateArgs, opts ...pulumi.ResourceOpt) (*Certificate, error) {
+	name string, args *CertificateArgs, opts ...pulumi.ResourceOption) (*Certificate, error) {
 	if args == nil || args.Certificate == nil {
 		return nil, errors.New("missing required argument 'Certificate'")
 	}
-	inputs := make(map[string]interface{})
 	if args == nil {
-		inputs["certificate"] = nil
-		inputs["privateKey"] = nil
-	} else {
-		inputs["certificate"] = args.Certificate
-		inputs["privateKey"] = args.PrivateKey
+		args = &CertificateArgs{}
 	}
-	s, err := ctx.RegisterResource("kong:index/certificate:Certificate", name, true, inputs, opts...)
+	var resource Certificate
+	err := ctx.RegisterResource("kong:index/certificate:Certificate", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Certificate{s: s}, nil
+	return &resource, nil
 }
 
 // GetCertificate gets an existing Certificate resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetCertificate(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *CertificateState, opts ...pulumi.ResourceOpt) (*Certificate, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["certificate"] = state.Certificate
-		inputs["privateKey"] = state.PrivateKey
-	}
-	s, err := ctx.ReadResource("kong:index/certificate:Certificate", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *CertificateState, opts ...pulumi.ResourceOption) (*Certificate, error) {
+	var resource Certificate
+	err := ctx.ReadResource("kong:index/certificate:Certificate", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Certificate{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *Certificate) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *Certificate) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *Certificate) Certificate() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["certificate"])
-}
-
-func (r *Certificate) PrivateKey() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["privateKey"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering Certificate resources.
+type certificateState struct {
+	Certificate *string `pulumi:"certificate"`
+	PrivateKey  *string `pulumi:"privateKey"`
+}
+
 type CertificateState struct {
-	Certificate interface{}
-	PrivateKey interface{}
+	Certificate pulumi.StringPtrInput
+	PrivateKey  pulumi.StringPtrInput
+}
+
+func (CertificateState) ElementType() reflect.Type {
+	return reflect.TypeOf((*certificateState)(nil)).Elem()
+}
+
+type certificateArgs struct {
+	Certificate string  `pulumi:"certificate"`
+	PrivateKey  *string `pulumi:"privateKey"`
 }
 
 // The set of arguments for constructing a Certificate resource.
 type CertificateArgs struct {
-	Certificate interface{}
-	PrivateKey interface{}
+	Certificate pulumi.StringInput
+	PrivateKey  pulumi.StringPtrInput
+}
+
+func (CertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*certificateArgs)(nil)).Elem()
 }

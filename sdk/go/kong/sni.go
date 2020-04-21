@@ -4,77 +4,74 @@
 package kong
 
 import (
+	"reflect"
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type Sni struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	CertificateId pulumi.StringOutput `pulumi:"certificateId"`
+	Name          pulumi.StringOutput `pulumi:"name"`
 }
 
 // NewSni registers a new resource with the given unique name, arguments, and options.
 func NewSni(ctx *pulumi.Context,
-	name string, args *SniArgs, opts ...pulumi.ResourceOpt) (*Sni, error) {
+	name string, args *SniArgs, opts ...pulumi.ResourceOption) (*Sni, error) {
 	if args == nil || args.CertificateId == nil {
 		return nil, errors.New("missing required argument 'CertificateId'")
 	}
-	inputs := make(map[string]interface{})
 	if args == nil {
-		inputs["certificateId"] = nil
-		inputs["name"] = nil
-	} else {
-		inputs["certificateId"] = args.CertificateId
-		inputs["name"] = args.Name
+		args = &SniArgs{}
 	}
-	s, err := ctx.RegisterResource("kong:index/sni:Sni", name, true, inputs, opts...)
+	var resource Sni
+	err := ctx.RegisterResource("kong:index/sni:Sni", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Sni{s: s}, nil
+	return &resource, nil
 }
 
 // GetSni gets an existing Sni resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetSni(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *SniState, opts ...pulumi.ResourceOpt) (*Sni, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["certificateId"] = state.CertificateId
-		inputs["name"] = state.Name
-	}
-	s, err := ctx.ReadResource("kong:index/sni:Sni", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *SniState, opts ...pulumi.ResourceOption) (*Sni, error) {
+	var resource Sni
+	err := ctx.ReadResource("kong:index/sni:Sni", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Sni{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *Sni) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *Sni) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *Sni) CertificateId() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["certificateId"])
-}
-
-func (r *Sni) Name() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["name"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering Sni resources.
+type sniState struct {
+	CertificateId *string `pulumi:"certificateId"`
+	Name          *string `pulumi:"name"`
+}
+
 type SniState struct {
-	CertificateId interface{}
-	Name interface{}
+	CertificateId pulumi.StringPtrInput
+	Name          pulumi.StringPtrInput
+}
+
+func (SniState) ElementType() reflect.Type {
+	return reflect.TypeOf((*sniState)(nil)).Elem()
+}
+
+type sniArgs struct {
+	CertificateId string  `pulumi:"certificateId"`
+	Name          *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a Sni resource.
 type SniArgs struct {
-	CertificateId interface{}
-	Name interface{}
+	CertificateId pulumi.StringInput
+	Name          pulumi.StringPtrInput
+}
+
+func (SniArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*sniArgs)(nil)).Elem()
 }

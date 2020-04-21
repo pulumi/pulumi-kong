@@ -4,140 +4,109 @@
 package kong
 
 import (
+	"reflect"
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type Service struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	ConnectTimeout pulumi.IntPtrOutput    `pulumi:"connectTimeout"`
+	Host           pulumi.StringPtrOutput `pulumi:"host"`
+	Name           pulumi.StringOutput    `pulumi:"name"`
+	Path           pulumi.StringPtrOutput `pulumi:"path"`
+	Port           pulumi.IntPtrOutput    `pulumi:"port"`
+	Protocol       pulumi.StringOutput    `pulumi:"protocol"`
+	ReadTimeout    pulumi.IntPtrOutput    `pulumi:"readTimeout"`
+	Retries        pulumi.IntPtrOutput    `pulumi:"retries"`
+	WriteTimeout   pulumi.IntPtrOutput    `pulumi:"writeTimeout"`
 }
 
 // NewService registers a new resource with the given unique name, arguments, and options.
 func NewService(ctx *pulumi.Context,
-	name string, args *ServiceArgs, opts ...pulumi.ResourceOpt) (*Service, error) {
+	name string, args *ServiceArgs, opts ...pulumi.ResourceOption) (*Service, error) {
 	if args == nil || args.Protocol == nil {
 		return nil, errors.New("missing required argument 'Protocol'")
 	}
-	inputs := make(map[string]interface{})
 	if args == nil {
-		inputs["connectTimeout"] = nil
-		inputs["host"] = nil
-		inputs["name"] = nil
-		inputs["path"] = nil
-		inputs["port"] = nil
-		inputs["protocol"] = nil
-		inputs["readTimeout"] = nil
-		inputs["retries"] = nil
-		inputs["writeTimeout"] = nil
-	} else {
-		inputs["connectTimeout"] = args.ConnectTimeout
-		inputs["host"] = args.Host
-		inputs["name"] = args.Name
-		inputs["path"] = args.Path
-		inputs["port"] = args.Port
-		inputs["protocol"] = args.Protocol
-		inputs["readTimeout"] = args.ReadTimeout
-		inputs["retries"] = args.Retries
-		inputs["writeTimeout"] = args.WriteTimeout
+		args = &ServiceArgs{}
 	}
-	s, err := ctx.RegisterResource("kong:index/service:Service", name, true, inputs, opts...)
+	var resource Service
+	err := ctx.RegisterResource("kong:index/service:Service", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Service{s: s}, nil
+	return &resource, nil
 }
 
 // GetService gets an existing Service resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetService(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *ServiceState, opts ...pulumi.ResourceOpt) (*Service, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["connectTimeout"] = state.ConnectTimeout
-		inputs["host"] = state.Host
-		inputs["name"] = state.Name
-		inputs["path"] = state.Path
-		inputs["port"] = state.Port
-		inputs["protocol"] = state.Protocol
-		inputs["readTimeout"] = state.ReadTimeout
-		inputs["retries"] = state.Retries
-		inputs["writeTimeout"] = state.WriteTimeout
-	}
-	s, err := ctx.ReadResource("kong:index/service:Service", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *ServiceState, opts ...pulumi.ResourceOption) (*Service, error) {
+	var resource Service
+	err := ctx.ReadResource("kong:index/service:Service", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Service{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *Service) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *Service) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *Service) ConnectTimeout() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["connectTimeout"])
-}
-
-func (r *Service) Host() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["host"])
-}
-
-func (r *Service) Name() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["name"])
-}
-
-func (r *Service) Path() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["path"])
-}
-
-func (r *Service) Port() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["port"])
-}
-
-func (r *Service) Protocol() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["protocol"])
-}
-
-func (r *Service) ReadTimeout() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["readTimeout"])
-}
-
-func (r *Service) Retries() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["retries"])
-}
-
-func (r *Service) WriteTimeout() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["writeTimeout"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering Service resources.
+type serviceState struct {
+	ConnectTimeout *int    `pulumi:"connectTimeout"`
+	Host           *string `pulumi:"host"`
+	Name           *string `pulumi:"name"`
+	Path           *string `pulumi:"path"`
+	Port           *int    `pulumi:"port"`
+	Protocol       *string `pulumi:"protocol"`
+	ReadTimeout    *int    `pulumi:"readTimeout"`
+	Retries        *int    `pulumi:"retries"`
+	WriteTimeout   *int    `pulumi:"writeTimeout"`
+}
+
 type ServiceState struct {
-	ConnectTimeout interface{}
-	Host interface{}
-	Name interface{}
-	Path interface{}
-	Port interface{}
-	Protocol interface{}
-	ReadTimeout interface{}
-	Retries interface{}
-	WriteTimeout interface{}
+	ConnectTimeout pulumi.IntPtrInput
+	Host           pulumi.StringPtrInput
+	Name           pulumi.StringPtrInput
+	Path           pulumi.StringPtrInput
+	Port           pulumi.IntPtrInput
+	Protocol       pulumi.StringPtrInput
+	ReadTimeout    pulumi.IntPtrInput
+	Retries        pulumi.IntPtrInput
+	WriteTimeout   pulumi.IntPtrInput
+}
+
+func (ServiceState) ElementType() reflect.Type {
+	return reflect.TypeOf((*serviceState)(nil)).Elem()
+}
+
+type serviceArgs struct {
+	ConnectTimeout *int    `pulumi:"connectTimeout"`
+	Host           *string `pulumi:"host"`
+	Name           *string `pulumi:"name"`
+	Path           *string `pulumi:"path"`
+	Port           *int    `pulumi:"port"`
+	Protocol       string  `pulumi:"protocol"`
+	ReadTimeout    *int    `pulumi:"readTimeout"`
+	Retries        *int    `pulumi:"retries"`
+	WriteTimeout   *int    `pulumi:"writeTimeout"`
 }
 
 // The set of arguments for constructing a Service resource.
 type ServiceArgs struct {
-	ConnectTimeout interface{}
-	Host interface{}
-	Name interface{}
-	Path interface{}
-	Port interface{}
-	Protocol interface{}
-	ReadTimeout interface{}
-	Retries interface{}
-	WriteTimeout interface{}
+	ConnectTimeout pulumi.IntPtrInput
+	Host           pulumi.StringPtrInput
+	Name           pulumi.StringPtrInput
+	Path           pulumi.StringPtrInput
+	Port           pulumi.IntPtrInput
+	Protocol       pulumi.StringInput
+	ReadTimeout    pulumi.IntPtrInput
+	Retries        pulumi.IntPtrInput
+	WriteTimeout   pulumi.IntPtrInput
+}
+
+func (ServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*serviceArgs)(nil)).Elem()
 }

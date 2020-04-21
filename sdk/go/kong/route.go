@@ -4,170 +4,127 @@
 package kong
 
 import (
+	"reflect"
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type Route struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	Destinations  RouteDestinationArrayOutput `pulumi:"destinations"`
+	Hosts         pulumi.StringArrayOutput    `pulumi:"hosts"`
+	Methods       pulumi.StringArrayOutput    `pulumi:"methods"`
+	Name          pulumi.StringOutput         `pulumi:"name"`
+	Paths         pulumi.StringArrayOutput    `pulumi:"paths"`
+	PreserveHost  pulumi.BoolPtrOutput        `pulumi:"preserveHost"`
+	Protocols     pulumi.StringArrayOutput    `pulumi:"protocols"`
+	RegexPriority pulumi.IntPtrOutput         `pulumi:"regexPriority"`
+	ServiceId     pulumi.StringOutput         `pulumi:"serviceId"`
+	Snis          pulumi.StringArrayOutput    `pulumi:"snis"`
+	Sources       RouteSourceArrayOutput      `pulumi:"sources"`
+	StripPath     pulumi.BoolPtrOutput        `pulumi:"stripPath"`
 }
 
 // NewRoute registers a new resource with the given unique name, arguments, and options.
 func NewRoute(ctx *pulumi.Context,
-	name string, args *RouteArgs, opts ...pulumi.ResourceOpt) (*Route, error) {
+	name string, args *RouteArgs, opts ...pulumi.ResourceOption) (*Route, error) {
 	if args == nil || args.Protocols == nil {
 		return nil, errors.New("missing required argument 'Protocols'")
 	}
 	if args == nil || args.ServiceId == nil {
 		return nil, errors.New("missing required argument 'ServiceId'")
 	}
-	inputs := make(map[string]interface{})
 	if args == nil {
-		inputs["destinations"] = nil
-		inputs["hosts"] = nil
-		inputs["methods"] = nil
-		inputs["name"] = nil
-		inputs["paths"] = nil
-		inputs["preserveHost"] = nil
-		inputs["protocols"] = nil
-		inputs["regexPriority"] = nil
-		inputs["serviceId"] = nil
-		inputs["snis"] = nil
-		inputs["sources"] = nil
-		inputs["stripPath"] = nil
-	} else {
-		inputs["destinations"] = args.Destinations
-		inputs["hosts"] = args.Hosts
-		inputs["methods"] = args.Methods
-		inputs["name"] = args.Name
-		inputs["paths"] = args.Paths
-		inputs["preserveHost"] = args.PreserveHost
-		inputs["protocols"] = args.Protocols
-		inputs["regexPriority"] = args.RegexPriority
-		inputs["serviceId"] = args.ServiceId
-		inputs["snis"] = args.Snis
-		inputs["sources"] = args.Sources
-		inputs["stripPath"] = args.StripPath
+		args = &RouteArgs{}
 	}
-	s, err := ctx.RegisterResource("kong:index/route:Route", name, true, inputs, opts...)
+	var resource Route
+	err := ctx.RegisterResource("kong:index/route:Route", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Route{s: s}, nil
+	return &resource, nil
 }
 
 // GetRoute gets an existing Route resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetRoute(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *RouteState, opts ...pulumi.ResourceOpt) (*Route, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["destinations"] = state.Destinations
-		inputs["hosts"] = state.Hosts
-		inputs["methods"] = state.Methods
-		inputs["name"] = state.Name
-		inputs["paths"] = state.Paths
-		inputs["preserveHost"] = state.PreserveHost
-		inputs["protocols"] = state.Protocols
-		inputs["regexPriority"] = state.RegexPriority
-		inputs["serviceId"] = state.ServiceId
-		inputs["snis"] = state.Snis
-		inputs["sources"] = state.Sources
-		inputs["stripPath"] = state.StripPath
-	}
-	s, err := ctx.ReadResource("kong:index/route:Route", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *RouteState, opts ...pulumi.ResourceOption) (*Route, error) {
+	var resource Route
+	err := ctx.ReadResource("kong:index/route:Route", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Route{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *Route) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *Route) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *Route) Destinations() pulumi.ArrayOutput {
-	return (pulumi.ArrayOutput)(r.s.State["destinations"])
-}
-
-func (r *Route) Hosts() pulumi.ArrayOutput {
-	return (pulumi.ArrayOutput)(r.s.State["hosts"])
-}
-
-func (r *Route) Methods() pulumi.ArrayOutput {
-	return (pulumi.ArrayOutput)(r.s.State["methods"])
-}
-
-func (r *Route) Name() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["name"])
-}
-
-func (r *Route) Paths() pulumi.ArrayOutput {
-	return (pulumi.ArrayOutput)(r.s.State["paths"])
-}
-
-func (r *Route) PreserveHost() pulumi.BoolOutput {
-	return (pulumi.BoolOutput)(r.s.State["preserveHost"])
-}
-
-func (r *Route) Protocols() pulumi.ArrayOutput {
-	return (pulumi.ArrayOutput)(r.s.State["protocols"])
-}
-
-func (r *Route) RegexPriority() pulumi.IntOutput {
-	return (pulumi.IntOutput)(r.s.State["regexPriority"])
-}
-
-func (r *Route) ServiceId() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["serviceId"])
-}
-
-func (r *Route) Snis() pulumi.ArrayOutput {
-	return (pulumi.ArrayOutput)(r.s.State["snis"])
-}
-
-func (r *Route) Sources() pulumi.ArrayOutput {
-	return (pulumi.ArrayOutput)(r.s.State["sources"])
-}
-
-func (r *Route) StripPath() pulumi.BoolOutput {
-	return (pulumi.BoolOutput)(r.s.State["stripPath"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering Route resources.
+type routeState struct {
+	Destinations  []RouteDestination `pulumi:"destinations"`
+	Hosts         []string           `pulumi:"hosts"`
+	Methods       []string           `pulumi:"methods"`
+	Name          *string            `pulumi:"name"`
+	Paths         []string           `pulumi:"paths"`
+	PreserveHost  *bool              `pulumi:"preserveHost"`
+	Protocols     []string           `pulumi:"protocols"`
+	RegexPriority *int               `pulumi:"regexPriority"`
+	ServiceId     *string            `pulumi:"serviceId"`
+	Snis          []string           `pulumi:"snis"`
+	Sources       []RouteSource      `pulumi:"sources"`
+	StripPath     *bool              `pulumi:"stripPath"`
+}
+
 type RouteState struct {
-	Destinations interface{}
-	Hosts interface{}
-	Methods interface{}
-	Name interface{}
-	Paths interface{}
-	PreserveHost interface{}
-	Protocols interface{}
-	RegexPriority interface{}
-	ServiceId interface{}
-	Snis interface{}
-	Sources interface{}
-	StripPath interface{}
+	Destinations  RouteDestinationArrayInput
+	Hosts         pulumi.StringArrayInput
+	Methods       pulumi.StringArrayInput
+	Name          pulumi.StringPtrInput
+	Paths         pulumi.StringArrayInput
+	PreserveHost  pulumi.BoolPtrInput
+	Protocols     pulumi.StringArrayInput
+	RegexPriority pulumi.IntPtrInput
+	ServiceId     pulumi.StringPtrInput
+	Snis          pulumi.StringArrayInput
+	Sources       RouteSourceArrayInput
+	StripPath     pulumi.BoolPtrInput
+}
+
+func (RouteState) ElementType() reflect.Type {
+	return reflect.TypeOf((*routeState)(nil)).Elem()
+}
+
+type routeArgs struct {
+	Destinations  []RouteDestination `pulumi:"destinations"`
+	Hosts         []string           `pulumi:"hosts"`
+	Methods       []string           `pulumi:"methods"`
+	Name          *string            `pulumi:"name"`
+	Paths         []string           `pulumi:"paths"`
+	PreserveHost  *bool              `pulumi:"preserveHost"`
+	Protocols     []string           `pulumi:"protocols"`
+	RegexPriority *int               `pulumi:"regexPriority"`
+	ServiceId     string             `pulumi:"serviceId"`
+	Snis          []string           `pulumi:"snis"`
+	Sources       []RouteSource      `pulumi:"sources"`
+	StripPath     *bool              `pulumi:"stripPath"`
 }
 
 // The set of arguments for constructing a Route resource.
 type RouteArgs struct {
-	Destinations interface{}
-	Hosts interface{}
-	Methods interface{}
-	Name interface{}
-	Paths interface{}
-	PreserveHost interface{}
-	Protocols interface{}
-	RegexPriority interface{}
-	ServiceId interface{}
-	Snis interface{}
-	Sources interface{}
-	StripPath interface{}
+	Destinations  RouteDestinationArrayInput
+	Hosts         pulumi.StringArrayInput
+	Methods       pulumi.StringArrayInput
+	Name          pulumi.StringPtrInput
+	Paths         pulumi.StringArrayInput
+	PreserveHost  pulumi.BoolPtrInput
+	Protocols     pulumi.StringArrayInput
+	RegexPriority pulumi.IntPtrInput
+	ServiceId     pulumi.StringInput
+	Snis          pulumi.StringArrayInput
+	Sources       RouteSourceArrayInput
+	StripPath     pulumi.BoolPtrInput
+}
+
+func (RouteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*routeArgs)(nil)).Elem()
 }

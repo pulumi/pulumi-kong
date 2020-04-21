@@ -4,99 +4,90 @@
 package kong
 
 import (
+	"reflect"
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type ConsumerPluginConfig struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	ComputedConfig pulumi.StringOutput `pulumi:"computedConfig"`
+	// JSON format of plugin config
+	ConfigJson pulumi.StringPtrOutput `pulumi:"configJson"`
+	ConsumerId pulumi.StringOutput    `pulumi:"consumerId"`
+	PluginName pulumi.StringOutput    `pulumi:"pluginName"`
 }
 
 // NewConsumerPluginConfig registers a new resource with the given unique name, arguments, and options.
 func NewConsumerPluginConfig(ctx *pulumi.Context,
-	name string, args *ConsumerPluginConfigArgs, opts ...pulumi.ResourceOpt) (*ConsumerPluginConfig, error) {
+	name string, args *ConsumerPluginConfigArgs, opts ...pulumi.ResourceOption) (*ConsumerPluginConfig, error) {
 	if args == nil || args.ConsumerId == nil {
 		return nil, errors.New("missing required argument 'ConsumerId'")
 	}
 	if args == nil || args.PluginName == nil {
 		return nil, errors.New("missing required argument 'PluginName'")
 	}
-	inputs := make(map[string]interface{})
 	if args == nil {
-		inputs["configJson"] = nil
-		inputs["consumerId"] = nil
-		inputs["pluginName"] = nil
-	} else {
-		inputs["configJson"] = args.ConfigJson
-		inputs["consumerId"] = args.ConsumerId
-		inputs["pluginName"] = args.PluginName
+		args = &ConsumerPluginConfigArgs{}
 	}
-	inputs["computedConfig"] = nil
-	s, err := ctx.RegisterResource("kong:index/consumerPluginConfig:ConsumerPluginConfig", name, true, inputs, opts...)
+	var resource ConsumerPluginConfig
+	err := ctx.RegisterResource("kong:index/consumerPluginConfig:ConsumerPluginConfig", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &ConsumerPluginConfig{s: s}, nil
+	return &resource, nil
 }
 
 // GetConsumerPluginConfig gets an existing ConsumerPluginConfig resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetConsumerPluginConfig(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *ConsumerPluginConfigState, opts ...pulumi.ResourceOpt) (*ConsumerPluginConfig, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["computedConfig"] = state.ComputedConfig
-		inputs["configJson"] = state.ConfigJson
-		inputs["consumerId"] = state.ConsumerId
-		inputs["pluginName"] = state.PluginName
-	}
-	s, err := ctx.ReadResource("kong:index/consumerPluginConfig:ConsumerPluginConfig", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *ConsumerPluginConfigState, opts ...pulumi.ResourceOption) (*ConsumerPluginConfig, error) {
+	var resource ConsumerPluginConfig
+	err := ctx.ReadResource("kong:index/consumerPluginConfig:ConsumerPluginConfig", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &ConsumerPluginConfig{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *ConsumerPluginConfig) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *ConsumerPluginConfig) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *ConsumerPluginConfig) ComputedConfig() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["computedConfig"])
-}
-
-// JSON format of plugin config
-func (r *ConsumerPluginConfig) ConfigJson() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["configJson"])
-}
-
-func (r *ConsumerPluginConfig) ConsumerId() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["consumerId"])
-}
-
-func (r *ConsumerPluginConfig) PluginName() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["pluginName"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering ConsumerPluginConfig resources.
-type ConsumerPluginConfigState struct {
-	ComputedConfig interface{}
+type consumerPluginConfigState struct {
+	ComputedConfig *string `pulumi:"computedConfig"`
 	// JSON format of plugin config
-	ConfigJson interface{}
-	ConsumerId interface{}
-	PluginName interface{}
+	ConfigJson *string `pulumi:"configJson"`
+	ConsumerId *string `pulumi:"consumerId"`
+	PluginName *string `pulumi:"pluginName"`
+}
+
+type ConsumerPluginConfigState struct {
+	ComputedConfig pulumi.StringPtrInput
+	// JSON format of plugin config
+	ConfigJson pulumi.StringPtrInput
+	ConsumerId pulumi.StringPtrInput
+	PluginName pulumi.StringPtrInput
+}
+
+func (ConsumerPluginConfigState) ElementType() reflect.Type {
+	return reflect.TypeOf((*consumerPluginConfigState)(nil)).Elem()
+}
+
+type consumerPluginConfigArgs struct {
+	// JSON format of plugin config
+	ConfigJson *string `pulumi:"configJson"`
+	ConsumerId string  `pulumi:"consumerId"`
+	PluginName string  `pulumi:"pluginName"`
 }
 
 // The set of arguments for constructing a ConsumerPluginConfig resource.
 type ConsumerPluginConfigArgs struct {
 	// JSON format of plugin config
-	ConfigJson interface{}
-	ConsumerId interface{}
-	PluginName interface{}
+	ConfigJson pulumi.StringPtrInput
+	ConsumerId pulumi.StringInput
+	PluginName pulumi.StringInput
+}
+
+func (ConsumerPluginConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*consumerPluginConfigArgs)(nil)).Elem()
 }

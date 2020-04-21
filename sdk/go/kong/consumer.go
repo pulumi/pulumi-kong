@@ -4,77 +4,74 @@
 package kong
 
 import (
+	"reflect"
+
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type Consumer struct {
-	s *pulumi.ResourceState
+	pulumi.CustomResourceState
+
+	CustomId pulumi.StringPtrOutput `pulumi:"customId"`
+	Username pulumi.StringOutput    `pulumi:"username"`
 }
 
 // NewConsumer registers a new resource with the given unique name, arguments, and options.
 func NewConsumer(ctx *pulumi.Context,
-	name string, args *ConsumerArgs, opts ...pulumi.ResourceOpt) (*Consumer, error) {
+	name string, args *ConsumerArgs, opts ...pulumi.ResourceOption) (*Consumer, error) {
 	if args == nil || args.Username == nil {
 		return nil, errors.New("missing required argument 'Username'")
 	}
-	inputs := make(map[string]interface{})
 	if args == nil {
-		inputs["customId"] = nil
-		inputs["username"] = nil
-	} else {
-		inputs["customId"] = args.CustomId
-		inputs["username"] = args.Username
+		args = &ConsumerArgs{}
 	}
-	s, err := ctx.RegisterResource("kong:index/consumer:Consumer", name, true, inputs, opts...)
+	var resource Consumer
+	err := ctx.RegisterResource("kong:index/consumer:Consumer", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Consumer{s: s}, nil
+	return &resource, nil
 }
 
 // GetConsumer gets an existing Consumer resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
 func GetConsumer(ctx *pulumi.Context,
-	name string, id pulumi.ID, state *ConsumerState, opts ...pulumi.ResourceOpt) (*Consumer, error) {
-	inputs := make(map[string]interface{})
-	if state != nil {
-		inputs["customId"] = state.CustomId
-		inputs["username"] = state.Username
-	}
-	s, err := ctx.ReadResource("kong:index/consumer:Consumer", name, id, inputs, opts...)
+	name string, id pulumi.IDInput, state *ConsumerState, opts ...pulumi.ResourceOption) (*Consumer, error) {
+	var resource Consumer
+	err := ctx.ReadResource("kong:index/consumer:Consumer", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &Consumer{s: s}, nil
-}
-
-// URN is this resource's unique name assigned by Pulumi.
-func (r *Consumer) URN() pulumi.URNOutput {
-	return r.s.URN()
-}
-
-// ID is this resource's unique identifier assigned by its provider.
-func (r *Consumer) ID() pulumi.IDOutput {
-	return r.s.ID()
-}
-
-func (r *Consumer) CustomId() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["customId"])
-}
-
-func (r *Consumer) Username() pulumi.StringOutput {
-	return (pulumi.StringOutput)(r.s.State["username"])
+	return &resource, nil
 }
 
 // Input properties used for looking up and filtering Consumer resources.
+type consumerState struct {
+	CustomId *string `pulumi:"customId"`
+	Username *string `pulumi:"username"`
+}
+
 type ConsumerState struct {
-	CustomId interface{}
-	Username interface{}
+	CustomId pulumi.StringPtrInput
+	Username pulumi.StringPtrInput
+}
+
+func (ConsumerState) ElementType() reflect.Type {
+	return reflect.TypeOf((*consumerState)(nil)).Elem()
+}
+
+type consumerArgs struct {
+	CustomId *string `pulumi:"customId"`
+	Username string  `pulumi:"username"`
 }
 
 // The set of arguments for constructing a Consumer resource.
 type ConsumerArgs struct {
-	CustomId interface{}
-	Username interface{}
+	CustomId pulumi.StringPtrInput
+	Username pulumi.StringInput
+}
+
+func (ConsumerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*consumerArgs)(nil)).Elem()
 }

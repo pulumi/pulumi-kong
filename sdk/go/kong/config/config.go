@@ -4,8 +4,8 @@
 package config
 
 import (
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/go/pulumi/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
 // An basic auth password for kong admin
@@ -14,10 +14,7 @@ func GetKongAdminPassword(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	if dv, ok := getEnvOrDefault("", nil, "KONG_ADMIN_PASSWORD").(string); ok {
-		return dv
-	}
-	return v
+	return getEnvOrDefault("", nil, "KONG_ADMIN_PASSWORD").(string)
 }
 
 // API key for the kong api (Enterprise Edition)
@@ -26,10 +23,7 @@ func GetKongAdminToken(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	if dv, ok := getEnvOrDefault("", nil, "KONG_ADMIN_TOKEN").(string); ok {
-		return dv
-	}
-	return v
+	return getEnvOrDefault("", nil, "KONG_ADMIN_TOKEN").(string)
 }
 
 // The address of the kong admin url e.g. http://localhost:8001
@@ -38,10 +32,7 @@ func GetKongAdminUri(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	if dv, ok := getEnvOrDefault("http://localhost:8001", nil, "KONG_ADMIN_ADDR").(string); ok {
-		return dv
-	}
-	return v
+	return getEnvOrDefault("http://localhost:8001", nil, "KONG_ADMIN_ADDR").(string)
 }
 
 // An basic auth user for kong admin
@@ -50,10 +41,7 @@ func GetKongAdminUsername(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	if dv, ok := getEnvOrDefault("", nil, "KONG_ADMIN_USERNAME").(string); ok {
-		return dv
-	}
-	return v
+	return getEnvOrDefault("", nil, "KONG_ADMIN_USERNAME").(string)
 }
 
 // API key for the kong api (if you have locked it down)
@@ -62,10 +50,7 @@ func GetKongApiKey(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	if dv, ok := getEnvOrDefault("", nil, "KONG_API_KEY").(string); ok {
-		return dv
-	}
-	return v
+	return getEnvOrDefault("", nil, "KONG_API_KEY").(string)
 }
 
 // Should plugins `config_json` field strictly match plugin configuration
@@ -74,10 +59,7 @@ func GetStrictPluginsMatch(ctx *pulumi.Context) bool {
 	if err == nil {
 		return v
 	}
-	if dv, ok := getEnvOrDefault(false, parseEnvBool, "STRICT_PLUGINS_MATCH").(bool); ok {
-		return dv
-	}
-	return v
+	return getEnvOrDefault(false, parseEnvBool, "STRICT_PLUGINS_MATCH").(bool)
 }
 
 // Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
@@ -86,8 +68,5 @@ func GetTlsSkipVerify(ctx *pulumi.Context) bool {
 	if err == nil {
 		return v
 	}
-	if dv, ok := getEnvOrDefault(false, parseEnvBool, "TLS_SKIP_VERIFY").(bool); ok {
-		return dv
-	}
-	return v
+	return getEnvOrDefault(false, parseEnvBool, "TLS_SKIP_VERIFY").(bool)
 }
