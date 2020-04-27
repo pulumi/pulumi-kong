@@ -340,11 +340,21 @@ func (o UpstreamHealthchecksPtrOutput) Elem() UpstreamHealthchecksOutput {
 }
 
 func (o UpstreamHealthchecksPtrOutput) Active() UpstreamHealthchecksActivePtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecks) *UpstreamHealthchecksActive { return v.Active }).(UpstreamHealthchecksActivePtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecks) *UpstreamHealthchecksActive {
+		if v == nil {
+			return nil
+		}
+		return v.Active
+	}).(UpstreamHealthchecksActivePtrOutput)
 }
 
 func (o UpstreamHealthchecksPtrOutput) Passive() UpstreamHealthchecksPassivePtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecks) *UpstreamHealthchecksPassive { return v.Passive }).(UpstreamHealthchecksPassivePtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecks) *UpstreamHealthchecksPassive {
+		if v == nil {
+			return nil
+		}
+		return v.Passive
+	}).(UpstreamHealthchecksPassivePtrOutput)
 }
 
 type UpstreamHealthchecksActive struct {
@@ -509,35 +519,75 @@ func (o UpstreamHealthchecksActivePtrOutput) Elem() UpstreamHealthchecksActiveOu
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Concurrency() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *int { return v.Concurrency }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Concurrency
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Healthy() UpstreamHealthchecksActiveHealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *UpstreamHealthchecksActiveHealthy { return v.Healthy }).(UpstreamHealthchecksActiveHealthyPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *UpstreamHealthchecksActiveHealthy {
+		if v == nil {
+			return nil
+		}
+		return v.Healthy
+	}).(UpstreamHealthchecksActiveHealthyPtrOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) HttpPath() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *string { return v.HttpPath }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HttpPath
+	}).(pulumi.StringPtrOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) HttpsSni() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *string { return v.HttpsSni }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HttpsSni
+	}).(pulumi.StringPtrOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) HttpsVerifyCertificate() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *bool { return v.HttpsVerifyCertificate }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HttpsVerifyCertificate
+	}).(pulumi.BoolPtrOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Timeout() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *int { return v.Timeout }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Timeout
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *string { return v.Type }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Unhealthy() UpstreamHealthchecksActiveUnhealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *UpstreamHealthchecksActiveUnhealthy { return v.Unhealthy }).(UpstreamHealthchecksActiveUnhealthyPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) *UpstreamHealthchecksActiveUnhealthy {
+		if v == nil {
+			return nil
+		}
+		return v.Unhealthy
+	}).(UpstreamHealthchecksActiveUnhealthyPtrOutput)
 }
 
 type UpstreamHealthchecksActiveHealthy struct {
@@ -672,15 +722,30 @@ func (o UpstreamHealthchecksActiveHealthyPtrOutput) Elem() UpstreamHealthchecksA
 }
 
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) []int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpStatuses
+	}).(pulumi.IntArrayOutput)
 }
 
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) Interval() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) *int { return v.Interval }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) Successes() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) *int { return v.Successes }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Successes
+	}).(pulumi.IntPtrOutput)
 }
 
 type UpstreamHealthchecksActiveUnhealthy struct {
@@ -827,23 +892,48 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Elem() UpstreamHealthcheck
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) HttpFailures() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.HttpFailures }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpFailures
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) []int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpStatuses
+	}).(pulumi.IntArrayOutput)
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Interval() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.Interval }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) TcpFailures() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.TcpFailures }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TcpFailures
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Timeouts() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.Timeouts }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Timeouts
+	}).(pulumi.IntPtrOutput)
 }
 
 type UpstreamHealthchecksPassive struct {
@@ -978,15 +1068,30 @@ func (o UpstreamHealthchecksPassivePtrOutput) Elem() UpstreamHealthchecksPassive
 }
 
 func (o UpstreamHealthchecksPassivePtrOutput) Healthy() UpstreamHealthchecksPassiveHealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassive) *UpstreamHealthchecksPassiveHealthy { return v.Healthy }).(UpstreamHealthchecksPassiveHealthyPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassive) *UpstreamHealthchecksPassiveHealthy {
+		if v == nil {
+			return nil
+		}
+		return v.Healthy
+	}).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
 
 func (o UpstreamHealthchecksPassivePtrOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassive) *string { return v.Type }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassive) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
 }
 
 func (o UpstreamHealthchecksPassivePtrOutput) Unhealthy() UpstreamHealthchecksPassiveUnhealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassive) *UpstreamHealthchecksPassiveUnhealthy { return v.Unhealthy }).(UpstreamHealthchecksPassiveUnhealthyPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassive) *UpstreamHealthchecksPassiveUnhealthy {
+		if v == nil {
+			return nil
+		}
+		return v.Unhealthy
+	}).(UpstreamHealthchecksPassiveUnhealthyPtrOutput)
 }
 
 type UpstreamHealthchecksPassiveHealthy struct {
@@ -1115,11 +1220,21 @@ func (o UpstreamHealthchecksPassiveHealthyPtrOutput) Elem() UpstreamHealthchecks
 }
 
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveHealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveHealthy) []int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpStatuses
+	}).(pulumi.IntArrayOutput)
 }
 
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) Successes() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveHealthy) *int { return v.Successes }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveHealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Successes
+	}).(pulumi.IntPtrOutput)
 }
 
 type UpstreamHealthchecksPassiveUnhealthy struct {
@@ -1260,19 +1375,39 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Elem() UpstreamHealthchec
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) HttpFailures() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *int { return v.HttpFailures }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpFailures
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) []int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpStatuses
+	}).(pulumi.IntArrayOutput)
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) TcpFailures() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *int { return v.TcpFailures }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TcpFailures
+	}).(pulumi.IntPtrOutput)
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Timeouts() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *int { return v.Timeouts }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Timeouts
+	}).(pulumi.IntPtrOutput)
 }
 
 func init() {
