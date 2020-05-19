@@ -18,6 +18,7 @@ before_install:
     - docker-compose -f testing/docker-compose.yml up --build -d
 install:
     - source ${PULUMI_SCRIPTS}/ci/install-common-toolchain.sh
+    - source ${PULUMI_SCRIPTS}/ci/configure-aws.sh
     - curl -L https://get.pulumi.com/ | bash
     - export PATH=$HOME/.pulumi/bin:$PATH
 before_script:
