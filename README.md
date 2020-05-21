@@ -31,6 +31,12 @@ To use from Go, use `go get` to grab the latest version of the library
 
     $ go get github.com/pulumi/pulumi-kong/sdk/go/...
 
+### .NET
+
+To use from .NET, install using `dotnet add package`:
+
+    $ dotnet add package Pulumi.Kong
+
 ## Configuration
 
 The following configuration points are available:
@@ -42,3 +48,7 @@ The following configuration points are available:
 - `kong:kongApiKey` - API key used to secure the kong admin API. May be set via the `KONG_API_KEY` environment variable.
 - `kong:kongAdminToken` - API key used to secure the kong admin API in the Enterprise Edition. May be set via the `KONG_ADMIN_TOKEN` environment variable.
 - `kong:strictPluginsMatch` - Should plugins `config_json` field strictly match plugin configuration. May be set via the `STRICT_PLUGINS_MATCH` environment variable. Defaults to `false`.
+
+## Reference
+
+For further information, please visit [the Kong provider docs](https://www.pulumi.com/docs/intro/cloud-providers/kong) or for detailed reference documentation, please visit [the API docs](https://www.pulumi.com/docs/reference/pkg/kong).
