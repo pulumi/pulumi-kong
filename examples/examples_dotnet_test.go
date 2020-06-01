@@ -10,7 +10,7 @@ import (
 )
 
 func getCsharpBaseOptions(t *testing.T) integration.ProgramTestOptions {
-	base := getBaseOptions(t)
+	base := getBaseOptions()
 	baseCsharp := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
 			"Pulumi.SpotInst",
