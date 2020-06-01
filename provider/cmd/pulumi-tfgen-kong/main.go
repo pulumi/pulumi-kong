@@ -15,8 +15,8 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-kong/provider/v2/pkg/version"
 	kong "github.com/pulumi/pulumi-kong/provider/v2"
+	"github.com/pulumi/pulumi-kong/provider/v2/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfgen"
 )
 
