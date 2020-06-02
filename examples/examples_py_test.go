@@ -1,5 +1,5 @@
 // Copyright 2016-2017, Pulumi Corporation.  All rights reserved.
-// +build nodejs all
+// +build python all
 
 package examples
 
