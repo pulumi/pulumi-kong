@@ -192,9 +192,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         always-auth: true
+        scope: "@pulumi"
         registry-url: https://registry.npmjs.org
-    - name: NPM whomai
-      run: npm whoami
     - name: Setup DotNet
       uses: actions/setup-dotnet@v1
     - name: Setup Python
