@@ -5,6 +5,7 @@ env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   PULUMI_API: https://api.pulumi-staging.io
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  TRAVIS_OS_NAME: "linux"
 jobs:
   build_sdk:
     name: build_sdk
