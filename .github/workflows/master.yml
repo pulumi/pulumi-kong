@@ -295,11 +295,8 @@ jobs:
         - 13.x
         pythonversion:
         - "3.7"
-name: branches
+name: master
 "on":
   pull_request:
-    branches:
-    - master
-  push:
     branches:
     - master
