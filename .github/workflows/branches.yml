@@ -131,6 +131,60 @@ jobs:
       with:
         name: pulumi-${{ env.PROVIDER }}
         path: ${{ github.workspace }}/bin
+  publish_sdk:
+    name: publish_sdk
+    needs: build_sdk
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Checkout Scripts Repo
+        uses: actions/checkout@v2
+        with:
+          path: ci-scripts
+          repository: pulumi/scripts
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.goversion }}
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@release/v1-alpha
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@releases/v1
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.nodeversion}}
+          registry-url: https://registry.npmjs.org
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{matrix.dotnetverson}}
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{matrix.pythonversion}}
+      - name: Download Python SDK
+        uses: actions/download-artifact@v2
+        with:
+          name: python-sdk
+          path: ${{ github.workspace}}/sdk/python
+      - name: Download NodeJS SDK
+        uses: actions/download-artifact@v2
+        with:
+          name: nodejs-sdk
+          path: ${{ github.workspace}}/sdk/nodejs
+      - name: Download DotNet SDK
+        uses: actions/download-artifact@v2
+        with:
+          name: dotnet-sdk
+          path: ${{ github.workspace}}/sdk/dotnet
+      - name: Publish SDK
+        run: ./ci-scripts/ci/publish-tfgen-package ${{ github.workspace }}
   test:
     name: test
     needs: build_sdk
