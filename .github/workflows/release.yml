@@ -239,7 +239,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: dotnet-sdk
-        path: ${{ github.workspace}}/sdk/nodejs
+        path: ${{ github.workspace}}/sdk/dotnet
     - name: Publish SDKs
       run: ./ci-scripts/ci/publish-tfgen-package ${{ github.workspace }}
   test:
