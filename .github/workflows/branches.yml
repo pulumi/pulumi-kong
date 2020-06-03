@@ -191,8 +191,9 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
+        always-auth: true
         registry-url: https://registry.npmjs.org
-    - name: NPM whoami
+    - name: NPM whomai
       run: npm whoami
     - name: Setup DotNet
       uses: actions/setup-dotnet@v1
@@ -244,8 +245,6 @@ jobs:
       with:
         node-version: ${{matrix.nodeversion}}
         registry-url: https://registry.npmjs.org
-    - name: Check npmrc
-      run: cat $HOME/.npmrc
     - name: Setup DotNet
       uses: actions/setup-dotnet@v1
       with:
