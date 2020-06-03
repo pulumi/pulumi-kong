@@ -297,5 +297,6 @@ jobs:
         - "3.7"
 name: master
 "on":
-  branches:
-  - master
+  push:
+    branches:
+    - master
