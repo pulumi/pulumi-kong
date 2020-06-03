@@ -297,6 +297,5 @@ jobs:
         - "3.7"
 name: master
 "on":
-  pull_request:
-    branches:
-    - master
+  branches:
+  - master
