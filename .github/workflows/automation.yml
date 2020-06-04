@@ -1,0 +1,19 @@
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  open-pull-request:
+    name: open pull request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          reviewers: "jaxxstorm,stack72"
+name: pr-automation
+"on":
+  push:
+    branches:
+      - pulumi-automation
