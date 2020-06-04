@@ -9,7 +9,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
       - name: Create Pull Request
-        uses: gha-utilities/init-pull-request@v0.1.8
+        uses: gha-utilities/init-pull-request@c302960f6dffa94923d9d6b91da482a5d9f418ea
         with:
           pull_request_token: ${{ secrets.GITHUB_TOKEN }}
           base: "master"
