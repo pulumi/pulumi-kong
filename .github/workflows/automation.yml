@@ -13,6 +13,7 @@ jobs:
         with:
           reviewers: "jaxxstorm,stack72"
           base: "master"
+          branch: ${{ github.ref }}
 name: pr-automation
 "on":
   push:
