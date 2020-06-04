@@ -13,7 +13,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Automated PR from Pulumi push"
-          pr_body: |
+          pr_body: >
             "This PR has been opened because changes have been pushed to ${{ github.ref }}"
           pr_reviewer: "jaxxstorm,stack72"
           pr_label: "automation/pull-request"
