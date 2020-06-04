@@ -9,11 +9,14 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v2
+        uses: gha-utilities/init-pull-request@v0.1.8
         with:
-          reviewers: "jaxxstorm,stack72"
+          pull_request_token: ${{ secrets.GITHUB_TOKEN }}
           base: "master"
-          branch: ${{ github.ref }}
+          head: ${{ github.ref }}
+          title: "Automated PR from Pulumi push"
+          body: |
+            "This PR has been opened because changes have been pushed to ${{ github.ref }}"
 name: pr-automation
 "on":
   push:
