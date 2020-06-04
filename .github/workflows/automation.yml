@@ -12,6 +12,7 @@ jobs:
         uses: peter-evans/create-pull-request@v2
         with:
           reviewers: "jaxxstorm,stack72"
+          base: "master"
 name: pr-automation
 "on":
   push:
