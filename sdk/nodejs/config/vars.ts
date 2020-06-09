@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 let __config = new pulumi.Config("kong");
@@ -29,8 +31,8 @@ export let kongApiKey: string | undefined = __config.get("kongApiKey") || utilit
 /**
  * Should plugins `config_json` field strictly match plugin configuration
  */
-export let strictPluginsMatch: boolean | undefined = __config.getObject<boolean>("strictPluginsMatch") || utilities.getEnvBoolean("STRICT_PLUGINS_MATCH");
+export let strictPluginsMatch: boolean | undefined = __config.getObject<boolean>("strictPluginsMatch") || <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH");
 /**
  * Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
  */
-export let tlsSkipVerify: boolean | undefined = __config.getObject<boolean>("tlsSkipVerify") || (utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false);
+export let tlsSkipVerify: boolean | undefined = __config.getObject<boolean>("tlsSkipVerify") || (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false);
