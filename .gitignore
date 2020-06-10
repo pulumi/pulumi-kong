@@ -17,3 +17,5 @@ yarn.lock
 
 **/ci-scripts
 **/nuget
+
+**/node_modules
