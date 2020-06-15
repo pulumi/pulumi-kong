@@ -2,8 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -37,15 +35,13 @@ export class Provider extends pulumi.ProviderResource {
      */
     constructor(name: string, args?: ProviderArgs, opts?: pulumi.ResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        {
-            inputs["kongAdminPassword"] = (args ? args.kongAdminPassword : undefined) || utilities.getEnv("KONG_ADMIN_PASSWORD");
-            inputs["kongAdminToken"] = (args ? args.kongAdminToken : undefined) || utilities.getEnv("KONG_ADMIN_TOKEN");
-            inputs["kongAdminUri"] = (args ? args.kongAdminUri : undefined) || (utilities.getEnv("KONG_ADMIN_ADDR") || "http://localhost:8001");
-            inputs["kongAdminUsername"] = (args ? args.kongAdminUsername : undefined) || utilities.getEnv("KONG_ADMIN_USERNAME");
-            inputs["kongApiKey"] = (args ? args.kongApiKey : undefined) || utilities.getEnv("KONG_API_KEY");
-            inputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) || utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
-            inputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) || (utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
-        }
+        inputs["kongAdminPassword"] = (args ? args.kongAdminPassword : undefined) || utilities.getEnv("KONG_ADMIN_PASSWORD");
+        inputs["kongAdminToken"] = (args ? args.kongAdminToken : undefined) || utilities.getEnv("KONG_ADMIN_TOKEN");
+        inputs["kongAdminUri"] = (args ? args.kongAdminUri : undefined) || (utilities.getEnv("KONG_ADMIN_ADDR") || "http://localhost:8001");
+        inputs["kongAdminUsername"] = (args ? args.kongAdminUsername : undefined) || utilities.getEnv("KONG_ADMIN_USERNAME");
+        inputs["kongApiKey"] = (args ? args.kongApiKey : undefined) || utilities.getEnv("KONG_API_KEY");
+        inputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) || <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
+        inputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) || (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
         if (!opts) {
             opts = {}
         }

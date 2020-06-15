@@ -1,8 +1,15 @@
 env:
+<<<<<<< HEAD
   GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
 jobs:
   open-pull-request:
     name: open pull request
+=======
+  GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
+jobs:
+  open-pull-request:
+    name: open pull request for ci changes
+>>>>>>> master
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
@@ -10,7 +17,11 @@ jobs:
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
       with:
+<<<<<<< HEAD
         github_token: ${{ secrets.GHA_TOKEN }}
+=======
+        github_token: ${{ secrets.PULUMI_BOT_TOKEN }}
+>>>>>>> master
         pr_body: "\U0001F680 This PR has been opened because changes have been pushed
           to ${{ github.ref }}, please review them carefully!"
         pr_label: automation/pull-request,impact/no-changelog-required
@@ -21,3 +32,4 @@ name: pr-automation
   push:
     branches:
     - pulumi-automation
+    - automation/pulumi-provider-ci
