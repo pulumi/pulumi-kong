@@ -18,8 +18,7 @@ type RouteDestination struct {
 // RouteDestinationInput is an input type that accepts RouteDestinationArgs and RouteDestinationOutput values.
 // You can construct a concrete instance of `RouteDestinationInput` via:
 //
-// 		 RouteDestinationArgs{...}
-//
+//          RouteDestinationArgs{...}
 type RouteDestinationInput interface {
 	pulumi.Input
 
@@ -47,8 +46,7 @@ func (i RouteDestinationArgs) ToRouteDestinationOutputWithContext(ctx context.Co
 // RouteDestinationArrayInput is an input type that accepts RouteDestinationArray and RouteDestinationArrayOutput values.
 // You can construct a concrete instance of `RouteDestinationArrayInput` via:
 //
-// 		 RouteDestinationArray{ RouteDestinationArgs{...} }
-//
+//          RouteDestinationArray{ RouteDestinationArgs{...} }
 type RouteDestinationArrayInput interface {
 	pulumi.Input
 
@@ -120,8 +118,7 @@ type RouteSource struct {
 // RouteSourceInput is an input type that accepts RouteSourceArgs and RouteSourceOutput values.
 // You can construct a concrete instance of `RouteSourceInput` via:
 //
-// 		 RouteSourceArgs{...}
-//
+//          RouteSourceArgs{...}
 type RouteSourceInput interface {
 	pulumi.Input
 
@@ -149,8 +146,7 @@ func (i RouteSourceArgs) ToRouteSourceOutputWithContext(ctx context.Context) Rou
 // RouteSourceArrayInput is an input type that accepts RouteSourceArray and RouteSourceArrayOutput values.
 // You can construct a concrete instance of `RouteSourceArrayInput` via:
 //
-// 		 RouteSourceArray{ RouteSourceArgs{...} }
-//
+//          RouteSourceArray{ RouteSourceArgs{...} }
 type RouteSourceArrayInput interface {
 	pulumi.Input
 
@@ -222,8 +218,7 @@ type UpstreamHealthchecks struct {
 // UpstreamHealthchecksInput is an input type that accepts UpstreamHealthchecksArgs and UpstreamHealthchecksOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksInput` via:
 //
-// 		 UpstreamHealthchecksArgs{...}
-//
+//          UpstreamHealthchecksArgs{...}
 type UpstreamHealthchecksInput interface {
 	pulumi.Input
 
@@ -259,12 +254,11 @@ func (i UpstreamHealthchecksArgs) ToUpstreamHealthchecksPtrOutputWithContext(ctx
 // UpstreamHealthchecksPtrInput is an input type that accepts UpstreamHealthchecksArgs, UpstreamHealthchecksPtr and UpstreamHealthchecksPtrOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksPtrInput` via:
 //
-// 		 UpstreamHealthchecksArgs{...}
+//          UpstreamHealthchecksArgs{...}
 //
 //  or:
 //
-// 		 nil
-//
+//          nil
 type UpstreamHealthchecksPtrInput interface {
 	pulumi.Input
 
@@ -371,8 +365,7 @@ type UpstreamHealthchecksActive struct {
 // UpstreamHealthchecksActiveInput is an input type that accepts UpstreamHealthchecksActiveArgs and UpstreamHealthchecksActiveOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksActiveInput` via:
 //
-// 		 UpstreamHealthchecksActiveArgs{...}
-//
+//          UpstreamHealthchecksActiveArgs{...}
 type UpstreamHealthchecksActiveInput interface {
 	pulumi.Input
 
@@ -414,12 +407,11 @@ func (i UpstreamHealthchecksActiveArgs) ToUpstreamHealthchecksActivePtrOutputWit
 // UpstreamHealthchecksActivePtrInput is an input type that accepts UpstreamHealthchecksActiveArgs, UpstreamHealthchecksActivePtr and UpstreamHealthchecksActivePtrOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksActivePtrInput` via:
 //
-// 		 UpstreamHealthchecksActiveArgs{...}
+//          UpstreamHealthchecksActiveArgs{...}
 //
 //  or:
 //
-// 		 nil
-//
+//          nil
 type UpstreamHealthchecksActivePtrInput interface {
 	pulumi.Input
 
@@ -599,8 +591,7 @@ type UpstreamHealthchecksActiveHealthy struct {
 // UpstreamHealthchecksActiveHealthyInput is an input type that accepts UpstreamHealthchecksActiveHealthyArgs and UpstreamHealthchecksActiveHealthyOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksActiveHealthyInput` via:
 //
-// 		 UpstreamHealthchecksActiveHealthyArgs{...}
-//
+//          UpstreamHealthchecksActiveHealthyArgs{...}
 type UpstreamHealthchecksActiveHealthyInput interface {
 	pulumi.Input
 
@@ -637,12 +628,11 @@ func (i UpstreamHealthchecksActiveHealthyArgs) ToUpstreamHealthchecksActiveHealt
 // UpstreamHealthchecksActiveHealthyPtrInput is an input type that accepts UpstreamHealthchecksActiveHealthyArgs, UpstreamHealthchecksActiveHealthyPtr and UpstreamHealthchecksActiveHealthyPtrOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksActiveHealthyPtrInput` via:
 //
-// 		 UpstreamHealthchecksActiveHealthyArgs{...}
+//          UpstreamHealthchecksActiveHealthyArgs{...}
 //
 //  or:
 //
-// 		 nil
-//
+//          nil
 type UpstreamHealthchecksActiveHealthyPtrInput interface {
 	pulumi.Input
 
@@ -759,8 +749,7 @@ type UpstreamHealthchecksActiveUnhealthy struct {
 // UpstreamHealthchecksActiveUnhealthyInput is an input type that accepts UpstreamHealthchecksActiveUnhealthyArgs and UpstreamHealthchecksActiveUnhealthyOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksActiveUnhealthyInput` via:
 //
-// 		 UpstreamHealthchecksActiveUnhealthyArgs{...}
-//
+//          UpstreamHealthchecksActiveUnhealthyArgs{...}
 type UpstreamHealthchecksActiveUnhealthyInput interface {
 	pulumi.Input
 
@@ -799,12 +788,11 @@ func (i UpstreamHealthchecksActiveUnhealthyArgs) ToUpstreamHealthchecksActiveUnh
 // UpstreamHealthchecksActiveUnhealthyPtrInput is an input type that accepts UpstreamHealthchecksActiveUnhealthyArgs, UpstreamHealthchecksActiveUnhealthyPtr and UpstreamHealthchecksActiveUnhealthyPtrOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksActiveUnhealthyPtrInput` via:
 //
-// 		 UpstreamHealthchecksActiveUnhealthyArgs{...}
+//          UpstreamHealthchecksActiveUnhealthyArgs{...}
 //
 //  or:
 //
-// 		 nil
-//
+//          nil
 type UpstreamHealthchecksActiveUnhealthyPtrInput interface {
 	pulumi.Input
 
@@ -945,8 +933,7 @@ type UpstreamHealthchecksPassive struct {
 // UpstreamHealthchecksPassiveInput is an input type that accepts UpstreamHealthchecksPassiveArgs and UpstreamHealthchecksPassiveOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksPassiveInput` via:
 //
-// 		 UpstreamHealthchecksPassiveArgs{...}
-//
+//          UpstreamHealthchecksPassiveArgs{...}
 type UpstreamHealthchecksPassiveInput interface {
 	pulumi.Input
 
@@ -983,12 +970,11 @@ func (i UpstreamHealthchecksPassiveArgs) ToUpstreamHealthchecksPassivePtrOutputW
 // UpstreamHealthchecksPassivePtrInput is an input type that accepts UpstreamHealthchecksPassiveArgs, UpstreamHealthchecksPassivePtr and UpstreamHealthchecksPassivePtrOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksPassivePtrInput` via:
 //
-// 		 UpstreamHealthchecksPassiveArgs{...}
+//          UpstreamHealthchecksPassiveArgs{...}
 //
 //  or:
 //
-// 		 nil
-//
+//          nil
 type UpstreamHealthchecksPassivePtrInput interface {
 	pulumi.Input
 
@@ -1102,8 +1088,7 @@ type UpstreamHealthchecksPassiveHealthy struct {
 // UpstreamHealthchecksPassiveHealthyInput is an input type that accepts UpstreamHealthchecksPassiveHealthyArgs and UpstreamHealthchecksPassiveHealthyOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksPassiveHealthyInput` via:
 //
-// 		 UpstreamHealthchecksPassiveHealthyArgs{...}
-//
+//          UpstreamHealthchecksPassiveHealthyArgs{...}
 type UpstreamHealthchecksPassiveHealthyInput interface {
 	pulumi.Input
 
@@ -1139,12 +1124,11 @@ func (i UpstreamHealthchecksPassiveHealthyArgs) ToUpstreamHealthchecksPassiveHea
 // UpstreamHealthchecksPassiveHealthyPtrInput is an input type that accepts UpstreamHealthchecksPassiveHealthyArgs, UpstreamHealthchecksPassiveHealthyPtr and UpstreamHealthchecksPassiveHealthyPtrOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksPassiveHealthyPtrInput` via:
 //
-// 		 UpstreamHealthchecksPassiveHealthyArgs{...}
+//          UpstreamHealthchecksPassiveHealthyArgs{...}
 //
 //  or:
 //
-// 		 nil
-//
+//          nil
 type UpstreamHealthchecksPassiveHealthyPtrInput interface {
 	pulumi.Input
 
@@ -1247,8 +1231,7 @@ type UpstreamHealthchecksPassiveUnhealthy struct {
 // UpstreamHealthchecksPassiveUnhealthyInput is an input type that accepts UpstreamHealthchecksPassiveUnhealthyArgs and UpstreamHealthchecksPassiveUnhealthyOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksPassiveUnhealthyInput` via:
 //
-// 		 UpstreamHealthchecksPassiveUnhealthyArgs{...}
-//
+//          UpstreamHealthchecksPassiveUnhealthyArgs{...}
 type UpstreamHealthchecksPassiveUnhealthyInput interface {
 	pulumi.Input
 
@@ -1286,12 +1269,11 @@ func (i UpstreamHealthchecksPassiveUnhealthyArgs) ToUpstreamHealthchecksPassiveU
 // UpstreamHealthchecksPassiveUnhealthyPtrInput is an input type that accepts UpstreamHealthchecksPassiveUnhealthyArgs, UpstreamHealthchecksPassiveUnhealthyPtr and UpstreamHealthchecksPassiveUnhealthyPtrOutput values.
 // You can construct a concrete instance of `UpstreamHealthchecksPassiveUnhealthyPtrInput` via:
 //
-// 		 UpstreamHealthchecksPassiveUnhealthyArgs{...}
+//          UpstreamHealthchecksPassiveUnhealthyArgs{...}
 //
 //  or:
 //
-// 		 nil
-//
+//          nil
 type UpstreamHealthchecksPassiveUnhealthyPtrInput interface {
 	pulumi.Input
 
