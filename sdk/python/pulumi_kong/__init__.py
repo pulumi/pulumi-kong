@@ -13,3 +13,8 @@ from .service import *
 from .sni import *
 from .target import *
 from .upstream import *
+
+# Make subpackages available:
+from . import (
+    config,
+)

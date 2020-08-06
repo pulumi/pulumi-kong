@@ -7,7 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Union
-from . import utilities, tables
+from . import _utilities, _tables
 
 
 class Provider(pulumi.ProviderResource):
@@ -39,32 +39,32 @@ class Provider(pulumi.ProviderResource):
         if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
-            opts.version = utilities.get_version()
+            opts.version = _utilities.get_version()
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
             if kong_admin_password is None:
-                kong_admin_password = utilities.get_env('KONG_ADMIN_PASSWORD')
+                kong_admin_password = _utilities.get_env('KONG_ADMIN_PASSWORD')
             __props__['kong_admin_password'] = kong_admin_password
             if kong_admin_token is None:
-                kong_admin_token = utilities.get_env('KONG_ADMIN_TOKEN')
+                kong_admin_token = _utilities.get_env('KONG_ADMIN_TOKEN')
             __props__['kong_admin_token'] = kong_admin_token
             if kong_admin_uri is None:
-                kong_admin_uri = (utilities.get_env('KONG_ADMIN_ADDR') or 'http://localhost:8001')
+                kong_admin_uri = (_utilities.get_env('KONG_ADMIN_ADDR') or 'http://localhost:8001')
             __props__['kong_admin_uri'] = kong_admin_uri
             if kong_admin_username is None:
-                kong_admin_username = utilities.get_env('KONG_ADMIN_USERNAME')
+                kong_admin_username = _utilities.get_env('KONG_ADMIN_USERNAME')
             __props__['kong_admin_username'] = kong_admin_username
             if kong_api_key is None:
-                kong_api_key = utilities.get_env('KONG_API_KEY')
+                kong_api_key = _utilities.get_env('KONG_API_KEY')
             __props__['kong_api_key'] = kong_api_key
             if strict_plugins_match is None:
-                strict_plugins_match = utilities.get_env_bool('STRICT_PLUGINS_MATCH')
+                strict_plugins_match = _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
             __props__['strict_plugins_match'] = pulumi.Output.from_input(strict_plugins_match).apply(json.dumps) if strict_plugins_match is not None else None
             if tls_skip_verify is None:
-                tls_skip_verify = (utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
+                tls_skip_verify = (_utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
             __props__['tls_skip_verify'] = pulumi.Output.from_input(tls_skip_verify).apply(json.dumps) if tls_skip_verify is not None else None
         super(Provider, __self__).__init__(
             'kong',
@@ -73,7 +73,7 @@ class Provider(pulumi.ProviderResource):
             opts)
 
     def translate_output_property(self, prop):
-        return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
-        return tables._SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
