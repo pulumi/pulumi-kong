@@ -6,41 +6,41 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Union
-from .. import utilities, tables
+from .. import _utilities, _tables
 
 __config__ = pulumi.Config('kong')
 
-kong_admin_password = __config__.get('kongAdminPassword') or utilities.get_env('KONG_ADMIN_PASSWORD')
+kong_admin_password = __config__.get('kongAdminPassword') or _utilities.get_env('KONG_ADMIN_PASSWORD')
 """
 An basic auth password for kong admin
 """
 
-kong_admin_token = __config__.get('kongAdminToken') or utilities.get_env('KONG_ADMIN_TOKEN')
+kong_admin_token = __config__.get('kongAdminToken') or _utilities.get_env('KONG_ADMIN_TOKEN')
 """
 API key for the kong api (Enterprise Edition)
 """
 
-kong_admin_uri = __config__.get('kongAdminUri') or (utilities.get_env('KONG_ADMIN_ADDR') or 'http://localhost:8001')
+kong_admin_uri = __config__.get('kongAdminUri') or (_utilities.get_env('KONG_ADMIN_ADDR') or 'http://localhost:8001')
 """
 The address of the kong admin url e.g. http://localhost:8001
 """
 
-kong_admin_username = __config__.get('kongAdminUsername') or utilities.get_env('KONG_ADMIN_USERNAME')
+kong_admin_username = __config__.get('kongAdminUsername') or _utilities.get_env('KONG_ADMIN_USERNAME')
 """
 An basic auth user for kong admin
 """
 
-kong_api_key = __config__.get('kongApiKey') or utilities.get_env('KONG_API_KEY')
+kong_api_key = __config__.get('kongApiKey') or _utilities.get_env('KONG_API_KEY')
 """
 API key for the kong api (if you have locked it down)
 """
 
-strict_plugins_match = __config__.get('strictPluginsMatch') or utilities.get_env_bool('STRICT_PLUGINS_MATCH')
+strict_plugins_match = __config__.get('strictPluginsMatch') or _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
 """
 Should plugins `config_json` field strictly match plugin configuration
 """
 
-tls_skip_verify = __config__.get('tlsSkipVerify') or (utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
+tls_skip_verify = __config__.get('tlsSkipVerify') or (_utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
 """
 Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
 """
