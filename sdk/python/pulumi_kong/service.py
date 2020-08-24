@@ -5,21 +5,28 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 from . import _utilities, _tables
+
+__all__ = ['Service']
 
 
 class Service(pulumi.CustomResource):
-    connect_timeout: pulumi.Output[float]
-    host: pulumi.Output[str]
-    name: pulumi.Output[str]
-    path: pulumi.Output[str]
-    port: pulumi.Output[float]
-    protocol: pulumi.Output[str]
-    read_timeout: pulumi.Output[float]
-    retries: pulumi.Output[float]
-    write_timeout: pulumi.Output[float]
-    def __init__(__self__, resource_name, opts=None, connect_timeout=None, host=None, name=None, path=None, port=None, protocol=None, read_timeout=None, retries=None, write_timeout=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 connect_timeout: Optional[pulumi.Input[float]] = None,
+                 host: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[float]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 read_timeout: Optional[pulumi.Input[float]] = None,
+                 retries: Optional[pulumi.Input[float]] = None,
+                 write_timeout: Optional[pulumi.Input[float]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         Create a Service resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
@@ -60,13 +67,24 @@ class Service(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, connect_timeout=None, host=None, name=None, path=None, port=None, protocol=None, read_timeout=None, retries=None, write_timeout=None):
+    def get(resource_name: str,
+            id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            connect_timeout: Optional[pulumi.Input[float]] = None,
+            host: Optional[pulumi.Input[str]] = None,
+            name: Optional[pulumi.Input[str]] = None,
+            path: Optional[pulumi.Input[str]] = None,
+            port: Optional[pulumi.Input[float]] = None,
+            protocol: Optional[pulumi.Input[str]] = None,
+            read_timeout: Optional[pulumi.Input[float]] = None,
+            retries: Optional[pulumi.Input[float]] = None,
+            write_timeout: Optional[pulumi.Input[float]] = None) -> 'Service':
         """
         Get an existing Service resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -84,8 +102,54 @@ class Service(pulumi.CustomResource):
         __props__["write_timeout"] = write_timeout
         return Service(resource_name, opts=opts, __props__=__props__)
 
+    @property
+    @pulumi.getter(name="connectTimeout")
+    def connect_timeout(self) -> Optional[float]:
+        return pulumi.get(self, "connect_timeout")
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[str]:
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[str]:
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[float]:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="readTimeout")
+    def read_timeout(self) -> Optional[float]:
+        return pulumi.get(self, "read_timeout")
+
+    @property
+    @pulumi.getter
+    def retries(self) -> Optional[float]:
+        return pulumi.get(self, "retries")
+
+    @property
+    @pulumi.getter(name="writeTimeout")
+    def write_timeout(self) -> Optional[float]:
+        return pulumi.get(self, "write_timeout")
+
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+

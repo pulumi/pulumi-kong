@@ -5,23 +5,26 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 from . import _utilities, _tables
+
+__all__ = ['Plugin']
 
 
 class Plugin(pulumi.CustomResource):
-    computed_config: pulumi.Output[str]
-    config_json: pulumi.Output[str]
-    """
-    plugin configuration in JSON format, configuration must be a valid JSON object.
-    """
-    consumer_id: pulumi.Output[str]
-    enabled: pulumi.Output[bool]
-    name: pulumi.Output[str]
-    route_id: pulumi.Output[str]
-    service_id: pulumi.Output[str]
-    strict_match: pulumi.Output[bool]
-    def __init__(__self__, resource_name, opts=None, config_json=None, consumer_id=None, enabled=None, name=None, route_id=None, service_id=None, strict_match=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 config_json: Optional[pulumi.Input[str]] = None,
+                 consumer_id: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 route_id: Optional[pulumi.Input[str]] = None,
+                 service_id: Optional[pulumi.Input[str]] = None,
+                 strict_match: Optional[pulumi.Input[bool]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         Create a Plugin resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
@@ -60,13 +63,23 @@ class Plugin(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, computed_config=None, config_json=None, consumer_id=None, enabled=None, name=None, route_id=None, service_id=None, strict_match=None):
+    def get(resource_name: str,
+            id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            computed_config: Optional[pulumi.Input[str]] = None,
+            config_json: Optional[pulumi.Input[str]] = None,
+            consumer_id: Optional[pulumi.Input[str]] = None,
+            enabled: Optional[pulumi.Input[bool]] = None,
+            name: Optional[pulumi.Input[str]] = None,
+            route_id: Optional[pulumi.Input[str]] = None,
+            service_id: Optional[pulumi.Input[str]] = None,
+            strict_match: Optional[pulumi.Input[bool]] = None) -> 'Plugin':
         """
         Get an existing Plugin resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
         """
@@ -84,8 +97,52 @@ class Plugin(pulumi.CustomResource):
         __props__["strict_match"] = strict_match
         return Plugin(resource_name, opts=opts, __props__=__props__)
 
+    @property
+    @pulumi.getter(name="computedConfig")
+    def computed_config(self) -> str:
+        return pulumi.get(self, "computed_config")
+
+    @property
+    @pulumi.getter(name="configJson")
+    def config_json(self) -> Optional[str]:
+        """
+        plugin configuration in JSON format, configuration must be a valid JSON object.
+        """
+        return pulumi.get(self, "config_json")
+
+    @property
+    @pulumi.getter(name="consumerId")
+    def consumer_id(self) -> Optional[str]:
+        return pulumi.get(self, "consumer_id")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> Optional[str]:
+        return pulumi.get(self, "route_id")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> Optional[str]:
+        return pulumi.get(self, "service_id")
+
+    @property
+    @pulumi.getter(name="strictMatch")
+    def strict_match(self) -> Optional[bool]:
+        return pulumi.get(self, "strict_match")
+
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+

@@ -5,58 +5,34 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 from . import _utilities, _tables
+from . import outputs
+from ._inputs import *
+
+__all__ = ['Upstream']
 
 
 class Upstream(pulumi.CustomResource):
-    hash_fallback: pulumi.Output[str]
-    hash_fallback_header: pulumi.Output[str]
-    hash_on: pulumi.Output[str]
-    hash_on_cookie: pulumi.Output[str]
-    hash_on_cookie_path: pulumi.Output[str]
-    hash_on_header: pulumi.Output[str]
-    healthchecks: pulumi.Output[dict]
-    name: pulumi.Output[str]
-    slots: pulumi.Output[float]
-    def __init__(__self__, resource_name, opts=None, hash_fallback=None, hash_fallback_header=None, hash_on=None, hash_on_cookie=None, hash_on_cookie_path=None, hash_on_header=None, healthchecks=None, name=None, slots=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 hash_fallback: Optional[pulumi.Input[str]] = None,
+                 hash_fallback_header: Optional[pulumi.Input[str]] = None,
+                 hash_on: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
+                 hash_on_header: Optional[pulumi.Input[str]] = None,
+                 healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 slots: Optional[pulumi.Input[float]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         Create a Upstream resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-
-        The **healthchecks** object supports the following:
-
-          * `active` (`pulumi.Input[dict]`)
-            * `concurrency` (`pulumi.Input[float]`)
-            * `healthy` (`pulumi.Input[dict]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `interval` (`pulumi.Input[float]`)
-              * `successes` (`pulumi.Input[float]`)
-
-            * `httpPath` (`pulumi.Input[str]`)
-            * `httpsSni` (`pulumi.Input[str]`)
-            * `httpsVerifyCertificate` (`pulumi.Input[bool]`)
-            * `timeout` (`pulumi.Input[float]`)
-            * `type` (`pulumi.Input[str]`)
-            * `unhealthy` (`pulumi.Input[dict]`)
-              * `httpFailures` (`pulumi.Input[float]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `interval` (`pulumi.Input[float]`)
-              * `tcpFailures` (`pulumi.Input[float]`)
-              * `timeouts` (`pulumi.Input[float]`)
-
-          * `passive` (`pulumi.Input[dict]`)
-            * `healthy` (`pulumi.Input[dict]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `successes` (`pulumi.Input[float]`)
-
-            * `type` (`pulumi.Input[str]`)
-            * `unhealthy` (`pulumi.Input[dict]`)
-              * `httpFailures` (`pulumi.Input[float]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `tcpFailures` (`pulumi.Input[float]`)
-              * `timeouts` (`pulumi.Input[float]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -91,47 +67,25 @@ class Upstream(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, hash_fallback=None, hash_fallback_header=None, hash_on=None, hash_on_cookie=None, hash_on_cookie_path=None, hash_on_header=None, healthchecks=None, name=None, slots=None):
+    def get(resource_name: str,
+            id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            hash_fallback: Optional[pulumi.Input[str]] = None,
+            hash_fallback_header: Optional[pulumi.Input[str]] = None,
+            hash_on: Optional[pulumi.Input[str]] = None,
+            hash_on_cookie: Optional[pulumi.Input[str]] = None,
+            hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
+            hash_on_header: Optional[pulumi.Input[str]] = None,
+            healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+            name: Optional[pulumi.Input[str]] = None,
+            slots: Optional[pulumi.Input[float]] = None) -> 'Upstream':
         """
         Get an existing Upstream resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-
-        The **healthchecks** object supports the following:
-
-          * `active` (`pulumi.Input[dict]`)
-            * `concurrency` (`pulumi.Input[float]`)
-            * `healthy` (`pulumi.Input[dict]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `interval` (`pulumi.Input[float]`)
-              * `successes` (`pulumi.Input[float]`)
-
-            * `httpPath` (`pulumi.Input[str]`)
-            * `httpsSni` (`pulumi.Input[str]`)
-            * `httpsVerifyCertificate` (`pulumi.Input[bool]`)
-            * `timeout` (`pulumi.Input[float]`)
-            * `type` (`pulumi.Input[str]`)
-            * `unhealthy` (`pulumi.Input[dict]`)
-              * `httpFailures` (`pulumi.Input[float]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `interval` (`pulumi.Input[float]`)
-              * `tcpFailures` (`pulumi.Input[float]`)
-              * `timeouts` (`pulumi.Input[float]`)
-
-          * `passive` (`pulumi.Input[dict]`)
-            * `healthy` (`pulumi.Input[dict]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `successes` (`pulumi.Input[float]`)
-
-            * `type` (`pulumi.Input[str]`)
-            * `unhealthy` (`pulumi.Input[dict]`)
-              * `httpFailures` (`pulumi.Input[float]`)
-              * `httpStatuses` (`pulumi.Input[list]`)
-              * `tcpFailures` (`pulumi.Input[float]`)
-              * `timeouts` (`pulumi.Input[float]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -148,8 +102,54 @@ class Upstream(pulumi.CustomResource):
         __props__["slots"] = slots
         return Upstream(resource_name, opts=opts, __props__=__props__)
 
+    @property
+    @pulumi.getter(name="hashFallback")
+    def hash_fallback(self) -> Optional[str]:
+        return pulumi.get(self, "hash_fallback")
+
+    @property
+    @pulumi.getter(name="hashFallbackHeader")
+    def hash_fallback_header(self) -> Optional[str]:
+        return pulumi.get(self, "hash_fallback_header")
+
+    @property
+    @pulumi.getter(name="hashOn")
+    def hash_on(self) -> Optional[str]:
+        return pulumi.get(self, "hash_on")
+
+    @property
+    @pulumi.getter(name="hashOnCookie")
+    def hash_on_cookie(self) -> Optional[str]:
+        return pulumi.get(self, "hash_on_cookie")
+
+    @property
+    @pulumi.getter(name="hashOnCookiePath")
+    def hash_on_cookie_path(self) -> Optional[str]:
+        return pulumi.get(self, "hash_on_cookie_path")
+
+    @property
+    @pulumi.getter(name="hashOnHeader")
+    def hash_on_header(self) -> Optional[str]:
+        return pulumi.get(self, "hash_on_header")
+
+    @property
+    @pulumi.getter
+    def healthchecks(self) -> 'outputs.UpstreamHealthchecks':
+        return pulumi.get(self, "healthchecks")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def slots(self) -> Optional[float]:
+        return pulumi.get(self, "slots")
+
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+

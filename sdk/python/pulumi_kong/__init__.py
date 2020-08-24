@@ -13,6 +13,8 @@ from .service import *
 from .sni import *
 from .target import *
 from .upstream import *
+from ._inputs import *
+from . import outputs
 
 # Make subpackages available:
 from . import (
