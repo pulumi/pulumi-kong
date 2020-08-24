@@ -30,6 +30,5 @@ changelog:
   skip: true
 release:
   disable: true
-  prerelease: true
 snapshot:
   name_template: '{{ .Tag }}-SNAPSHOT'
