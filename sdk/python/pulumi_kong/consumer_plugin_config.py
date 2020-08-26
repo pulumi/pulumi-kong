@@ -5,19 +5,22 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 from . import _utilities, _tables
+
+__all__ = ['ConsumerPluginConfig']
 
 
 class ConsumerPluginConfig(pulumi.CustomResource):
-    computed_config: pulumi.Output[str]
-    config_json: pulumi.Output[str]
-    """
-    JSON format of plugin config
-    """
-    consumer_id: pulumi.Output[str]
-    plugin_name: pulumi.Output[str]
-    def __init__(__self__, resource_name, opts=None, config_json=None, consumer_id=None, plugin_name=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 config_json: Optional[pulumi.Input[str]] = None,
+                 consumer_id: Optional[pulumi.Input[str]] = None,
+                 plugin_name: Optional[pulumi.Input[str]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         Create a ConsumerPluginConfig resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
@@ -56,13 +59,19 @@ class ConsumerPluginConfig(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, computed_config=None, config_json=None, consumer_id=None, plugin_name=None):
+    def get(resource_name: str,
+            id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            computed_config: Optional[pulumi.Input[str]] = None,
+            config_json: Optional[pulumi.Input[str]] = None,
+            consumer_id: Optional[pulumi.Input[str]] = None,
+            plugin_name: Optional[pulumi.Input[str]] = None) -> 'ConsumerPluginConfig':
         """
         Get an existing ConsumerPluginConfig resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_json: JSON format of plugin config
         """
@@ -76,8 +85,32 @@ class ConsumerPluginConfig(pulumi.CustomResource):
         __props__["plugin_name"] = plugin_name
         return ConsumerPluginConfig(resource_name, opts=opts, __props__=__props__)
 
+    @property
+    @pulumi.getter(name="computedConfig")
+    def computed_config(self) -> str:
+        return pulumi.get(self, "computed_config")
+
+    @property
+    @pulumi.getter(name="configJson")
+    def config_json(self) -> Optional[str]:
+        """
+        JSON format of plugin config
+        """
+        return pulumi.get(self, "config_json")
+
+    @property
+    @pulumi.getter(name="consumerId")
+    def consumer_id(self) -> str:
+        return pulumi.get(self, "consumer_id")
+
+    @property
+    @pulumi.getter(name="pluginName")
+    def plugin_name(self) -> str:
+        return pulumi.get(self, "plugin_name")
+
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+

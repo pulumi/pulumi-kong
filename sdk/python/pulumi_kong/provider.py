@@ -6,12 +6,26 @@ import json
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 from . import _utilities, _tables
+
+__all__ = ['Provider']
 
 
 class Provider(pulumi.ProviderResource):
-    def __init__(__self__, resource_name, opts=None, kong_admin_password=None, kong_admin_token=None, kong_admin_uri=None, kong_admin_username=None, kong_api_key=None, strict_plugins_match=None, tls_skip_verify=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 kong_admin_password: Optional[pulumi.Input[str]] = None,
+                 kong_admin_token: Optional[pulumi.Input[str]] = None,
+                 kong_admin_uri: Optional[pulumi.Input[str]] = None,
+                 kong_admin_username: Optional[pulumi.Input[str]] = None,
+                 kong_api_key: Optional[pulumi.Input[str]] = None,
+                 strict_plugins_match: Optional[pulumi.Input[bool]] = None,
+                 tls_skip_verify: Optional[pulumi.Input[bool]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         The provider type for the kong package. By default, resources use package-wide configuration
         settings, however an explicit `Provider` instance may be created and passed during resource
@@ -77,3 +91,4 @@ class Provider(pulumi.ProviderResource):
 
     def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+

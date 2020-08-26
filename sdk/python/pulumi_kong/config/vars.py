@@ -5,8 +5,18 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 from .. import _utilities, _tables
+
+__all__ = [
+    'kong_admin_password',
+    'kong_admin_token',
+    'kong_admin_uri',
+    'kong_admin_username',
+    'kong_api_key',
+    'strict_plugins_match',
+    'tls_skip_verify',
+]
 
 __config__ = pulumi.Config('kong')
 

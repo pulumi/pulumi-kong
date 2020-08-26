@@ -5,15 +5,22 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 from . import _utilities, _tables
+
+__all__ = ['Target']
 
 
 class Target(pulumi.CustomResource):
-    target: pulumi.Output[str]
-    upstream_id: pulumi.Output[str]
-    weight: pulumi.Output[float]
-    def __init__(__self__, resource_name, opts=None, target=None, upstream_id=None, weight=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 target: Optional[pulumi.Input[str]] = None,
+                 upstream_id: Optional[pulumi.Input[str]] = None,
+                 weight: Optional[pulumi.Input[float]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         Create a Target resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
@@ -52,13 +59,18 @@ class Target(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, target=None, upstream_id=None, weight=None):
+    def get(resource_name: str,
+            id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            target: Optional[pulumi.Input[str]] = None,
+            upstream_id: Optional[pulumi.Input[str]] = None,
+            weight: Optional[pulumi.Input[float]] = None) -> 'Target':
         """
         Get an existing Target resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -70,8 +82,24 @@ class Target(pulumi.CustomResource):
         __props__["weight"] = weight
         return Target(resource_name, opts=opts, __props__=__props__)
 
+    @property
+    @pulumi.getter
+    def target(self) -> str:
+        return pulumi.get(self, "target")
+
+    @property
+    @pulumi.getter(name="upstreamId")
+    def upstream_id(self) -> str:
+        return pulumi.get(self, "upstream_id")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> float:
+        return pulumi.get(self, "weight")
+
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+
