@@ -13,7 +13,7 @@ __all__ = ['Certificate']
 
 class Certificate(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  certificate: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
@@ -76,12 +76,12 @@ class Certificate(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def certificate(self) -> str:
+    def certificate(self) -> pulumi.Output[str]:
         return pulumi.get(self, "certificate")
 
     @property
     @pulumi.getter(name="privateKey")
-    def private_key(self) -> Optional[str]:
+    def private_key(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "private_key")
 
     def translate_output_property(self, prop):

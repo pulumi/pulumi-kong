@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Upgrade to pulumi-terraform-bridge v2.7.0
+* Upgrade to pulumi-terraform-bridge v2.7.3
 * Upgrade to Pulumi v2.9.0, which adds type annotations and input/output classes to Python
 
 ---
@@ -30,4 +30,4 @@ CHANGELOG
 
 
 ## 1.0.0 (2020-02-19)
-* Initial release of the provider against v5.2.1 of the Kong Terraform 
+* Initial release of the provider against v5.2.1 of the Kong Terraform

@@ -15,7 +15,7 @@ __all__ = ['Route']
 
 class Route(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  destinations: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['RouteDestinationArgs']]]]] = None,
                  hosts: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
@@ -120,62 +120,62 @@ class Route(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def destinations(self) -> Optional[List['outputs.RouteDestination']]:
+    def destinations(self) -> pulumi.Output[Optional[List['outputs.RouteDestination']]]:
         return pulumi.get(self, "destinations")
 
     @property
     @pulumi.getter
-    def hosts(self) -> Optional[List[str]]:
+    def hosts(self) -> pulumi.Output[Optional[List[str]]]:
         return pulumi.get(self, "hosts")
 
     @property
     @pulumi.getter
-    def methods(self) -> Optional[List[str]]:
+    def methods(self) -> pulumi.Output[Optional[List[str]]]:
         return pulumi.get(self, "methods")
 
     @property
     @pulumi.getter
-    def name(self) -> str:
+    def name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
-    def paths(self) -> Optional[List[str]]:
+    def paths(self) -> pulumi.Output[Optional[List[str]]]:
         return pulumi.get(self, "paths")
 
     @property
     @pulumi.getter(name="preserveHost")
-    def preserve_host(self) -> Optional[bool]:
+    def preserve_host(self) -> pulumi.Output[Optional[bool]]:
         return pulumi.get(self, "preserve_host")
 
     @property
     @pulumi.getter
-    def protocols(self) -> List[str]:
+    def protocols(self) -> pulumi.Output[List[str]]:
         return pulumi.get(self, "protocols")
 
     @property
     @pulumi.getter(name="regexPriority")
-    def regex_priority(self) -> Optional[float]:
+    def regex_priority(self) -> pulumi.Output[Optional[float]]:
         return pulumi.get(self, "regex_priority")
 
     @property
     @pulumi.getter(name="serviceId")
-    def service_id(self) -> str:
+    def service_id(self) -> pulumi.Output[str]:
         return pulumi.get(self, "service_id")
 
     @property
     @pulumi.getter
-    def snis(self) -> Optional[List[str]]:
+    def snis(self) -> pulumi.Output[Optional[List[str]]]:
         return pulumi.get(self, "snis")
 
     @property
     @pulumi.getter
-    def sources(self) -> Optional[List['outputs.RouteSource']]:
+    def sources(self) -> pulumi.Output[Optional[List['outputs.RouteSource']]]:
         return pulumi.get(self, "sources")
 
     @property
     @pulumi.getter(name="stripPath")
-    def strip_path(self) -> Optional[bool]:
+    def strip_path(self) -> pulumi.Output[Optional[bool]]:
         return pulumi.get(self, "strip_path")
 
     def translate_output_property(self, prop):

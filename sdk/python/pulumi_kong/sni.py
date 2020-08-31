@@ -13,7 +13,7 @@ __all__ = ['Sni']
 
 class Sni(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -76,12 +76,12 @@ class Sni(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="certificateId")
-    def certificate_id(self) -> str:
+    def certificate_id(self) -> pulumi.Output[str]:
         return pulumi.get(self, "certificate_id")
 
     @property
     @pulumi.getter
-    def name(self) -> str:
+    def name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "name")
 
     def translate_output_property(self, prop):

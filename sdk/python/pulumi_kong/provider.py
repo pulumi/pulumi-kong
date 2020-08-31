@@ -14,7 +14,7 @@ __all__ = ['Provider']
 
 class Provider(pulumi.ProviderResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  kong_admin_password: Optional[pulumi.Input[str]] = None,
                  kong_admin_token: Optional[pulumi.Input[str]] = None,

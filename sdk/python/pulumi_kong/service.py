@@ -13,7 +13,7 @@ __all__ = ['Service']
 
 class Service(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  connect_timeout: Optional[pulumi.Input[float]] = None,
                  host: Optional[pulumi.Input[str]] = None,
@@ -104,47 +104,47 @@ class Service(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="connectTimeout")
-    def connect_timeout(self) -> Optional[float]:
+    def connect_timeout(self) -> pulumi.Output[Optional[float]]:
         return pulumi.get(self, "connect_timeout")
 
     @property
     @pulumi.getter
-    def host(self) -> Optional[str]:
+    def host(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "host")
 
     @property
     @pulumi.getter
-    def name(self) -> str:
+    def name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
-    def path(self) -> Optional[str]:
+    def path(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter
-    def port(self) -> Optional[float]:
+    def port(self) -> pulumi.Output[Optional[float]]:
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
-    def protocol(self) -> str:
+    def protocol(self) -> pulumi.Output[str]:
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="readTimeout")
-    def read_timeout(self) -> Optional[float]:
+    def read_timeout(self) -> pulumi.Output[Optional[float]]:
         return pulumi.get(self, "read_timeout")
 
     @property
     @pulumi.getter
-    def retries(self) -> Optional[float]:
+    def retries(self) -> pulumi.Output[Optional[float]]:
         return pulumi.get(self, "retries")
 
     @property
     @pulumi.getter(name="writeTimeout")
-    def write_timeout(self) -> Optional[float]:
+    def write_timeout(self) -> pulumi.Output[Optional[float]]:
         return pulumi.get(self, "write_timeout")
 
     def translate_output_property(self, prop):

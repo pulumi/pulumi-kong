@@ -13,7 +13,7 @@ __all__ = ['Plugin']
 
 class Plugin(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  config_json: Optional[pulumi.Input[str]] = None,
                  consumer_id: Optional[pulumi.Input[str]] = None,
@@ -99,12 +99,12 @@ class Plugin(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="computedConfig")
-    def computed_config(self) -> str:
+    def computed_config(self) -> pulumi.Output[str]:
         return pulumi.get(self, "computed_config")
 
     @property
     @pulumi.getter(name="configJson")
-    def config_json(self) -> Optional[str]:
+    def config_json(self) -> pulumi.Output[Optional[str]]:
         """
         plugin configuration in JSON format, configuration must be a valid JSON object.
         """
@@ -112,32 +112,32 @@ class Plugin(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="consumerId")
-    def consumer_id(self) -> Optional[str]:
+    def consumer_id(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "consumer_id")
 
     @property
     @pulumi.getter
-    def enabled(self) -> Optional[bool]:
+    def enabled(self) -> pulumi.Output[Optional[bool]]:
         return pulumi.get(self, "enabled")
 
     @property
     @pulumi.getter
-    def name(self) -> str:
+    def name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="routeId")
-    def route_id(self) -> Optional[str]:
+    def route_id(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "route_id")
 
     @property
     @pulumi.getter(name="serviceId")
-    def service_id(self) -> Optional[str]:
+    def service_id(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "service_id")
 
     @property
     @pulumi.getter(name="strictMatch")
-    def strict_match(self) -> Optional[bool]:
+    def strict_match(self) -> pulumi.Output[Optional[bool]]:
         return pulumi.get(self, "strict_match")
 
     def translate_output_property(self, prop):

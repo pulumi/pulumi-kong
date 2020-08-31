@@ -13,7 +13,7 @@ __all__ = ['Target']
 
 class Target(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  target: Optional[pulumi.Input[str]] = None,
                  upstream_id: Optional[pulumi.Input[str]] = None,
@@ -84,17 +84,17 @@ class Target(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def target(self) -> str:
+    def target(self) -> pulumi.Output[str]:
         return pulumi.get(self, "target")
 
     @property
     @pulumi.getter(name="upstreamId")
-    def upstream_id(self) -> str:
+    def upstream_id(self) -> pulumi.Output[str]:
         return pulumi.get(self, "upstream_id")
 
     @property
     @pulumi.getter
-    def weight(self) -> float:
+    def weight(self) -> pulumi.Output[float]:
         return pulumi.get(self, "weight")
 
     def translate_output_property(self, prop):
