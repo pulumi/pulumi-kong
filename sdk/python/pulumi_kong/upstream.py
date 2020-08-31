@@ -15,7 +15,7 @@ __all__ = ['Upstream']
 
 class Upstream(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  hash_fallback: Optional[pulumi.Input[str]] = None,
                  hash_fallback_header: Optional[pulumi.Input[str]] = None,
@@ -104,47 +104,47 @@ class Upstream(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="hashFallback")
-    def hash_fallback(self) -> Optional[str]:
+    def hash_fallback(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "hash_fallback")
 
     @property
     @pulumi.getter(name="hashFallbackHeader")
-    def hash_fallback_header(self) -> Optional[str]:
+    def hash_fallback_header(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "hash_fallback_header")
 
     @property
     @pulumi.getter(name="hashOn")
-    def hash_on(self) -> Optional[str]:
+    def hash_on(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "hash_on")
 
     @property
     @pulumi.getter(name="hashOnCookie")
-    def hash_on_cookie(self) -> Optional[str]:
+    def hash_on_cookie(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "hash_on_cookie")
 
     @property
     @pulumi.getter(name="hashOnCookiePath")
-    def hash_on_cookie_path(self) -> Optional[str]:
+    def hash_on_cookie_path(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "hash_on_cookie_path")
 
     @property
     @pulumi.getter(name="hashOnHeader")
-    def hash_on_header(self) -> Optional[str]:
+    def hash_on_header(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "hash_on_header")
 
     @property
     @pulumi.getter
-    def healthchecks(self) -> 'outputs.UpstreamHealthchecks':
+    def healthchecks(self) -> pulumi.Output['outputs.UpstreamHealthchecks']:
         return pulumi.get(self, "healthchecks")
 
     @property
     @pulumi.getter
-    def name(self) -> str:
+    def name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
-    def slots(self) -> Optional[float]:
+    def slots(self) -> pulumi.Output[Optional[float]]:
         return pulumi.get(self, "slots")
 
     def translate_output_property(self, prop):

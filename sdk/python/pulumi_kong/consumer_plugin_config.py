@@ -13,7 +13,7 @@ __all__ = ['ConsumerPluginConfig']
 
 class ConsumerPluginConfig(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  config_json: Optional[pulumi.Input[str]] = None,
                  consumer_id: Optional[pulumi.Input[str]] = None,
@@ -87,12 +87,12 @@ class ConsumerPluginConfig(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="computedConfig")
-    def computed_config(self) -> str:
+    def computed_config(self) -> pulumi.Output[str]:
         return pulumi.get(self, "computed_config")
 
     @property
     @pulumi.getter(name="configJson")
-    def config_json(self) -> Optional[str]:
+    def config_json(self) -> pulumi.Output[Optional[str]]:
         """
         JSON format of plugin config
         """
@@ -100,12 +100,12 @@ class ConsumerPluginConfig(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="consumerId")
-    def consumer_id(self) -> str:
+    def consumer_id(self) -> pulumi.Output[str]:
         return pulumi.get(self, "consumer_id")
 
     @property
     @pulumi.getter(name="pluginName")
-    def plugin_name(self) -> str:
+    def plugin_name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "plugin_name")
 
     def translate_output_property(self, prop):

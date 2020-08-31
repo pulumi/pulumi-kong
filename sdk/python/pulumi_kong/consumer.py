@@ -13,7 +13,7 @@ __all__ = ['Consumer']
 
 class Consumer(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  custom_id: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None,
@@ -76,12 +76,12 @@ class Consumer(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="customId")
-    def custom_id(self) -> Optional[str]:
+    def custom_id(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "custom_id")
 
     @property
     @pulumi.getter
-    def username(self) -> str:
+    def username(self) -> pulumi.Output[str]:
         return pulumi.get(self, "username")
 
     def translate_output_property(self, prop):
