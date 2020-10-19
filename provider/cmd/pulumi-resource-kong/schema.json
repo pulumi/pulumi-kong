@@ -85,7 +85,7 @@
         ]
     },
     "types": {
-        "kong:/RouteDestination:RouteDestination": {
+        "kong:index/RouteDestination:RouteDestination": {
             "properties": {
                 "ip": {
                     "type": "string",
@@ -106,7 +106,7 @@
             },
             "type": "object"
         },
-        "kong:/RouteSource:RouteSource": {
+        "kong:index/RouteSource:RouteSource": {
             "properties": {
                 "ip": {
                     "type": "string",
@@ -127,10 +127,10 @@
             },
             "type": "object"
         },
-        "kong:/UpstreamHealthchecks:UpstreamHealthchecks": {
+        "kong:index/UpstreamHealthchecks:UpstreamHealthchecks": {
             "properties": {
                 "active": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecksActive:UpstreamHealthchecksActive",
+                    "$ref": "#/types/kong:index/UpstreamHealthchecksActive:UpstreamHealthchecksActive",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -138,7 +138,7 @@
                     }
                 },
                 "passive": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecksPassive:UpstreamHealthchecksPassive",
+                    "$ref": "#/types/kong:index/UpstreamHealthchecksPassive:UpstreamHealthchecksPassive",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -156,7 +156,7 @@
                 }
             }
         },
-        "kong:/UpstreamHealthchecksActive:UpstreamHealthchecksActive": {
+        "kong:index/UpstreamHealthchecksActive:UpstreamHealthchecksActive": {
             "properties": {
                 "concurrency": {
                     "type": "integer",
@@ -167,7 +167,7 @@
                     }
                 },
                 "healthy": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecksActiveHealthy:UpstreamHealthchecksActiveHealthy",
+                    "$ref": "#/types/kong:index/UpstreamHealthchecksActiveHealthy:UpstreamHealthchecksActiveHealthy",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -215,7 +215,7 @@
                     }
                 },
                 "unhealthy": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecksActiveUnhealthy:UpstreamHealthchecksActiveUnhealthy",
+                    "$ref": "#/types/kong:index/UpstreamHealthchecksActiveUnhealthy:UpstreamHealthchecksActiveUnhealthy",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -233,7 +233,7 @@
                 }
             }
         },
-        "kong:/UpstreamHealthchecksActiveHealthy:UpstreamHealthchecksActiveHealthy": {
+        "kong:index/UpstreamHealthchecksActiveHealthy:UpstreamHealthchecksActiveHealthy": {
             "properties": {
                 "httpStatuses": {
                     "type": "array",
@@ -274,7 +274,7 @@
                 }
             }
         },
-        "kong:/UpstreamHealthchecksActiveUnhealthy:UpstreamHealthchecksActiveUnhealthy": {
+        "kong:index/UpstreamHealthchecksActiveUnhealthy:UpstreamHealthchecksActiveUnhealthy": {
             "properties": {
                 "httpFailures": {
                     "type": "integer",
@@ -333,10 +333,10 @@
                 }
             }
         },
-        "kong:/UpstreamHealthchecksPassive:UpstreamHealthchecksPassive": {
+        "kong:index/UpstreamHealthchecksPassive:UpstreamHealthchecksPassive": {
             "properties": {
                 "healthy": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecksPassiveHealthy:UpstreamHealthchecksPassiveHealthy",
+                    "$ref": "#/types/kong:index/UpstreamHealthchecksPassiveHealthy:UpstreamHealthchecksPassiveHealthy",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -352,7 +352,7 @@
                     }
                 },
                 "unhealthy": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecksPassiveUnhealthy:UpstreamHealthchecksPassiveUnhealthy",
+                    "$ref": "#/types/kong:index/UpstreamHealthchecksPassiveUnhealthy:UpstreamHealthchecksPassiveUnhealthy",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -370,7 +370,7 @@
                 }
             }
         },
-        "kong:/UpstreamHealthchecksPassiveHealthy:UpstreamHealthchecksPassiveHealthy": {
+        "kong:index/UpstreamHealthchecksPassiveHealthy:UpstreamHealthchecksPassiveHealthy": {
             "properties": {
                 "httpStatuses": {
                     "type": "array",
@@ -394,7 +394,7 @@
             },
             "type": "object"
         },
-        "kong:/UpstreamHealthchecksPassiveUnhealthy:UpstreamHealthchecksPassiveUnhealthy": {
+        "kong:index/UpstreamHealthchecksPassiveUnhealthy:UpstreamHealthchecksPassiveUnhealthy": {
             "properties": {
                 "httpFailures": {
                     "type": "integer",
@@ -743,7 +743,7 @@
                 "destinations": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/kong:/RouteDestination:RouteDestination"
+                        "$ref": "#/types/kong:index/RouteDestination:RouteDestination"
                     }
                 },
                 "hosts": {
@@ -791,7 +791,7 @@
                 "sources": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/kong:/RouteSource:RouteSource"
+                        "$ref": "#/types/kong:index/RouteSource:RouteSource"
                     }
                 },
                 "stripPath": {
@@ -807,7 +807,7 @@
                 "destinations": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/kong:/RouteDestination:RouteDestination"
+                        "$ref": "#/types/kong:index/RouteDestination:RouteDestination"
                     }
                 },
                 "hosts": {
@@ -855,7 +855,7 @@
                 "sources": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/kong:/RouteSource:RouteSource"
+                        "$ref": "#/types/kong:index/RouteSource:RouteSource"
                     }
                 },
                 "stripPath": {
@@ -872,7 +872,7 @@
                     "destinations": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/kong:/RouteDestination:RouteDestination"
+                            "$ref": "#/types/kong:index/RouteDestination:RouteDestination"
                         }
                     },
                     "hosts": {
@@ -920,7 +920,7 @@
                     "sources": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/kong:/RouteSource:RouteSource"
+                            "$ref": "#/types/kong:index/RouteSource:RouteSource"
                         }
                     },
                     "stripPath": {
@@ -1152,7 +1152,7 @@
                     "type": "string"
                 },
                 "healthchecks": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecks:UpstreamHealthchecks"
+                    "$ref": "#/types/kong:index/UpstreamHealthchecks:UpstreamHealthchecks"
                 },
                 "name": {
                     "type": "string"
@@ -1185,7 +1185,7 @@
                     "type": "string"
                 },
                 "healthchecks": {
-                    "$ref": "#/types/kong:/UpstreamHealthchecks:UpstreamHealthchecks"
+                    "$ref": "#/types/kong:index/UpstreamHealthchecks:UpstreamHealthchecks"
                 },
                 "name": {
                     "type": "string"
@@ -1216,7 +1216,7 @@
                         "type": "string"
                     },
                     "healthchecks": {
-                        "$ref": "#/types/kong:/UpstreamHealthchecks:UpstreamHealthchecks"
+                        "$ref": "#/types/kong:index/UpstreamHealthchecks:UpstreamHealthchecks"
                     },
                     "name": {
                         "type": "string"
