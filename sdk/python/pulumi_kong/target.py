@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 
 __all__ = ['Target']
@@ -17,7 +17,7 @@ class Target(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  target: Optional[pulumi.Input[str]] = None,
                  upstream_id: Optional[pulumi.Input[str]] = None,
-                 weight: Optional[pulumi.Input[float]] = None,
+                 weight: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
@@ -64,7 +64,7 @@ class Target(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             target: Optional[pulumi.Input[str]] = None,
             upstream_id: Optional[pulumi.Input[str]] = None,
-            weight: Optional[pulumi.Input[float]] = None) -> 'Target':
+            weight: Optional[pulumi.Input[int]] = None) -> 'Target':
         """
         Get an existing Target resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -94,7 +94,7 @@ class Target(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def weight(self) -> pulumi.Output[float]:
+    def weight(self) -> pulumi.Output[int]:
         return pulumi.get(self, "weight")
 
     def translate_output_property(self, prop):

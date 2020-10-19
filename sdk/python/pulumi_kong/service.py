@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 
 __all__ = ['Service']
@@ -15,15 +15,15 @@ class Service(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 connect_timeout: Optional[pulumi.Input[float]] = None,
+                 connect_timeout: Optional[pulumi.Input[int]] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  path: Optional[pulumi.Input[str]] = None,
-                 port: Optional[pulumi.Input[float]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
-                 read_timeout: Optional[pulumi.Input[float]] = None,
-                 retries: Optional[pulumi.Input[float]] = None,
-                 write_timeout: Optional[pulumi.Input[float]] = None,
+                 read_timeout: Optional[pulumi.Input[int]] = None,
+                 retries: Optional[pulumi.Input[int]] = None,
+                 write_timeout: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
@@ -70,15 +70,15 @@ class Service(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            connect_timeout: Optional[pulumi.Input[float]] = None,
+            connect_timeout: Optional[pulumi.Input[int]] = None,
             host: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             path: Optional[pulumi.Input[str]] = None,
-            port: Optional[pulumi.Input[float]] = None,
+            port: Optional[pulumi.Input[int]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
-            read_timeout: Optional[pulumi.Input[float]] = None,
-            retries: Optional[pulumi.Input[float]] = None,
-            write_timeout: Optional[pulumi.Input[float]] = None) -> 'Service':
+            read_timeout: Optional[pulumi.Input[int]] = None,
+            retries: Optional[pulumi.Input[int]] = None,
+            write_timeout: Optional[pulumi.Input[int]] = None) -> 'Service':
         """
         Get an existing Service resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -104,7 +104,7 @@ class Service(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="connectTimeout")
-    def connect_timeout(self) -> pulumi.Output[Optional[float]]:
+    def connect_timeout(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "connect_timeout")
 
     @property
@@ -124,7 +124,7 @@ class Service(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def port(self) -> pulumi.Output[Optional[float]]:
+    def port(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "port")
 
     @property
@@ -134,17 +134,17 @@ class Service(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="readTimeout")
-    def read_timeout(self) -> pulumi.Output[Optional[float]]:
+    def read_timeout(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "read_timeout")
 
     @property
     @pulumi.getter
-    def retries(self) -> pulumi.Output[Optional[float]]:
+    def retries(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "retries")
 
     @property
     @pulumi.getter(name="writeTimeout")
-    def write_timeout(self) -> pulumi.Output[Optional[float]]:
+    def write_timeout(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "write_timeout")
 
     def translate_output_property(self, prop):

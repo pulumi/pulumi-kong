@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from . import outputs
 from ._inputs import *
@@ -17,17 +17,17 @@ class Route(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 destinations: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['RouteDestinationArgs']]]]] = None,
-                 hosts: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-                 methods: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+                 destinations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteDestinationArgs']]]]] = None,
+                 hosts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 methods: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 paths: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+                 paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  preserve_host: Optional[pulumi.Input[bool]] = None,
-                 protocols: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-                 regex_priority: Optional[pulumi.Input[float]] = None,
+                 protocols: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 regex_priority: Optional[pulumi.Input[int]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
-                 snis: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-                 sources: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['RouteSourceArgs']]]]] = None,
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sources: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteSourceArgs']]]]] = None,
                  strip_path: Optional[pulumi.Input[bool]] = None,
                  __props__=None,
                  __name__=None,
@@ -80,17 +80,17 @@ class Route(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            destinations: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['RouteDestinationArgs']]]]] = None,
-            hosts: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-            methods: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            destinations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteDestinationArgs']]]]] = None,
+            hosts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            methods: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            paths: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             preserve_host: Optional[pulumi.Input[bool]] = None,
-            protocols: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-            regex_priority: Optional[pulumi.Input[float]] = None,
+            protocols: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            regex_priority: Optional[pulumi.Input[int]] = None,
             service_id: Optional[pulumi.Input[str]] = None,
-            snis: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-            sources: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['RouteSourceArgs']]]]] = None,
+            snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            sources: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteSourceArgs']]]]] = None,
             strip_path: Optional[pulumi.Input[bool]] = None) -> 'Route':
         """
         Get an existing Route resource's state with the given name, id, and optional extra
@@ -120,17 +120,17 @@ class Route(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def destinations(self) -> pulumi.Output[Optional[List['outputs.RouteDestination']]]:
+    def destinations(self) -> pulumi.Output[Optional[Sequence['outputs.RouteDestination']]]:
         return pulumi.get(self, "destinations")
 
     @property
     @pulumi.getter
-    def hosts(self) -> pulumi.Output[Optional[List[str]]]:
+    def hosts(self) -> pulumi.Output[Optional[Sequence[str]]]:
         return pulumi.get(self, "hosts")
 
     @property
     @pulumi.getter
-    def methods(self) -> pulumi.Output[Optional[List[str]]]:
+    def methods(self) -> pulumi.Output[Optional[Sequence[str]]]:
         return pulumi.get(self, "methods")
 
     @property
@@ -140,7 +140,7 @@ class Route(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def paths(self) -> pulumi.Output[Optional[List[str]]]:
+    def paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         return pulumi.get(self, "paths")
 
     @property
@@ -150,12 +150,12 @@ class Route(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def protocols(self) -> pulumi.Output[List[str]]:
+    def protocols(self) -> pulumi.Output[Sequence[str]]:
         return pulumi.get(self, "protocols")
 
     @property
     @pulumi.getter(name="regexPriority")
-    def regex_priority(self) -> pulumi.Output[Optional[float]]:
+    def regex_priority(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "regex_priority")
 
     @property
@@ -165,12 +165,12 @@ class Route(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def snis(self) -> pulumi.Output[Optional[List[str]]]:
+    def snis(self) -> pulumi.Output[Optional[Sequence[str]]]:
         return pulumi.get(self, "snis")
 
     @property
     @pulumi.getter
-    def sources(self) -> pulumi.Output[Optional[List['outputs.RouteSource']]]:
+    def sources(self) -> pulumi.Output[Optional[Sequence['outputs.RouteSource']]]:
         return pulumi.get(self, "sources")
 
     @property

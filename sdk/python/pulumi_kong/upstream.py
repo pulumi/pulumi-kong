@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from . import outputs
 from ._inputs import *
@@ -25,7 +25,7 @@ class Upstream(pulumi.CustomResource):
                  hash_on_header: Optional[pulumi.Input[str]] = None,
                  healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 slots: Optional[pulumi.Input[float]] = None,
+                 slots: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
@@ -78,7 +78,7 @@ class Upstream(pulumi.CustomResource):
             hash_on_header: Optional[pulumi.Input[str]] = None,
             healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            slots: Optional[pulumi.Input[float]] = None) -> 'Upstream':
+            slots: Optional[pulumi.Input[int]] = None) -> 'Upstream':
         """
         Get an existing Upstream resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -144,7 +144,7 @@ class Upstream(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def slots(self) -> pulumi.Output[Optional[float]]:
+    def slots(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "slots")
 
     def translate_output_property(self, prop):
