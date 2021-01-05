@@ -4,6 +4,7 @@
 package kong
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -74,4 +75,43 @@ type SniArgs struct {
 
 func (SniArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*sniArgs)(nil)).Elem()
+}
+
+type SniInput interface {
+	pulumi.Input
+
+	ToSniOutput() SniOutput
+	ToSniOutputWithContext(ctx context.Context) SniOutput
+}
+
+func (Sni) ElementType() reflect.Type {
+	return reflect.TypeOf((*Sni)(nil)).Elem()
+}
+
+func (i Sni) ToSniOutput() SniOutput {
+	return i.ToSniOutputWithContext(context.Background())
+}
+
+func (i Sni) ToSniOutputWithContext(ctx context.Context) SniOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SniOutput)
+}
+
+type SniOutput struct {
+	*pulumi.OutputState
+}
+
+func (SniOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SniOutput)(nil)).Elem()
+}
+
+func (o SniOutput) ToSniOutput() SniOutput {
+	return o
+}
+
+func (o SniOutput) ToSniOutputWithContext(ctx context.Context) SniOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(SniOutput{})
 }

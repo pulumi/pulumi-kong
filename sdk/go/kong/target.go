@@ -4,6 +4,7 @@
 package kong
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -85,4 +86,43 @@ type TargetArgs struct {
 
 func (TargetArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*targetArgs)(nil)).Elem()
+}
+
+type TargetInput interface {
+	pulumi.Input
+
+	ToTargetOutput() TargetOutput
+	ToTargetOutputWithContext(ctx context.Context) TargetOutput
+}
+
+func (Target) ElementType() reflect.Type {
+	return reflect.TypeOf((*Target)(nil)).Elem()
+}
+
+func (i Target) ToTargetOutput() TargetOutput {
+	return i.ToTargetOutputWithContext(context.Background())
+}
+
+func (i Target) ToTargetOutputWithContext(ctx context.Context) TargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TargetOutput)
+}
+
+type TargetOutput struct {
+	*pulumi.OutputState
+}
+
+func (TargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TargetOutput)(nil)).Elem()
+}
+
+func (o TargetOutput) ToTargetOutput() TargetOutput {
+	return o
+}
+
+func (o TargetOutput) ToTargetOutputWithContext(ctx context.Context) TargetOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(TargetOutput{})
 }

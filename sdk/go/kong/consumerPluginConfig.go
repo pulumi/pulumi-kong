@@ -4,6 +4,7 @@
 package kong
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -90,4 +91,43 @@ type ConsumerPluginConfigArgs struct {
 
 func (ConsumerPluginConfigArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerPluginConfigArgs)(nil)).Elem()
+}
+
+type ConsumerPluginConfigInput interface {
+	pulumi.Input
+
+	ToConsumerPluginConfigOutput() ConsumerPluginConfigOutput
+	ToConsumerPluginConfigOutputWithContext(ctx context.Context) ConsumerPluginConfigOutput
+}
+
+func (ConsumerPluginConfig) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsumerPluginConfig)(nil)).Elem()
+}
+
+func (i ConsumerPluginConfig) ToConsumerPluginConfigOutput() ConsumerPluginConfigOutput {
+	return i.ToConsumerPluginConfigOutputWithContext(context.Background())
+}
+
+func (i ConsumerPluginConfig) ToConsumerPluginConfigOutputWithContext(ctx context.Context) ConsumerPluginConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPluginConfigOutput)
+}
+
+type ConsumerPluginConfigOutput struct {
+	*pulumi.OutputState
+}
+
+func (ConsumerPluginConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsumerPluginConfigOutput)(nil)).Elem()
+}
+
+func (o ConsumerPluginConfigOutput) ToConsumerPluginConfigOutput() ConsumerPluginConfigOutput {
+	return o
+}
+
+func (o ConsumerPluginConfigOutput) ToConsumerPluginConfigOutputWithContext(ctx context.Context) ConsumerPluginConfigOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(ConsumerPluginConfigOutput{})
 }

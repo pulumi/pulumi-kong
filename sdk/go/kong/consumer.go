@@ -4,6 +4,7 @@
 package kong
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -74,4 +75,43 @@ type ConsumerArgs struct {
 
 func (ConsumerArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerArgs)(nil)).Elem()
+}
+
+type ConsumerInput interface {
+	pulumi.Input
+
+	ToConsumerOutput() ConsumerOutput
+	ToConsumerOutputWithContext(ctx context.Context) ConsumerOutput
+}
+
+func (Consumer) ElementType() reflect.Type {
+	return reflect.TypeOf((*Consumer)(nil)).Elem()
+}
+
+func (i Consumer) ToConsumerOutput() ConsumerOutput {
+	return i.ToConsumerOutputWithContext(context.Background())
+}
+
+func (i Consumer) ToConsumerOutputWithContext(ctx context.Context) ConsumerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerOutput)
+}
+
+type ConsumerOutput struct {
+	*pulumi.OutputState
+}
+
+func (ConsumerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsumerOutput)(nil)).Elem()
+}
+
+func (o ConsumerOutput) ToConsumerOutput() ConsumerOutput {
+	return o
+}
+
+func (o ConsumerOutput) ToConsumerOutputWithContext(ctx context.Context) ConsumerOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(ConsumerOutput{})
 }
