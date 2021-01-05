@@ -4,6 +4,7 @@
 package kong
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
@@ -105,4 +106,43 @@ type UpstreamArgs struct {
 
 func (UpstreamArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*upstreamArgs)(nil)).Elem()
+}
+
+type UpstreamInput interface {
+	pulumi.Input
+
+	ToUpstreamOutput() UpstreamOutput
+	ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutput
+}
+
+func (Upstream) ElementType() reflect.Type {
+	return reflect.TypeOf((*Upstream)(nil)).Elem()
+}
+
+func (i Upstream) ToUpstreamOutput() UpstreamOutput {
+	return i.ToUpstreamOutputWithContext(context.Background())
+}
+
+func (i Upstream) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpstreamOutput)
+}
+
+type UpstreamOutput struct {
+	*pulumi.OutputState
+}
+
+func (UpstreamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UpstreamOutput)(nil)).Elem()
+}
+
+func (o UpstreamOutput) ToUpstreamOutput() UpstreamOutput {
+	return o
+}
+
+func (o UpstreamOutput) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(UpstreamOutput{})
 }
