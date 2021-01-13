@@ -28,11 +28,12 @@ type Service struct {
 // NewService registers a new resource with the given unique name, arguments, and options.
 func NewService(ctx *pulumi.Context,
 	name string, args *ServiceArgs, opts ...pulumi.ResourceOption) (*Service, error) {
-	if args == nil || args.Protocol == nil {
-		return nil, errors.New("missing required argument 'Protocol'")
-	}
 	if args == nil {
-		args = &ServiceArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.Protocol == nil {
+		return nil, errors.New("invalid value for required argument 'Protocol'")
 	}
 	var resource Service
 	err := ctx.RegisterResource("kong:index/service:Service", name, args, &resource, opts...)

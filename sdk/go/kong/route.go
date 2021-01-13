@@ -31,14 +31,15 @@ type Route struct {
 // NewRoute registers a new resource with the given unique name, arguments, and options.
 func NewRoute(ctx *pulumi.Context,
 	name string, args *RouteArgs, opts ...pulumi.ResourceOption) (*Route, error) {
-	if args == nil || args.Protocols == nil {
-		return nil, errors.New("missing required argument 'Protocols'")
-	}
-	if args == nil || args.ServiceId == nil {
-		return nil, errors.New("missing required argument 'ServiceId'")
-	}
 	if args == nil {
-		args = &RouteArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.Protocols == nil {
+		return nil, errors.New("invalid value for required argument 'Protocols'")
+	}
+	if args.ServiceId == nil {
+		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
 	var resource Route
 	err := ctx.RegisterResource("kong:index/route:Route", name, args, &resource, opts...)

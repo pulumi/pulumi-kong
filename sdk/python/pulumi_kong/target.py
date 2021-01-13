@@ -43,13 +43,13 @@ class Target(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            if target is None:
+            if target is None and not opts.urn:
                 raise TypeError("Missing required property 'target'")
             __props__['target'] = target
-            if upstream_id is None:
+            if upstream_id is None and not opts.urn:
                 raise TypeError("Missing required property 'upstream_id'")
             __props__['upstream_id'] = upstream_id
-            if weight is None:
+            if weight is None and not opts.urn:
                 raise TypeError("Missing required property 'weight'")
             __props__['weight'] = weight
         super(Target, __self__).__init__(

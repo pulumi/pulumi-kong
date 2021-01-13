@@ -51,7 +51,7 @@ export class Certificate extends pulumi.CustomResource {
             inputs["privateKey"] = state ? state.privateKey : undefined;
         } else {
             const args = argsOrState as CertificateArgs | undefined;
-            if (!args || args.certificate === undefined) {
+            if ((!args || args.certificate === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'certificate'");
             }
             inputs["certificate"] = args ? args.certificate : undefined;

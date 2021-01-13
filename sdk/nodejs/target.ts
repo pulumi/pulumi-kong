@@ -53,13 +53,13 @@ export class Target extends pulumi.CustomResource {
             inputs["weight"] = state ? state.weight : undefined;
         } else {
             const args = argsOrState as TargetArgs | undefined;
-            if (!args || args.target === undefined) {
+            if ((!args || args.target === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'target'");
             }
-            if (!args || args.upstreamId === undefined) {
+            if ((!args || args.upstreamId === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'upstreamId'");
             }
-            if (!args || args.weight === undefined) {
+            if ((!args || args.weight === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'weight'");
             }
             inputs["target"] = args ? args.target : undefined;

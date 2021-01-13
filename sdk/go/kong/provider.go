@@ -24,6 +24,7 @@ func NewProvider(ctx *pulumi.Context,
 	if args == nil {
 		args = &ProviderArgs{}
 	}
+
 	if args.KongAdminPassword == nil {
 		args.KongAdminPassword = pulumi.StringPtr(getEnvOrDefault("", nil, "KONG_ADMIN_PASSWORD").(string))
 	}

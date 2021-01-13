@@ -20,3 +20,65 @@ from . import outputs
 from . import (
     config,
 )
+
+def _register_module():
+    import pulumi
+    from . import _utilities
+
+
+    class Module(pulumi.runtime.ResourceModule):
+        _version = _utilities.get_semver_version()
+
+        def version(self):
+            return Module._version
+
+        def construct(self, name: str, typ: str, urn: str) -> pulumi.Resource:
+            if typ == "kong:index/certificate:Certificate":
+                return Certificate(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/consumer:Consumer":
+                return Consumer(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/consumerPluginConfig:ConsumerPluginConfig":
+                return ConsumerPluginConfig(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/plugin:Plugin":
+                return Plugin(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/route:Route":
+                return Route(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/service:Service":
+                return Service(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/sni:Sni":
+                return Sni(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/target:Target":
+                return Target(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/upstream:Upstream":
+                return Upstream(name, pulumi.ResourceOptions(urn=urn))
+            else:
+                raise Exception(f"unknown resource type {typ}")
+
+
+    _module_instance = Module()
+    pulumi.runtime.register_resource_module("kong", "index/certificate", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/consumer", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/consumerPluginConfig", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/plugin", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/route", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/service", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/sni", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/target", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/upstream", _module_instance)
+
+
+    class Package(pulumi.runtime.ResourcePackage):
+        _version = _utilities.get_semver_version()
+
+        def version(self):
+            return Package._version
+
+        def construct_provider(self, name: str, typ: str, urn: str) -> pulumi.ProviderResource:
+            if typ != "pulumi:providers:kong":
+                raise Exception(f"unknown provider type {typ}")
+            return Provider(name, pulumi.ResourceOptions(urn=urn))
+
+
+    pulumi.runtime.register_resource_package("kong", Package())
+
+_register_module()

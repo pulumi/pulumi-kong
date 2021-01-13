@@ -30,6 +30,7 @@ func NewUpstream(ctx *pulumi.Context,
 	if args == nil {
 		args = &UpstreamArgs{}
 	}
+
 	var resource Upstream
 	err := ctx.RegisterResource("kong:index/upstream:Upstream", name, args, &resource, opts...)
 	if err != nil {

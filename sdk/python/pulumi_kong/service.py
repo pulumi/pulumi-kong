@@ -54,7 +54,7 @@ class Service(pulumi.CustomResource):
             __props__['name'] = name
             __props__['path'] = path
             __props__['port'] = port
-            if protocol is None:
+            if protocol is None and not opts.urn:
                 raise TypeError("Missing required property 'protocol'")
             __props__['protocol'] = protocol
             __props__['read_timeout'] = read_timeout

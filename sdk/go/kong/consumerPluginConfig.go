@@ -24,14 +24,15 @@ type ConsumerPluginConfig struct {
 // NewConsumerPluginConfig registers a new resource with the given unique name, arguments, and options.
 func NewConsumerPluginConfig(ctx *pulumi.Context,
 	name string, args *ConsumerPluginConfigArgs, opts ...pulumi.ResourceOption) (*ConsumerPluginConfig, error) {
-	if args == nil || args.ConsumerId == nil {
-		return nil, errors.New("missing required argument 'ConsumerId'")
-	}
-	if args == nil || args.PluginName == nil {
-		return nil, errors.New("missing required argument 'PluginName'")
-	}
 	if args == nil {
-		args = &ConsumerPluginConfigArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.ConsumerId == nil {
+		return nil, errors.New("invalid value for required argument 'ConsumerId'")
+	}
+	if args.PluginName == nil {
+		return nil, errors.New("invalid value for required argument 'PluginName'")
 	}
 	var resource ConsumerPluginConfig
 	err := ctx.RegisterResource("kong:index/consumerPluginConfig:ConsumerPluginConfig", name, args, &resource, opts...)
