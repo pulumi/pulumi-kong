@@ -45,10 +45,10 @@ class ConsumerPluginConfig(pulumi.CustomResource):
             __props__ = dict()
 
             __props__['config_json'] = config_json
-            if consumer_id is None:
+            if consumer_id is None and not opts.urn:
                 raise TypeError("Missing required property 'consumer_id'")
             __props__['consumer_id'] = consumer_id
-            if plugin_name is None:
+            if plugin_name is None and not opts.urn:
                 raise TypeError("Missing required property 'plugin_name'")
             __props__['plugin_name'] = plugin_name
             __props__['computed_config'] = None

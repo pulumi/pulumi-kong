@@ -22,17 +22,18 @@ type Target struct {
 // NewTarget registers a new resource with the given unique name, arguments, and options.
 func NewTarget(ctx *pulumi.Context,
 	name string, args *TargetArgs, opts ...pulumi.ResourceOption) (*Target, error) {
-	if args == nil || args.Target == nil {
-		return nil, errors.New("missing required argument 'Target'")
-	}
-	if args == nil || args.UpstreamId == nil {
-		return nil, errors.New("missing required argument 'UpstreamId'")
-	}
-	if args == nil || args.Weight == nil {
-		return nil, errors.New("missing required argument 'Weight'")
-	}
 	if args == nil {
-		args = &TargetArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.Target == nil {
+		return nil, errors.New("invalid value for required argument 'Target'")
+	}
+	if args.UpstreamId == nil {
+		return nil, errors.New("invalid value for required argument 'UpstreamId'")
+	}
+	if args.Weight == nil {
+		return nil, errors.New("invalid value for required argument 'Weight'")
 	}
 	var resource Target
 	err := ctx.RegisterResource("kong:index/target:Target", name, args, &resource, opts...)

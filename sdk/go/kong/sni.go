@@ -21,11 +21,12 @@ type Sni struct {
 // NewSni registers a new resource with the given unique name, arguments, and options.
 func NewSni(ctx *pulumi.Context,
 	name string, args *SniArgs, opts ...pulumi.ResourceOption) (*Sni, error) {
-	if args == nil || args.CertificateId == nil {
-		return nil, errors.New("missing required argument 'CertificateId'")
-	}
 	if args == nil {
-		args = &SniArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.CertificateId == nil {
+		return nil, errors.New("invalid value for required argument 'CertificateId'")
 	}
 	var resource Sni
 	err := ctx.RegisterResource("kong:index/sni:Sni", name, args, &resource, opts...)

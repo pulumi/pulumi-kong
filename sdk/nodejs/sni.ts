@@ -51,7 +51,7 @@ export class Sni extends pulumi.CustomResource {
             inputs["name"] = state ? state.name : undefined;
         } else {
             const args = argsOrState as SniArgs | undefined;
-            if (!args || args.certificateId === undefined) {
+            if ((!args || args.certificateId === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'certificateId'");
             }
             inputs["certificateId"] = args ? args.certificateId : undefined;

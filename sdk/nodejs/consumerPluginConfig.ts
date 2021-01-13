@@ -58,10 +58,10 @@ export class ConsumerPluginConfig extends pulumi.CustomResource {
             inputs["pluginName"] = state ? state.pluginName : undefined;
         } else {
             const args = argsOrState as ConsumerPluginConfigArgs | undefined;
-            if (!args || args.consumerId === undefined) {
+            if ((!args || args.consumerId === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            if (!args || args.pluginName === undefined) {
+            if ((!args || args.pluginName === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'pluginName'");
             }
             inputs["configJson"] = args ? args.configJson : undefined;

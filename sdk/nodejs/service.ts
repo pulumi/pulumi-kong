@@ -65,7 +65,7 @@ export class Service extends pulumi.CustomResource {
             inputs["writeTimeout"] = state ? state.writeTimeout : undefined;
         } else {
             const args = argsOrState as ServiceArgs | undefined;
-            if (!args || args.protocol === undefined) {
+            if ((!args || args.protocol === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'protocol'");
             }
             inputs["connectTimeout"] = args ? args.connectTimeout : undefined;

@@ -21,11 +21,12 @@ type Consumer struct {
 // NewConsumer registers a new resource with the given unique name, arguments, and options.
 func NewConsumer(ctx *pulumi.Context,
 	name string, args *ConsumerArgs, opts ...pulumi.ResourceOption) (*Consumer, error) {
-	if args == nil || args.Username == nil {
-		return nil, errors.New("missing required argument 'Username'")
-	}
 	if args == nil {
-		args = &ConsumerArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.Username == nil {
+		return nil, errors.New("invalid value for required argument 'Username'")
 	}
 	var resource Consumer
 	err := ctx.RegisterResource("kong:index/consumer:Consumer", name, args, &resource, opts...)

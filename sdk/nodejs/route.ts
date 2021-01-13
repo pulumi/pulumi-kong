@@ -72,10 +72,10 @@ export class Route extends pulumi.CustomResource {
             inputs["stripPath"] = state ? state.stripPath : undefined;
         } else {
             const args = argsOrState as RouteArgs | undefined;
-            if (!args || args.protocols === undefined) {
+            if ((!args || args.protocols === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'protocols'");
             }
-            if (!args || args.serviceId === undefined) {
+            if ((!args || args.serviceId === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'serviceId'");
             }
             inputs["destinations"] = args ? args.destinations : undefined;
