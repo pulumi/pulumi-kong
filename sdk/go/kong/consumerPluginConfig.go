@@ -101,15 +101,15 @@ type ConsumerPluginConfigInput interface {
 	ToConsumerPluginConfigOutputWithContext(ctx context.Context) ConsumerPluginConfigOutput
 }
 
-func (ConsumerPluginConfig) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConsumerPluginConfig)(nil)).Elem()
+func (*ConsumerPluginConfig) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsumerPluginConfig)(nil))
 }
 
-func (i ConsumerPluginConfig) ToConsumerPluginConfigOutput() ConsumerPluginConfigOutput {
+func (i *ConsumerPluginConfig) ToConsumerPluginConfigOutput() ConsumerPluginConfigOutput {
 	return i.ToConsumerPluginConfigOutputWithContext(context.Background())
 }
 
-func (i ConsumerPluginConfig) ToConsumerPluginConfigOutputWithContext(ctx context.Context) ConsumerPluginConfigOutput {
+func (i *ConsumerPluginConfig) ToConsumerPluginConfigOutputWithContext(ctx context.Context) ConsumerPluginConfigOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPluginConfigOutput)
 }
 
@@ -118,7 +118,7 @@ type ConsumerPluginConfigOutput struct {
 }
 
 func (ConsumerPluginConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConsumerPluginConfigOutput)(nil)).Elem()
+	return reflect.TypeOf((*ConsumerPluginConfig)(nil))
 }
 
 func (o ConsumerPluginConfigOutput) ToConsumerPluginConfigOutput() ConsumerPluginConfigOutput {

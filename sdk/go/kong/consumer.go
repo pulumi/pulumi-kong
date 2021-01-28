@@ -85,15 +85,15 @@ type ConsumerInput interface {
 	ToConsumerOutputWithContext(ctx context.Context) ConsumerOutput
 }
 
-func (Consumer) ElementType() reflect.Type {
-	return reflect.TypeOf((*Consumer)(nil)).Elem()
+func (*Consumer) ElementType() reflect.Type {
+	return reflect.TypeOf((*Consumer)(nil))
 }
 
-func (i Consumer) ToConsumerOutput() ConsumerOutput {
+func (i *Consumer) ToConsumerOutput() ConsumerOutput {
 	return i.ToConsumerOutputWithContext(context.Background())
 }
 
-func (i Consumer) ToConsumerOutputWithContext(ctx context.Context) ConsumerOutput {
+func (i *Consumer) ToConsumerOutputWithContext(ctx context.Context) ConsumerOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerOutput)
 }
 
@@ -102,7 +102,7 @@ type ConsumerOutput struct {
 }
 
 func (ConsumerOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConsumerOutput)(nil)).Elem()
+	return reflect.TypeOf((*Consumer)(nil))
 }
 
 func (o ConsumerOutput) ToConsumerOutput() ConsumerOutput {

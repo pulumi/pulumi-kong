@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    [KongResourceType("kong:index/target:Target")]
     public partial class Target : Pulumi.CustomResource
     {
         [Output("target")]

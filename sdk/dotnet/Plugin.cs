@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    [KongResourceType("kong:index/plugin:Plugin")]
     public partial class Plugin : Pulumi.CustomResource
     {
         [Output("computedConfig")]

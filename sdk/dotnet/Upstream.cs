@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    [KongResourceType("kong:index/upstream:Upstream")]
     public partial class Upstream : Pulumi.CustomResource
     {
         [Output("hashFallback")]

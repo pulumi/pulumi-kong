@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    [KongResourceType("kong:index/route:Route")]
     public partial class Route : Pulumi.CustomResource
     {
         [Output("destinations")]

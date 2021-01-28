@@ -85,15 +85,15 @@ type SniInput interface {
 	ToSniOutputWithContext(ctx context.Context) SniOutput
 }
 
-func (Sni) ElementType() reflect.Type {
-	return reflect.TypeOf((*Sni)(nil)).Elem()
+func (*Sni) ElementType() reflect.Type {
+	return reflect.TypeOf((*Sni)(nil))
 }
 
-func (i Sni) ToSniOutput() SniOutput {
+func (i *Sni) ToSniOutput() SniOutput {
 	return i.ToSniOutputWithContext(context.Background())
 }
 
-func (i Sni) ToSniOutputWithContext(ctx context.Context) SniOutput {
+func (i *Sni) ToSniOutputWithContext(ctx context.Context) SniOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SniOutput)
 }
 
@@ -102,7 +102,7 @@ type SniOutput struct {
 }
 
 func (SniOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SniOutput)(nil)).Elem()
+	return reflect.TypeOf((*Sni)(nil))
 }
 
 func (o SniOutput) ToSniOutput() SniOutput {
