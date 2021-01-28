@@ -77,4 +77,11 @@ namespace Pulumi.Kong
             }
         }
     }
+
+    internal sealed class KongResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    {
+        public KongResourceTypeAttribute(string type) : base(type, Utilities.Version)
+        {
+        }
+    }
 }

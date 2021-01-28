@@ -1239,6 +1239,10 @@
                 "System.Collections.Immutable": "1.6.0"
             }
         },
+        "go": {
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-kong/sdk/v2/go/kong"
+        },
         "nodejs": {
             "dependencies": {
                 "@pulumi/pulumi": "^2.15.0"

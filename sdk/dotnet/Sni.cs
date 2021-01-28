@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    [KongResourceType("kong:index/sni:Sni")]
     public partial class Sni : Pulumi.CustomResource
     {
         [Output("certificateId")]

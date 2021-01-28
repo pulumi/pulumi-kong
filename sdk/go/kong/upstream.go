@@ -116,15 +116,15 @@ type UpstreamInput interface {
 	ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutput
 }
 
-func (Upstream) ElementType() reflect.Type {
-	return reflect.TypeOf((*Upstream)(nil)).Elem()
+func (*Upstream) ElementType() reflect.Type {
+	return reflect.TypeOf((*Upstream)(nil))
 }
 
-func (i Upstream) ToUpstreamOutput() UpstreamOutput {
+func (i *Upstream) ToUpstreamOutput() UpstreamOutput {
 	return i.ToUpstreamOutputWithContext(context.Background())
 }
 
-func (i Upstream) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutput {
+func (i *Upstream) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamOutput)
 }
 
@@ -133,7 +133,7 @@ type UpstreamOutput struct {
 }
 
 func (UpstreamOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*UpstreamOutput)(nil)).Elem()
+	return reflect.TypeOf((*Upstream)(nil))
 }
 
 func (o UpstreamOutput) ToUpstreamOutput() UpstreamOutput {

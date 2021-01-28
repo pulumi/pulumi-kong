@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    [KongResourceType("kong:index/service:Service")]
     public partial class Service : Pulumi.CustomResource
     {
         [Output("connectTimeout")]
