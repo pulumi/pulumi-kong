@@ -45,24 +45,21 @@ export class Consumer extends pulumi.CustomResource {
     constructor(name: string, args: ConsumerArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerArgs | ConsumerState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as ConsumerState | undefined;
             inputs["customId"] = state ? state.customId : undefined;
             inputs["username"] = state ? state.username : undefined;
         } else {
             const args = argsOrState as ConsumerArgs | undefined;
-            if ((!args || args.username === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.username === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'username'");
             }
             inputs["customId"] = args ? args.customId : undefined;
             inputs["username"] = args ? args.username : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Consumer.__pulumiType, name, inputs, opts);
     }

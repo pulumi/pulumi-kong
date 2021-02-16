@@ -10,47 +10,27 @@ import (
 
 // An basic auth password for kong admin
 func GetKongAdminPassword(ctx *pulumi.Context) string {
-	v, err := config.Try(ctx, "kong:kongAdminPassword")
-	if err == nil {
-		return v
-	}
-	return getEnvOrDefault("", nil, "KONG_ADMIN_PASSWORD").(string)
+	return config.Get(ctx, "kong:kongAdminPassword")
 }
 
 // API key for the kong api (Enterprise Edition)
 func GetKongAdminToken(ctx *pulumi.Context) string {
-	v, err := config.Try(ctx, "kong:kongAdminToken")
-	if err == nil {
-		return v
-	}
-	return getEnvOrDefault("", nil, "KONG_ADMIN_TOKEN").(string)
+	return config.Get(ctx, "kong:kongAdminToken")
 }
 
 // The address of the kong admin url e.g. http://localhost:8001
 func GetKongAdminUri(ctx *pulumi.Context) string {
-	v, err := config.Try(ctx, "kong:kongAdminUri")
-	if err == nil {
-		return v
-	}
-	return getEnvOrDefault("http://localhost:8001", nil, "KONG_ADMIN_ADDR").(string)
+	return config.Get(ctx, "kong:kongAdminUri")
 }
 
 // An basic auth user for kong admin
 func GetKongAdminUsername(ctx *pulumi.Context) string {
-	v, err := config.Try(ctx, "kong:kongAdminUsername")
-	if err == nil {
-		return v
-	}
-	return getEnvOrDefault("", nil, "KONG_ADMIN_USERNAME").(string)
+	return config.Get(ctx, "kong:kongAdminUsername")
 }
 
 // API key for the kong api (if you have locked it down)
 func GetKongApiKey(ctx *pulumi.Context) string {
-	v, err := config.Try(ctx, "kong:kongApiKey")
-	if err == nil {
-		return v
-	}
-	return getEnvOrDefault("", nil, "KONG_API_KEY").(string)
+	return config.Get(ctx, "kong:kongApiKey")
 }
 
 // Should plugins `config_json` field strictly match plugin configuration

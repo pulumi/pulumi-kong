@@ -53,7 +53,8 @@ export class Upstream extends pulumi.CustomResource {
     constructor(name: string, args?: UpstreamArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: UpstreamArgs | UpstreamState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as UpstreamState | undefined;
             inputs["hashFallback"] = state ? state.hashFallback : undefined;
             inputs["hashFallbackHeader"] = state ? state.hashFallbackHeader : undefined;
@@ -76,12 +77,8 @@ export class Upstream extends pulumi.CustomResource {
             inputs["name"] = args ? args.name : undefined;
             inputs["slots"] = args ? args.slots : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Upstream.__pulumiType, name, inputs, opts);
     }

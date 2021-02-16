@@ -113,6 +113,85 @@ func (i *ConsumerPluginConfig) ToConsumerPluginConfigOutputWithContext(ctx conte
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPluginConfigOutput)
 }
 
+func (i *ConsumerPluginConfig) ToConsumerPluginConfigPtrOutput() ConsumerPluginConfigPtrOutput {
+	return i.ToConsumerPluginConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *ConsumerPluginConfig) ToConsumerPluginConfigPtrOutputWithContext(ctx context.Context) ConsumerPluginConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPluginConfigPtrOutput)
+}
+
+type ConsumerPluginConfigPtrInput interface {
+	pulumi.Input
+
+	ToConsumerPluginConfigPtrOutput() ConsumerPluginConfigPtrOutput
+	ToConsumerPluginConfigPtrOutputWithContext(ctx context.Context) ConsumerPluginConfigPtrOutput
+}
+
+type consumerPluginConfigPtrType ConsumerPluginConfigArgs
+
+func (*consumerPluginConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConsumerPluginConfig)(nil))
+}
+
+func (i *consumerPluginConfigPtrType) ToConsumerPluginConfigPtrOutput() ConsumerPluginConfigPtrOutput {
+	return i.ToConsumerPluginConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *consumerPluginConfigPtrType) ToConsumerPluginConfigPtrOutputWithContext(ctx context.Context) ConsumerPluginConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPluginConfigPtrOutput)
+}
+
+// ConsumerPluginConfigArrayInput is an input type that accepts ConsumerPluginConfigArray and ConsumerPluginConfigArrayOutput values.
+// You can construct a concrete instance of `ConsumerPluginConfigArrayInput` via:
+//
+//          ConsumerPluginConfigArray{ ConsumerPluginConfigArgs{...} }
+type ConsumerPluginConfigArrayInput interface {
+	pulumi.Input
+
+	ToConsumerPluginConfigArrayOutput() ConsumerPluginConfigArrayOutput
+	ToConsumerPluginConfigArrayOutputWithContext(context.Context) ConsumerPluginConfigArrayOutput
+}
+
+type ConsumerPluginConfigArray []ConsumerPluginConfigInput
+
+func (ConsumerPluginConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf(([]*ConsumerPluginConfig)(nil))
+}
+
+func (i ConsumerPluginConfigArray) ToConsumerPluginConfigArrayOutput() ConsumerPluginConfigArrayOutput {
+	return i.ToConsumerPluginConfigArrayOutputWithContext(context.Background())
+}
+
+func (i ConsumerPluginConfigArray) ToConsumerPluginConfigArrayOutputWithContext(ctx context.Context) ConsumerPluginConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPluginConfigArrayOutput)
+}
+
+// ConsumerPluginConfigMapInput is an input type that accepts ConsumerPluginConfigMap and ConsumerPluginConfigMapOutput values.
+// You can construct a concrete instance of `ConsumerPluginConfigMapInput` via:
+//
+//          ConsumerPluginConfigMap{ "key": ConsumerPluginConfigArgs{...} }
+type ConsumerPluginConfigMapInput interface {
+	pulumi.Input
+
+	ToConsumerPluginConfigMapOutput() ConsumerPluginConfigMapOutput
+	ToConsumerPluginConfigMapOutputWithContext(context.Context) ConsumerPluginConfigMapOutput
+}
+
+type ConsumerPluginConfigMap map[string]ConsumerPluginConfigInput
+
+func (ConsumerPluginConfigMap) ElementType() reflect.Type {
+	return reflect.TypeOf((map[string]*ConsumerPluginConfig)(nil))
+}
+
+func (i ConsumerPluginConfigMap) ToConsumerPluginConfigMapOutput() ConsumerPluginConfigMapOutput {
+	return i.ToConsumerPluginConfigMapOutputWithContext(context.Background())
+}
+
+func (i ConsumerPluginConfigMap) ToConsumerPluginConfigMapOutputWithContext(ctx context.Context) ConsumerPluginConfigMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPluginConfigMapOutput)
+}
+
 type ConsumerPluginConfigOutput struct {
 	*pulumi.OutputState
 }
@@ -129,6 +208,75 @@ func (o ConsumerPluginConfigOutput) ToConsumerPluginConfigOutputWithContext(ctx 
 	return o
 }
 
+func (o ConsumerPluginConfigOutput) ToConsumerPluginConfigPtrOutput() ConsumerPluginConfigPtrOutput {
+	return o.ToConsumerPluginConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ConsumerPluginConfigOutput) ToConsumerPluginConfigPtrOutputWithContext(ctx context.Context) ConsumerPluginConfigPtrOutput {
+	return o.ApplyT(func(v ConsumerPluginConfig) *ConsumerPluginConfig {
+		return &v
+	}).(ConsumerPluginConfigPtrOutput)
+}
+
+type ConsumerPluginConfigPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (ConsumerPluginConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConsumerPluginConfig)(nil))
+}
+
+func (o ConsumerPluginConfigPtrOutput) ToConsumerPluginConfigPtrOutput() ConsumerPluginConfigPtrOutput {
+	return o
+}
+
+func (o ConsumerPluginConfigPtrOutput) ToConsumerPluginConfigPtrOutputWithContext(ctx context.Context) ConsumerPluginConfigPtrOutput {
+	return o
+}
+
+type ConsumerPluginConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (ConsumerPluginConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsumerPluginConfig)(nil))
+}
+
+func (o ConsumerPluginConfigArrayOutput) ToConsumerPluginConfigArrayOutput() ConsumerPluginConfigArrayOutput {
+	return o
+}
+
+func (o ConsumerPluginConfigArrayOutput) ToConsumerPluginConfigArrayOutputWithContext(ctx context.Context) ConsumerPluginConfigArrayOutput {
+	return o
+}
+
+func (o ConsumerPluginConfigArrayOutput) Index(i pulumi.IntInput) ConsumerPluginConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConsumerPluginConfig {
+		return vs[0].([]ConsumerPluginConfig)[vs[1].(int)]
+	}).(ConsumerPluginConfigOutput)
+}
+
+type ConsumerPluginConfigMapOutput struct{ *pulumi.OutputState }
+
+func (ConsumerPluginConfigMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]ConsumerPluginConfig)(nil))
+}
+
+func (o ConsumerPluginConfigMapOutput) ToConsumerPluginConfigMapOutput() ConsumerPluginConfigMapOutput {
+	return o
+}
+
+func (o ConsumerPluginConfigMapOutput) ToConsumerPluginConfigMapOutputWithContext(ctx context.Context) ConsumerPluginConfigMapOutput {
+	return o
+}
+
+func (o ConsumerPluginConfigMapOutput) MapIndex(k pulumi.StringInput) ConsumerPluginConfigOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) ConsumerPluginConfig {
+		return vs[0].(map[string]ConsumerPluginConfig)[vs[1].(string)]
+	}).(ConsumerPluginConfigOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(ConsumerPluginConfigOutput{})
+	pulumi.RegisterOutputType(ConsumerPluginConfigPtrOutput{})
+	pulumi.RegisterOutputType(ConsumerPluginConfigArrayOutput{})
+	pulumi.RegisterOutputType(ConsumerPluginConfigMapOutput{})
 }

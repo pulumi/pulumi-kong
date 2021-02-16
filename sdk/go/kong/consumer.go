@@ -97,6 +97,85 @@ func (i *Consumer) ToConsumerOutputWithContext(ctx context.Context) ConsumerOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerOutput)
 }
 
+func (i *Consumer) ToConsumerPtrOutput() ConsumerPtrOutput {
+	return i.ToConsumerPtrOutputWithContext(context.Background())
+}
+
+func (i *Consumer) ToConsumerPtrOutputWithContext(ctx context.Context) ConsumerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPtrOutput)
+}
+
+type ConsumerPtrInput interface {
+	pulumi.Input
+
+	ToConsumerPtrOutput() ConsumerPtrOutput
+	ToConsumerPtrOutputWithContext(ctx context.Context) ConsumerPtrOutput
+}
+
+type consumerPtrType ConsumerArgs
+
+func (*consumerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Consumer)(nil))
+}
+
+func (i *consumerPtrType) ToConsumerPtrOutput() ConsumerPtrOutput {
+	return i.ToConsumerPtrOutputWithContext(context.Background())
+}
+
+func (i *consumerPtrType) ToConsumerPtrOutputWithContext(ctx context.Context) ConsumerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerPtrOutput)
+}
+
+// ConsumerArrayInput is an input type that accepts ConsumerArray and ConsumerArrayOutput values.
+// You can construct a concrete instance of `ConsumerArrayInput` via:
+//
+//          ConsumerArray{ ConsumerArgs{...} }
+type ConsumerArrayInput interface {
+	pulumi.Input
+
+	ToConsumerArrayOutput() ConsumerArrayOutput
+	ToConsumerArrayOutputWithContext(context.Context) ConsumerArrayOutput
+}
+
+type ConsumerArray []ConsumerInput
+
+func (ConsumerArray) ElementType() reflect.Type {
+	return reflect.TypeOf(([]*Consumer)(nil))
+}
+
+func (i ConsumerArray) ToConsumerArrayOutput() ConsumerArrayOutput {
+	return i.ToConsumerArrayOutputWithContext(context.Background())
+}
+
+func (i ConsumerArray) ToConsumerArrayOutputWithContext(ctx context.Context) ConsumerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerArrayOutput)
+}
+
+// ConsumerMapInput is an input type that accepts ConsumerMap and ConsumerMapOutput values.
+// You can construct a concrete instance of `ConsumerMapInput` via:
+//
+//          ConsumerMap{ "key": ConsumerArgs{...} }
+type ConsumerMapInput interface {
+	pulumi.Input
+
+	ToConsumerMapOutput() ConsumerMapOutput
+	ToConsumerMapOutputWithContext(context.Context) ConsumerMapOutput
+}
+
+type ConsumerMap map[string]ConsumerInput
+
+func (ConsumerMap) ElementType() reflect.Type {
+	return reflect.TypeOf((map[string]*Consumer)(nil))
+}
+
+func (i ConsumerMap) ToConsumerMapOutput() ConsumerMapOutput {
+	return i.ToConsumerMapOutputWithContext(context.Background())
+}
+
+func (i ConsumerMap) ToConsumerMapOutputWithContext(ctx context.Context) ConsumerMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsumerMapOutput)
+}
+
 type ConsumerOutput struct {
 	*pulumi.OutputState
 }
@@ -113,6 +192,75 @@ func (o ConsumerOutput) ToConsumerOutputWithContext(ctx context.Context) Consume
 	return o
 }
 
+func (o ConsumerOutput) ToConsumerPtrOutput() ConsumerPtrOutput {
+	return o.ToConsumerPtrOutputWithContext(context.Background())
+}
+
+func (o ConsumerOutput) ToConsumerPtrOutputWithContext(ctx context.Context) ConsumerPtrOutput {
+	return o.ApplyT(func(v Consumer) *Consumer {
+		return &v
+	}).(ConsumerPtrOutput)
+}
+
+type ConsumerPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (ConsumerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Consumer)(nil))
+}
+
+func (o ConsumerPtrOutput) ToConsumerPtrOutput() ConsumerPtrOutput {
+	return o
+}
+
+func (o ConsumerPtrOutput) ToConsumerPtrOutputWithContext(ctx context.Context) ConsumerPtrOutput {
+	return o
+}
+
+type ConsumerArrayOutput struct{ *pulumi.OutputState }
+
+func (ConsumerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]Consumer)(nil))
+}
+
+func (o ConsumerArrayOutput) ToConsumerArrayOutput() ConsumerArrayOutput {
+	return o
+}
+
+func (o ConsumerArrayOutput) ToConsumerArrayOutputWithContext(ctx context.Context) ConsumerArrayOutput {
+	return o
+}
+
+func (o ConsumerArrayOutput) Index(i pulumi.IntInput) ConsumerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Consumer {
+		return vs[0].([]Consumer)[vs[1].(int)]
+	}).(ConsumerOutput)
+}
+
+type ConsumerMapOutput struct{ *pulumi.OutputState }
+
+func (ConsumerMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]Consumer)(nil))
+}
+
+func (o ConsumerMapOutput) ToConsumerMapOutput() ConsumerMapOutput {
+	return o
+}
+
+func (o ConsumerMapOutput) ToConsumerMapOutputWithContext(ctx context.Context) ConsumerMapOutput {
+	return o
+}
+
+func (o ConsumerMapOutput) MapIndex(k pulumi.StringInput) ConsumerOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) Consumer {
+		return vs[0].(map[string]Consumer)[vs[1].(string)]
+	}).(ConsumerOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(ConsumerOutput{})
+	pulumi.RegisterOutputType(ConsumerPtrOutput{})
+	pulumi.RegisterOutputType(ConsumerArrayOutput{})
+	pulumi.RegisterOutputType(ConsumerMapOutput{})
 }

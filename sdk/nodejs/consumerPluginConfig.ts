@@ -50,7 +50,8 @@ export class ConsumerPluginConfig extends pulumi.CustomResource {
     constructor(name: string, args: ConsumerPluginConfigArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerPluginConfigArgs | ConsumerPluginConfigState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as ConsumerPluginConfigState | undefined;
             inputs["computedConfig"] = state ? state.computedConfig : undefined;
             inputs["configJson"] = state ? state.configJson : undefined;
@@ -58,10 +59,10 @@ export class ConsumerPluginConfig extends pulumi.CustomResource {
             inputs["pluginName"] = state ? state.pluginName : undefined;
         } else {
             const args = argsOrState as ConsumerPluginConfigArgs | undefined;
-            if ((!args || args.consumerId === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.consumerId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            if ((!args || args.pluginName === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.pluginName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'pluginName'");
             }
             inputs["configJson"] = args ? args.configJson : undefined;
@@ -69,12 +70,8 @@ export class ConsumerPluginConfig extends pulumi.CustomResource {
             inputs["pluginName"] = args ? args.pluginName : undefined;
             inputs["computedConfig"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(ConsumerPluginConfig.__pulumiType, name, inputs, opts);
     }

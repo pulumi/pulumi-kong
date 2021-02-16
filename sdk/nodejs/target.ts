@@ -46,32 +46,29 @@ export class Target extends pulumi.CustomResource {
     constructor(name: string, args: TargetArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: TargetArgs | TargetState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as TargetState | undefined;
             inputs["target"] = state ? state.target : undefined;
             inputs["upstreamId"] = state ? state.upstreamId : undefined;
             inputs["weight"] = state ? state.weight : undefined;
         } else {
             const args = argsOrState as TargetArgs | undefined;
-            if ((!args || args.target === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.target === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'target'");
             }
-            if ((!args || args.upstreamId === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.upstreamId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'upstreamId'");
             }
-            if ((!args || args.weight === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.weight === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'weight'");
             }
             inputs["target"] = args ? args.target : undefined;
             inputs["upstreamId"] = args ? args.upstreamId : undefined;
             inputs["weight"] = args ? args.weight : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Target.__pulumiType, name, inputs, opts);
     }

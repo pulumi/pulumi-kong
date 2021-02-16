@@ -9,23 +9,23 @@ let __config = new pulumi.Config("kong");
 /**
  * An basic auth password for kong admin
  */
-export let kongAdminPassword: string | undefined = __config.get("kongAdminPassword") || utilities.getEnv("KONG_ADMIN_PASSWORD");
+export let kongAdminPassword: string | undefined = __config.get("kongAdminPassword");
 /**
  * API key for the kong api (Enterprise Edition)
  */
-export let kongAdminToken: string | undefined = __config.get("kongAdminToken") || utilities.getEnv("KONG_ADMIN_TOKEN");
+export let kongAdminToken: string | undefined = __config.get("kongAdminToken");
 /**
  * The address of the kong admin url e.g. http://localhost:8001
  */
-export let kongAdminUri: string | undefined = __config.get("kongAdminUri") || (utilities.getEnv("KONG_ADMIN_ADDR") || "http://localhost:8001");
+export let kongAdminUri: string | undefined = __config.get("kongAdminUri");
 /**
  * An basic auth user for kong admin
  */
-export let kongAdminUsername: string | undefined = __config.get("kongAdminUsername") || utilities.getEnv("KONG_ADMIN_USERNAME");
+export let kongAdminUsername: string | undefined = __config.get("kongAdminUsername");
 /**
  * API key for the kong api (if you have locked it down)
  */
-export let kongApiKey: string | undefined = __config.get("kongApiKey") || utilities.getEnv("KONG_API_KEY");
+export let kongApiKey: string | undefined = __config.get("kongApiKey");
 /**
  * Should plugins `config_json` field strictly match plugin configuration
  */

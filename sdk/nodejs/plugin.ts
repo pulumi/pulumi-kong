@@ -54,7 +54,8 @@ export class Plugin extends pulumi.CustomResource {
     constructor(name: string, args?: PluginArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: PluginArgs | PluginState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as PluginState | undefined;
             inputs["computedConfig"] = state ? state.computedConfig : undefined;
             inputs["configJson"] = state ? state.configJson : undefined;
@@ -75,12 +76,8 @@ export class Plugin extends pulumi.CustomResource {
             inputs["strictMatch"] = args ? args.strictMatch : undefined;
             inputs["computedConfig"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Plugin.__pulumiType, name, inputs, opts);
     }

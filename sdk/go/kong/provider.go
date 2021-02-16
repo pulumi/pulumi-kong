@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
@@ -22,23 +23,11 @@ type Provider struct {
 func NewProvider(ctx *pulumi.Context,
 	name string, args *ProviderArgs, opts ...pulumi.ResourceOption) (*Provider, error) {
 	if args == nil {
-		args = &ProviderArgs{}
+		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.KongAdminPassword == nil {
-		args.KongAdminPassword = pulumi.StringPtr(getEnvOrDefault("", nil, "KONG_ADMIN_PASSWORD").(string))
-	}
-	if args.KongAdminToken == nil {
-		args.KongAdminToken = pulumi.StringPtr(getEnvOrDefault("", nil, "KONG_ADMIN_TOKEN").(string))
-	}
 	if args.KongAdminUri == nil {
-		args.KongAdminUri = pulumi.StringPtr(getEnvOrDefault("http://localhost:8001", nil, "KONG_ADMIN_ADDR").(string))
-	}
-	if args.KongAdminUsername == nil {
-		args.KongAdminUsername = pulumi.StringPtr(getEnvOrDefault("", nil, "KONG_ADMIN_USERNAME").(string))
-	}
-	if args.KongApiKey == nil {
-		args.KongApiKey = pulumi.StringPtr(getEnvOrDefault("", nil, "KONG_API_KEY").(string))
+		return nil, errors.New("invalid value for required argument 'KongAdminUri'")
 	}
 	if args.StrictPluginsMatch == nil {
 		args.StrictPluginsMatch = pulumi.BoolPtr(getEnvOrDefault(false, parseEnvBool, "STRICT_PLUGINS_MATCH").(bool))
@@ -60,7 +49,7 @@ type providerArgs struct {
 	// API key for the kong api (Enterprise Edition)
 	KongAdminToken *string `pulumi:"kongAdminToken"`
 	// The address of the kong admin url e.g. http://localhost:8001
-	KongAdminUri *string `pulumi:"kongAdminUri"`
+	KongAdminUri string `pulumi:"kongAdminUri"`
 	// An basic auth user for kong admin
 	KongAdminUsername *string `pulumi:"kongAdminUsername"`
 	// API key for the kong api (if you have locked it down)
@@ -78,7 +67,7 @@ type ProviderArgs struct {
 	// API key for the kong api (Enterprise Edition)
 	KongAdminToken pulumi.StringPtrInput
 	// The address of the kong admin url e.g. http://localhost:8001
-	KongAdminUri pulumi.StringPtrInput
+	KongAdminUri pulumi.StringInput
 	// An basic auth user for kong admin
 	KongAdminUsername pulumi.StringPtrInput
 	// API key for the kong api (if you have locked it down)
@@ -112,6 +101,35 @@ func (i *Provider) ToProviderOutputWithContext(ctx context.Context) ProviderOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderOutput)
 }
 
+func (i *Provider) ToProviderPtrOutput() ProviderPtrOutput {
+	return i.ToProviderPtrOutputWithContext(context.Background())
+}
+
+func (i *Provider) ToProviderPtrOutputWithContext(ctx context.Context) ProviderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderPtrOutput)
+}
+
+type ProviderPtrInput interface {
+	pulumi.Input
+
+	ToProviderPtrOutput() ProviderPtrOutput
+	ToProviderPtrOutputWithContext(ctx context.Context) ProviderPtrOutput
+}
+
+type providerPtrType ProviderArgs
+
+func (*providerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Provider)(nil))
+}
+
+func (i *providerPtrType) ToProviderPtrOutput() ProviderPtrOutput {
+	return i.ToProviderPtrOutputWithContext(context.Background())
+}
+
+func (i *providerPtrType) ToProviderPtrOutputWithContext(ctx context.Context) ProviderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderPtrOutput)
+}
+
 type ProviderOutput struct {
 	*pulumi.OutputState
 }
@@ -128,6 +146,33 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
+func (o ProviderOutput) ToProviderPtrOutput() ProviderPtrOutput {
+	return o.ToProviderPtrOutputWithContext(context.Background())
+}
+
+func (o ProviderOutput) ToProviderPtrOutputWithContext(ctx context.Context) ProviderPtrOutput {
+	return o.ApplyT(func(v Provider) *Provider {
+		return &v
+	}).(ProviderPtrOutput)
+}
+
+type ProviderPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (ProviderPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Provider)(nil))
+}
+
+func (o ProviderPtrOutput) ToProviderPtrOutput() ProviderPtrOutput {
+	return o
+}
+
+func (o ProviderPtrOutput) ToProviderPtrOutputWithContext(ctx context.Context) ProviderPtrOutput {
+	return o
+}
+
 func init() {
 	pulumi.RegisterOutputType(ProviderOutput{})
+	pulumi.RegisterOutputType(ProviderPtrOutput{})
 }

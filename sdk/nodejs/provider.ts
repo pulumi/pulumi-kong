@@ -33,23 +33,23 @@ export class Provider extends pulumi.ProviderResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args?: ProviderArgs, opts?: pulumi.ResourceOptions) {
+    constructor(name: string, args: ProviderArgs, opts?: pulumi.ResourceOptions) {
         let inputs: pulumi.Inputs = {};
+        opts = opts || {};
         {
-            inputs["kongAdminPassword"] = (args ? args.kongAdminPassword : undefined) || utilities.getEnv("KONG_ADMIN_PASSWORD");
-            inputs["kongAdminToken"] = (args ? args.kongAdminToken : undefined) || utilities.getEnv("KONG_ADMIN_TOKEN");
-            inputs["kongAdminUri"] = (args ? args.kongAdminUri : undefined) || (utilities.getEnv("KONG_ADMIN_ADDR") || "http://localhost:8001");
-            inputs["kongAdminUsername"] = (args ? args.kongAdminUsername : undefined) || utilities.getEnv("KONG_ADMIN_USERNAME");
-            inputs["kongApiKey"] = (args ? args.kongApiKey : undefined) || utilities.getEnv("KONG_API_KEY");
+            if ((!args || args.kongAdminUri === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'kongAdminUri'");
+            }
+            inputs["kongAdminPassword"] = args ? args.kongAdminPassword : undefined;
+            inputs["kongAdminToken"] = args ? args.kongAdminToken : undefined;
+            inputs["kongAdminUri"] = args ? args.kongAdminUri : undefined;
+            inputs["kongAdminUsername"] = args ? args.kongAdminUsername : undefined;
+            inputs["kongApiKey"] = args ? args.kongApiKey : undefined;
             inputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) || <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
             inputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) || (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Provider.__pulumiType, name, inputs, opts);
     }
@@ -70,7 +70,7 @@ export interface ProviderArgs {
     /**
      * The address of the kong admin url e.g. http://localhost:8001
      */
-    readonly kongAdminUri?: pulumi.Input<string>;
+    readonly kongAdminUri: pulumi.Input<string>;
     /**
      * An basic auth user for kong admin
      */

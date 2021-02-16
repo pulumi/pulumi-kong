@@ -20,27 +20,27 @@ __all__ = [
 
 __config__ = pulumi.Config('kong')
 
-kong_admin_password = __config__.get('kongAdminPassword') or _utilities.get_env('KONG_ADMIN_PASSWORD')
+kong_admin_password = __config__.get('kongAdminPassword')
 """
 An basic auth password for kong admin
 """
 
-kong_admin_token = __config__.get('kongAdminToken') or _utilities.get_env('KONG_ADMIN_TOKEN')
+kong_admin_token = __config__.get('kongAdminToken')
 """
 API key for the kong api (Enterprise Edition)
 """
 
-kong_admin_uri = __config__.get('kongAdminUri') or (_utilities.get_env('KONG_ADMIN_ADDR') or 'http://localhost:8001')
+kong_admin_uri = __config__.get('kongAdminUri')
 """
 The address of the kong admin url e.g. http://localhost:8001
 """
 
-kong_admin_username = __config__.get('kongAdminUsername') or _utilities.get_env('KONG_ADMIN_USERNAME')
+kong_admin_username = __config__.get('kongAdminUsername')
 """
 An basic auth user for kong admin
 """
 
-kong_api_key = __config__.get('kongApiKey') or _utilities.get_env('KONG_API_KEY')
+kong_api_key = __config__.get('kongApiKey')
 """
 API key for the kong api (if you have locked it down)
 """

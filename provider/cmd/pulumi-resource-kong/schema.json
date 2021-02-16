@@ -16,49 +16,23 @@
         "variables": {
             "kongAdminPassword": {
                 "type": "string",
-                "description": "An basic auth password for kong admin\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_PASSWORD"
-                    ]
-                }
+                "description": "An basic auth password for kong admin\n"
             },
             "kongAdminToken": {
                 "type": "string",
-                "description": "API key for the kong api (Enterprise Edition)\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_TOKEN"
-                    ]
-                }
+                "description": "API key for the kong api (Enterprise Edition)\n"
             },
             "kongAdminUri": {
                 "type": "string",
-                "description": "The address of the kong admin url e.g. http://localhost:8001\n",
-                "default": "http://localhost:8001",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_ADDR"
-                    ]
-                }
+                "description": "The address of the kong admin url e.g. http://localhost:8001\n"
             },
             "kongAdminUsername": {
                 "type": "string",
-                "description": "An basic auth user for kong admin\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_USERNAME"
-                    ]
-                }
+                "description": "An basic auth user for kong admin\n"
             },
             "kongApiKey": {
                 "type": "string",
-                "description": "API key for the kong api (if you have locked it down)\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_API_KEY"
-                    ]
-                }
+                "description": "API key for the kong api (if you have locked it down)\n"
             },
             "strictPluginsMatch": {
                 "type": "boolean",
@@ -440,49 +414,23 @@
         "inputProperties": {
             "kongAdminPassword": {
                 "type": "string",
-                "description": "An basic auth password for kong admin\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_PASSWORD"
-                    ]
-                }
+                "description": "An basic auth password for kong admin\n"
             },
             "kongAdminToken": {
                 "type": "string",
-                "description": "API key for the kong api (Enterprise Edition)\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_TOKEN"
-                    ]
-                }
+                "description": "API key for the kong api (Enterprise Edition)\n"
             },
             "kongAdminUri": {
                 "type": "string",
-                "description": "The address of the kong admin url e.g. http://localhost:8001\n",
-                "default": "http://localhost:8001",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_ADDR"
-                    ]
-                }
+                "description": "The address of the kong admin url e.g. http://localhost:8001\n"
             },
             "kongAdminUsername": {
                 "type": "string",
-                "description": "An basic auth user for kong admin\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_ADMIN_USERNAME"
-                    ]
-                }
+                "description": "An basic auth user for kong admin\n"
             },
             "kongApiKey": {
                 "type": "string",
-                "description": "API key for the kong api (if you have locked it down)\n",
-                "defaultInfo": {
-                    "environment": [
-                        "KONG_API_KEY"
-                    ]
-                }
+                "description": "API key for the kong api (if you have locked it down)\n"
             },
             "strictPluginsMatch": {
                 "type": "boolean",
@@ -503,7 +451,10 @@
                     ]
                 }
             }
-        }
+        },
+        "requiredInputs": [
+            "kongAdminUri"
+        ]
     },
     "resources": {
         "kong:index/certificate:Certificate": {
