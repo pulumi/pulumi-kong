@@ -25,7 +25,7 @@ namespace Pulumi.Kong
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
+        public Provider(string name, ProviderArgs args, CustomResourceOptions? options = null)
             : base("kong", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -60,8 +60,8 @@ namespace Pulumi.Kong
         /// <summary>
         /// The address of the kong admin url e.g. http://localhost:8001
         /// </summary>
-        [Input("kongAdminUri")]
-        public Input<string>? KongAdminUri { get; set; }
+        [Input("kongAdminUri", required: true)]
+        public Input<string> KongAdminUri { get; set; } = null!;
 
         /// <summary>
         /// An basic auth user for kong admin
@@ -89,11 +89,6 @@ namespace Pulumi.Kong
 
         public ProviderArgs()
         {
-            KongAdminPassword = Utilities.GetEnv("KONG_ADMIN_PASSWORD");
-            KongAdminToken = Utilities.GetEnv("KONG_ADMIN_TOKEN");
-            KongAdminUri = Utilities.GetEnv("KONG_ADMIN_ADDR") ?? "http://localhost:8001";
-            KongAdminUsername = Utilities.GetEnv("KONG_ADMIN_USERNAME");
-            KongApiKey = Utilities.GetEnv("KONG_API_KEY");
             StrictPluginsMatch = Utilities.GetEnvBoolean("STRICT_PLUGINS_MATCH");
             TlsSkipVerify = Utilities.GetEnvBoolean("TLS_SKIP_VERIFY") ?? false;
         }

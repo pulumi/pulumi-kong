@@ -128,6 +128,85 @@ func (i *Upstream) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutp
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamOutput)
 }
 
+func (i *Upstream) ToUpstreamPtrOutput() UpstreamPtrOutput {
+	return i.ToUpstreamPtrOutputWithContext(context.Background())
+}
+
+func (i *Upstream) ToUpstreamPtrOutputWithContext(ctx context.Context) UpstreamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpstreamPtrOutput)
+}
+
+type UpstreamPtrInput interface {
+	pulumi.Input
+
+	ToUpstreamPtrOutput() UpstreamPtrOutput
+	ToUpstreamPtrOutputWithContext(ctx context.Context) UpstreamPtrOutput
+}
+
+type upstreamPtrType UpstreamArgs
+
+func (*upstreamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Upstream)(nil))
+}
+
+func (i *upstreamPtrType) ToUpstreamPtrOutput() UpstreamPtrOutput {
+	return i.ToUpstreamPtrOutputWithContext(context.Background())
+}
+
+func (i *upstreamPtrType) ToUpstreamPtrOutputWithContext(ctx context.Context) UpstreamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpstreamPtrOutput)
+}
+
+// UpstreamArrayInput is an input type that accepts UpstreamArray and UpstreamArrayOutput values.
+// You can construct a concrete instance of `UpstreamArrayInput` via:
+//
+//          UpstreamArray{ UpstreamArgs{...} }
+type UpstreamArrayInput interface {
+	pulumi.Input
+
+	ToUpstreamArrayOutput() UpstreamArrayOutput
+	ToUpstreamArrayOutputWithContext(context.Context) UpstreamArrayOutput
+}
+
+type UpstreamArray []UpstreamInput
+
+func (UpstreamArray) ElementType() reflect.Type {
+	return reflect.TypeOf(([]*Upstream)(nil))
+}
+
+func (i UpstreamArray) ToUpstreamArrayOutput() UpstreamArrayOutput {
+	return i.ToUpstreamArrayOutputWithContext(context.Background())
+}
+
+func (i UpstreamArray) ToUpstreamArrayOutputWithContext(ctx context.Context) UpstreamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpstreamArrayOutput)
+}
+
+// UpstreamMapInput is an input type that accepts UpstreamMap and UpstreamMapOutput values.
+// You can construct a concrete instance of `UpstreamMapInput` via:
+//
+//          UpstreamMap{ "key": UpstreamArgs{...} }
+type UpstreamMapInput interface {
+	pulumi.Input
+
+	ToUpstreamMapOutput() UpstreamMapOutput
+	ToUpstreamMapOutputWithContext(context.Context) UpstreamMapOutput
+}
+
+type UpstreamMap map[string]UpstreamInput
+
+func (UpstreamMap) ElementType() reflect.Type {
+	return reflect.TypeOf((map[string]*Upstream)(nil))
+}
+
+func (i UpstreamMap) ToUpstreamMapOutput() UpstreamMapOutput {
+	return i.ToUpstreamMapOutputWithContext(context.Background())
+}
+
+func (i UpstreamMap) ToUpstreamMapOutputWithContext(ctx context.Context) UpstreamMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpstreamMapOutput)
+}
+
 type UpstreamOutput struct {
 	*pulumi.OutputState
 }
@@ -144,6 +223,75 @@ func (o UpstreamOutput) ToUpstreamOutputWithContext(ctx context.Context) Upstrea
 	return o
 }
 
+func (o UpstreamOutput) ToUpstreamPtrOutput() UpstreamPtrOutput {
+	return o.ToUpstreamPtrOutputWithContext(context.Background())
+}
+
+func (o UpstreamOutput) ToUpstreamPtrOutputWithContext(ctx context.Context) UpstreamPtrOutput {
+	return o.ApplyT(func(v Upstream) *Upstream {
+		return &v
+	}).(UpstreamPtrOutput)
+}
+
+type UpstreamPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (UpstreamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Upstream)(nil))
+}
+
+func (o UpstreamPtrOutput) ToUpstreamPtrOutput() UpstreamPtrOutput {
+	return o
+}
+
+func (o UpstreamPtrOutput) ToUpstreamPtrOutputWithContext(ctx context.Context) UpstreamPtrOutput {
+	return o
+}
+
+type UpstreamArrayOutput struct{ *pulumi.OutputState }
+
+func (UpstreamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]Upstream)(nil))
+}
+
+func (o UpstreamArrayOutput) ToUpstreamArrayOutput() UpstreamArrayOutput {
+	return o
+}
+
+func (o UpstreamArrayOutput) ToUpstreamArrayOutputWithContext(ctx context.Context) UpstreamArrayOutput {
+	return o
+}
+
+func (o UpstreamArrayOutput) Index(i pulumi.IntInput) UpstreamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Upstream {
+		return vs[0].([]Upstream)[vs[1].(int)]
+	}).(UpstreamOutput)
+}
+
+type UpstreamMapOutput struct{ *pulumi.OutputState }
+
+func (UpstreamMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]Upstream)(nil))
+}
+
+func (o UpstreamMapOutput) ToUpstreamMapOutput() UpstreamMapOutput {
+	return o
+}
+
+func (o UpstreamMapOutput) ToUpstreamMapOutputWithContext(ctx context.Context) UpstreamMapOutput {
+	return o
+}
+
+func (o UpstreamMapOutput) MapIndex(k pulumi.StringInput) UpstreamOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) Upstream {
+		return vs[0].(map[string]Upstream)[vs[1].(string)]
+	}).(UpstreamOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(UpstreamOutput{})
+	pulumi.RegisterOutputType(UpstreamPtrOutput{})
+	pulumi.RegisterOutputType(UpstreamArrayOutput{})
+	pulumi.RegisterOutputType(UpstreamMapOutput{})
 }

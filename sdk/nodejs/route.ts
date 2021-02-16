@@ -56,7 +56,8 @@ export class Route extends pulumi.CustomResource {
     constructor(name: string, args: RouteArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: RouteArgs | RouteState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as RouteState | undefined;
             inputs["destinations"] = state ? state.destinations : undefined;
             inputs["hosts"] = state ? state.hosts : undefined;
@@ -72,10 +73,10 @@ export class Route extends pulumi.CustomResource {
             inputs["stripPath"] = state ? state.stripPath : undefined;
         } else {
             const args = argsOrState as RouteArgs | undefined;
-            if ((!args || args.protocols === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.protocols === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'protocols'");
             }
-            if ((!args || args.serviceId === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.serviceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'serviceId'");
             }
             inputs["destinations"] = args ? args.destinations : undefined;
@@ -91,12 +92,8 @@ export class Route extends pulumi.CustomResource {
             inputs["sources"] = args ? args.sources : undefined;
             inputs["stripPath"] = args ? args.stripPath : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Route.__pulumiType, name, inputs, opts);
     }

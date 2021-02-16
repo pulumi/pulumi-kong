@@ -5,8 +5,8 @@ go 1.14
 require (
 	github.com/hashicorp/terraform-plugin-sdk v1.7.0
 	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20200124095244-a53d2fc45429
-	github.com/pulumi/pulumi-terraform-bridge/v2 v2.18.1
-	github.com/pulumi/pulumi/sdk/v2 v2.18.0
+	github.com/pulumi/pulumi-terraform-bridge/v2 v2.19.0
+	github.com/pulumi/pulumi/sdk/v2 v2.20.1-0.20210212181059-f4b0fa86fedc
 )
 
 replace (

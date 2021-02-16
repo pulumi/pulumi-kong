@@ -58,20 +58,12 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            if kong_admin_password is None:
-                kong_admin_password = _utilities.get_env('KONG_ADMIN_PASSWORD')
             __props__['kong_admin_password'] = kong_admin_password
-            if kong_admin_token is None:
-                kong_admin_token = _utilities.get_env('KONG_ADMIN_TOKEN')
             __props__['kong_admin_token'] = kong_admin_token
-            if kong_admin_uri is None:
-                kong_admin_uri = (_utilities.get_env('KONG_ADMIN_ADDR') or 'http://localhost:8001')
+            if kong_admin_uri is None and not opts.urn:
+                raise TypeError("Missing required property 'kong_admin_uri'")
             __props__['kong_admin_uri'] = kong_admin_uri
-            if kong_admin_username is None:
-                kong_admin_username = _utilities.get_env('KONG_ADMIN_USERNAME')
             __props__['kong_admin_username'] = kong_admin_username
-            if kong_api_key is None:
-                kong_api_key = _utilities.get_env('KONG_API_KEY')
             __props__['kong_api_key'] = kong_api_key
             if strict_plugins_match is None:
                 strict_plugins_match = _utilities.get_env_bool('STRICT_PLUGINS_MATCH')

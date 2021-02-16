@@ -70,36 +70,10 @@ func Provider() tfbridge.ProviderInfo {
 		Repository:        "https://github.com/pulumi/pulumi-kong",
 		TFProviderLicense: refProviderLicense(tfbridge.MITLicenseType),
 		Config: map[string]*tfbridge.SchemaInfo{
-			"kong_admin_uri": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"KONG_ADMIN_ADDR"},
-					Value:   "http://localhost:8001",
-				},
-			},
-			"kong_admin_username": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"KONG_ADMIN_USERNAME"},
-				},
-			},
-			"kong_admin_password": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"KONG_ADMIN_PASSWORD"},
-				},
-			},
 			"tls_skip_verify": {
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"TLS_SKIP_VERIFY"},
 					Value:   false,
-				},
-			},
-			"kong_api_key": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"KONG_API_KEY"},
-				},
-			},
-			"kong_admin_token": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"KONG_ADMIN_TOKEN"},
 				},
 			},
 			"strict_plugins_match": {

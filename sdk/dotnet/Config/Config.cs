@@ -11,27 +11,27 @@ namespace Pulumi.Kong
         /// <summary>
         /// An basic auth password for kong admin
         /// </summary>
-        public static string? KongAdminPassword { get; set; } = __config.Get("kongAdminPassword") ?? Utilities.GetEnv("KONG_ADMIN_PASSWORD");
+        public static string? KongAdminPassword { get; set; } = __config.Get("kongAdminPassword");
 
         /// <summary>
         /// API key for the kong api (Enterprise Edition)
         /// </summary>
-        public static string? KongAdminToken { get; set; } = __config.Get("kongAdminToken") ?? Utilities.GetEnv("KONG_ADMIN_TOKEN");
+        public static string? KongAdminToken { get; set; } = __config.Get("kongAdminToken");
 
         /// <summary>
         /// The address of the kong admin url e.g. http://localhost:8001
         /// </summary>
-        public static string? KongAdminUri { get; set; } = __config.Get("kongAdminUri") ?? Utilities.GetEnv("KONG_ADMIN_ADDR") ?? "http://localhost:8001";
+        public static string? KongAdminUri { get; set; } = __config.Get("kongAdminUri");
 
         /// <summary>
         /// An basic auth user for kong admin
         /// </summary>
-        public static string? KongAdminUsername { get; set; } = __config.Get("kongAdminUsername") ?? Utilities.GetEnv("KONG_ADMIN_USERNAME");
+        public static string? KongAdminUsername { get; set; } = __config.Get("kongAdminUsername");
 
         /// <summary>
         /// API key for the kong api (if you have locked it down)
         /// </summary>
-        public static string? KongApiKey { get; set; } = __config.Get("kongApiKey") ?? Utilities.GetEnv("KONG_API_KEY");
+        public static string? KongApiKey { get; set; } = __config.Get("kongApiKey");
 
         /// <summary>
         /// Should plugins `config_json` field strictly match plugin configuration

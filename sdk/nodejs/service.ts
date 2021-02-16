@@ -52,7 +52,8 @@ export class Service extends pulumi.CustomResource {
     constructor(name: string, args: ServiceArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ServiceArgs | ServiceState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as ServiceState | undefined;
             inputs["connectTimeout"] = state ? state.connectTimeout : undefined;
             inputs["host"] = state ? state.host : undefined;
@@ -65,7 +66,7 @@ export class Service extends pulumi.CustomResource {
             inputs["writeTimeout"] = state ? state.writeTimeout : undefined;
         } else {
             const args = argsOrState as ServiceArgs | undefined;
-            if ((!args || args.protocol === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.protocol === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'protocol'");
             }
             inputs["connectTimeout"] = args ? args.connectTimeout : undefined;
@@ -78,12 +79,8 @@ export class Service extends pulumi.CustomResource {
             inputs["retries"] = args ? args.retries : undefined;
             inputs["writeTimeout"] = args ? args.writeTimeout : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Service.__pulumiType, name, inputs, opts);
     }

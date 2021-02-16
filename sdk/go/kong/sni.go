@@ -97,6 +97,85 @@ func (i *Sni) ToSniOutputWithContext(ctx context.Context) SniOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SniOutput)
 }
 
+func (i *Sni) ToSniPtrOutput() SniPtrOutput {
+	return i.ToSniPtrOutputWithContext(context.Background())
+}
+
+func (i *Sni) ToSniPtrOutputWithContext(ctx context.Context) SniPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SniPtrOutput)
+}
+
+type SniPtrInput interface {
+	pulumi.Input
+
+	ToSniPtrOutput() SniPtrOutput
+	ToSniPtrOutputWithContext(ctx context.Context) SniPtrOutput
+}
+
+type sniPtrType SniArgs
+
+func (*sniPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Sni)(nil))
+}
+
+func (i *sniPtrType) ToSniPtrOutput() SniPtrOutput {
+	return i.ToSniPtrOutputWithContext(context.Background())
+}
+
+func (i *sniPtrType) ToSniPtrOutputWithContext(ctx context.Context) SniPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SniPtrOutput)
+}
+
+// SniArrayInput is an input type that accepts SniArray and SniArrayOutput values.
+// You can construct a concrete instance of `SniArrayInput` via:
+//
+//          SniArray{ SniArgs{...} }
+type SniArrayInput interface {
+	pulumi.Input
+
+	ToSniArrayOutput() SniArrayOutput
+	ToSniArrayOutputWithContext(context.Context) SniArrayOutput
+}
+
+type SniArray []SniInput
+
+func (SniArray) ElementType() reflect.Type {
+	return reflect.TypeOf(([]*Sni)(nil))
+}
+
+func (i SniArray) ToSniArrayOutput() SniArrayOutput {
+	return i.ToSniArrayOutputWithContext(context.Background())
+}
+
+func (i SniArray) ToSniArrayOutputWithContext(ctx context.Context) SniArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SniArrayOutput)
+}
+
+// SniMapInput is an input type that accepts SniMap and SniMapOutput values.
+// You can construct a concrete instance of `SniMapInput` via:
+//
+//          SniMap{ "key": SniArgs{...} }
+type SniMapInput interface {
+	pulumi.Input
+
+	ToSniMapOutput() SniMapOutput
+	ToSniMapOutputWithContext(context.Context) SniMapOutput
+}
+
+type SniMap map[string]SniInput
+
+func (SniMap) ElementType() reflect.Type {
+	return reflect.TypeOf((map[string]*Sni)(nil))
+}
+
+func (i SniMap) ToSniMapOutput() SniMapOutput {
+	return i.ToSniMapOutputWithContext(context.Background())
+}
+
+func (i SniMap) ToSniMapOutputWithContext(ctx context.Context) SniMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SniMapOutput)
+}
+
 type SniOutput struct {
 	*pulumi.OutputState
 }
@@ -113,6 +192,75 @@ func (o SniOutput) ToSniOutputWithContext(ctx context.Context) SniOutput {
 	return o
 }
 
+func (o SniOutput) ToSniPtrOutput() SniPtrOutput {
+	return o.ToSniPtrOutputWithContext(context.Background())
+}
+
+func (o SniOutput) ToSniPtrOutputWithContext(ctx context.Context) SniPtrOutput {
+	return o.ApplyT(func(v Sni) *Sni {
+		return &v
+	}).(SniPtrOutput)
+}
+
+type SniPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (SniPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Sni)(nil))
+}
+
+func (o SniPtrOutput) ToSniPtrOutput() SniPtrOutput {
+	return o
+}
+
+func (o SniPtrOutput) ToSniPtrOutputWithContext(ctx context.Context) SniPtrOutput {
+	return o
+}
+
+type SniArrayOutput struct{ *pulumi.OutputState }
+
+func (SniArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]Sni)(nil))
+}
+
+func (o SniArrayOutput) ToSniArrayOutput() SniArrayOutput {
+	return o
+}
+
+func (o SniArrayOutput) ToSniArrayOutputWithContext(ctx context.Context) SniArrayOutput {
+	return o
+}
+
+func (o SniArrayOutput) Index(i pulumi.IntInput) SniOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Sni {
+		return vs[0].([]Sni)[vs[1].(int)]
+	}).(SniOutput)
+}
+
+type SniMapOutput struct{ *pulumi.OutputState }
+
+func (SniMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]Sni)(nil))
+}
+
+func (o SniMapOutput) ToSniMapOutput() SniMapOutput {
+	return o
+}
+
+func (o SniMapOutput) ToSniMapOutputWithContext(ctx context.Context) SniMapOutput {
+	return o
+}
+
+func (o SniMapOutput) MapIndex(k pulumi.StringInput) SniOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) Sni {
+		return vs[0].(map[string]Sni)[vs[1].(string)]
+	}).(SniOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(SniOutput{})
+	pulumi.RegisterOutputType(SniPtrOutput{})
+	pulumi.RegisterOutputType(SniArrayOutput{})
+	pulumi.RegisterOutputType(SniMapOutput{})
 }
