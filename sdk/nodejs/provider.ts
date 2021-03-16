@@ -45,8 +45,8 @@ export class Provider extends pulumi.ProviderResource {
             inputs["kongAdminUri"] = args ? args.kongAdminUri : undefined;
             inputs["kongAdminUsername"] = args ? args.kongAdminUsername : undefined;
             inputs["kongApiKey"] = args ? args.kongApiKey : undefined;
-            inputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) || <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
-            inputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) || (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
+            inputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) ?? <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
+            inputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) ?? (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
