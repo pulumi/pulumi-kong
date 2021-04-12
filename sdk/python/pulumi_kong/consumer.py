@@ -5,13 +5,44 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities, _tables
 
-__all__ = ['Consumer']
+__all__ = ['ConsumerArgs', 'Consumer']
+
+@pulumi.input_type
+class ConsumerArgs:
+    def __init__(__self__, *,
+                 username: pulumi.Input[str],
+                 custom_id: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a Consumer resource.
+        """
+        pulumi.set(__self__, "username", username)
+        if custom_id is not None:
+            pulumi.set(__self__, "custom_id", custom_id)
+
+    @property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[str]):
+        pulumi.set(self, "username", value)
+
+    @property
+    @pulumi.getter(name="customId")
+    def custom_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "custom_id")
+
+    @custom_id.setter
+    def custom_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "custom_id", value)
 
 
 class Consumer(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -25,6 +56,34 @@ class Consumer(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: ConsumerArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Create a Consumer resource with the given unique name, props, and options.
+        :param str resource_name: The name of the resource.
+        :param ConsumerArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ConsumerArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 custom_id: Optional[pulumi.Input[str]] = None,
+                 username: Optional[pulumi.Input[str]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
