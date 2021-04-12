@@ -21,27 +21,28 @@ func (m *module) Version() semver.Version {
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
 	case "kong:index/certificate:Certificate":
-		r, err = NewCertificate(ctx, name, nil, pulumi.URN_(urn))
+		r = &Certificate{}
 	case "kong:index/consumer:Consumer":
-		r, err = NewConsumer(ctx, name, nil, pulumi.URN_(urn))
+		r = &Consumer{}
 	case "kong:index/consumerPluginConfig:ConsumerPluginConfig":
-		r, err = NewConsumerPluginConfig(ctx, name, nil, pulumi.URN_(urn))
+		r = &ConsumerPluginConfig{}
 	case "kong:index/plugin:Plugin":
-		r, err = NewPlugin(ctx, name, nil, pulumi.URN_(urn))
+		r = &Plugin{}
 	case "kong:index/route:Route":
-		r, err = NewRoute(ctx, name, nil, pulumi.URN_(urn))
+		r = &Route{}
 	case "kong:index/service:Service":
-		r, err = NewService(ctx, name, nil, pulumi.URN_(urn))
+		r = &Service{}
 	case "kong:index/sni:Sni":
-		r, err = NewSni(ctx, name, nil, pulumi.URN_(urn))
+		r = &Sni{}
 	case "kong:index/target:Target":
-		r, err = NewTarget(ctx, name, nil, pulumi.URN_(urn))
+		r = &Target{}
 	case "kong:index/upstream:Upstream":
-		r, err = NewUpstream(ctx, name, nil, pulumi.URN_(urn))
+		r = &Upstream{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
 
+	err = ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
 	return
 }
 
@@ -58,7 +59,9 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 		return nil, fmt.Errorf("unknown provider type: %s", typ)
 	}
 
-	return NewProvider(ctx, name, nil, pulumi.URN_(urn))
+	r := &Provider{}
+	err := ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
+	return r, err
 }
 
 func init() {

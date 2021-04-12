@@ -5,13 +5,59 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities, _tables
 
-__all__ = ['ConsumerPluginConfig']
+__all__ = ['ConsumerPluginConfigArgs', 'ConsumerPluginConfig']
+
+@pulumi.input_type
+class ConsumerPluginConfigArgs:
+    def __init__(__self__, *,
+                 consumer_id: pulumi.Input[str],
+                 plugin_name: pulumi.Input[str],
+                 config_json: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a ConsumerPluginConfig resource.
+        :param pulumi.Input[str] config_json: JSON format of plugin config
+        """
+        pulumi.set(__self__, "consumer_id", consumer_id)
+        pulumi.set(__self__, "plugin_name", plugin_name)
+        if config_json is not None:
+            pulumi.set(__self__, "config_json", config_json)
+
+    @property
+    @pulumi.getter(name="consumerId")
+    def consumer_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "consumer_id")
+
+    @consumer_id.setter
+    def consumer_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "consumer_id", value)
+
+    @property
+    @pulumi.getter(name="pluginName")
+    def plugin_name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "plugin_name")
+
+    @plugin_name.setter
+    def plugin_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "plugin_name", value)
+
+    @property
+    @pulumi.getter(name="configJson")
+    def config_json(self) -> Optional[pulumi.Input[str]]:
+        """
+        JSON format of plugin config
+        """
+        return pulumi.get(self, "config_json")
+
+    @config_json.setter
+    def config_json(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "config_json", value)
 
 
 class ConsumerPluginConfig(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -27,6 +73,35 @@ class ConsumerPluginConfig(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_json: JSON format of plugin config
         """
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: ConsumerPluginConfigArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Create a ConsumerPluginConfig resource with the given unique name, props, and options.
+        :param str resource_name: The name of the resource.
+        :param ConsumerPluginConfigArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ConsumerPluginConfigArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 config_json: Optional[pulumi.Input[str]] = None,
+                 consumer_id: Optional[pulumi.Input[str]] = None,
+                 plugin_name: Optional[pulumi.Input[str]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__

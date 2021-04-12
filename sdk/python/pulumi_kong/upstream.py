@@ -5,15 +5,131 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities, _tables
 from . import outputs
 from ._inputs import *
 
-__all__ = ['Upstream']
+__all__ = ['UpstreamArgs', 'Upstream']
+
+@pulumi.input_type
+class UpstreamArgs:
+    def __init__(__self__, *,
+                 hash_fallback: Optional[pulumi.Input[str]] = None,
+                 hash_fallback_header: Optional[pulumi.Input[str]] = None,
+                 hash_on: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
+                 hash_on_header: Optional[pulumi.Input[str]] = None,
+                 healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 slots: Optional[pulumi.Input[int]] = None):
+        """
+        The set of arguments for constructing a Upstream resource.
+        """
+        if hash_fallback is not None:
+            pulumi.set(__self__, "hash_fallback", hash_fallback)
+        if hash_fallback_header is not None:
+            pulumi.set(__self__, "hash_fallback_header", hash_fallback_header)
+        if hash_on is not None:
+            pulumi.set(__self__, "hash_on", hash_on)
+        if hash_on_cookie is not None:
+            pulumi.set(__self__, "hash_on_cookie", hash_on_cookie)
+        if hash_on_cookie_path is not None:
+            pulumi.set(__self__, "hash_on_cookie_path", hash_on_cookie_path)
+        if hash_on_header is not None:
+            pulumi.set(__self__, "hash_on_header", hash_on_header)
+        if healthchecks is not None:
+            pulumi.set(__self__, "healthchecks", healthchecks)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if slots is not None:
+            pulumi.set(__self__, "slots", slots)
+
+    @property
+    @pulumi.getter(name="hashFallback")
+    def hash_fallback(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_fallback")
+
+    @hash_fallback.setter
+    def hash_fallback(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_fallback", value)
+
+    @property
+    @pulumi.getter(name="hashFallbackHeader")
+    def hash_fallback_header(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_fallback_header")
+
+    @hash_fallback_header.setter
+    def hash_fallback_header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_fallback_header", value)
+
+    @property
+    @pulumi.getter(name="hashOn")
+    def hash_on(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on")
+
+    @hash_on.setter
+    def hash_on(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on", value)
+
+    @property
+    @pulumi.getter(name="hashOnCookie")
+    def hash_on_cookie(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on_cookie")
+
+    @hash_on_cookie.setter
+    def hash_on_cookie(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on_cookie", value)
+
+    @property
+    @pulumi.getter(name="hashOnCookiePath")
+    def hash_on_cookie_path(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on_cookie_path")
+
+    @hash_on_cookie_path.setter
+    def hash_on_cookie_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on_cookie_path", value)
+
+    @property
+    @pulumi.getter(name="hashOnHeader")
+    def hash_on_header(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on_header")
+
+    @hash_on_header.setter
+    def hash_on_header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on_header", value)
+
+    @property
+    @pulumi.getter
+    def healthchecks(self) -> Optional[pulumi.Input['UpstreamHealthchecksArgs']]:
+        return pulumi.get(self, "healthchecks")
+
+    @healthchecks.setter
+    def healthchecks(self, value: Optional[pulumi.Input['UpstreamHealthchecksArgs']]):
+        pulumi.set(self, "healthchecks", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def slots(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "slots")
+
+    @slots.setter
+    def slots(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "slots", value)
 
 
 class Upstream(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -34,6 +150,41 @@ class Upstream(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[UpstreamArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Create a Upstream resource with the given unique name, props, and options.
+        :param str resource_name: The name of the resource.
+        :param UpstreamArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(UpstreamArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 hash_fallback: Optional[pulumi.Input[str]] = None,
+                 hash_fallback_header: Optional[pulumi.Input[str]] = None,
+                 hash_on: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
+                 hash_on_header: Optional[pulumi.Input[str]] = None,
+                 healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 slots: Optional[pulumi.Input[int]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
