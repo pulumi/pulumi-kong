@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 from . import outputs
 
 __all__ = [
@@ -41,9 +41,6 @@ class RouteDestination(dict):
     def port(self) -> Optional[int]:
         return pulumi.get(self, "port")
 
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
 
 @pulumi.output_type
 class RouteSource(dict):
@@ -64,9 +61,6 @@ class RouteSource(dict):
     @pulumi.getter
     def port(self) -> Optional[int]:
         return pulumi.get(self, "port")
-
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
 
 @pulumi.output_type
@@ -89,12 +83,30 @@ class UpstreamHealthchecks(dict):
     def passive(self) -> Optional['outputs.UpstreamHealthchecksPassive']:
         return pulumi.get(self, "passive")
 
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
 
 @pulumi.output_type
 class UpstreamHealthchecksActive(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "httpPath":
+            suggest = "http_path"
+        elif key == "httpsSni":
+            suggest = "https_sni"
+        elif key == "httpsVerifyCertificate":
+            suggest = "https_verify_certificate"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UpstreamHealthchecksActive. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UpstreamHealthchecksActive.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UpstreamHealthchecksActive.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  concurrency: Optional[int] = None,
                  healthy: Optional['outputs.UpstreamHealthchecksActiveHealthy'] = None,
@@ -161,12 +173,26 @@ class UpstreamHealthchecksActive(dict):
     def unhealthy(self) -> Optional['outputs.UpstreamHealthchecksActiveUnhealthy']:
         return pulumi.get(self, "unhealthy")
 
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
 
 @pulumi.output_type
 class UpstreamHealthchecksActiveHealthy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "httpStatuses":
+            suggest = "http_statuses"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UpstreamHealthchecksActiveHealthy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UpstreamHealthchecksActiveHealthy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UpstreamHealthchecksActiveHealthy.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  http_statuses: Optional[Sequence[int]] = None,
                  interval: Optional[int] = None,
@@ -193,12 +219,30 @@ class UpstreamHealthchecksActiveHealthy(dict):
     def successes(self) -> Optional[int]:
         return pulumi.get(self, "successes")
 
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
 
 @pulumi.output_type
 class UpstreamHealthchecksActiveUnhealthy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "httpFailures":
+            suggest = "http_failures"
+        elif key == "httpStatuses":
+            suggest = "http_statuses"
+        elif key == "tcpFailures":
+            suggest = "tcp_failures"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UpstreamHealthchecksActiveUnhealthy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UpstreamHealthchecksActiveUnhealthy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UpstreamHealthchecksActiveUnhealthy.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  http_failures: Optional[int] = None,
                  http_statuses: Optional[Sequence[int]] = None,
@@ -240,9 +284,6 @@ class UpstreamHealthchecksActiveUnhealthy(dict):
     @pulumi.getter
     def timeouts(self) -> Optional[int]:
         return pulumi.get(self, "timeouts")
-
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
 
 @pulumi.output_type
@@ -273,12 +314,26 @@ class UpstreamHealthchecksPassive(dict):
     def unhealthy(self) -> Optional['outputs.UpstreamHealthchecksPassiveUnhealthy']:
         return pulumi.get(self, "unhealthy")
 
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
 
 @pulumi.output_type
 class UpstreamHealthchecksPassiveHealthy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "httpStatuses":
+            suggest = "http_statuses"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UpstreamHealthchecksPassiveHealthy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UpstreamHealthchecksPassiveHealthy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UpstreamHealthchecksPassiveHealthy.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  http_statuses: Optional[Sequence[int]] = None,
                  successes: Optional[int] = None):
@@ -297,12 +352,30 @@ class UpstreamHealthchecksPassiveHealthy(dict):
     def successes(self) -> Optional[int]:
         return pulumi.get(self, "successes")
 
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
 
 @pulumi.output_type
 class UpstreamHealthchecksPassiveUnhealthy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "httpFailures":
+            suggest = "http_failures"
+        elif key == "httpStatuses":
+            suggest = "http_statuses"
+        elif key == "tcpFailures":
+            suggest = "tcp_failures"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UpstreamHealthchecksPassiveUnhealthy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UpstreamHealthchecksPassiveUnhealthy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UpstreamHealthchecksPassiveUnhealthy.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  http_failures: Optional[int] = None,
                  http_statuses: Optional[Sequence[int]] = None,
@@ -336,8 +409,5 @@ class UpstreamHealthchecksPassiveUnhealthy(dict):
     @pulumi.getter
     def timeouts(self) -> Optional[int]:
         return pulumi.get(self, "timeouts")
-
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
 

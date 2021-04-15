@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = ['PluginArgs', 'Plugin']
 
@@ -38,6 +38,114 @@ class PluginArgs:
             pulumi.set(__self__, "service_id", service_id)
         if strict_match is not None:
             pulumi.set(__self__, "strict_match", strict_match)
+
+    @property
+    @pulumi.getter(name="configJson")
+    def config_json(self) -> Optional[pulumi.Input[str]]:
+        """
+        plugin configuration in JSON format, configuration must be a valid JSON object.
+        """
+        return pulumi.get(self, "config_json")
+
+    @config_json.setter
+    def config_json(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "config_json", value)
+
+    @property
+    @pulumi.getter(name="consumerId")
+    def consumer_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "consumer_id")
+
+    @consumer_id.setter
+    def consumer_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "consumer_id", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "route_id")
+
+    @route_id.setter
+    def route_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "route_id", value)
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "service_id")
+
+    @service_id.setter
+    def service_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_id", value)
+
+    @property
+    @pulumi.getter(name="strictMatch")
+    def strict_match(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "strict_match")
+
+    @strict_match.setter
+    def strict_match(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "strict_match", value)
+
+
+@pulumi.input_type
+class _PluginState:
+    def __init__(__self__, *,
+                 computed_config: Optional[pulumi.Input[str]] = None,
+                 config_json: Optional[pulumi.Input[str]] = None,
+                 consumer_id: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 route_id: Optional[pulumi.Input[str]] = None,
+                 service_id: Optional[pulumi.Input[str]] = None,
+                 strict_match: Optional[pulumi.Input[bool]] = None):
+        """
+        Input properties used for looking up and filtering Plugin resources.
+        :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
+        """
+        if computed_config is not None:
+            pulumi.set(__self__, "computed_config", computed_config)
+        if config_json is not None:
+            pulumi.set(__self__, "config_json", config_json)
+        if consumer_id is not None:
+            pulumi.set(__self__, "consumer_id", consumer_id)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if route_id is not None:
+            pulumi.set(__self__, "route_id", route_id)
+        if service_id is not None:
+            pulumi.set(__self__, "service_id", service_id)
+        if strict_match is not None:
+            pulumi.set(__self__, "strict_match", strict_match)
+
+    @property
+    @pulumi.getter(name="computedConfig")
+    def computed_config(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "computed_config")
+
+    @computed_config.setter
+    def computed_config(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "computed_config", value)
 
     @property
     @pulumi.getter(name="configJson")
@@ -175,16 +283,16 @@ class Plugin(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = PluginArgs.__new__(PluginArgs)
 
-            __props__['config_json'] = config_json
-            __props__['consumer_id'] = consumer_id
-            __props__['enabled'] = enabled
-            __props__['name'] = name
-            __props__['route_id'] = route_id
-            __props__['service_id'] = service_id
-            __props__['strict_match'] = strict_match
-            __props__['computed_config'] = None
+            __props__.__dict__["config_json"] = config_json
+            __props__.__dict__["consumer_id"] = consumer_id
+            __props__.__dict__["enabled"] = enabled
+            __props__.__dict__["name"] = name
+            __props__.__dict__["route_id"] = route_id
+            __props__.__dict__["service_id"] = service_id
+            __props__.__dict__["strict_match"] = strict_match
+            __props__.__dict__["computed_config"] = None
         super(Plugin, __self__).__init__(
             'kong:index/plugin:Plugin',
             resource_name,
@@ -214,16 +322,16 @@ class Plugin(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _PluginState.__new__(_PluginState)
 
-        __props__["computed_config"] = computed_config
-        __props__["config_json"] = config_json
-        __props__["consumer_id"] = consumer_id
-        __props__["enabled"] = enabled
-        __props__["name"] = name
-        __props__["route_id"] = route_id
-        __props__["service_id"] = service_id
-        __props__["strict_match"] = strict_match
+        __props__.__dict__["computed_config"] = computed_config
+        __props__.__dict__["config_json"] = config_json
+        __props__.__dict__["consumer_id"] = consumer_id
+        __props__.__dict__["enabled"] = enabled
+        __props__.__dict__["name"] = name
+        __props__.__dict__["route_id"] = route_id
+        __props__.__dict__["service_id"] = service_id
+        __props__.__dict__["strict_match"] = strict_match
         return Plugin(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -268,10 +376,4 @@ class Plugin(pulumi.CustomResource):
     @pulumi.getter(name="strictMatch")
     def strict_match(self) -> pulumi.Output[Optional[bool]]:
         return pulumi.get(self, "strict_match")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

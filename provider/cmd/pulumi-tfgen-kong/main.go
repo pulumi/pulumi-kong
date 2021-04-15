@@ -15,9 +15,9 @@
 package main
 
 import (
-	kong "github.com/pulumi/pulumi-kong/provider/v2"
-	"github.com/pulumi/pulumi-kong/provider/v2/pkg/version"
-	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfgen"
+	kong "github.com/pulumi/pulumi-kong/provider/v3"
+	"github.com/pulumi/pulumi-kong/provider/v3/pkg/version"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 )
 
 func main() {
