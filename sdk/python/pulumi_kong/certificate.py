@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = ['CertificateArgs', 'Certificate']
 
@@ -29,6 +29,38 @@ class CertificateArgs:
 
     @certificate.setter
     def certificate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "certificate", value)
+
+    @property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_key", value)
+
+
+@pulumi.input_type
+class _CertificateState:
+    def __init__(__self__, *,
+                 certificate: Optional[pulumi.Input[str]] = None,
+                 private_key: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Certificate resources.
+        """
+        if certificate is not None:
+            pulumi.set(__self__, "certificate", certificate)
+        if private_key is not None:
+            pulumi.set(__self__, "private_key", private_key)
+
+    @property
+    @pulumi.getter
+    def certificate(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "certificate")
+
+    @certificate.setter
+    def certificate(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "certificate", value)
 
     @property
@@ -99,12 +131,12 @@ class Certificate(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = CertificateArgs.__new__(CertificateArgs)
 
             if certificate is None and not opts.urn:
                 raise TypeError("Missing required property 'certificate'")
-            __props__['certificate'] = certificate
-            __props__['private_key'] = private_key
+            __props__.__dict__["certificate"] = certificate
+            __props__.__dict__["private_key"] = private_key
         super(Certificate, __self__).__init__(
             'kong:index/certificate:Certificate',
             resource_name,
@@ -127,10 +159,10 @@ class Certificate(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _CertificateState.__new__(_CertificateState)
 
-        __props__["certificate"] = certificate
-        __props__["private_key"] = private_key
+        __props__.__dict__["certificate"] = certificate
+        __props__.__dict__["private_key"] = private_key
         return Certificate(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -142,10 +174,4 @@ class Certificate(pulumi.CustomResource):
     @pulumi.getter(name="privateKey")
     def private_key(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "private_key")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

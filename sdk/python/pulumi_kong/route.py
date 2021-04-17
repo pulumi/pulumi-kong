@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -162,6 +162,158 @@ class RouteArgs:
         pulumi.set(self, "strip_path", value)
 
 
+@pulumi.input_type
+class _RouteState:
+    def __init__(__self__, *,
+                 destinations: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]] = None,
+                 hosts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 methods: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 preserve_host: Optional[pulumi.Input[bool]] = None,
+                 protocols: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 regex_priority: Optional[pulumi.Input[int]] = None,
+                 service_id: Optional[pulumi.Input[str]] = None,
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sources: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]] = None,
+                 strip_path: Optional[pulumi.Input[bool]] = None):
+        """
+        Input properties used for looking up and filtering Route resources.
+        """
+        if destinations is not None:
+            pulumi.set(__self__, "destinations", destinations)
+        if hosts is not None:
+            pulumi.set(__self__, "hosts", hosts)
+        if methods is not None:
+            pulumi.set(__self__, "methods", methods)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if paths is not None:
+            pulumi.set(__self__, "paths", paths)
+        if preserve_host is not None:
+            pulumi.set(__self__, "preserve_host", preserve_host)
+        if protocols is not None:
+            pulumi.set(__self__, "protocols", protocols)
+        if regex_priority is not None:
+            pulumi.set(__self__, "regex_priority", regex_priority)
+        if service_id is not None:
+            pulumi.set(__self__, "service_id", service_id)
+        if snis is not None:
+            pulumi.set(__self__, "snis", snis)
+        if sources is not None:
+            pulumi.set(__self__, "sources", sources)
+        if strip_path is not None:
+            pulumi.set(__self__, "strip_path", strip_path)
+
+    @property
+    @pulumi.getter
+    def destinations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]:
+        return pulumi.get(self, "destinations")
+
+    @destinations.setter
+    def destinations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]):
+        pulumi.set(self, "destinations", value)
+
+    @property
+    @pulumi.getter
+    def hosts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "hosts")
+
+    @hosts.setter
+    def hosts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "hosts", value)
+
+    @property
+    @pulumi.getter
+    def methods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "methods")
+
+    @methods.setter
+    def methods(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "methods", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "paths")
+
+    @paths.setter
+    def paths(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "paths", value)
+
+    @property
+    @pulumi.getter(name="preserveHost")
+    def preserve_host(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "preserve_host")
+
+    @preserve_host.setter
+    def preserve_host(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "preserve_host", value)
+
+    @property
+    @pulumi.getter
+    def protocols(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "protocols")
+
+    @protocols.setter
+    def protocols(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "protocols", value)
+
+    @property
+    @pulumi.getter(name="regexPriority")
+    def regex_priority(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "regex_priority")
+
+    @regex_priority.setter
+    def regex_priority(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "regex_priority", value)
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "service_id")
+
+    @service_id.setter
+    def service_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_id", value)
+
+    @property
+    @pulumi.getter
+    def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "snis")
+
+    @snis.setter
+    def snis(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "snis", value)
+
+    @property
+    @pulumi.getter
+    def sources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]:
+        return pulumi.get(self, "sources")
+
+    @sources.setter
+    def sources(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]):
+        pulumi.set(self, "sources", value)
+
+    @property
+    @pulumi.getter(name="stripPath")
+    def strip_path(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "strip_path")
+
+    @strip_path.setter
+    def strip_path(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "strip_path", value)
+
+
 class Route(pulumi.CustomResource):
     @overload
     def __init__(__self__,
@@ -240,24 +392,24 @@ class Route(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = RouteArgs.__new__(RouteArgs)
 
-            __props__['destinations'] = destinations
-            __props__['hosts'] = hosts
-            __props__['methods'] = methods
-            __props__['name'] = name
-            __props__['paths'] = paths
-            __props__['preserve_host'] = preserve_host
+            __props__.__dict__["destinations"] = destinations
+            __props__.__dict__["hosts"] = hosts
+            __props__.__dict__["methods"] = methods
+            __props__.__dict__["name"] = name
+            __props__.__dict__["paths"] = paths
+            __props__.__dict__["preserve_host"] = preserve_host
             if protocols is None and not opts.urn:
                 raise TypeError("Missing required property 'protocols'")
-            __props__['protocols'] = protocols
-            __props__['regex_priority'] = regex_priority
+            __props__.__dict__["protocols"] = protocols
+            __props__.__dict__["regex_priority"] = regex_priority
             if service_id is None and not opts.urn:
                 raise TypeError("Missing required property 'service_id'")
-            __props__['service_id'] = service_id
-            __props__['snis'] = snis
-            __props__['sources'] = sources
-            __props__['strip_path'] = strip_path
+            __props__.__dict__["service_id"] = service_id
+            __props__.__dict__["snis"] = snis
+            __props__.__dict__["sources"] = sources
+            __props__.__dict__["strip_path"] = strip_path
         super(Route, __self__).__init__(
             'kong:index/route:Route',
             resource_name,
@@ -290,20 +442,20 @@ class Route(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _RouteState.__new__(_RouteState)
 
-        __props__["destinations"] = destinations
-        __props__["hosts"] = hosts
-        __props__["methods"] = methods
-        __props__["name"] = name
-        __props__["paths"] = paths
-        __props__["preserve_host"] = preserve_host
-        __props__["protocols"] = protocols
-        __props__["regex_priority"] = regex_priority
-        __props__["service_id"] = service_id
-        __props__["snis"] = snis
-        __props__["sources"] = sources
-        __props__["strip_path"] = strip_path
+        __props__.__dict__["destinations"] = destinations
+        __props__.__dict__["hosts"] = hosts
+        __props__.__dict__["methods"] = methods
+        __props__.__dict__["name"] = name
+        __props__.__dict__["paths"] = paths
+        __props__.__dict__["preserve_host"] = preserve_host
+        __props__.__dict__["protocols"] = protocols
+        __props__.__dict__["regex_priority"] = regex_priority
+        __props__.__dict__["service_id"] = service_id
+        __props__.__dict__["snis"] = snis
+        __props__.__dict__["sources"] = sources
+        __props__.__dict__["strip_path"] = strip_path
         return Route(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -365,10 +517,4 @@ class Route(pulumi.CustomResource):
     @pulumi.getter(name="stripPath")
     def strip_path(self) -> pulumi.Output[Optional[bool]]:
         return pulumi.get(self, "strip_path")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

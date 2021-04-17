@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = ['ProviderArgs', 'Provider']
 
@@ -216,30 +216,24 @@ class Provider(pulumi.ProviderResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ProviderArgs.__new__(ProviderArgs)
 
-            __props__['kong_admin_password'] = kong_admin_password
-            __props__['kong_admin_token'] = kong_admin_token
+            __props__.__dict__["kong_admin_password"] = kong_admin_password
+            __props__.__dict__["kong_admin_token"] = kong_admin_token
             if kong_admin_uri is None and not opts.urn:
                 raise TypeError("Missing required property 'kong_admin_uri'")
-            __props__['kong_admin_uri'] = kong_admin_uri
-            __props__['kong_admin_username'] = kong_admin_username
-            __props__['kong_api_key'] = kong_api_key
+            __props__.__dict__["kong_admin_uri"] = kong_admin_uri
+            __props__.__dict__["kong_admin_username"] = kong_admin_username
+            __props__.__dict__["kong_api_key"] = kong_api_key
             if strict_plugins_match is None:
                 strict_plugins_match = _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
-            __props__['strict_plugins_match'] = pulumi.Output.from_input(strict_plugins_match).apply(pulumi.runtime.to_json) if strict_plugins_match is not None else None
+            __props__.__dict__["strict_plugins_match"] = pulumi.Output.from_input(strict_plugins_match).apply(pulumi.runtime.to_json) if strict_plugins_match is not None else None
             if tls_skip_verify is None:
                 tls_skip_verify = (_utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
-            __props__['tls_skip_verify'] = pulumi.Output.from_input(tls_skip_verify).apply(pulumi.runtime.to_json) if tls_skip_verify is not None else None
+            __props__.__dict__["tls_skip_verify"] = pulumi.Output.from_input(tls_skip_verify).apply(pulumi.runtime.to_json) if tls_skip_verify is not None else None
         super(Provider, __self__).__init__(
             'kong',
             resource_name,
             __props__,
             opts)
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

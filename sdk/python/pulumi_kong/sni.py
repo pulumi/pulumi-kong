@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = ['SniArgs', 'Sni']
 
@@ -29,6 +29,38 @@ class SniArgs:
 
     @certificate_id.setter
     def certificate_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "certificate_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
+class _SniState:
+    def __init__(__self__, *,
+                 certificate_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Sni resources.
+        """
+        if certificate_id is not None:
+            pulumi.set(__self__, "certificate_id", certificate_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="certificateId")
+    def certificate_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "certificate_id")
+
+    @certificate_id.setter
+    def certificate_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "certificate_id", value)
 
     @property
@@ -99,12 +131,12 @@ class Sni(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = SniArgs.__new__(SniArgs)
 
             if certificate_id is None and not opts.urn:
                 raise TypeError("Missing required property 'certificate_id'")
-            __props__['certificate_id'] = certificate_id
-            __props__['name'] = name
+            __props__.__dict__["certificate_id"] = certificate_id
+            __props__.__dict__["name"] = name
         super(Sni, __self__).__init__(
             'kong:index/sni:Sni',
             resource_name,
@@ -127,10 +159,10 @@ class Sni(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _SniState.__new__(_SniState)
 
-        __props__["certificate_id"] = certificate_id
-        __props__["name"] = name
+        __props__.__dict__["certificate_id"] = certificate_id
+        __props__.__dict__["name"] = name
         return Sni(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -142,10 +174,4 @@ class Sni(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "name")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

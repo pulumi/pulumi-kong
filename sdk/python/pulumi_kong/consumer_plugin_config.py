@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = ['ConsumerPluginConfigArgs', 'ConsumerPluginConfig']
 
@@ -54,6 +54,66 @@ class ConsumerPluginConfigArgs:
     @config_json.setter
     def config_json(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "config_json", value)
+
+
+@pulumi.input_type
+class _ConsumerPluginConfigState:
+    def __init__(__self__, *,
+                 computed_config: Optional[pulumi.Input[str]] = None,
+                 config_json: Optional[pulumi.Input[str]] = None,
+                 consumer_id: Optional[pulumi.Input[str]] = None,
+                 plugin_name: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering ConsumerPluginConfig resources.
+        :param pulumi.Input[str] config_json: JSON format of plugin config
+        """
+        if computed_config is not None:
+            pulumi.set(__self__, "computed_config", computed_config)
+        if config_json is not None:
+            pulumi.set(__self__, "config_json", config_json)
+        if consumer_id is not None:
+            pulumi.set(__self__, "consumer_id", consumer_id)
+        if plugin_name is not None:
+            pulumi.set(__self__, "plugin_name", plugin_name)
+
+    @property
+    @pulumi.getter(name="computedConfig")
+    def computed_config(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "computed_config")
+
+    @computed_config.setter
+    def computed_config(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "computed_config", value)
+
+    @property
+    @pulumi.getter(name="configJson")
+    def config_json(self) -> Optional[pulumi.Input[str]]:
+        """
+        JSON format of plugin config
+        """
+        return pulumi.get(self, "config_json")
+
+    @config_json.setter
+    def config_json(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "config_json", value)
+
+    @property
+    @pulumi.getter(name="consumerId")
+    def consumer_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "consumer_id")
+
+    @consumer_id.setter
+    def consumer_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "consumer_id", value)
+
+    @property
+    @pulumi.getter(name="pluginName")
+    def plugin_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "plugin_name")
+
+    @plugin_name.setter
+    def plugin_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "plugin_name", value)
 
 
 class ConsumerPluginConfig(pulumi.CustomResource):
@@ -117,16 +177,16 @@ class ConsumerPluginConfig(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ConsumerPluginConfigArgs.__new__(ConsumerPluginConfigArgs)
 
-            __props__['config_json'] = config_json
+            __props__.__dict__["config_json"] = config_json
             if consumer_id is None and not opts.urn:
                 raise TypeError("Missing required property 'consumer_id'")
-            __props__['consumer_id'] = consumer_id
+            __props__.__dict__["consumer_id"] = consumer_id
             if plugin_name is None and not opts.urn:
                 raise TypeError("Missing required property 'plugin_name'")
-            __props__['plugin_name'] = plugin_name
-            __props__['computed_config'] = None
+            __props__.__dict__["plugin_name"] = plugin_name
+            __props__.__dict__["computed_config"] = None
         super(ConsumerPluginConfig, __self__).__init__(
             'kong:index/consumerPluginConfig:ConsumerPluginConfig',
             resource_name,
@@ -152,12 +212,12 @@ class ConsumerPluginConfig(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ConsumerPluginConfigState.__new__(_ConsumerPluginConfigState)
 
-        __props__["computed_config"] = computed_config
-        __props__["config_json"] = config_json
-        __props__["consumer_id"] = consumer_id
-        __props__["plugin_name"] = plugin_name
+        __props__.__dict__["computed_config"] = computed_config
+        __props__.__dict__["config_json"] = config_json
+        __props__.__dict__["consumer_id"] = consumer_id
+        __props__.__dict__["plugin_name"] = plugin_name
         return ConsumerPluginConfig(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -182,10 +242,4 @@ class ConsumerPluginConfig(pulumi.CustomResource):
     @pulumi.getter(name="pluginName")
     def plugin_name(self) -> pulumi.Output[str]:
         return pulumi.get(self, "plugin_name")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

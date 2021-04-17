@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = ['TargetArgs', 'Target']
 
@@ -48,6 +48,50 @@ class TargetArgs:
 
     @weight.setter
     def weight(self, value: pulumi.Input[int]):
+        pulumi.set(self, "weight", value)
+
+
+@pulumi.input_type
+class _TargetState:
+    def __init__(__self__, *,
+                 target: Optional[pulumi.Input[str]] = None,
+                 upstream_id: Optional[pulumi.Input[str]] = None,
+                 weight: Optional[pulumi.Input[int]] = None):
+        """
+        Input properties used for looking up and filtering Target resources.
+        """
+        if target is not None:
+            pulumi.set(__self__, "target", target)
+        if upstream_id is not None:
+            pulumi.set(__self__, "upstream_id", upstream_id)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def target(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "target")
+
+    @target.setter
+    def target(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target", value)
+
+    @property
+    @pulumi.getter(name="upstreamId")
+    def upstream_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "upstream_id")
+
+    @upstream_id.setter
+    def upstream_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "upstream_id", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "weight", value)
 
 
@@ -111,17 +155,17 @@ class Target(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = TargetArgs.__new__(TargetArgs)
 
             if target is None and not opts.urn:
                 raise TypeError("Missing required property 'target'")
-            __props__['target'] = target
+            __props__.__dict__["target"] = target
             if upstream_id is None and not opts.urn:
                 raise TypeError("Missing required property 'upstream_id'")
-            __props__['upstream_id'] = upstream_id
+            __props__.__dict__["upstream_id"] = upstream_id
             if weight is None and not opts.urn:
                 raise TypeError("Missing required property 'weight'")
-            __props__['weight'] = weight
+            __props__.__dict__["weight"] = weight
         super(Target, __self__).__init__(
             'kong:index/target:Target',
             resource_name,
@@ -145,11 +189,11 @@ class Target(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _TargetState.__new__(_TargetState)
 
-        __props__["target"] = target
-        __props__["upstream_id"] = upstream_id
-        __props__["weight"] = weight
+        __props__.__dict__["target"] = target
+        __props__.__dict__["upstream_id"] = upstream_id
+        __props__.__dict__["weight"] = weight
         return Target(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -166,10 +210,4 @@ class Target(pulumi.CustomResource):
     @pulumi.getter
     def weight(self) -> pulumi.Output[int]:
         return pulumi.get(self, "weight")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

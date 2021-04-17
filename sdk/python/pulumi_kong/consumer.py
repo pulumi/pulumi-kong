@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = ['ConsumerArgs', 'Consumer']
 
@@ -39,6 +39,38 @@ class ConsumerArgs:
     @custom_id.setter
     def custom_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "custom_id", value)
+
+
+@pulumi.input_type
+class _ConsumerState:
+    def __init__(__self__, *,
+                 custom_id: Optional[pulumi.Input[str]] = None,
+                 username: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Consumer resources.
+        """
+        if custom_id is not None:
+            pulumi.set(__self__, "custom_id", custom_id)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter(name="customId")
+    def custom_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "custom_id")
+
+    @custom_id.setter
+    def custom_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "custom_id", value)
+
+    @property
+    @pulumi.getter
+    def username(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "username", value)
 
 
 class Consumer(pulumi.CustomResource):
@@ -99,12 +131,12 @@ class Consumer(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ConsumerArgs.__new__(ConsumerArgs)
 
-            __props__['custom_id'] = custom_id
+            __props__.__dict__["custom_id"] = custom_id
             if username is None and not opts.urn:
                 raise TypeError("Missing required property 'username'")
-            __props__['username'] = username
+            __props__.__dict__["username"] = username
         super(Consumer, __self__).__init__(
             'kong:index/consumer:Consumer',
             resource_name,
@@ -127,10 +159,10 @@ class Consumer(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ConsumerState.__new__(_ConsumerState)
 
-        __props__["custom_id"] = custom_id
-        __props__["username"] = username
+        __props__.__dict__["custom_id"] = custom_id
+        __props__.__dict__["username"] = username
         return Consumer(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -142,10 +174,4 @@ class Consumer(pulumi.CustomResource):
     @pulumi.getter
     def username(self) -> pulumi.Output[str]:
         return pulumi.get(self, "username")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

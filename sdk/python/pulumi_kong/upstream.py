@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -26,6 +26,122 @@ class UpstreamArgs:
                  slots: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Upstream resource.
+        """
+        if hash_fallback is not None:
+            pulumi.set(__self__, "hash_fallback", hash_fallback)
+        if hash_fallback_header is not None:
+            pulumi.set(__self__, "hash_fallback_header", hash_fallback_header)
+        if hash_on is not None:
+            pulumi.set(__self__, "hash_on", hash_on)
+        if hash_on_cookie is not None:
+            pulumi.set(__self__, "hash_on_cookie", hash_on_cookie)
+        if hash_on_cookie_path is not None:
+            pulumi.set(__self__, "hash_on_cookie_path", hash_on_cookie_path)
+        if hash_on_header is not None:
+            pulumi.set(__self__, "hash_on_header", hash_on_header)
+        if healthchecks is not None:
+            pulumi.set(__self__, "healthchecks", healthchecks)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if slots is not None:
+            pulumi.set(__self__, "slots", slots)
+
+    @property
+    @pulumi.getter(name="hashFallback")
+    def hash_fallback(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_fallback")
+
+    @hash_fallback.setter
+    def hash_fallback(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_fallback", value)
+
+    @property
+    @pulumi.getter(name="hashFallbackHeader")
+    def hash_fallback_header(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_fallback_header")
+
+    @hash_fallback_header.setter
+    def hash_fallback_header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_fallback_header", value)
+
+    @property
+    @pulumi.getter(name="hashOn")
+    def hash_on(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on")
+
+    @hash_on.setter
+    def hash_on(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on", value)
+
+    @property
+    @pulumi.getter(name="hashOnCookie")
+    def hash_on_cookie(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on_cookie")
+
+    @hash_on_cookie.setter
+    def hash_on_cookie(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on_cookie", value)
+
+    @property
+    @pulumi.getter(name="hashOnCookiePath")
+    def hash_on_cookie_path(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on_cookie_path")
+
+    @hash_on_cookie_path.setter
+    def hash_on_cookie_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on_cookie_path", value)
+
+    @property
+    @pulumi.getter(name="hashOnHeader")
+    def hash_on_header(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hash_on_header")
+
+    @hash_on_header.setter
+    def hash_on_header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash_on_header", value)
+
+    @property
+    @pulumi.getter
+    def healthchecks(self) -> Optional[pulumi.Input['UpstreamHealthchecksArgs']]:
+        return pulumi.get(self, "healthchecks")
+
+    @healthchecks.setter
+    def healthchecks(self, value: Optional[pulumi.Input['UpstreamHealthchecksArgs']]):
+        pulumi.set(self, "healthchecks", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def slots(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "slots")
+
+    @slots.setter
+    def slots(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "slots", value)
+
+
+@pulumi.input_type
+class _UpstreamState:
+    def __init__(__self__, *,
+                 hash_fallback: Optional[pulumi.Input[str]] = None,
+                 hash_fallback_header: Optional[pulumi.Input[str]] = None,
+                 hash_on: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie: Optional[pulumi.Input[str]] = None,
+                 hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
+                 hash_on_header: Optional[pulumi.Input[str]] = None,
+                 healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 slots: Optional[pulumi.Input[int]] = None):
+        """
+        Input properties used for looking up and filtering Upstream resources.
         """
         if hash_fallback is not None:
             pulumi.set(__self__, "hash_fallback", hash_fallback)
@@ -200,17 +316,17 @@ class Upstream(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = UpstreamArgs.__new__(UpstreamArgs)
 
-            __props__['hash_fallback'] = hash_fallback
-            __props__['hash_fallback_header'] = hash_fallback_header
-            __props__['hash_on'] = hash_on
-            __props__['hash_on_cookie'] = hash_on_cookie
-            __props__['hash_on_cookie_path'] = hash_on_cookie_path
-            __props__['hash_on_header'] = hash_on_header
-            __props__['healthchecks'] = healthchecks
-            __props__['name'] = name
-            __props__['slots'] = slots
+            __props__.__dict__["hash_fallback"] = hash_fallback
+            __props__.__dict__["hash_fallback_header"] = hash_fallback_header
+            __props__.__dict__["hash_on"] = hash_on
+            __props__.__dict__["hash_on_cookie"] = hash_on_cookie
+            __props__.__dict__["hash_on_cookie_path"] = hash_on_cookie_path
+            __props__.__dict__["hash_on_header"] = hash_on_header
+            __props__.__dict__["healthchecks"] = healthchecks
+            __props__.__dict__["name"] = name
+            __props__.__dict__["slots"] = slots
         super(Upstream, __self__).__init__(
             'kong:index/upstream:Upstream',
             resource_name,
@@ -240,17 +356,17 @@ class Upstream(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _UpstreamState.__new__(_UpstreamState)
 
-        __props__["hash_fallback"] = hash_fallback
-        __props__["hash_fallback_header"] = hash_fallback_header
-        __props__["hash_on"] = hash_on
-        __props__["hash_on_cookie"] = hash_on_cookie
-        __props__["hash_on_cookie_path"] = hash_on_cookie_path
-        __props__["hash_on_header"] = hash_on_header
-        __props__["healthchecks"] = healthchecks
-        __props__["name"] = name
-        __props__["slots"] = slots
+        __props__.__dict__["hash_fallback"] = hash_fallback
+        __props__.__dict__["hash_fallback_header"] = hash_fallback_header
+        __props__.__dict__["hash_on"] = hash_on
+        __props__.__dict__["hash_on_cookie"] = hash_on_cookie
+        __props__.__dict__["hash_on_cookie_path"] = hash_on_cookie_path
+        __props__.__dict__["hash_on_header"] = hash_on_header
+        __props__.__dict__["healthchecks"] = healthchecks
+        __props__.__dict__["name"] = name
+        __props__.__dict__["slots"] = slots
         return Upstream(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -297,10 +413,4 @@ class Upstream(pulumi.CustomResource):
     @pulumi.getter
     def slots(self) -> pulumi.Output[Optional[int]]:
         return pulumi.get(self, "slots")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 
