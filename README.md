@@ -3,7 +3,7 @@
 [![NPM version](https://badge.fury.io/js/%40pulumi%2Fkong.svg)](https://www.npmjs.com/package/@pulumi/kong)
 [![Python version](https://badge.fury.io/py/pulumi-kong.svg)](https://pypi.org/project/pulumi-kong)
 [![NuGet version](https://badge.fury.io/nu/pulumi.kong.svg)](https://badge.fury.io/nu/pulumi.kong)
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/pulumi/pulumi-kong/sdk/v2/go)](https://pkg.go.dev/github.com/pulumi/pulumi-kong/sdk/v2/go)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/pulumi/pulumi-kong/sdk/v3/go)](https://pkg.go.dev/github.com/pulumi/pulumi-kong/sdk/v2/go)
 [![License](https://img.shields.io/npm/l/%40pulumi%2Fpulumi.svg)](https://github.com/pulumi/pulumi-kong/blob/master/LICENSE)
 
 # Kong Resource Provider
@@ -35,7 +35,7 @@ To use from Python, install using `pip`:
 
 To use from Go, use `go get` to grab the latest version of the library
 
-    $ go get github.com/pulumi/pulumi-kong/sdk/v2/go/...
+    $ go get github.com/pulumi/pulumi-kong/sdk/v3/go/...
 
 ### .NET
 
