@@ -24,16 +24,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Certificate{}
 	case "kong:index/consumer:Consumer":
 		r = &Consumer{}
-	case "kong:index/consumerPluginConfig:ConsumerPluginConfig":
-		r = &ConsumerPluginConfig{}
+	case "kong:index/consumerAcl:ConsumerAcl":
+		r = &ConsumerAcl{}
+	case "kong:index/consumerBasicAuth:ConsumerBasicAuth":
+		r = &ConsumerBasicAuth{}
+	case "kong:index/jwtAuth:JwtAuth":
+		r = &JwtAuth{}
 	case "kong:index/plugin:Plugin":
 		r = &Plugin{}
 	case "kong:index/route:Route":
 		r = &Route{}
 	case "kong:index/service:Service":
 		r = &Service{}
-	case "kong:index/sni:Sni":
-		r = &Sni{}
 	case "kong:index/target:Target":
 		r = &Target{}
 	case "kong:index/upstream:Upstream":
@@ -81,7 +83,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"kong",
-		"index/consumerPluginConfig",
+		"index/consumerAcl",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"kong",
+		"index/consumerBasicAuth",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"kong",
+		"index/jwtAuth",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -97,11 +109,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"kong",
 		"index/service",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"kong",
-		"index/sni",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

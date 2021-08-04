@@ -19,11 +19,10 @@ import (
 	"path/filepath"
 	"unicode"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/kevholditch/terraform-provider-kong/kong"
-	"github.com/pulumi/pulumi-kong/provider/v3/pkg/version"
+	"github.com/pulumi/pulumi-kong/provider/v4/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shimv1 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v1"
+	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 )
 
@@ -58,7 +57,7 @@ func refProviderLicense(license tfbridge.TFProviderLicense) *tfbridge.TFProvider
 }
 
 func Provider() tfbridge.ProviderInfo {
-	p := shimv1.NewProvider(kong.Provider().(*schema.Provider))
+	p := shimv2.NewProvider(kong.Provider())
 	prov := tfbridge.ProviderInfo{
 		P:                 p,
 		Name:              "kong",
@@ -91,11 +90,9 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"kong_consumer":               {Tok: makeResource(mainMod, "Consumer")},
-			"kong_consumer_plugin_config": {Tok: makeResource(mainMod, "ConsumerPluginConfig")},
-			"kong_plugin":                 {Tok: makeResource(mainMod, "Plugin")},
-			"kong_sni":                    {Tok: makeResource(mainMod, "Sni")},
-			"kong_upstream":               {Tok: makeResource(mainMod, "Upstream")},
+			"kong_consumer": {Tok: makeResource(mainMod, "Consumer")},
+			"kong_plugin":   {Tok: makeResource(mainMod, "Plugin")},
+			"kong_upstream": {Tok: makeResource(mainMod, "Upstream")},
 			"kong_target": {
 				Tok: makeResource(mainMod, "Target"),
 				Fields: map[string]*tfbridge.SchemaInfo{
@@ -104,12 +101,15 @@ func Provider() tfbridge.ProviderInfo {
 					},
 				},
 			},
-			"kong_service": {Tok: makeResource(mainMod, "Service")},
-			"kong_route":   {Tok: makeResource(mainMod, "Route")},
+			"kong_service":             {Tok: makeResource(mainMod, "Service")},
+			"kong_route":               {Tok: makeResource(mainMod, "Route")},
+			"kong_consumer_acl":        {Tok: makeResource(mainMod, "ConsumerAcl")},
+			"kong_consumer_basic_auth": {Tok: makeResource(mainMod, "ConsumerBasicAuth")},
+			"kong_jwt_auth":            {Tok: makeResource(mainMod, "JwtAuth")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
-				"@pulumi/pulumi": "^3.0.0-alpha.0",
+				"@pulumi/pulumi": "^3.0.0",
 			},
 			DevDependencies: map[string]string{
 				"@types/node": "^10.0.0",
@@ -118,7 +118,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Python: &tfbridge.PythonInfo{
 			Requires: map[string]string{
-				"pulumi": ">=3.0.0a1,<4.0.0",
+				"pulumi": ">=3.0.0,<4.0.0",
 			},
 		},
 		Golang: &tfbridge.GolangInfo{
@@ -132,8 +132,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		CSharp: &tfbridge.CSharpInfo{
 			PackageReferences: map[string]string{
-				"Pulumi":                       "3.*-*",
-				"System.Collections.Immutable": "1.6.0",
+				"Pulumi": "3.*",
 			},
 			Namespaces: map[string]string{
 				mainPkg: "Kong",

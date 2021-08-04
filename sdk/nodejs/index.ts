@@ -7,12 +7,13 @@ import * as utilities from "./utilities";
 // Export members:
 export * from "./certificate";
 export * from "./consumer";
-export * from "./consumerPluginConfig";
+export * from "./consumerAcl";
+export * from "./consumerBasicAuth";
+export * from "./jwtAuth";
 export * from "./plugin";
 export * from "./provider";
 export * from "./route";
 export * from "./service";
-export * from "./sni";
 export * from "./target";
 export * from "./upstream";
 
@@ -28,11 +29,12 @@ export {
 // Import resources to register:
 import { Certificate } from "./certificate";
 import { Consumer } from "./consumer";
-import { ConsumerPluginConfig } from "./consumerPluginConfig";
+import { ConsumerAcl } from "./consumerAcl";
+import { ConsumerBasicAuth } from "./consumerBasicAuth";
+import { JwtAuth } from "./jwtAuth";
 import { Plugin } from "./plugin";
 import { Route } from "./route";
 import { Service } from "./service";
-import { Sni } from "./sni";
 import { Target } from "./target";
 import { Upstream } from "./upstream";
 
@@ -44,16 +46,18 @@ const _module = {
                 return new Certificate(name, <any>undefined, { urn })
             case "kong:index/consumer:Consumer":
                 return new Consumer(name, <any>undefined, { urn })
-            case "kong:index/consumerPluginConfig:ConsumerPluginConfig":
-                return new ConsumerPluginConfig(name, <any>undefined, { urn })
+            case "kong:index/consumerAcl:ConsumerAcl":
+                return new ConsumerAcl(name, <any>undefined, { urn })
+            case "kong:index/consumerBasicAuth:ConsumerBasicAuth":
+                return new ConsumerBasicAuth(name, <any>undefined, { urn })
+            case "kong:index/jwtAuth:JwtAuth":
+                return new JwtAuth(name, <any>undefined, { urn })
             case "kong:index/plugin:Plugin":
                 return new Plugin(name, <any>undefined, { urn })
             case "kong:index/route:Route":
                 return new Route(name, <any>undefined, { urn })
             case "kong:index/service:Service":
                 return new Service(name, <any>undefined, { urn })
-            case "kong:index/sni:Sni":
-                return new Sni(name, <any>undefined, { urn })
             case "kong:index/target:Target":
                 return new Target(name, <any>undefined, { urn })
             case "kong:index/upstream:Upstream":
@@ -65,11 +69,12 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("kong", "index/certificate", _module)
 pulumi.runtime.registerResourceModule("kong", "index/consumer", _module)
-pulumi.runtime.registerResourceModule("kong", "index/consumerPluginConfig", _module)
+pulumi.runtime.registerResourceModule("kong", "index/consumerAcl", _module)
+pulumi.runtime.registerResourceModule("kong", "index/consumerBasicAuth", _module)
+pulumi.runtime.registerResourceModule("kong", "index/jwtAuth", _module)
 pulumi.runtime.registerResourceModule("kong", "index/plugin", _module)
 pulumi.runtime.registerResourceModule("kong", "index/route", _module)
 pulumi.runtime.registerResourceModule("kong", "index/service", _module)
-pulumi.runtime.registerResourceModule("kong", "index/sni", _module)
 pulumi.runtime.registerResourceModule("kong", "index/target", _module)
 pulumi.runtime.registerResourceModule("kong", "index/upstream", _module)
 

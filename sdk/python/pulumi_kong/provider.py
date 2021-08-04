@@ -18,6 +18,7 @@ class ProviderArgs:
                  kong_admin_token: Optional[pulumi.Input[str]] = None,
                  kong_admin_username: Optional[pulumi.Input[str]] = None,
                  kong_api_key: Optional[pulumi.Input[str]] = None,
+                 kong_workspace: Optional[pulumi.Input[str]] = None,
                  strict_plugins_match: Optional[pulumi.Input[bool]] = None,
                  tls_skip_verify: Optional[pulumi.Input[bool]] = None):
         """
@@ -27,6 +28,7 @@ class ProviderArgs:
         :param pulumi.Input[str] kong_admin_token: API key for the kong api (Enterprise Edition)
         :param pulumi.Input[str] kong_admin_username: An basic auth user for kong admin
         :param pulumi.Input[str] kong_api_key: API key for the kong api (if you have locked it down)
+        :param pulumi.Input[str] kong_workspace: Workspace context (Enterprise Edition)
         :param pulumi.Input[bool] strict_plugins_match: Should plugins `config_json` field strictly match plugin configuration
         :param pulumi.Input[bool] tls_skip_verify: Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
         """
@@ -39,6 +41,8 @@ class ProviderArgs:
             pulumi.set(__self__, "kong_admin_username", kong_admin_username)
         if kong_api_key is not None:
             pulumi.set(__self__, "kong_api_key", kong_api_key)
+        if kong_workspace is not None:
+            pulumi.set(__self__, "kong_workspace", kong_workspace)
         if strict_plugins_match is None:
             strict_plugins_match = _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
         if strict_plugins_match is not None:
@@ -109,6 +113,18 @@ class ProviderArgs:
         pulumi.set(self, "kong_api_key", value)
 
     @property
+    @pulumi.getter(name="kongWorkspace")
+    def kong_workspace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Workspace context (Enterprise Edition)
+        """
+        return pulumi.get(self, "kong_workspace")
+
+    @kong_workspace.setter
+    def kong_workspace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "kong_workspace", value)
+
+    @property
     @pulumi.getter(name="strictPluginsMatch")
     def strict_plugins_match(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -143,6 +159,7 @@ class Provider(pulumi.ProviderResource):
                  kong_admin_uri: Optional[pulumi.Input[str]] = None,
                  kong_admin_username: Optional[pulumi.Input[str]] = None,
                  kong_api_key: Optional[pulumi.Input[str]] = None,
+                 kong_workspace: Optional[pulumi.Input[str]] = None,
                  strict_plugins_match: Optional[pulumi.Input[bool]] = None,
                  tls_skip_verify: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
@@ -159,6 +176,7 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.Input[str] kong_admin_uri: The address of the kong admin url e.g. http://localhost:8001
         :param pulumi.Input[str] kong_admin_username: An basic auth user for kong admin
         :param pulumi.Input[str] kong_api_key: API key for the kong api (if you have locked it down)
+        :param pulumi.Input[str] kong_workspace: Workspace context (Enterprise Edition)
         :param pulumi.Input[bool] strict_plugins_match: Should plugins `config_json` field strictly match plugin configuration
         :param pulumi.Input[bool] tls_skip_verify: Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
         """
@@ -194,6 +212,7 @@ class Provider(pulumi.ProviderResource):
                  kong_admin_uri: Optional[pulumi.Input[str]] = None,
                  kong_admin_username: Optional[pulumi.Input[str]] = None,
                  kong_api_key: Optional[pulumi.Input[str]] = None,
+                 kong_workspace: Optional[pulumi.Input[str]] = None,
                  strict_plugins_match: Optional[pulumi.Input[bool]] = None,
                  tls_skip_verify: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
@@ -215,6 +234,7 @@ class Provider(pulumi.ProviderResource):
             __props__.__dict__["kong_admin_uri"] = kong_admin_uri
             __props__.__dict__["kong_admin_username"] = kong_admin_username
             __props__.__dict__["kong_api_key"] = kong_api_key
+            __props__.__dict__["kong_workspace"] = kong_workspace
             if strict_plugins_match is None:
                 strict_plugins_match = _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
             __props__.__dict__["strict_plugins_match"] = pulumi.Output.from_input(strict_plugins_match).apply(pulumi.runtime.to_json) if strict_plugins_match is not None else None

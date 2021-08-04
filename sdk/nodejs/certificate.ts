@@ -34,6 +34,7 @@ export class Certificate extends pulumi.CustomResource {
 
     public readonly certificate!: pulumi.Output<string>;
     public readonly privateKey!: pulumi.Output<string | undefined>;
+    public readonly snis!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Certificate resource with the given unique name, arguments, and options.
@@ -50,6 +51,7 @@ export class Certificate extends pulumi.CustomResource {
             const state = argsOrState as CertificateState | undefined;
             inputs["certificate"] = state ? state.certificate : undefined;
             inputs["privateKey"] = state ? state.privateKey : undefined;
+            inputs["snis"] = state ? state.snis : undefined;
         } else {
             const args = argsOrState as CertificateArgs | undefined;
             if ((!args || args.certificate === undefined) && !opts.urn) {
@@ -57,6 +59,7 @@ export class Certificate extends pulumi.CustomResource {
             }
             inputs["certificate"] = args ? args.certificate : undefined;
             inputs["privateKey"] = args ? args.privateKey : undefined;
+            inputs["snis"] = args ? args.snis : undefined;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -71,6 +74,7 @@ export class Certificate extends pulumi.CustomResource {
 export interface CertificateState {
     readonly certificate?: pulumi.Input<string>;
     readonly privateKey?: pulumi.Input<string>;
+    readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -79,4 +83,5 @@ export interface CertificateState {
 export interface CertificateArgs {
     readonly certificate: pulumi.Input<string>;
     readonly privateKey?: pulumi.Input<string>;
+    readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
 }

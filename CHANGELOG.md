@@ -2,7 +2,10 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Upgrade to v6.1.0 of the Kong Terraform Provider
+  **Breaking Change:** The following resources have been removed from the provider:
+  * `kong.Sni`
+  * `kong.ConsumerPluginConfig`
 
 ---
 

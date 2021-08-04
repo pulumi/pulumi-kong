@@ -14,13 +14,16 @@ __all__ = ['CertificateArgs', 'Certificate']
 class CertificateArgs:
     def __init__(__self__, *,
                  certificate: pulumi.Input[str],
-                 private_key: Optional[pulumi.Input[str]] = None):
+                 private_key: Optional[pulumi.Input[str]] = None,
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Certificate resource.
         """
         pulumi.set(__self__, "certificate", certificate)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
+        if snis is not None:
+            pulumi.set(__self__, "snis", snis)
 
     @property
     @pulumi.getter
@@ -40,12 +43,22 @@ class CertificateArgs:
     def private_key(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "private_key", value)
 
+    @property
+    @pulumi.getter
+    def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "snis")
+
+    @snis.setter
+    def snis(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "snis", value)
+
 
 @pulumi.input_type
 class _CertificateState:
     def __init__(__self__, *,
                  certificate: Optional[pulumi.Input[str]] = None,
-                 private_key: Optional[pulumi.Input[str]] = None):
+                 private_key: Optional[pulumi.Input[str]] = None,
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Certificate resources.
         """
@@ -53,6 +66,8 @@ class _CertificateState:
             pulumi.set(__self__, "certificate", certificate)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
+        if snis is not None:
+            pulumi.set(__self__, "snis", snis)
 
     @property
     @pulumi.getter
@@ -72,6 +87,15 @@ class _CertificateState:
     def private_key(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "private_key", value)
 
+    @property
+    @pulumi.getter
+    def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "snis")
+
+    @snis.setter
+    def snis(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "snis", value)
+
 
 class Certificate(pulumi.CustomResource):
     @overload
@@ -80,6 +104,7 @@ class Certificate(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  certificate: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Create a Certificate resource with the given unique name, props, and options.
@@ -111,6 +136,7 @@ class Certificate(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  certificate: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -127,6 +153,7 @@ class Certificate(pulumi.CustomResource):
                 raise TypeError("Missing required property 'certificate'")
             __props__.__dict__["certificate"] = certificate
             __props__.__dict__["private_key"] = private_key
+            __props__.__dict__["snis"] = snis
         super(Certificate, __self__).__init__(
             'kong:index/certificate:Certificate',
             resource_name,
@@ -138,7 +165,8 @@ class Certificate(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             certificate: Optional[pulumi.Input[str]] = None,
-            private_key: Optional[pulumi.Input[str]] = None) -> 'Certificate':
+            private_key: Optional[pulumi.Input[str]] = None,
+            snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Certificate':
         """
         Get an existing Certificate resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -153,6 +181,7 @@ class Certificate(pulumi.CustomResource):
 
         __props__.__dict__["certificate"] = certificate
         __props__.__dict__["private_key"] = private_key
+        __props__.__dict__["snis"] = snis
         return Certificate(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -164,4 +193,9 @@ class Certificate(pulumi.CustomResource):
     @pulumi.getter(name="privateKey")
     def private_key(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "private_key")
+
+    @property
+    @pulumi.getter
+    def snis(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        return pulumi.get(self, "snis")
 

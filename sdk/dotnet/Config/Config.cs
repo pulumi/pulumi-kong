@@ -34,6 +34,11 @@ namespace Pulumi.Kong
         public static string? KongApiKey { get; set; } = __config.Get("kongApiKey");
 
         /// <summary>
+        /// Workspace context (Enterprise Edition)
+        /// </summary>
+        public static string? KongWorkspace { get; set; } = __config.Get("kongWorkspace");
+
+        /// <summary>
         /// Should plugins `config_json` field strictly match plugin configuration
         /// </summary>
         public static bool? StrictPluginsMatch { get; set; } = __config.GetBoolean("strictPluginsMatch") ?? Utilities.GetEnvBoolean("STRICT_PLUGINS_MATCH");

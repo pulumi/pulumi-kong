@@ -34,6 +34,10 @@
                 "type": "string",
                 "description": "API key for the kong api (if you have locked it down)\n"
             },
+            "kongWorkspace": {
+                "type": "string",
+                "description": "Workspace context (Enterprise Edition)\n"
+            },
             "strictPluginsMatch": {
                 "type": "boolean",
                 "description": "Should plugins `config_json` field strictly match plugin configuration\n",
@@ -432,6 +436,10 @@
                 "type": "string",
                 "description": "API key for the kong api (if you have locked it down)\n"
             },
+            "kongWorkspace": {
+                "type": "string",
+                "description": "Workspace context (Enterprise Edition)\n"
+            },
             "strictPluginsMatch": {
                 "type": "boolean",
                 "description": "Should plugins `config_json` field strictly match plugin configuration\n",
@@ -469,6 +477,12 @@
                 },
                 "privateKey": {
                     "type": "string"
+                },
+                "snis": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
@@ -485,6 +499,12 @@
                 },
                 "privateKey": {
                     "type": "string"
+                },
+                "snis": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "requiredInputs": [
@@ -503,6 +523,12 @@
                     },
                     "privateKey": {
                         "type": "string"
+                    },
+                    "snis": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 },
                 "type": "object"
@@ -544,57 +570,188 @@
                 "type": "object"
             }
         },
-        "kong:index/consumerPluginConfig:ConsumerPluginConfig": {
+        "kong:index/consumerAcl:ConsumerAcl": {
             "properties": {
-                "computedConfig": {
-                    "type": "string"
-                },
-                "configJson": {
-                    "type": "string",
-                    "description": "JSON format of plugin config\n"
-                },
                 "consumerId": {
                     "type": "string"
                 },
-                "pluginName": {
+                "group": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "consumerId",
+                "group"
+            ],
+            "inputProperties": {
+                "consumerId": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "group"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConsumerAcl resources.\n",
+                "properties": {
+                    "consumerId": {
+                        "type": "string"
+                    },
+                    "group": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "kong:index/consumerBasicAuth:ConsumerBasicAuth": {
+            "properties": {
+                "consumerId": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "username": {
                     "type": "string"
                 }
             },
             "required": [
-                "computedConfig",
                 "consumerId",
-                "pluginName"
+                "password",
+                "username"
             ],
             "inputProperties": {
-                "configJson": {
-                    "type": "string",
-                    "description": "JSON format of plugin config\n"
-                },
                 "consumerId": {
                     "type": "string"
                 },
-                "pluginName": {
+                "password": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "username": {
                     "type": "string"
                 }
             },
             "requiredInputs": [
                 "consumerId",
-                "pluginName"
+                "password",
+                "username"
             ],
             "stateInputs": {
-                "description": "Input properties used for looking up and filtering ConsumerPluginConfig resources.\n",
+                "description": "Input properties used for looking up and filtering ConsumerBasicAuth resources.\n",
                 "properties": {
-                    "computedConfig": {
+                    "consumerId": {
                         "type": "string"
                     },
-                    "configJson": {
-                        "type": "string",
-                        "description": "JSON format of plugin config\n"
+                    "password": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "kong:index/jwtAuth:JwtAuth": {
+            "properties": {
+                "algorithm": {
+                    "type": "string"
+                },
+                "consumerId": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "rsaPublicKey": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "consumerId",
+                "rsaPublicKey"
+            ],
+            "inputProperties": {
+                "algorithm": {
+                    "type": "string"
+                },
+                "consumerId": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "rsaPublicKey": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "rsaPublicKey"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering JwtAuth resources.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "string"
                     },
                     "consumerId": {
                         "type": "string"
                     },
-                    "pluginName": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "rsaPublicKey": {
+                        "type": "string"
+                    },
+                    "secret": {
                         "type": "string"
                     }
                 },
@@ -981,43 +1138,6 @@
                 "type": "object"
             }
         },
-        "kong:index/sni:Sni": {
-            "properties": {
-                "certificateId": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "certificateId",
-                "name"
-            ],
-            "inputProperties": {
-                "certificateId": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "requiredInputs": [
-                "certificateId"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering Sni resources.\n",
-                "properties": {
-                    "certificateId": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            }
-        },
         "kong:index/target:Target": {
             "properties": {
                 "target": {
@@ -1187,18 +1307,17 @@
                 "kong": "Kong"
             },
             "packageReferences": {
-                "Pulumi": "3.*-*",
-                "System.Collections.Immutable": "1.6.0"
+                "Pulumi": "3.*"
             }
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-kong/sdk/v3/go/kong"
+            "importBasePath": "github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
         },
         "nodejs": {
             "compatibility": "tfbridge20",
             "dependencies": {
-                "@pulumi/pulumi": "^3.0.0-alpha.0"
+                "@pulumi/pulumi": "^3.0.0"
             },
             "devDependencies": {
                 "@types/mime": "^2.0.0",
@@ -1214,7 +1333,7 @@
             "compatibility": "tfbridge20",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/kevholditch/terraform-provider-kong)\n\u003e distributed under [MIT](https://mit-license.org/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-kong` repo](https://github.com/pulumi/pulumi-kong/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`kevholditch/terraform-provider-kong` repo](https://github.com/kevholditch/terraform-provider-kong/issues).",
             "requires": {
-                "pulumi": "\u003e=3.0.0a1,\u003c4.0.0"
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }
         }
     }

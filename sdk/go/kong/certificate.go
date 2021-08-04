@@ -14,8 +14,9 @@ import (
 type Certificate struct {
 	pulumi.CustomResourceState
 
-	Certificate pulumi.StringOutput    `pulumi:"certificate"`
-	PrivateKey  pulumi.StringPtrOutput `pulumi:"privateKey"`
+	Certificate pulumi.StringOutput      `pulumi:"certificate"`
+	PrivateKey  pulumi.StringPtrOutput   `pulumi:"privateKey"`
+	Snis        pulumi.StringArrayOutput `pulumi:"snis"`
 }
 
 // NewCertificate registers a new resource with the given unique name, arguments, and options.
@@ -50,13 +51,15 @@ func GetCertificate(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Certificate resources.
 type certificateState struct {
-	Certificate *string `pulumi:"certificate"`
-	PrivateKey  *string `pulumi:"privateKey"`
+	Certificate *string  `pulumi:"certificate"`
+	PrivateKey  *string  `pulumi:"privateKey"`
+	Snis        []string `pulumi:"snis"`
 }
 
 type CertificateState struct {
 	Certificate pulumi.StringPtrInput
 	PrivateKey  pulumi.StringPtrInput
+	Snis        pulumi.StringArrayInput
 }
 
 func (CertificateState) ElementType() reflect.Type {
@@ -64,14 +67,16 @@ func (CertificateState) ElementType() reflect.Type {
 }
 
 type certificateArgs struct {
-	Certificate string  `pulumi:"certificate"`
-	PrivateKey  *string `pulumi:"privateKey"`
+	Certificate string   `pulumi:"certificate"`
+	PrivateKey  *string  `pulumi:"privateKey"`
+	Snis        []string `pulumi:"snis"`
 }
 
 // The set of arguments for constructing a Certificate resource.
 type CertificateArgs struct {
 	Certificate pulumi.StringInput
 	PrivateKey  pulumi.StringPtrInput
+	Snis        pulumi.StringArrayInput
 }
 
 func (CertificateArgs) ElementType() reflect.Type {

@@ -18,6 +18,9 @@ namespace Pulumi.Kong
         [Output("privateKey")]
         public Output<string?> PrivateKey { get; private set; } = null!;
 
+        [Output("snis")]
+        public Output<ImmutableArray<string>> Snis { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Certificate resource with the given unique name, arguments, and options.
@@ -70,6 +73,14 @@ namespace Pulumi.Kong
         [Input("privateKey")]
         public Input<string>? PrivateKey { get; set; }
 
+        [Input("snis")]
+        private InputList<string>? _snis;
+        public InputList<string> Snis
+        {
+            get => _snis ?? (_snis = new InputList<string>());
+            set => _snis = value;
+        }
+
         public CertificateArgs()
         {
         }
@@ -82,6 +93,14 @@ namespace Pulumi.Kong
 
         [Input("privateKey")]
         public Input<string>? PrivateKey { get; set; }
+
+        [Input("snis")]
+        private InputList<string>? _snis;
+        public InputList<string> Snis
+        {
+            get => _snis ?? (_snis = new InputList<string>());
+            set => _snis = value;
+        }
 
         public CertificateState()
         {
