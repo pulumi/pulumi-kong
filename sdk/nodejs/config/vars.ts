@@ -27,6 +27,10 @@ export let kongAdminUsername: string | undefined = __config.get("kongAdminUserna
  */
 export let kongApiKey: string | undefined = __config.get("kongApiKey");
 /**
+ * Workspace context (Enterprise Edition)
+ */
+export let kongWorkspace: string | undefined = __config.get("kongWorkspace");
+/**
  * Should plugins `config_json` field strictly match plugin configuration
  */
 export let strictPluginsMatch: boolean | undefined = __config.getObject<boolean>("strictPluginsMatch") || <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH");

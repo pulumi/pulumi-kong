@@ -11,11 +11,54 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## # Certificate
+//
+// For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
+// 			Certificate: pulumi.String("public key --- 123 ----"),
+// 			PrivateKey:  pulumi.String("private key --- 456 ----"),
+// 			Snis: pulumi.StringArray{
+// 				pulumi.String("foo.com"),
+// 				pulumi.String("bar.com"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// To import a certificate
+//
+// ```sh
+//  $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
+// ```
 type Certificate struct {
 	pulumi.CustomResourceState
 
-	Certificate pulumi.StringOutput    `pulumi:"certificate"`
-	PrivateKey  pulumi.StringPtrOutput `pulumi:"privateKey"`
+	// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+	Certificate pulumi.StringOutput `pulumi:"certificate"`
+	// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+	PrivateKey pulumi.StringPtrOutput `pulumi:"privateKey"`
+	// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+	Snis pulumi.StringArrayOutput `pulumi:"snis"`
 }
 
 // NewCertificate registers a new resource with the given unique name, arguments, and options.
@@ -50,13 +93,21 @@ func GetCertificate(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Certificate resources.
 type certificateState struct {
+	// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
 	Certificate *string `pulumi:"certificate"`
-	PrivateKey  *string `pulumi:"privateKey"`
+	// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+	PrivateKey *string `pulumi:"privateKey"`
+	// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+	Snis []string `pulumi:"snis"`
 }
 
 type CertificateState struct {
+	// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
 	Certificate pulumi.StringPtrInput
-	PrivateKey  pulumi.StringPtrInput
+	// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+	PrivateKey pulumi.StringPtrInput
+	// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+	Snis pulumi.StringArrayInput
 }
 
 func (CertificateState) ElementType() reflect.Type {
@@ -64,14 +115,22 @@ func (CertificateState) ElementType() reflect.Type {
 }
 
 type certificateArgs struct {
-	Certificate string  `pulumi:"certificate"`
-	PrivateKey  *string `pulumi:"privateKey"`
+	// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+	Certificate string `pulumi:"certificate"`
+	// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+	PrivateKey *string `pulumi:"privateKey"`
+	// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+	Snis []string `pulumi:"snis"`
 }
 
 // The set of arguments for constructing a Certificate resource.
 type CertificateArgs struct {
+	// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
 	Certificate pulumi.StringInput
-	PrivateKey  pulumi.StringPtrInput
+	// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+	PrivateKey pulumi.StringPtrInput
+	// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+	Snis pulumi.StringArrayInput
 }
 
 func (CertificateArgs) ElementType() reflect.Type {

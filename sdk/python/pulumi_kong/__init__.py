@@ -5,12 +5,12 @@
 # Export this package's modules as members:
 from .certificate import *
 from .consumer import *
-from .consumer_plugin_config import *
+from .consumer_acl import *
+from .consumer_basic_auth import *
 from .plugin import *
 from .provider import *
 from .route import *
 from .service import *
-from .sni import *
 from .target import *
 from .upstream import *
 from ._inputs import *
@@ -37,16 +37,16 @@ def _register_module():
                 return Certificate(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/consumer:Consumer":
                 return Consumer(name, pulumi.ResourceOptions(urn=urn))
-            elif typ == "kong:index/consumerPluginConfig:ConsumerPluginConfig":
-                return ConsumerPluginConfig(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/consumerAcl:ConsumerAcl":
+                return ConsumerAcl(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/consumerBasicAuth:ConsumerBasicAuth":
+                return ConsumerBasicAuth(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/plugin:Plugin":
                 return Plugin(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/route:Route":
                 return Route(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/service:Service":
                 return Service(name, pulumi.ResourceOptions(urn=urn))
-            elif typ == "kong:index/sni:Sni":
-                return Sni(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/target:Target":
                 return Target(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/upstream:Upstream":
@@ -58,11 +58,11 @@ def _register_module():
     _module_instance = Module()
     pulumi.runtime.register_resource_module("kong", "index/certificate", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/consumer", _module_instance)
-    pulumi.runtime.register_resource_module("kong", "index/consumerPluginConfig", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/consumerAcl", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/consumerBasicAuth", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/plugin", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/route", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/service", _module_instance)
-    pulumi.runtime.register_resource_module("kong", "index/sni", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/target", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/upstream", _module_instance)
 

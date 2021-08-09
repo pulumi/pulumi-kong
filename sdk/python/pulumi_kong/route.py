@@ -29,6 +29,18 @@ class RouteArgs:
                  strip_path: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a Route resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: The list of protocols to use
+        :param pulumi.Input[str] service_id: Service ID to map to
+        :param pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]] destinations: A list of destination `ip` and `port`
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: A list of domain names that match this Route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: A list of HTTP methods that match this Route
+        :param pulumi.Input[str] name: The name of the route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: A list of paths that match this Route
+        :param pulumi.Input[bool] preserve_host: When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        :param pulumi.Input[int] regex_priority: A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of SNIs that match this Route when using stream routing.
+        :param pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]] sources: A list of source `ip` and `port`
+        :param pulumi.Input[bool] strip_path: When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         """
         pulumi.set(__self__, "protocols", protocols)
         pulumi.set(__self__, "service_id", service_id)
@@ -56,6 +68,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def protocols(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        The list of protocols to use
+        """
         return pulumi.get(self, "protocols")
 
     @protocols.setter
@@ -65,6 +80,9 @@ class RouteArgs:
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Input[str]:
+        """
+        Service ID to map to
+        """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
@@ -74,6 +92,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def destinations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]:
+        """
+        A list of destination `ip` and `port`
+        """
         return pulumi.get(self, "destinations")
 
     @destinations.setter
@@ -83,6 +104,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def hosts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of domain names that match this Route
+        """
         return pulumi.get(self, "hosts")
 
     @hosts.setter
@@ -92,6 +116,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def methods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of HTTP methods that match this Route
+        """
         return pulumi.get(self, "methods")
 
     @methods.setter
@@ -101,6 +128,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the route
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -110,6 +140,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of paths that match this Route
+        """
         return pulumi.get(self, "paths")
 
     @paths.setter
@@ -119,6 +152,9 @@ class RouteArgs:
     @property
     @pulumi.getter(name="preserveHost")
     def preserve_host(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        """
         return pulumi.get(self, "preserve_host")
 
     @preserve_host.setter
@@ -128,6 +164,9 @@ class RouteArgs:
     @property
     @pulumi.getter(name="regexPriority")
     def regex_priority(self) -> Optional[pulumi.Input[int]]:
+        """
+        A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        """
         return pulumi.get(self, "regex_priority")
 
     @regex_priority.setter
@@ -137,6 +176,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of SNIs that match this Route when using stream routing.
+        """
         return pulumi.get(self, "snis")
 
     @snis.setter
@@ -146,6 +188,9 @@ class RouteArgs:
     @property
     @pulumi.getter
     def sources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]:
+        """
+        A list of source `ip` and `port`
+        """
         return pulumi.get(self, "sources")
 
     @sources.setter
@@ -155,6 +200,9 @@ class RouteArgs:
     @property
     @pulumi.getter(name="stripPath")
     def strip_path(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+        """
         return pulumi.get(self, "strip_path")
 
     @strip_path.setter
@@ -179,6 +227,18 @@ class _RouteState:
                  strip_path: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering Route resources.
+        :param pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]] destinations: A list of destination `ip` and `port`
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: A list of domain names that match this Route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: A list of HTTP methods that match this Route
+        :param pulumi.Input[str] name: The name of the route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: A list of paths that match this Route
+        :param pulumi.Input[bool] preserve_host: When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: The list of protocols to use
+        :param pulumi.Input[int] regex_priority: A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        :param pulumi.Input[str] service_id: Service ID to map to
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of SNIs that match this Route when using stream routing.
+        :param pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]] sources: A list of source `ip` and `port`
+        :param pulumi.Input[bool] strip_path: When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         """
         if destinations is not None:
             pulumi.set(__self__, "destinations", destinations)
@@ -208,6 +268,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def destinations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]:
+        """
+        A list of destination `ip` and `port`
+        """
         return pulumi.get(self, "destinations")
 
     @destinations.setter
@@ -217,6 +280,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def hosts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of domain names that match this Route
+        """
         return pulumi.get(self, "hosts")
 
     @hosts.setter
@@ -226,6 +292,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def methods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of HTTP methods that match this Route
+        """
         return pulumi.get(self, "methods")
 
     @methods.setter
@@ -235,6 +304,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the route
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -244,6 +316,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of paths that match this Route
+        """
         return pulumi.get(self, "paths")
 
     @paths.setter
@@ -253,6 +328,9 @@ class _RouteState:
     @property
     @pulumi.getter(name="preserveHost")
     def preserve_host(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        """
         return pulumi.get(self, "preserve_host")
 
     @preserve_host.setter
@@ -262,6 +340,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def protocols(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of protocols to use
+        """
         return pulumi.get(self, "protocols")
 
     @protocols.setter
@@ -271,6 +352,9 @@ class _RouteState:
     @property
     @pulumi.getter(name="regexPriority")
     def regex_priority(self) -> Optional[pulumi.Input[int]]:
+        """
+        A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        """
         return pulumi.get(self, "regex_priority")
 
     @regex_priority.setter
@@ -280,6 +364,9 @@ class _RouteState:
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Service ID to map to
+        """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
@@ -289,6 +376,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of SNIs that match this Route when using stream routing.
+        """
         return pulumi.get(self, "snis")
 
     @snis.setter
@@ -298,6 +388,9 @@ class _RouteState:
     @property
     @pulumi.getter
     def sources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]:
+        """
+        A list of source `ip` and `port`
+        """
         return pulumi.get(self, "sources")
 
     @sources.setter
@@ -307,6 +400,9 @@ class _RouteState:
     @property
     @pulumi.getter(name="stripPath")
     def strip_path(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+        """
         return pulumi.get(self, "strip_path")
 
     @strip_path.setter
@@ -333,9 +429,84 @@ class Route(pulumi.CustomResource):
                  strip_path: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a Route resource with the given unique name, props, and options.
+        ## # Route
+
+        The route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).
+
+        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=[
+                "http",
+                "https",
+            ],
+            methods=[
+                "GET",
+                "POST",
+            ],
+            hosts=["example2.com"],
+            paths=["/test"],
+            strip_path=False,
+            preserve_host=True,
+            regex_priority=1,
+            service_id=kong_service["service"]["id"])
+        ```
+
+        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=["tcp"],
+            strip_path=True,
+            preserve_host=False,
+            sources=[
+                kong.RouteSourceArgs(
+                    ip="192.168.1.1",
+                    port=80,
+                ),
+                kong.RouteSourceArgs(
+                    ip="192.168.1.2",
+                ),
+            ],
+            destinations=[kong.RouteDestinationArgs(
+                ip="172.10.1.1",
+                port=81,
+            )],
+            snis=["foo.com"],
+            service_id=kong_service["service"]["id"])
+        ```
+
+        ## Import
+
+        To import a route
+
+        ```sh
+         $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteDestinationArgs']]]] destinations: A list of destination `ip` and `port`
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: A list of domain names that match this Route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: A list of HTTP methods that match this Route
+        :param pulumi.Input[str] name: The name of the route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: A list of paths that match this Route
+        :param pulumi.Input[bool] preserve_host: When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: The list of protocols to use
+        :param pulumi.Input[int] regex_priority: A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        :param pulumi.Input[str] service_id: Service ID to map to
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of SNIs that match this Route when using stream routing.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteSourceArgs']]]] sources: A list of source `ip` and `port`
+        :param pulumi.Input[bool] strip_path: When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         """
         ...
     @overload
@@ -344,7 +515,70 @@ class Route(pulumi.CustomResource):
                  args: RouteArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Route resource with the given unique name, props, and options.
+        ## # Route
+
+        The route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).
+
+        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=[
+                "http",
+                "https",
+            ],
+            methods=[
+                "GET",
+                "POST",
+            ],
+            hosts=["example2.com"],
+            paths=["/test"],
+            strip_path=False,
+            preserve_host=True,
+            regex_priority=1,
+            service_id=kong_service["service"]["id"])
+        ```
+
+        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=["tcp"],
+            strip_path=True,
+            preserve_host=False,
+            sources=[
+                kong.RouteSourceArgs(
+                    ip="192.168.1.1",
+                    port=80,
+                ),
+                kong.RouteSourceArgs(
+                    ip="192.168.1.2",
+                ),
+            ],
+            destinations=[kong.RouteDestinationArgs(
+                ip="172.10.1.1",
+                port=81,
+            )],
+            snis=["foo.com"],
+            service_id=kong_service["service"]["id"])
+        ```
+
+        ## Import
+
+        To import a route
+
+        ```sh
+         $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param RouteArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -429,6 +663,18 @@ class Route(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteDestinationArgs']]]] destinations: A list of destination `ip` and `port`
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: A list of domain names that match this Route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: A list of HTTP methods that match this Route
+        :param pulumi.Input[str] name: The name of the route
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: A list of paths that match this Route
+        :param pulumi.Input[bool] preserve_host: When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: The list of protocols to use
+        :param pulumi.Input[int] regex_priority: A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        :param pulumi.Input[str] service_id: Service ID to map to
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of SNIs that match this Route when using stream routing.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RouteSourceArgs']]]] sources: A list of source `ip` and `port`
+        :param pulumi.Input[bool] strip_path: When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -451,60 +697,96 @@ class Route(pulumi.CustomResource):
     @property
     @pulumi.getter
     def destinations(self) -> pulumi.Output[Optional[Sequence['outputs.RouteDestination']]]:
+        """
+        A list of destination `ip` and `port`
+        """
         return pulumi.get(self, "destinations")
 
     @property
     @pulumi.getter
     def hosts(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of domain names that match this Route
+        """
         return pulumi.get(self, "hosts")
 
     @property
     @pulumi.getter
     def methods(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of HTTP methods that match this Route
+        """
         return pulumi.get(self, "methods")
 
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
+        """
+        The name of the route
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of paths that match this Route
+        """
         return pulumi.get(self, "paths")
 
     @property
     @pulumi.getter(name="preserveHost")
     def preserve_host(self) -> pulumi.Output[Optional[bool]]:
+        """
+        When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        """
         return pulumi.get(self, "preserve_host")
 
     @property
     @pulumi.getter
     def protocols(self) -> pulumi.Output[Sequence[str]]:
+        """
+        The list of protocols to use
+        """
         return pulumi.get(self, "protocols")
 
     @property
     @pulumi.getter(name="regexPriority")
     def regex_priority(self) -> pulumi.Output[Optional[int]]:
+        """
+        A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        """
         return pulumi.get(self, "regex_priority")
 
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Output[str]:
+        """
+        Service ID to map to
+        """
         return pulumi.get(self, "service_id")
 
     @property
     @pulumi.getter
     def snis(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of SNIs that match this Route when using stream routing.
+        """
         return pulumi.get(self, "snis")
 
     @property
     @pulumi.getter
     def sources(self) -> pulumi.Output[Optional[Sequence['outputs.RouteSource']]]:
+        """
+        A list of source `ip` and `port`
+        """
         return pulumi.get(self, "sources")
 
     @property
     @pulumi.getter(name="stripPath")
     def strip_path(self) -> pulumi.Output[Optional[bool]]:
+        """
+        When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+        """
         return pulumi.get(self, "strip_path")
 

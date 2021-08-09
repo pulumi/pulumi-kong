@@ -13,41 +13,12 @@ __all__ = ['ConsumerArgs', 'Consumer']
 @pulumi.input_type
 class ConsumerArgs:
     def __init__(__self__, *,
-                 username: pulumi.Input[str],
-                 custom_id: Optional[pulumi.Input[str]] = None):
-        """
-        The set of arguments for constructing a Consumer resource.
-        """
-        pulumi.set(__self__, "username", username)
-        if custom_id is not None:
-            pulumi.set(__self__, "custom_id", custom_id)
-
-    @property
-    @pulumi.getter
-    def username(self) -> pulumi.Input[str]:
-        return pulumi.get(self, "username")
-
-    @username.setter
-    def username(self, value: pulumi.Input[str]):
-        pulumi.set(self, "username", value)
-
-    @property
-    @pulumi.getter(name="customId")
-    def custom_id(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "custom_id")
-
-    @custom_id.setter
-    def custom_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "custom_id", value)
-
-
-@pulumi.input_type
-class _ConsumerState:
-    def __init__(__self__, *,
                  custom_id: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering Consumer resources.
+        The set of arguments for constructing a Consumer resource.
+        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
         if custom_id is not None:
             pulumi.set(__self__, "custom_id", custom_id)
@@ -57,6 +28,9 @@ class _ConsumerState:
     @property
     @pulumi.getter(name="customId")
     def custom_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        A custom id for the consumer, you must set either the username or custom_id
+        """
         return pulumi.get(self, "custom_id")
 
     @custom_id.setter
@@ -66,6 +40,49 @@ class _ConsumerState:
     @property
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
+        """
+        The username to use, you must set either the username or custom_id
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "username", value)
+
+
+@pulumi.input_type
+class _ConsumerState:
+    def __init__(__self__, *,
+                 custom_id: Optional[pulumi.Input[str]] = None,
+                 username: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Consumer resources.
+        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
+        """
+        if custom_id is not None:
+            pulumi.set(__self__, "custom_id", custom_id)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter(name="customId")
+    def custom_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        A custom id for the consumer, you must set either the username or custom_id
+        """
+        return pulumi.get(self, "custom_id")
+
+    @custom_id.setter
+    def custom_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "custom_id", value)
+
+    @property
+    @pulumi.getter
+    def username(self) -> Optional[pulumi.Input[str]]:
+        """
+        The username to use, you must set either the username or custom_id
+        """
         return pulumi.get(self, "username")
 
     @username.setter
@@ -82,18 +99,64 @@ class Consumer(pulumi.CustomResource):
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Consumer resource with the given unique name, props, and options.
+        ## # Consumer
+
+        The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        consumer = kong.Consumer("consumer",
+            custom_id="123",
+            username="User1")
+        ```
+
+        ## Import
+
+        To import a consumer
+
+        ```sh
+         $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ConsumerArgs,
+                 args: Optional[ConsumerArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Consumer resource with the given unique name, props, and options.
+        ## # Consumer
+
+        The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        consumer = kong.Consumer("consumer",
+            custom_id="123",
+            username="User1")
+        ```
+
+        ## Import
+
+        To import a consumer
+
+        ```sh
+         $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param ConsumerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -124,8 +187,6 @@ class Consumer(pulumi.CustomResource):
             __props__ = ConsumerArgs.__new__(ConsumerArgs)
 
             __props__.__dict__["custom_id"] = custom_id
-            if username is None and not opts.urn:
-                raise TypeError("Missing required property 'username'")
             __props__.__dict__["username"] = username
         super(Consumer, __self__).__init__(
             'kong:index/consumer:Consumer',
@@ -146,6 +207,8 @@ class Consumer(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -158,10 +221,16 @@ class Consumer(pulumi.CustomResource):
     @property
     @pulumi.getter(name="customId")
     def custom_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        A custom id for the consumer, you must set either the username or custom_id
+        """
         return pulumi.get(self, "custom_id")
 
     @property
     @pulumi.getter
-    def username(self) -> pulumi.Output[str]:
+    def username(self) -> pulumi.Output[Optional[str]]:
+        """
+        The username to use, you must set either the username or custom_id
+        """
         return pulumi.get(self, "username")
 

@@ -9,14 +9,53 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    /// <summary>
+    /// ## # kong.Consumer
+    /// 
+    /// The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var consumer = new Kong.Consumer("consumer", new Kong.ConsumerArgs
+    ///         {
+    ///             CustomId = "123",
+    ///             Username = "User1",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// To import a consumer
+    /// 
+    /// ```sh
+    ///  $ pulumi import kong:index/consumer:Consumer &lt;consumer_identifier&gt; &lt;consumer_id&gt;
+    /// ```
+    /// </summary>
     [KongResourceType("kong:index/consumer:Consumer")]
     public partial class Consumer : Pulumi.CustomResource
     {
+        /// <summary>
+        /// A custom id for the consumer, you must set either the username or custom_id
+        /// </summary>
         [Output("customId")]
         public Output<string?> CustomId { get; private set; } = null!;
 
+        /// <summary>
+        /// The username to use, you must set either the username or custom_id
+        /// </summary>
         [Output("username")]
-        public Output<string> Username { get; private set; } = null!;
+        public Output<string?> Username { get; private set; } = null!;
 
 
         /// <summary>
@@ -26,7 +65,7 @@ namespace Pulumi.Kong
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Consumer(string name, ConsumerArgs args, CustomResourceOptions? options = null)
+        public Consumer(string name, ConsumerArgs? args = null, CustomResourceOptions? options = null)
             : base("kong:index/consumer:Consumer", name, args ?? new ConsumerArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -64,11 +103,17 @@ namespace Pulumi.Kong
 
     public sealed class ConsumerArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A custom id for the consumer, you must set either the username or custom_id
+        /// </summary>
         [Input("customId")]
         public Input<string>? CustomId { get; set; }
 
-        [Input("username", required: true)]
-        public Input<string> Username { get; set; } = null!;
+        /// <summary>
+        /// The username to use, you must set either the username or custom_id
+        /// </summary>
+        [Input("username")]
+        public Input<string>? Username { get; set; }
 
         public ConsumerArgs()
         {
@@ -77,9 +122,15 @@ namespace Pulumi.Kong
 
     public sealed class ConsumerState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A custom id for the consumer, you must set either the username or custom_id
+        /// </summary>
         [Input("customId")]
         public Input<string>? CustomId { get; set; }
 
+        /// <summary>
+        /// The username to use, you must set either the username or custom_id
+        /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 

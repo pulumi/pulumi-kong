@@ -7,27 +7,60 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## # Consumer
+//
+// The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := kong.NewConsumer(ctx, "consumer", &kong.ConsumerArgs{
+// 			CustomId: pulumi.String("123"),
+// 			Username: pulumi.String("User1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// To import a consumer
+//
+// ```sh
+//  $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+// ```
 type Consumer struct {
 	pulumi.CustomResourceState
 
+	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrOutput `pulumi:"customId"`
-	Username pulumi.StringOutput    `pulumi:"username"`
+	// The username to use, you must set either the username or custom_id
+	Username pulumi.StringPtrOutput `pulumi:"username"`
 }
 
 // NewConsumer registers a new resource with the given unique name, arguments, and options.
 func NewConsumer(ctx *pulumi.Context,
 	name string, args *ConsumerArgs, opts ...pulumi.ResourceOption) (*Consumer, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ConsumerArgs{}
 	}
 
-	if args.Username == nil {
-		return nil, errors.New("invalid value for required argument 'Username'")
-	}
 	var resource Consumer
 	err := ctx.RegisterResource("kong:index/consumer:Consumer", name, args, &resource, opts...)
 	if err != nil {
@@ -50,12 +83,16 @@ func GetConsumer(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Consumer resources.
 type consumerState struct {
+	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId *string `pulumi:"customId"`
+	// The username to use, you must set either the username or custom_id
 	Username *string `pulumi:"username"`
 }
 
 type ConsumerState struct {
+	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrInput
+	// The username to use, you must set either the username or custom_id
 	Username pulumi.StringPtrInput
 }
 
@@ -64,14 +101,18 @@ func (ConsumerState) ElementType() reflect.Type {
 }
 
 type consumerArgs struct {
+	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId *string `pulumi:"customId"`
-	Username string  `pulumi:"username"`
+	// The username to use, you must set either the username or custom_id
+	Username *string `pulumi:"username"`
 }
 
 // The set of arguments for constructing a Consumer resource.
 type ConsumerArgs struct {
+	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrInput
-	Username pulumi.StringInput
+	// The username to use, you must set either the username or custom_id
+	Username pulumi.StringPtrInput
 }
 
 func (ConsumerArgs) ElementType() reflect.Type {

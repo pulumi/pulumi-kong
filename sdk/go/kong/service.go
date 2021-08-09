@@ -11,6 +11,63 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## # Service
+//
+// The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
+// 			ConnectTimeout: pulumi.Int(1000),
+// 			Host:           pulumi.String("test.org"),
+// 			Path:           pulumi.String("/mypath"),
+// 			Port:           pulumi.Int(8080),
+// 			Protocol:       pulumi.String("http"),
+// 			ReadTimeout:    pulumi.Int(3000),
+// 			Retries:        pulumi.Int(5),
+// 			WriteTimeout:   pulumi.Int(2000),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ## Argument reference
+//
+// * `name` - (Required) Service name
+// * `protocol` - (Required) Protocol to use
+// * `host` - (Optional) Host to map to
+// * `port` - (Optional, int) Port to map to. Default: 80
+// * `path` - (Optional) Path to map to
+// * `retries` - (Optional, int) Number of retries. Default: 5
+// * `connectTimeout` - (Optional, int) Connection timeout. Default(ms): 60000
+// * `writeTimeout` - (Optional, int) Write timout. Default(ms): 60000
+// * `readTimeout` - (Optional, int) Read timeout. Default(ms): 60000
+// * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
+// * `clientCertificate` - (Optional) Certificate to be used as client certificate while TLS handshaking to the upstream server.
+// * `tlsVerify` - (Optional) Whether to enable verification of upstream server TLS certificate.
+// * `tlsVerifyDepth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
+// * `caCertificates` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+//
+// ## Import
+//
+// To import a service
+//
+// ```sh
+//  $ pulumi import kong:index/service:Service <service_identifier> <service_id>
+// ```
 type Service struct {
 	pulumi.CustomResourceState
 

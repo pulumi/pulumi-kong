@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const target = new kong.Target("target", {
+ *     target: "sample_target:80",
+ *     upstreamId: kong_upstream_upstream.id,
+ *     weight: 10,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * To import a target use a combination of the upstream id and the target id as follows
+ *
+ * ```sh
+ *  $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
+ * ```
+ */
 export class Target extends pulumi.CustomResource {
     /**
      * Get an existing Target resource's state with the given name, ID, and optional extra
@@ -32,8 +54,17 @@ export class Target extends pulumi.CustomResource {
         return obj['__pulumiType'] === Target.__pulumiType;
     }
 
+    /**
+     * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+     */
     public readonly target!: pulumi.Output<string>;
+    /**
+     * is the id of the upstream to apply this target to.
+     */
     public readonly upstreamId!: pulumi.Output<string>;
+    /**
+     * is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+     */
     public readonly weight!: pulumi.Output<number>;
 
     /**
@@ -78,8 +109,17 @@ export class Target extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Target resources.
  */
 export interface TargetState {
+    /**
+     * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+     */
     readonly target?: pulumi.Input<string>;
+    /**
+     * is the id of the upstream to apply this target to.
+     */
     readonly upstreamId?: pulumi.Input<string>;
+    /**
+     * is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+     */
     readonly weight?: pulumi.Input<number>;
 }
 
@@ -87,7 +127,16 @@ export interface TargetState {
  * The set of arguments for constructing a Target resource.
  */
 export interface TargetArgs {
+    /**
+     * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+     */
     readonly target: pulumi.Input<string>;
+    /**
+     * is the id of the upstream to apply this target to.
+     */
     readonly upstreamId: pulumi.Input<string>;
+    /**
+     * is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+     */
     readonly weight: pulumi.Input<number>;
 }

@@ -4,6 +4,104 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## # kong.Plugin
+ *
+ * The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
+ * The `configJson` is passed through to the plugin to configure it as is.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     configJson: `	{
+ * 		"second": 5,
+ * 		"hour" : 1000
+ * 	}
+ * `,
+ * });
+ * ```
+ * To apply a plugin to a consumer use the `consumerId` property, for example:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const pluginConsumer = new kong.Consumer("plugin_consumer", {
+ *     customId: "567",
+ *     username: "PluginUser",
+ * });
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     configJson: `	{
+ * 		"second": 5,
+ * 		"hour" : 1000
+ * 	}
+ * `,
+ *     consumerId: pluginConsumer.id,
+ * });
+ * ```
+ *
+ * To apply a plugin to a service use the `serviceId` property, for example:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const service = new kong.Service("service", {
+ *     host: "test.org",
+ *     protocol: "http",
+ * });
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     configJson: `	{
+ * 		"second": 10,
+ * 		"hour" : 2000
+ * 	}
+ * `,
+ *     serviceId: service.id,
+ * });
+ * ```
+ *
+ * To apply a plugin to a route use the `routeId` property, for example:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const service = new kong.Service("service", {
+ *     host: "test.org",
+ *     protocol: "http",
+ * });
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     configJson: `	{
+ * 		"second": 11,
+ * 		"hour" : 4000
+ * 	}
+ * `,
+ *     enabled: true,
+ *     serviceId: service.id,
+ * });
+ * ```
+ * ## Argument reference
+ *
+ * `pluginName` - (Required) the name of the plugin you want to configure
+ * `consumerId` - (Optional) the consumer id you want to configure the plugin for
+ * `serviceId`  - (Optional) the service id that you want to configure the plugin for
+ * `routeId` - (Optional) the route id that you want to configure the plugin for
+ * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+ * `configJson` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+ * page of the plugin you are configuring
+ *
+ * ## Import
+ *
+ * To import a plugin
+ *
+ * ```sh
+ *  $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+ * ```
+ */
 export class Plugin extends pulumi.CustomResource {
     /**
      * Get an existing Plugin resource's state with the given name, ID, and optional extra

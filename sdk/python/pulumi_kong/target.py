@@ -18,6 +18,9 @@ class TargetArgs:
                  weight: pulumi.Input[int]):
         """
         The set of arguments for constructing a Target resource.
+        :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
+        :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
         """
         pulumi.set(__self__, "target", target)
         pulumi.set(__self__, "upstream_id", upstream_id)
@@ -26,6 +29,9 @@ class TargetArgs:
     @property
     @pulumi.getter
     def target(self) -> pulumi.Input[str]:
+        """
+        is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        """
         return pulumi.get(self, "target")
 
     @target.setter
@@ -35,6 +41,9 @@ class TargetArgs:
     @property
     @pulumi.getter(name="upstreamId")
     def upstream_id(self) -> pulumi.Input[str]:
+        """
+        is the id of the upstream to apply this target to.
+        """
         return pulumi.get(self, "upstream_id")
 
     @upstream_id.setter
@@ -44,6 +53,9 @@ class TargetArgs:
     @property
     @pulumi.getter
     def weight(self) -> pulumi.Input[int]:
+        """
+        is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter
@@ -59,6 +71,9 @@ class _TargetState:
                  weight: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Target resources.
+        :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
+        :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
         """
         if target is not None:
             pulumi.set(__self__, "target", target)
@@ -70,6 +85,9 @@ class _TargetState:
     @property
     @pulumi.getter
     def target(self) -> Optional[pulumi.Input[str]]:
+        """
+        is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        """
         return pulumi.get(self, "target")
 
     @target.setter
@@ -79,6 +97,9 @@ class _TargetState:
     @property
     @pulumi.getter(name="upstreamId")
     def upstream_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        is the id of the upstream to apply this target to.
+        """
         return pulumi.get(self, "upstream_id")
 
     @upstream_id.setter
@@ -88,6 +109,9 @@ class _TargetState:
     @property
     @pulumi.getter
     def weight(self) -> Optional[pulumi.Input[int]]:
+        """
+        is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter
@@ -105,9 +129,31 @@ class Target(pulumi.CustomResource):
                  weight: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a Target resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        target = kong.Target("target",
+            target="sample_target:80",
+            upstream_id=kong_upstream["upstream"]["id"],
+            weight=10)
+        ```
+
+        ## Import
+
+        To import a target use a combination of the upstream id and the target id as follows
+
+        ```sh
+         $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
+        :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
         """
         ...
     @overload
@@ -116,7 +162,26 @@ class Target(pulumi.CustomResource):
                  args: TargetArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Target resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        target = kong.Target("target",
+            target="sample_target:80",
+            upstream_id=kong_upstream["upstream"]["id"],
+            weight=10)
+        ```
+
+        ## Import
+
+        To import a target use a combination of the upstream id and the target id as follows
+
+        ```sh
+         $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param TargetArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -176,6 +241,9 @@ class Target(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
+        :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -189,15 +257,24 @@ class Target(pulumi.CustomResource):
     @property
     @pulumi.getter
     def target(self) -> pulumi.Output[str]:
+        """
+        is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        """
         return pulumi.get(self, "target")
 
     @property
     @pulumi.getter(name="upstreamId")
     def upstream_id(self) -> pulumi.Output[str]:
+        """
+        is the id of the upstream to apply this target to.
+        """
         return pulumi.get(self, "upstream_id")
 
     @property
     @pulumi.getter
     def weight(self) -> pulumi.Output[int]:
+        """
+        is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+        """
         return pulumi.get(self, "weight")
 

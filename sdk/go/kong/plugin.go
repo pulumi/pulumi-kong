@@ -10,6 +10,151 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## # Plugin
+//
+// The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
+// The `configJson` is passed through to the plugin to configure it as is.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// To apply a plugin to a consumer use the `consumerId` property, for example:
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		pluginConsumer, err := kong.NewConsumer(ctx, "pluginConsumer", &kong.ConsumerArgs{
+// 			CustomId: pulumi.String("567"),
+// 			Username: pulumi.String("PluginUser"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
+// 			ConsumerId: pluginConsumer.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// To apply a plugin to a service use the `serviceId` property, for example:
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
+// 			Host:     pulumi.String("test.org"),
+// 			Protocol: pulumi.String("http"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 10,\n", "		\"hour\" : 2000\n", "	}\n", "\n")),
+// 			ServiceId: service.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// To apply a plugin to a route use the `routeId` property, for example:
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
+// 			Host:     pulumi.String("test.org"),
+// 			Protocol: pulumi.String("http"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 11,\n", "		\"hour\" : 4000\n", "	}\n", "\n")),
+// 			Enabled:   pulumi.Bool(true),
+// 			ServiceId: service.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ## Argument reference
+//
+// `pluginName` - (Required) the name of the plugin you want to configure
+// `consumerId` - (Optional) the consumer id you want to configure the plugin for
+// `serviceId`  - (Optional) the service id that you want to configure the plugin for
+// `routeId` - (Optional) the route id that you want to configure the plugin for
+// `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+// `configJson` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+// page of the plugin you are configuring
+//
+// ## Import
+//
+// To import a plugin
+//
+// ```sh
+//  $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+// ```
 type Plugin struct {
 	pulumi.CustomResourceState
 

@@ -45,6 +45,7 @@ export class Provider extends pulumi.ProviderResource {
             inputs["kongAdminUri"] = args ? args.kongAdminUri : undefined;
             inputs["kongAdminUsername"] = args ? args.kongAdminUsername : undefined;
             inputs["kongApiKey"] = args ? args.kongApiKey : undefined;
+            inputs["kongWorkspace"] = args ? args.kongWorkspace : undefined;
             inputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) ?? <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
             inputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) ?? (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
         }
@@ -79,6 +80,10 @@ export interface ProviderArgs {
      * API key for the kong api (if you have locked it down)
      */
     readonly kongApiKey?: pulumi.Input<string>;
+    /**
+     * Workspace context (Enterprise Edition)
+     */
+    readonly kongWorkspace?: pulumi.Input<string>;
     /**
      * Should plugins `config_json` field strictly match plugin configuration
      */

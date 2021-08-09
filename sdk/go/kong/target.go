@@ -11,12 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := kong.NewTarget(ctx, "target", &kong.TargetArgs{
+// 			Target:     pulumi.String("sample_target:80"),
+// 			UpstreamId: pulumi.Any(kong_upstream.Upstream.Id),
+// 			Weight:     pulumi.Int(10),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// To import a target use a combination of the upstream id and the target id as follows
+//
+// ```sh
+//  $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
+// ```
 type Target struct {
 	pulumi.CustomResourceState
 
-	Target     pulumi.StringOutput `pulumi:"target"`
+	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+	Target pulumi.StringOutput `pulumi:"target"`
+	// is the id of the upstream to apply this target to.
 	UpstreamId pulumi.StringOutput `pulumi:"upstreamId"`
-	Weight     pulumi.IntOutput    `pulumi:"weight"`
+	// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+	Weight pulumi.IntOutput `pulumi:"weight"`
 }
 
 // NewTarget registers a new resource with the given unique name, arguments, and options.
@@ -57,15 +92,21 @@ func GetTarget(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Target resources.
 type targetState struct {
-	Target     *string `pulumi:"target"`
+	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+	Target *string `pulumi:"target"`
+	// is the id of the upstream to apply this target to.
 	UpstreamId *string `pulumi:"upstreamId"`
-	Weight     *int    `pulumi:"weight"`
+	// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+	Weight *int `pulumi:"weight"`
 }
 
 type TargetState struct {
-	Target     pulumi.StringPtrInput
+	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+	Target pulumi.StringPtrInput
+	// is the id of the upstream to apply this target to.
 	UpstreamId pulumi.StringPtrInput
-	Weight     pulumi.IntPtrInput
+	// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+	Weight pulumi.IntPtrInput
 }
 
 func (TargetState) ElementType() reflect.Type {
@@ -73,16 +114,22 @@ func (TargetState) ElementType() reflect.Type {
 }
 
 type targetArgs struct {
-	Target     string `pulumi:"target"`
+	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+	Target string `pulumi:"target"`
+	// is the id of the upstream to apply this target to.
 	UpstreamId string `pulumi:"upstreamId"`
-	Weight     int    `pulumi:"weight"`
+	// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+	Weight int `pulumi:"weight"`
 }
 
 // The set of arguments for constructing a Target resource.
 type TargetArgs struct {
-	Target     pulumi.StringInput
+	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+	Target pulumi.StringInput
+	// is the id of the upstream to apply this target to.
 	UpstreamId pulumi.StringInput
-	Weight     pulumi.IntInput
+	// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+	Weight pulumi.IntInput
 }
 
 func (TargetArgs) ElementType() reflect.Type {

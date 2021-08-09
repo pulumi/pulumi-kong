@@ -11,21 +11,132 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## # Route
+//
+// The route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).
+//
+// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
+// 			Protocols: pulumi.StringArray{
+// 				pulumi.String("http"),
+// 				pulumi.String("https"),
+// 			},
+// 			Methods: pulumi.StringArray{
+// 				pulumi.String("GET"),
+// 				pulumi.String("POST"),
+// 			},
+// 			Hosts: pulumi.StringArray{
+// 				pulumi.String("example2.com"),
+// 			},
+// 			Paths: pulumi.StringArray{
+// 				pulumi.String("/test"),
+// 			},
+// 			StripPath:     pulumi.Bool(false),
+// 			PreserveHost:  pulumi.Bool(true),
+// 			RegexPriority: pulumi.Int(1),
+// 			ServiceId:     pulumi.Any(kong_service.Service.Id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
+// 			Protocols: pulumi.StringArray{
+// 				pulumi.String("tcp"),
+// 			},
+// 			StripPath:    pulumi.Bool(true),
+// 			PreserveHost: pulumi.Bool(false),
+// 			Sources: kong.RouteSourceArray{
+// 				&kong.RouteSourceArgs{
+// 					Ip:   pulumi.String("192.168.1.1"),
+// 					Port: pulumi.Int(80),
+// 				},
+// 				&kong.RouteSourceArgs{
+// 					Ip: pulumi.String("192.168.1.2"),
+// 				},
+// 			},
+// 			Destinations: kong.RouteDestinationArray{
+// 				&kong.RouteDestinationArgs{
+// 					Ip:   pulumi.String("172.10.1.1"),
+// 					Port: pulumi.Int(81),
+// 				},
+// 			},
+// 			Snis: pulumi.StringArray{
+// 				pulumi.String("foo.com"),
+// 			},
+// 			ServiceId: pulumi.Any(kong_service.Service.Id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// To import a route
+//
+// ```sh
+//  $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+// ```
 type Route struct {
 	pulumi.CustomResourceState
 
-	Destinations  RouteDestinationArrayOutput `pulumi:"destinations"`
-	Hosts         pulumi.StringArrayOutput    `pulumi:"hosts"`
-	Methods       pulumi.StringArrayOutput    `pulumi:"methods"`
-	Name          pulumi.StringOutput         `pulumi:"name"`
-	Paths         pulumi.StringArrayOutput    `pulumi:"paths"`
-	PreserveHost  pulumi.BoolPtrOutput        `pulumi:"preserveHost"`
-	Protocols     pulumi.StringArrayOutput    `pulumi:"protocols"`
-	RegexPriority pulumi.IntPtrOutput         `pulumi:"regexPriority"`
-	ServiceId     pulumi.StringOutput         `pulumi:"serviceId"`
-	Snis          pulumi.StringArrayOutput    `pulumi:"snis"`
-	Sources       RouteSourceArrayOutput      `pulumi:"sources"`
-	StripPath     pulumi.BoolPtrOutput        `pulumi:"stripPath"`
+	// A list of destination `ip` and `port`
+	Destinations RouteDestinationArrayOutput `pulumi:"destinations"`
+	// A list of domain names that match this Route
+	Hosts pulumi.StringArrayOutput `pulumi:"hosts"`
+	// A list of HTTP methods that match this Route
+	Methods pulumi.StringArrayOutput `pulumi:"methods"`
+	// The name of the route
+	Name pulumi.StringOutput `pulumi:"name"`
+	// A list of paths that match this Route
+	Paths pulumi.StringArrayOutput `pulumi:"paths"`
+	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+	PreserveHost pulumi.BoolPtrOutput `pulumi:"preserveHost"`
+	// The list of protocols to use
+	Protocols pulumi.StringArrayOutput `pulumi:"protocols"`
+	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+	RegexPriority pulumi.IntPtrOutput `pulumi:"regexPriority"`
+	// Service ID to map to
+	ServiceId pulumi.StringOutput `pulumi:"serviceId"`
+	// A list of SNIs that match this Route when using stream routing.
+	Snis pulumi.StringArrayOutput `pulumi:"snis"`
+	// A list of source `ip` and `port`
+	Sources RouteSourceArrayOutput `pulumi:"sources"`
+	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+	StripPath pulumi.BoolPtrOutput `pulumi:"stripPath"`
 }
 
 // NewRoute registers a new resource with the given unique name, arguments, and options.
@@ -63,33 +174,57 @@ func GetRoute(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Route resources.
 type routeState struct {
-	Destinations  []RouteDestination `pulumi:"destinations"`
-	Hosts         []string           `pulumi:"hosts"`
-	Methods       []string           `pulumi:"methods"`
-	Name          *string            `pulumi:"name"`
-	Paths         []string           `pulumi:"paths"`
-	PreserveHost  *bool              `pulumi:"preserveHost"`
-	Protocols     []string           `pulumi:"protocols"`
-	RegexPriority *int               `pulumi:"regexPriority"`
-	ServiceId     *string            `pulumi:"serviceId"`
-	Snis          []string           `pulumi:"snis"`
-	Sources       []RouteSource      `pulumi:"sources"`
-	StripPath     *bool              `pulumi:"stripPath"`
+	// A list of destination `ip` and `port`
+	Destinations []RouteDestination `pulumi:"destinations"`
+	// A list of domain names that match this Route
+	Hosts []string `pulumi:"hosts"`
+	// A list of HTTP methods that match this Route
+	Methods []string `pulumi:"methods"`
+	// The name of the route
+	Name *string `pulumi:"name"`
+	// A list of paths that match this Route
+	Paths []string `pulumi:"paths"`
+	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+	PreserveHost *bool `pulumi:"preserveHost"`
+	// The list of protocols to use
+	Protocols []string `pulumi:"protocols"`
+	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+	RegexPriority *int `pulumi:"regexPriority"`
+	// Service ID to map to
+	ServiceId *string `pulumi:"serviceId"`
+	// A list of SNIs that match this Route when using stream routing.
+	Snis []string `pulumi:"snis"`
+	// A list of source `ip` and `port`
+	Sources []RouteSource `pulumi:"sources"`
+	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+	StripPath *bool `pulumi:"stripPath"`
 }
 
 type RouteState struct {
-	Destinations  RouteDestinationArrayInput
-	Hosts         pulumi.StringArrayInput
-	Methods       pulumi.StringArrayInput
-	Name          pulumi.StringPtrInput
-	Paths         pulumi.StringArrayInput
-	PreserveHost  pulumi.BoolPtrInput
-	Protocols     pulumi.StringArrayInput
+	// A list of destination `ip` and `port`
+	Destinations RouteDestinationArrayInput
+	// A list of domain names that match this Route
+	Hosts pulumi.StringArrayInput
+	// A list of HTTP methods that match this Route
+	Methods pulumi.StringArrayInput
+	// The name of the route
+	Name pulumi.StringPtrInput
+	// A list of paths that match this Route
+	Paths pulumi.StringArrayInput
+	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+	PreserveHost pulumi.BoolPtrInput
+	// The list of protocols to use
+	Protocols pulumi.StringArrayInput
+	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
 	RegexPriority pulumi.IntPtrInput
-	ServiceId     pulumi.StringPtrInput
-	Snis          pulumi.StringArrayInput
-	Sources       RouteSourceArrayInput
-	StripPath     pulumi.BoolPtrInput
+	// Service ID to map to
+	ServiceId pulumi.StringPtrInput
+	// A list of SNIs that match this Route when using stream routing.
+	Snis pulumi.StringArrayInput
+	// A list of source `ip` and `port`
+	Sources RouteSourceArrayInput
+	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+	StripPath pulumi.BoolPtrInput
 }
 
 func (RouteState) ElementType() reflect.Type {
@@ -97,34 +232,58 @@ func (RouteState) ElementType() reflect.Type {
 }
 
 type routeArgs struct {
-	Destinations  []RouteDestination `pulumi:"destinations"`
-	Hosts         []string           `pulumi:"hosts"`
-	Methods       []string           `pulumi:"methods"`
-	Name          *string            `pulumi:"name"`
-	Paths         []string           `pulumi:"paths"`
-	PreserveHost  *bool              `pulumi:"preserveHost"`
-	Protocols     []string           `pulumi:"protocols"`
-	RegexPriority *int               `pulumi:"regexPriority"`
-	ServiceId     string             `pulumi:"serviceId"`
-	Snis          []string           `pulumi:"snis"`
-	Sources       []RouteSource      `pulumi:"sources"`
-	StripPath     *bool              `pulumi:"stripPath"`
+	// A list of destination `ip` and `port`
+	Destinations []RouteDestination `pulumi:"destinations"`
+	// A list of domain names that match this Route
+	Hosts []string `pulumi:"hosts"`
+	// A list of HTTP methods that match this Route
+	Methods []string `pulumi:"methods"`
+	// The name of the route
+	Name *string `pulumi:"name"`
+	// A list of paths that match this Route
+	Paths []string `pulumi:"paths"`
+	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+	PreserveHost *bool `pulumi:"preserveHost"`
+	// The list of protocols to use
+	Protocols []string `pulumi:"protocols"`
+	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+	RegexPriority *int `pulumi:"regexPriority"`
+	// Service ID to map to
+	ServiceId string `pulumi:"serviceId"`
+	// A list of SNIs that match this Route when using stream routing.
+	Snis []string `pulumi:"snis"`
+	// A list of source `ip` and `port`
+	Sources []RouteSource `pulumi:"sources"`
+	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+	StripPath *bool `pulumi:"stripPath"`
 }
 
 // The set of arguments for constructing a Route resource.
 type RouteArgs struct {
-	Destinations  RouteDestinationArrayInput
-	Hosts         pulumi.StringArrayInput
-	Methods       pulumi.StringArrayInput
-	Name          pulumi.StringPtrInput
-	Paths         pulumi.StringArrayInput
-	PreserveHost  pulumi.BoolPtrInput
-	Protocols     pulumi.StringArrayInput
+	// A list of destination `ip` and `port`
+	Destinations RouteDestinationArrayInput
+	// A list of domain names that match this Route
+	Hosts pulumi.StringArrayInput
+	// A list of HTTP methods that match this Route
+	Methods pulumi.StringArrayInput
+	// The name of the route
+	Name pulumi.StringPtrInput
+	// A list of paths that match this Route
+	Paths pulumi.StringArrayInput
+	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+	PreserveHost pulumi.BoolPtrInput
+	// The list of protocols to use
+	Protocols pulumi.StringArrayInput
+	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
 	RegexPriority pulumi.IntPtrInput
-	ServiceId     pulumi.StringInput
-	Snis          pulumi.StringArrayInput
-	Sources       RouteSourceArrayInput
-	StripPath     pulumi.BoolPtrInput
+	// Service ID to map to
+	ServiceId pulumi.StringInput
+	// A list of SNIs that match this Route when using stream routing.
+	Snis pulumi.StringArrayInput
+	// A list of source `ip` and `port`
+	Sources RouteSourceArrayInput
+	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+	StripPath pulumi.BoolPtrInput
 }
 
 func (RouteArgs) ElementType() reflect.Type {

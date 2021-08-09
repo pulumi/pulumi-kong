@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## # kong.Certificate
+ *
+ * For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const certificate = new kong.Certificate("certificate", {
+ *     certificate: "public key --- 123 ----",
+ *     privateKey: "private key --- 456 ----",
+ *     snis: [
+ *         "foo.com",
+ *         "bar.com",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * To import a certificate
+ *
+ * ```sh
+ *  $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
+ * ```
+ */
 export class Certificate extends pulumi.CustomResource {
     /**
      * Get an existing Certificate resource's state with the given name, ID, and optional extra
@@ -32,8 +61,18 @@ export class Certificate extends pulumi.CustomResource {
         return obj['__pulumiType'] === Certificate.__pulumiType;
     }
 
+    /**
+     * should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+     */
     public readonly certificate!: pulumi.Output<string>;
+    /**
+     * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+     */
     public readonly privateKey!: pulumi.Output<string | undefined>;
+    /**
+     * a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+     */
+    public readonly snis!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Certificate resource with the given unique name, arguments, and options.
@@ -50,6 +89,7 @@ export class Certificate extends pulumi.CustomResource {
             const state = argsOrState as CertificateState | undefined;
             inputs["certificate"] = state ? state.certificate : undefined;
             inputs["privateKey"] = state ? state.privateKey : undefined;
+            inputs["snis"] = state ? state.snis : undefined;
         } else {
             const args = argsOrState as CertificateArgs | undefined;
             if ((!args || args.certificate === undefined) && !opts.urn) {
@@ -57,6 +97,7 @@ export class Certificate extends pulumi.CustomResource {
             }
             inputs["certificate"] = args ? args.certificate : undefined;
             inputs["privateKey"] = args ? args.privateKey : undefined;
+            inputs["snis"] = args ? args.snis : undefined;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -69,14 +110,34 @@ export class Certificate extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Certificate resources.
  */
 export interface CertificateState {
+    /**
+     * should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+     */
     readonly certificate?: pulumi.Input<string>;
+    /**
+     * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+     */
     readonly privateKey?: pulumi.Input<string>;
+    /**
+     * a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+     */
+    readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
  * The set of arguments for constructing a Certificate resource.
  */
 export interface CertificateArgs {
+    /**
+     * should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+     */
     readonly certificate: pulumi.Input<string>;
+    /**
+     * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+     */
     readonly privateKey?: pulumi.Input<string>;
+    /**
+     * a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+     */
+    readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
 }

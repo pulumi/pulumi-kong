@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-kong/examples/v3
+module github.com/pulumi/pulumi-kong/examples/v4
 
 go 1.16
 

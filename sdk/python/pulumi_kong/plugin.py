@@ -228,7 +228,99 @@ class Plugin(pulumi.CustomResource):
                  strict_match: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a Plugin resource with the given unique name, props, and options.
+        ## # Plugin
+
+        The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
+        The `config_json` is passed through to the plugin to configure it as is.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"	{
+        		"second": 5,
+        		"hour" : 1000
+        	}
+
+        \"\"\")
+        ```
+        To apply a plugin to a consumer use the `consumer_id` property, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        plugin_consumer = kong.Consumer("pluginConsumer",
+            custom_id="567",
+            username="PluginUser")
+        rate_limit = kong.Plugin("rateLimit",
+            config_json=\"\"\"	{
+        		"second": 5,
+        		"hour" : 1000
+        	}
+
+        \"\"\",
+            consumer_id=plugin_consumer.id)
+        ```
+
+        To apply a plugin to a service use the `service_id` property, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        service = kong.Service("service",
+            host="test.org",
+            protocol="http")
+        rate_limit = kong.Plugin("rateLimit",
+            config_json=\"\"\"	{
+        		"second": 10,
+        		"hour" : 2000
+        	}
+
+        \"\"\",
+            service_id=service.id)
+        ```
+
+        To apply a plugin to a route use the `route_id` property, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        service = kong.Service("service",
+            host="test.org",
+            protocol="http")
+        rate_limit = kong.Plugin("rateLimit",
+            config_json=\"\"\"	{
+        		"second": 11,
+        		"hour" : 4000
+        	}
+
+        \"\"\",
+            enabled=True,
+            service_id=service.id)
+        ```
+        ## Argument reference
+
+        `plugin_name` - (Required) the name of the plugin you want to configure
+        `consumer_id` - (Optional) the consumer id you want to configure the plugin for
+        `service_id`  - (Optional) the service id that you want to configure the plugin for
+        `route_id` - (Optional) the route id that you want to configure the plugin for
+        `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        page of the plugin you are configuring
+
+        ## Import
+
+        To import a plugin
+
+        ```sh
+         $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
@@ -240,7 +332,99 @@ class Plugin(pulumi.CustomResource):
                  args: Optional[PluginArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Plugin resource with the given unique name, props, and options.
+        ## # Plugin
+
+        The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
+        The `config_json` is passed through to the plugin to configure it as is.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"	{
+        		"second": 5,
+        		"hour" : 1000
+        	}
+
+        \"\"\")
+        ```
+        To apply a plugin to a consumer use the `consumer_id` property, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        plugin_consumer = kong.Consumer("pluginConsumer",
+            custom_id="567",
+            username="PluginUser")
+        rate_limit = kong.Plugin("rateLimit",
+            config_json=\"\"\"	{
+        		"second": 5,
+        		"hour" : 1000
+        	}
+
+        \"\"\",
+            consumer_id=plugin_consumer.id)
+        ```
+
+        To apply a plugin to a service use the `service_id` property, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        service = kong.Service("service",
+            host="test.org",
+            protocol="http")
+        rate_limit = kong.Plugin("rateLimit",
+            config_json=\"\"\"	{
+        		"second": 10,
+        		"hour" : 2000
+        	}
+
+        \"\"\",
+            service_id=service.id)
+        ```
+
+        To apply a plugin to a route use the `route_id` property, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        service = kong.Service("service",
+            host="test.org",
+            protocol="http")
+        rate_limit = kong.Plugin("rateLimit",
+            config_json=\"\"\"	{
+        		"second": 11,
+        		"hour" : 4000
+        	}
+
+        \"\"\",
+            enabled=True,
+            service_id=service.id)
+        ```
+        ## Argument reference
+
+        `plugin_name` - (Required) the name of the plugin you want to configure
+        `consumer_id` - (Optional) the consumer id you want to configure the plugin for
+        `service_id`  - (Optional) the service id that you want to configure the plugin for
+        `route_id` - (Optional) the route id that you want to configure the plugin for
+        `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        page of the plugin you are configuring
+
+        ## Import
+
+        To import a plugin
+
+        ```sh
+         $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param PluginArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

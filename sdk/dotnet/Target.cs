@@ -9,15 +9,54 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var target = new Kong.Target("target", new Kong.TargetArgs
+    ///         {
+    ///             Target = "sample_target:80",
+    ///             UpstreamId = kong_upstream.Upstream.Id,
+    ///             Weight = 10,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// To import a target use a combination of the upstream id and the target id as follows
+    /// 
+    /// ```sh
+    ///  $ pulumi import kong:index/target:Target &lt;target_identifier&gt; &lt;upstream_id&gt;/&lt;target_id&gt;
+    /// ```
+    /// </summary>
     [KongResourceType("kong:index/target:Target")]
     public partial class Target : Pulumi.CustomResource
     {
+        /// <summary>
+        /// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        /// </summary>
         [Output("target")]
         public Output<string> TargetAddress { get; private set; } = null!;
 
+        /// <summary>
+        /// is the id of the upstream to apply this target to.
+        /// </summary>
         [Output("upstreamId")]
         public Output<string> UpstreamId { get; private set; } = null!;
 
+        /// <summary>
+        /// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+        /// </summary>
         [Output("weight")]
         public Output<int> Weight { get; private set; } = null!;
 
@@ -67,12 +106,21 @@ namespace Pulumi.Kong
 
     public sealed class TargetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        /// </summary>
         [Input("target", required: true)]
         public Input<string> TargetAddress { get; set; } = null!;
 
+        /// <summary>
+        /// is the id of the upstream to apply this target to.
+        /// </summary>
         [Input("upstreamId", required: true)]
         public Input<string> UpstreamId { get; set; } = null!;
 
+        /// <summary>
+        /// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+        /// </summary>
         [Input("weight", required: true)]
         public Input<int> Weight { get; set; } = null!;
 
@@ -83,12 +131,21 @@ namespace Pulumi.Kong
 
     public sealed class TargetState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+        /// </summary>
         [Input("target")]
         public Input<string>? TargetAddress { get; set; }
 
+        /// <summary>
+        /// is the id of the upstream to apply this target to.
+        /// </summary>
         [Input("upstreamId")]
         public Input<string>? UpstreamId { get; set; }
 
+        /// <summary>
+        /// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+        /// </summary>
         [Input("weight")]
         public Input<int>? Weight { get; set; }
 

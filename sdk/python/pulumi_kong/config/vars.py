@@ -14,6 +14,7 @@ __all__ = [
     'kong_admin_uri',
     'kong_admin_username',
     'kong_api_key',
+    'kong_workspace',
     'strict_plugins_match',
     'tls_skip_verify',
 ]
@@ -43,6 +44,11 @@ An basic auth user for kong admin
 kong_api_key = __config__.get('kongApiKey')
 """
 API key for the kong api (if you have locked it down)
+"""
+
+kong_workspace = __config__.get('kongWorkspace')
+"""
+Workspace context (Enterprise Edition)
 """
 
 strict_plugins_match = __config__.get('strictPluginsMatch') or _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
