@@ -4,6 +4,37 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## # kong.ConsumerAcl
+ *
+ * Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const myConsumer = new kong.Consumer("my_consumer", {
+ *     customId: "123",
+ *     username: "User1",
+ * });
+ * const aclPlugin = new kong.Plugin("acl_plugin", {
+ *     configJson: `	{
+ * 		"allow": ["group1", "group2"]
+ * 	}
+ * `,
+ * });
+ * const consumerAcl = new kong.ConsumerAcl("consumer_acl", {
+ *     consumerId: myConsumer.id,
+ *     group: "group2",
+ *     tags: [
+ *         "myTag",
+ *         "otherTag",
+ *     ],
+ * });
+ * ```
+ */
 export class ConsumerAcl extends pulumi.CustomResource {
     /**
      * Get an existing ConsumerAcl resource's state with the given name, ID, and optional extra
@@ -32,8 +63,17 @@ export class ConsumerAcl extends pulumi.CustomResource {
         return obj['__pulumiType'] === ConsumerAcl.__pulumiType;
     }
 
+    /**
+     * the id of the consumer to be configured
+     */
     public readonly consumerId!: pulumi.Output<string>;
+    /**
+     * the acl group
+     */
     public readonly group!: pulumi.Output<string>;
+    /**
+     * A list of strings associated with the consumer acl for grouping and filtering.
+     */
     public readonly tags!: pulumi.Output<string[] | undefined>;
 
     /**
@@ -75,8 +115,17 @@ export class ConsumerAcl extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ConsumerAcl resources.
  */
 export interface ConsumerAclState {
+    /**
+     * the id of the consumer to be configured
+     */
     readonly consumerId?: pulumi.Input<string>;
+    /**
+     * the acl group
+     */
     readonly group?: pulumi.Input<string>;
+    /**
+     * A list of strings associated with the consumer acl for grouping and filtering.
+     */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
@@ -84,7 +133,16 @@ export interface ConsumerAclState {
  * The set of arguments for constructing a ConsumerAcl resource.
  */
 export interface ConsumerAclArgs {
+    /**
+     * the id of the consumer to be configured
+     */
     readonly consumerId: pulumi.Input<string>;
+    /**
+     * the acl group
+     */
     readonly group: pulumi.Input<string>;
+    /**
+     * A list of strings associated with the consumer acl for grouping and filtering.
+     */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

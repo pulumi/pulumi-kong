@@ -9,42 +9,182 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    /// <summary>
+    /// ## # kong.Route
+    /// 
+    /// The route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).
+    /// 
+    /// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var route = new Kong.Route("route", new Kong.RouteArgs
+    ///         {
+    ///             Protocols = 
+    ///             {
+    ///                 "http",
+    ///                 "https",
+    ///             },
+    ///             Methods = 
+    ///             {
+    ///                 "GET",
+    ///                 "POST",
+    ///             },
+    ///             Hosts = 
+    ///             {
+    ///                 "example2.com",
+    ///             },
+    ///             Paths = 
+    ///             {
+    ///                 "/test",
+    ///             },
+    ///             StripPath = false,
+    ///             PreserveHost = true,
+    ///             RegexPriority = 1,
+    ///             ServiceId = kong_service.Service.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var route = new Kong.Route("route", new Kong.RouteArgs
+    ///         {
+    ///             Protocols = 
+    ///             {
+    ///                 "tcp",
+    ///             },
+    ///             StripPath = true,
+    ///             PreserveHost = false,
+    ///             Sources = 
+    ///             {
+    ///                 new Kong.Inputs.RouteSourceArgs
+    ///                 {
+    ///                     Ip = "192.168.1.1",
+    ///                     Port = 80,
+    ///                 },
+    ///                 new Kong.Inputs.RouteSourceArgs
+    ///                 {
+    ///                     Ip = "192.168.1.2",
+    ///                 },
+    ///             },
+    ///             Destinations = 
+    ///             {
+    ///                 new Kong.Inputs.RouteDestinationArgs
+    ///                 {
+    ///                     Ip = "172.10.1.1",
+    ///                     Port = 81,
+    ///                 },
+    ///             },
+    ///             Snis = 
+    ///             {
+    ///                 "foo.com",
+    ///             },
+    ///             ServiceId = kong_service.Service.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// To import a route
+    /// 
+    /// ```sh
+    ///  $ pulumi import kong:index/route:Route &lt;route_identifier&gt; &lt;route_id&gt;
+    /// ```
+    /// </summary>
     [KongResourceType("kong:index/route:Route")]
     public partial class Route : Pulumi.CustomResource
     {
+        /// <summary>
+        /// A list of destination `ip` and `port`
+        /// </summary>
         [Output("destinations")]
         public Output<ImmutableArray<Outputs.RouteDestination>> Destinations { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of domain names that match this Route
+        /// </summary>
         [Output("hosts")]
         public Output<ImmutableArray<string>> Hosts { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of HTTP methods that match this Route
+        /// </summary>
         [Output("methods")]
         public Output<ImmutableArray<string>> Methods { get; private set; } = null!;
 
+        /// <summary>
+        /// The name of the route
+        /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of paths that match this Route
+        /// </summary>
         [Output("paths")]
         public Output<ImmutableArray<string>> Paths { get; private set; } = null!;
 
+        /// <summary>
+        /// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        /// </summary>
         [Output("preserveHost")]
         public Output<bool?> PreserveHost { get; private set; } = null!;
 
+        /// <summary>
+        /// The list of protocols to use
+        /// </summary>
         [Output("protocols")]
         public Output<ImmutableArray<string>> Protocols { get; private set; } = null!;
 
+        /// <summary>
+        /// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        /// </summary>
         [Output("regexPriority")]
         public Output<int?> RegexPriority { get; private set; } = null!;
 
+        /// <summary>
+        /// Service ID to map to
+        /// </summary>
         [Output("serviceId")]
         public Output<string> ServiceId { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of SNIs that match this Route when using stream routing.
+        /// </summary>
         [Output("snis")]
         public Output<ImmutableArray<string>> Snis { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of source `ip` and `port`
+        /// </summary>
         [Output("sources")]
         public Output<ImmutableArray<Outputs.RouteSource>> Sources { get; private set; } = null!;
 
+        /// <summary>
+        /// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+        /// </summary>
         [Output("stripPath")]
         public Output<bool?> StripPath { get; private set; } = null!;
 
@@ -96,6 +236,10 @@ namespace Pulumi.Kong
     {
         [Input("destinations")]
         private InputList<Inputs.RouteDestinationArgs>? _destinations;
+
+        /// <summary>
+        /// A list of destination `ip` and `port`
+        /// </summary>
         public InputList<Inputs.RouteDestinationArgs> Destinations
         {
             get => _destinations ?? (_destinations = new InputList<Inputs.RouteDestinationArgs>());
@@ -104,6 +248,10 @@ namespace Pulumi.Kong
 
         [Input("hosts")]
         private InputList<string>? _hosts;
+
+        /// <summary>
+        /// A list of domain names that match this Route
+        /// </summary>
         public InputList<string> Hosts
         {
             get => _hosts ?? (_hosts = new InputList<string>());
@@ -112,42 +260,70 @@ namespace Pulumi.Kong
 
         [Input("methods")]
         private InputList<string>? _methods;
+
+        /// <summary>
+        /// A list of HTTP methods that match this Route
+        /// </summary>
         public InputList<string> Methods
         {
             get => _methods ?? (_methods = new InputList<string>());
             set => _methods = value;
         }
 
+        /// <summary>
+        /// The name of the route
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("paths")]
         private InputList<string>? _paths;
+
+        /// <summary>
+        /// A list of paths that match this Route
+        /// </summary>
         public InputList<string> Paths
         {
             get => _paths ?? (_paths = new InputList<string>());
             set => _paths = value;
         }
 
+        /// <summary>
+        /// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        /// </summary>
         [Input("preserveHost")]
         public Input<bool>? PreserveHost { get; set; }
 
         [Input("protocols", required: true)]
         private InputList<string>? _protocols;
+
+        /// <summary>
+        /// The list of protocols to use
+        /// </summary>
         public InputList<string> Protocols
         {
             get => _protocols ?? (_protocols = new InputList<string>());
             set => _protocols = value;
         }
 
+        /// <summary>
+        /// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        /// </summary>
         [Input("regexPriority")]
         public Input<int>? RegexPriority { get; set; }
 
+        /// <summary>
+        /// Service ID to map to
+        /// </summary>
         [Input("serviceId", required: true)]
         public Input<string> ServiceId { get; set; } = null!;
 
         [Input("snis")]
         private InputList<string>? _snis;
+
+        /// <summary>
+        /// A list of SNIs that match this Route when using stream routing.
+        /// </summary>
         public InputList<string> Snis
         {
             get => _snis ?? (_snis = new InputList<string>());
@@ -156,12 +332,19 @@ namespace Pulumi.Kong
 
         [Input("sources")]
         private InputList<Inputs.RouteSourceArgs>? _sources;
+
+        /// <summary>
+        /// A list of source `ip` and `port`
+        /// </summary>
         public InputList<Inputs.RouteSourceArgs> Sources
         {
             get => _sources ?? (_sources = new InputList<Inputs.RouteSourceArgs>());
             set => _sources = value;
         }
 
+        /// <summary>
+        /// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+        /// </summary>
         [Input("stripPath")]
         public Input<bool>? StripPath { get; set; }
 
@@ -174,6 +357,10 @@ namespace Pulumi.Kong
     {
         [Input("destinations")]
         private InputList<Inputs.RouteDestinationGetArgs>? _destinations;
+
+        /// <summary>
+        /// A list of destination `ip` and `port`
+        /// </summary>
         public InputList<Inputs.RouteDestinationGetArgs> Destinations
         {
             get => _destinations ?? (_destinations = new InputList<Inputs.RouteDestinationGetArgs>());
@@ -182,6 +369,10 @@ namespace Pulumi.Kong
 
         [Input("hosts")]
         private InputList<string>? _hosts;
+
+        /// <summary>
+        /// A list of domain names that match this Route
+        /// </summary>
         public InputList<string> Hosts
         {
             get => _hosts ?? (_hosts = new InputList<string>());
@@ -190,42 +381,70 @@ namespace Pulumi.Kong
 
         [Input("methods")]
         private InputList<string>? _methods;
+
+        /// <summary>
+        /// A list of HTTP methods that match this Route
+        /// </summary>
         public InputList<string> Methods
         {
             get => _methods ?? (_methods = new InputList<string>());
             set => _methods = value;
         }
 
+        /// <summary>
+        /// The name of the route
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("paths")]
         private InputList<string>? _paths;
+
+        /// <summary>
+        /// A list of paths that match this Route
+        /// </summary>
         public InputList<string> Paths
         {
             get => _paths ?? (_paths = new InputList<string>());
             set => _paths = value;
         }
 
+        /// <summary>
+        /// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+        /// </summary>
         [Input("preserveHost")]
         public Input<bool>? PreserveHost { get; set; }
 
         [Input("protocols")]
         private InputList<string>? _protocols;
+
+        /// <summary>
+        /// The list of protocols to use
+        /// </summary>
         public InputList<string> Protocols
         {
             get => _protocols ?? (_protocols = new InputList<string>());
             set => _protocols = value;
         }
 
+        /// <summary>
+        /// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+        /// </summary>
         [Input("regexPriority")]
         public Input<int>? RegexPriority { get; set; }
 
+        /// <summary>
+        /// Service ID to map to
+        /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }
 
         [Input("snis")]
         private InputList<string>? _snis;
+
+        /// <summary>
+        /// A list of SNIs that match this Route when using stream routing.
+        /// </summary>
         public InputList<string> Snis
         {
             get => _snis ?? (_snis = new InputList<string>());
@@ -234,12 +453,19 @@ namespace Pulumi.Kong
 
         [Input("sources")]
         private InputList<Inputs.RouteSourceGetArgs>? _sources;
+
+        /// <summary>
+        /// A list of source `ip` and `port`
+        /// </summary>
         public InputList<Inputs.RouteSourceGetArgs> Sources
         {
             get => _sources ?? (_sources = new InputList<Inputs.RouteSourceGetArgs>());
             set => _sources = value;
         }
 
+        /// <summary>
+        /// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+        /// </summary>
         [Input("stripPath")]
         public Input<bool>? StripPath { get; set; }
 

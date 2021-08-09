@@ -4,6 +4,53 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## # kong.Service
+ *
+ * The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const service = new kong.Service("service", {
+ *     connectTimeout: 1000,
+ *     host: "test.org",
+ *     path: "/mypath",
+ *     port: 8080,
+ *     protocol: "http",
+ *     readTimeout: 3000,
+ *     retries: 5,
+ *     writeTimeout: 2000,
+ * });
+ * ```
+ * ## Argument reference
+ *
+ * * `name` - (Required) Service name
+ * * `protocol` - (Required) Protocol to use
+ * * `host` - (Optional) Host to map to
+ * * `port` - (Optional, int) Port to map to. Default: 80
+ * * `path` - (Optional) Path to map to
+ * * `retries` - (Optional, int) Number of retries. Default: 5
+ * * `connectTimeout` - (Optional, int) Connection timeout. Default(ms): 60000
+ * * `writeTimeout` - (Optional, int) Write timout. Default(ms): 60000
+ * * `readTimeout` - (Optional, int) Read timeout. Default(ms): 60000
+ * * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
+ * * `clientCertificate` - (Optional) Certificate to be used as client certificate while TLS handshaking to the upstream server.
+ * * `tlsVerify` - (Optional) Whether to enable verification of upstream server TLS certificate.
+ * * `tlsVerifyDepth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
+ * * `caCertificates` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+ *
+ * ## Import
+ *
+ * To import a service
+ *
+ * ```sh
+ *  $ pulumi import kong:index/service:Service <service_identifier> <service_id>
+ * ```
+ */
 export class Service extends pulumi.CustomResource {
     /**
      * Get an existing Service resource's state with the given name, ID, and optional extra

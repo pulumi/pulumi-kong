@@ -9,15 +9,67 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    /// <summary>
+    /// ## # kong.ConsumerAcl
+    /// 
+    /// Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myConsumer = new Kong.Consumer("myConsumer", new Kong.ConsumerArgs
+    ///         {
+    ///             CustomId = "123",
+    ///             Username = "User1",
+    ///         });
+    ///         var aclPlugin = new Kong.Plugin("aclPlugin", new Kong.PluginArgs
+    ///         {
+    ///             ConfigJson = @"	{
+    /// 		""allow"": [""group1"", ""group2""]
+    /// 	}
+    /// 
+    /// ",
+    ///         });
+    ///         var consumerAcl = new Kong.ConsumerAcl("consumerAcl", new Kong.ConsumerAclArgs
+    ///         {
+    ///             ConsumerId = myConsumer.Id,
+    ///             Group = "group2",
+    ///             Tags = 
+    ///             {
+    ///                 "myTag",
+    ///                 "otherTag",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [KongResourceType("kong:index/consumerAcl:ConsumerAcl")]
     public partial class ConsumerAcl : Pulumi.CustomResource
     {
+        /// <summary>
+        /// the id of the consumer to be configured
+        /// </summary>
         [Output("consumerId")]
         public Output<string> ConsumerId { get; private set; } = null!;
 
+        /// <summary>
+        /// the acl group
+        /// </summary>
         [Output("group")]
         public Output<string> Group { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of strings associated with the consumer acl for grouping and filtering.
+        /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
@@ -67,14 +119,24 @@ namespace Pulumi.Kong
 
     public sealed class ConsumerAclArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// the id of the consumer to be configured
+        /// </summary>
         [Input("consumerId", required: true)]
         public Input<string> ConsumerId { get; set; } = null!;
 
+        /// <summary>
+        /// the acl group
+        /// </summary>
         [Input("group", required: true)]
         public Input<string> Group { get; set; } = null!;
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the consumer acl for grouping and filtering.
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());
@@ -88,14 +150,24 @@ namespace Pulumi.Kong
 
     public sealed class ConsumerAclState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// the id of the consumer to be configured
+        /// </summary>
         [Input("consumerId")]
         public Input<string>? ConsumerId { get; set; }
 
+        /// <summary>
+        /// the acl group
+        /// </summary>
         [Input("group")]
         public Input<string>? Group { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the consumer acl for grouping and filtering.
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());

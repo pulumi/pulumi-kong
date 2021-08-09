@@ -26,6 +26,35 @@ class UpstreamArgs:
                  slots: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Upstream resource.
+        :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+        :param pulumi.Input[str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+               * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+               * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+               * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+               * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+               * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+               * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+               * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+               * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+               * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+               * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+               * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+               * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+        :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
+        :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         """
         if hash_fallback is not None:
             pulumi.set(__self__, "hash_fallback", hash_fallback)
@@ -49,6 +78,9 @@ class UpstreamArgs:
     @property
     @pulumi.getter(name="hashFallback")
     def hash_fallback(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+        """
         return pulumi.get(self, "hash_fallback")
 
     @hash_fallback.setter
@@ -58,6 +90,9 @@ class UpstreamArgs:
     @property
     @pulumi.getter(name="hashFallbackHeader")
     def hash_fallback_header(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+        """
         return pulumi.get(self, "hash_fallback_header")
 
     @hash_fallback_header.setter
@@ -67,6 +102,9 @@ class UpstreamArgs:
     @property
     @pulumi.getter(name="hashOn")
     def hash_on(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        """
         return pulumi.get(self, "hash_on")
 
     @hash_on.setter
@@ -76,6 +114,9 @@ class UpstreamArgs:
     @property
     @pulumi.getter(name="hashOnCookie")
     def hash_on_cookie(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+        """
         return pulumi.get(self, "hash_on_cookie")
 
     @hash_on_cookie.setter
@@ -85,6 +126,30 @@ class UpstreamArgs:
     @property
     @pulumi.getter(name="hashOnCookiePath")
     def hash_on_cookie_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+        * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+        * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+        * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+        * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+        * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+        * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+        * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+        * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+        * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+        * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+        """
         return pulumi.get(self, "hash_on_cookie_path")
 
     @hash_on_cookie_path.setter
@@ -94,6 +159,9 @@ class UpstreamArgs:
     @property
     @pulumi.getter(name="hashOnHeader")
     def hash_on_header(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        """
         return pulumi.get(self, "hash_on_header")
 
     @hash_on_header.setter
@@ -112,6 +180,9 @@ class UpstreamArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a hostname, which must be equal to the host of a Service.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -121,6 +192,9 @@ class UpstreamArgs:
     @property
     @pulumi.getter
     def slots(self) -> Optional[pulumi.Input[int]]:
+        """
+        is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+        """
         return pulumi.get(self, "slots")
 
     @slots.setter
@@ -142,6 +216,35 @@ class _UpstreamState:
                  slots: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Upstream resources.
+        :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+        :param pulumi.Input[str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+               * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+               * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+               * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+               * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+               * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+               * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+               * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+               * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+               * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+               * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+               * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+               * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+        :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
+        :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         """
         if hash_fallback is not None:
             pulumi.set(__self__, "hash_fallback", hash_fallback)
@@ -165,6 +268,9 @@ class _UpstreamState:
     @property
     @pulumi.getter(name="hashFallback")
     def hash_fallback(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+        """
         return pulumi.get(self, "hash_fallback")
 
     @hash_fallback.setter
@@ -174,6 +280,9 @@ class _UpstreamState:
     @property
     @pulumi.getter(name="hashFallbackHeader")
     def hash_fallback_header(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+        """
         return pulumi.get(self, "hash_fallback_header")
 
     @hash_fallback_header.setter
@@ -183,6 +292,9 @@ class _UpstreamState:
     @property
     @pulumi.getter(name="hashOn")
     def hash_on(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        """
         return pulumi.get(self, "hash_on")
 
     @hash_on.setter
@@ -192,6 +304,9 @@ class _UpstreamState:
     @property
     @pulumi.getter(name="hashOnCookie")
     def hash_on_cookie(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+        """
         return pulumi.get(self, "hash_on_cookie")
 
     @hash_on_cookie.setter
@@ -201,6 +316,30 @@ class _UpstreamState:
     @property
     @pulumi.getter(name="hashOnCookiePath")
     def hash_on_cookie_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+        * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+        * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+        * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+        * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+        * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+        * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+        * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+        * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+        * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+        * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+        """
         return pulumi.get(self, "hash_on_cookie_path")
 
     @hash_on_cookie_path.setter
@@ -210,6 +349,9 @@ class _UpstreamState:
     @property
     @pulumi.getter(name="hashOnHeader")
     def hash_on_header(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        """
         return pulumi.get(self, "hash_on_header")
 
     @hash_on_header.setter
@@ -228,6 +370,9 @@ class _UpstreamState:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a hostname, which must be equal to the host of a Service.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -237,6 +382,9 @@ class _UpstreamState:
     @property
     @pulumi.getter
     def slots(self) -> Optional[pulumi.Input[int]]:
+        """
+        is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+        """
         return pulumi.get(self, "slots")
 
     @slots.setter
@@ -260,9 +408,110 @@ class Upstream(pulumi.CustomResource):
                  slots: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a Upstream resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        upstream = kong.Upstream("upstream",
+            hash_fallback="cookie",
+            hash_fallback_header="FallbackHeaderName",
+            hash_on="header",
+            hash_on_cookie="CookieName",
+            hash_on_cookie_path="/path",
+            hash_on_header="HeaderName",
+            healthchecks=kong.UpstreamHealthchecksArgs(
+                active=kong.UpstreamHealthchecksActiveArgs(
+                    concurrency=20,
+                    healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
+                        http_statuses=[
+                            200,
+                            201,
+                        ],
+                        interval=5,
+                        successes=1,
+                    ),
+                    http_path="/status",
+                    https_sni="some.domain.com",
+                    https_verify_certificate=False,
+                    timeout=10,
+                    type="https",
+                    unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
+                        http_failures=2,
+                        http_statuses=[
+                            500,
+                            501,
+                        ],
+                        interval=3,
+                        tcp_failures=1,
+                        timeouts=7,
+                    ),
+                ),
+                passive=kong.UpstreamHealthchecksPassiveArgs(
+                    healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
+                        http_statuses=[
+                            200,
+                            201,
+                            202,
+                        ],
+                        successes=1,
+                    ),
+                    type="https",
+                    unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
+                        http_failures=6,
+                        http_statuses=[
+                            500,
+                            501,
+                            502,
+                        ],
+                        tcp_failures=5,
+                        timeouts=3,
+                    ),
+                ),
+            ),
+            slots=10)
+        ```
+
+        ## Import
+
+        To import an upstream
+
+        ```sh
+         $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+        :param pulumi.Input[str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+               * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+               * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+               * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+               * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+               * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+               * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+               * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+               * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+               * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+               * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+               * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+               * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+        :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
+        :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         """
         ...
     @overload
@@ -271,7 +520,79 @@ class Upstream(pulumi.CustomResource):
                  args: Optional[UpstreamArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Upstream resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        upstream = kong.Upstream("upstream",
+            hash_fallback="cookie",
+            hash_fallback_header="FallbackHeaderName",
+            hash_on="header",
+            hash_on_cookie="CookieName",
+            hash_on_cookie_path="/path",
+            hash_on_header="HeaderName",
+            healthchecks=kong.UpstreamHealthchecksArgs(
+                active=kong.UpstreamHealthchecksActiveArgs(
+                    concurrency=20,
+                    healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
+                        http_statuses=[
+                            200,
+                            201,
+                        ],
+                        interval=5,
+                        successes=1,
+                    ),
+                    http_path="/status",
+                    https_sni="some.domain.com",
+                    https_verify_certificate=False,
+                    timeout=10,
+                    type="https",
+                    unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
+                        http_failures=2,
+                        http_statuses=[
+                            500,
+                            501,
+                        ],
+                        interval=3,
+                        tcp_failures=1,
+                        timeouts=7,
+                    ),
+                ),
+                passive=kong.UpstreamHealthchecksPassiveArgs(
+                    healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
+                        http_statuses=[
+                            200,
+                            201,
+                            202,
+                        ],
+                        successes=1,
+                    ),
+                    type="https",
+                    unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
+                        http_failures=6,
+                        http_statuses=[
+                            500,
+                            501,
+                            502,
+                        ],
+                        tcp_failures=5,
+                        timeouts=3,
+                    ),
+                ),
+            ),
+            slots=10)
+        ```
+
+        ## Import
+
+        To import an upstream
+
+        ```sh
+         $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
+        ```
+
         :param str resource_name: The name of the resource.
         :param UpstreamArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -343,6 +664,35 @@ class Upstream(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+        :param pulumi.Input[str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+               * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+               * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+               * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+               * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+               * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+               * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+               * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+               * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+               * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+               * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+               * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+               * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+               * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+               * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+               * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+        :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
+        :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -362,31 +712,70 @@ class Upstream(pulumi.CustomResource):
     @property
     @pulumi.getter(name="hashFallback")
     def hash_fallback(self) -> pulumi.Output[Optional[str]]:
+        """
+        is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+        """
         return pulumi.get(self, "hash_fallback")
 
     @property
     @pulumi.getter(name="hashFallbackHeader")
     def hash_fallback_header(self) -> pulumi.Output[Optional[str]]:
+        """
+        is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+        """
         return pulumi.get(self, "hash_fallback_header")
 
     @property
     @pulumi.getter(name="hashOn")
     def hash_on(self) -> pulumi.Output[Optional[str]]:
+        """
+        is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        """
         return pulumi.get(self, "hash_on")
 
     @property
     @pulumi.getter(name="hashOnCookie")
     def hash_on_cookie(self) -> pulumi.Output[Optional[str]]:
+        """
+        is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+        """
         return pulumi.get(self, "hash_on_cookie")
 
     @property
     @pulumi.getter(name="hashOnCookiePath")
     def hash_on_cookie_path(self) -> pulumi.Output[Optional[str]]:
+        """
+        is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+        * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+        * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+        * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+        * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+        * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+        * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+        * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+        * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+        * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+        * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+        * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+        """
         return pulumi.get(self, "hash_on_cookie_path")
 
     @property
     @pulumi.getter(name="hashOnHeader")
     def hash_on_header(self) -> pulumi.Output[Optional[str]]:
+        """
+        is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        """
         return pulumi.get(self, "hash_on_header")
 
     @property
@@ -397,10 +786,16 @@ class Upstream(pulumi.CustomResource):
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
+        """
+        is a hostname, which must be equal to the host of a Service.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def slots(self) -> pulumi.Output[Optional[int]]:
+        """
+        is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+        """
         return pulumi.get(self, "slots")
 

@@ -3,7 +3,7 @@ module github.com/pulumi/pulumi-kong/provider/v4
 go 1.16
 
 require (
-	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20210726172352-f86940b04c5a
+	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20210807200914-f91a5a63edec
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.0.0
 	github.com/pulumi/pulumi/pkg/v3 v3.0.0
 	github.com/pulumi/pulumi/sdk/v3 v3.0.0

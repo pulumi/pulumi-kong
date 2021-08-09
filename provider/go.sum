@@ -618,6 +618,8 @@ github.com/kevholditch/gokong v0.0.0-20191114132141-305470f01f9a h1:LO/whd92BLFp
 github.com/kevholditch/gokong v0.0.0-20191114132141-305470f01f9a/go.mod h1:/yPEclE0cTiGmrhJK8Un8tHP1ZQ3hty35tTdbwYaXqw=
 github.com/kevholditch/terraform-provider-kong v1.9.2-0.20210726172352-f86940b04c5a h1:esrrczvJS1q/N32zYLJARneSlJ8Q5bINyrZ27ejWMQg=
 github.com/kevholditch/terraform-provider-kong v1.9.2-0.20210726172352-f86940b04c5a/go.mod h1:KsveQsBEjxhtHHKvhdS4TA9ntvsFrMiK7bMT+C2myUA=
+github.com/kevholditch/terraform-provider-kong v1.9.2-0.20210807200914-f91a5a63edec h1:L3JowyTkWUjprDGzXsHzzLQ0L9ATia4ho4kHNQsZQCo=
+github.com/kevholditch/terraform-provider-kong v1.9.2-0.20210807200914-f91a5a63edec/go.mod h1:KsveQsBEjxhtHHKvhdS4TA9ntvsFrMiK7bMT+C2myUA=
 github.com/kevinburke/ssh_config v0.0.0-20190725054713-01f96b0aa0cd h1:Coekwdh0v2wtGp9Gmz1Ze3eVRAWJMLokvN3QjdzCHLY=
 github.com/kevinburke/ssh_config v0.0.0-20190725054713-01f96b0aa0cd/go.mod h1:CT57kijsi8u/K/BOFA39wgDQJ9CxiF4nAY/ojJ6r6mM=
 github.com/keybase/go-crypto v0.0.0-20161004153544-93f5b35093ba h1:NARVGAAgEXvoMeNPHhPFt1SBt1VMznA3Gnz9d0qj+co=

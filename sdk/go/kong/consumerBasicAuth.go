@@ -11,13 +11,60 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## # ConsumerBasicAuth
+//
+// Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
+// 			CustomId: pulumi.String("123"),
+// 			Username: pulumi.String("User1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewPlugin(ctx, "basicAuthPlugin", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewConsumerBasicAuth(ctx, "consumerBasicAuth", &kong.ConsumerBasicAuthArgs{
+// 			ConsumerId: myConsumer.ID(),
+// 			Password:   pulumi.String("bar_updated"),
+// 			Tags: pulumi.StringArray{
+// 				pulumi.String("myTag"),
+// 				pulumi.String("anotherTag"),
+// 			},
+// 			Username: pulumi.String("foo_updated"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ConsumerBasicAuth struct {
 	pulumi.CustomResourceState
 
-	ConsumerId pulumi.StringOutput      `pulumi:"consumerId"`
-	Password   pulumi.StringOutput      `pulumi:"password"`
-	Tags       pulumi.StringArrayOutput `pulumi:"tags"`
-	Username   pulumi.StringOutput      `pulumi:"username"`
+	// the id of the consumer to be configured with basic auth
+	ConsumerId pulumi.StringOutput `pulumi:"consumerId"`
+	// password to be used for basic auth
+	Password pulumi.StringOutput `pulumi:"password"`
+	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	// username to be used for basic auth
+	Username pulumi.StringOutput `pulumi:"username"`
 }
 
 // NewConsumerBasicAuth registers a new resource with the given unique name, arguments, and options.
@@ -58,17 +105,25 @@ func GetConsumerBasicAuth(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ConsumerBasicAuth resources.
 type consumerBasicAuthState struct {
-	ConsumerId *string  `pulumi:"consumerId"`
-	Password   *string  `pulumi:"password"`
-	Tags       []string `pulumi:"tags"`
-	Username   *string  `pulumi:"username"`
+	// the id of the consumer to be configured with basic auth
+	ConsumerId *string `pulumi:"consumerId"`
+	// password to be used for basic auth
+	Password *string `pulumi:"password"`
+	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	Tags []string `pulumi:"tags"`
+	// username to be used for basic auth
+	Username *string `pulumi:"username"`
 }
 
 type ConsumerBasicAuthState struct {
+	// the id of the consumer to be configured with basic auth
 	ConsumerId pulumi.StringPtrInput
-	Password   pulumi.StringPtrInput
-	Tags       pulumi.StringArrayInput
-	Username   pulumi.StringPtrInput
+	// password to be used for basic auth
+	Password pulumi.StringPtrInput
+	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	Tags pulumi.StringArrayInput
+	// username to be used for basic auth
+	Username pulumi.StringPtrInput
 }
 
 func (ConsumerBasicAuthState) ElementType() reflect.Type {
@@ -76,18 +131,26 @@ func (ConsumerBasicAuthState) ElementType() reflect.Type {
 }
 
 type consumerBasicAuthArgs struct {
-	ConsumerId string   `pulumi:"consumerId"`
-	Password   string   `pulumi:"password"`
-	Tags       []string `pulumi:"tags"`
-	Username   string   `pulumi:"username"`
+	// the id of the consumer to be configured with basic auth
+	ConsumerId string `pulumi:"consumerId"`
+	// password to be used for basic auth
+	Password string `pulumi:"password"`
+	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	Tags []string `pulumi:"tags"`
+	// username to be used for basic auth
+	Username string `pulumi:"username"`
 }
 
 // The set of arguments for constructing a ConsumerBasicAuth resource.
 type ConsumerBasicAuthArgs struct {
+	// the id of the consumer to be configured with basic auth
 	ConsumerId pulumi.StringInput
-	Password   pulumi.StringInput
-	Tags       pulumi.StringArrayInput
-	Username   pulumi.StringInput
+	// password to be used for basic auth
+	Password pulumi.StringInput
+	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	Tags pulumi.StringArrayInput
+	// username to be used for basic auth
+	Username pulumi.StringInput
 }
 
 func (ConsumerBasicAuthArgs) ElementType() reflect.Type {

@@ -19,6 +19,10 @@ class ConsumerBasicAuthArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a ConsumerBasicAuth resource.
+        :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
+        :param pulumi.Input[str] password: password to be used for basic auth
+        :param pulumi.Input[str] username: username to be used for basic auth
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
         """
         pulumi.set(__self__, "consumer_id", consumer_id)
         pulumi.set(__self__, "password", password)
@@ -29,6 +33,9 @@ class ConsumerBasicAuthArgs:
     @property
     @pulumi.getter(name="consumerId")
     def consumer_id(self) -> pulumi.Input[str]:
+        """
+        the id of the consumer to be configured with basic auth
+        """
         return pulumi.get(self, "consumer_id")
 
     @consumer_id.setter
@@ -38,6 +45,9 @@ class ConsumerBasicAuthArgs:
     @property
     @pulumi.getter
     def password(self) -> pulumi.Input[str]:
+        """
+        password to be used for basic auth
+        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -47,6 +57,9 @@ class ConsumerBasicAuthArgs:
     @property
     @pulumi.getter
     def username(self) -> pulumi.Input[str]:
+        """
+        username to be used for basic auth
+        """
         return pulumi.get(self, "username")
 
     @username.setter
@@ -56,6 +69,9 @@ class ConsumerBasicAuthArgs:
     @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the consumer basic auth for grouping and filtering.
+        """
         return pulumi.get(self, "tags")
 
     @tags.setter
@@ -72,6 +88,10 @@ class _ConsumerBasicAuthState:
                  username: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ConsumerBasicAuth resources.
+        :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
+        :param pulumi.Input[str] password: password to be used for basic auth
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
+        :param pulumi.Input[str] username: username to be used for basic auth
         """
         if consumer_id is not None:
             pulumi.set(__self__, "consumer_id", consumer_id)
@@ -85,6 +105,9 @@ class _ConsumerBasicAuthState:
     @property
     @pulumi.getter(name="consumerId")
     def consumer_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        the id of the consumer to be configured with basic auth
+        """
         return pulumi.get(self, "consumer_id")
 
     @consumer_id.setter
@@ -94,6 +117,9 @@ class _ConsumerBasicAuthState:
     @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        password to be used for basic auth
+        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -103,6 +129,9 @@ class _ConsumerBasicAuthState:
     @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the consumer basic auth for grouping and filtering.
+        """
         return pulumi.get(self, "tags")
 
     @tags.setter
@@ -112,6 +141,9 @@ class _ConsumerBasicAuthState:
     @property
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
+        """
+        username to be used for basic auth
+        """
         return pulumi.get(self, "username")
 
     @username.setter
@@ -130,9 +162,36 @@ class ConsumerBasicAuth(pulumi.CustomResource):
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ConsumerBasicAuth resource with the given unique name, props, and options.
+        ## # ConsumerBasicAuth
+
+        Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
+        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
+            consumer_id=my_consumer.id,
+            password="bar_updated",
+            tags=[
+                "myTag",
+                "anotherTag",
+            ],
+            username="foo_updated")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
+        :param pulumi.Input[str] password: password to be used for basic auth
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
+        :param pulumi.Input[str] username: username to be used for basic auth
         """
         ...
     @overload
@@ -141,7 +200,30 @@ class ConsumerBasicAuth(pulumi.CustomResource):
                  args: ConsumerBasicAuthArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ConsumerBasicAuth resource with the given unique name, props, and options.
+        ## # ConsumerBasicAuth
+
+        Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
+        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
+            consumer_id=my_consumer.id,
+            password="bar_updated",
+            tags=[
+                "myTag",
+                "anotherTag",
+            ],
+            username="foo_updated")
+        ```
+
         :param str resource_name: The name of the resource.
         :param ConsumerBasicAuthArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -204,6 +286,10 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
+        :param pulumi.Input[str] password: password to be used for basic auth
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
+        :param pulumi.Input[str] username: username to be used for basic auth
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -218,20 +304,32 @@ class ConsumerBasicAuth(pulumi.CustomResource):
     @property
     @pulumi.getter(name="consumerId")
     def consumer_id(self) -> pulumi.Output[str]:
+        """
+        the id of the consumer to be configured with basic auth
+        """
         return pulumi.get(self, "consumer_id")
 
     @property
     @pulumi.getter
     def password(self) -> pulumi.Output[str]:
+        """
+        password to be used for basic auth
+        """
         return pulumi.get(self, "password")
 
     @property
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of strings associated with the consumer basic auth for grouping and filtering.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter
     def username(self) -> pulumi.Output[str]:
+        """
+        username to be used for basic auth
+        """
         return pulumi.get(self, "username")
 

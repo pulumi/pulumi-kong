@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## # kong.Consumer
+ *
+ * The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const consumer = new kong.Consumer("consumer", {
+ *     customId: "123",
+ *     username: "User1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * To import a consumer
+ *
+ * ```sh
+ *  $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+ * ```
+ */
 export class Consumer extends pulumi.CustomResource {
     /**
      * Get an existing Consumer resource's state with the given name, ID, and optional extra
@@ -32,8 +57,14 @@ export class Consumer extends pulumi.CustomResource {
         return obj['__pulumiType'] === Consumer.__pulumiType;
     }
 
+    /**
+     * A custom id for the consumer, you must set either the username or custom_id
+     */
     public readonly customId!: pulumi.Output<string | undefined>;
-    public readonly username!: pulumi.Output<string>;
+    /**
+     * The username to use, you must set either the username or custom_id
+     */
+    public readonly username!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Consumer resource with the given unique name, arguments, and options.
@@ -42,7 +73,7 @@ export class Consumer extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ConsumerArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: ConsumerArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerArgs | ConsumerState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -52,9 +83,6 @@ export class Consumer extends pulumi.CustomResource {
             inputs["username"] = state ? state.username : undefined;
         } else {
             const args = argsOrState as ConsumerArgs | undefined;
-            if ((!args || args.username === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'username'");
-            }
             inputs["customId"] = args ? args.customId : undefined;
             inputs["username"] = args ? args.username : undefined;
         }
@@ -69,7 +97,13 @@ export class Consumer extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Consumer resources.
  */
 export interface ConsumerState {
+    /**
+     * A custom id for the consumer, you must set either the username or custom_id
+     */
     readonly customId?: pulumi.Input<string>;
+    /**
+     * The username to use, you must set either the username or custom_id
+     */
     readonly username?: pulumi.Input<string>;
 }
 
@@ -77,6 +111,12 @@ export interface ConsumerState {
  * The set of arguments for constructing a Consumer resource.
  */
 export interface ConsumerArgs {
+    /**
+     * A custom id for the consumer, you must set either the username or custom_id
+     */
     readonly customId?: pulumi.Input<string>;
-    readonly username: pulumi.Input<string>;
+    /**
+     * The username to use, you must set either the username or custom_id
+     */
+    readonly username?: pulumi.Input<string>;
 }

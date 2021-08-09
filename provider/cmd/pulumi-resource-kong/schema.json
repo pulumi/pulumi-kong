@@ -466,9 +466,11 @@
     },
     "resources": {
         "kong:index/certificate:Certificate": {
+            "description": "## # kong.Certificate\n\nFor more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst certificate = new kong.Certificate(\"certificate\", {\n    certificate: \"public key --- 123 ----\",\n    privateKey: \"private key --- 456 ----\",\n    snis: [\n        \"foo.com\",\n        \"bar.com\",\n    ],\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\ncertificate = kong.Certificate(\"certificate\",\n    certificate=\"public key --- 123 ----\",\n    private_key=\"private key --- 456 ----\",\n    snis=[\n        \"foo.com\",\n        \"bar.com\",\n    ])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var certificate = new Kong.Certificate(\"certificate\", new Kong.CertificateArgs\n        {\n            Certificate = \"public key --- 123 ----\",\n            PrivateKey = \"private key --- 456 ----\",\n            Snis = \n            {\n                \"foo.com\",\n                \"bar.com\",\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewCertificate(ctx, \"certificate\", \u0026kong.CertificateArgs{\n\t\t\tCertificate: pulumi.String(\"public key --- 123 ----\"),\n\t\t\tPrivateKey:  pulumi.String(\"private key --- 456 ----\"),\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"foo.com\"),\n\t\t\t\tpulumi.String(\"bar.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a certificate\n\n```sh\n $ pulumi import kong:index/certificate:Certificate \u003ccertifcate_identifier\u003e \u003ccertificate_id\u003e\n```\n\n ",
             "properties": {
                 "certificate": {
                     "type": "string",
+                    "description": "should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.\n",
                     "language": {
                         "csharp": {
                             "name": "Cert"
@@ -476,13 +478,15 @@
                     }
                 },
                 "privateKey": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.\n"
                 },
                 "snis": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong\n"
                 }
             },
             "required": [
@@ -491,6 +495,7 @@
             "inputProperties": {
                 "certificate": {
                     "type": "string",
+                    "description": "should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.\n",
                     "language": {
                         "csharp": {
                             "name": "Cert"
@@ -498,13 +503,15 @@
                     }
                 },
                 "privateKey": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.\n"
                 },
                 "snis": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong\n"
                 }
             },
             "requiredInputs": [
@@ -515,6 +522,7 @@
                 "properties": {
                     "certificate": {
                         "type": "string",
+                        "description": "should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.\n",
                         "language": {
                             "csharp": {
                                 "name": "Cert"
@@ -522,67 +530,74 @@
                         }
                     },
                     "privateKey": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.\n"
                     },
                     "snis": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong\n"
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/consumer:Consumer": {
+            "description": "## # kong.Consumer\n\nThe consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst consumer = new kong.Consumer(\"consumer\", {\n    customId: \"123\",\n    username: \"User1\",\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nconsumer = kong.Consumer(\"consumer\",\n    custom_id=\"123\",\n    username=\"User1\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var consumer = new Kong.Consumer(\"consumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"123\",\n            Username = \"User1\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewConsumer(ctx, \"consumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"123\"),\n\t\t\tUsername: pulumi.String(\"User1\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a consumer\n\n```sh\n $ pulumi import kong:index/consumer:Consumer \u003cconsumer_identifier\u003e \u003cconsumer_id\u003e\n```\n\n ",
             "properties": {
                 "customId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom id for the consumer, you must set either the username or custom_id\n"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The username to use, you must set either the username or custom_id\n"
                 }
             },
-            "required": [
-                "username"
-            ],
             "inputProperties": {
                 "customId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom id for the consumer, you must set either the username or custom_id\n"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The username to use, you must set either the username or custom_id\n"
                 }
             },
-            "requiredInputs": [
-                "username"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Consumer resources.\n",
                 "properties": {
                     "customId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "A custom id for the consumer, you must set either the username or custom_id\n"
                     },
                     "username": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The username to use, you must set either the username or custom_id\n"
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/consumerAcl:ConsumerAcl": {
+            "description": "## # kong.ConsumerAcl\n\nConsumer ACL is a resource that allows you to configure the acl plugin for a consumer.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst myConsumer = new kong.Consumer(\"my_consumer\", {\n    customId: \"123\",\n    username: \"User1\",\n});\nconst aclPlugin = new kong.Plugin(\"acl_plugin\", {\n    configJson: `\t{\n\t\t\"allow\": [\"group1\", \"group2\"]\n\t}\n`,\n});\nconst consumerAcl = new kong.ConsumerAcl(\"consumer_acl\", {\n    consumerId: myConsumer.id,\n    group: \"group2\",\n    tags: [\n        \"myTag\",\n        \"otherTag\",\n    ],\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nmy_consumer = kong.Consumer(\"myConsumer\",\n    custom_id=\"123\",\n    username=\"User1\")\nacl_plugin = kong.Plugin(\"aclPlugin\", config_json=\"\"\"\t{\n\t\t\"allow\": [\"group1\", \"group2\"]\n\t}\n\n\"\"\")\nconsumer_acl = kong.ConsumerAcl(\"consumerAcl\",\n    consumer_id=my_consumer.id,\n    group=\"group2\",\n    tags=[\n        \"myTag\",\n        \"otherTag\",\n    ])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var myConsumer = new Kong.Consumer(\"myConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"123\",\n            Username = \"User1\",\n        });\n        var aclPlugin = new Kong.Plugin(\"aclPlugin\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"allow\"\": [\"\"group1\"\", \"\"group2\"\"]\n\t}\n\n\",\n        });\n        var consumerAcl = new Kong.ConsumerAcl(\"consumerAcl\", new Kong.ConsumerAclArgs\n        {\n            ConsumerId = myConsumer.Id,\n            Group = \"group2\",\n            Tags = \n            {\n                \"myTag\",\n                \"otherTag\",\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyConsumer, err := kong.NewConsumer(ctx, \"myConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"123\"),\n\t\t\tUsername: pulumi.String(\"User1\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"aclPlugin\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"allow\\\": [\\\"group1\\\", \\\"group2\\\"]\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewConsumerAcl(ctx, \"consumerAcl\", \u0026kong.ConsumerAclArgs{\n\t\t\tConsumerId: myConsumer.ID(),\n\t\t\tGroup:      pulumi.String(\"group2\"),\n\t\t\tTags: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"myTag\"),\n\t\t\t\tpulumi.String(\"otherTag\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "consumerId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the id of the consumer to be configured\n"
                 },
                 "group": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the acl group\n"
                 },
                 "tags": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the consumer acl for grouping and filtering.\n"
                 }
             },
             "required": [
@@ -591,16 +606,19 @@
             ],
             "inputProperties": {
                 "consumerId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the id of the consumer to be configured\n"
                 },
                 "group": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the acl group\n"
                 },
                 "tags": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the consumer acl for grouping and filtering.\n"
                 }
             },
             "requiredInputs": [
@@ -611,37 +629,45 @@
                 "description": "Input properties used for looking up and filtering ConsumerAcl resources.\n",
                 "properties": {
                     "consumerId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "the id of the consumer to be configured\n"
                     },
                     "group": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "the acl group\n"
                     },
                     "tags": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of strings associated with the consumer acl for grouping and filtering.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/consumerBasicAuth:ConsumerBasicAuth": {
+            "description": "## # kong.ConsumerBasicAuth\n\nConsumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst myConsumer = new kong.Consumer(\"my_consumer\", {\n    customId: \"123\",\n    username: \"User1\",\n});\nconst basicAuthPlugin = new kong.Plugin(\"basic_auth_plugin\", {});\nconst consumerBasicAuth = new kong.ConsumerBasicAuth(\"consumer_basic_auth\", {\n    consumerId: myConsumer.id,\n    password: \"bar_updated\",\n    tags: [\n        \"myTag\",\n        \"anotherTag\",\n    ],\n    username: \"foo_updated\",\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nmy_consumer = kong.Consumer(\"myConsumer\",\n    custom_id=\"123\",\n    username=\"User1\")\nbasic_auth_plugin = kong.Plugin(\"basicAuthPlugin\")\nconsumer_basic_auth = kong.ConsumerBasicAuth(\"consumerBasicAuth\",\n    consumer_id=my_consumer.id,\n    password=\"bar_updated\",\n    tags=[\n        \"myTag\",\n        \"anotherTag\",\n    ],\n    username=\"foo_updated\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var myConsumer = new Kong.Consumer(\"myConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"123\",\n            Username = \"User1\",\n        });\n        var basicAuthPlugin = new Kong.Plugin(\"basicAuthPlugin\", new Kong.PluginArgs\n        {\n        });\n        var consumerBasicAuth = new Kong.ConsumerBasicAuth(\"consumerBasicAuth\", new Kong.ConsumerBasicAuthArgs\n        {\n            ConsumerId = myConsumer.Id,\n            Password = \"bar_updated\",\n            Tags = \n            {\n                \"myTag\",\n                \"anotherTag\",\n            },\n            Username = \"foo_updated\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyConsumer, err := kong.NewConsumer(ctx, \"myConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"123\"),\n\t\t\tUsername: pulumi.String(\"User1\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"basicAuthPlugin\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewConsumerBasicAuth(ctx, \"consumerBasicAuth\", \u0026kong.ConsumerBasicAuthArgs{\n\t\t\tConsumerId: myConsumer.ID(),\n\t\t\tPassword:   pulumi.String(\"bar_updated\"),\n\t\t\tTags: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"myTag\"),\n\t\t\t\tpulumi.String(\"anotherTag\"),\n\t\t\t},\n\t\t\tUsername: pulumi.String(\"foo_updated\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "consumerId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the id of the consumer to be configured with basic auth\n"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "password to be used for basic auth\n"
                 },
                 "tags": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the consumer basic auth for grouping and filtering.\n"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "username to be used for basic auth\n"
                 }
             },
             "required": [
@@ -651,19 +677,23 @@
             ],
             "inputProperties": {
                 "consumerId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the id of the consumer to be configured with basic auth\n"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "password to be used for basic auth\n"
                 },
                 "tags": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the consumer basic auth for grouping and filtering.\n"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "username to be used for basic auth\n"
                 }
             },
             "requiredInputs": [
@@ -675,90 +705,30 @@
                 "description": "Input properties used for looking up and filtering ConsumerBasicAuth resources.\n",
                 "properties": {
                     "consumerId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "the id of the consumer to be configured with basic auth\n"
                     },
                     "password": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "password to be used for basic auth\n"
                     },
                     "tags": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of strings associated with the consumer basic auth for grouping and filtering.\n"
                     },
                     "username": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "kong:index/jwtAuth:JwtAuth": {
-            "properties": {
-                "algorithm": {
-                    "type": "string"
-                },
-                "consumerId": {
-                    "type": "string"
-                },
-                "key": {
-                    "type": "string"
-                },
-                "rsaPublicKey": {
-                    "type": "string"
-                },
-                "secret": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "consumerId",
-                "rsaPublicKey"
-            ],
-            "inputProperties": {
-                "algorithm": {
-                    "type": "string"
-                },
-                "consumerId": {
-                    "type": "string"
-                },
-                "key": {
-                    "type": "string"
-                },
-                "rsaPublicKey": {
-                    "type": "string"
-                },
-                "secret": {
-                    "type": "string"
-                }
-            },
-            "requiredInputs": [
-                "consumerId",
-                "rsaPublicKey"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering JwtAuth resources.\n",
-                "properties": {
-                    "algorithm": {
-                        "type": "string"
-                    },
-                    "consumerId": {
-                        "type": "string"
-                    },
-                    "key": {
-                        "type": "string"
-                    },
-                    "rsaPublicKey": {
-                        "type": "string"
-                    },
-                    "secret": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "username to be used for basic auth\n"
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/plugin:Plugin": {
+            "description": "## # kong.Plugin\n\nThe plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).\nThe `config_json` is passed through to the plugin to configure it as is.  \n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nrate_limit = kong.Plugin(\"rateLimit\", config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\nTo apply a plugin to a consumer use the `consumer_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst pluginConsumer = new kong.Consumer(\"plugin_consumer\", {\n    customId: \"567\",\n    username: \"PluginUser\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n    consumerId: pluginConsumer.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nplugin_consumer = kong.Consumer(\"pluginConsumer\",\n    custom_id=\"567\",\n    username=\"PluginUser\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\",\n    consumer_id=plugin_consumer.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var pluginConsumer = new Kong.Consumer(\"pluginConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"567\",\n            Username = \"PluginUser\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n            ConsumerId = pluginConsumer.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpluginConsumer, err := kong.NewConsumer(ctx, \"pluginConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"567\"),\n\t\t\tUsername: pulumi.String(\"PluginUser\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tConsumerId: pluginConsumer.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a service use the `service_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n`,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n\n\"\"\",\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 10,\n\t\t\"\"hour\"\" : 2000\n\t}\n\n\",\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 10,\\n\", \"\t\t\\\"hour\\\" : 2000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a route use the `route_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n`,\n    enabled: true,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n\n\"\"\",\n    enabled=True,\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 11,\n\t\t\"\"hour\"\" : 4000\n\t}\n\n\",\n            Enabled = true,\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 11,\\n\", \"\t\t\\\"hour\\\" : 4000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tEnabled:   pulumi.Bool(true),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n## Argument reference\n\n`plugin_name` - (Required) the name of the plugin you want to configure\n`consumer_id` - (Optional) the consumer id you want to configure the plugin for\n`service_id`  - (Optional) the service id that you want to configure the plugin for\n`route_id` - (Optional) the route id that you want to configure the plugin for\n`enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it\n`config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation\npage of the plugin you are configuring\n\n\n## Import\n\nTo import a plugin\n\n```sh\n $ pulumi import kong:index/plugin:Plugin \u003cplugin_identifier\u003e \u003cplugin_id\u003e\n```\n\n ",
             "properties": {
                 "computedConfig": {
                     "type": "string"
@@ -847,63 +817,76 @@
             }
         },
         "kong:index/route:Route": {
+            "description": "## # kong.Route\n\nThe route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).\n\nTo create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst route = new kong.Route(\"route\", {\n    protocols: [\n        \"http\",\n        \"https\",\n    ],\n    methods: [\n        \"GET\",\n        \"POST\",\n    ],\n    hosts: [\"example2.com\"],\n    paths: [\"/test\"],\n    stripPath: false,\n    preserveHost: true,\n    regexPriority: 1,\n    serviceId: kong_service.service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nroute = kong.Route(\"route\",\n    protocols=[\n        \"http\",\n        \"https\",\n    ],\n    methods=[\n        \"GET\",\n        \"POST\",\n    ],\n    hosts=[\"example2.com\"],\n    paths=[\"/test\"],\n    strip_path=False,\n    preserve_host=True,\n    regex_priority=1,\n    service_id=kong_service[\"service\"][\"id\"])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var route = new Kong.Route(\"route\", new Kong.RouteArgs\n        {\n            Protocols = \n            {\n                \"http\",\n                \"https\",\n            },\n            Methods = \n            {\n                \"GET\",\n                \"POST\",\n            },\n            Hosts = \n            {\n                \"example2.com\",\n            },\n            Paths = \n            {\n                \"/test\",\n            },\n            StripPath = false,\n            PreserveHost = true,\n            RegexPriority = 1,\n            ServiceId = kong_service.Service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewRoute(ctx, \"route\", \u0026kong.RouteArgs{\n\t\t\tProtocols: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"http\"),\n\t\t\t\tpulumi.String(\"https\"),\n\t\t\t},\n\t\t\tMethods: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"GET\"),\n\t\t\t\tpulumi.String(\"POST\"),\n\t\t\t},\n\t\t\tHosts: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"example2.com\"),\n\t\t\t},\n\t\t\tPaths: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"/test\"),\n\t\t\t},\n\t\t\tStripPath:     pulumi.Bool(false),\n\t\t\tPreserveHost:  pulumi.Bool(true),\n\t\t\tRegexPriority: pulumi.Int(1),\n\t\t\tServiceId:     pulumi.Any(kong_service.Service.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst route = new kong.Route(\"route\", {\n    protocols: [\"tcp\"],\n    stripPath: true,\n    preserveHost: false,\n    sources: [\n        {\n            ip: \"192.168.1.1\",\n            port: 80,\n        },\n        {\n            ip: \"192.168.1.2\",\n        },\n    ],\n    destinations: [{\n        ip: \"172.10.1.1\",\n        port: 81,\n    }],\n    snis: [\"foo.com\"],\n    serviceId: kong_service.service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nroute = kong.Route(\"route\",\n    protocols=[\"tcp\"],\n    strip_path=True,\n    preserve_host=False,\n    sources=[\n        kong.RouteSourceArgs(\n            ip=\"192.168.1.1\",\n            port=80,\n        ),\n        kong.RouteSourceArgs(\n            ip=\"192.168.1.2\",\n        ),\n    ],\n    destinations=[kong.RouteDestinationArgs(\n        ip=\"172.10.1.1\",\n        port=81,\n    )],\n    snis=[\"foo.com\"],\n    service_id=kong_service[\"service\"][\"id\"])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var route = new Kong.Route(\"route\", new Kong.RouteArgs\n        {\n            Protocols = \n            {\n                \"tcp\",\n            },\n            StripPath = true,\n            PreserveHost = false,\n            Sources = \n            {\n                new Kong.Inputs.RouteSourceArgs\n                {\n                    Ip = \"192.168.1.1\",\n                    Port = 80,\n                },\n                new Kong.Inputs.RouteSourceArgs\n                {\n                    Ip = \"192.168.1.2\",\n                },\n            },\n            Destinations = \n            {\n                new Kong.Inputs.RouteDestinationArgs\n                {\n                    Ip = \"172.10.1.1\",\n                    Port = 81,\n                },\n            },\n            Snis = \n            {\n                \"foo.com\",\n            },\n            ServiceId = kong_service.Service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewRoute(ctx, \"route\", \u0026kong.RouteArgs{\n\t\t\tProtocols: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"tcp\"),\n\t\t\t},\n\t\t\tStripPath:    pulumi.Bool(true),\n\t\t\tPreserveHost: pulumi.Bool(false),\n\t\t\tSources: kong.RouteSourceArray{\n\t\t\t\t\u0026kong.RouteSourceArgs{\n\t\t\t\t\tIp:   pulumi.String(\"192.168.1.1\"),\n\t\t\t\t\tPort: pulumi.Int(80),\n\t\t\t\t},\n\t\t\t\t\u0026kong.RouteSourceArgs{\n\t\t\t\t\tIp: pulumi.String(\"192.168.1.2\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tDestinations: kong.RouteDestinationArray{\n\t\t\t\t\u0026kong.RouteDestinationArgs{\n\t\t\t\t\tIp:   pulumi.String(\"172.10.1.1\"),\n\t\t\t\t\tPort: pulumi.Int(81),\n\t\t\t\t},\n\t\t\t},\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"foo.com\"),\n\t\t\t},\n\t\t\tServiceId: pulumi.Any(kong_service.Service.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a route\n\n```sh\n $ pulumi import kong:index/route:Route \u003croute_identifier\u003e \u003croute_id\u003e\n```\n\n ",
             "properties": {
                 "destinations": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/kong:index/RouteDestination:RouteDestination"
-                    }
+                    },
+                    "description": "A list of destination `ip` and `port`\n"
                 },
                 "hosts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of domain names that match this Route\n"
                 },
                 "methods": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of HTTP methods that match this Route\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the route\n"
                 },
                 "paths": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of paths that match this Route\n"
                 },
                 "preserveHost": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.\n"
                 },
                 "protocols": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "The list of protocols to use\n"
                 },
                 "regexPriority": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.\n"
                 },
                 "serviceId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Service ID to map to\n"
                 },
                 "snis": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of SNIs that match this Route when using stream routing.\n"
                 },
                 "sources": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/kong:index/RouteSource:RouteSource"
-                    }
+                    },
+                    "description": "A list of source `ip` and `port`\n"
                 },
                 "stripPath": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.\n"
                 }
             },
             "required": [
@@ -916,58 +899,70 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/kong:index/RouteDestination:RouteDestination"
-                    }
+                    },
+                    "description": "A list of destination `ip` and `port`\n"
                 },
                 "hosts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of domain names that match this Route\n"
                 },
                 "methods": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of HTTP methods that match this Route\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the route\n"
                 },
                 "paths": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of paths that match this Route\n"
                 },
                 "preserveHost": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.\n"
                 },
                 "protocols": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "The list of protocols to use\n"
                 },
                 "regexPriority": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.\n"
                 },
                 "serviceId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Service ID to map to\n"
                 },
                 "snis": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of SNIs that match this Route when using stream routing.\n"
                 },
                 "sources": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/kong:index/RouteSource:RouteSource"
-                    }
+                    },
+                    "description": "A list of source `ip` and `port`\n"
                 },
                 "stripPath": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.\n"
                 }
             },
             "requiredInputs": [
@@ -981,64 +976,77 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/types/kong:index/RouteDestination:RouteDestination"
-                        }
+                        },
+                        "description": "A list of destination `ip` and `port`\n"
                     },
                     "hosts": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of domain names that match this Route\n"
                     },
                     "methods": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of HTTP methods that match this Route\n"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The name of the route\n"
                     },
                     "paths": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of paths that match this Route\n"
                     },
                     "preserveHost": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.\n"
                     },
                     "protocols": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "The list of protocols to use\n"
                     },
                     "regexPriority": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.\n"
                     },
                     "serviceId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Service ID to map to\n"
                     },
                     "snis": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of SNIs that match this Route when using stream routing.\n"
                     },
                     "sources": {
                         "type": "array",
                         "items": {
                             "$ref": "#/types/kong:index/RouteSource:RouteSource"
-                        }
+                        },
+                        "description": "A list of source `ip` and `port`\n"
                     },
                     "stripPath": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/service:Service": {
+            "description": "## # kong.Service\n\nThe service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    connectTimeout: 1000,\n    host: \"test.org\",\n    path: \"/mypath\",\n    port: 8080,\n    protocol: \"http\",\n    readTimeout: 3000,\n    retries: 5,\n    writeTimeout: 2000,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    connect_timeout=1000,\n    host=\"test.org\",\n    path=\"/mypath\",\n    port=8080,\n    protocol=\"http\",\n    read_timeout=3000,\n    retries=5,\n    write_timeout=2000)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            ConnectTimeout = 1000,\n            Host = \"test.org\",\n            Path = \"/mypath\",\n            Port = 8080,\n            Protocol = \"http\",\n            ReadTimeout = 3000,\n            Retries = 5,\n            WriteTimeout = 2000,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tConnectTimeout: pulumi.Int(1000),\n\t\t\tHost:           pulumi.String(\"test.org\"),\n\t\t\tPath:           pulumi.String(\"/mypath\"),\n\t\t\tPort:           pulumi.Int(8080),\n\t\t\tProtocol:       pulumi.String(\"http\"),\n\t\t\tReadTimeout:    pulumi.Int(3000),\n\t\t\tRetries:        pulumi.Int(5),\n\t\t\tWriteTimeout:   pulumi.Int(2000),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n## Argument reference\n\n* `name` - (Required) Service name\n* `protocol` - (Required) Protocol to use\n* `host` - (Optional) Host to map to\n* `port` - (Optional, int) Port to map to. Default: 80\n* `path` - (Optional) Path to map to\n* `retries` - (Optional, int) Number of retries. Default: 5\n* `connect_timeout` - (Optional, int) Connection timeout. Default(ms): 60000\n* `write_timeout` - (Optional, int) Write timout. Default(ms): 60000\n* `read_timeout` - (Optional, int) Read timeout. Default(ms): 60000\n* `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.\n* `client_certificate` - (Optional) Certificate to be used as client certificate while TLS handshaking to the upstream server.\n* `tls_verify` - (Optional) Whether to enable verification of upstream server TLS certificate.\n* `tls_verify_depth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.\n* `ca_certificates` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.\n\n\n## Import\n\nTo import a service\n\n```sh\n $ pulumi import kong:index/service:Service \u003cservice_identifier\u003e \u003cservice_id\u003e\n```\n\n ",
             "properties": {
                 "connectTimeout": {
                     "type": "integer"
@@ -1139,9 +1147,11 @@
             }
         },
         "kong:index/target:Target": {
+            "description": "{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst target = new kong.Target(\"target\", {\n    target: \"sample_target:80\",\n    upstreamId: kong_upstream_upstream.id,\n    weight: 10,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\ntarget = kong.Target(\"target\",\n    target=\"sample_target:80\",\n    upstream_id=kong_upstream[\"upstream\"][\"id\"],\n    weight=10)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var target = new Kong.Target(\"target\", new Kong.TargetArgs\n        {\n            Target = \"sample_target:80\",\n            UpstreamId = kong_upstream.Upstream.Id,\n            Weight = 10,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewTarget(ctx, \"target\", \u0026kong.TargetArgs{\n\t\t\tTarget:     pulumi.String(\"sample_target:80\"),\n\t\t\tUpstreamId: pulumi.Any(kong_upstream.Upstream.Id),\n\t\t\tWeight:     pulumi.Int(10),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a target use a combination of the upstream id and the target id as follows\n\n```sh\n $ pulumi import kong:index/target:Target \u003ctarget_identifier\u003e \u003cupstream_id\u003e/\u003ctarget_id\u003e\n```\n\n ",
             "properties": {
                 "target": {
                     "type": "string",
+                    "description": "is the target address (IP or hostname) and port. If omitted the port defaults to 8000.\n",
                     "language": {
                         "csharp": {
                             "name": "TargetAddress"
@@ -1149,10 +1159,12 @@
                     }
                 },
                 "upstreamId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is the id of the upstream to apply this target to.\n"
                 },
                 "weight": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).\n"
                 }
             },
             "required": [
@@ -1163,6 +1175,7 @@
             "inputProperties": {
                 "target": {
                     "type": "string",
+                    "description": "is the target address (IP or hostname) and port. If omitted the port defaults to 8000.\n",
                     "language": {
                         "csharp": {
                             "name": "TargetAddress"
@@ -1170,10 +1183,12 @@
                     }
                 },
                 "upstreamId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is the id of the upstream to apply this target to.\n"
                 },
                 "weight": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).\n"
                 }
             },
             "requiredInputs": [
@@ -1186,6 +1201,7 @@
                 "properties": {
                     "target": {
                         "type": "string",
+                        "description": "is the target address (IP or hostname) and port. If omitted the port defaults to 8000.\n",
                         "language": {
                             "csharp": {
                                 "name": "TargetAddress"
@@ -1193,43 +1209,54 @@
                         }
                     },
                     "upstreamId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is the id of the upstream to apply this target to.\n"
                     },
                     "weight": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).\n"
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/upstream:Upstream": {
+            "description": "{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst upstream = new kong.Upstream(\"upstream\", {\n    hashFallback: \"cookie\",\n    hashFallbackHeader: \"FallbackHeaderName\",\n    hashOn: \"header\",\n    hashOnCookie: \"CookieName\",\n    hashOnCookiePath: \"/path\",\n    hashOnHeader: \"HeaderName\",\n    healthchecks: {\n        active: {\n            concurrency: 20,\n            healthy: {\n                httpStatuses: [\n                    200,\n                    201,\n                ],\n                interval: 5,\n                successes: 1,\n            },\n            httpPath: \"/status\",\n            httpsSni: \"some.domain.com\",\n            httpsVerifyCertificate: false,\n            timeout: 10,\n            type: \"https\",\n            unhealthy: {\n                httpFailures: 2,\n                httpStatuses: [\n                    500,\n                    501,\n                ],\n                interval: 3,\n                tcpFailures: 1,\n                timeouts: 7,\n            },\n        },\n        passive: {\n            healthy: {\n                httpStatuses: [\n                    200,\n                    201,\n                    202,\n                ],\n                successes: 1,\n            },\n            type: \"https\",\n            unhealthy: {\n                httpFailures: 6,\n                httpStatuses: [\n                    500,\n                    501,\n                    502,\n                ],\n                tcpFailures: 5,\n                timeouts: 3,\n            },\n        },\n    },\n    slots: 10,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nupstream = kong.Upstream(\"upstream\",\n    hash_fallback=\"cookie\",\n    hash_fallback_header=\"FallbackHeaderName\",\n    hash_on=\"header\",\n    hash_on_cookie=\"CookieName\",\n    hash_on_cookie_path=\"/path\",\n    hash_on_header=\"HeaderName\",\n    healthchecks=kong.UpstreamHealthchecksArgs(\n        active=kong.UpstreamHealthchecksActiveArgs(\n            concurrency=20,\n            healthy=kong.UpstreamHealthchecksActiveHealthyArgs(\n                http_statuses=[\n                    200,\n                    201,\n                ],\n                interval=5,\n                successes=1,\n            ),\n            http_path=\"/status\",\n            https_sni=\"some.domain.com\",\n            https_verify_certificate=False,\n            timeout=10,\n            type=\"https\",\n            unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(\n                http_failures=2,\n                http_statuses=[\n                    500,\n                    501,\n                ],\n                interval=3,\n                tcp_failures=1,\n                timeouts=7,\n            ),\n        ),\n        passive=kong.UpstreamHealthchecksPassiveArgs(\n            healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(\n                http_statuses=[\n                    200,\n                    201,\n                    202,\n                ],\n                successes=1,\n            ),\n            type=\"https\",\n            unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(\n                http_failures=6,\n                http_statuses=[\n                    500,\n                    501,\n                    502,\n                ],\n                tcp_failures=5,\n                timeouts=3,\n            ),\n        ),\n    ),\n    slots=10)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var upstream = new Kong.Upstream(\"upstream\", new Kong.UpstreamArgs\n        {\n            HashFallback = \"cookie\",\n            HashFallbackHeader = \"FallbackHeaderName\",\n            HashOn = \"header\",\n            HashOnCookie = \"CookieName\",\n            HashOnCookiePath = \"/path\",\n            HashOnHeader = \"HeaderName\",\n            Healthchecks = new Kong.Inputs.UpstreamHealthchecksArgs\n            {\n                Active = new Kong.Inputs.UpstreamHealthchecksActiveArgs\n                {\n                    Concurrency = 20,\n                    Healthy = new Kong.Inputs.UpstreamHealthchecksActiveHealthyArgs\n                    {\n                        HttpStatuses = \n                        {\n                            200,\n                            201,\n                        },\n                        Interval = 5,\n                        Successes = 1,\n                    },\n                    HttpPath = \"/status\",\n                    HttpsSni = \"some.domain.com\",\n                    HttpsVerifyCertificate = false,\n                    Timeout = 10,\n                    Type = \"https\",\n                    Unhealthy = new Kong.Inputs.UpstreamHealthchecksActiveUnhealthyArgs\n                    {\n                        HttpFailures = 2,\n                        HttpStatuses = \n                        {\n                            500,\n                            501,\n                        },\n                        Interval = 3,\n                        TcpFailures = 1,\n                        Timeouts = 7,\n                    },\n                },\n                Passive = new Kong.Inputs.UpstreamHealthchecksPassiveArgs\n                {\n                    Healthy = new Kong.Inputs.UpstreamHealthchecksPassiveHealthyArgs\n                    {\n                        HttpStatuses = \n                        {\n                            200,\n                            201,\n                            202,\n                        },\n                        Successes = 1,\n                    },\n                    Type = \"https\",\n                    Unhealthy = new Kong.Inputs.UpstreamHealthchecksPassiveUnhealthyArgs\n                    {\n                        HttpFailures = 6,\n                        HttpStatuses = \n                        {\n                            500,\n                            501,\n                            502,\n                        },\n                        TcpFailures = 5,\n                        Timeouts = 3,\n                    },\n                },\n            },\n            Slots = 10,\n        });\n    }\n\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import an upstream\n\n```sh\n $ pulumi import kong:index/upstream:Upstream \u003cupstream_identifier\u003e \u003cupstream_id\u003e\n```\n\n ",
             "properties": {
                 "hashFallback": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.\n"
                 },
                 "hashFallbackHeader": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.\n"
                 },
                 "hashOn": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.\n"
                 },
                 "hashOnCookie": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.\n"
                 },
                 "hashOnCookiePath": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.\n* `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.\n* `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.\n* `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.\n* `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.\n* `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.\n* `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.\n* `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.\n* `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.\n* `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.\n* `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.\n* `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.\n* `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.\n* `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.\n* `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.\n"
                 },
                 "hashOnHeader": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.\n"
                 },
                 "healthchecks": {
                     "$ref": "#/types/kong:index/UpstreamHealthchecks:UpstreamHealthchecks"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a hostname, which must be equal to the host of a Service.\n"
                 },
                 "slots": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).\n"
                 }
             },
             "required": [
@@ -1238,62 +1265,78 @@
             ],
             "inputProperties": {
                 "hashFallback": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.\n"
                 },
                 "hashFallbackHeader": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.\n"
                 },
                 "hashOn": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.\n"
                 },
                 "hashOnCookie": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.\n"
                 },
                 "hashOnCookiePath": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.\n* `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.\n* `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.\n* `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.\n* `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.\n* `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.\n* `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.\n* `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.\n* `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.\n* `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.\n* `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.\n* `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.\n* `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.\n* `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.\n* `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.\n"
                 },
                 "hashOnHeader": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.\n"
                 },
                 "healthchecks": {
                     "$ref": "#/types/kong:index/UpstreamHealthchecks:UpstreamHealthchecks"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "is a hostname, which must be equal to the host of a Service.\n"
                 },
                 "slots": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).\n"
                 }
             },
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Upstream resources.\n",
                 "properties": {
                     "hashFallback": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.\n"
                     },
                     "hashFallbackHeader": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.\n"
                     },
                     "hashOn": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.\n"
                     },
                     "hashOnCookie": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.\n"
                     },
                     "hashOnCookiePath": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.\n* `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.\n* `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.\n* `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.\n* `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.\n* `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.\n* `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.\n* `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.\n* `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.\n* `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.\n* `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.\n* `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.\n* `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.\n* `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.\n* `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.\n* `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.\n* `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.\n"
                     },
                     "hashOnHeader": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.\n"
                     },
                     "healthchecks": {
                         "$ref": "#/types/kong:index/UpstreamHealthchecks:UpstreamHealthchecks"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "is a hostname, which must be equal to the host of a Service.\n"
                     },
                     "slots": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).\n"
                     }
                 },
                 "type": "object"

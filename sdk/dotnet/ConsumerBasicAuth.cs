@@ -9,18 +9,69 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    /// <summary>
+    /// ## # kong.ConsumerBasicAuth
+    /// 
+    /// Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myConsumer = new Kong.Consumer("myConsumer", new Kong.ConsumerArgs
+    ///         {
+    ///             CustomId = "123",
+    ///             Username = "User1",
+    ///         });
+    ///         var basicAuthPlugin = new Kong.Plugin("basicAuthPlugin", new Kong.PluginArgs
+    ///         {
+    ///         });
+    ///         var consumerBasicAuth = new Kong.ConsumerBasicAuth("consumerBasicAuth", new Kong.ConsumerBasicAuthArgs
+    ///         {
+    ///             ConsumerId = myConsumer.Id,
+    ///             Password = "bar_updated",
+    ///             Tags = 
+    ///             {
+    ///                 "myTag",
+    ///                 "anotherTag",
+    ///             },
+    ///             Username = "foo_updated",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [KongResourceType("kong:index/consumerBasicAuth:ConsumerBasicAuth")]
     public partial class ConsumerBasicAuth : Pulumi.CustomResource
     {
+        /// <summary>
+        /// the id of the consumer to be configured with basic auth
+        /// </summary>
         [Output("consumerId")]
         public Output<string> ConsumerId { get; private set; } = null!;
 
+        /// <summary>
+        /// password to be used for basic auth
+        /// </summary>
         [Output("password")]
         public Output<string> Password { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of strings associated with the consumer basic auth for grouping and filtering.
+        /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
+        /// <summary>
+        /// username to be used for basic auth
+        /// </summary>
         [Output("username")]
         public Output<string> Username { get; private set; } = null!;
 
@@ -70,20 +121,33 @@ namespace Pulumi.Kong
 
     public sealed class ConsumerBasicAuthArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// the id of the consumer to be configured with basic auth
+        /// </summary>
         [Input("consumerId", required: true)]
         public Input<string> ConsumerId { get; set; } = null!;
 
+        /// <summary>
+        /// password to be used for basic auth
+        /// </summary>
         [Input("password", required: true)]
         public Input<string> Password { get; set; } = null!;
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the consumer basic auth for grouping and filtering.
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
         }
 
+        /// <summary>
+        /// username to be used for basic auth
+        /// </summary>
         [Input("username", required: true)]
         public Input<string> Username { get; set; } = null!;
 
@@ -94,20 +158,33 @@ namespace Pulumi.Kong
 
     public sealed class ConsumerBasicAuthState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// the id of the consumer to be configured with basic auth
+        /// </summary>
         [Input("consumerId")]
         public Input<string>? ConsumerId { get; set; }
 
+        /// <summary>
+        /// password to be used for basic auth
+        /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the consumer basic auth for grouping and filtering.
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
         }
 
+        /// <summary>
+        /// username to be used for basic auth
+        /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 

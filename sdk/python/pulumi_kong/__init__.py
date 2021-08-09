@@ -7,7 +7,6 @@ from .certificate import *
 from .consumer import *
 from .consumer_acl import *
 from .consumer_basic_auth import *
-from .jwt_auth import *
 from .plugin import *
 from .provider import *
 from .route import *
@@ -42,8 +41,6 @@ def _register_module():
                 return ConsumerAcl(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/consumerBasicAuth:ConsumerBasicAuth":
                 return ConsumerBasicAuth(name, pulumi.ResourceOptions(urn=urn))
-            elif typ == "kong:index/jwtAuth:JwtAuth":
-                return JwtAuth(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/plugin:Plugin":
                 return Plugin(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/route:Route":
@@ -63,7 +60,6 @@ def _register_module():
     pulumi.runtime.register_resource_module("kong", "index/consumer", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/consumerAcl", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/consumerBasicAuth", _module_instance)
-    pulumi.runtime.register_resource_module("kong", "index/jwtAuth", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/plugin", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/route", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/service", _module_instance)

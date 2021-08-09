@@ -5,6 +5,73 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * ## # kong.Route
+ *
+ * The route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).
+ *
+ * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const route = new kong.Route("route", {
+ *     protocols: [
+ *         "http",
+ *         "https",
+ *     ],
+ *     methods: [
+ *         "GET",
+ *         "POST",
+ *     ],
+ *     hosts: ["example2.com"],
+ *     paths: ["/test"],
+ *     stripPath: false,
+ *     preserveHost: true,
+ *     regexPriority: 1,
+ *     serviceId: kong_service.service.id,
+ * });
+ * ```
+ *
+ * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const route = new kong.Route("route", {
+ *     protocols: ["tcp"],
+ *     stripPath: true,
+ *     preserveHost: false,
+ *     sources: [
+ *         {
+ *             ip: "192.168.1.1",
+ *             port: 80,
+ *         },
+ *         {
+ *             ip: "192.168.1.2",
+ *         },
+ *     ],
+ *     destinations: [{
+ *         ip: "172.10.1.1",
+ *         port: 81,
+ *     }],
+ *     snis: ["foo.com"],
+ *     serviceId: kong_service.service.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * To import a route
+ *
+ * ```sh
+ *  $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+ * ```
+ */
 export class Route extends pulumi.CustomResource {
     /**
      * Get an existing Route resource's state with the given name, ID, and optional extra
@@ -33,17 +100,53 @@ export class Route extends pulumi.CustomResource {
         return obj['__pulumiType'] === Route.__pulumiType;
     }
 
+    /**
+     * A list of destination `ip` and `port`
+     */
     public readonly destinations!: pulumi.Output<outputs.RouteDestination[] | undefined>;
+    /**
+     * A list of domain names that match this Route
+     */
     public readonly hosts!: pulumi.Output<string[] | undefined>;
+    /**
+     * A list of HTTP methods that match this Route
+     */
     public readonly methods!: pulumi.Output<string[] | undefined>;
+    /**
+     * The name of the route
+     */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * A list of paths that match this Route
+     */
     public readonly paths!: pulumi.Output<string[] | undefined>;
+    /**
+     * When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+     */
     public readonly preserveHost!: pulumi.Output<boolean | undefined>;
+    /**
+     * The list of protocols to use
+     */
     public readonly protocols!: pulumi.Output<string[]>;
+    /**
+     * A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+     */
     public readonly regexPriority!: pulumi.Output<number | undefined>;
+    /**
+     * Service ID to map to
+     */
     public readonly serviceId!: pulumi.Output<string>;
+    /**
+     * A list of SNIs that match this Route when using stream routing.
+     */
     public readonly snis!: pulumi.Output<string[] | undefined>;
+    /**
+     * A list of source `ip` and `port`
+     */
     public readonly sources!: pulumi.Output<outputs.RouteSource[] | undefined>;
+    /**
+     * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+     */
     public readonly stripPath!: pulumi.Output<boolean | undefined>;
 
     /**
@@ -103,17 +206,53 @@ export class Route extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Route resources.
  */
 export interface RouteState {
+    /**
+     * A list of destination `ip` and `port`
+     */
     readonly destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[]>;
+    /**
+     * A list of domain names that match this Route
+     */
     readonly hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of HTTP methods that match this Route
+     */
     readonly methods?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The name of the route
+     */
     readonly name?: pulumi.Input<string>;
+    /**
+     * A list of paths that match this Route
+     */
     readonly paths?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+     */
     readonly preserveHost?: pulumi.Input<boolean>;
+    /**
+     * The list of protocols to use
+     */
     readonly protocols?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+     */
     readonly regexPriority?: pulumi.Input<number>;
+    /**
+     * Service ID to map to
+     */
     readonly serviceId?: pulumi.Input<string>;
+    /**
+     * A list of SNIs that match this Route when using stream routing.
+     */
     readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of source `ip` and `port`
+     */
     readonly sources?: pulumi.Input<pulumi.Input<inputs.RouteSource>[]>;
+    /**
+     * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+     */
     readonly stripPath?: pulumi.Input<boolean>;
 }
 
@@ -121,16 +260,52 @@ export interface RouteState {
  * The set of arguments for constructing a Route resource.
  */
 export interface RouteArgs {
+    /**
+     * A list of destination `ip` and `port`
+     */
     readonly destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[]>;
+    /**
+     * A list of domain names that match this Route
+     */
     readonly hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of HTTP methods that match this Route
+     */
     readonly methods?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The name of the route
+     */
     readonly name?: pulumi.Input<string>;
+    /**
+     * A list of paths that match this Route
+     */
     readonly paths?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+     */
     readonly preserveHost?: pulumi.Input<boolean>;
+    /**
+     * The list of protocols to use
+     */
     readonly protocols: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+     */
     readonly regexPriority?: pulumi.Input<number>;
+    /**
+     * Service ID to map to
+     */
     readonly serviceId: pulumi.Input<string>;
+    /**
+     * A list of SNIs that match this Route when using stream routing.
+     */
     readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of source `ip` and `port`
+     */
     readonly sources?: pulumi.Input<pulumi.Input<inputs.RouteSource>[]>;
+    /**
+     * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+     */
     readonly stripPath?: pulumi.Input<boolean>;
 }

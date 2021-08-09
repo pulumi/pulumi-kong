@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## # kong.ConsumerBasicAuth
+ *
+ * Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const myConsumer = new kong.Consumer("my_consumer", {
+ *     customId: "123",
+ *     username: "User1",
+ * });
+ * const basicAuthPlugin = new kong.Plugin("basic_auth_plugin", {});
+ * const consumerBasicAuth = new kong.ConsumerBasicAuth("consumer_basic_auth", {
+ *     consumerId: myConsumer.id,
+ *     password: "bar_updated",
+ *     tags: [
+ *         "myTag",
+ *         "anotherTag",
+ *     ],
+ *     username: "foo_updated",
+ * });
+ * ```
+ */
 export class ConsumerBasicAuth extends pulumi.CustomResource {
     /**
      * Get an existing ConsumerBasicAuth resource's state with the given name, ID, and optional extra
@@ -32,9 +59,21 @@ export class ConsumerBasicAuth extends pulumi.CustomResource {
         return obj['__pulumiType'] === ConsumerBasicAuth.__pulumiType;
     }
 
+    /**
+     * the id of the consumer to be configured with basic auth
+     */
     public readonly consumerId!: pulumi.Output<string>;
+    /**
+     * password to be used for basic auth
+     */
     public readonly password!: pulumi.Output<string>;
+    /**
+     * A list of strings associated with the consumer basic auth for grouping and filtering.
+     */
     public readonly tags!: pulumi.Output<string[] | undefined>;
+    /**
+     * username to be used for basic auth
+     */
     public readonly username!: pulumi.Output<string>;
 
     /**
@@ -81,9 +120,21 @@ export class ConsumerBasicAuth extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ConsumerBasicAuth resources.
  */
 export interface ConsumerBasicAuthState {
+    /**
+     * the id of the consumer to be configured with basic auth
+     */
     readonly consumerId?: pulumi.Input<string>;
+    /**
+     * password to be used for basic auth
+     */
     readonly password?: pulumi.Input<string>;
+    /**
+     * A list of strings associated with the consumer basic auth for grouping and filtering.
+     */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * username to be used for basic auth
+     */
     readonly username?: pulumi.Input<string>;
 }
 
@@ -91,8 +142,20 @@ export interface ConsumerBasicAuthState {
  * The set of arguments for constructing a ConsumerBasicAuth resource.
  */
 export interface ConsumerBasicAuthArgs {
+    /**
+     * the id of the consumer to be configured with basic auth
+     */
     readonly consumerId: pulumi.Input<string>;
+    /**
+     * password to be used for basic auth
+     */
     readonly password: pulumi.Input<string>;
+    /**
+     * A list of strings associated with the consumer basic auth for grouping and filtering.
+     */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * username to be used for basic auth
+     */
     readonly username: pulumi.Input<string>;
 }

@@ -9,15 +9,62 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Kong
 {
+    /// <summary>
+    /// ## # kong.Certificate
+    /// 
+    /// For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var certificate = new Kong.Certificate("certificate", new Kong.CertificateArgs
+    ///         {
+    ///             Certificate = "public key --- 123 ----",
+    ///             PrivateKey = "private key --- 456 ----",
+    ///             Snis = 
+    ///             {
+    ///                 "foo.com",
+    ///                 "bar.com",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// To import a certificate
+    /// 
+    /// ```sh
+    ///  $ pulumi import kong:index/certificate:Certificate &lt;certifcate_identifier&gt; &lt;certificate_id&gt;
+    /// ```
+    /// </summary>
     [KongResourceType("kong:index/certificate:Certificate")]
     public partial class Certificate : Pulumi.CustomResource
     {
+        /// <summary>
+        /// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+        /// </summary>
         [Output("certificate")]
         public Output<string> Cert { get; private set; } = null!;
 
+        /// <summary>
+        /// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+        /// </summary>
         [Output("privateKey")]
         public Output<string?> PrivateKey { get; private set; } = null!;
 
+        /// <summary>
+        /// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        /// </summary>
         [Output("snis")]
         public Output<ImmutableArray<string>> Snis { get; private set; } = null!;
 
@@ -67,14 +114,24 @@ namespace Pulumi.Kong
 
     public sealed class CertificateArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+        /// </summary>
         [Input("certificate", required: true)]
         public Input<string> Cert { get; set; } = null!;
 
+        /// <summary>
+        /// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+        /// </summary>
         [Input("privateKey")]
         public Input<string>? PrivateKey { get; set; }
 
         [Input("snis")]
         private InputList<string>? _snis;
+
+        /// <summary>
+        /// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        /// </summary>
         public InputList<string> Snis
         {
             get => _snis ?? (_snis = new InputList<string>());
@@ -88,14 +145,24 @@ namespace Pulumi.Kong
 
     public sealed class CertificateState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
+        /// </summary>
         [Input("certificate")]
         public Input<string>? Cert { get; set; }
 
+        /// <summary>
+        /// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
+        /// </summary>
         [Input("privateKey")]
         public Input<string>? PrivateKey { get; set; }
 
         [Input("snis")]
         private InputList<string>? _snis;
+
+        /// <summary>
+        /// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        /// </summary>
         public InputList<string> Snis
         {
             get => _snis ?? (_snis = new InputList<string>());

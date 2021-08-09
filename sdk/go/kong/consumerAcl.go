@@ -11,12 +11,61 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## # ConsumerAcl
+//
+// Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
+// 			CustomId: pulumi.String("123"),
+// 			Username: pulumi.String("User1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewPlugin(ctx, "aclPlugin", &kong.PluginArgs{
+// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v", "	{\n", "		\"allow\": [\"group1\", \"group2\"]\n", "	}\n", "\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewConsumerAcl(ctx, "consumerAcl", &kong.ConsumerAclArgs{
+// 			ConsumerId: myConsumer.ID(),
+// 			Group:      pulumi.String("group2"),
+// 			Tags: pulumi.StringArray{
+// 				pulumi.String("myTag"),
+// 				pulumi.String("otherTag"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ConsumerAcl struct {
 	pulumi.CustomResourceState
 
-	ConsumerId pulumi.StringOutput      `pulumi:"consumerId"`
-	Group      pulumi.StringOutput      `pulumi:"group"`
-	Tags       pulumi.StringArrayOutput `pulumi:"tags"`
+	// the id of the consumer to be configured
+	ConsumerId pulumi.StringOutput `pulumi:"consumerId"`
+	// the acl group
+	Group pulumi.StringOutput `pulumi:"group"`
+	// A list of strings associated with the consumer acl for grouping and filtering.
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
 // NewConsumerAcl registers a new resource with the given unique name, arguments, and options.
@@ -54,15 +103,21 @@ func GetConsumerAcl(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ConsumerAcl resources.
 type consumerAclState struct {
-	ConsumerId *string  `pulumi:"consumerId"`
-	Group      *string  `pulumi:"group"`
-	Tags       []string `pulumi:"tags"`
+	// the id of the consumer to be configured
+	ConsumerId *string `pulumi:"consumerId"`
+	// the acl group
+	Group *string `pulumi:"group"`
+	// A list of strings associated with the consumer acl for grouping and filtering.
+	Tags []string `pulumi:"tags"`
 }
 
 type ConsumerAclState struct {
+	// the id of the consumer to be configured
 	ConsumerId pulumi.StringPtrInput
-	Group      pulumi.StringPtrInput
-	Tags       pulumi.StringArrayInput
+	// the acl group
+	Group pulumi.StringPtrInput
+	// A list of strings associated with the consumer acl for grouping and filtering.
+	Tags pulumi.StringArrayInput
 }
 
 func (ConsumerAclState) ElementType() reflect.Type {
@@ -70,16 +125,22 @@ func (ConsumerAclState) ElementType() reflect.Type {
 }
 
 type consumerAclArgs struct {
-	ConsumerId string   `pulumi:"consumerId"`
-	Group      string   `pulumi:"group"`
-	Tags       []string `pulumi:"tags"`
+	// the id of the consumer to be configured
+	ConsumerId string `pulumi:"consumerId"`
+	// the acl group
+	Group string `pulumi:"group"`
+	// A list of strings associated with the consumer acl for grouping and filtering.
+	Tags []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a ConsumerAcl resource.
 type ConsumerAclArgs struct {
+	// the id of the consumer to be configured
 	ConsumerId pulumi.StringInput
-	Group      pulumi.StringInput
-	Tags       pulumi.StringArrayInput
+	// the acl group
+	Group pulumi.StringInput
+	// A list of strings associated with the consumer acl for grouping and filtering.
+	Tags pulumi.StringArrayInput
 }
 
 func (ConsumerAclArgs) ElementType() reflect.Type {

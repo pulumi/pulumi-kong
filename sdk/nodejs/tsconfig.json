@@ -20,7 +20,6 @@
         "consumerAcl.ts",
         "consumerBasicAuth.ts",
         "index.ts",
-        "jwtAuth.ts",
         "plugin.ts",
         "provider.ts",
         "route.ts",
