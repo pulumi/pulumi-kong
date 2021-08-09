@@ -2,12 +2,15 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
+_(none)_
+
+---
+
+## 4.0.0 (2021-08-09)
 * Upgrade to v6.1.1 of the Kong Terraform Provider
   **Breaking Change:** The following resources have been removed from the provider:
   * `kong.Sni`
   * `kong.ConsumerPluginConfig`
-
----
 
 ## 3.0.0 (2021-04-19)
 * Depend on Pulumi 3.0, which includes improvements to Python resource arguments and key translation, Go SDK performance,
