@@ -15,6 +15,7 @@ __all__ = ['UpstreamArgs', 'Upstream']
 @pulumi.input_type
 class UpstreamArgs:
     def __init__(__self__, *,
+                 client_certificate_id: Optional[pulumi.Input[str]] = None,
                  hash_fallback: Optional[pulumi.Input[str]] = None,
                  hash_fallback_header: Optional[pulumi.Input[str]] = None,
                  hash_on: Optional[pulumi.Input[str]] = None,
@@ -22,10 +23,13 @@ class UpstreamArgs:
                  hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
                  hash_on_header: Optional[pulumi.Input[str]] = None,
                  healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
+                 host_header: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 slots: Optional[pulumi.Input[int]] = None):
+                 slots: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Upstream resource.
+        :param pulumi.Input[str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
         :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
@@ -53,9 +57,13 @@ class UpstreamArgs:
                * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
                * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
         :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] host_header: The hostname to be used as Host header when proxying requests through Kong.
         :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
         :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Upstream for grouping and filtering.
         """
+        if client_certificate_id is not None:
+            pulumi.set(__self__, "client_certificate_id", client_certificate_id)
         if hash_fallback is not None:
             pulumi.set(__self__, "hash_fallback", hash_fallback)
         if hash_fallback_header is not None:
@@ -70,10 +78,26 @@ class UpstreamArgs:
             pulumi.set(__self__, "hash_on_header", hash_on_header)
         if healthchecks is not None:
             pulumi.set(__self__, "healthchecks", healthchecks)
+        if host_header is not None:
+            pulumi.set(__self__, "host_header", host_header)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if slots is not None:
             pulumi.set(__self__, "slots", slots)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="clientCertificateId")
+    def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+        """
+        return pulumi.get(self, "client_certificate_id")
+
+    @client_certificate_id.setter
+    def client_certificate_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "client_certificate_id", value)
 
     @property
     @pulumi.getter(name="hashFallback")
@@ -178,6 +202,18 @@ class UpstreamArgs:
         pulumi.set(self, "healthchecks", value)
 
     @property
+    @pulumi.getter(name="hostHeader")
+    def host_header(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hostname to be used as Host header when proxying requests through Kong.
+        """
+        return pulumi.get(self, "host_header")
+
+    @host_header.setter
+    def host_header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "host_header", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -200,11 +236,24 @@ class UpstreamArgs:
     @slots.setter
     def slots(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "slots", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Upstream for grouping and filtering.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 @pulumi.input_type
 class _UpstreamState:
     def __init__(__self__, *,
+                 client_certificate_id: Optional[pulumi.Input[str]] = None,
                  hash_fallback: Optional[pulumi.Input[str]] = None,
                  hash_fallback_header: Optional[pulumi.Input[str]] = None,
                  hash_on: Optional[pulumi.Input[str]] = None,
@@ -212,10 +261,13 @@ class _UpstreamState:
                  hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
                  hash_on_header: Optional[pulumi.Input[str]] = None,
                  healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
+                 host_header: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 slots: Optional[pulumi.Input[int]] = None):
+                 slots: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Upstream resources.
+        :param pulumi.Input[str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
         :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
@@ -243,9 +295,13 @@ class _UpstreamState:
                * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
                * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
         :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] host_header: The hostname to be used as Host header when proxying requests through Kong.
         :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
         :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Upstream for grouping and filtering.
         """
+        if client_certificate_id is not None:
+            pulumi.set(__self__, "client_certificate_id", client_certificate_id)
         if hash_fallback is not None:
             pulumi.set(__self__, "hash_fallback", hash_fallback)
         if hash_fallback_header is not None:
@@ -260,10 +316,26 @@ class _UpstreamState:
             pulumi.set(__self__, "hash_on_header", hash_on_header)
         if healthchecks is not None:
             pulumi.set(__self__, "healthchecks", healthchecks)
+        if host_header is not None:
+            pulumi.set(__self__, "host_header", host_header)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if slots is not None:
             pulumi.set(__self__, "slots", slots)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="clientCertificateId")
+    def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+        """
+        return pulumi.get(self, "client_certificate_id")
+
+    @client_certificate_id.setter
+    def client_certificate_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "client_certificate_id", value)
 
     @property
     @pulumi.getter(name="hashFallback")
@@ -368,6 +440,18 @@ class _UpstreamState:
         pulumi.set(self, "healthchecks", value)
 
     @property
+    @pulumi.getter(name="hostHeader")
+    def host_header(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hostname to be used as Host header when proxying requests through Kong.
+        """
+        return pulumi.get(self, "host_header")
+
+    @host_header.setter
+    def host_header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "host_header", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -390,6 +474,18 @@ class _UpstreamState:
     @slots.setter
     def slots(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "slots", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Upstream for grouping and filtering.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class Upstream(pulumi.CustomResource):
@@ -397,6 +493,7 @@ class Upstream(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 client_certificate_id: Optional[pulumi.Input[str]] = None,
                  hash_fallback: Optional[pulumi.Input[str]] = None,
                  hash_fallback_header: Optional[pulumi.Input[str]] = None,
                  hash_on: Optional[pulumi.Input[str]] = None,
@@ -404,8 +501,10 @@ class Upstream(pulumi.CustomResource):
                  hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
                  hash_on_header: Optional[pulumi.Input[str]] = None,
                  healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+                 host_header: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  slots: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         ## Example Usage
@@ -414,63 +513,79 @@ class Upstream(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
+        certificate = kong.Certificate("certificate",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["foo.com"])
         upstream = kong.Upstream("upstream",
-            hash_fallback="cookie",
-            hash_fallback_header="FallbackHeaderName",
+            slots=10,
             hash_on="header",
+            hash_fallback="cookie",
+            hash_on_header="HeaderName",
+            hash_fallback_header="FallbackHeaderName",
             hash_on_cookie="CookieName",
             hash_on_cookie_path="/path",
-            hash_on_header="HeaderName",
+            host_header="x-host",
+            tags=[
+                "a",
+                "b",
+            ],
+            client_certificate_id=certificate.id,
             healthchecks=kong.UpstreamHealthchecksArgs(
                 active=kong.UpstreamHealthchecksActiveArgs(
+                    type="https",
+                    http_path="/status",
+                    timeout=10,
                     concurrency=20,
+                    https_verify_certificate=False,
+                    https_sni="some.domain.com",
                     healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
+                        successes=1,
+                        interval=5,
                         http_statuses=[
                             200,
                             201,
                         ],
-                        interval=5,
-                        successes=1,
                     ),
-                    http_path="/status",
-                    https_sni="some.domain.com",
-                    https_verify_certificate=False,
-                    timeout=10,
-                    type="https",
                     unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
+                        timeouts=7,
+                        interval=3,
+                        tcp_failures=1,
                         http_failures=2,
                         http_statuses=[
                             500,
                             501,
                         ],
-                        interval=3,
-                        tcp_failures=1,
-                        timeouts=7,
                     ),
                 ),
                 passive=kong.UpstreamHealthchecksPassiveArgs(
+                    type="https",
                     healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
+                        successes=1,
                         http_statuses=[
                             200,
                             201,
                             202,
                         ],
-                        successes=1,
                     ),
-                    type="https",
                     unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
+                        timeouts=3,
+                        tcp_failures=5,
                         http_failures=6,
                         http_statuses=[
                             500,
                             501,
                             502,
                         ],
-                        tcp_failures=5,
-                        timeouts=3,
                     ),
                 ),
-            ),
-            slots=10)
+            ))
         ```
 
         ## Import
@@ -483,6 +598,7 @@ class Upstream(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
         :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
@@ -510,8 +626,10 @@ class Upstream(pulumi.CustomResource):
                * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
                * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
         :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] host_header: The hostname to be used as Host header when proxying requests through Kong.
         :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
         :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Upstream for grouping and filtering.
         """
         ...
     @overload
@@ -526,63 +644,79 @@ class Upstream(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
+        certificate = kong.Certificate("certificate",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["foo.com"])
         upstream = kong.Upstream("upstream",
-            hash_fallback="cookie",
-            hash_fallback_header="FallbackHeaderName",
+            slots=10,
             hash_on="header",
+            hash_fallback="cookie",
+            hash_on_header="HeaderName",
+            hash_fallback_header="FallbackHeaderName",
             hash_on_cookie="CookieName",
             hash_on_cookie_path="/path",
-            hash_on_header="HeaderName",
+            host_header="x-host",
+            tags=[
+                "a",
+                "b",
+            ],
+            client_certificate_id=certificate.id,
             healthchecks=kong.UpstreamHealthchecksArgs(
                 active=kong.UpstreamHealthchecksActiveArgs(
+                    type="https",
+                    http_path="/status",
+                    timeout=10,
                     concurrency=20,
+                    https_verify_certificate=False,
+                    https_sni="some.domain.com",
                     healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
+                        successes=1,
+                        interval=5,
                         http_statuses=[
                             200,
                             201,
                         ],
-                        interval=5,
-                        successes=1,
                     ),
-                    http_path="/status",
-                    https_sni="some.domain.com",
-                    https_verify_certificate=False,
-                    timeout=10,
-                    type="https",
                     unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
+                        timeouts=7,
+                        interval=3,
+                        tcp_failures=1,
                         http_failures=2,
                         http_statuses=[
                             500,
                             501,
                         ],
-                        interval=3,
-                        tcp_failures=1,
-                        timeouts=7,
                     ),
                 ),
                 passive=kong.UpstreamHealthchecksPassiveArgs(
+                    type="https",
                     healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
+                        successes=1,
                         http_statuses=[
                             200,
                             201,
                             202,
                         ],
-                        successes=1,
                     ),
-                    type="https",
                     unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
+                        timeouts=3,
+                        tcp_failures=5,
                         http_failures=6,
                         http_statuses=[
                             500,
                             501,
                             502,
                         ],
-                        tcp_failures=5,
-                        timeouts=3,
                     ),
                 ),
-            ),
-            slots=10)
+            ))
         ```
 
         ## Import
@@ -608,6 +742,7 @@ class Upstream(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 client_certificate_id: Optional[pulumi.Input[str]] = None,
                  hash_fallback: Optional[pulumi.Input[str]] = None,
                  hash_fallback_header: Optional[pulumi.Input[str]] = None,
                  hash_on: Optional[pulumi.Input[str]] = None,
@@ -615,8 +750,10 @@ class Upstream(pulumi.CustomResource):
                  hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
                  hash_on_header: Optional[pulumi.Input[str]] = None,
                  healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+                 host_header: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  slots: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -629,6 +766,7 @@ class Upstream(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = UpstreamArgs.__new__(UpstreamArgs)
 
+            __props__.__dict__["client_certificate_id"] = client_certificate_id
             __props__.__dict__["hash_fallback"] = hash_fallback
             __props__.__dict__["hash_fallback_header"] = hash_fallback_header
             __props__.__dict__["hash_on"] = hash_on
@@ -636,8 +774,10 @@ class Upstream(pulumi.CustomResource):
             __props__.__dict__["hash_on_cookie_path"] = hash_on_cookie_path
             __props__.__dict__["hash_on_header"] = hash_on_header
             __props__.__dict__["healthchecks"] = healthchecks
+            __props__.__dict__["host_header"] = host_header
             __props__.__dict__["name"] = name
             __props__.__dict__["slots"] = slots
+            __props__.__dict__["tags"] = tags
         super(Upstream, __self__).__init__(
             'kong:index/upstream:Upstream',
             resource_name,
@@ -648,6 +788,7 @@ class Upstream(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            client_certificate_id: Optional[pulumi.Input[str]] = None,
             hash_fallback: Optional[pulumi.Input[str]] = None,
             hash_fallback_header: Optional[pulumi.Input[str]] = None,
             hash_on: Optional[pulumi.Input[str]] = None,
@@ -655,8 +796,10 @@ class Upstream(pulumi.CustomResource):
             hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
             hash_on_header: Optional[pulumi.Input[str]] = None,
             healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+            host_header: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            slots: Optional[pulumi.Input[int]] = None) -> 'Upstream':
+            slots: Optional[pulumi.Input[int]] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Upstream':
         """
         Get an existing Upstream resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -664,6 +807,7 @@ class Upstream(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
         :param pulumi.Input[str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
@@ -691,13 +835,16 @@ class Upstream(pulumi.CustomResource):
                * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
                * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
         :param pulumi.Input[str] hash_on_header: is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+        :param pulumi.Input[str] host_header: The hostname to be used as Host header when proxying requests through Kong.
         :param pulumi.Input[str] name: is a hostname, which must be equal to the host of a Service.
         :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Upstream for grouping and filtering.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _UpstreamState.__new__(_UpstreamState)
 
+        __props__.__dict__["client_certificate_id"] = client_certificate_id
         __props__.__dict__["hash_fallback"] = hash_fallback
         __props__.__dict__["hash_fallback_header"] = hash_fallback_header
         __props__.__dict__["hash_on"] = hash_on
@@ -705,9 +852,19 @@ class Upstream(pulumi.CustomResource):
         __props__.__dict__["hash_on_cookie_path"] = hash_on_cookie_path
         __props__.__dict__["hash_on_header"] = hash_on_header
         __props__.__dict__["healthchecks"] = healthchecks
+        __props__.__dict__["host_header"] = host_header
         __props__.__dict__["name"] = name
         __props__.__dict__["slots"] = slots
+        __props__.__dict__["tags"] = tags
         return Upstream(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="clientCertificateId")
+    def client_certificate_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+        """
+        return pulumi.get(self, "client_certificate_id")
 
     @property
     @pulumi.getter(name="hashFallback")
@@ -784,6 +941,14 @@ class Upstream(pulumi.CustomResource):
         return pulumi.get(self, "healthchecks")
 
     @property
+    @pulumi.getter(name="hostHeader")
+    def host_header(self) -> pulumi.Output[Optional[str]]:
+        """
+        The hostname to be used as Host header when proxying requests through Kong.
+        """
+        return pulumi.get(self, "host_header")
+
+    @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
@@ -798,4 +963,12 @@ class Upstream(pulumi.CustomResource):
         is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         """
         return pulumi.get(self, "slots")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of strings associated with the Upstream for grouping and filtering.
+        """
+        return pulumi.get(self, "tags")
 

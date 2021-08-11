@@ -110,6 +110,109 @@ func (o RouteDestinationArrayOutput) Index(i pulumi.IntInput) RouteDestinationOu
 	}).(RouteDestinationOutput)
 }
 
+type RouteHeader struct {
+	// The name of the route
+	Name   string   `pulumi:"name"`
+	Values []string `pulumi:"values"`
+}
+
+// RouteHeaderInput is an input type that accepts RouteHeaderArgs and RouteHeaderOutput values.
+// You can construct a concrete instance of `RouteHeaderInput` via:
+//
+//          RouteHeaderArgs{...}
+type RouteHeaderInput interface {
+	pulumi.Input
+
+	ToRouteHeaderOutput() RouteHeaderOutput
+	ToRouteHeaderOutputWithContext(context.Context) RouteHeaderOutput
+}
+
+type RouteHeaderArgs struct {
+	// The name of the route
+	Name   pulumi.StringInput      `pulumi:"name"`
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (RouteHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteHeader)(nil)).Elem()
+}
+
+func (i RouteHeaderArgs) ToRouteHeaderOutput() RouteHeaderOutput {
+	return i.ToRouteHeaderOutputWithContext(context.Background())
+}
+
+func (i RouteHeaderArgs) ToRouteHeaderOutputWithContext(ctx context.Context) RouteHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteHeaderOutput)
+}
+
+// RouteHeaderArrayInput is an input type that accepts RouteHeaderArray and RouteHeaderArrayOutput values.
+// You can construct a concrete instance of `RouteHeaderArrayInput` via:
+//
+//          RouteHeaderArray{ RouteHeaderArgs{...} }
+type RouteHeaderArrayInput interface {
+	pulumi.Input
+
+	ToRouteHeaderArrayOutput() RouteHeaderArrayOutput
+	ToRouteHeaderArrayOutputWithContext(context.Context) RouteHeaderArrayOutput
+}
+
+type RouteHeaderArray []RouteHeaderInput
+
+func (RouteHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteHeader)(nil)).Elem()
+}
+
+func (i RouteHeaderArray) ToRouteHeaderArrayOutput() RouteHeaderArrayOutput {
+	return i.ToRouteHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i RouteHeaderArray) ToRouteHeaderArrayOutputWithContext(ctx context.Context) RouteHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteHeaderArrayOutput)
+}
+
+type RouteHeaderOutput struct{ *pulumi.OutputState }
+
+func (RouteHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteHeader)(nil)).Elem()
+}
+
+func (o RouteHeaderOutput) ToRouteHeaderOutput() RouteHeaderOutput {
+	return o
+}
+
+func (o RouteHeaderOutput) ToRouteHeaderOutputWithContext(ctx context.Context) RouteHeaderOutput {
+	return o
+}
+
+// The name of the route
+func (o RouteHeaderOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteHeader) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o RouteHeaderOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RouteHeader) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type RouteHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteHeader)(nil)).Elem()
+}
+
+func (o RouteHeaderArrayOutput) ToRouteHeaderArrayOutput() RouteHeaderArrayOutput {
+	return o
+}
+
+func (o RouteHeaderArrayOutput) ToRouteHeaderArrayOutputWithContext(ctx context.Context) RouteHeaderArrayOutput {
+	return o
+}
+
+func (o RouteHeaderArrayOutput) Index(i pulumi.IntInput) RouteHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteHeader {
+		return vs[0].([]RouteHeader)[vs[1].(int)]
+	}).(RouteHeaderOutput)
+}
+
 type RouteSource struct {
 	Ip   *string `pulumi:"ip"`
 	Port *int    `pulumi:"port"`
@@ -1395,6 +1498,8 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Timeouts() pulumi.IntPtrO
 func init() {
 	pulumi.RegisterOutputType(RouteDestinationOutput{})
 	pulumi.RegisterOutputType(RouteDestinationArrayOutput{})
+	pulumi.RegisterOutputType(RouteHeaderOutput{})
+	pulumi.RegisterOutputType(RouteHeaderArrayOutput{})
 	pulumi.RegisterOutputType(RouteSourceOutput{})
 	pulumi.RegisterOutputType(RouteSourceArrayOutput{})
 	pulumi.RegisterOutputType(UpstreamHealthchecksOutput{})

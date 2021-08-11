@@ -20,6 +20,8 @@ import (
 type Upstream struct {
 	pulumi.CustomResourceState
 
+	// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+	ClientCertificateId pulumi.StringPtrOutput `pulumi:"clientCertificateId"`
 	// is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
 	HashFallback pulumi.StringPtrOutput `pulumi:"hashFallback"`
 	// is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
@@ -54,10 +56,14 @@ type Upstream struct {
 	// is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
 	HashOnHeader pulumi.StringPtrOutput     `pulumi:"hashOnHeader"`
 	Healthchecks UpstreamHealthchecksOutput `pulumi:"healthchecks"`
+	// The hostname to be used as Host header when proxying requests through Kong.
+	HostHeader pulumi.StringPtrOutput `pulumi:"hostHeader"`
 	// is a hostname, which must be equal to the host of a Service.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
 	Slots pulumi.IntPtrOutput `pulumi:"slots"`
+	// A list of strings associated with the Upstream for grouping and filtering.
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
 // NewUpstream registers a new resource with the given unique name, arguments, and options.
@@ -89,6 +95,8 @@ func GetUpstream(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Upstream resources.
 type upstreamState struct {
+	// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+	ClientCertificateId *string `pulumi:"clientCertificateId"`
 	// is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
 	HashFallback *string `pulumi:"hashFallback"`
 	// is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
@@ -123,13 +131,19 @@ type upstreamState struct {
 	// is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
 	HashOnHeader *string               `pulumi:"hashOnHeader"`
 	Healthchecks *UpstreamHealthchecks `pulumi:"healthchecks"`
+	// The hostname to be used as Host header when proxying requests through Kong.
+	HostHeader *string `pulumi:"hostHeader"`
 	// is a hostname, which must be equal to the host of a Service.
 	Name *string `pulumi:"name"`
 	// is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
 	Slots *int `pulumi:"slots"`
+	// A list of strings associated with the Upstream for grouping and filtering.
+	Tags []string `pulumi:"tags"`
 }
 
 type UpstreamState struct {
+	// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+	ClientCertificateId pulumi.StringPtrInput
 	// is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
 	HashFallback pulumi.StringPtrInput
 	// is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
@@ -164,10 +178,14 @@ type UpstreamState struct {
 	// is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
 	HashOnHeader pulumi.StringPtrInput
 	Healthchecks UpstreamHealthchecksPtrInput
+	// The hostname to be used as Host header when proxying requests through Kong.
+	HostHeader pulumi.StringPtrInput
 	// is a hostname, which must be equal to the host of a Service.
 	Name pulumi.StringPtrInput
 	// is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
 	Slots pulumi.IntPtrInput
+	// A list of strings associated with the Upstream for grouping and filtering.
+	Tags pulumi.StringArrayInput
 }
 
 func (UpstreamState) ElementType() reflect.Type {
@@ -175,6 +193,8 @@ func (UpstreamState) ElementType() reflect.Type {
 }
 
 type upstreamArgs struct {
+	// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+	ClientCertificateId *string `pulumi:"clientCertificateId"`
 	// is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
 	HashFallback *string `pulumi:"hashFallback"`
 	// is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
@@ -209,14 +229,20 @@ type upstreamArgs struct {
 	// is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
 	HashOnHeader *string               `pulumi:"hashOnHeader"`
 	Healthchecks *UpstreamHealthchecks `pulumi:"healthchecks"`
+	// The hostname to be used as Host header when proxying requests through Kong.
+	HostHeader *string `pulumi:"hostHeader"`
 	// is a hostname, which must be equal to the host of a Service.
 	Name *string `pulumi:"name"`
 	// is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
 	Slots *int `pulumi:"slots"`
+	// A list of strings associated with the Upstream for grouping and filtering.
+	Tags []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Upstream resource.
 type UpstreamArgs struct {
+	// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+	ClientCertificateId pulumi.StringPtrInput
 	// is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
 	HashFallback pulumi.StringPtrInput
 	// is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
@@ -251,10 +277,14 @@ type UpstreamArgs struct {
 	// is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
 	HashOnHeader pulumi.StringPtrInput
 	Healthchecks UpstreamHealthchecksPtrInput
+	// The hostname to be used as Host header when proxying requests through Kong.
+	HostHeader pulumi.StringPtrInput
 	// is a hostname, which must be equal to the host of a Service.
 	Name pulumi.StringPtrInput
 	// is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
 	Slots pulumi.IntPtrInput
+	// A list of strings associated with the Upstream for grouping and filtering.
+	Tags pulumi.StringArrayInput
 }
 
 func (UpstreamArgs) ElementType() reflect.Type {

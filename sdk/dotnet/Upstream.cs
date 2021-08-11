@@ -20,62 +20,87 @@ namespace Pulumi.Kong
     /// {
     ///     public MyStack()
     ///     {
+    ///         var certificate = new Kong.Certificate("certificate", new Kong.CertificateArgs
+    ///         {
+    ///             Certificate = @"    -----BEGIN CERTIFICATE-----
+    ///     ......
+    ///     -----END CERTIFICATE-----
+    /// ",
+    ///             PrivateKey = @"    -----BEGIN PRIVATE KEY-----
+    ///     .....
+    ///     -----END PRIVATE KEY-----
+    /// ",
+    ///             Snis = 
+    ///             {
+    ///                 "foo.com",
+    ///             },
+    ///         });
     ///         var upstream = new Kong.Upstream("upstream", new Kong.UpstreamArgs
     ///         {
-    ///             HashFallback = "cookie",
-    ///             HashFallbackHeader = "FallbackHeaderName",
+    ///             Slots = 10,
     ///             HashOn = "header",
+    ///             HashFallback = "cookie",
+    ///             HashOnHeader = "HeaderName",
+    ///             HashFallbackHeader = "FallbackHeaderName",
     ///             HashOnCookie = "CookieName",
     ///             HashOnCookiePath = "/path",
-    ///             HashOnHeader = "HeaderName",
+    ///             HostHeader = "x-host",
+    ///             Tags = 
+    ///             {
+    ///                 "a",
+    ///                 "b",
+    ///             },
+    ///             ClientCertificateId = certificate.Id,
     ///             Healthchecks = new Kong.Inputs.UpstreamHealthchecksArgs
     ///             {
     ///                 Active = new Kong.Inputs.UpstreamHealthchecksActiveArgs
     ///                 {
+    ///                     Type = "https",
+    ///                     HttpPath = "/status",
+    ///                     Timeout = 10,
     ///                     Concurrency = 20,
+    ///                     HttpsVerifyCertificate = false,
+    ///                     HttpsSni = "some.domain.com",
     ///                     Healthy = new Kong.Inputs.UpstreamHealthchecksActiveHealthyArgs
     ///                     {
+    ///                         Successes = 1,
+    ///                         Interval = 5,
     ///                         HttpStatuses = 
     ///                         {
     ///                             200,
     ///                             201,
     ///                         },
-    ///                         Interval = 5,
-    ///                         Successes = 1,
     ///                     },
-    ///                     HttpPath = "/status",
-    ///                     HttpsSni = "some.domain.com",
-    ///                     HttpsVerifyCertificate = false,
-    ///                     Timeout = 10,
-    ///                     Type = "https",
     ///                     Unhealthy = new Kong.Inputs.UpstreamHealthchecksActiveUnhealthyArgs
     ///                     {
+    ///                         Timeouts = 7,
+    ///                         Interval = 3,
+    ///                         TcpFailures = 1,
     ///                         HttpFailures = 2,
     ///                         HttpStatuses = 
     ///                         {
     ///                             500,
     ///                             501,
     ///                         },
-    ///                         Interval = 3,
-    ///                         TcpFailures = 1,
-    ///                         Timeouts = 7,
     ///                     },
     ///                 },
     ///                 Passive = new Kong.Inputs.UpstreamHealthchecksPassiveArgs
     ///                 {
+    ///                     Type = "https",
     ///                     Healthy = new Kong.Inputs.UpstreamHealthchecksPassiveHealthyArgs
     ///                     {
+    ///                         Successes = 1,
     ///                         HttpStatuses = 
     ///                         {
     ///                             200,
     ///                             201,
     ///                             202,
     ///                         },
-    ///                         Successes = 1,
     ///                     },
-    ///                     Type = "https",
     ///                     Unhealthy = new Kong.Inputs.UpstreamHealthchecksPassiveUnhealthyArgs
     ///                     {
+    ///                         Timeouts = 3,
+    ///                         TcpFailures = 5,
     ///                         HttpFailures = 6,
     ///                         HttpStatuses = 
     ///                         {
@@ -83,12 +108,9 @@ namespace Pulumi.Kong
     ///                             501,
     ///                             502,
     ///                         },
-    ///                         TcpFailures = 5,
-    ///                         Timeouts = 3,
     ///                     },
     ///                 },
     ///             },
-    ///             Slots = 10,
     ///         });
     ///     }
     /// 
@@ -106,6 +128,12 @@ namespace Pulumi.Kong
     [KongResourceType("kong:index/upstream:Upstream")]
     public partial class Upstream : Pulumi.CustomResource
     {
+        /// <summary>
+        /// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+        /// </summary>
+        [Output("clientCertificateId")]
+        public Output<string?> ClientCertificateId { get; private set; } = null!;
+
         /// <summary>
         /// is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         /// </summary>
@@ -167,6 +195,12 @@ namespace Pulumi.Kong
         public Output<Outputs.UpstreamHealthchecks> Healthchecks { get; private set; } = null!;
 
         /// <summary>
+        /// The hostname to be used as Host header when proxying requests through Kong.
+        /// </summary>
+        [Output("hostHeader")]
+        public Output<string?> HostHeader { get; private set; } = null!;
+
+        /// <summary>
         /// is a hostname, which must be equal to the host of a Service.
         /// </summary>
         [Output("name")]
@@ -177,6 +211,12 @@ namespace Pulumi.Kong
         /// </summary>
         [Output("slots")]
         public Output<int?> Slots { get; private set; } = null!;
+
+        /// <summary>
+        /// A list of strings associated with the Upstream for grouping and filtering.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -224,6 +264,12 @@ namespace Pulumi.Kong
 
     public sealed class UpstreamArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+        /// </summary>
+        [Input("clientCertificateId")]
+        public Input<string>? ClientCertificateId { get; set; }
+
         /// <summary>
         /// is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         /// </summary>
@@ -285,6 +331,12 @@ namespace Pulumi.Kong
         public Input<Inputs.UpstreamHealthchecksArgs>? Healthchecks { get; set; }
 
         /// <summary>
+        /// The hostname to be used as Host header when proxying requests through Kong.
+        /// </summary>
+        [Input("hostHeader")]
+        public Input<string>? HostHeader { get; set; }
+
+        /// <summary>
         /// is a hostname, which must be equal to the host of a Service.
         /// </summary>
         [Input("name")]
@@ -296,6 +348,18 @@ namespace Pulumi.Kong
         [Input("slots")]
         public Input<int>? Slots { get; set; }
 
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Upstream for grouping and filtering.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
         public UpstreamArgs()
         {
         }
@@ -303,6 +367,12 @@ namespace Pulumi.Kong
 
     public sealed class UpstreamState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+        /// </summary>
+        [Input("clientCertificateId")]
+        public Input<string>? ClientCertificateId { get; set; }
+
         /// <summary>
         /// is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         /// </summary>
@@ -364,6 +434,12 @@ namespace Pulumi.Kong
         public Input<Inputs.UpstreamHealthchecksGetArgs>? Healthchecks { get; set; }
 
         /// <summary>
+        /// The hostname to be used as Host header when proxying requests through Kong.
+        /// </summary>
+        [Input("hostHeader")]
+        public Input<string>? HostHeader { get; set; }
+
+        /// <summary>
         /// is a hostname, which must be equal to the host of a Service.
         /// </summary>
         [Input("name")]
@@ -374,6 +450,18 @@ namespace Pulumi.Kong
         /// </summary>
         [Input("slots")]
         public Input<int>? Slots { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Upstream for grouping and filtering.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         public UpstreamState()
         {

@@ -48,6 +48,15 @@ import (
 // 			PreserveHost:  pulumi.Bool(true),
 // 			RegexPriority: pulumi.Int(1),
 // 			ServiceId:     pulumi.Any(kong_service.Service.Id),
+// 			Headers: kong.RouteHeaderArray{
+// 				&kong.RouteHeaderArgs{
+// 					Name: pulumi.String("x-test-1"),
+// 					Values: pulumi.StringArray{
+// 						pulumi.String("a"),
+// 						pulumi.String("b"),
+// 					},
+// 				},
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
@@ -115,12 +124,18 @@ type Route struct {
 
 	// A list of destination `ip` and `port`
 	Destinations RouteDestinationArrayOutput `pulumi:"destinations"`
+	// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+	Headers RouteHeaderArrayOutput `pulumi:"headers"`
 	// A list of domain names that match this Route
 	Hosts pulumi.StringArrayOutput `pulumi:"hosts"`
+	// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+	HttpsRedirectStatusCode pulumi.IntPtrOutput `pulumi:"httpsRedirectStatusCode"`
 	// A list of HTTP methods that match this Route
 	Methods pulumi.StringArrayOutput `pulumi:"methods"`
 	// The name of the route
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+	PathHandling pulumi.StringPtrOutput `pulumi:"pathHandling"`
 	// A list of paths that match this Route
 	Paths pulumi.StringArrayOutput `pulumi:"paths"`
 	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
@@ -129,6 +144,10 @@ type Route struct {
 	Protocols pulumi.StringArrayOutput `pulumi:"protocols"`
 	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
 	RegexPriority pulumi.IntPtrOutput `pulumi:"regexPriority"`
+	// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+	RequestBuffering pulumi.BoolPtrOutput `pulumi:"requestBuffering"`
+	// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+	ResponseBuffering pulumi.BoolPtrOutput `pulumi:"responseBuffering"`
 	// Service ID to map to
 	ServiceId pulumi.StringOutput `pulumi:"serviceId"`
 	// A list of SNIs that match this Route when using stream routing.
@@ -137,6 +156,8 @@ type Route struct {
 	Sources RouteSourceArrayOutput `pulumi:"sources"`
 	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
 	StripPath pulumi.BoolPtrOutput `pulumi:"stripPath"`
+	// A list of strings associated with the Route for grouping and filtering.
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
 // NewRoute registers a new resource with the given unique name, arguments, and options.
@@ -176,12 +197,18 @@ func GetRoute(ctx *pulumi.Context,
 type routeState struct {
 	// A list of destination `ip` and `port`
 	Destinations []RouteDestination `pulumi:"destinations"`
+	// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+	Headers []RouteHeader `pulumi:"headers"`
 	// A list of domain names that match this Route
 	Hosts []string `pulumi:"hosts"`
+	// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+	HttpsRedirectStatusCode *int `pulumi:"httpsRedirectStatusCode"`
 	// A list of HTTP methods that match this Route
 	Methods []string `pulumi:"methods"`
 	// The name of the route
 	Name *string `pulumi:"name"`
+	// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+	PathHandling *string `pulumi:"pathHandling"`
 	// A list of paths that match this Route
 	Paths []string `pulumi:"paths"`
 	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
@@ -190,6 +217,10 @@ type routeState struct {
 	Protocols []string `pulumi:"protocols"`
 	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
 	RegexPriority *int `pulumi:"regexPriority"`
+	// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+	RequestBuffering *bool `pulumi:"requestBuffering"`
+	// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+	ResponseBuffering *bool `pulumi:"responseBuffering"`
 	// Service ID to map to
 	ServiceId *string `pulumi:"serviceId"`
 	// A list of SNIs that match this Route when using stream routing.
@@ -198,17 +229,25 @@ type routeState struct {
 	Sources []RouteSource `pulumi:"sources"`
 	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
 	StripPath *bool `pulumi:"stripPath"`
+	// A list of strings associated with the Route for grouping and filtering.
+	Tags []string `pulumi:"tags"`
 }
 
 type RouteState struct {
 	// A list of destination `ip` and `port`
 	Destinations RouteDestinationArrayInput
+	// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+	Headers RouteHeaderArrayInput
 	// A list of domain names that match this Route
 	Hosts pulumi.StringArrayInput
+	// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+	HttpsRedirectStatusCode pulumi.IntPtrInput
 	// A list of HTTP methods that match this Route
 	Methods pulumi.StringArrayInput
 	// The name of the route
 	Name pulumi.StringPtrInput
+	// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+	PathHandling pulumi.StringPtrInput
 	// A list of paths that match this Route
 	Paths pulumi.StringArrayInput
 	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
@@ -217,6 +256,10 @@ type RouteState struct {
 	Protocols pulumi.StringArrayInput
 	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
 	RegexPriority pulumi.IntPtrInput
+	// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+	RequestBuffering pulumi.BoolPtrInput
+	// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+	ResponseBuffering pulumi.BoolPtrInput
 	// Service ID to map to
 	ServiceId pulumi.StringPtrInput
 	// A list of SNIs that match this Route when using stream routing.
@@ -225,6 +268,8 @@ type RouteState struct {
 	Sources RouteSourceArrayInput
 	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
 	StripPath pulumi.BoolPtrInput
+	// A list of strings associated with the Route for grouping and filtering.
+	Tags pulumi.StringArrayInput
 }
 
 func (RouteState) ElementType() reflect.Type {
@@ -234,12 +279,18 @@ func (RouteState) ElementType() reflect.Type {
 type routeArgs struct {
 	// A list of destination `ip` and `port`
 	Destinations []RouteDestination `pulumi:"destinations"`
+	// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+	Headers []RouteHeader `pulumi:"headers"`
 	// A list of domain names that match this Route
 	Hosts []string `pulumi:"hosts"`
+	// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+	HttpsRedirectStatusCode *int `pulumi:"httpsRedirectStatusCode"`
 	// A list of HTTP methods that match this Route
 	Methods []string `pulumi:"methods"`
 	// The name of the route
 	Name *string `pulumi:"name"`
+	// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+	PathHandling *string `pulumi:"pathHandling"`
 	// A list of paths that match this Route
 	Paths []string `pulumi:"paths"`
 	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
@@ -248,6 +299,10 @@ type routeArgs struct {
 	Protocols []string `pulumi:"protocols"`
 	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
 	RegexPriority *int `pulumi:"regexPriority"`
+	// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+	RequestBuffering *bool `pulumi:"requestBuffering"`
+	// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+	ResponseBuffering *bool `pulumi:"responseBuffering"`
 	// Service ID to map to
 	ServiceId string `pulumi:"serviceId"`
 	// A list of SNIs that match this Route when using stream routing.
@@ -256,18 +311,26 @@ type routeArgs struct {
 	Sources []RouteSource `pulumi:"sources"`
 	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
 	StripPath *bool `pulumi:"stripPath"`
+	// A list of strings associated with the Route for grouping and filtering.
+	Tags []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Route resource.
 type RouteArgs struct {
 	// A list of destination `ip` and `port`
 	Destinations RouteDestinationArrayInput
+	// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+	Headers RouteHeaderArrayInput
 	// A list of domain names that match this Route
 	Hosts pulumi.StringArrayInput
+	// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+	HttpsRedirectStatusCode pulumi.IntPtrInput
 	// A list of HTTP methods that match this Route
 	Methods pulumi.StringArrayInput
 	// The name of the route
 	Name pulumi.StringPtrInput
+	// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+	PathHandling pulumi.StringPtrInput
 	// A list of paths that match this Route
 	Paths pulumi.StringArrayInput
 	// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
@@ -276,6 +339,10 @@ type RouteArgs struct {
 	Protocols pulumi.StringArrayInput
 	// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
 	RegexPriority pulumi.IntPtrInput
+	// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+	RequestBuffering pulumi.BoolPtrInput
+	// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+	ResponseBuffering pulumi.BoolPtrInput
 	// Service ID to map to
 	ServiceId pulumi.StringInput
 	// A list of SNIs that match this Route when using stream routing.
@@ -284,6 +351,8 @@ type RouteArgs struct {
 	Sources RouteSourceArrayInput
 	// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
 	StripPath pulumi.BoolPtrInput
+	// A list of strings associated with the Route for grouping and filtering.
+	Tags pulumi.StringArrayInput
 }
 
 func (RouteArgs) ElementType() reflect.Type {

@@ -50,6 +50,18 @@ namespace Pulumi.Kong
     ///             PreserveHost = true,
     ///             RegexPriority = 1,
     ///             ServiceId = kong_service.Service.Id,
+    ///             Headers = 
+    ///             {
+    ///                 new Kong.Inputs.RouteHeaderArgs
+    ///                 {
+    ///                     Name = "x-test-1",
+    ///                     Values = 
+    ///                     {
+    ///                         "a",
+    ///                         "b",
+    ///                     },
+    ///                 },
+    ///             },
     ///         });
     ///     }
     /// 
@@ -123,10 +135,22 @@ namespace Pulumi.Kong
         public Output<ImmutableArray<Outputs.RouteDestination>> Destinations { get; private set; } = null!;
 
         /// <summary>
+        /// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+        /// </summary>
+        [Output("headers")]
+        public Output<ImmutableArray<Outputs.RouteHeader>> Headers { get; private set; } = null!;
+
+        /// <summary>
         /// A list of domain names that match this Route
         /// </summary>
         [Output("hosts")]
         public Output<ImmutableArray<string>> Hosts { get; private set; } = null!;
+
+        /// <summary>
+        /// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+        /// </summary>
+        [Output("httpsRedirectStatusCode")]
+        public Output<int?> HttpsRedirectStatusCode { get; private set; } = null!;
 
         /// <summary>
         /// A list of HTTP methods that match this Route
@@ -139,6 +163,12 @@ namespace Pulumi.Kong
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+        /// </summary>
+        [Output("pathHandling")]
+        public Output<string?> PathHandling { get; private set; } = null!;
 
         /// <summary>
         /// A list of paths that match this Route
@@ -165,6 +195,18 @@ namespace Pulumi.Kong
         public Output<int?> RegexPriority { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+        /// </summary>
+        [Output("requestBuffering")]
+        public Output<bool?> RequestBuffering { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+        /// </summary>
+        [Output("responseBuffering")]
+        public Output<bool?> ResponseBuffering { get; private set; } = null!;
+
+        /// <summary>
         /// Service ID to map to
         /// </summary>
         [Output("serviceId")]
@@ -187,6 +229,12 @@ namespace Pulumi.Kong
         /// </summary>
         [Output("stripPath")]
         public Output<bool?> StripPath { get; private set; } = null!;
+
+        /// <summary>
+        /// A list of strings associated with the Route for grouping and filtering.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -246,6 +294,18 @@ namespace Pulumi.Kong
             set => _destinations = value;
         }
 
+        [Input("headers")]
+        private InputList<Inputs.RouteHeaderArgs>? _headers;
+
+        /// <summary>
+        /// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+        /// </summary>
+        public InputList<Inputs.RouteHeaderArgs> Headers
+        {
+            get => _headers ?? (_headers = new InputList<Inputs.RouteHeaderArgs>());
+            set => _headers = value;
+        }
+
         [Input("hosts")]
         private InputList<string>? _hosts;
 
@@ -257,6 +317,12 @@ namespace Pulumi.Kong
             get => _hosts ?? (_hosts = new InputList<string>());
             set => _hosts = value;
         }
+
+        /// <summary>
+        /// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+        /// </summary>
+        [Input("httpsRedirectStatusCode")]
+        public Input<int>? HttpsRedirectStatusCode { get; set; }
 
         [Input("methods")]
         private InputList<string>? _methods;
@@ -275,6 +341,12 @@ namespace Pulumi.Kong
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+        /// </summary>
+        [Input("pathHandling")]
+        public Input<string>? PathHandling { get; set; }
 
         [Input("paths")]
         private InputList<string>? _paths;
@@ -313,6 +385,18 @@ namespace Pulumi.Kong
         public Input<int>? RegexPriority { get; set; }
 
         /// <summary>
+        /// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+        /// </summary>
+        [Input("requestBuffering")]
+        public Input<bool>? RequestBuffering { get; set; }
+
+        /// <summary>
+        /// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+        /// </summary>
+        [Input("responseBuffering")]
+        public Input<bool>? ResponseBuffering { get; set; }
+
+        /// <summary>
         /// Service ID to map to
         /// </summary>
         [Input("serviceId", required: true)]
@@ -348,6 +432,18 @@ namespace Pulumi.Kong
         [Input("stripPath")]
         public Input<bool>? StripPath { get; set; }
 
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Route for grouping and filtering.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
         public RouteArgs()
         {
         }
@@ -367,6 +463,18 @@ namespace Pulumi.Kong
             set => _destinations = value;
         }
 
+        [Input("headers")]
+        private InputList<Inputs.RouteHeaderGetArgs>? _headers;
+
+        /// <summary>
+        /// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+        /// </summary>
+        public InputList<Inputs.RouteHeaderGetArgs> Headers
+        {
+            get => _headers ?? (_headers = new InputList<Inputs.RouteHeaderGetArgs>());
+            set => _headers = value;
+        }
+
         [Input("hosts")]
         private InputList<string>? _hosts;
 
@@ -378,6 +486,12 @@ namespace Pulumi.Kong
             get => _hosts ?? (_hosts = new InputList<string>());
             set => _hosts = value;
         }
+
+        /// <summary>
+        /// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+        /// </summary>
+        [Input("httpsRedirectStatusCode")]
+        public Input<int>? HttpsRedirectStatusCode { get; set; }
 
         [Input("methods")]
         private InputList<string>? _methods;
@@ -396,6 +510,12 @@ namespace Pulumi.Kong
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+        /// </summary>
+        [Input("pathHandling")]
+        public Input<string>? PathHandling { get; set; }
 
         [Input("paths")]
         private InputList<string>? _paths;
@@ -434,6 +554,18 @@ namespace Pulumi.Kong
         public Input<int>? RegexPriority { get; set; }
 
         /// <summary>
+        /// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+        /// </summary>
+        [Input("requestBuffering")]
+        public Input<bool>? RequestBuffering { get; set; }
+
+        /// <summary>
+        /// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+        /// </summary>
+        [Input("responseBuffering")]
+        public Input<bool>? ResponseBuffering { get; set; }
+
+        /// <summary>
         /// Service ID to map to
         /// </summary>
         [Input("serviceId")]
@@ -468,6 +600,18 @@ namespace Pulumi.Kong
         /// </summary>
         [Input("stripPath")]
         public Input<bool>? StripPath { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Route for grouping and filtering.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         public RouteState()
         {

@@ -9,6 +9,14 @@ export interface RouteDestination {
     port?: pulumi.Input<number>;
 }
 
+export interface RouteHeader {
+    /**
+     * The name of the route
+     */
+    name: pulumi.Input<string>;
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface RouteSource {
     ip?: pulumi.Input<string>;
     port?: pulumi.Input<number>;

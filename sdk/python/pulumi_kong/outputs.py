@@ -11,6 +11,7 @@ from . import outputs
 
 __all__ = [
     'RouteDestination',
+    'RouteHeader',
     'RouteSource',
     'UpstreamHealthchecks',
     'UpstreamHealthchecksActive',
@@ -40,6 +41,31 @@ class RouteDestination(dict):
     @pulumi.getter
     def port(self) -> Optional[int]:
         return pulumi.get(self, "port")
+
+
+@pulumi.output_type
+class RouteHeader(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The name of the route
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of the route
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type

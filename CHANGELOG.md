@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Upgrade to v6.1.4 of the Kong Terraform Provider
 
 ---
 
