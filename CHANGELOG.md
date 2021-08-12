@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Upgrade to v6.1.4 of the Kong Terraform Provider
+_(none)_
 
 ---
+
+## 4.0.1 (2021-08-12)
+* Upgrade to v6.1.4 of the Kong Terraform Provider
 
 ## 4.0.0 (2021-08-09)
 * Upgrade to v6.1.1 of the Kong Terraform Provider
