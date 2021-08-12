@@ -9,6 +9,14 @@ export interface RouteDestination {
     port?: number;
 }
 
+export interface RouteHeader {
+    /**
+     * The name of the route
+     */
+    name: string;
+    values: string[];
+}
+
 export interface RouteSource {
     ip?: string;
     port?: number;

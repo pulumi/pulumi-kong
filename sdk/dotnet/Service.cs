@@ -39,6 +39,63 @@ namespace Pulumi.Kong
     /// 
     /// }
     /// ```
+    /// 
+    /// To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var certificate = new Kong.Certificate("certificate", new Kong.CertificateArgs
+    ///         {
+    ///             Certificate = @"    -----BEGIN CERTIFICATE-----
+    ///     ......
+    ///     -----END CERTIFICATE-----
+    /// ",
+    ///             PrivateKey = @"    -----BEGIN PRIVATE KEY-----
+    ///     .....
+    ///     -----END PRIVATE KEY-----
+    /// ",
+    ///             Snis = 
+    ///             {
+    ///                 "foo.com",
+    ///             },
+    ///         });
+    ///         var ca = new Kong.Certificate("ca", new Kong.CertificateArgs
+    ///         {
+    ///             Certificate = @"    -----BEGIN CERTIFICATE-----
+    ///     ......
+    ///     -----END CERTIFICATE-----
+    /// ",
+    ///             PrivateKey = @"    -----BEGIN PRIVATE KEY-----
+    ///     .....
+    ///     -----END PRIVATE KEY-----
+    /// ",
+    ///             Snis = 
+    ///             {
+    ///                 "ca.com",
+    ///             },
+    ///         });
+    ///         var service = new Kong.Service("service", new Kong.ServiceArgs
+    ///         {
+    ///             Protocol = "https",
+    ///             Host = "test.org",
+    ///             TlsVerify = true,
+    ///             TlsVerifyDepth = 2,
+    ///             ClientCertificateId = certificate.Id,
+    ///             CaCertificateIds = 
+    ///             {
+    ///                 ca.Id,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// ## Argument reference
     /// 
     /// * `name` - (Required) Service name
@@ -51,10 +108,10 @@ namespace Pulumi.Kong
     /// * `write_timeout` - (Optional, int) Write timout. Default(ms): 60000
     /// * `read_timeout` - (Optional, int) Read timeout. Default(ms): 60000
     /// * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
-    /// * `client_certificate` - (Optional) Certificate to be used as client certificate while TLS handshaking to the upstream server.
-    /// * `tls_verify` - (Optional) Whether to enable verification of upstream server TLS certificate.
+    /// * `client_certificate_id` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
+    /// * `tls_verify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
     /// * `tls_verify_depth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
-    /// * `ca_certificates` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+    /// * `ca_certificate_ids` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
     /// 
     /// ## Import
     /// 
@@ -67,6 +124,12 @@ namespace Pulumi.Kong
     [KongResourceType("kong:index/service:Service")]
     public partial class Service : Pulumi.CustomResource
     {
+        [Output("caCertificateIds")]
+        public Output<ImmutableArray<string>> CaCertificateIds { get; private set; } = null!;
+
+        [Output("clientCertificateId")]
+        public Output<string?> ClientCertificateId { get; private set; } = null!;
+
         [Output("connectTimeout")]
         public Output<int?> ConnectTimeout { get; private set; } = null!;
 
@@ -90,6 +153,15 @@ namespace Pulumi.Kong
 
         [Output("retries")]
         public Output<int?> Retries { get; private set; } = null!;
+
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
+
+        [Output("tlsVerify")]
+        public Output<bool?> TlsVerify { get; private set; } = null!;
+
+        [Output("tlsVerifyDepth")]
+        public Output<int?> TlsVerifyDepth { get; private set; } = null!;
 
         [Output("writeTimeout")]
         public Output<int?> WriteTimeout { get; private set; } = null!;
@@ -140,6 +212,17 @@ namespace Pulumi.Kong
 
     public sealed class ServiceArgs : Pulumi.ResourceArgs
     {
+        [Input("caCertificateIds")]
+        private InputList<string>? _caCertificateIds;
+        public InputList<string> CaCertificateIds
+        {
+            get => _caCertificateIds ?? (_caCertificateIds = new InputList<string>());
+            set => _caCertificateIds = value;
+        }
+
+        [Input("clientCertificateId")]
+        public Input<string>? ClientCertificateId { get; set; }
+
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
 
@@ -164,6 +247,20 @@ namespace Pulumi.Kong
         [Input("retries")]
         public Input<int>? Retries { get; set; }
 
+        [Input("tags")]
+        private InputList<string>? _tags;
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
+        [Input("tlsVerify")]
+        public Input<bool>? TlsVerify { get; set; }
+
+        [Input("tlsVerifyDepth")]
+        public Input<int>? TlsVerifyDepth { get; set; }
+
         [Input("writeTimeout")]
         public Input<int>? WriteTimeout { get; set; }
 
@@ -174,6 +271,17 @@ namespace Pulumi.Kong
 
     public sealed class ServiceState : Pulumi.ResourceArgs
     {
+        [Input("caCertificateIds")]
+        private InputList<string>? _caCertificateIds;
+        public InputList<string> CaCertificateIds
+        {
+            get => _caCertificateIds ?? (_caCertificateIds = new InputList<string>());
+            set => _caCertificateIds = value;
+        }
+
+        [Input("clientCertificateId")]
+        public Input<string>? ClientCertificateId { get; set; }
+
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
 
@@ -197,6 +305,20 @@ namespace Pulumi.Kong
 
         [Input("retries")]
         public Input<int>? Retries { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
+        [Input("tlsVerify")]
+        public Input<bool>? TlsVerify { get; set; }
+
+        [Input("tlsVerifyDepth")]
+        public Input<int>? TlsVerifyDepth { get; set; }
 
         [Input("writeTimeout")]
         public Input<int>? WriteTimeout { get; set; }

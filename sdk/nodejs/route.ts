@@ -33,6 +33,13 @@ import * as utilities from "./utilities";
  *     preserveHost: true,
  *     regexPriority: 1,
  *     serviceId: kong_service.service.id,
+ *     headers: [{
+ *         name: "x-test-1",
+ *         values: [
+ *             "a",
+ *             "b",
+ *         ],
+ *     }],
  * });
  * ```
  *
@@ -105,9 +112,17 @@ export class Route extends pulumi.CustomResource {
      */
     public readonly destinations!: pulumi.Output<outputs.RouteDestination[] | undefined>;
     /**
+     * One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+     */
+    public readonly headers!: pulumi.Output<outputs.RouteHeader[] | undefined>;
+    /**
      * A list of domain names that match this Route
      */
     public readonly hosts!: pulumi.Output<string[] | undefined>;
+    /**
+     * The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+     */
+    public readonly httpsRedirectStatusCode!: pulumi.Output<number | undefined>;
     /**
      * A list of HTTP methods that match this Route
      */
@@ -116,6 +131,10 @@ export class Route extends pulumi.CustomResource {
      * The name of the route
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+     */
+    public readonly pathHandling!: pulumi.Output<string | undefined>;
     /**
      * A list of paths that match this Route
      */
@@ -133,6 +152,14 @@ export class Route extends pulumi.CustomResource {
      */
     public readonly regexPriority!: pulumi.Output<number | undefined>;
     /**
+     * Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+     */
+    public readonly requestBuffering!: pulumi.Output<boolean | undefined>;
+    /**
+     * Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+     */
+    public readonly responseBuffering!: pulumi.Output<boolean | undefined>;
+    /**
      * Service ID to map to
      */
     public readonly serviceId!: pulumi.Output<string>;
@@ -148,6 +175,10 @@ export class Route extends pulumi.CustomResource {
      * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
      */
     public readonly stripPath!: pulumi.Output<boolean | undefined>;
+    /**
+     * A list of strings associated with the Route for grouping and filtering.
+     */
+    public readonly tags!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Route resource with the given unique name, arguments, and options.
@@ -163,17 +194,23 @@ export class Route extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as RouteState | undefined;
             inputs["destinations"] = state ? state.destinations : undefined;
+            inputs["headers"] = state ? state.headers : undefined;
             inputs["hosts"] = state ? state.hosts : undefined;
+            inputs["httpsRedirectStatusCode"] = state ? state.httpsRedirectStatusCode : undefined;
             inputs["methods"] = state ? state.methods : undefined;
             inputs["name"] = state ? state.name : undefined;
+            inputs["pathHandling"] = state ? state.pathHandling : undefined;
             inputs["paths"] = state ? state.paths : undefined;
             inputs["preserveHost"] = state ? state.preserveHost : undefined;
             inputs["protocols"] = state ? state.protocols : undefined;
             inputs["regexPriority"] = state ? state.regexPriority : undefined;
+            inputs["requestBuffering"] = state ? state.requestBuffering : undefined;
+            inputs["responseBuffering"] = state ? state.responseBuffering : undefined;
             inputs["serviceId"] = state ? state.serviceId : undefined;
             inputs["snis"] = state ? state.snis : undefined;
             inputs["sources"] = state ? state.sources : undefined;
             inputs["stripPath"] = state ? state.stripPath : undefined;
+            inputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as RouteArgs | undefined;
             if ((!args || args.protocols === undefined) && !opts.urn) {
@@ -183,17 +220,23 @@ export class Route extends pulumi.CustomResource {
                 throw new Error("Missing required property 'serviceId'");
             }
             inputs["destinations"] = args ? args.destinations : undefined;
+            inputs["headers"] = args ? args.headers : undefined;
             inputs["hosts"] = args ? args.hosts : undefined;
+            inputs["httpsRedirectStatusCode"] = args ? args.httpsRedirectStatusCode : undefined;
             inputs["methods"] = args ? args.methods : undefined;
             inputs["name"] = args ? args.name : undefined;
+            inputs["pathHandling"] = args ? args.pathHandling : undefined;
             inputs["paths"] = args ? args.paths : undefined;
             inputs["preserveHost"] = args ? args.preserveHost : undefined;
             inputs["protocols"] = args ? args.protocols : undefined;
             inputs["regexPriority"] = args ? args.regexPriority : undefined;
+            inputs["requestBuffering"] = args ? args.requestBuffering : undefined;
+            inputs["responseBuffering"] = args ? args.responseBuffering : undefined;
             inputs["serviceId"] = args ? args.serviceId : undefined;
             inputs["snis"] = args ? args.snis : undefined;
             inputs["sources"] = args ? args.sources : undefined;
             inputs["stripPath"] = args ? args.stripPath : undefined;
+            inputs["tags"] = args ? args.tags : undefined;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -211,9 +254,17 @@ export interface RouteState {
      */
     readonly destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[]>;
     /**
+     * One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+     */
+    readonly headers?: pulumi.Input<pulumi.Input<inputs.RouteHeader>[]>;
+    /**
      * A list of domain names that match this Route
      */
     readonly hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+     */
+    readonly httpsRedirectStatusCode?: pulumi.Input<number>;
     /**
      * A list of HTTP methods that match this Route
      */
@@ -222,6 +273,10 @@ export interface RouteState {
      * The name of the route
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+     */
+    readonly pathHandling?: pulumi.Input<string>;
     /**
      * A list of paths that match this Route
      */
@@ -239,6 +294,14 @@ export interface RouteState {
      */
     readonly regexPriority?: pulumi.Input<number>;
     /**
+     * Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+     */
+    readonly requestBuffering?: pulumi.Input<boolean>;
+    /**
+     * Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+     */
+    readonly responseBuffering?: pulumi.Input<boolean>;
+    /**
      * Service ID to map to
      */
     readonly serviceId?: pulumi.Input<string>;
@@ -254,6 +317,10 @@ export interface RouteState {
      * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
      */
     readonly stripPath?: pulumi.Input<boolean>;
+    /**
+     * A list of strings associated with the Route for grouping and filtering.
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -265,9 +332,17 @@ export interface RouteArgs {
      */
     readonly destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[]>;
     /**
+     * One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+     */
+    readonly headers?: pulumi.Input<pulumi.Input<inputs.RouteHeader>[]>;
+    /**
      * A list of domain names that match this Route
      */
     readonly hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+     */
+    readonly httpsRedirectStatusCode?: pulumi.Input<number>;
     /**
      * A list of HTTP methods that match this Route
      */
@@ -276,6 +351,10 @@ export interface RouteArgs {
      * The name of the route
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+     */
+    readonly pathHandling?: pulumi.Input<string>;
     /**
      * A list of paths that match this Route
      */
@@ -293,6 +372,14 @@ export interface RouteArgs {
      */
     readonly regexPriority?: pulumi.Input<number>;
     /**
+     * Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+     */
+    readonly requestBuffering?: pulumi.Input<boolean>;
+    /**
+     * Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+     */
+    readonly responseBuffering?: pulumi.Input<boolean>;
+    /**
      * Service ID to map to
      */
     readonly serviceId: pulumi.Input<string>;
@@ -308,4 +395,8 @@ export interface RouteArgs {
      * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
      */
     readonly stripPath?: pulumi.Input<boolean>;
+    /**
+     * A list of strings associated with the Route for grouping and filtering.
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

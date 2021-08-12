@@ -12,63 +12,80 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
+ * const certificate = new kong.Certificate("certificate", {
+ *     certificate: `    -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ * `,
+ *     privateKey: `    -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ * `,
+ *     snis: ["foo.com"],
+ * });
  * const upstream = new kong.Upstream("upstream", {
- *     hashFallback: "cookie",
- *     hashFallbackHeader: "FallbackHeaderName",
+ *     slots: 10,
  *     hashOn: "header",
+ *     hashFallback: "cookie",
+ *     hashOnHeader: "HeaderName",
+ *     hashFallbackHeader: "FallbackHeaderName",
  *     hashOnCookie: "CookieName",
  *     hashOnCookiePath: "/path",
- *     hashOnHeader: "HeaderName",
+ *     hostHeader: "x-host",
+ *     tags: [
+ *         "a",
+ *         "b",
+ *     ],
+ *     clientCertificateId: certificate.id,
  *     healthchecks: {
  *         active: {
+ *             type: "https",
+ *             httpPath: "/status",
+ *             timeout: 10,
  *             concurrency: 20,
+ *             httpsVerifyCertificate: false,
+ *             httpsSni: "some.domain.com",
  *             healthy: {
+ *                 successes: 1,
+ *                 interval: 5,
  *                 httpStatuses: [
  *                     200,
  *                     201,
  *                 ],
- *                 interval: 5,
- *                 successes: 1,
  *             },
- *             httpPath: "/status",
- *             httpsSni: "some.domain.com",
- *             httpsVerifyCertificate: false,
- *             timeout: 10,
- *             type: "https",
  *             unhealthy: {
+ *                 timeouts: 7,
+ *                 interval: 3,
+ *                 tcpFailures: 1,
  *                 httpFailures: 2,
  *                 httpStatuses: [
  *                     500,
  *                     501,
  *                 ],
- *                 interval: 3,
- *                 tcpFailures: 1,
- *                 timeouts: 7,
  *             },
  *         },
  *         passive: {
+ *             type: "https",
  *             healthy: {
+ *                 successes: 1,
  *                 httpStatuses: [
  *                     200,
  *                     201,
  *                     202,
  *                 ],
- *                 successes: 1,
  *             },
- *             type: "https",
  *             unhealthy: {
+ *                 timeouts: 3,
+ *                 tcpFailures: 5,
  *                 httpFailures: 6,
  *                 httpStatuses: [
  *                     500,
  *                     501,
  *                     502,
  *                 ],
- *                 tcpFailures: 5,
- *                 timeouts: 3,
  *             },
  *         },
  *     },
- *     slots: 10,
  * });
  * ```
  *
@@ -108,6 +125,10 @@ export class Upstream extends pulumi.CustomResource {
         return obj['__pulumiType'] === Upstream.__pulumiType;
     }
 
+    /**
+     * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+     */
+    public readonly clientCertificateId!: pulumi.Output<string | undefined>;
     /**
      * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      */
@@ -155,6 +176,10 @@ export class Upstream extends pulumi.CustomResource {
     public readonly hashOnHeader!: pulumi.Output<string | undefined>;
     public readonly healthchecks!: pulumi.Output<outputs.UpstreamHealthchecks>;
     /**
+     * The hostname to be used as Host header when proxying requests through Kong.
+     */
+    public readonly hostHeader!: pulumi.Output<string | undefined>;
+    /**
      * is a hostname, which must be equal to the host of a Service.
      */
     public readonly name!: pulumi.Output<string>;
@@ -162,6 +187,10 @@ export class Upstream extends pulumi.CustomResource {
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      */
     public readonly slots!: pulumi.Output<number | undefined>;
+    /**
+     * A list of strings associated with the Upstream for grouping and filtering.
+     */
+    public readonly tags!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Upstream resource with the given unique name, arguments, and options.
@@ -176,6 +205,7 @@ export class Upstream extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as UpstreamState | undefined;
+            inputs["clientCertificateId"] = state ? state.clientCertificateId : undefined;
             inputs["hashFallback"] = state ? state.hashFallback : undefined;
             inputs["hashFallbackHeader"] = state ? state.hashFallbackHeader : undefined;
             inputs["hashOn"] = state ? state.hashOn : undefined;
@@ -183,10 +213,13 @@ export class Upstream extends pulumi.CustomResource {
             inputs["hashOnCookiePath"] = state ? state.hashOnCookiePath : undefined;
             inputs["hashOnHeader"] = state ? state.hashOnHeader : undefined;
             inputs["healthchecks"] = state ? state.healthchecks : undefined;
+            inputs["hostHeader"] = state ? state.hostHeader : undefined;
             inputs["name"] = state ? state.name : undefined;
             inputs["slots"] = state ? state.slots : undefined;
+            inputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as UpstreamArgs | undefined;
+            inputs["clientCertificateId"] = args ? args.clientCertificateId : undefined;
             inputs["hashFallback"] = args ? args.hashFallback : undefined;
             inputs["hashFallbackHeader"] = args ? args.hashFallbackHeader : undefined;
             inputs["hashOn"] = args ? args.hashOn : undefined;
@@ -194,8 +227,10 @@ export class Upstream extends pulumi.CustomResource {
             inputs["hashOnCookiePath"] = args ? args.hashOnCookiePath : undefined;
             inputs["hashOnHeader"] = args ? args.hashOnHeader : undefined;
             inputs["healthchecks"] = args ? args.healthchecks : undefined;
+            inputs["hostHeader"] = args ? args.hostHeader : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["slots"] = args ? args.slots : undefined;
+            inputs["tags"] = args ? args.tags : undefined;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -209,6 +244,10 @@ export class Upstream extends pulumi.CustomResource {
  */
 export interface UpstreamState {
     /**
+     * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+     */
+    readonly clientCertificateId?: pulumi.Input<string>;
+    /**
      * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      */
     readonly hashFallback?: pulumi.Input<string>;
@@ -255,6 +294,10 @@ export interface UpstreamState {
     readonly hashOnHeader?: pulumi.Input<string>;
     readonly healthchecks?: pulumi.Input<inputs.UpstreamHealthchecks>;
     /**
+     * The hostname to be used as Host header when proxying requests through Kong.
+     */
+    readonly hostHeader?: pulumi.Input<string>;
+    /**
      * is a hostname, which must be equal to the host of a Service.
      */
     readonly name?: pulumi.Input<string>;
@@ -262,6 +305,10 @@ export interface UpstreamState {
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      */
     readonly slots?: pulumi.Input<number>;
+    /**
+     * A list of strings associated with the Upstream for grouping and filtering.
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -269,6 +316,10 @@ export interface UpstreamState {
  */
 export interface UpstreamArgs {
     /**
+     * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+     */
+    readonly clientCertificateId?: pulumi.Input<string>;
+    /**
      * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      */
     readonly hashFallback?: pulumi.Input<string>;
@@ -315,6 +366,10 @@ export interface UpstreamArgs {
     readonly hashOnHeader?: pulumi.Input<string>;
     readonly healthchecks?: pulumi.Input<inputs.UpstreamHealthchecks>;
     /**
+     * The hostname to be used as Host header when proxying requests through Kong.
+     */
+    readonly hostHeader?: pulumi.Input<string>;
+    /**
      * is a hostname, which must be equal to the host of a Service.
      */
     readonly name?: pulumi.Input<string>;
@@ -322,4 +377,8 @@ export interface UpstreamArgs {
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      */
     readonly slots?: pulumi.Input<number>;
+    /**
+     * A list of strings associated with the Upstream for grouping and filtering.
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

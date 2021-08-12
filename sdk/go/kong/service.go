@@ -44,6 +44,58 @@ import (
 // 	})
 // }
 // ```
+//
+// To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		certificate, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
+// 			Certificate: pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN CERTIFICATE-----\n", "    ......\n", "    -----END CERTIFICATE-----\n")),
+// 			PrivateKey:  pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN PRIVATE KEY-----\n", "    .....\n", "    -----END PRIVATE KEY-----\n")),
+// 			Snis: pulumi.StringArray{
+// 				pulumi.String("foo.com"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ca, err := kong.NewCertificate(ctx, "ca", &kong.CertificateArgs{
+// 			Certificate: pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN CERTIFICATE-----\n", "    ......\n", "    -----END CERTIFICATE-----\n")),
+// 			PrivateKey:  pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN PRIVATE KEY-----\n", "    .....\n", "    -----END PRIVATE KEY-----\n")),
+// 			Snis: pulumi.StringArray{
+// 				pulumi.String("ca.com"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewService(ctx, "service", &kong.ServiceArgs{
+// 			Protocol:            pulumi.String("https"),
+// 			Host:                pulumi.String("test.org"),
+// 			TlsVerify:           pulumi.Bool(true),
+// 			TlsVerifyDepth:      pulumi.Int(2),
+// 			ClientCertificateId: certificate.ID(),
+// 			CaCertificateIds: pulumi.StringArray{
+// 				ca.ID(),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 // ## Argument reference
 //
 // * `name` - (Required) Service name
@@ -56,10 +108,10 @@ import (
 // * `writeTimeout` - (Optional, int) Write timout. Default(ms): 60000
 // * `readTimeout` - (Optional, int) Read timeout. Default(ms): 60000
 // * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
-// * `clientCertificate` - (Optional) Certificate to be used as client certificate while TLS handshaking to the upstream server.
-// * `tlsVerify` - (Optional) Whether to enable verification of upstream server TLS certificate.
+// * `clientCertificateId` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+// * `tlsVerify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
 // * `tlsVerifyDepth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
-// * `caCertificates` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+// * `caCertificateIds` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
 //
 // ## Import
 //
@@ -71,15 +123,20 @@ import (
 type Service struct {
 	pulumi.CustomResourceState
 
-	ConnectTimeout pulumi.IntPtrOutput    `pulumi:"connectTimeout"`
-	Host           pulumi.StringPtrOutput `pulumi:"host"`
-	Name           pulumi.StringOutput    `pulumi:"name"`
-	Path           pulumi.StringPtrOutput `pulumi:"path"`
-	Port           pulumi.IntPtrOutput    `pulumi:"port"`
-	Protocol       pulumi.StringOutput    `pulumi:"protocol"`
-	ReadTimeout    pulumi.IntPtrOutput    `pulumi:"readTimeout"`
-	Retries        pulumi.IntPtrOutput    `pulumi:"retries"`
-	WriteTimeout   pulumi.IntPtrOutput    `pulumi:"writeTimeout"`
+	CaCertificateIds    pulumi.StringArrayOutput `pulumi:"caCertificateIds"`
+	ClientCertificateId pulumi.StringPtrOutput   `pulumi:"clientCertificateId"`
+	ConnectTimeout      pulumi.IntPtrOutput      `pulumi:"connectTimeout"`
+	Host                pulumi.StringPtrOutput   `pulumi:"host"`
+	Name                pulumi.StringOutput      `pulumi:"name"`
+	Path                pulumi.StringPtrOutput   `pulumi:"path"`
+	Port                pulumi.IntPtrOutput      `pulumi:"port"`
+	Protocol            pulumi.StringOutput      `pulumi:"protocol"`
+	ReadTimeout         pulumi.IntPtrOutput      `pulumi:"readTimeout"`
+	Retries             pulumi.IntPtrOutput      `pulumi:"retries"`
+	Tags                pulumi.StringArrayOutput `pulumi:"tags"`
+	TlsVerify           pulumi.BoolPtrOutput     `pulumi:"tlsVerify"`
+	TlsVerifyDepth      pulumi.IntPtrOutput      `pulumi:"tlsVerifyDepth"`
+	WriteTimeout        pulumi.IntPtrOutput      `pulumi:"writeTimeout"`
 }
 
 // NewService registers a new resource with the given unique name, arguments, and options.
@@ -114,27 +171,37 @@ func GetService(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Service resources.
 type serviceState struct {
-	ConnectTimeout *int    `pulumi:"connectTimeout"`
-	Host           *string `pulumi:"host"`
-	Name           *string `pulumi:"name"`
-	Path           *string `pulumi:"path"`
-	Port           *int    `pulumi:"port"`
-	Protocol       *string `pulumi:"protocol"`
-	ReadTimeout    *int    `pulumi:"readTimeout"`
-	Retries        *int    `pulumi:"retries"`
-	WriteTimeout   *int    `pulumi:"writeTimeout"`
+	CaCertificateIds    []string `pulumi:"caCertificateIds"`
+	ClientCertificateId *string  `pulumi:"clientCertificateId"`
+	ConnectTimeout      *int     `pulumi:"connectTimeout"`
+	Host                *string  `pulumi:"host"`
+	Name                *string  `pulumi:"name"`
+	Path                *string  `pulumi:"path"`
+	Port                *int     `pulumi:"port"`
+	Protocol            *string  `pulumi:"protocol"`
+	ReadTimeout         *int     `pulumi:"readTimeout"`
+	Retries             *int     `pulumi:"retries"`
+	Tags                []string `pulumi:"tags"`
+	TlsVerify           *bool    `pulumi:"tlsVerify"`
+	TlsVerifyDepth      *int     `pulumi:"tlsVerifyDepth"`
+	WriteTimeout        *int     `pulumi:"writeTimeout"`
 }
 
 type ServiceState struct {
-	ConnectTimeout pulumi.IntPtrInput
-	Host           pulumi.StringPtrInput
-	Name           pulumi.StringPtrInput
-	Path           pulumi.StringPtrInput
-	Port           pulumi.IntPtrInput
-	Protocol       pulumi.StringPtrInput
-	ReadTimeout    pulumi.IntPtrInput
-	Retries        pulumi.IntPtrInput
-	WriteTimeout   pulumi.IntPtrInput
+	CaCertificateIds    pulumi.StringArrayInput
+	ClientCertificateId pulumi.StringPtrInput
+	ConnectTimeout      pulumi.IntPtrInput
+	Host                pulumi.StringPtrInput
+	Name                pulumi.StringPtrInput
+	Path                pulumi.StringPtrInput
+	Port                pulumi.IntPtrInput
+	Protocol            pulumi.StringPtrInput
+	ReadTimeout         pulumi.IntPtrInput
+	Retries             pulumi.IntPtrInput
+	Tags                pulumi.StringArrayInput
+	TlsVerify           pulumi.BoolPtrInput
+	TlsVerifyDepth      pulumi.IntPtrInput
+	WriteTimeout        pulumi.IntPtrInput
 }
 
 func (ServiceState) ElementType() reflect.Type {
@@ -142,28 +209,38 @@ func (ServiceState) ElementType() reflect.Type {
 }
 
 type serviceArgs struct {
-	ConnectTimeout *int    `pulumi:"connectTimeout"`
-	Host           *string `pulumi:"host"`
-	Name           *string `pulumi:"name"`
-	Path           *string `pulumi:"path"`
-	Port           *int    `pulumi:"port"`
-	Protocol       string  `pulumi:"protocol"`
-	ReadTimeout    *int    `pulumi:"readTimeout"`
-	Retries        *int    `pulumi:"retries"`
-	WriteTimeout   *int    `pulumi:"writeTimeout"`
+	CaCertificateIds    []string `pulumi:"caCertificateIds"`
+	ClientCertificateId *string  `pulumi:"clientCertificateId"`
+	ConnectTimeout      *int     `pulumi:"connectTimeout"`
+	Host                *string  `pulumi:"host"`
+	Name                *string  `pulumi:"name"`
+	Path                *string  `pulumi:"path"`
+	Port                *int     `pulumi:"port"`
+	Protocol            string   `pulumi:"protocol"`
+	ReadTimeout         *int     `pulumi:"readTimeout"`
+	Retries             *int     `pulumi:"retries"`
+	Tags                []string `pulumi:"tags"`
+	TlsVerify           *bool    `pulumi:"tlsVerify"`
+	TlsVerifyDepth      *int     `pulumi:"tlsVerifyDepth"`
+	WriteTimeout        *int     `pulumi:"writeTimeout"`
 }
 
 // The set of arguments for constructing a Service resource.
 type ServiceArgs struct {
-	ConnectTimeout pulumi.IntPtrInput
-	Host           pulumi.StringPtrInput
-	Name           pulumi.StringPtrInput
-	Path           pulumi.StringPtrInput
-	Port           pulumi.IntPtrInput
-	Protocol       pulumi.StringInput
-	ReadTimeout    pulumi.IntPtrInput
-	Retries        pulumi.IntPtrInput
-	WriteTimeout   pulumi.IntPtrInput
+	CaCertificateIds    pulumi.StringArrayInput
+	ClientCertificateId pulumi.StringPtrInput
+	ConnectTimeout      pulumi.IntPtrInput
+	Host                pulumi.StringPtrInput
+	Name                pulumi.StringPtrInput
+	Path                pulumi.StringPtrInput
+	Port                pulumi.IntPtrInput
+	Protocol            pulumi.StringInput
+	ReadTimeout         pulumi.IntPtrInput
+	Retries             pulumi.IntPtrInput
+	Tags                pulumi.StringArrayInput
+	TlsVerify           pulumi.BoolPtrInput
+	TlsVerifyDepth      pulumi.IntPtrInput
+	WriteTimeout        pulumi.IntPtrInput
 }
 
 func (ServiceArgs) ElementType() reflect.Type {

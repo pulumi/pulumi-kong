@@ -26,6 +26,44 @@ import * as utilities from "./utilities";
  *     writeTimeout: 2000,
  * });
  * ```
+ *
+ * To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const certificate = new kong.Certificate("certificate", {
+ *     certificate: `    -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ * `,
+ *     privateKey: `    -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ * `,
+ *     snis: ["foo.com"],
+ * });
+ * const ca = new kong.Certificate("ca", {
+ *     certificate: `    -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ * `,
+ *     privateKey: `    -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ * `,
+ *     snis: ["ca.com"],
+ * });
+ * const service = new kong.Service("service", {
+ *     protocol: "https",
+ *     host: "test.org",
+ *     tlsVerify: true,
+ *     tlsVerifyDepth: 2,
+ *     clientCertificateId: certificate.id,
+ *     caCertificateIds: [ca.id],
+ * });
+ * ```
  * ## Argument reference
  *
  * * `name` - (Required) Service name
@@ -38,10 +76,10 @@ import * as utilities from "./utilities";
  * * `writeTimeout` - (Optional, int) Write timout. Default(ms): 60000
  * * `readTimeout` - (Optional, int) Read timeout. Default(ms): 60000
  * * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
- * * `clientCertificate` - (Optional) Certificate to be used as client certificate while TLS handshaking to the upstream server.
- * * `tlsVerify` - (Optional) Whether to enable verification of upstream server TLS certificate.
+ * * `clientCertificateId` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
+ * * `tlsVerify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
  * * `tlsVerifyDepth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
- * * `caCertificates` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+ * * `caCertificateIds` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
  *
  * ## Import
  *
@@ -79,6 +117,8 @@ export class Service extends pulumi.CustomResource {
         return obj['__pulumiType'] === Service.__pulumiType;
     }
 
+    public readonly caCertificateIds!: pulumi.Output<string[] | undefined>;
+    public readonly clientCertificateId!: pulumi.Output<string | undefined>;
     public readonly connectTimeout!: pulumi.Output<number | undefined>;
     public readonly host!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
@@ -87,6 +127,9 @@ export class Service extends pulumi.CustomResource {
     public readonly protocol!: pulumi.Output<string>;
     public readonly readTimeout!: pulumi.Output<number | undefined>;
     public readonly retries!: pulumi.Output<number | undefined>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
+    public readonly tlsVerify!: pulumi.Output<boolean | undefined>;
+    public readonly tlsVerifyDepth!: pulumi.Output<number | undefined>;
     public readonly writeTimeout!: pulumi.Output<number | undefined>;
 
     /**
@@ -102,6 +145,8 @@ export class Service extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ServiceState | undefined;
+            inputs["caCertificateIds"] = state ? state.caCertificateIds : undefined;
+            inputs["clientCertificateId"] = state ? state.clientCertificateId : undefined;
             inputs["connectTimeout"] = state ? state.connectTimeout : undefined;
             inputs["host"] = state ? state.host : undefined;
             inputs["name"] = state ? state.name : undefined;
@@ -110,12 +155,17 @@ export class Service extends pulumi.CustomResource {
             inputs["protocol"] = state ? state.protocol : undefined;
             inputs["readTimeout"] = state ? state.readTimeout : undefined;
             inputs["retries"] = state ? state.retries : undefined;
+            inputs["tags"] = state ? state.tags : undefined;
+            inputs["tlsVerify"] = state ? state.tlsVerify : undefined;
+            inputs["tlsVerifyDepth"] = state ? state.tlsVerifyDepth : undefined;
             inputs["writeTimeout"] = state ? state.writeTimeout : undefined;
         } else {
             const args = argsOrState as ServiceArgs | undefined;
             if ((!args || args.protocol === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'protocol'");
             }
+            inputs["caCertificateIds"] = args ? args.caCertificateIds : undefined;
+            inputs["clientCertificateId"] = args ? args.clientCertificateId : undefined;
             inputs["connectTimeout"] = args ? args.connectTimeout : undefined;
             inputs["host"] = args ? args.host : undefined;
             inputs["name"] = args ? args.name : undefined;
@@ -124,6 +174,9 @@ export class Service extends pulumi.CustomResource {
             inputs["protocol"] = args ? args.protocol : undefined;
             inputs["readTimeout"] = args ? args.readTimeout : undefined;
             inputs["retries"] = args ? args.retries : undefined;
+            inputs["tags"] = args ? args.tags : undefined;
+            inputs["tlsVerify"] = args ? args.tlsVerify : undefined;
+            inputs["tlsVerifyDepth"] = args ? args.tlsVerifyDepth : undefined;
             inputs["writeTimeout"] = args ? args.writeTimeout : undefined;
         }
         if (!opts.version) {
@@ -137,6 +190,8 @@ export class Service extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Service resources.
  */
 export interface ServiceState {
+    readonly caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly clientCertificateId?: pulumi.Input<string>;
     readonly connectTimeout?: pulumi.Input<number>;
     readonly host?: pulumi.Input<string>;
     readonly name?: pulumi.Input<string>;
@@ -145,6 +200,9 @@ export interface ServiceState {
     readonly protocol?: pulumi.Input<string>;
     readonly readTimeout?: pulumi.Input<number>;
     readonly retries?: pulumi.Input<number>;
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly tlsVerify?: pulumi.Input<boolean>;
+    readonly tlsVerifyDepth?: pulumi.Input<number>;
     readonly writeTimeout?: pulumi.Input<number>;
 }
 
@@ -152,6 +210,8 @@ export interface ServiceState {
  * The set of arguments for constructing a Service resource.
  */
 export interface ServiceArgs {
+    readonly caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly clientCertificateId?: pulumi.Input<string>;
     readonly connectTimeout?: pulumi.Input<number>;
     readonly host?: pulumi.Input<string>;
     readonly name?: pulumi.Input<string>;
@@ -160,5 +220,8 @@ export interface ServiceArgs {
     readonly protocol: pulumi.Input<string>;
     readonly readTimeout?: pulumi.Input<number>;
     readonly retries?: pulumi.Input<number>;
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly tlsVerify?: pulumi.Input<boolean>;
+    readonly tlsVerifyDepth?: pulumi.Input<number>;
     readonly writeTimeout?: pulumi.Input<number>;
 }
