@@ -72,7 +72,7 @@ export class ConsumerAcl extends pulumi.CustomResource {
      */
     public readonly group!: pulumi.Output<string>;
     /**
-     * A list of strings associated with the consumer acl for grouping and filtering.
+     * A list of strings associated with the consumer acl for grouping and filtering
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
 
@@ -124,7 +124,7 @@ export interface ConsumerAclState {
      */
     readonly group?: pulumi.Input<string>;
     /**
-     * A list of strings associated with the consumer acl for grouping and filtering.
+     * A list of strings associated with the consumer acl for grouping and filtering
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -142,7 +142,7 @@ export interface ConsumerAclArgs {
      */
     readonly group: pulumi.Input<string>;
     /**
-     * A list of strings associated with the consumer acl for grouping and filtering.
+     * A list of strings associated with the consumer acl for grouping and filtering
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

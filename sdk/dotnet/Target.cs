@@ -43,6 +43,12 @@ namespace Pulumi.Kong
     public partial class Target : Pulumi.CustomResource
     {
         /// <summary>
+        /// A list set of strings associated with the Plugin for grouping and filtering
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
+
+        /// <summary>
         /// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         /// </summary>
         [Output("target")]
@@ -106,6 +112,18 @@ namespace Pulumi.Kong
 
     public sealed class TargetArgs : Pulumi.ResourceArgs
     {
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list set of strings associated with the Plugin for grouping and filtering
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         /// </summary>
@@ -131,6 +149,18 @@ namespace Pulumi.Kong
 
     public sealed class TargetState : Pulumi.ResourceArgs
     {
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list set of strings associated with the Plugin for grouping and filtering
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         /// </summary>

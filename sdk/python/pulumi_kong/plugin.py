@@ -19,7 +19,8 @@ class PluginArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  route_id: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
-                 strict_match: Optional[pulumi.Input[bool]] = None):
+                 strict_match: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Plugin resource.
         :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
@@ -38,6 +39,8 @@ class PluginArgs:
             pulumi.set(__self__, "service_id", service_id)
         if strict_match is not None:
             pulumi.set(__self__, "strict_match", strict_match)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="configJson")
@@ -105,6 +108,15 @@ class PluginArgs:
     def strict_match(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "strict_match", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _PluginState:
@@ -116,7 +128,8 @@ class _PluginState:
                  name: Optional[pulumi.Input[str]] = None,
                  route_id: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
-                 strict_match: Optional[pulumi.Input[bool]] = None):
+                 strict_match: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Plugin resources.
         :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
@@ -137,6 +150,8 @@ class _PluginState:
             pulumi.set(__self__, "service_id", service_id)
         if strict_match is not None:
             pulumi.set(__self__, "strict_match", strict_match)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="computedConfig")
@@ -213,6 +228,15 @@ class _PluginState:
     def strict_match(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "strict_match", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 class Plugin(pulumi.CustomResource):
     @overload
@@ -226,6 +250,7 @@ class Plugin(pulumi.CustomResource):
                  route_id: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
                  strict_match: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         ## # Plugin
@@ -305,13 +330,14 @@ class Plugin(pulumi.CustomResource):
         ```
         ## Argument reference
 
-        `plugin_name` - (Required) the name of the plugin you want to configure
-        `consumer_id` - (Optional) the consumer id you want to configure the plugin for
-        `service_id`  - (Optional) the service id that you want to configure the plugin for
-        `route_id` - (Optional) the route id that you want to configure the plugin for
-        `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-        `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-        page of the plugin you are configuring
+        * `plugin_name` - (Required) the name of the plugin you want to configure
+        * `consumer_id` - (Optional) the consumer id you want to configure the plugin for
+        * `service_id`  - (Optional) the service id that you want to configure the plugin for
+        * `route_id` - (Optional) the route id that you want to configure the plugin for
+        * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        * `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+          page of the plugin you are configuring
+        * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
 
         ## Import
 
@@ -409,13 +435,14 @@ class Plugin(pulumi.CustomResource):
         ```
         ## Argument reference
 
-        `plugin_name` - (Required) the name of the plugin you want to configure
-        `consumer_id` - (Optional) the consumer id you want to configure the plugin for
-        `service_id`  - (Optional) the service id that you want to configure the plugin for
-        `route_id` - (Optional) the route id that you want to configure the plugin for
-        `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-        `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-        page of the plugin you are configuring
+        * `plugin_name` - (Required) the name of the plugin you want to configure
+        * `consumer_id` - (Optional) the consumer id you want to configure the plugin for
+        * `service_id`  - (Optional) the service id that you want to configure the plugin for
+        * `route_id` - (Optional) the route id that you want to configure the plugin for
+        * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        * `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+          page of the plugin you are configuring
+        * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
 
         ## Import
 
@@ -447,6 +474,7 @@ class Plugin(pulumi.CustomResource):
                  route_id: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
                  strict_match: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -466,6 +494,7 @@ class Plugin(pulumi.CustomResource):
             __props__.__dict__["route_id"] = route_id
             __props__.__dict__["service_id"] = service_id
             __props__.__dict__["strict_match"] = strict_match
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["computed_config"] = None
         super(Plugin, __self__).__init__(
             'kong:index/plugin:Plugin',
@@ -484,7 +513,8 @@ class Plugin(pulumi.CustomResource):
             name: Optional[pulumi.Input[str]] = None,
             route_id: Optional[pulumi.Input[str]] = None,
             service_id: Optional[pulumi.Input[str]] = None,
-            strict_match: Optional[pulumi.Input[bool]] = None) -> 'Plugin':
+            strict_match: Optional[pulumi.Input[bool]] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Plugin':
         """
         Get an existing Plugin resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -506,6 +536,7 @@ class Plugin(pulumi.CustomResource):
         __props__.__dict__["route_id"] = route_id
         __props__.__dict__["service_id"] = service_id
         __props__.__dict__["strict_match"] = strict_match
+        __props__.__dict__["tags"] = tags
         return Plugin(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -550,4 +581,9 @@ class Plugin(pulumi.CustomResource):
     @pulumi.getter(name="strictMatch")
     def strict_match(self) -> pulumi.Output[Optional[bool]]:
         return pulumi.get(self, "strict_match")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        return pulumi.get(self, "tags")
 

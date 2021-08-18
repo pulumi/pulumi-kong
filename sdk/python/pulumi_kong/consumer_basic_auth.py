@@ -22,7 +22,7 @@ class ConsumerBasicAuthArgs:
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
         :param pulumi.Input[str] password: password to be used for basic auth
         :param pulumi.Input[str] username: username to be used for basic auth
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         """
         pulumi.set(__self__, "consumer_id", consumer_id)
         pulumi.set(__self__, "password", password)
@@ -70,7 +70,7 @@ class ConsumerBasicAuthArgs:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A list of strings associated with the consumer basic auth for grouping and filtering.
+        A list of strings associated with the consumer basic auth for grouping and filtering
         """
         return pulumi.get(self, "tags")
 
@@ -90,7 +90,7 @@ class _ConsumerBasicAuthState:
         Input properties used for looking up and filtering ConsumerBasicAuth resources.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
         :param pulumi.Input[str] password: password to be used for basic auth
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         :param pulumi.Input[str] username: username to be used for basic auth
         """
         if consumer_id is not None:
@@ -130,7 +130,7 @@ class _ConsumerBasicAuthState:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A list of strings associated with the consumer basic auth for grouping and filtering.
+        A list of strings associated with the consumer basic auth for grouping and filtering
         """
         return pulumi.get(self, "tags")
 
@@ -190,7 +190,7 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
         :param pulumi.Input[str] password: password to be used for basic auth
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         :param pulumi.Input[str] username: username to be used for basic auth
         """
         ...
@@ -288,7 +288,7 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
         :param pulumi.Input[str] password: password to be used for basic auth
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         :param pulumi.Input[str] username: username to be used for basic auth
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -321,7 +321,7 @@ class ConsumerBasicAuth(pulumi.CustomResource):
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        A list of strings associated with the consumer basic auth for grouping and filtering.
+        A list of strings associated with the consumer basic auth for grouping and filtering
         """
         return pulumi.get(self, "tags")
 

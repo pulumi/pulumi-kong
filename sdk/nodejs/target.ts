@@ -55,6 +55,10 @@ export class Target extends pulumi.CustomResource {
     }
 
     /**
+     * A list set of strings associated with the Plugin for grouping and filtering
+     */
+    public readonly tags!: pulumi.Output<string[] | undefined>;
+    /**
      * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
      */
     public readonly target!: pulumi.Output<string>;
@@ -80,6 +84,7 @@ export class Target extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TargetState | undefined;
+            inputs["tags"] = state ? state.tags : undefined;
             inputs["target"] = state ? state.target : undefined;
             inputs["upstreamId"] = state ? state.upstreamId : undefined;
             inputs["weight"] = state ? state.weight : undefined;
@@ -94,6 +99,7 @@ export class Target extends pulumi.CustomResource {
             if ((!args || args.weight === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'weight'");
             }
+            inputs["tags"] = args ? args.tags : undefined;
             inputs["target"] = args ? args.target : undefined;
             inputs["upstreamId"] = args ? args.upstreamId : undefined;
             inputs["weight"] = args ? args.weight : undefined;
@@ -109,6 +115,10 @@ export class Target extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Target resources.
  */
 export interface TargetState {
+    /**
+     * A list set of strings associated with the Plugin for grouping and filtering
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
      */
@@ -127,6 +137,10 @@ export interface TargetState {
  * The set of arguments for constructing a Target resource.
  */
 export interface TargetArgs {
+    /**
+     * A list set of strings associated with the Plugin for grouping and filtering
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
      */

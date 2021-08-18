@@ -63,7 +63,7 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
     }
 
     /**
-     * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+     * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
     public readonly algorithm!: pulumi.Output<string | undefined>;
     /**
@@ -75,13 +75,17 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
      */
     public readonly key!: pulumi.Output<string | undefined>;
     /**
-     * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+     * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
     public readonly rsaPublicKey!: pulumi.Output<string>;
     /**
-     * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+     * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
     public readonly secret!: pulumi.Output<string | undefined>;
+    /**
+     * A list of strings associated with the consumer JWT auth for grouping and filtering
+     */
+    public readonly tags!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a ConsumerJwtAuth resource with the given unique name, arguments, and options.
@@ -101,6 +105,7 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
             inputs["key"] = state ? state.key : undefined;
             inputs["rsaPublicKey"] = state ? state.rsaPublicKey : undefined;
             inputs["secret"] = state ? state.secret : undefined;
+            inputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as ConsumerJwtAuthArgs | undefined;
             if ((!args || args.consumerId === undefined) && !opts.urn) {
@@ -114,6 +119,7 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
             inputs["key"] = args ? args.key : undefined;
             inputs["rsaPublicKey"] = args ? args.rsaPublicKey : undefined;
             inputs["secret"] = args ? args.secret : undefined;
+            inputs["tags"] = args ? args.tags : undefined;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -127,7 +133,7 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
  */
 export interface ConsumerJwtAuthState {
     /**
-     * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+     * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
     readonly algorithm?: pulumi.Input<string>;
     /**
@@ -139,13 +145,17 @@ export interface ConsumerJwtAuthState {
      */
     readonly key?: pulumi.Input<string>;
     /**
-     * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+     * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
     readonly rsaPublicKey?: pulumi.Input<string>;
     /**
-     * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+     * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
     readonly secret?: pulumi.Input<string>;
+    /**
+     * A list of strings associated with the consumer JWT auth for grouping and filtering
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -153,7 +163,7 @@ export interface ConsumerJwtAuthState {
  */
 export interface ConsumerJwtAuthArgs {
     /**
-     * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+     * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
     readonly algorithm?: pulumi.Input<string>;
     /**
@@ -165,11 +175,15 @@ export interface ConsumerJwtAuthArgs {
      */
     readonly key?: pulumi.Input<string>;
     /**
-     * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+     * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
     readonly rsaPublicKey: pulumi.Input<string>;
     /**
-     * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+     * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
     readonly secret?: pulumi.Input<string>;
+    /**
+     * A list of strings associated with the consumer JWT auth for grouping and filtering
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

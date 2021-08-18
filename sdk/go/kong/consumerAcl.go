@@ -64,7 +64,7 @@ type ConsumerAcl struct {
 	ConsumerId pulumi.StringOutput `pulumi:"consumerId"`
 	// the acl group
 	Group pulumi.StringOutput `pulumi:"group"`
-	// A list of strings associated with the consumer acl for grouping and filtering.
+	// A list of strings associated with the consumer acl for grouping and filtering
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
@@ -107,7 +107,7 @@ type consumerAclState struct {
 	ConsumerId *string `pulumi:"consumerId"`
 	// the acl group
 	Group *string `pulumi:"group"`
-	// A list of strings associated with the consumer acl for grouping and filtering.
+	// A list of strings associated with the consumer acl for grouping and filtering
 	Tags []string `pulumi:"tags"`
 }
 
@@ -116,7 +116,7 @@ type ConsumerAclState struct {
 	ConsumerId pulumi.StringPtrInput
 	// the acl group
 	Group pulumi.StringPtrInput
-	// A list of strings associated with the consumer acl for grouping and filtering.
+	// A list of strings associated with the consumer acl for grouping and filtering
 	Tags pulumi.StringArrayInput
 }
 
@@ -129,7 +129,7 @@ type consumerAclArgs struct {
 	ConsumerId string `pulumi:"consumerId"`
 	// the acl group
 	Group string `pulumi:"group"`
-	// A list of strings associated with the consumer acl for grouping and filtering.
+	// A list of strings associated with the consumer acl for grouping and filtering
 	Tags []string `pulumi:"tags"`
 }
 
@@ -139,7 +139,7 @@ type ConsumerAclArgs struct {
 	ConsumerId pulumi.StringInput
 	// the acl group
 	Group pulumi.StringInput
-	// A list of strings associated with the consumer acl for grouping and filtering.
+	// A list of strings associated with the consumer acl for grouping and filtering
 	Tags pulumi.StringArrayInput
 }
 

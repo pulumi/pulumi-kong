@@ -15,16 +15,20 @@ class TargetArgs:
     def __init__(__self__, *,
                  target: pulumi.Input[str],
                  upstream_id: pulumi.Input[str],
-                 weight: pulumi.Input[int]):
+                 weight: pulumi.Input[int],
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Target resource.
         :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
         :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list set of strings associated with the Plugin for grouping and filtering
         """
         pulumi.set(__self__, "target", target)
         pulumi.set(__self__, "upstream_id", upstream_id)
         pulumi.set(__self__, "weight", weight)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
@@ -62,25 +66,53 @@ class TargetArgs:
     def weight(self, value: pulumi.Input[int]):
         pulumi.set(self, "weight", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list set of strings associated with the Plugin for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _TargetState:
     def __init__(__self__, *,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  target: Optional[pulumi.Input[str]] = None,
                  upstream_id: Optional[pulumi.Input[str]] = None,
                  weight: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Target resources.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list set of strings associated with the Plugin for grouping and filtering
         :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
         :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
         """
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if target is not None:
             pulumi.set(__self__, "target", target)
         if upstream_id is not None:
             pulumi.set(__self__, "upstream_id", upstream_id)
         if weight is not None:
             pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list set of strings associated with the Plugin for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
     @property
     @pulumi.getter
@@ -124,6 +156,7 @@ class Target(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  target: Optional[pulumi.Input[str]] = None,
                  upstream_id: Optional[pulumi.Input[str]] = None,
                  weight: Optional[pulumi.Input[int]] = None,
@@ -151,6 +184,7 @@ class Target(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list set of strings associated with the Plugin for grouping and filtering
         :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
         :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
@@ -197,6 +231,7 @@ class Target(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  target: Optional[pulumi.Input[str]] = None,
                  upstream_id: Optional[pulumi.Input[str]] = None,
                  weight: Optional[pulumi.Input[int]] = None,
@@ -212,6 +247,7 @@ class Target(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = TargetArgs.__new__(TargetArgs)
 
+            __props__.__dict__["tags"] = tags
             if target is None and not opts.urn:
                 raise TypeError("Missing required property 'target'")
             __props__.__dict__["target"] = target
@@ -231,6 +267,7 @@ class Target(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             target: Optional[pulumi.Input[str]] = None,
             upstream_id: Optional[pulumi.Input[str]] = None,
             weight: Optional[pulumi.Input[int]] = None) -> 'Target':
@@ -241,6 +278,7 @@ class Target(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list set of strings associated with the Plugin for grouping and filtering
         :param pulumi.Input[str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
         :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
@@ -249,10 +287,19 @@ class Target(pulumi.CustomResource):
 
         __props__ = _TargetState.__new__(_TargetState)
 
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["target"] = target
         __props__.__dict__["upstream_id"] = upstream_id
         __props__.__dict__["weight"] = weight
         return Target(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list set of strings associated with the Plugin for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter

@@ -59,16 +59,18 @@ import (
 type ConsumerJwtAuth struct {
 	pulumi.CustomResourceState
 
-	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
 	Algorithm pulumi.StringPtrOutput `pulumi:"algorithm"`
 	// the id of the consumer to be configured with jwt auth
 	ConsumerId pulumi.StringOutput `pulumi:"consumerId"`
 	// A unique string identifying the credential. If left out, it will be auto-generated.
 	Key pulumi.StringPtrOutput `pulumi:"key"`
-	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
 	RsaPublicKey pulumi.StringOutput `pulumi:"rsaPublicKey"`
-	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
 	Secret pulumi.StringPtrOutput `pulumi:"secret"`
+	// A list of strings associated with the consumer JWT auth for grouping and filtering
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
 // NewConsumerJwtAuth registers a new resource with the given unique name, arguments, and options.
@@ -106,29 +108,33 @@ func GetConsumerJwtAuth(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ConsumerJwtAuth resources.
 type consumerJwtAuthState struct {
-	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
 	Algorithm *string `pulumi:"algorithm"`
 	// the id of the consumer to be configured with jwt auth
 	ConsumerId *string `pulumi:"consumerId"`
 	// A unique string identifying the credential. If left out, it will be auto-generated.
 	Key *string `pulumi:"key"`
-	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
 	RsaPublicKey *string `pulumi:"rsaPublicKey"`
-	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
 	Secret *string `pulumi:"secret"`
+	// A list of strings associated with the consumer JWT auth for grouping and filtering
+	Tags []string `pulumi:"tags"`
 }
 
 type ConsumerJwtAuthState struct {
-	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
 	Algorithm pulumi.StringPtrInput
 	// the id of the consumer to be configured with jwt auth
 	ConsumerId pulumi.StringPtrInput
 	// A unique string identifying the credential. If left out, it will be auto-generated.
 	Key pulumi.StringPtrInput
-	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
 	RsaPublicKey pulumi.StringPtrInput
-	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
 	Secret pulumi.StringPtrInput
+	// A list of strings associated with the consumer JWT auth for grouping and filtering
+	Tags pulumi.StringArrayInput
 }
 
 func (ConsumerJwtAuthState) ElementType() reflect.Type {
@@ -136,30 +142,34 @@ func (ConsumerJwtAuthState) ElementType() reflect.Type {
 }
 
 type consumerJwtAuthArgs struct {
-	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
 	Algorithm *string `pulumi:"algorithm"`
 	// the id of the consumer to be configured with jwt auth
 	ConsumerId string `pulumi:"consumerId"`
 	// A unique string identifying the credential. If left out, it will be auto-generated.
 	Key *string `pulumi:"key"`
-	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
 	RsaPublicKey string `pulumi:"rsaPublicKey"`
-	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
 	Secret *string `pulumi:"secret"`
+	// A list of strings associated with the consumer JWT auth for grouping and filtering
+	Tags []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a ConsumerJwtAuth resource.
 type ConsumerJwtAuthArgs struct {
-	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
 	Algorithm pulumi.StringPtrInput
 	// the id of the consumer to be configured with jwt auth
 	ConsumerId pulumi.StringInput
 	// A unique string identifying the credential. If left out, it will be auto-generated.
 	Key pulumi.StringPtrInput
-	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+	// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
 	RsaPublicKey pulumi.StringInput
-	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+	// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
 	Secret pulumi.StringPtrInput
+	// A list of strings associated with the consumer JWT auth for grouping and filtering
+	Tags pulumi.StringArrayInput
 }
 
 func (ConsumerJwtAuthArgs) ElementType() reflect.Type {

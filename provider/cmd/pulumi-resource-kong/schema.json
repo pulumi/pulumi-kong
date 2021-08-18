@@ -495,7 +495,7 @@
     },
     "resources": {
         "kong:index/certificate:Certificate": {
-            "description": "## # kong.Certificate\n\nFor more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst certificate = new kong.Certificate(\"certificate\", {\n    certificate: \"public key --- 123 ----\",\n    privateKey: \"private key --- 456 ----\",\n    snis: [\n        \"foo.com\",\n        \"bar.com\",\n    ],\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\ncertificate = kong.Certificate(\"certificate\",\n    certificate=\"public key --- 123 ----\",\n    private_key=\"private key --- 456 ----\",\n    snis=[\n        \"foo.com\",\n        \"bar.com\",\n    ])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var certificate = new Kong.Certificate(\"certificate\", new Kong.CertificateArgs\n        {\n            Certificate = \"public key --- 123 ----\",\n            PrivateKey = \"private key --- 456 ----\",\n            Snis = \n            {\n                \"foo.com\",\n                \"bar.com\",\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewCertificate(ctx, \"certificate\", \u0026kong.CertificateArgs{\n\t\t\tCertificate: pulumi.String(\"public key --- 123 ----\"),\n\t\t\tPrivateKey:  pulumi.String(\"private key --- 456 ----\"),\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"foo.com\"),\n\t\t\t\tpulumi.String(\"bar.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a certificate\n\n```sh\n $ pulumi import kong:index/certificate:Certificate \u003ccertifcate_identifier\u003e \u003ccertificate_id\u003e\n```\n\n ",
+            "description": "## # kong.Certificate\n\nFor more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst certificate = new kong.Certificate(\"certificate\", {\n    certificate: \"public key --- 123 ----\",\n    privateKey: \"private key --- 456 ----\",\n    snis: [\n        \"foo.com\",\n        \"bar.com\",\n    ],\n    tags: [\"myTag\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\ncertificate = kong.Certificate(\"certificate\",\n    certificate=\"public key --- 123 ----\",\n    private_key=\"private key --- 456 ----\",\n    snis=[\n        \"foo.com\",\n        \"bar.com\",\n    ],\n    tags=[\"myTag\"])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var certificate = new Kong.Certificate(\"certificate\", new Kong.CertificateArgs\n        {\n            Certificate = \"public key --- 123 ----\",\n            PrivateKey = \"private key --- 456 ----\",\n            Snis = \n            {\n                \"foo.com\",\n                \"bar.com\",\n            },\n            Tags = \n            {\n                \"myTag\",\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewCertificate(ctx, \"certificate\", \u0026kong.CertificateArgs{\n\t\t\tCertificate: pulumi.String(\"public key --- 123 ----\"),\n\t\t\tPrivateKey:  pulumi.String(\"private key --- 456 ----\"),\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"foo.com\"),\n\t\t\t\tpulumi.String(\"bar.com\"),\n\t\t\t},\n\t\t\tTags: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"myTag\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a certificate\n\n```sh\n $ pulumi import kong:index/certificate:Certificate \u003ccertifcate_identifier\u003e \u003ccertificate_id\u003e\n```\n\n ",
             "properties": {
                 "certificate": {
                     "type": "string",
@@ -515,7 +515,13 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong\n"
+                    "description": "A list of strings associated with the Certificate for grouping and filtering\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
@@ -540,7 +546,13 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong\n"
+                    "description": "A list of strings associated with the Certificate for grouping and filtering\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "requiredInputs": [
@@ -567,18 +579,31 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong\n"
+                        "description": "A list of strings associated with the Certificate for grouping and filtering\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/consumer:Consumer": {
-            "description": "## # kong.Consumer\n\nThe consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst consumer = new kong.Consumer(\"consumer\", {\n    customId: \"123\",\n    username: \"User1\",\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nconsumer = kong.Consumer(\"consumer\",\n    custom_id=\"123\",\n    username=\"User1\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var consumer = new Kong.Consumer(\"consumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"123\",\n            Username = \"User1\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewConsumer(ctx, \"consumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"123\"),\n\t\t\tUsername: pulumi.String(\"User1\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a consumer\n\n```sh\n $ pulumi import kong:index/consumer:Consumer \u003cconsumer_identifier\u003e \u003cconsumer_id\u003e\n```\n\n ",
+            "description": "## # kong.Consumer\n\nThe consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst consumer = new kong.Consumer(\"consumer\", {\n    customId: \"123\",\n    tags: [\"mySuperTag\"],\n    username: \"User1\",\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nconsumer = kong.Consumer(\"consumer\",\n    custom_id=\"123\",\n    tags=[\"mySuperTag\"],\n    username=\"User1\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var consumer = new Kong.Consumer(\"consumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"123\",\n            Tags = \n            {\n                \"mySuperTag\",\n            },\n            Username = \"User1\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewConsumer(ctx, \"consumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"123\"),\n\t\t\tTags: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"mySuperTag\"),\n\t\t\t},\n\t\t\tUsername: pulumi.String(\"User1\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a consumer\n\n```sh\n $ pulumi import kong:index/consumer:Consumer \u003cconsumer_identifier\u003e \u003cconsumer_id\u003e\n```\n\n ",
             "properties": {
                 "customId": {
                     "type": "string",
                     "description": "A custom id for the consumer, you must set either the username or custom_id\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings associated with the Consumer for grouping and filtering\n"
                 },
                 "username": {
                     "type": "string",
@@ -589,6 +614,13 @@
                 "customId": {
                     "type": "string",
                     "description": "A custom id for the consumer, you must set either the username or custom_id\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings associated with the Consumer for grouping and filtering\n"
                 },
                 "username": {
                     "type": "string",
@@ -601,6 +633,13 @@
                     "customId": {
                         "type": "string",
                         "description": "A custom id for the consumer, you must set either the username or custom_id\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of strings associated with the Consumer for grouping and filtering\n"
                     },
                     "username": {
                         "type": "string",
@@ -626,7 +665,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of strings associated with the consumer acl for grouping and filtering.\n"
+                    "description": "A list of strings associated with the consumer acl for grouping and filtering\n"
                 }
             },
             "required": [
@@ -647,7 +686,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of strings associated with the consumer acl for grouping and filtering.\n"
+                    "description": "A list of strings associated with the consumer acl for grouping and filtering\n"
                 }
             },
             "requiredInputs": [
@@ -670,7 +709,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of strings associated with the consumer acl for grouping and filtering.\n"
+                        "description": "A list of strings associated with the consumer acl for grouping and filtering\n"
                     }
                 },
                 "type": "object"
@@ -692,7 +731,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of strings associated with the consumer basic auth for grouping and filtering.\n"
+                    "description": "A list of strings associated with the consumer basic auth for grouping and filtering\n"
                 },
                 "username": {
                     "type": "string",
@@ -718,7 +757,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of strings associated with the consumer basic auth for grouping and filtering.\n"
+                    "description": "A list of strings associated with the consumer basic auth for grouping and filtering\n"
                 },
                 "username": {
                     "type": "string",
@@ -746,7 +785,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of strings associated with the consumer basic auth for grouping and filtering.\n"
+                        "description": "A list of strings associated with the consumer basic auth for grouping and filtering\n"
                     },
                     "username": {
                         "type": "string",
@@ -761,7 +800,7 @@
             "properties": {
                 "algorithm": {
                     "type": "string",
-                    "description": "The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.\n"
+                    "description": "The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`\n"
                 },
                 "consumerId": {
                     "type": "string",
@@ -773,11 +812,18 @@
                 },
                 "rsaPublicKey": {
                     "type": "string",
-                    "description": "If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.\n"
+                    "description": "If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature\n"
                 },
                 "secret": {
                     "type": "string",
-                    "description": "If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.\n"
+                    "description": "If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings associated with the consumer JWT auth for grouping and filtering\n"
                 }
             },
             "required": [
@@ -787,7 +833,7 @@
             "inputProperties": {
                 "algorithm": {
                     "type": "string",
-                    "description": "The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.\n"
+                    "description": "The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`\n"
                 },
                 "consumerId": {
                     "type": "string",
@@ -799,11 +845,18 @@
                 },
                 "rsaPublicKey": {
                     "type": "string",
-                    "description": "If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.\n"
+                    "description": "If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature\n"
                 },
                 "secret": {
                     "type": "string",
-                    "description": "If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.\n"
+                    "description": "If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings associated with the consumer JWT auth for grouping and filtering\n"
                 }
             },
             "requiredInputs": [
@@ -815,7 +868,7 @@
                 "properties": {
                     "algorithm": {
                         "type": "string",
-                        "description": "The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.\n"
+                        "description": "The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`\n"
                     },
                     "consumerId": {
                         "type": "string",
@@ -827,18 +880,25 @@
                     },
                     "rsaPublicKey": {
                         "type": "string",
-                        "description": "If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.\n"
+                        "description": "If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature\n"
                     },
                     "secret": {
                         "type": "string",
-                        "description": "If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.\n"
+                        "description": "If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of strings associated with the consumer JWT auth for grouping and filtering\n"
                     }
                 },
                 "type": "object"
             }
         },
         "kong:index/plugin:Plugin": {
-            "description": "## # kong.Plugin\n\nThe plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).\nThe `config_json` is passed through to the plugin to configure it as is.  \n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nrate_limit = kong.Plugin(\"rateLimit\", config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\nTo apply a plugin to a consumer use the `consumer_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst pluginConsumer = new kong.Consumer(\"plugin_consumer\", {\n    customId: \"567\",\n    username: \"PluginUser\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n    consumerId: pluginConsumer.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nplugin_consumer = kong.Consumer(\"pluginConsumer\",\n    custom_id=\"567\",\n    username=\"PluginUser\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\",\n    consumer_id=plugin_consumer.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var pluginConsumer = new Kong.Consumer(\"pluginConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"567\",\n            Username = \"PluginUser\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n            ConsumerId = pluginConsumer.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpluginConsumer, err := kong.NewConsumer(ctx, \"pluginConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"567\"),\n\t\t\tUsername: pulumi.String(\"PluginUser\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tConsumerId: pluginConsumer.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a service use the `service_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n`,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n\n\"\"\",\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 10,\n\t\t\"\"hour\"\" : 2000\n\t}\n\n\",\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 10,\\n\", \"\t\t\\\"hour\\\" : 2000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a route use the `route_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n`,\n    enabled: true,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n\n\"\"\",\n    enabled=True,\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 11,\n\t\t\"\"hour\"\" : 4000\n\t}\n\n\",\n            Enabled = true,\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 11,\\n\", \"\t\t\\\"hour\\\" : 4000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tEnabled:   pulumi.Bool(true),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n## Argument reference\n\n`plugin_name` - (Required) the name of the plugin you want to configure\n`consumer_id` - (Optional) the consumer id you want to configure the plugin for\n`service_id`  - (Optional) the service id that you want to configure the plugin for\n`route_id` - (Optional) the route id that you want to configure the plugin for\n`enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it\n`config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation\npage of the plugin you are configuring\n\n\n## Import\n\nTo import a plugin\n\n```sh\n $ pulumi import kong:index/plugin:Plugin \u003cplugin_identifier\u003e \u003cplugin_id\u003e\n```\n\n ",
+            "description": "## # kong.Plugin\n\nThe plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).\nThe `config_json` is passed through to the plugin to configure it as is.  \n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nrate_limit = kong.Plugin(\"rateLimit\", config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\nTo apply a plugin to a consumer use the `consumer_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst pluginConsumer = new kong.Consumer(\"plugin_consumer\", {\n    customId: \"567\",\n    username: \"PluginUser\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n    consumerId: pluginConsumer.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nplugin_consumer = kong.Consumer(\"pluginConsumer\",\n    custom_id=\"567\",\n    username=\"PluginUser\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\",\n    consumer_id=plugin_consumer.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var pluginConsumer = new Kong.Consumer(\"pluginConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"567\",\n            Username = \"PluginUser\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n            ConsumerId = pluginConsumer.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpluginConsumer, err := kong.NewConsumer(ctx, \"pluginConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"567\"),\n\t\t\tUsername: pulumi.String(\"PluginUser\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tConsumerId: pluginConsumer.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a service use the `service_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n`,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n\n\"\"\",\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 10,\n\t\t\"\"hour\"\" : 2000\n\t}\n\n\",\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 10,\\n\", \"\t\t\\\"hour\\\" : 2000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a route use the `route_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n`,\n    enabled: true,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n\n\"\"\",\n    enabled=True,\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 11,\n\t\t\"\"hour\"\" : 4000\n\t}\n\n\",\n            Enabled = true,\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 11,\\n\", \"\t\t\\\"hour\\\" : 4000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tEnabled:   pulumi.Bool(true),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n## Argument reference\n\n* `plugin_name` - (Required) the name of the plugin you want to configure\n* `consumer_id` - (Optional) the consumer id you want to configure the plugin for\n* `service_id`  - (Optional) the service id that you want to configure the plugin for\n* `route_id` - (Optional) the route id that you want to configure the plugin for\n* `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it\n* `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation\npage of the plugin you are configuring\n* `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering\n\n\n## Import\n\nTo import a plugin\n\n```sh\n $ pulumi import kong:index/plugin:Plugin \u003cplugin_identifier\u003e \u003cplugin_id\u003e\n```\n\n ",
             "properties": {
                 "computedConfig": {
                     "type": "string"
@@ -864,6 +924,12 @@
                 },
                 "strictMatch": {
                     "type": "boolean"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
@@ -892,6 +958,12 @@
                 },
                 "strictMatch": {
                     "type": "boolean"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "stateInputs": {
@@ -921,6 +993,12 @@
                     },
                     "strictMatch": {
                         "type": "boolean"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 },
                 "type": "object"
@@ -1412,6 +1490,13 @@
         "kong:index/target:Target": {
             "description": "{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst target = new kong.Target(\"target\", {\n    target: \"sample_target:80\",\n    upstreamId: kong_upstream_upstream.id,\n    weight: 10,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\ntarget = kong.Target(\"target\",\n    target=\"sample_target:80\",\n    upstream_id=kong_upstream[\"upstream\"][\"id\"],\n    weight=10)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var target = new Kong.Target(\"target\", new Kong.TargetArgs\n        {\n            Target = \"sample_target:80\",\n            UpstreamId = kong_upstream.Upstream.Id,\n            Weight = 10,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewTarget(ctx, \"target\", \u0026kong.TargetArgs{\n\t\t\tTarget:     pulumi.String(\"sample_target:80\"),\n\t\t\tUpstreamId: pulumi.Any(kong_upstream.Upstream.Id),\n\t\t\tWeight:     pulumi.Int(10),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a target use a combination of the upstream id and the target id as follows\n\n```sh\n $ pulumi import kong:index/target:Target \u003ctarget_identifier\u003e \u003cupstream_id\u003e/\u003ctarget_id\u003e\n```\n\n ",
             "properties": {
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list set of strings associated with the Plugin for grouping and filtering\n"
+                },
                 "target": {
                     "type": "string",
                     "description": "is the target address (IP or hostname) and port. If omitted the port defaults to 8000.\n",
@@ -1436,6 +1521,13 @@
                 "weight"
             ],
             "inputProperties": {
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list set of strings associated with the Plugin for grouping and filtering\n"
+                },
                 "target": {
                     "type": "string",
                     "description": "is the target address (IP or hostname) and port. If omitted the port defaults to 8000.\n",
@@ -1462,6 +1554,13 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Target resources.\n",
                 "properties": {
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list set of strings associated with the Plugin for grouping and filtering\n"
+                    },
                     "target": {
                         "type": "string",
                         "description": "is the target address (IP or hostname) and port. If omitted the port defaults to 8000.\n",

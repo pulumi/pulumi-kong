@@ -68,7 +68,7 @@ export class ConsumerBasicAuth extends pulumi.CustomResource {
      */
     public readonly password!: pulumi.Output<string>;
     /**
-     * A list of strings associated with the consumer basic auth for grouping and filtering.
+     * A list of strings associated with the consumer basic auth for grouping and filtering
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
@@ -129,7 +129,7 @@ export interface ConsumerBasicAuthState {
      */
     readonly password?: pulumi.Input<string>;
     /**
-     * A list of strings associated with the consumer basic auth for grouping and filtering.
+     * A list of strings associated with the consumer basic auth for grouping and filtering
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -151,7 +151,7 @@ export interface ConsumerBasicAuthArgs {
      */
     readonly password: pulumi.Input<string>;
     /**
-     * A list of strings associated with the consumer basic auth for grouping and filtering.
+     * A list of strings associated with the consumer basic auth for grouping and filtering
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**

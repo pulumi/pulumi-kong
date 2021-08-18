@@ -20,7 +20,7 @@ class ConsumerAclArgs:
         The set of arguments for constructing a ConsumerAcl resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured
         :param pulumi.Input[str] group: the acl group
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering
         """
         pulumi.set(__self__, "consumer_id", consumer_id)
         pulumi.set(__self__, "group", group)
@@ -55,7 +55,7 @@ class ConsumerAclArgs:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A list of strings associated with the consumer acl for grouping and filtering.
+        A list of strings associated with the consumer acl for grouping and filtering
         """
         return pulumi.get(self, "tags")
 
@@ -74,7 +74,7 @@ class _ConsumerAclState:
         Input properties used for looking up and filtering ConsumerAcl resources.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured
         :param pulumi.Input[str] group: the acl group
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering
         """
         if consumer_id is not None:
             pulumi.set(__self__, "consumer_id", consumer_id)
@@ -111,7 +111,7 @@ class _ConsumerAclState:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A list of strings associated with the consumer acl for grouping and filtering.
+        A list of strings associated with the consumer acl for grouping and filtering
         """
         return pulumi.get(self, "tags")
 
@@ -161,7 +161,7 @@ class ConsumerAcl(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured
         :param pulumi.Input[str] group: the acl group
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering
         """
         ...
     @overload
@@ -256,7 +256,7 @@ class ConsumerAcl(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured
         :param pulumi.Input[str] group: the acl group
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer acl for grouping and filtering
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -287,7 +287,7 @@ class ConsumerAcl(pulumi.CustomResource):
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        A list of strings associated with the consumer acl for grouping and filtering.
+        A list of strings associated with the consumer acl for grouping and filtering
         """
         return pulumi.get(self, "tags")
 

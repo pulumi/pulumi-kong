@@ -27,6 +27,10 @@ namespace Pulumi.Kong
     ///         var consumer = new Kong.Consumer("consumer", new Kong.ConsumerArgs
     ///         {
     ///             CustomId = "123",
+    ///             Tags = 
+    ///             {
+    ///                 "mySuperTag",
+    ///             },
     ///             Username = "User1",
     ///         });
     ///     }
@@ -50,6 +54,12 @@ namespace Pulumi.Kong
         /// </summary>
         [Output("customId")]
         public Output<string?> CustomId { get; private set; } = null!;
+
+        /// <summary>
+        /// A list of strings associated with the Consumer for grouping and filtering
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// The username to use, you must set either the username or custom_id
@@ -109,6 +119,18 @@ namespace Pulumi.Kong
         [Input("customId")]
         public Input<string>? CustomId { get; set; }
 
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Consumer for grouping and filtering
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// The username to use, you must set either the username or custom_id
         /// </summary>
@@ -127,6 +149,18 @@ namespace Pulumi.Kong
         /// </summary>
         [Input("customId")]
         public Input<string>? CustomId { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Consumer for grouping and filtering
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// The username to use, you must set either the username or custom_id

@@ -54,7 +54,7 @@ namespace Pulumi.Kong
     public partial class ConsumerJwtAuth : Pulumi.CustomResource
     {
         /// <summary>
-        /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         /// </summary>
         [Output("algorithm")]
         public Output<string?> Algorithm { get; private set; } = null!;
@@ -72,16 +72,22 @@ namespace Pulumi.Kong
         public Output<string?> Key { get; private set; } = null!;
 
         /// <summary>
-        /// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+        /// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
         /// </summary>
         [Output("rsaPublicKey")]
         public Output<string> RsaPublicKey { get; private set; } = null!;
 
         /// <summary>
-        /// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        /// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         /// </summary>
         [Output("secret")]
         public Output<string?> Secret { get; private set; } = null!;
+
+        /// <summary>
+        /// A list of strings associated with the consumer JWT auth for grouping and filtering
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -130,7 +136,7 @@ namespace Pulumi.Kong
     public sealed class ConsumerJwtAuthArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         /// </summary>
         [Input("algorithm")]
         public Input<string>? Algorithm { get; set; }
@@ -148,16 +154,28 @@ namespace Pulumi.Kong
         public Input<string>? Key { get; set; }
 
         /// <summary>
-        /// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+        /// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
         /// </summary>
         [Input("rsaPublicKey", required: true)]
         public Input<string> RsaPublicKey { get; set; } = null!;
 
         /// <summary>
-        /// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        /// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         /// </summary>
         [Input("secret")]
         public Input<string>? Secret { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the consumer JWT auth for grouping and filtering
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         public ConsumerJwtAuthArgs()
         {
@@ -167,7 +185,7 @@ namespace Pulumi.Kong
     public sealed class ConsumerJwtAuthState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         /// </summary>
         [Input("algorithm")]
         public Input<string>? Algorithm { get; set; }
@@ -185,16 +203,28 @@ namespace Pulumi.Kong
         public Input<string>? Key { get; set; }
 
         /// <summary>
-        /// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+        /// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
         /// </summary>
         [Input("rsaPublicKey")]
         public Input<string>? RsaPublicKey { get; set; }
 
         /// <summary>
-        /// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        /// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         /// </summary>
         [Input("secret")]
         public Input<string>? Secret { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the consumer JWT auth for grouping and filtering
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         public ConsumerJwtAuthState()
         {
