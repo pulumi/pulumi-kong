@@ -15,18 +15,21 @@ class CertificateArgs:
     def __init__(__self__, *,
                  certificate: pulumi.Input[str],
                  private_key: Optional[pulumi.Input[str]] = None,
-                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Certificate resource.
         :param pulumi.Input[str] certificate: should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
         :param pulumi.Input[str] private_key: should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of strings associated with the Certificate for grouping and filtering
         """
         pulumi.set(__self__, "certificate", certificate)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
         if snis is not None:
             pulumi.set(__self__, "snis", snis)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
@@ -56,7 +59,7 @@ class CertificateArgs:
     @pulumi.getter
     def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        A list of strings associated with the Certificate for grouping and filtering
         """
         return pulumi.get(self, "snis")
 
@@ -64,18 +67,28 @@ class CertificateArgs:
     def snis(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "snis", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _CertificateState:
     def __init__(__self__, *,
                  certificate: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
-                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Certificate resources.
         :param pulumi.Input[str] certificate: should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
         :param pulumi.Input[str] private_key: should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of strings associated with the Certificate for grouping and filtering
         """
         if certificate is not None:
             pulumi.set(__self__, "certificate", certificate)
@@ -83,6 +96,8 @@ class _CertificateState:
             pulumi.set(__self__, "private_key", private_key)
         if snis is not None:
             pulumi.set(__self__, "snis", snis)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
@@ -112,13 +127,22 @@ class _CertificateState:
     @pulumi.getter
     def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        A list of strings associated with the Certificate for grouping and filtering
         """
         return pulumi.get(self, "snis")
 
     @snis.setter
     def snis(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "snis", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class Certificate(pulumi.CustomResource):
@@ -129,6 +153,7 @@ class Certificate(pulumi.CustomResource):
                  certificate: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
                  snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         ## # Certificate
@@ -147,7 +172,8 @@ class Certificate(pulumi.CustomResource):
             snis=[
                 "foo.com",
                 "bar.com",
-            ])
+            ],
+            tags=["myTag"])
         ```
 
         ## Import
@@ -162,7 +188,7 @@ class Certificate(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] certificate: should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
         :param pulumi.Input[str] private_key: should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of strings associated with the Certificate for grouping and filtering
         """
         ...
     @overload
@@ -187,7 +213,8 @@ class Certificate(pulumi.CustomResource):
             snis=[
                 "foo.com",
                 "bar.com",
-            ])
+            ],
+            tags=["myTag"])
         ```
 
         ## Import
@@ -216,6 +243,7 @@ class Certificate(pulumi.CustomResource):
                  certificate: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
                  snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -233,6 +261,7 @@ class Certificate(pulumi.CustomResource):
             __props__.__dict__["certificate"] = certificate
             __props__.__dict__["private_key"] = private_key
             __props__.__dict__["snis"] = snis
+            __props__.__dict__["tags"] = tags
         super(Certificate, __self__).__init__(
             'kong:index/certificate:Certificate',
             resource_name,
@@ -245,7 +274,8 @@ class Certificate(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             certificate: Optional[pulumi.Input[str]] = None,
             private_key: Optional[pulumi.Input[str]] = None,
-            snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Certificate':
+            snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Certificate':
         """
         Get an existing Certificate resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -255,7 +285,7 @@ class Certificate(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] certificate: should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
         :param pulumi.Input[str] private_key: should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snis: A list of strings associated with the Certificate for grouping and filtering
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -264,6 +294,7 @@ class Certificate(pulumi.CustomResource):
         __props__.__dict__["certificate"] = certificate
         __props__.__dict__["private_key"] = private_key
         __props__.__dict__["snis"] = snis
+        __props__.__dict__["tags"] = tags
         return Certificate(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -286,7 +317,12 @@ class Certificate(pulumi.CustomResource):
     @pulumi.getter
     def snis(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        A list of strings associated with the Certificate for grouping and filtering
         """
         return pulumi.get(self, "snis")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        return pulumi.get(self, "tags")
 

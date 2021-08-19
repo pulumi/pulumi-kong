@@ -86,13 +86,14 @@ import * as utilities from "./utilities";
  * ```
  * ## Argument reference
  *
- * `pluginName` - (Required) the name of the plugin you want to configure
- * `consumerId` - (Optional) the consumer id you want to configure the plugin for
- * `serviceId`  - (Optional) the service id that you want to configure the plugin for
- * `routeId` - (Optional) the route id that you want to configure the plugin for
- * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
- * `configJson` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
- * page of the plugin you are configuring
+ * * `pluginName` - (Required) the name of the plugin you want to configure
+ * * `consumerId` - (Optional) the consumer id you want to configure the plugin for
+ * * `serviceId`  - (Optional) the service id that you want to configure the plugin for
+ * * `routeId` - (Optional) the route id that you want to configure the plugin for
+ * * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+ * * `configJson` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+ *   page of the plugin you are configuring
+ * * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
  *
  * ## Import
  *
@@ -141,6 +142,7 @@ export class Plugin extends pulumi.CustomResource {
     public readonly routeId!: pulumi.Output<string | undefined>;
     public readonly serviceId!: pulumi.Output<string | undefined>;
     public readonly strictMatch!: pulumi.Output<boolean | undefined>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Plugin resource with the given unique name, arguments, and options.
@@ -163,6 +165,7 @@ export class Plugin extends pulumi.CustomResource {
             inputs["routeId"] = state ? state.routeId : undefined;
             inputs["serviceId"] = state ? state.serviceId : undefined;
             inputs["strictMatch"] = state ? state.strictMatch : undefined;
+            inputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as PluginArgs | undefined;
             inputs["configJson"] = args ? args.configJson : undefined;
@@ -172,6 +175,7 @@ export class Plugin extends pulumi.CustomResource {
             inputs["routeId"] = args ? args.routeId : undefined;
             inputs["serviceId"] = args ? args.serviceId : undefined;
             inputs["strictMatch"] = args ? args.strictMatch : undefined;
+            inputs["tags"] = args ? args.tags : undefined;
             inputs["computedConfig"] = undefined /*out*/;
         }
         if (!opts.version) {
@@ -196,6 +200,7 @@ export interface PluginState {
     readonly routeId?: pulumi.Input<string>;
     readonly serviceId?: pulumi.Input<string>;
     readonly strictMatch?: pulumi.Input<boolean>;
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -212,4 +217,5 @@ export interface PluginArgs {
     readonly routeId?: pulumi.Input<string>;
     readonly serviceId?: pulumi.Input<string>;
     readonly strictMatch?: pulumi.Input<boolean>;
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

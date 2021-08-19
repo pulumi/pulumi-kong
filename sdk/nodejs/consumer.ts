@@ -17,6 +17,7 @@ import * as utilities from "./utilities";
  *
  * const consumer = new kong.Consumer("consumer", {
  *     customId: "123",
+ *     tags: ["mySuperTag"],
  *     username: "User1",
  * });
  * ```
@@ -62,6 +63,10 @@ export class Consumer extends pulumi.CustomResource {
      */
     public readonly customId!: pulumi.Output<string | undefined>;
     /**
+     * A list of strings associated with the Consumer for grouping and filtering
+     */
+    public readonly tags!: pulumi.Output<string[] | undefined>;
+    /**
      * The username to use, you must set either the username or custom_id
      */
     public readonly username!: pulumi.Output<string | undefined>;
@@ -80,10 +85,12 @@ export class Consumer extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ConsumerState | undefined;
             inputs["customId"] = state ? state.customId : undefined;
+            inputs["tags"] = state ? state.tags : undefined;
             inputs["username"] = state ? state.username : undefined;
         } else {
             const args = argsOrState as ConsumerArgs | undefined;
             inputs["customId"] = args ? args.customId : undefined;
+            inputs["tags"] = args ? args.tags : undefined;
             inputs["username"] = args ? args.username : undefined;
         }
         if (!opts.version) {
@@ -102,6 +109,10 @@ export interface ConsumerState {
      */
     readonly customId?: pulumi.Input<string>;
     /**
+     * A list of strings associated with the Consumer for grouping and filtering
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The username to use, you must set either the username or custom_id
      */
     readonly username?: pulumi.Input<string>;
@@ -115,6 +126,10 @@ export interface ConsumerArgs {
      * A custom id for the consumer, you must set either the username or custom_id
      */
     readonly customId?: pulumi.Input<string>;
+    /**
+     * A list of strings associated with the Consumer for grouping and filtering
+     */
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The username to use, you must set either the username or custom_id
      */

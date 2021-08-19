@@ -130,13 +130,14 @@ namespace Pulumi.Kong
     /// ```
     /// ## Argument reference
     /// 
-    /// `plugin_name` - (Required) the name of the plugin you want to configure
-    /// `consumer_id` - (Optional) the consumer id you want to configure the plugin for
-    /// `service_id`  - (Optional) the service id that you want to configure the plugin for
-    /// `route_id` - (Optional) the route id that you want to configure the plugin for
-    /// `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-    /// `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-    /// page of the plugin you are configuring
+    /// * `plugin_name` - (Required) the name of the plugin you want to configure
+    /// * `consumer_id` - (Optional) the consumer id you want to configure the plugin for
+    /// * `service_id`  - (Optional) the service id that you want to configure the plugin for
+    /// * `route_id` - (Optional) the route id that you want to configure the plugin for
+    /// * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+    /// * `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+    ///   page of the plugin you are configuring
+    /// * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
     /// 
     /// ## Import
     /// 
@@ -175,6 +176,9 @@ namespace Pulumi.Kong
 
         [Output("strictMatch")]
         public Output<bool?> StrictMatch { get; private set; } = null!;
+
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -246,6 +250,14 @@ namespace Pulumi.Kong
         [Input("strictMatch")]
         public Input<bool>? StrictMatch { get; set; }
 
+        [Input("tags")]
+        private InputList<string>? _tags;
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
+
         public PluginArgs()
         {
         }
@@ -279,6 +291,14 @@ namespace Pulumi.Kong
 
         [Input("strictMatch")]
         public Input<bool>? StrictMatch { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         public PluginState()
         {

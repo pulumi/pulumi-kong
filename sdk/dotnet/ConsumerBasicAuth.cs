@@ -64,7 +64,7 @@ namespace Pulumi.Kong
         public Output<string> Password { get; private set; } = null!;
 
         /// <summary>
-        /// A list of strings associated with the consumer basic auth for grouping and filtering.
+        /// A list of strings associated with the consumer basic auth for grouping and filtering
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
@@ -137,7 +137,7 @@ namespace Pulumi.Kong
         private InputList<string>? _tags;
 
         /// <summary>
-        /// A list of strings associated with the consumer basic auth for grouping and filtering.
+        /// A list of strings associated with the consumer basic auth for grouping and filtering
         /// </summary>
         public InputList<string> Tags
         {
@@ -174,7 +174,7 @@ namespace Pulumi.Kong
         private InputList<string>? _tags;
 
         /// <summary>
-        /// A list of strings associated with the consumer basic auth for grouping and filtering.
+        /// A list of strings associated with the consumer basic auth for grouping and filtering
         /// </summary>
         public InputList<string> Tags
         {

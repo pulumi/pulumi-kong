@@ -33,6 +33,10 @@ namespace Pulumi.Kong
     ///                 "foo.com",
     ///                 "bar.com",
     ///             },
+    ///             Tags = 
+    ///             {
+    ///                 "myTag",
+    ///             },
     ///         });
     ///     }
     /// 
@@ -63,10 +67,13 @@ namespace Pulumi.Kong
         public Output<string?> PrivateKey { get; private set; } = null!;
 
         /// <summary>
-        /// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        /// A list of strings associated with the Certificate for grouping and filtering
         /// </summary>
         [Output("snis")]
         public Output<ImmutableArray<string>> Snis { get; private set; } = null!;
+
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -130,12 +137,20 @@ namespace Pulumi.Kong
         private InputList<string>? _snis;
 
         /// <summary>
-        /// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        /// A list of strings associated with the Certificate for grouping and filtering
         /// </summary>
         public InputList<string> Snis
         {
             get => _snis ?? (_snis = new InputList<string>());
             set => _snis = value;
+        }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
         }
 
         public CertificateArgs()
@@ -161,12 +176,20 @@ namespace Pulumi.Kong
         private InputList<string>? _snis;
 
         /// <summary>
-        /// a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+        /// A list of strings associated with the Certificate for grouping and filtering
         /// </summary>
         public InputList<string> Snis
         {
             get => _snis ?? (_snis = new InputList<string>());
             set => _snis = value;
+        }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
         }
 
         public CertificateState()

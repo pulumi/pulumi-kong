@@ -140,13 +140,14 @@ import (
 // ```
 // ## Argument reference
 //
-// `pluginName` - (Required) the name of the plugin you want to configure
-// `consumerId` - (Optional) the consumer id you want to configure the plugin for
-// `serviceId`  - (Optional) the service id that you want to configure the plugin for
-// `routeId` - (Optional) the route id that you want to configure the plugin for
-// `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-// `configJson` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-// page of the plugin you are configuring
+// * `pluginName` - (Required) the name of the plugin you want to configure
+// * `consumerId` - (Optional) the consumer id you want to configure the plugin for
+// * `serviceId`  - (Optional) the service id that you want to configure the plugin for
+// * `routeId` - (Optional) the route id that you want to configure the plugin for
+// * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+// * `configJson` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+//   page of the plugin you are configuring
+// * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
 //
 // ## Import
 //
@@ -160,13 +161,14 @@ type Plugin struct {
 
 	ComputedConfig pulumi.StringOutput `pulumi:"computedConfig"`
 	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  pulumi.StringPtrOutput `pulumi:"configJson"`
-	ConsumerId  pulumi.StringPtrOutput `pulumi:"consumerId"`
-	Enabled     pulumi.BoolPtrOutput   `pulumi:"enabled"`
-	Name        pulumi.StringOutput    `pulumi:"name"`
-	RouteId     pulumi.StringPtrOutput `pulumi:"routeId"`
-	ServiceId   pulumi.StringPtrOutput `pulumi:"serviceId"`
-	StrictMatch pulumi.BoolPtrOutput   `pulumi:"strictMatch"`
+	ConfigJson  pulumi.StringPtrOutput   `pulumi:"configJson"`
+	ConsumerId  pulumi.StringPtrOutput   `pulumi:"consumerId"`
+	Enabled     pulumi.BoolPtrOutput     `pulumi:"enabled"`
+	Name        pulumi.StringOutput      `pulumi:"name"`
+	RouteId     pulumi.StringPtrOutput   `pulumi:"routeId"`
+	ServiceId   pulumi.StringPtrOutput   `pulumi:"serviceId"`
+	StrictMatch pulumi.BoolPtrOutput     `pulumi:"strictMatch"`
+	Tags        pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
 // NewPlugin registers a new resource with the given unique name, arguments, and options.
@@ -200,13 +202,14 @@ func GetPlugin(ctx *pulumi.Context,
 type pluginState struct {
 	ComputedConfig *string `pulumi:"computedConfig"`
 	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  *string `pulumi:"configJson"`
-	ConsumerId  *string `pulumi:"consumerId"`
-	Enabled     *bool   `pulumi:"enabled"`
-	Name        *string `pulumi:"name"`
-	RouteId     *string `pulumi:"routeId"`
-	ServiceId   *string `pulumi:"serviceId"`
-	StrictMatch *bool   `pulumi:"strictMatch"`
+	ConfigJson  *string  `pulumi:"configJson"`
+	ConsumerId  *string  `pulumi:"consumerId"`
+	Enabled     *bool    `pulumi:"enabled"`
+	Name        *string  `pulumi:"name"`
+	RouteId     *string  `pulumi:"routeId"`
+	ServiceId   *string  `pulumi:"serviceId"`
+	StrictMatch *bool    `pulumi:"strictMatch"`
+	Tags        []string `pulumi:"tags"`
 }
 
 type PluginState struct {
@@ -219,6 +222,7 @@ type PluginState struct {
 	RouteId     pulumi.StringPtrInput
 	ServiceId   pulumi.StringPtrInput
 	StrictMatch pulumi.BoolPtrInput
+	Tags        pulumi.StringArrayInput
 }
 
 func (PluginState) ElementType() reflect.Type {
@@ -227,13 +231,14 @@ func (PluginState) ElementType() reflect.Type {
 
 type pluginArgs struct {
 	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  *string `pulumi:"configJson"`
-	ConsumerId  *string `pulumi:"consumerId"`
-	Enabled     *bool   `pulumi:"enabled"`
-	Name        *string `pulumi:"name"`
-	RouteId     *string `pulumi:"routeId"`
-	ServiceId   *string `pulumi:"serviceId"`
-	StrictMatch *bool   `pulumi:"strictMatch"`
+	ConfigJson  *string  `pulumi:"configJson"`
+	ConsumerId  *string  `pulumi:"consumerId"`
+	Enabled     *bool    `pulumi:"enabled"`
+	Name        *string  `pulumi:"name"`
+	RouteId     *string  `pulumi:"routeId"`
+	ServiceId   *string  `pulumi:"serviceId"`
+	StrictMatch *bool    `pulumi:"strictMatch"`
+	Tags        []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Plugin resource.
@@ -246,6 +251,7 @@ type PluginArgs struct {
 	RouteId     pulumi.StringPtrInput
 	ServiceId   pulumi.StringPtrInput
 	StrictMatch pulumi.BoolPtrInput
+	Tags        pulumi.StringArrayInput
 }
 
 func (PluginArgs) ElementType() reflect.Type {

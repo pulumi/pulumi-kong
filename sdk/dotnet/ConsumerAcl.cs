@@ -68,7 +68,7 @@ namespace Pulumi.Kong
         public Output<string> Group { get; private set; } = null!;
 
         /// <summary>
-        /// A list of strings associated with the consumer acl for grouping and filtering.
+        /// A list of strings associated with the consumer acl for grouping and filtering
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
@@ -135,7 +135,7 @@ namespace Pulumi.Kong
         private InputList<string>? _tags;
 
         /// <summary>
-        /// A list of strings associated with the consumer acl for grouping and filtering.
+        /// A list of strings associated with the consumer acl for grouping and filtering
         /// </summary>
         public InputList<string> Tags
         {
@@ -166,7 +166,7 @@ namespace Pulumi.Kong
         private InputList<string>? _tags;
 
         /// <summary>
-        /// A list of strings associated with the consumer acl for grouping and filtering.
+        /// A list of strings associated with the consumer acl for grouping and filtering
         /// </summary>
         public InputList<string> Tags
         {

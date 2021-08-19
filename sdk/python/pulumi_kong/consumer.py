@@ -14,14 +14,18 @@ __all__ = ['ConsumerArgs', 'Consumer']
 class ConsumerArgs:
     def __init__(__self__, *,
                  custom_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  username: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Consumer resource.
         :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
         if custom_id is not None:
             pulumi.set(__self__, "custom_id", custom_id)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if username is not None:
             pulumi.set(__self__, "username", username)
 
@@ -36,6 +40,18 @@ class ConsumerArgs:
     @custom_id.setter
     def custom_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "custom_id", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Consumer for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
     @property
     @pulumi.getter
@@ -54,14 +70,18 @@ class ConsumerArgs:
 class _ConsumerState:
     def __init__(__self__, *,
                  custom_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  username: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Consumer resources.
         :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
         if custom_id is not None:
             pulumi.set(__self__, "custom_id", custom_id)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if username is not None:
             pulumi.set(__self__, "username", username)
 
@@ -76,6 +96,18 @@ class _ConsumerState:
     @custom_id.setter
     def custom_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "custom_id", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Consumer for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
     @property
     @pulumi.getter
@@ -96,6 +128,7 @@ class Consumer(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  custom_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -111,6 +144,7 @@ class Consumer(pulumi.CustomResource):
 
         consumer = kong.Consumer("consumer",
             custom_id="123",
+            tags=["mySuperTag"],
             username="User1")
         ```
 
@@ -125,6 +159,7 @@ class Consumer(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
         ...
@@ -146,6 +181,7 @@ class Consumer(pulumi.CustomResource):
 
         consumer = kong.Consumer("consumer",
             custom_id="123",
+            tags=["mySuperTag"],
             username="User1")
         ```
 
@@ -173,6 +209,7 @@ class Consumer(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  custom_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -187,6 +224,7 @@ class Consumer(pulumi.CustomResource):
             __props__ = ConsumerArgs.__new__(ConsumerArgs)
 
             __props__.__dict__["custom_id"] = custom_id
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["username"] = username
         super(Consumer, __self__).__init__(
             'kong:index/consumer:Consumer',
@@ -199,6 +237,7 @@ class Consumer(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             custom_id: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             username: Optional[pulumi.Input[str]] = None) -> 'Consumer':
         """
         Get an existing Consumer resource's state with the given name, id, and optional extra
@@ -208,6 +247,7 @@ class Consumer(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -215,6 +255,7 @@ class Consumer(pulumi.CustomResource):
         __props__ = _ConsumerState.__new__(_ConsumerState)
 
         __props__.__dict__["custom_id"] = custom_id
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["username"] = username
         return Consumer(resource_name, opts=opts, __props__=__props__)
 
@@ -225,6 +266,14 @@ class Consumer(pulumi.CustomResource):
         A custom id for the consumer, you must set either the username or custom_id
         """
         return pulumi.get(self, "custom_id")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of strings associated with the Consumer for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter

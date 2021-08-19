@@ -28,6 +28,9 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := kong.NewConsumer(ctx, "consumer", &kong.ConsumerArgs{
 // 			CustomId: pulumi.String("123"),
+// 			Tags: pulumi.StringArray{
+// 				pulumi.String("mySuperTag"),
+// 			},
 // 			Username: pulumi.String("User1"),
 // 		})
 // 		if err != nil {
@@ -50,6 +53,8 @@ type Consumer struct {
 
 	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrOutput `pulumi:"customId"`
+	// A list of strings associated with the Consumer for grouping and filtering
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	// The username to use, you must set either the username or custom_id
 	Username pulumi.StringPtrOutput `pulumi:"username"`
 }
@@ -85,6 +90,8 @@ func GetConsumer(ctx *pulumi.Context,
 type consumerState struct {
 	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId *string `pulumi:"customId"`
+	// A list of strings associated with the Consumer for grouping and filtering
+	Tags []string `pulumi:"tags"`
 	// The username to use, you must set either the username or custom_id
 	Username *string `pulumi:"username"`
 }
@@ -92,6 +99,8 @@ type consumerState struct {
 type ConsumerState struct {
 	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrInput
+	// A list of strings associated with the Consumer for grouping and filtering
+	Tags pulumi.StringArrayInput
 	// The username to use, you must set either the username or custom_id
 	Username pulumi.StringPtrInput
 }
@@ -103,6 +112,8 @@ func (ConsumerState) ElementType() reflect.Type {
 type consumerArgs struct {
 	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId *string `pulumi:"customId"`
+	// A list of strings associated with the Consumer for grouping and filtering
+	Tags []string `pulumi:"tags"`
 	// The username to use, you must set either the username or custom_id
 	Username *string `pulumi:"username"`
 }
@@ -111,6 +122,8 @@ type consumerArgs struct {
 type ConsumerArgs struct {
 	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrInput
+	// A list of strings associated with the Consumer for grouping and filtering
+	Tags pulumi.StringArrayInput
 	// The username to use, you must set either the username or custom_id
 	Username pulumi.StringPtrInput
 }

@@ -46,6 +46,8 @@ import (
 type Target struct {
 	pulumi.CustomResourceState
 
+	// A list set of strings associated with the Plugin for grouping and filtering
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
 	Target pulumi.StringOutput `pulumi:"target"`
 	// is the id of the upstream to apply this target to.
@@ -92,6 +94,8 @@ func GetTarget(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Target resources.
 type targetState struct {
+	// A list set of strings associated with the Plugin for grouping and filtering
+	Tags []string `pulumi:"tags"`
 	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
 	Target *string `pulumi:"target"`
 	// is the id of the upstream to apply this target to.
@@ -101,6 +105,8 @@ type targetState struct {
 }
 
 type TargetState struct {
+	// A list set of strings associated with the Plugin for grouping and filtering
+	Tags pulumi.StringArrayInput
 	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
 	Target pulumi.StringPtrInput
 	// is the id of the upstream to apply this target to.
@@ -114,6 +120,8 @@ func (TargetState) ElementType() reflect.Type {
 }
 
 type targetArgs struct {
+	// A list set of strings associated with the Plugin for grouping and filtering
+	Tags []string `pulumi:"tags"`
 	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
 	Target string `pulumi:"target"`
 	// is the id of the upstream to apply this target to.
@@ -124,6 +132,8 @@ type targetArgs struct {
 
 // The set of arguments for constructing a Target resource.
 type TargetArgs struct {
+	// A list set of strings associated with the Plugin for grouping and filtering
+	Tags pulumi.StringArrayInput
 	// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
 	Target pulumi.StringInput
 	// is the id of the upstream to apply this target to.

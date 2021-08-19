@@ -22,6 +22,7 @@ import * as utilities from "./utilities";
  *         "foo.com",
  *         "bar.com",
  *     ],
+ *     tags: ["myTag"],
  * });
  * ```
  *
@@ -70,9 +71,10 @@ export class Certificate extends pulumi.CustomResource {
      */
     public readonly privateKey!: pulumi.Output<string | undefined>;
     /**
-     * a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+     * A list of strings associated with the Certificate for grouping and filtering
      */
     public readonly snis!: pulumi.Output<string[] | undefined>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Certificate resource with the given unique name, arguments, and options.
@@ -90,6 +92,7 @@ export class Certificate extends pulumi.CustomResource {
             inputs["certificate"] = state ? state.certificate : undefined;
             inputs["privateKey"] = state ? state.privateKey : undefined;
             inputs["snis"] = state ? state.snis : undefined;
+            inputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as CertificateArgs | undefined;
             if ((!args || args.certificate === undefined) && !opts.urn) {
@@ -98,6 +101,7 @@ export class Certificate extends pulumi.CustomResource {
             inputs["certificate"] = args ? args.certificate : undefined;
             inputs["privateKey"] = args ? args.privateKey : undefined;
             inputs["snis"] = args ? args.snis : undefined;
+            inputs["tags"] = args ? args.tags : undefined;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -119,9 +123,10 @@ export interface CertificateState {
      */
     readonly privateKey?: pulumi.Input<string>;
     /**
-     * a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+     * A list of strings associated with the Certificate for grouping and filtering
      */
     readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -137,7 +142,8 @@ export interface CertificateArgs {
      */
     readonly privateKey?: pulumi.Input<string>;
     /**
-     * a list of SNIs (alternative hosts on the certificate), under the bonnet this will create an SNI object in kong
+     * A list of strings associated with the Certificate for grouping and filtering
      */
     readonly snis?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

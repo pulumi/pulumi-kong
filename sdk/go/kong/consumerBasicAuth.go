@@ -61,7 +61,7 @@ type ConsumerBasicAuth struct {
 	ConsumerId pulumi.StringOutput `pulumi:"consumerId"`
 	// password to be used for basic auth
 	Password pulumi.StringOutput `pulumi:"password"`
-	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	// A list of strings associated with the consumer basic auth for grouping and filtering
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	// username to be used for basic auth
 	Username pulumi.StringOutput `pulumi:"username"`
@@ -109,7 +109,7 @@ type consumerBasicAuthState struct {
 	ConsumerId *string `pulumi:"consumerId"`
 	// password to be used for basic auth
 	Password *string `pulumi:"password"`
-	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	// A list of strings associated with the consumer basic auth for grouping and filtering
 	Tags []string `pulumi:"tags"`
 	// username to be used for basic auth
 	Username *string `pulumi:"username"`
@@ -120,7 +120,7 @@ type ConsumerBasicAuthState struct {
 	ConsumerId pulumi.StringPtrInput
 	// password to be used for basic auth
 	Password pulumi.StringPtrInput
-	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	// A list of strings associated with the consumer basic auth for grouping and filtering
 	Tags pulumi.StringArrayInput
 	// username to be used for basic auth
 	Username pulumi.StringPtrInput
@@ -135,7 +135,7 @@ type consumerBasicAuthArgs struct {
 	ConsumerId string `pulumi:"consumerId"`
 	// password to be used for basic auth
 	Password string `pulumi:"password"`
-	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	// A list of strings associated with the consumer basic auth for grouping and filtering
 	Tags []string `pulumi:"tags"`
 	// username to be used for basic auth
 	Username string `pulumi:"username"`
@@ -147,7 +147,7 @@ type ConsumerBasicAuthArgs struct {
 	ConsumerId pulumi.StringInput
 	// password to be used for basic auth
 	Password pulumi.StringInput
-	// A list of strings associated with the consumer basic auth for grouping and filtering.
+	// A list of strings associated with the consumer basic auth for grouping and filtering
 	Tags pulumi.StringArrayInput
 	// username to be used for basic auth
 	Username pulumi.StringInput

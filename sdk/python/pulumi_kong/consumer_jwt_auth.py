@@ -17,14 +17,16 @@ class ConsumerJwtAuthArgs:
                  rsa_public_key: pulumi.Input[str],
                  algorithm: Optional[pulumi.Input[str]] = None,
                  key: Optional[pulumi.Input[str]] = None,
-                 secret: Optional[pulumi.Input[str]] = None):
+                 secret: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a ConsumerJwtAuth resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with jwt auth
-        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
-        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
+        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         :param pulumi.Input[str] key: A unique string identifying the credential. If left out, it will be auto-generated.
-        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer JWT auth for grouping and filtering
         """
         pulumi.set(__self__, "consumer_id", consumer_id)
         pulumi.set(__self__, "rsa_public_key", rsa_public_key)
@@ -34,6 +36,8 @@ class ConsumerJwtAuthArgs:
             pulumi.set(__self__, "key", key)
         if secret is not None:
             pulumi.set(__self__, "secret", secret)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -51,7 +55,7 @@ class ConsumerJwtAuthArgs:
     @pulumi.getter(name="rsaPublicKey")
     def rsa_public_key(self) -> pulumi.Input[str]:
         """
-        If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+        If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
         """
         return pulumi.get(self, "rsa_public_key")
 
@@ -63,7 +67,7 @@ class ConsumerJwtAuthArgs:
     @pulumi.getter
     def algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         """
         return pulumi.get(self, "algorithm")
 
@@ -87,13 +91,25 @@ class ConsumerJwtAuthArgs:
     @pulumi.getter
     def secret(self) -> Optional[pulumi.Input[str]]:
         """
-        If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         """
         return pulumi.get(self, "secret")
 
     @secret.setter
     def secret(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "secret", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the consumer JWT auth for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 @pulumi.input_type
@@ -103,14 +119,16 @@ class _ConsumerJwtAuthState:
                  consumer_id: Optional[pulumi.Input[str]] = None,
                  key: Optional[pulumi.Input[str]] = None,
                  rsa_public_key: Optional[pulumi.Input[str]] = None,
-                 secret: Optional[pulumi.Input[str]] = None):
+                 secret: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering ConsumerJwtAuth resources.
-        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with jwt auth
         :param pulumi.Input[str] key: A unique string identifying the credential. If left out, it will be auto-generated.
-        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
-        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
+        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer JWT auth for grouping and filtering
         """
         if algorithm is not None:
             pulumi.set(__self__, "algorithm", algorithm)
@@ -122,12 +140,14 @@ class _ConsumerJwtAuthState:
             pulumi.set(__self__, "rsa_public_key", rsa_public_key)
         if secret is not None:
             pulumi.set(__self__, "secret", secret)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
     def algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         """
         return pulumi.get(self, "algorithm")
 
@@ -163,7 +183,7 @@ class _ConsumerJwtAuthState:
     @pulumi.getter(name="rsaPublicKey")
     def rsa_public_key(self) -> Optional[pulumi.Input[str]]:
         """
-        If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+        If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
         """
         return pulumi.get(self, "rsa_public_key")
 
@@ -175,13 +195,25 @@ class _ConsumerJwtAuthState:
     @pulumi.getter
     def secret(self) -> Optional[pulumi.Input[str]]:
         """
-        If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         """
         return pulumi.get(self, "secret")
 
     @secret.setter
     def secret(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "secret", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the consumer JWT auth for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class ConsumerJwtAuth(pulumi.CustomResource):
@@ -194,6 +226,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
                  key: Optional[pulumi.Input[str]] = None,
                  rsa_public_key: Optional[pulumi.Input[str]] = None,
                  secret: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         ## # ConsumerJwtAuth
@@ -224,11 +257,12 @@ class ConsumerJwtAuth(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with jwt auth
         :param pulumi.Input[str] key: A unique string identifying the credential. If left out, it will be auto-generated.
-        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
-        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
+        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer JWT auth for grouping and filtering
         """
         ...
     @overload
@@ -283,6 +317,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
                  key: Optional[pulumi.Input[str]] = None,
                  rsa_public_key: Optional[pulumi.Input[str]] = None,
                  secret: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -304,6 +339,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
                 raise TypeError("Missing required property 'rsa_public_key'")
             __props__.__dict__["rsa_public_key"] = rsa_public_key
             __props__.__dict__["secret"] = secret
+            __props__.__dict__["tags"] = tags
         super(ConsumerJwtAuth, __self__).__init__(
             'kong:index/consumerJwtAuth:ConsumerJwtAuth',
             resource_name,
@@ -318,7 +354,8 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             consumer_id: Optional[pulumi.Input[str]] = None,
             key: Optional[pulumi.Input[str]] = None,
             rsa_public_key: Optional[pulumi.Input[str]] = None,
-            secret: Optional[pulumi.Input[str]] = None) -> 'ConsumerJwtAuth':
+            secret: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'ConsumerJwtAuth':
         """
         Get an existing ConsumerJwtAuth resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -326,11 +363,12 @@ class ConsumerJwtAuth(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with jwt auth
         :param pulumi.Input[str] key: A unique string identifying the credential. If left out, it will be auto-generated.
-        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
-        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        :param pulumi.Input[str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
+        :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer JWT auth for grouping and filtering
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -341,13 +379,14 @@ class ConsumerJwtAuth(pulumi.CustomResource):
         __props__.__dict__["key"] = key
         __props__.__dict__["rsa_public_key"] = rsa_public_key
         __props__.__dict__["secret"] = secret
+        __props__.__dict__["tags"] = tags
         return ConsumerJwtAuth(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
     def algorithm(self) -> pulumi.Output[Optional[str]]:
         """
-        The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`.
+        The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         """
         return pulumi.get(self, "algorithm")
 
@@ -371,7 +410,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
     @pulumi.getter(name="rsaPublicKey")
     def rsa_public_key(self) -> pulumi.Output[str]:
         """
-        If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature.
+        If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
         """
         return pulumi.get(self, "rsa_public_key")
 
@@ -379,7 +418,15 @@ class ConsumerJwtAuth(pulumi.CustomResource):
     @pulumi.getter
     def secret(self) -> pulumi.Output[Optional[str]]:
         """
-        If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated.
+        If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         """
         return pulumi.get(self, "secret")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of strings associated with the consumer JWT auth for grouping and filtering
+        """
+        return pulumi.get(self, "tags")
 
