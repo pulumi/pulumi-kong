@@ -106,6 +106,7 @@ func Provider() tfbridge.ProviderInfo {
 			"kong_consumer_acl":        {Tok: makeResource(mainMod, "ConsumerAcl")},
 			"kong_consumer_basic_auth": {Tok: makeResource(mainMod, "ConsumerBasicAuth")},
 			"kong_consumer_jwt_auth":   {Tok: makeResource(mainMod, "ConsumerJwtAuth")},
+			"kong_consumer_key_auth":   {Tok: makeResource(mainMod, "ConsumerKeyAuth")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{

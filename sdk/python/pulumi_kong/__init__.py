@@ -8,6 +8,7 @@ from .consumer import *
 from .consumer_acl import *
 from .consumer_basic_auth import *
 from .consumer_jwt_auth import *
+from .consumer_key_auth import *
 from .plugin import *
 from .provider import *
 from .route import *
@@ -44,6 +45,8 @@ def _register_module():
                 return ConsumerBasicAuth(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/consumerJwtAuth:ConsumerJwtAuth":
                 return ConsumerJwtAuth(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "kong:index/consumerKeyAuth:ConsumerKeyAuth":
+                return ConsumerKeyAuth(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/plugin:Plugin":
                 return Plugin(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "kong:index/route:Route":
@@ -64,6 +67,7 @@ def _register_module():
     pulumi.runtime.register_resource_module("kong", "index/consumerAcl", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/consumerBasicAuth", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/consumerJwtAuth", _module_instance)
+    pulumi.runtime.register_resource_module("kong", "index/consumerKeyAuth", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/plugin", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/route", _module_instance)
     pulumi.runtime.register_resource_module("kong", "index/service", _module_instance)
