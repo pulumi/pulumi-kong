@@ -69,3 +69,4 @@ export interface UpstreamHealthchecksPassiveUnhealthy {
     tcpFailures?: number;
     timeouts?: number;
 }
+

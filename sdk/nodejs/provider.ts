@@ -25,6 +25,30 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === Provider.__pulumiType;
     }
 
+    /**
+     * An basic auth password for kong admin
+     */
+    public readonly kongAdminPassword!: pulumi.Output<string | undefined>;
+    /**
+     * API key for the kong api (Enterprise Edition)
+     */
+    public readonly kongAdminToken!: pulumi.Output<string | undefined>;
+    /**
+     * The address of the kong admin url e.g. http://localhost:8001
+     */
+    public readonly kongAdminUri!: pulumi.Output<string>;
+    /**
+     * An basic auth user for kong admin
+     */
+    public readonly kongAdminUsername!: pulumi.Output<string | undefined>;
+    /**
+     * API key for the kong api (if you have locked it down)
+     */
+    public readonly kongApiKey!: pulumi.Output<string | undefined>;
+    /**
+     * Workspace context (Enterprise Edition)
+     */
+    public readonly kongWorkspace!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -63,33 +87,33 @@ export interface ProviderArgs {
     /**
      * An basic auth password for kong admin
      */
-    readonly kongAdminPassword?: pulumi.Input<string>;
+    kongAdminPassword?: pulumi.Input<string>;
     /**
      * API key for the kong api (Enterprise Edition)
      */
-    readonly kongAdminToken?: pulumi.Input<string>;
+    kongAdminToken?: pulumi.Input<string>;
     /**
      * The address of the kong admin url e.g. http://localhost:8001
      */
-    readonly kongAdminUri: pulumi.Input<string>;
+    kongAdminUri: pulumi.Input<string>;
     /**
      * An basic auth user for kong admin
      */
-    readonly kongAdminUsername?: pulumi.Input<string>;
+    kongAdminUsername?: pulumi.Input<string>;
     /**
      * API key for the kong api (if you have locked it down)
      */
-    readonly kongApiKey?: pulumi.Input<string>;
+    kongApiKey?: pulumi.Input<string>;
     /**
      * Workspace context (Enterprise Edition)
      */
-    readonly kongWorkspace?: pulumi.Input<string>;
+    kongWorkspace?: pulumi.Input<string>;
     /**
      * Should plugins `config_json` field strictly match plugin configuration
      */
-    readonly strictPluginsMatch?: pulumi.Input<boolean>;
+    strictPluginsMatch?: pulumi.Input<boolean>;
     /**
      * Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
      */
-    readonly tlsSkipVerify?: pulumi.Input<boolean>;
+    tlsSkipVerify?: pulumi.Input<boolean>;
 }

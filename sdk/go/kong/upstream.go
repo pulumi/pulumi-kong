@@ -10,6 +10,102 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		certificate, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
+// 			Certificate: pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN CERTIFICATE-----\n", "    ......\n", "    -----END CERTIFICATE-----\n")),
+// 			PrivateKey:  pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN PRIVATE KEY-----\n", "    .....\n", "    -----END PRIVATE KEY-----\n")),
+// 			Snis: pulumi.StringArray{
+// 				pulumi.String("foo.com"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = kong.NewUpstream(ctx, "upstream", &kong.UpstreamArgs{
+// 			Slots:              pulumi.Int(10),
+// 			HashOn:             pulumi.String("header"),
+// 			HashFallback:       pulumi.String("cookie"),
+// 			HashOnHeader:       pulumi.String("HeaderName"),
+// 			HashFallbackHeader: pulumi.String("FallbackHeaderName"),
+// 			HashOnCookie:       pulumi.String("CookieName"),
+// 			HashOnCookiePath:   pulumi.String("/path"),
+// 			HostHeader:         pulumi.String("x-host"),
+// 			Tags: pulumi.StringArray{
+// 				pulumi.String("a"),
+// 				pulumi.String("b"),
+// 			},
+// 			ClientCertificateId: certificate.ID(),
+// 			Healthchecks: &UpstreamHealthchecksArgs{
+// 				Active: &UpstreamHealthchecksActiveArgs{
+// 					Type:                   pulumi.String("https"),
+// 					HttpPath:               pulumi.String("/status"),
+// 					Timeout:                pulumi.Int(10),
+// 					Concurrency:            pulumi.Int(20),
+// 					HttpsVerifyCertificate: pulumi.Bool(false),
+// 					HttpsSni:               pulumi.String("some.domain.com"),
+// 					Healthy: &UpstreamHealthchecksActiveHealthyArgs{
+// 						Successes: pulumi.Int(1),
+// 						Interval:  pulumi.Int(5),
+// 						HttpStatuses: pulumi.IntArray{
+// 							pulumi.Int(200),
+// 							pulumi.Int(201),
+// 						},
+// 					},
+// 					Unhealthy: &UpstreamHealthchecksActiveUnhealthyArgs{
+// 						Timeouts:     pulumi.Int(7),
+// 						Interval:     pulumi.Int(3),
+// 						TcpFailures:  pulumi.Int(1),
+// 						HttpFailures: pulumi.Int(2),
+// 						HttpStatuses: pulumi.IntArray{
+// 							pulumi.Int(500),
+// 							pulumi.Int(501),
+// 						},
+// 					},
+// 				},
+// 				Passive: &UpstreamHealthchecksPassiveArgs{
+// 					Type: pulumi.String("https"),
+// 					Healthy: &UpstreamHealthchecksPassiveHealthyArgs{
+// 						Successes: pulumi.Int(1),
+// 						HttpStatuses: pulumi.IntArray{
+// 							pulumi.Int(200),
+// 							pulumi.Int(201),
+// 							pulumi.Int(202),
+// 						},
+// 					},
+// 					Unhealthy: &UpstreamHealthchecksPassiveUnhealthyArgs{
+// 						Timeouts:     pulumi.Int(3),
+// 						TcpFailures:  pulumi.Int(5),
+// 						HttpFailures: pulumi.Int(6),
+// 						HttpStatuses: pulumi.IntArray{
+// 							pulumi.Int(500),
+// 							pulumi.Int(501),
+// 							pulumi.Int(502),
+// 						},
+// 					},
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
 // ## Import
 //
 // To import an upstream
@@ -353,7 +449,7 @@ type UpstreamArrayInput interface {
 type UpstreamArray []UpstreamInput
 
 func (UpstreamArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Upstream)(nil))
+	return reflect.TypeOf((*[]*Upstream)(nil)).Elem()
 }
 
 func (i UpstreamArray) ToUpstreamArrayOutput() UpstreamArrayOutput {
@@ -378,7 +474,7 @@ type UpstreamMapInput interface {
 type UpstreamMap map[string]UpstreamInput
 
 func (UpstreamMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Upstream)(nil))
+	return reflect.TypeOf((*map[string]*Upstream)(nil)).Elem()
 }
 
 func (i UpstreamMap) ToUpstreamMapOutput() UpstreamMapOutput {
@@ -389,9 +485,7 @@ func (i UpstreamMap) ToUpstreamMapOutputWithContext(ctx context.Context) Upstrea
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamMapOutput)
 }
 
-type UpstreamOutput struct {
-	*pulumi.OutputState
-}
+type UpstreamOutput struct{ *pulumi.OutputState }
 
 func (UpstreamOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Upstream)(nil))
@@ -410,14 +504,12 @@ func (o UpstreamOutput) ToUpstreamPtrOutput() UpstreamPtrOutput {
 }
 
 func (o UpstreamOutput) ToUpstreamPtrOutputWithContext(ctx context.Context) UpstreamPtrOutput {
-	return o.ApplyT(func(v Upstream) *Upstream {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Upstream) *Upstream {
 		return &v
 	}).(UpstreamPtrOutput)
 }
 
-type UpstreamPtrOutput struct {
-	*pulumi.OutputState
-}
+type UpstreamPtrOutput struct{ *pulumi.OutputState }
 
 func (UpstreamPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Upstream)(nil))
@@ -429,6 +521,16 @@ func (o UpstreamPtrOutput) ToUpstreamPtrOutput() UpstreamPtrOutput {
 
 func (o UpstreamPtrOutput) ToUpstreamPtrOutputWithContext(ctx context.Context) UpstreamPtrOutput {
 	return o
+}
+
+func (o UpstreamPtrOutput) Elem() UpstreamOutput {
+	return o.ApplyT(func(v *Upstream) Upstream {
+		if v != nil {
+			return *v
+		}
+		var ret Upstream
+		return ret
+	}).(UpstreamOutput)
 }
 
 type UpstreamArrayOutput struct{ *pulumi.OutputState }
@@ -472,6 +574,10 @@ func (o UpstreamMapOutput) MapIndex(k pulumi.StringInput) UpstreamOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamInput)(nil)).Elem(), &Upstream{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamPtrInput)(nil)).Elem(), &Upstream{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamArrayInput)(nil)).Elem(), UpstreamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamMapInput)(nil)).Elem(), UpstreamMap{})
 	pulumi.RegisterOutputType(UpstreamOutput{})
 	pulumi.RegisterOutputType(UpstreamPtrOutput{})
 	pulumi.RegisterOutputType(UpstreamArrayOutput{})

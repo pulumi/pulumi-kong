@@ -194,7 +194,7 @@ type ConsumerArrayInput interface {
 type ConsumerArray []ConsumerInput
 
 func (ConsumerArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Consumer)(nil))
+	return reflect.TypeOf((*[]*Consumer)(nil)).Elem()
 }
 
 func (i ConsumerArray) ToConsumerArrayOutput() ConsumerArrayOutput {
@@ -219,7 +219,7 @@ type ConsumerMapInput interface {
 type ConsumerMap map[string]ConsumerInput
 
 func (ConsumerMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Consumer)(nil))
+	return reflect.TypeOf((*map[string]*Consumer)(nil)).Elem()
 }
 
 func (i ConsumerMap) ToConsumerMapOutput() ConsumerMapOutput {
@@ -230,9 +230,7 @@ func (i ConsumerMap) ToConsumerMapOutputWithContext(ctx context.Context) Consume
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerMapOutput)
 }
 
-type ConsumerOutput struct {
-	*pulumi.OutputState
-}
+type ConsumerOutput struct{ *pulumi.OutputState }
 
 func (ConsumerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Consumer)(nil))
@@ -251,14 +249,12 @@ func (o ConsumerOutput) ToConsumerPtrOutput() ConsumerPtrOutput {
 }
 
 func (o ConsumerOutput) ToConsumerPtrOutputWithContext(ctx context.Context) ConsumerPtrOutput {
-	return o.ApplyT(func(v Consumer) *Consumer {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Consumer) *Consumer {
 		return &v
 	}).(ConsumerPtrOutput)
 }
 
-type ConsumerPtrOutput struct {
-	*pulumi.OutputState
-}
+type ConsumerPtrOutput struct{ *pulumi.OutputState }
 
 func (ConsumerPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Consumer)(nil))
@@ -270,6 +266,16 @@ func (o ConsumerPtrOutput) ToConsumerPtrOutput() ConsumerPtrOutput {
 
 func (o ConsumerPtrOutput) ToConsumerPtrOutputWithContext(ctx context.Context) ConsumerPtrOutput {
 	return o
+}
+
+func (o ConsumerPtrOutput) Elem() ConsumerOutput {
+	return o.ApplyT(func(v *Consumer) Consumer {
+		if v != nil {
+			return *v
+		}
+		var ret Consumer
+		return ret
+	}).(ConsumerOutput)
 }
 
 type ConsumerArrayOutput struct{ *pulumi.OutputState }
@@ -313,6 +319,10 @@ func (o ConsumerMapOutput) MapIndex(k pulumi.StringInput) ConsumerOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerInput)(nil)).Elem(), &Consumer{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerPtrInput)(nil)).Elem(), &Consumer{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerArrayInput)(nil)).Elem(), ConsumerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerMapInput)(nil)).Elem(), ConsumerMap{})
 	pulumi.RegisterOutputType(ConsumerOutput{})
 	pulumi.RegisterOutputType(ConsumerPtrOutput{})
 	pulumi.RegisterOutputType(ConsumerArrayOutput{})

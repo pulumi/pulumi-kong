@@ -8,56 +8,65 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
-__all__ = [
-    'kong_admin_password',
-    'kong_admin_token',
-    'kong_admin_uri',
-    'kong_admin_username',
-    'kong_api_key',
-    'kong_workspace',
-    'strict_plugins_match',
-    'tls_skip_verify',
-]
+import types
 
 __config__ = pulumi.Config('kong')
 
-kong_admin_password = __config__.get('kongAdminPassword')
-"""
-An basic auth password for kong admin
-"""
 
-kong_admin_token = __config__.get('kongAdminToken')
-"""
-API key for the kong api (Enterprise Edition)
-"""
+class _ExportableConfig(types.ModuleType):
+    @property
+    def kong_admin_password(self) -> Optional[str]:
+        """
+        An basic auth password for kong admin
+        """
+        return __config__.get('kongAdminPassword')
 
-kong_admin_uri = __config__.get('kongAdminUri')
-"""
-The address of the kong admin url e.g. http://localhost:8001
-"""
+    @property
+    def kong_admin_token(self) -> Optional[str]:
+        """
+        API key for the kong api (Enterprise Edition)
+        """
+        return __config__.get('kongAdminToken')
 
-kong_admin_username = __config__.get('kongAdminUsername')
-"""
-An basic auth user for kong admin
-"""
+    @property
+    def kong_admin_uri(self) -> Optional[str]:
+        """
+        The address of the kong admin url e.g. http://localhost:8001
+        """
+        return __config__.get('kongAdminUri')
 
-kong_api_key = __config__.get('kongApiKey')
-"""
-API key for the kong api (if you have locked it down)
-"""
+    @property
+    def kong_admin_username(self) -> Optional[str]:
+        """
+        An basic auth user for kong admin
+        """
+        return __config__.get('kongAdminUsername')
 
-kong_workspace = __config__.get('kongWorkspace')
-"""
-Workspace context (Enterprise Edition)
-"""
+    @property
+    def kong_api_key(self) -> Optional[str]:
+        """
+        API key for the kong api (if you have locked it down)
+        """
+        return __config__.get('kongApiKey')
 
-strict_plugins_match = __config__.get('strictPluginsMatch') or _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
-"""
-Should plugins `config_json` field strictly match plugin configuration
-"""
+    @property
+    def kong_workspace(self) -> Optional[str]:
+        """
+        Workspace context (Enterprise Edition)
+        """
+        return __config__.get('kongWorkspace')
 
-tls_skip_verify = __config__.get('tlsSkipVerify') or (_utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
-"""
-Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
-"""
+    @property
+    def strict_plugins_match(self) -> Optional[bool]:
+        """
+        Should plugins `config_json` field strictly match plugin configuration
+        """
+        return __config__.get_bool('strictPluginsMatch') or _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
+
+    @property
+    def tls_skip_verify(self) -> bool:
+        """
+        Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
+        """
+        return __config__.get_bool('tlsSkipVerify') or (_utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
 

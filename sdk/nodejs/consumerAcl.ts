@@ -118,15 +118,15 @@ export interface ConsumerAclState {
     /**
      * the id of the consumer to be configured
      */
-    readonly consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string>;
     /**
      * the acl group
      */
-    readonly group?: pulumi.Input<string>;
+    group?: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer acl for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -136,13 +136,13 @@ export interface ConsumerAclArgs {
     /**
      * the id of the consumer to be configured
      */
-    readonly consumerId: pulumi.Input<string>;
+    consumerId: pulumi.Input<string>;
     /**
      * the acl group
      */
-    readonly group: pulumi.Input<string>;
+    group: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer acl for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

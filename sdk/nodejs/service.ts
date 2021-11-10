@@ -190,38 +190,38 @@ export class Service extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Service resources.
  */
 export interface ServiceState {
-    readonly caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
-    readonly clientCertificateId?: pulumi.Input<string>;
-    readonly connectTimeout?: pulumi.Input<number>;
-    readonly host?: pulumi.Input<string>;
-    readonly name?: pulumi.Input<string>;
-    readonly path?: pulumi.Input<string>;
-    readonly port?: pulumi.Input<number>;
-    readonly protocol?: pulumi.Input<string>;
-    readonly readTimeout?: pulumi.Input<number>;
-    readonly retries?: pulumi.Input<number>;
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
-    readonly tlsVerify?: pulumi.Input<boolean>;
-    readonly tlsVerifyDepth?: pulumi.Input<number>;
-    readonly writeTimeout?: pulumi.Input<number>;
+    caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clientCertificateId?: pulumi.Input<string>;
+    connectTimeout?: pulumi.Input<number>;
+    host?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    protocol?: pulumi.Input<string>;
+    readTimeout?: pulumi.Input<number>;
+    retries?: pulumi.Input<number>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tlsVerify?: pulumi.Input<boolean>;
+    tlsVerifyDepth?: pulumi.Input<number>;
+    writeTimeout?: pulumi.Input<number>;
 }
 
 /**
  * The set of arguments for constructing a Service resource.
  */
 export interface ServiceArgs {
-    readonly caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
-    readonly clientCertificateId?: pulumi.Input<string>;
-    readonly connectTimeout?: pulumi.Input<number>;
-    readonly host?: pulumi.Input<string>;
-    readonly name?: pulumi.Input<string>;
-    readonly path?: pulumi.Input<string>;
-    readonly port?: pulumi.Input<number>;
-    readonly protocol: pulumi.Input<string>;
-    readonly readTimeout?: pulumi.Input<number>;
-    readonly retries?: pulumi.Input<number>;
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
-    readonly tlsVerify?: pulumi.Input<boolean>;
-    readonly tlsVerifyDepth?: pulumi.Input<number>;
-    readonly writeTimeout?: pulumi.Input<number>;
+    caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clientCertificateId?: pulumi.Input<string>;
+    connectTimeout?: pulumi.Input<number>;
+    host?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    protocol: pulumi.Input<string>;
+    readTimeout?: pulumi.Input<number>;
+    retries?: pulumi.Input<number>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tlsVerify?: pulumi.Input<boolean>;
+    tlsVerifyDepth?: pulumi.Input<number>;
+    writeTimeout?: pulumi.Input<number>;
 }
