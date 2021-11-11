@@ -118,19 +118,19 @@ export interface TargetState {
     /**
      * A list set of strings associated with the Plugin for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
      */
-    readonly target?: pulumi.Input<string>;
+    target?: pulumi.Input<string>;
     /**
      * is the id of the upstream to apply this target to.
      */
-    readonly upstreamId?: pulumi.Input<string>;
+    upstreamId?: pulumi.Input<string>;
     /**
      * is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
      */
-    readonly weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number>;
 }
 
 /**
@@ -140,17 +140,17 @@ export interface TargetArgs {
     /**
      * A list set of strings associated with the Plugin for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
      */
-    readonly target: pulumi.Input<string>;
+    target: pulumi.Input<string>;
     /**
      * is the id of the upstream to apply this target to.
      */
-    readonly upstreamId: pulumi.Input<string>;
+    upstreamId: pulumi.Input<string>;
     /**
      * is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
      */
-    readonly weight: pulumi.Input<number>;
+    weight: pulumi.Input<number>;
 }

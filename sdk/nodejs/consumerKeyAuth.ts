@@ -110,15 +110,15 @@ export interface ConsumerKeyAuthState {
     /**
      * the id of the consumer to associate the credentials to
      */
-    readonly consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string>;
     /**
      * Unique key to authenticate the client; if omitted the plugin will generate one
      */
-    readonly key?: pulumi.Input<string>;
+    key?: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer key auth for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -128,13 +128,13 @@ export interface ConsumerKeyAuthArgs {
     /**
      * the id of the consumer to associate the credentials to
      */
-    readonly consumerId: pulumi.Input<string>;
+    consumerId: pulumi.Input<string>;
     /**
      * Unique key to authenticate the client; if omitted the plugin will generate one
      */
-    readonly key?: pulumi.Input<string>;
+    key?: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer key auth for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

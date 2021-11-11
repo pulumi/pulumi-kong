@@ -246,23 +246,23 @@ export interface UpstreamState {
     /**
      * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
      */
-    readonly clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string>;
     /**
      * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      */
-    readonly hashFallback?: pulumi.Input<string>;
+    hashFallback?: pulumi.Input<string>;
     /**
      * is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
      */
-    readonly hashFallbackHeader?: pulumi.Input<string>;
+    hashFallbackHeader?: pulumi.Input<string>;
     /**
      * is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      */
-    readonly hashOn?: pulumi.Input<string>;
+    hashOn?: pulumi.Input<string>;
     /**
      * is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      */
-    readonly hashOnCookie?: pulumi.Input<string>;
+    hashOnCookie?: pulumi.Input<string>;
     /**
      * is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
      * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -287,28 +287,28 @@ export interface UpstreamState {
      * * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
      * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
      */
-    readonly hashOnCookiePath?: pulumi.Input<string>;
+    hashOnCookiePath?: pulumi.Input<string>;
     /**
      * is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
      */
-    readonly hashOnHeader?: pulumi.Input<string>;
-    readonly healthchecks?: pulumi.Input<inputs.UpstreamHealthchecks>;
+    hashOnHeader?: pulumi.Input<string>;
+    healthchecks?: pulumi.Input<inputs.UpstreamHealthchecks>;
     /**
      * The hostname to be used as Host header when proxying requests through Kong.
      */
-    readonly hostHeader?: pulumi.Input<string>;
+    hostHeader?: pulumi.Input<string>;
     /**
      * is a hostname, which must be equal to the host of a Service.
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      */
-    readonly slots?: pulumi.Input<number>;
+    slots?: pulumi.Input<number>;
     /**
      * A list of strings associated with the Upstream for grouping and filtering.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -318,23 +318,23 @@ export interface UpstreamArgs {
     /**
      * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
      */
-    readonly clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string>;
     /**
      * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      */
-    readonly hashFallback?: pulumi.Input<string>;
+    hashFallback?: pulumi.Input<string>;
     /**
      * is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
      */
-    readonly hashFallbackHeader?: pulumi.Input<string>;
+    hashFallbackHeader?: pulumi.Input<string>;
     /**
      * is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      */
-    readonly hashOn?: pulumi.Input<string>;
+    hashOn?: pulumi.Input<string>;
     /**
      * is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      */
-    readonly hashOnCookie?: pulumi.Input<string>;
+    hashOnCookie?: pulumi.Input<string>;
     /**
      * is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
      * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -359,26 +359,26 @@ export interface UpstreamArgs {
      * * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
      * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
      */
-    readonly hashOnCookiePath?: pulumi.Input<string>;
+    hashOnCookiePath?: pulumi.Input<string>;
     /**
      * is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
      */
-    readonly hashOnHeader?: pulumi.Input<string>;
-    readonly healthchecks?: pulumi.Input<inputs.UpstreamHealthchecks>;
+    hashOnHeader?: pulumi.Input<string>;
+    healthchecks?: pulumi.Input<inputs.UpstreamHealthchecks>;
     /**
      * The hostname to be used as Host header when proxying requests through Kong.
      */
-    readonly hostHeader?: pulumi.Input<string>;
+    hostHeader?: pulumi.Input<string>;
     /**
      * is a hostname, which must be equal to the host of a Service.
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      */
-    readonly slots?: pulumi.Input<number>;
+    slots?: pulumi.Input<number>;
     /**
      * A list of strings associated with the Upstream for grouping and filtering.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

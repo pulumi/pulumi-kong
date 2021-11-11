@@ -202,7 +202,7 @@ type ConsumerKeyAuthArrayInput interface {
 type ConsumerKeyAuthArray []ConsumerKeyAuthInput
 
 func (ConsumerKeyAuthArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ConsumerKeyAuth)(nil))
+	return reflect.TypeOf((*[]*ConsumerKeyAuth)(nil)).Elem()
 }
 
 func (i ConsumerKeyAuthArray) ToConsumerKeyAuthArrayOutput() ConsumerKeyAuthArrayOutput {
@@ -227,7 +227,7 @@ type ConsumerKeyAuthMapInput interface {
 type ConsumerKeyAuthMap map[string]ConsumerKeyAuthInput
 
 func (ConsumerKeyAuthMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ConsumerKeyAuth)(nil))
+	return reflect.TypeOf((*map[string]*ConsumerKeyAuth)(nil)).Elem()
 }
 
 func (i ConsumerKeyAuthMap) ToConsumerKeyAuthMapOutput() ConsumerKeyAuthMapOutput {
@@ -238,9 +238,7 @@ func (i ConsumerKeyAuthMap) ToConsumerKeyAuthMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerKeyAuthMapOutput)
 }
 
-type ConsumerKeyAuthOutput struct {
-	*pulumi.OutputState
-}
+type ConsumerKeyAuthOutput struct{ *pulumi.OutputState }
 
 func (ConsumerKeyAuthOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ConsumerKeyAuth)(nil))
@@ -259,14 +257,12 @@ func (o ConsumerKeyAuthOutput) ToConsumerKeyAuthPtrOutput() ConsumerKeyAuthPtrOu
 }
 
 func (o ConsumerKeyAuthOutput) ToConsumerKeyAuthPtrOutputWithContext(ctx context.Context) ConsumerKeyAuthPtrOutput {
-	return o.ApplyT(func(v ConsumerKeyAuth) *ConsumerKeyAuth {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConsumerKeyAuth) *ConsumerKeyAuth {
 		return &v
 	}).(ConsumerKeyAuthPtrOutput)
 }
 
-type ConsumerKeyAuthPtrOutput struct {
-	*pulumi.OutputState
-}
+type ConsumerKeyAuthPtrOutput struct{ *pulumi.OutputState }
 
 func (ConsumerKeyAuthPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ConsumerKeyAuth)(nil))
@@ -278,6 +274,16 @@ func (o ConsumerKeyAuthPtrOutput) ToConsumerKeyAuthPtrOutput() ConsumerKeyAuthPt
 
 func (o ConsumerKeyAuthPtrOutput) ToConsumerKeyAuthPtrOutputWithContext(ctx context.Context) ConsumerKeyAuthPtrOutput {
 	return o
+}
+
+func (o ConsumerKeyAuthPtrOutput) Elem() ConsumerKeyAuthOutput {
+	return o.ApplyT(func(v *ConsumerKeyAuth) ConsumerKeyAuth {
+		if v != nil {
+			return *v
+		}
+		var ret ConsumerKeyAuth
+		return ret
+	}).(ConsumerKeyAuthOutput)
 }
 
 type ConsumerKeyAuthArrayOutput struct{ *pulumi.OutputState }
@@ -321,6 +327,10 @@ func (o ConsumerKeyAuthMapOutput) MapIndex(k pulumi.StringInput) ConsumerKeyAuth
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerKeyAuthInput)(nil)).Elem(), &ConsumerKeyAuth{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerKeyAuthPtrInput)(nil)).Elem(), &ConsumerKeyAuth{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerKeyAuthArrayInput)(nil)).Elem(), ConsumerKeyAuthArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerKeyAuthMapInput)(nil)).Elem(), ConsumerKeyAuthMap{})
 	pulumi.RegisterOutputType(ConsumerKeyAuthOutput{})
 	pulumi.RegisterOutputType(ConsumerKeyAuthPtrOutput{})
 	pulumi.RegisterOutputType(ConsumerKeyAuthArrayOutput{})

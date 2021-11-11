@@ -189,18 +189,18 @@ export class Plugin extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Plugin resources.
  */
 export interface PluginState {
-    readonly computedConfig?: pulumi.Input<string>;
+    computedConfig?: pulumi.Input<string>;
     /**
      * plugin configuration in JSON format, configuration must be a valid JSON object.
      */
-    readonly configJson?: pulumi.Input<string>;
-    readonly consumerId?: pulumi.Input<string>;
-    readonly enabled?: pulumi.Input<boolean>;
-    readonly name?: pulumi.Input<string>;
-    readonly routeId?: pulumi.Input<string>;
-    readonly serviceId?: pulumi.Input<string>;
-    readonly strictMatch?: pulumi.Input<boolean>;
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    configJson?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string>;
+    enabled?: pulumi.Input<boolean>;
+    name?: pulumi.Input<string>;
+    routeId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string>;
+    strictMatch?: pulumi.Input<boolean>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -210,12 +210,12 @@ export interface PluginArgs {
     /**
      * plugin configuration in JSON format, configuration must be a valid JSON object.
      */
-    readonly configJson?: pulumi.Input<string>;
-    readonly consumerId?: pulumi.Input<string>;
-    readonly enabled?: pulumi.Input<boolean>;
-    readonly name?: pulumi.Input<string>;
-    readonly routeId?: pulumi.Input<string>;
-    readonly serviceId?: pulumi.Input<string>;
-    readonly strictMatch?: pulumi.Input<boolean>;
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    configJson?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string>;
+    enabled?: pulumi.Input<boolean>;
+    name?: pulumi.Input<string>;
+    routeId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string>;
+    strictMatch?: pulumi.Input<boolean>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

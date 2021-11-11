@@ -406,10 +406,11 @@ func (o UpstreamHealthchecksOutput) ToUpstreamHealthchecksPtrOutput() UpstreamHe
 }
 
 func (o UpstreamHealthchecksOutput) ToUpstreamHealthchecksPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecks) *UpstreamHealthchecks {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecks) *UpstreamHealthchecks {
 		return &v
 	}).(UpstreamHealthchecksPtrOutput)
 }
+
 func (o UpstreamHealthchecksOutput) Active() UpstreamHealthchecksActivePtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecks) *UpstreamHealthchecksActive { return v.Active }).(UpstreamHealthchecksActivePtrOutput)
 }
@@ -433,7 +434,13 @@ func (o UpstreamHealthchecksPtrOutput) ToUpstreamHealthchecksPtrOutputWithContex
 }
 
 func (o UpstreamHealthchecksPtrOutput) Elem() UpstreamHealthchecksOutput {
-	return o.ApplyT(func(v *UpstreamHealthchecks) UpstreamHealthchecks { return *v }).(UpstreamHealthchecksOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecks) UpstreamHealthchecks {
+		if v != nil {
+			return *v
+		}
+		var ret UpstreamHealthchecks
+		return ret
+	}).(UpstreamHealthchecksOutput)
 }
 
 func (o UpstreamHealthchecksPtrOutput) Active() UpstreamHealthchecksActivePtrOutput {
@@ -559,10 +566,11 @@ func (o UpstreamHealthchecksActiveOutput) ToUpstreamHealthchecksActivePtrOutput(
 }
 
 func (o UpstreamHealthchecksActiveOutput) ToUpstreamHealthchecksActivePtrOutputWithContext(ctx context.Context) UpstreamHealthchecksActivePtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActive) *UpstreamHealthchecksActive {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksActive) *UpstreamHealthchecksActive {
 		return &v
 	}).(UpstreamHealthchecksActivePtrOutput)
 }
+
 func (o UpstreamHealthchecksActiveOutput) Concurrency() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *int { return v.Concurrency }).(pulumi.IntPtrOutput)
 }
@@ -610,7 +618,13 @@ func (o UpstreamHealthchecksActivePtrOutput) ToUpstreamHealthchecksActivePtrOutp
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Elem() UpstreamHealthchecksActiveOutput {
-	return o.ApplyT(func(v *UpstreamHealthchecksActive) UpstreamHealthchecksActive { return *v }).(UpstreamHealthchecksActiveOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActive) UpstreamHealthchecksActive {
+		if v != nil {
+			return *v
+		}
+		var ret UpstreamHealthchecksActive
+		return ret
+	}).(UpstreamHealthchecksActiveOutput)
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Concurrency() pulumi.IntPtrOutput {
@@ -780,10 +794,11 @@ func (o UpstreamHealthchecksActiveHealthyOutput) ToUpstreamHealthchecksActiveHea
 }
 
 func (o UpstreamHealthchecksActiveHealthyOutput) ToUpstreamHealthchecksActiveHealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksActiveHealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) *UpstreamHealthchecksActiveHealthy {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksActiveHealthy) *UpstreamHealthchecksActiveHealthy {
 		return &v
 	}).(UpstreamHealthchecksActiveHealthyPtrOutput)
 }
+
 func (o UpstreamHealthchecksActiveHealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
 }
@@ -811,7 +826,13 @@ func (o UpstreamHealthchecksActiveHealthyPtrOutput) ToUpstreamHealthchecksActive
 }
 
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) Elem() UpstreamHealthchecksActiveHealthyOutput {
-	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) UpstreamHealthchecksActiveHealthy { return *v }).(UpstreamHealthchecksActiveHealthyOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) UpstreamHealthchecksActiveHealthy {
+		if v != nil {
+			return *v
+		}
+		var ret UpstreamHealthchecksActiveHealthy
+		return ret
+	}).(UpstreamHealthchecksActiveHealthyOutput)
 }
 
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
@@ -940,10 +961,11 @@ func (o UpstreamHealthchecksActiveUnhealthyOutput) ToUpstreamHealthchecksActiveU
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyOutput) ToUpstreamHealthchecksActiveUnhealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksActiveUnhealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *UpstreamHealthchecksActiveUnhealthy {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksActiveUnhealthy) *UpstreamHealthchecksActiveUnhealthy {
 		return &v
 	}).(UpstreamHealthchecksActiveUnhealthyPtrOutput)
 }
+
 func (o UpstreamHealthchecksActiveUnhealthyOutput) HttpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.HttpFailures }).(pulumi.IntPtrOutput)
 }
@@ -979,7 +1001,13 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) ToUpstreamHealthchecksActi
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Elem() UpstreamHealthchecksActiveUnhealthyOutput {
-	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) UpstreamHealthchecksActiveUnhealthy { return *v }).(UpstreamHealthchecksActiveUnhealthyOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) UpstreamHealthchecksActiveUnhealthy {
+		if v != nil {
+			return *v
+		}
+		var ret UpstreamHealthchecksActiveUnhealthy
+		return ret
+	}).(UpstreamHealthchecksActiveUnhealthyOutput)
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) HttpFailures() pulumi.IntPtrOutput {
@@ -1122,10 +1150,11 @@ func (o UpstreamHealthchecksPassiveOutput) ToUpstreamHealthchecksPassivePtrOutpu
 }
 
 func (o UpstreamHealthchecksPassiveOutput) ToUpstreamHealthchecksPassivePtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPassivePtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassive) *UpstreamHealthchecksPassive {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksPassive) *UpstreamHealthchecksPassive {
 		return &v
 	}).(UpstreamHealthchecksPassivePtrOutput)
 }
+
 func (o UpstreamHealthchecksPassiveOutput) Healthy() UpstreamHealthchecksPassiveHealthyPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassive) *UpstreamHealthchecksPassiveHealthy { return v.Healthy }).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
@@ -1153,7 +1182,13 @@ func (o UpstreamHealthchecksPassivePtrOutput) ToUpstreamHealthchecksPassivePtrOu
 }
 
 func (o UpstreamHealthchecksPassivePtrOutput) Elem() UpstreamHealthchecksPassiveOutput {
-	return o.ApplyT(func(v *UpstreamHealthchecksPassive) UpstreamHealthchecksPassive { return *v }).(UpstreamHealthchecksPassiveOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassive) UpstreamHealthchecksPassive {
+		if v != nil {
+			return *v
+		}
+		var ret UpstreamHealthchecksPassive
+		return ret
+	}).(UpstreamHealthchecksPassiveOutput)
 }
 
 func (o UpstreamHealthchecksPassivePtrOutput) Healthy() UpstreamHealthchecksPassiveHealthyPtrOutput {
@@ -1276,10 +1311,11 @@ func (o UpstreamHealthchecksPassiveHealthyOutput) ToUpstreamHealthchecksPassiveH
 }
 
 func (o UpstreamHealthchecksPassiveHealthyOutput) ToUpstreamHealthchecksPassiveHealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPassiveHealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveHealthy) *UpstreamHealthchecksPassiveHealthy {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksPassiveHealthy) *UpstreamHealthchecksPassiveHealthy {
 		return &v
 	}).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
+
 func (o UpstreamHealthchecksPassiveHealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveHealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
 }
@@ -1303,7 +1339,13 @@ func (o UpstreamHealthchecksPassiveHealthyPtrOutput) ToUpstreamHealthchecksPassi
 }
 
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) Elem() UpstreamHealthchecksPassiveHealthyOutput {
-	return o.ApplyT(func(v *UpstreamHealthchecksPassiveHealthy) UpstreamHealthchecksPassiveHealthy { return *v }).(UpstreamHealthchecksPassiveHealthyOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveHealthy) UpstreamHealthchecksPassiveHealthy {
+		if v != nil {
+			return *v
+		}
+		var ret UpstreamHealthchecksPassiveHealthy
+		return ret
+	}).(UpstreamHealthchecksPassiveHealthyOutput)
 }
 
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
@@ -1421,10 +1463,11 @@ func (o UpstreamHealthchecksPassiveUnhealthyOutput) ToUpstreamHealthchecksPassiv
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyOutput) ToUpstreamHealthchecksPassiveUnhealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPassiveUnhealthyPtrOutput {
-	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *UpstreamHealthchecksPassiveUnhealthy {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksPassiveUnhealthy) *UpstreamHealthchecksPassiveUnhealthy {
 		return &v
 	}).(UpstreamHealthchecksPassiveUnhealthyPtrOutput)
 }
+
 func (o UpstreamHealthchecksPassiveUnhealthyOutput) HttpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *int { return v.HttpFailures }).(pulumi.IntPtrOutput)
 }
@@ -1456,7 +1499,13 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) ToUpstreamHealthchecksPas
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Elem() UpstreamHealthchecksPassiveUnhealthyOutput {
-	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) UpstreamHealthchecksPassiveUnhealthy { return *v }).(UpstreamHealthchecksPassiveUnhealthyOutput)
+	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) UpstreamHealthchecksPassiveUnhealthy {
+		if v != nil {
+			return *v
+		}
+		var ret UpstreamHealthchecksPassiveUnhealthy
+		return ret
+	}).(UpstreamHealthchecksPassiveUnhealthyOutput)
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) HttpFailures() pulumi.IntPtrOutput {
@@ -1496,6 +1545,26 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Timeouts() pulumi.IntPtrO
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteDestinationInput)(nil)).Elem(), RouteDestinationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteDestinationArrayInput)(nil)).Elem(), RouteDestinationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteHeaderInput)(nil)).Elem(), RouteHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteHeaderArrayInput)(nil)).Elem(), RouteHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteSourceInput)(nil)).Elem(), RouteSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteSourceArrayInput)(nil)).Elem(), RouteSourceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksInput)(nil)).Elem(), UpstreamHealthchecksArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksPtrInput)(nil)).Elem(), UpstreamHealthchecksArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksActiveInput)(nil)).Elem(), UpstreamHealthchecksActiveArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksActivePtrInput)(nil)).Elem(), UpstreamHealthchecksActiveArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksActiveHealthyInput)(nil)).Elem(), UpstreamHealthchecksActiveHealthyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksActiveHealthyPtrInput)(nil)).Elem(), UpstreamHealthchecksActiveHealthyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksActiveUnhealthyInput)(nil)).Elem(), UpstreamHealthchecksActiveUnhealthyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksActiveUnhealthyPtrInput)(nil)).Elem(), UpstreamHealthchecksActiveUnhealthyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksPassiveInput)(nil)).Elem(), UpstreamHealthchecksPassiveArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksPassivePtrInput)(nil)).Elem(), UpstreamHealthchecksPassiveArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksPassiveHealthyInput)(nil)).Elem(), UpstreamHealthchecksPassiveHealthyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksPassiveHealthyPtrInput)(nil)).Elem(), UpstreamHealthchecksPassiveHealthyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksPassiveUnhealthyInput)(nil)).Elem(), UpstreamHealthchecksPassiveUnhealthyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpstreamHealthchecksPassiveUnhealthyPtrInput)(nil)).Elem(), UpstreamHealthchecksPassiveUnhealthyArgs{})
 	pulumi.RegisterOutputType(RouteDestinationOutput{})
 	pulumi.RegisterOutputType(RouteDestinationArrayOutput{})
 	pulumi.RegisterOutputType(RouteHeaderOutput{})

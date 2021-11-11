@@ -135,27 +135,27 @@ export interface ConsumerJwtAuthState {
     /**
      * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
-    readonly algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string>;
     /**
      * the id of the consumer to be configured with jwt auth
      */
-    readonly consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string>;
     /**
      * A unique string identifying the credential. If left out, it will be auto-generated.
      */
-    readonly key?: pulumi.Input<string>;
+    key?: pulumi.Input<string>;
     /**
      * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
-    readonly rsaPublicKey?: pulumi.Input<string>;
+    rsaPublicKey?: pulumi.Input<string>;
     /**
      * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
-    readonly secret?: pulumi.Input<string>;
+    secret?: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer JWT auth for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -165,25 +165,25 @@ export interface ConsumerJwtAuthArgs {
     /**
      * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
-    readonly algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string>;
     /**
      * the id of the consumer to be configured with jwt auth
      */
-    readonly consumerId: pulumi.Input<string>;
+    consumerId: pulumi.Input<string>;
     /**
      * A unique string identifying the credential. If left out, it will be auto-generated.
      */
-    readonly key?: pulumi.Input<string>;
+    key?: pulumi.Input<string>;
     /**
      * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
-    readonly rsaPublicKey: pulumi.Input<string>;
+    rsaPublicKey: pulumi.Input<string>;
     /**
      * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
-    readonly secret?: pulumi.Input<string>;
+    secret?: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer JWT auth for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

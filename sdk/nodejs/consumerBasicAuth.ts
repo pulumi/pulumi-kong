@@ -123,19 +123,19 @@ export interface ConsumerBasicAuthState {
     /**
      * the id of the consumer to be configured with basic auth
      */
-    readonly consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string>;
     /**
      * password to be used for basic auth
      */
-    readonly password?: pulumi.Input<string>;
+    password?: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer basic auth for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * username to be used for basic auth
      */
-    readonly username?: pulumi.Input<string>;
+    username?: pulumi.Input<string>;
 }
 
 /**
@@ -145,17 +145,17 @@ export interface ConsumerBasicAuthArgs {
     /**
      * the id of the consumer to be configured with basic auth
      */
-    readonly consumerId: pulumi.Input<string>;
+    consumerId: pulumi.Input<string>;
     /**
      * password to be used for basic auth
      */
-    readonly password: pulumi.Input<string>;
+    password: pulumi.Input<string>;
     /**
      * A list of strings associated with the consumer basic auth for grouping and filtering
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * username to be used for basic auth
      */
-    readonly username: pulumi.Input<string>;
+    username: pulumi.Input<string>;
 }

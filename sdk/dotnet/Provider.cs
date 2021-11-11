@@ -19,6 +19,43 @@ namespace Pulumi.Kong
     public partial class Provider : Pulumi.ProviderResource
     {
         /// <summary>
+        /// An basic auth password for kong admin
+        /// </summary>
+        [Output("kongAdminPassword")]
+        public Output<string?> KongAdminPassword { get; private set; } = null!;
+
+        /// <summary>
+        /// API key for the kong api (Enterprise Edition)
+        /// </summary>
+        [Output("kongAdminToken")]
+        public Output<string?> KongAdminToken { get; private set; } = null!;
+
+        /// <summary>
+        /// The address of the kong admin url e.g. http://localhost:8001
+        /// </summary>
+        [Output("kongAdminUri")]
+        public Output<string> KongAdminUri { get; private set; } = null!;
+
+        /// <summary>
+        /// An basic auth user for kong admin
+        /// </summary>
+        [Output("kongAdminUsername")]
+        public Output<string?> KongAdminUsername { get; private set; } = null!;
+
+        /// <summary>
+        /// API key for the kong api (if you have locked it down)
+        /// </summary>
+        [Output("kongApiKey")]
+        public Output<string?> KongApiKey { get; private set; } = null!;
+
+        /// <summary>
+        /// Workspace context (Enterprise Edition)
+        /// </summary>
+        [Output("kongWorkspace")]
+        public Output<string?> KongWorkspace { get; private set; } = null!;
+
+
+        /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
         /// </summary>
         ///

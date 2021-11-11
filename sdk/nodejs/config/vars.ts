@@ -4,37 +4,94 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-let __config = new pulumi.Config("kong");
+declare var exports: any;
+const __config = new pulumi.Config("kong");
 
 /**
  * An basic auth password for kong admin
  */
-export let kongAdminPassword: string | undefined = __config.get("kongAdminPassword");
+export declare const kongAdminPassword: string | undefined;
+Object.defineProperty(exports, "kongAdminPassword", {
+    get() {
+        return __config.get("kongAdminPassword");
+    },
+    enumerable: true,
+});
+
 /**
  * API key for the kong api (Enterprise Edition)
  */
-export let kongAdminToken: string | undefined = __config.get("kongAdminToken");
+export declare const kongAdminToken: string | undefined;
+Object.defineProperty(exports, "kongAdminToken", {
+    get() {
+        return __config.get("kongAdminToken");
+    },
+    enumerable: true,
+});
+
 /**
  * The address of the kong admin url e.g. http://localhost:8001
  */
-export let kongAdminUri: string | undefined = __config.get("kongAdminUri");
+export declare const kongAdminUri: string | undefined;
+Object.defineProperty(exports, "kongAdminUri", {
+    get() {
+        return __config.get("kongAdminUri");
+    },
+    enumerable: true,
+});
+
 /**
  * An basic auth user for kong admin
  */
-export let kongAdminUsername: string | undefined = __config.get("kongAdminUsername");
+export declare const kongAdminUsername: string | undefined;
+Object.defineProperty(exports, "kongAdminUsername", {
+    get() {
+        return __config.get("kongAdminUsername");
+    },
+    enumerable: true,
+});
+
 /**
  * API key for the kong api (if you have locked it down)
  */
-export let kongApiKey: string | undefined = __config.get("kongApiKey");
+export declare const kongApiKey: string | undefined;
+Object.defineProperty(exports, "kongApiKey", {
+    get() {
+        return __config.get("kongApiKey");
+    },
+    enumerable: true,
+});
+
 /**
  * Workspace context (Enterprise Edition)
  */
-export let kongWorkspace: string | undefined = __config.get("kongWorkspace");
+export declare const kongWorkspace: string | undefined;
+Object.defineProperty(exports, "kongWorkspace", {
+    get() {
+        return __config.get("kongWorkspace");
+    },
+    enumerable: true,
+});
+
 /**
  * Should plugins `config_json` field strictly match plugin configuration
  */
-export let strictPluginsMatch: boolean | undefined = __config.getObject<boolean>("strictPluginsMatch") || <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH");
+export declare const strictPluginsMatch: boolean | undefined;
+Object.defineProperty(exports, "strictPluginsMatch", {
+    get() {
+        return __config.getObject<boolean>("strictPluginsMatch") ?? <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH");
+    },
+    enumerable: true,
+});
+
 /**
  * Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
  */
-export let tlsSkipVerify: boolean | undefined = __config.getObject<boolean>("tlsSkipVerify") || (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false);
+export declare const tlsSkipVerify: boolean;
+Object.defineProperty(exports, "tlsSkipVerify", {
+    get() {
+        return __config.getObject<boolean>("tlsSkipVerify") ?? (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false);
+    },
+    enumerable: true,
+});
+

@@ -209,7 +209,7 @@ type ConsumerAclArrayInput interface {
 type ConsumerAclArray []ConsumerAclInput
 
 func (ConsumerAclArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ConsumerAcl)(nil))
+	return reflect.TypeOf((*[]*ConsumerAcl)(nil)).Elem()
 }
 
 func (i ConsumerAclArray) ToConsumerAclArrayOutput() ConsumerAclArrayOutput {
@@ -234,7 +234,7 @@ type ConsumerAclMapInput interface {
 type ConsumerAclMap map[string]ConsumerAclInput
 
 func (ConsumerAclMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ConsumerAcl)(nil))
+	return reflect.TypeOf((*map[string]*ConsumerAcl)(nil)).Elem()
 }
 
 func (i ConsumerAclMap) ToConsumerAclMapOutput() ConsumerAclMapOutput {
@@ -245,9 +245,7 @@ func (i ConsumerAclMap) ToConsumerAclMapOutputWithContext(ctx context.Context) C
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerAclMapOutput)
 }
 
-type ConsumerAclOutput struct {
-	*pulumi.OutputState
-}
+type ConsumerAclOutput struct{ *pulumi.OutputState }
 
 func (ConsumerAclOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ConsumerAcl)(nil))
@@ -266,14 +264,12 @@ func (o ConsumerAclOutput) ToConsumerAclPtrOutput() ConsumerAclPtrOutput {
 }
 
 func (o ConsumerAclOutput) ToConsumerAclPtrOutputWithContext(ctx context.Context) ConsumerAclPtrOutput {
-	return o.ApplyT(func(v ConsumerAcl) *ConsumerAcl {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConsumerAcl) *ConsumerAcl {
 		return &v
 	}).(ConsumerAclPtrOutput)
 }
 
-type ConsumerAclPtrOutput struct {
-	*pulumi.OutputState
-}
+type ConsumerAclPtrOutput struct{ *pulumi.OutputState }
 
 func (ConsumerAclPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ConsumerAcl)(nil))
@@ -285,6 +281,16 @@ func (o ConsumerAclPtrOutput) ToConsumerAclPtrOutput() ConsumerAclPtrOutput {
 
 func (o ConsumerAclPtrOutput) ToConsumerAclPtrOutputWithContext(ctx context.Context) ConsumerAclPtrOutput {
 	return o
+}
+
+func (o ConsumerAclPtrOutput) Elem() ConsumerAclOutput {
+	return o.ApplyT(func(v *ConsumerAcl) ConsumerAcl {
+		if v != nil {
+			return *v
+		}
+		var ret ConsumerAcl
+		return ret
+	}).(ConsumerAclOutput)
 }
 
 type ConsumerAclArrayOutput struct{ *pulumi.OutputState }
@@ -328,6 +334,10 @@ func (o ConsumerAclMapOutput) MapIndex(k pulumi.StringInput) ConsumerAclOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerAclInput)(nil)).Elem(), &ConsumerAcl{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerAclPtrInput)(nil)).Elem(), &ConsumerAcl{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerAclArrayInput)(nil)).Elem(), ConsumerAclArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerAclMapInput)(nil)).Elem(), ConsumerAclMap{})
 	pulumi.RegisterOutputType(ConsumerAclOutput{})
 	pulumi.RegisterOutputType(ConsumerAclPtrOutput{})
 	pulumi.RegisterOutputType(ConsumerAclArrayOutput{})

@@ -247,3 +247,51 @@ class Provider(pulumi.ProviderResource):
             __props__,
             opts)
 
+    @property
+    @pulumi.getter(name="kongAdminPassword")
+    def kong_admin_password(self) -> pulumi.Output[Optional[str]]:
+        """
+        An basic auth password for kong admin
+        """
+        return pulumi.get(self, "kong_admin_password")
+
+    @property
+    @pulumi.getter(name="kongAdminToken")
+    def kong_admin_token(self) -> pulumi.Output[Optional[str]]:
+        """
+        API key for the kong api (Enterprise Edition)
+        """
+        return pulumi.get(self, "kong_admin_token")
+
+    @property
+    @pulumi.getter(name="kongAdminUri")
+    def kong_admin_uri(self) -> pulumi.Output[str]:
+        """
+        The address of the kong admin url e.g. http://localhost:8001
+        """
+        return pulumi.get(self, "kong_admin_uri")
+
+    @property
+    @pulumi.getter(name="kongAdminUsername")
+    def kong_admin_username(self) -> pulumi.Output[Optional[str]]:
+        """
+        An basic auth user for kong admin
+        """
+        return pulumi.get(self, "kong_admin_username")
+
+    @property
+    @pulumi.getter(name="kongApiKey")
+    def kong_api_key(self) -> pulumi.Output[Optional[str]]:
+        """
+        API key for the kong api (if you have locked it down)
+        """
+        return pulumi.get(self, "kong_api_key")
+
+    @property
+    @pulumi.getter(name="kongWorkspace")
+    def kong_workspace(self) -> pulumi.Output[Optional[str]]:
+        """
+        Workspace context (Enterprise Edition)
+        """
+        return pulumi.get(self, "kong_workspace")
+
