@@ -201,41 +201,39 @@ export class Upstream extends pulumi.CustomResource {
      */
     constructor(name: string, args?: UpstreamArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: UpstreamArgs | UpstreamState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as UpstreamState | undefined;
-            inputs["clientCertificateId"] = state ? state.clientCertificateId : undefined;
-            inputs["hashFallback"] = state ? state.hashFallback : undefined;
-            inputs["hashFallbackHeader"] = state ? state.hashFallbackHeader : undefined;
-            inputs["hashOn"] = state ? state.hashOn : undefined;
-            inputs["hashOnCookie"] = state ? state.hashOnCookie : undefined;
-            inputs["hashOnCookiePath"] = state ? state.hashOnCookiePath : undefined;
-            inputs["hashOnHeader"] = state ? state.hashOnHeader : undefined;
-            inputs["healthchecks"] = state ? state.healthchecks : undefined;
-            inputs["hostHeader"] = state ? state.hostHeader : undefined;
-            inputs["name"] = state ? state.name : undefined;
-            inputs["slots"] = state ? state.slots : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["clientCertificateId"] = state ? state.clientCertificateId : undefined;
+            resourceInputs["hashFallback"] = state ? state.hashFallback : undefined;
+            resourceInputs["hashFallbackHeader"] = state ? state.hashFallbackHeader : undefined;
+            resourceInputs["hashOn"] = state ? state.hashOn : undefined;
+            resourceInputs["hashOnCookie"] = state ? state.hashOnCookie : undefined;
+            resourceInputs["hashOnCookiePath"] = state ? state.hashOnCookiePath : undefined;
+            resourceInputs["hashOnHeader"] = state ? state.hashOnHeader : undefined;
+            resourceInputs["healthchecks"] = state ? state.healthchecks : undefined;
+            resourceInputs["hostHeader"] = state ? state.hostHeader : undefined;
+            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["slots"] = state ? state.slots : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as UpstreamArgs | undefined;
-            inputs["clientCertificateId"] = args ? args.clientCertificateId : undefined;
-            inputs["hashFallback"] = args ? args.hashFallback : undefined;
-            inputs["hashFallbackHeader"] = args ? args.hashFallbackHeader : undefined;
-            inputs["hashOn"] = args ? args.hashOn : undefined;
-            inputs["hashOnCookie"] = args ? args.hashOnCookie : undefined;
-            inputs["hashOnCookiePath"] = args ? args.hashOnCookiePath : undefined;
-            inputs["hashOnHeader"] = args ? args.hashOnHeader : undefined;
-            inputs["healthchecks"] = args ? args.healthchecks : undefined;
-            inputs["hostHeader"] = args ? args.hostHeader : undefined;
-            inputs["name"] = args ? args.name : undefined;
-            inputs["slots"] = args ? args.slots : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["clientCertificateId"] = args ? args.clientCertificateId : undefined;
+            resourceInputs["hashFallback"] = args ? args.hashFallback : undefined;
+            resourceInputs["hashFallbackHeader"] = args ? args.hashFallbackHeader : undefined;
+            resourceInputs["hashOn"] = args ? args.hashOn : undefined;
+            resourceInputs["hashOnCookie"] = args ? args.hashOnCookie : undefined;
+            resourceInputs["hashOnCookiePath"] = args ? args.hashOnCookiePath : undefined;
+            resourceInputs["hashOnHeader"] = args ? args.hashOnHeader : undefined;
+            resourceInputs["healthchecks"] = args ? args.healthchecks : undefined;
+            resourceInputs["hostHeader"] = args ? args.hostHeader : undefined;
+            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["slots"] = args ? args.slots : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Upstream.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Upstream.__pulumiType, name, resourceInputs, opts);
     }
 }
 

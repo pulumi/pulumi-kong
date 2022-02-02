@@ -85,13 +85,13 @@ export class ConsumerAcl extends pulumi.CustomResource {
      */
     constructor(name: string, args: ConsumerAclArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerAclArgs | ConsumerAclState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerAclState | undefined;
-            inputs["consumerId"] = state ? state.consumerId : undefined;
-            inputs["group"] = state ? state.group : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
+            resourceInputs["group"] = state ? state.group : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as ConsumerAclArgs | undefined;
             if ((!args || args.consumerId === undefined) && !opts.urn) {
@@ -100,14 +100,12 @@ export class ConsumerAcl extends pulumi.CustomResource {
             if ((!args || args.group === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'group'");
             }
-            inputs["consumerId"] = args ? args.consumerId : undefined;
-            inputs["group"] = args ? args.group : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
+            resourceInputs["group"] = args ? args.group : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(ConsumerAcl.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(ConsumerAcl.__pulumiType, name, resourceInputs, opts);
     }
 }
 

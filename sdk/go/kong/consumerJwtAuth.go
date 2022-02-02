@@ -184,7 +184,7 @@ type ConsumerJwtAuthInput interface {
 }
 
 func (*ConsumerJwtAuth) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConsumerJwtAuth)(nil))
+	return reflect.TypeOf((**ConsumerJwtAuth)(nil)).Elem()
 }
 
 func (i *ConsumerJwtAuth) ToConsumerJwtAuthOutput() ConsumerJwtAuthOutput {
@@ -193,35 +193,6 @@ func (i *ConsumerJwtAuth) ToConsumerJwtAuthOutput() ConsumerJwtAuthOutput {
 
 func (i *ConsumerJwtAuth) ToConsumerJwtAuthOutputWithContext(ctx context.Context) ConsumerJwtAuthOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthOutput)
-}
-
-func (i *ConsumerJwtAuth) ToConsumerJwtAuthPtrOutput() ConsumerJwtAuthPtrOutput {
-	return i.ToConsumerJwtAuthPtrOutputWithContext(context.Background())
-}
-
-func (i *ConsumerJwtAuth) ToConsumerJwtAuthPtrOutputWithContext(ctx context.Context) ConsumerJwtAuthPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthPtrOutput)
-}
-
-type ConsumerJwtAuthPtrInput interface {
-	pulumi.Input
-
-	ToConsumerJwtAuthPtrOutput() ConsumerJwtAuthPtrOutput
-	ToConsumerJwtAuthPtrOutputWithContext(ctx context.Context) ConsumerJwtAuthPtrOutput
-}
-
-type consumerJwtAuthPtrType ConsumerJwtAuthArgs
-
-func (*consumerJwtAuthPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ConsumerJwtAuth)(nil))
-}
-
-func (i *consumerJwtAuthPtrType) ToConsumerJwtAuthPtrOutput() ConsumerJwtAuthPtrOutput {
-	return i.ToConsumerJwtAuthPtrOutputWithContext(context.Background())
-}
-
-func (i *consumerJwtAuthPtrType) ToConsumerJwtAuthPtrOutputWithContext(ctx context.Context) ConsumerJwtAuthPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthPtrOutput)
 }
 
 // ConsumerJwtAuthArrayInput is an input type that accepts ConsumerJwtAuthArray and ConsumerJwtAuthArrayOutput values.
@@ -277,7 +248,7 @@ func (i ConsumerJwtAuthMap) ToConsumerJwtAuthMapOutputWithContext(ctx context.Co
 type ConsumerJwtAuthOutput struct{ *pulumi.OutputState }
 
 func (ConsumerJwtAuthOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConsumerJwtAuth)(nil))
+	return reflect.TypeOf((**ConsumerJwtAuth)(nil)).Elem()
 }
 
 func (o ConsumerJwtAuthOutput) ToConsumerJwtAuthOutput() ConsumerJwtAuthOutput {
@@ -288,44 +259,10 @@ func (o ConsumerJwtAuthOutput) ToConsumerJwtAuthOutputWithContext(ctx context.Co
 	return o
 }
 
-func (o ConsumerJwtAuthOutput) ToConsumerJwtAuthPtrOutput() ConsumerJwtAuthPtrOutput {
-	return o.ToConsumerJwtAuthPtrOutputWithContext(context.Background())
-}
-
-func (o ConsumerJwtAuthOutput) ToConsumerJwtAuthPtrOutputWithContext(ctx context.Context) ConsumerJwtAuthPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConsumerJwtAuth) *ConsumerJwtAuth {
-		return &v
-	}).(ConsumerJwtAuthPtrOutput)
-}
-
-type ConsumerJwtAuthPtrOutput struct{ *pulumi.OutputState }
-
-func (ConsumerJwtAuthPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ConsumerJwtAuth)(nil))
-}
-
-func (o ConsumerJwtAuthPtrOutput) ToConsumerJwtAuthPtrOutput() ConsumerJwtAuthPtrOutput {
-	return o
-}
-
-func (o ConsumerJwtAuthPtrOutput) ToConsumerJwtAuthPtrOutputWithContext(ctx context.Context) ConsumerJwtAuthPtrOutput {
-	return o
-}
-
-func (o ConsumerJwtAuthPtrOutput) Elem() ConsumerJwtAuthOutput {
-	return o.ApplyT(func(v *ConsumerJwtAuth) ConsumerJwtAuth {
-		if v != nil {
-			return *v
-		}
-		var ret ConsumerJwtAuth
-		return ret
-	}).(ConsumerJwtAuthOutput)
-}
-
 type ConsumerJwtAuthArrayOutput struct{ *pulumi.OutputState }
 
 func (ConsumerJwtAuthArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ConsumerJwtAuth)(nil))
+	return reflect.TypeOf((*[]*ConsumerJwtAuth)(nil)).Elem()
 }
 
 func (o ConsumerJwtAuthArrayOutput) ToConsumerJwtAuthArrayOutput() ConsumerJwtAuthArrayOutput {
@@ -337,15 +274,15 @@ func (o ConsumerJwtAuthArrayOutput) ToConsumerJwtAuthArrayOutputWithContext(ctx 
 }
 
 func (o ConsumerJwtAuthArrayOutput) Index(i pulumi.IntInput) ConsumerJwtAuthOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConsumerJwtAuth {
-		return vs[0].([]ConsumerJwtAuth)[vs[1].(int)]
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ConsumerJwtAuth {
+		return vs[0].([]*ConsumerJwtAuth)[vs[1].(int)]
 	}).(ConsumerJwtAuthOutput)
 }
 
 type ConsumerJwtAuthMapOutput struct{ *pulumi.OutputState }
 
 func (ConsumerJwtAuthMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]ConsumerJwtAuth)(nil))
+	return reflect.TypeOf((*map[string]*ConsumerJwtAuth)(nil)).Elem()
 }
 
 func (o ConsumerJwtAuthMapOutput) ToConsumerJwtAuthMapOutput() ConsumerJwtAuthMapOutput {
@@ -357,18 +294,16 @@ func (o ConsumerJwtAuthMapOutput) ToConsumerJwtAuthMapOutputWithContext(ctx cont
 }
 
 func (o ConsumerJwtAuthMapOutput) MapIndex(k pulumi.StringInput) ConsumerJwtAuthOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) ConsumerJwtAuth {
-		return vs[0].(map[string]ConsumerJwtAuth)[vs[1].(string)]
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *ConsumerJwtAuth {
+		return vs[0].(map[string]*ConsumerJwtAuth)[vs[1].(string)]
 	}).(ConsumerJwtAuthOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerJwtAuthInput)(nil)).Elem(), &ConsumerJwtAuth{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerJwtAuthPtrInput)(nil)).Elem(), &ConsumerJwtAuth{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerJwtAuthArrayInput)(nil)).Elem(), ConsumerJwtAuthArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerJwtAuthMapInput)(nil)).Elem(), ConsumerJwtAuthMap{})
 	pulumi.RegisterOutputType(ConsumerJwtAuthOutput{})
-	pulumi.RegisterOutputType(ConsumerJwtAuthPtrOutput{})
 	pulumi.RegisterOutputType(ConsumerJwtAuthArrayOutput{})
 	pulumi.RegisterOutputType(ConsumerJwtAuthMapOutput{})
 }

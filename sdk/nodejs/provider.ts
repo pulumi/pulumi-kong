@@ -58,25 +58,23 @@ export class Provider extends pulumi.ProviderResource {
      * @param opts A bag of options that control this resource's behavior.
      */
     constructor(name: string, args: ProviderArgs, opts?: pulumi.ResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
             if ((!args || args.kongAdminUri === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'kongAdminUri'");
             }
-            inputs["kongAdminPassword"] = args ? args.kongAdminPassword : undefined;
-            inputs["kongAdminToken"] = args ? args.kongAdminToken : undefined;
-            inputs["kongAdminUri"] = args ? args.kongAdminUri : undefined;
-            inputs["kongAdminUsername"] = args ? args.kongAdminUsername : undefined;
-            inputs["kongApiKey"] = args ? args.kongApiKey : undefined;
-            inputs["kongWorkspace"] = args ? args.kongWorkspace : undefined;
-            inputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) ?? <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
-            inputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) ?? (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
+            resourceInputs["kongAdminPassword"] = args ? args.kongAdminPassword : undefined;
+            resourceInputs["kongAdminToken"] = args ? args.kongAdminToken : undefined;
+            resourceInputs["kongAdminUri"] = args ? args.kongAdminUri : undefined;
+            resourceInputs["kongAdminUsername"] = args ? args.kongAdminUsername : undefined;
+            resourceInputs["kongApiKey"] = args ? args.kongApiKey : undefined;
+            resourceInputs["kongWorkspace"] = args ? args.kongWorkspace : undefined;
+            resourceInputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) ?? utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
+            resourceInputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) ?? (utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Provider.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 }
 

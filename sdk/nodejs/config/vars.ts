@@ -79,7 +79,7 @@ Object.defineProperty(exports, "kongWorkspace", {
 export declare const strictPluginsMatch: boolean | undefined;
 Object.defineProperty(exports, "strictPluginsMatch", {
     get() {
-        return __config.getObject<boolean>("strictPluginsMatch") ?? <any>utilities.getEnvBoolean("STRICT_PLUGINS_MATCH");
+        return __config.getObject<boolean>("strictPluginsMatch") ?? utilities.getEnvBoolean("STRICT_PLUGINS_MATCH");
     },
     enumerable: true,
 });
@@ -90,7 +90,7 @@ Object.defineProperty(exports, "strictPluginsMatch", {
 export declare const tlsSkipVerify: boolean;
 Object.defineProperty(exports, "tlsSkipVerify", {
     get() {
-        return __config.getObject<boolean>("tlsSkipVerify") ?? (<any>utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false);
+        return __config.getObject<boolean>("tlsSkipVerify") ?? (utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false);
     },
     enumerable: true,
 });

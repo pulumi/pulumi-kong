@@ -80,23 +80,21 @@ export class Consumer extends pulumi.CustomResource {
      */
     constructor(name: string, args?: ConsumerArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerArgs | ConsumerState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerState | undefined;
-            inputs["customId"] = state ? state.customId : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
-            inputs["username"] = state ? state.username : undefined;
+            resourceInputs["customId"] = state ? state.customId : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["username"] = state ? state.username : undefined;
         } else {
             const args = argsOrState as ConsumerArgs | undefined;
-            inputs["customId"] = args ? args.customId : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
-            inputs["username"] = args ? args.username : undefined;
+            resourceInputs["customId"] = args ? args.customId : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["username"] = args ? args.username : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Consumer.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Consumer.__pulumiType, name, resourceInputs, opts);
     }
 }
 

@@ -128,16 +128,6 @@ namespace Pulumi.Kong
     /// 
     /// }
     /// ```
-    /// ## Argument reference
-    /// 
-    /// * `plugin_name` - (Required) the name of the plugin you want to configure
-    /// * `consumer_id` - (Optional) the consumer id you want to configure the plugin for
-    /// * `service_id`  - (Optional) the service id that you want to configure the plugin for
-    /// * `route_id` - (Optional) the route id that you want to configure the plugin for
-    /// * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-    /// * `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-    ///   page of the plugin you are configuring
-    /// * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
     /// 
     /// ## Import
     /// 
@@ -154,29 +144,45 @@ namespace Pulumi.Kong
         public Output<string> ComputedConfig { get; private set; } = null!;
 
         /// <summary>
-        /// plugin configuration in JSON format, configuration must be a valid JSON object.
+        /// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        /// page of the plugin you are configuring
         /// </summary>
         [Output("configJson")]
         public Output<string?> ConfigJson { get; private set; } = null!;
 
+        /// <summary>
+        /// the consumer id you want to configure the plugin for
+        /// </summary>
         [Output("consumerId")]
         public Output<string?> ConsumerId { get; private set; } = null!;
 
+        /// <summary>
+        /// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        /// </summary>
         [Output("enabled")]
         public Output<bool?> Enabled { get; private set; } = null!;
 
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// the route id that you want to configure the plugin for
+        /// </summary>
         [Output("routeId")]
         public Output<string?> RouteId { get; private set; } = null!;
 
+        /// <summary>
+        /// the service id that you want to configure the plugin for
+        /// </summary>
         [Output("serviceId")]
         public Output<string?> ServiceId { get; private set; } = null!;
 
         [Output("strictMatch")]
         public Output<bool?> StrictMatch { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of strings associated with the Plugin for grouping and filtering
+        /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
@@ -227,23 +233,36 @@ namespace Pulumi.Kong
     public sealed class PluginArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// plugin configuration in JSON format, configuration must be a valid JSON object.
+        /// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        /// page of the plugin you are configuring
         /// </summary>
         [Input("configJson")]
         public Input<string>? ConfigJson { get; set; }
 
+        /// <summary>
+        /// the consumer id you want to configure the plugin for
+        /// </summary>
         [Input("consumerId")]
         public Input<string>? ConsumerId { get; set; }
 
+        /// <summary>
+        /// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        /// </summary>
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// the route id that you want to configure the plugin for
+        /// </summary>
         [Input("routeId")]
         public Input<string>? RouteId { get; set; }
 
+        /// <summary>
+        /// the service id that you want to configure the plugin for
+        /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }
 
@@ -252,6 +271,10 @@ namespace Pulumi.Kong
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Plugin for grouping and filtering
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());
@@ -269,23 +292,36 @@ namespace Pulumi.Kong
         public Input<string>? ComputedConfig { get; set; }
 
         /// <summary>
-        /// plugin configuration in JSON format, configuration must be a valid JSON object.
+        /// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        /// page of the plugin you are configuring
         /// </summary>
         [Input("configJson")]
         public Input<string>? ConfigJson { get; set; }
 
+        /// <summary>
+        /// the consumer id you want to configure the plugin for
+        /// </summary>
         [Input("consumerId")]
         public Input<string>? ConsumerId { get; set; }
 
+        /// <summary>
+        /// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        /// </summary>
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// the route id that you want to configure the plugin for
+        /// </summary>
         [Input("routeId")]
         public Input<string>? RouteId { get; set; }
 
+        /// <summary>
+        /// the service id that you want to configure the plugin for
+        /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }
 
@@ -294,6 +330,10 @@ namespace Pulumi.Kong
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Plugin for grouping and filtering
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());

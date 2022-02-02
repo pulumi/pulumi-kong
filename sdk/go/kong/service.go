@@ -96,22 +96,6 @@ import (
 // 	})
 // }
 // ```
-// ## Argument reference
-//
-// * `name` - (Required) Service name
-// * `protocol` - (Required) Protocol to use
-// * `host` - (Optional) Host to map to
-// * `port` - (Optional, int) Port to map to. Default: 80
-// * `path` - (Optional) Path to map to
-// * `retries` - (Optional, int) Number of retries. Default: 5
-// * `connectTimeout` - (Optional, int) Connection timeout. Default(ms): 60000
-// * `writeTimeout` - (Optional, int) Write timout. Default(ms): 60000
-// * `readTimeout` - (Optional, int) Read timeout. Default(ms): 60000
-// * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
-// * `clientCertificateId` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
-// * `tlsVerify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
-// * `tlsVerifyDepth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
-// * `caCertificateIds` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
 //
 // ## Import
 //
@@ -123,20 +107,34 @@ import (
 type Service struct {
 	pulumi.CustomResourceState
 
-	CaCertificateIds    pulumi.StringArrayOutput `pulumi:"caCertificateIds"`
-	ClientCertificateId pulumi.StringPtrOutput   `pulumi:"clientCertificateId"`
-	ConnectTimeout      pulumi.IntPtrOutput      `pulumi:"connectTimeout"`
-	Host                pulumi.StringPtrOutput   `pulumi:"host"`
-	Name                pulumi.StringOutput      `pulumi:"name"`
-	Path                pulumi.StringPtrOutput   `pulumi:"path"`
-	Port                pulumi.IntPtrOutput      `pulumi:"port"`
-	Protocol            pulumi.StringOutput      `pulumi:"protocol"`
-	ReadTimeout         pulumi.IntPtrOutput      `pulumi:"readTimeout"`
-	Retries             pulumi.IntPtrOutput      `pulumi:"retries"`
-	Tags                pulumi.StringArrayOutput `pulumi:"tags"`
-	TlsVerify           pulumi.BoolPtrOutput     `pulumi:"tlsVerify"`
-	TlsVerifyDepth      pulumi.IntPtrOutput      `pulumi:"tlsVerifyDepth"`
-	WriteTimeout        pulumi.IntPtrOutput      `pulumi:"writeTimeout"`
+	// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+	CaCertificateIds pulumi.StringArrayOutput `pulumi:"caCertificateIds"`
+	// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+	ClientCertificateId pulumi.StringPtrOutput `pulumi:"clientCertificateId"`
+	// Connection timeout. Default(ms): 60000
+	ConnectTimeout pulumi.IntPtrOutput `pulumi:"connectTimeout"`
+	// Host to map to
+	Host pulumi.StringPtrOutput `pulumi:"host"`
+	// Service name
+	Name pulumi.StringOutput `pulumi:"name"`
+	// Path to map to
+	Path pulumi.StringPtrOutput `pulumi:"path"`
+	// Port to map to. Default: 80
+	Port pulumi.IntPtrOutput `pulumi:"port"`
+	// Protocol to use
+	Protocol pulumi.StringOutput `pulumi:"protocol"`
+	// Read timeout. Default(ms): 60000
+	ReadTimeout pulumi.IntPtrOutput `pulumi:"readTimeout"`
+	// Number of retries. Default: 5
+	Retries pulumi.IntPtrOutput `pulumi:"retries"`
+	// A list of strings associated with the Service for grouping and filtering.
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+	TlsVerify pulumi.BoolPtrOutput `pulumi:"tlsVerify"`
+	// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+	TlsVerifyDepth pulumi.IntPtrOutput `pulumi:"tlsVerifyDepth"`
+	// Write timout. Default(ms): 60000
+	WriteTimeout pulumi.IntPtrOutput `pulumi:"writeTimeout"`
 }
 
 // NewService registers a new resource with the given unique name, arguments, and options.
@@ -171,37 +169,65 @@ func GetService(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Service resources.
 type serviceState struct {
-	CaCertificateIds    []string `pulumi:"caCertificateIds"`
-	ClientCertificateId *string  `pulumi:"clientCertificateId"`
-	ConnectTimeout      *int     `pulumi:"connectTimeout"`
-	Host                *string  `pulumi:"host"`
-	Name                *string  `pulumi:"name"`
-	Path                *string  `pulumi:"path"`
-	Port                *int     `pulumi:"port"`
-	Protocol            *string  `pulumi:"protocol"`
-	ReadTimeout         *int     `pulumi:"readTimeout"`
-	Retries             *int     `pulumi:"retries"`
-	Tags                []string `pulumi:"tags"`
-	TlsVerify           *bool    `pulumi:"tlsVerify"`
-	TlsVerifyDepth      *int     `pulumi:"tlsVerifyDepth"`
-	WriteTimeout        *int     `pulumi:"writeTimeout"`
+	// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+	CaCertificateIds []string `pulumi:"caCertificateIds"`
+	// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+	ClientCertificateId *string `pulumi:"clientCertificateId"`
+	// Connection timeout. Default(ms): 60000
+	ConnectTimeout *int `pulumi:"connectTimeout"`
+	// Host to map to
+	Host *string `pulumi:"host"`
+	// Service name
+	Name *string `pulumi:"name"`
+	// Path to map to
+	Path *string `pulumi:"path"`
+	// Port to map to. Default: 80
+	Port *int `pulumi:"port"`
+	// Protocol to use
+	Protocol *string `pulumi:"protocol"`
+	// Read timeout. Default(ms): 60000
+	ReadTimeout *int `pulumi:"readTimeout"`
+	// Number of retries. Default: 5
+	Retries *int `pulumi:"retries"`
+	// A list of strings associated with the Service for grouping and filtering.
+	Tags []string `pulumi:"tags"`
+	// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+	TlsVerify *bool `pulumi:"tlsVerify"`
+	// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+	TlsVerifyDepth *int `pulumi:"tlsVerifyDepth"`
+	// Write timout. Default(ms): 60000
+	WriteTimeout *int `pulumi:"writeTimeout"`
 }
 
 type ServiceState struct {
-	CaCertificateIds    pulumi.StringArrayInput
+	// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+	CaCertificateIds pulumi.StringArrayInput
+	// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
 	ClientCertificateId pulumi.StringPtrInput
-	ConnectTimeout      pulumi.IntPtrInput
-	Host                pulumi.StringPtrInput
-	Name                pulumi.StringPtrInput
-	Path                pulumi.StringPtrInput
-	Port                pulumi.IntPtrInput
-	Protocol            pulumi.StringPtrInput
-	ReadTimeout         pulumi.IntPtrInput
-	Retries             pulumi.IntPtrInput
-	Tags                pulumi.StringArrayInput
-	TlsVerify           pulumi.BoolPtrInput
-	TlsVerifyDepth      pulumi.IntPtrInput
-	WriteTimeout        pulumi.IntPtrInput
+	// Connection timeout. Default(ms): 60000
+	ConnectTimeout pulumi.IntPtrInput
+	// Host to map to
+	Host pulumi.StringPtrInput
+	// Service name
+	Name pulumi.StringPtrInput
+	// Path to map to
+	Path pulumi.StringPtrInput
+	// Port to map to. Default: 80
+	Port pulumi.IntPtrInput
+	// Protocol to use
+	Protocol pulumi.StringPtrInput
+	// Read timeout. Default(ms): 60000
+	ReadTimeout pulumi.IntPtrInput
+	// Number of retries. Default: 5
+	Retries pulumi.IntPtrInput
+	// A list of strings associated with the Service for grouping and filtering.
+	Tags pulumi.StringArrayInput
+	// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+	TlsVerify pulumi.BoolPtrInput
+	// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+	TlsVerifyDepth pulumi.IntPtrInput
+	// Write timout. Default(ms): 60000
+	WriteTimeout pulumi.IntPtrInput
 }
 
 func (ServiceState) ElementType() reflect.Type {
@@ -209,38 +235,66 @@ func (ServiceState) ElementType() reflect.Type {
 }
 
 type serviceArgs struct {
-	CaCertificateIds    []string `pulumi:"caCertificateIds"`
-	ClientCertificateId *string  `pulumi:"clientCertificateId"`
-	ConnectTimeout      *int     `pulumi:"connectTimeout"`
-	Host                *string  `pulumi:"host"`
-	Name                *string  `pulumi:"name"`
-	Path                *string  `pulumi:"path"`
-	Port                *int     `pulumi:"port"`
-	Protocol            string   `pulumi:"protocol"`
-	ReadTimeout         *int     `pulumi:"readTimeout"`
-	Retries             *int     `pulumi:"retries"`
-	Tags                []string `pulumi:"tags"`
-	TlsVerify           *bool    `pulumi:"tlsVerify"`
-	TlsVerifyDepth      *int     `pulumi:"tlsVerifyDepth"`
-	WriteTimeout        *int     `pulumi:"writeTimeout"`
+	// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+	CaCertificateIds []string `pulumi:"caCertificateIds"`
+	// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+	ClientCertificateId *string `pulumi:"clientCertificateId"`
+	// Connection timeout. Default(ms): 60000
+	ConnectTimeout *int `pulumi:"connectTimeout"`
+	// Host to map to
+	Host *string `pulumi:"host"`
+	// Service name
+	Name *string `pulumi:"name"`
+	// Path to map to
+	Path *string `pulumi:"path"`
+	// Port to map to. Default: 80
+	Port *int `pulumi:"port"`
+	// Protocol to use
+	Protocol string `pulumi:"protocol"`
+	// Read timeout. Default(ms): 60000
+	ReadTimeout *int `pulumi:"readTimeout"`
+	// Number of retries. Default: 5
+	Retries *int `pulumi:"retries"`
+	// A list of strings associated with the Service for grouping and filtering.
+	Tags []string `pulumi:"tags"`
+	// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+	TlsVerify *bool `pulumi:"tlsVerify"`
+	// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+	TlsVerifyDepth *int `pulumi:"tlsVerifyDepth"`
+	// Write timout. Default(ms): 60000
+	WriteTimeout *int `pulumi:"writeTimeout"`
 }
 
 // The set of arguments for constructing a Service resource.
 type ServiceArgs struct {
-	CaCertificateIds    pulumi.StringArrayInput
+	// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+	CaCertificateIds pulumi.StringArrayInput
+	// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
 	ClientCertificateId pulumi.StringPtrInput
-	ConnectTimeout      pulumi.IntPtrInput
-	Host                pulumi.StringPtrInput
-	Name                pulumi.StringPtrInput
-	Path                pulumi.StringPtrInput
-	Port                pulumi.IntPtrInput
-	Protocol            pulumi.StringInput
-	ReadTimeout         pulumi.IntPtrInput
-	Retries             pulumi.IntPtrInput
-	Tags                pulumi.StringArrayInput
-	TlsVerify           pulumi.BoolPtrInput
-	TlsVerifyDepth      pulumi.IntPtrInput
-	WriteTimeout        pulumi.IntPtrInput
+	// Connection timeout. Default(ms): 60000
+	ConnectTimeout pulumi.IntPtrInput
+	// Host to map to
+	Host pulumi.StringPtrInput
+	// Service name
+	Name pulumi.StringPtrInput
+	// Path to map to
+	Path pulumi.StringPtrInput
+	// Port to map to. Default: 80
+	Port pulumi.IntPtrInput
+	// Protocol to use
+	Protocol pulumi.StringInput
+	// Read timeout. Default(ms): 60000
+	ReadTimeout pulumi.IntPtrInput
+	// Number of retries. Default: 5
+	Retries pulumi.IntPtrInput
+	// A list of strings associated with the Service for grouping and filtering.
+	Tags pulumi.StringArrayInput
+	// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+	TlsVerify pulumi.BoolPtrInput
+	// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+	TlsVerifyDepth pulumi.IntPtrInput
+	// Write timout. Default(ms): 60000
+	WriteTimeout pulumi.IntPtrInput
 }
 
 func (ServiceArgs) ElementType() reflect.Type {
@@ -255,7 +309,7 @@ type ServiceInput interface {
 }
 
 func (*Service) ElementType() reflect.Type {
-	return reflect.TypeOf((*Service)(nil))
+	return reflect.TypeOf((**Service)(nil)).Elem()
 }
 
 func (i *Service) ToServiceOutput() ServiceOutput {
@@ -264,35 +318,6 @@ func (i *Service) ToServiceOutput() ServiceOutput {
 
 func (i *Service) ToServiceOutputWithContext(ctx context.Context) ServiceOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceOutput)
-}
-
-func (i *Service) ToServicePtrOutput() ServicePtrOutput {
-	return i.ToServicePtrOutputWithContext(context.Background())
-}
-
-func (i *Service) ToServicePtrOutputWithContext(ctx context.Context) ServicePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ServicePtrOutput)
-}
-
-type ServicePtrInput interface {
-	pulumi.Input
-
-	ToServicePtrOutput() ServicePtrOutput
-	ToServicePtrOutputWithContext(ctx context.Context) ServicePtrOutput
-}
-
-type servicePtrType ServiceArgs
-
-func (*servicePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Service)(nil))
-}
-
-func (i *servicePtrType) ToServicePtrOutput() ServicePtrOutput {
-	return i.ToServicePtrOutputWithContext(context.Background())
-}
-
-func (i *servicePtrType) ToServicePtrOutputWithContext(ctx context.Context) ServicePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ServicePtrOutput)
 }
 
 // ServiceArrayInput is an input type that accepts ServiceArray and ServiceArrayOutput values.
@@ -348,7 +373,7 @@ func (i ServiceMap) ToServiceMapOutputWithContext(ctx context.Context) ServiceMa
 type ServiceOutput struct{ *pulumi.OutputState }
 
 func (ServiceOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Service)(nil))
+	return reflect.TypeOf((**Service)(nil)).Elem()
 }
 
 func (o ServiceOutput) ToServiceOutput() ServiceOutput {
@@ -359,44 +384,10 @@ func (o ServiceOutput) ToServiceOutputWithContext(ctx context.Context) ServiceOu
 	return o
 }
 
-func (o ServiceOutput) ToServicePtrOutput() ServicePtrOutput {
-	return o.ToServicePtrOutputWithContext(context.Background())
-}
-
-func (o ServiceOutput) ToServicePtrOutputWithContext(ctx context.Context) ServicePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Service) *Service {
-		return &v
-	}).(ServicePtrOutput)
-}
-
-type ServicePtrOutput struct{ *pulumi.OutputState }
-
-func (ServicePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Service)(nil))
-}
-
-func (o ServicePtrOutput) ToServicePtrOutput() ServicePtrOutput {
-	return o
-}
-
-func (o ServicePtrOutput) ToServicePtrOutputWithContext(ctx context.Context) ServicePtrOutput {
-	return o
-}
-
-func (o ServicePtrOutput) Elem() ServiceOutput {
-	return o.ApplyT(func(v *Service) Service {
-		if v != nil {
-			return *v
-		}
-		var ret Service
-		return ret
-	}).(ServiceOutput)
-}
-
 type ServiceArrayOutput struct{ *pulumi.OutputState }
 
 func (ServiceArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Service)(nil))
+	return reflect.TypeOf((*[]*Service)(nil)).Elem()
 }
 
 func (o ServiceArrayOutput) ToServiceArrayOutput() ServiceArrayOutput {
@@ -408,15 +399,15 @@ func (o ServiceArrayOutput) ToServiceArrayOutputWithContext(ctx context.Context)
 }
 
 func (o ServiceArrayOutput) Index(i pulumi.IntInput) ServiceOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Service {
-		return vs[0].([]Service)[vs[1].(int)]
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Service {
+		return vs[0].([]*Service)[vs[1].(int)]
 	}).(ServiceOutput)
 }
 
 type ServiceMapOutput struct{ *pulumi.OutputState }
 
 func (ServiceMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]Service)(nil))
+	return reflect.TypeOf((*map[string]*Service)(nil)).Elem()
 }
 
 func (o ServiceMapOutput) ToServiceMapOutput() ServiceMapOutput {
@@ -428,18 +419,16 @@ func (o ServiceMapOutput) ToServiceMapOutputWithContext(ctx context.Context) Ser
 }
 
 func (o ServiceMapOutput) MapIndex(k pulumi.StringInput) ServiceOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) Service {
-		return vs[0].(map[string]Service)[vs[1].(string)]
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *Service {
+		return vs[0].(map[string]*Service)[vs[1].(string)]
 	}).(ServiceOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceInput)(nil)).Elem(), &Service{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ServicePtrInput)(nil)).Elem(), &Service{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceArrayInput)(nil)).Elem(), ServiceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceMapInput)(nil)).Elem(), ServiceMap{})
 	pulumi.RegisterOutputType(ServiceOutput{})
-	pulumi.RegisterOutputType(ServicePtrOutput{})
 	pulumi.RegisterOutputType(ServiceArrayOutput{})
 	pulumi.RegisterOutputType(ServiceMapOutput{})
 }

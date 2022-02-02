@@ -29,6 +29,20 @@ class ServiceArgs:
                  write_timeout: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Service resource.
+        :param pulumi.Input[str] protocol: Protocol to use
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ca_certificate_ids: A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        :param pulumi.Input[str] client_certificate_id: ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+        :param pulumi.Input[int] connect_timeout: Connection timeout. Default(ms): 60000
+        :param pulumi.Input[str] host: Host to map to
+        :param pulumi.Input[str] name: Service name
+        :param pulumi.Input[str] path: Path to map to
+        :param pulumi.Input[int] port: Port to map to. Default: 80
+        :param pulumi.Input[int] read_timeout: Read timeout. Default(ms): 60000
+        :param pulumi.Input[int] retries: Number of retries. Default: 5
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Service for grouping and filtering.
+        :param pulumi.Input[bool] tls_verify: Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        :param pulumi.Input[int] tls_verify_depth: Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        :param pulumi.Input[int] write_timeout: Write timout. Default(ms): 60000
         """
         pulumi.set(__self__, "protocol", protocol)
         if ca_certificate_ids is not None:
@@ -61,6 +75,9 @@ class ServiceArgs:
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol to use
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -70,6 +87,9 @@ class ServiceArgs:
     @property
     @pulumi.getter(name="caCertificateIds")
     def ca_certificate_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        """
         return pulumi.get(self, "ca_certificate_ids")
 
     @ca_certificate_ids.setter
@@ -79,6 +99,9 @@ class ServiceArgs:
     @property
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+        """
         return pulumi.get(self, "client_certificate_id")
 
     @client_certificate_id.setter
@@ -88,6 +111,9 @@ class ServiceArgs:
     @property
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Connection timeout. Default(ms): 60000
+        """
         return pulumi.get(self, "connect_timeout")
 
     @connect_timeout.setter
@@ -97,6 +123,9 @@ class ServiceArgs:
     @property
     @pulumi.getter
     def host(self) -> Optional[pulumi.Input[str]]:
+        """
+        Host to map to
+        """
         return pulumi.get(self, "host")
 
     @host.setter
@@ -106,6 +135,9 @@ class ServiceArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Service name
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -115,6 +147,9 @@ class ServiceArgs:
     @property
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to map to
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -124,6 +159,9 @@ class ServiceArgs:
     @property
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Port to map to. Default: 80
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -133,6 +171,9 @@ class ServiceArgs:
     @property
     @pulumi.getter(name="readTimeout")
     def read_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Read timeout. Default(ms): 60000
+        """
         return pulumi.get(self, "read_timeout")
 
     @read_timeout.setter
@@ -142,6 +183,9 @@ class ServiceArgs:
     @property
     @pulumi.getter
     def retries(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of retries. Default: 5
+        """
         return pulumi.get(self, "retries")
 
     @retries.setter
@@ -151,6 +195,9 @@ class ServiceArgs:
     @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Service for grouping and filtering.
+        """
         return pulumi.get(self, "tags")
 
     @tags.setter
@@ -160,6 +207,9 @@ class ServiceArgs:
     @property
     @pulumi.getter(name="tlsVerify")
     def tls_verify(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        """
         return pulumi.get(self, "tls_verify")
 
     @tls_verify.setter
@@ -169,6 +219,9 @@ class ServiceArgs:
     @property
     @pulumi.getter(name="tlsVerifyDepth")
     def tls_verify_depth(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        """
         return pulumi.get(self, "tls_verify_depth")
 
     @tls_verify_depth.setter
@@ -178,6 +231,9 @@ class ServiceArgs:
     @property
     @pulumi.getter(name="writeTimeout")
     def write_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Write timout. Default(ms): 60000
+        """
         return pulumi.get(self, "write_timeout")
 
     @write_timeout.setter
@@ -204,6 +260,20 @@ class _ServiceState:
                  write_timeout: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Service resources.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ca_certificate_ids: A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        :param pulumi.Input[str] client_certificate_id: ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+        :param pulumi.Input[int] connect_timeout: Connection timeout. Default(ms): 60000
+        :param pulumi.Input[str] host: Host to map to
+        :param pulumi.Input[str] name: Service name
+        :param pulumi.Input[str] path: Path to map to
+        :param pulumi.Input[int] port: Port to map to. Default: 80
+        :param pulumi.Input[str] protocol: Protocol to use
+        :param pulumi.Input[int] read_timeout: Read timeout. Default(ms): 60000
+        :param pulumi.Input[int] retries: Number of retries. Default: 5
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Service for grouping and filtering.
+        :param pulumi.Input[bool] tls_verify: Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        :param pulumi.Input[int] tls_verify_depth: Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        :param pulumi.Input[int] write_timeout: Write timout. Default(ms): 60000
         """
         if ca_certificate_ids is not None:
             pulumi.set(__self__, "ca_certificate_ids", ca_certificate_ids)
@@ -237,6 +307,9 @@ class _ServiceState:
     @property
     @pulumi.getter(name="caCertificateIds")
     def ca_certificate_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        """
         return pulumi.get(self, "ca_certificate_ids")
 
     @ca_certificate_ids.setter
@@ -246,6 +319,9 @@ class _ServiceState:
     @property
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+        """
         return pulumi.get(self, "client_certificate_id")
 
     @client_certificate_id.setter
@@ -255,6 +331,9 @@ class _ServiceState:
     @property
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Connection timeout. Default(ms): 60000
+        """
         return pulumi.get(self, "connect_timeout")
 
     @connect_timeout.setter
@@ -264,6 +343,9 @@ class _ServiceState:
     @property
     @pulumi.getter
     def host(self) -> Optional[pulumi.Input[str]]:
+        """
+        Host to map to
+        """
         return pulumi.get(self, "host")
 
     @host.setter
@@ -273,6 +355,9 @@ class _ServiceState:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Service name
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -282,6 +367,9 @@ class _ServiceState:
     @property
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to map to
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -291,6 +379,9 @@ class _ServiceState:
     @property
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Port to map to. Default: 80
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -300,6 +391,9 @@ class _ServiceState:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        Protocol to use
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -309,6 +403,9 @@ class _ServiceState:
     @property
     @pulumi.getter(name="readTimeout")
     def read_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Read timeout. Default(ms): 60000
+        """
         return pulumi.get(self, "read_timeout")
 
     @read_timeout.setter
@@ -318,6 +415,9 @@ class _ServiceState:
     @property
     @pulumi.getter
     def retries(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of retries. Default: 5
+        """
         return pulumi.get(self, "retries")
 
     @retries.setter
@@ -327,6 +427,9 @@ class _ServiceState:
     @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Service for grouping and filtering.
+        """
         return pulumi.get(self, "tags")
 
     @tags.setter
@@ -336,6 +439,9 @@ class _ServiceState:
     @property
     @pulumi.getter(name="tlsVerify")
     def tls_verify(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        """
         return pulumi.get(self, "tls_verify")
 
     @tls_verify.setter
@@ -345,6 +451,9 @@ class _ServiceState:
     @property
     @pulumi.getter(name="tlsVerifyDepth")
     def tls_verify_depth(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        """
         return pulumi.get(self, "tls_verify_depth")
 
     @tls_verify_depth.setter
@@ -354,6 +463,9 @@ class _ServiceState:
     @property
     @pulumi.getter(name="writeTimeout")
     def write_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Write timout. Default(ms): 60000
+        """
         return pulumi.get(self, "write_timeout")
 
     @write_timeout.setter
@@ -437,22 +549,6 @@ class Service(pulumi.CustomResource):
             client_certificate_id=certificate.id,
             ca_certificate_ids=[ca.id])
         ```
-        ## Argument reference
-
-        * `name` - (Required) Service name
-        * `protocol` - (Required) Protocol to use
-        * `host` - (Optional) Host to map to
-        * `port` - (Optional, int) Port to map to. Default: 80
-        * `path` - (Optional) Path to map to
-        * `retries` - (Optional, int) Number of retries. Default: 5
-        * `connect_timeout` - (Optional, int) Connection timeout. Default(ms): 60000
-        * `write_timeout` - (Optional, int) Write timout. Default(ms): 60000
-        * `read_timeout` - (Optional, int) Read timeout. Default(ms): 60000
-        * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
-        * `client_certificate_id` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
-        * `tls_verify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
-        * `tls_verify_depth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
-        * `ca_certificate_ids` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
 
         ## Import
 
@@ -464,6 +560,20 @@ class Service(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ca_certificate_ids: A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        :param pulumi.Input[str] client_certificate_id: ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+        :param pulumi.Input[int] connect_timeout: Connection timeout. Default(ms): 60000
+        :param pulumi.Input[str] host: Host to map to
+        :param pulumi.Input[str] name: Service name
+        :param pulumi.Input[str] path: Path to map to
+        :param pulumi.Input[int] port: Port to map to. Default: 80
+        :param pulumi.Input[str] protocol: Protocol to use
+        :param pulumi.Input[int] read_timeout: Read timeout. Default(ms): 60000
+        :param pulumi.Input[int] retries: Number of retries. Default: 5
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Service for grouping and filtering.
+        :param pulumi.Input[bool] tls_verify: Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        :param pulumi.Input[int] tls_verify_depth: Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        :param pulumi.Input[int] write_timeout: Write timout. Default(ms): 60000
         """
         ...
     @overload
@@ -527,22 +637,6 @@ class Service(pulumi.CustomResource):
             client_certificate_id=certificate.id,
             ca_certificate_ids=[ca.id])
         ```
-        ## Argument reference
-
-        * `name` - (Required) Service name
-        * `protocol` - (Required) Protocol to use
-        * `host` - (Optional) Host to map to
-        * `port` - (Optional, int) Port to map to. Default: 80
-        * `path` - (Optional) Path to map to
-        * `retries` - (Optional, int) Number of retries. Default: 5
-        * `connect_timeout` - (Optional, int) Connection timeout. Default(ms): 60000
-        * `write_timeout` - (Optional, int) Write timout. Default(ms): 60000
-        * `read_timeout` - (Optional, int) Read timeout. Default(ms): 60000
-        * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
-        * `client_certificate_id` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
-        * `tls_verify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
-        * `tls_verify_depth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
-        * `ca_certificate_ids` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
 
         ## Import
 
@@ -640,6 +734,20 @@ class Service(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ca_certificate_ids: A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        :param pulumi.Input[str] client_certificate_id: ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+        :param pulumi.Input[int] connect_timeout: Connection timeout. Default(ms): 60000
+        :param pulumi.Input[str] host: Host to map to
+        :param pulumi.Input[str] name: Service name
+        :param pulumi.Input[str] path: Path to map to
+        :param pulumi.Input[int] port: Port to map to. Default: 80
+        :param pulumi.Input[str] protocol: Protocol to use
+        :param pulumi.Input[int] read_timeout: Read timeout. Default(ms): 60000
+        :param pulumi.Input[int] retries: Number of retries. Default: 5
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Service for grouping and filtering.
+        :param pulumi.Input[bool] tls_verify: Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        :param pulumi.Input[int] tls_verify_depth: Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        :param pulumi.Input[int] write_timeout: Write timout. Default(ms): 60000
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -664,70 +772,112 @@ class Service(pulumi.CustomResource):
     @property
     @pulumi.getter(name="caCertificateIds")
     def ca_certificate_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        """
         return pulumi.get(self, "ca_certificate_ids")
 
     @property
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+        """
         return pulumi.get(self, "client_certificate_id")
 
     @property
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> pulumi.Output[Optional[int]]:
+        """
+        Connection timeout. Default(ms): 60000
+        """
         return pulumi.get(self, "connect_timeout")
 
     @property
     @pulumi.getter
     def host(self) -> pulumi.Output[Optional[str]]:
+        """
+        Host to map to
+        """
         return pulumi.get(self, "host")
 
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
+        """
+        Service name
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def path(self) -> pulumi.Output[Optional[str]]:
+        """
+        Path to map to
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter
     def port(self) -> pulumi.Output[Optional[int]]:
+        """
+        Port to map to. Default: 80
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Output[str]:
+        """
+        Protocol to use
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="readTimeout")
     def read_timeout(self) -> pulumi.Output[Optional[int]]:
+        """
+        Read timeout. Default(ms): 60000
+        """
         return pulumi.get(self, "read_timeout")
 
     @property
     @pulumi.getter
     def retries(self) -> pulumi.Output[Optional[int]]:
+        """
+        Number of retries. Default: 5
+        """
         return pulumi.get(self, "retries")
 
     @property
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of strings associated with the Service for grouping and filtering.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="tlsVerify")
     def tls_verify(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        """
         return pulumi.get(self, "tls_verify")
 
     @property
     @pulumi.getter(name="tlsVerifyDepth")
     def tls_verify_depth(self) -> pulumi.Output[Optional[int]]:
+        """
+        Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        """
         return pulumi.get(self, "tls_verify_depth")
 
     @property
     @pulumi.getter(name="writeTimeout")
     def write_timeout(self) -> pulumi.Output[Optional[int]]:
+        """
+        Write timout. Default(ms): 60000
+        """
         return pulumi.get(self, "write_timeout")
 

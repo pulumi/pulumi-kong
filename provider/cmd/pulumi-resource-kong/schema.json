@@ -1000,29 +1000,33 @@
             }
         },
         "kong:index/plugin:Plugin": {
-            "description": "## # kong.Plugin\n\nThe plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).\nThe `config_json` is passed through to the plugin to configure it as is.  \n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nrate_limit = kong.Plugin(\"rateLimit\", config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\nTo apply a plugin to a consumer use the `consumer_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst pluginConsumer = new kong.Consumer(\"plugin_consumer\", {\n    customId: \"567\",\n    username: \"PluginUser\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n    consumerId: pluginConsumer.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nplugin_consumer = kong.Consumer(\"pluginConsumer\",\n    custom_id=\"567\",\n    username=\"PluginUser\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\",\n    consumer_id=plugin_consumer.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var pluginConsumer = new Kong.Consumer(\"pluginConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"567\",\n            Username = \"PluginUser\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n            ConsumerId = pluginConsumer.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpluginConsumer, err := kong.NewConsumer(ctx, \"pluginConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"567\"),\n\t\t\tUsername: pulumi.String(\"PluginUser\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tConsumerId: pluginConsumer.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a service use the `service_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n`,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n\n\"\"\",\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 10,\n\t\t\"\"hour\"\" : 2000\n\t}\n\n\",\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 10,\\n\", \"\t\t\\\"hour\\\" : 2000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a route use the `route_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n`,\n    enabled: true,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n\n\"\"\",\n    enabled=True,\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 11,\n\t\t\"\"hour\"\" : 4000\n\t}\n\n\",\n            Enabled = true,\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 11,\\n\", \"\t\t\\\"hour\\\" : 4000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tEnabled:   pulumi.Bool(true),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n## Argument reference\n\n* `plugin_name` - (Required) the name of the plugin you want to configure\n* `consumer_id` - (Optional) the consumer id you want to configure the plugin for\n* `service_id`  - (Optional) the service id that you want to configure the plugin for\n* `route_id` - (Optional) the route id that you want to configure the plugin for\n* `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it\n* `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation\npage of the plugin you are configuring\n* `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering\n\n\n## Import\n\nTo import a plugin\n\n```sh\n $ pulumi import kong:index/plugin:Plugin \u003cplugin_identifier\u003e \u003cplugin_id\u003e\n```\n\n ",
+            "description": "## # kong.Plugin\n\nThe plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).\nThe `config_json` is passed through to the plugin to configure it as is.  \n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nrate_limit = kong.Plugin(\"rateLimit\", config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\nTo apply a plugin to a consumer use the `consumer_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst pluginConsumer = new kong.Consumer(\"plugin_consumer\", {\n    customId: \"567\",\n    username: \"PluginUser\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n    consumerId: pluginConsumer.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nplugin_consumer = kong.Consumer(\"pluginConsumer\",\n    custom_id=\"567\",\n    username=\"PluginUser\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\",\n    consumer_id=plugin_consumer.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var pluginConsumer = new Kong.Consumer(\"pluginConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"567\",\n            Username = \"PluginUser\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n            ConsumerId = pluginConsumer.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpluginConsumer, err := kong.NewConsumer(ctx, \"pluginConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"567\"),\n\t\t\tUsername: pulumi.String(\"PluginUser\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tConsumerId: pluginConsumer.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a service use the `service_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n`,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n\n\"\"\",\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 10,\n\t\t\"\"hour\"\" : 2000\n\t}\n\n\",\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 10,\\n\", \"\t\t\\\"hour\\\" : 2000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a route use the `route_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n`,\n    enabled: true,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n\n\"\"\",\n    enabled=True,\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 11,\n\t\t\"\"hour\"\" : 4000\n\t}\n\n\",\n            Enabled = true,\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 11,\\n\", \"\t\t\\\"hour\\\" : 4000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tEnabled:   pulumi.Bool(true),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a plugin\n\n```sh\n $ pulumi import kong:index/plugin:Plugin \u003cplugin_identifier\u003e \u003cplugin_id\u003e\n```\n\n ",
             "properties": {
                 "computedConfig": {
                     "type": "string"
                 },
                 "configJson": {
                     "type": "string",
-                    "description": "plugin configuration in JSON format, configuration must be a valid JSON object.\n"
+                    "description": "this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation\npage of the plugin you are configuring\n"
                 },
                 "consumerId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the consumer id you want to configure the plugin for\n"
                 },
                 "enabled": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it\n"
                 },
                 "name": {
                     "type": "string"
                 },
                 "routeId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the route id that you want to configure the plugin for\n"
                 },
                 "serviceId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the service id that you want to configure the plugin for\n"
                 },
                 "strictMatch": {
                     "type": "boolean"
@@ -1031,7 +1035,8 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the Plugin for grouping and filtering\n"
                 }
             },
             "required": [
@@ -1041,22 +1046,26 @@
             "inputProperties": {
                 "configJson": {
                     "type": "string",
-                    "description": "plugin configuration in JSON format, configuration must be a valid JSON object.\n"
+                    "description": "this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation\npage of the plugin you are configuring\n"
                 },
                 "consumerId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the consumer id you want to configure the plugin for\n"
                 },
                 "enabled": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it\n"
                 },
                 "name": {
                     "type": "string"
                 },
                 "routeId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the route id that you want to configure the plugin for\n"
                 },
                 "serviceId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "the service id that you want to configure the plugin for\n"
                 },
                 "strictMatch": {
                     "type": "boolean"
@@ -1065,7 +1074,8 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the Plugin for grouping and filtering\n"
                 }
             },
             "stateInputs": {
@@ -1076,22 +1086,26 @@
                     },
                     "configJson": {
                         "type": "string",
-                        "description": "plugin configuration in JSON format, configuration must be a valid JSON object.\n"
+                        "description": "this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation\npage of the plugin you are configuring\n"
                     },
                     "consumerId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "the consumer id you want to configure the plugin for\n"
                     },
                     "enabled": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it\n"
                     },
                     "name": {
                         "type": "string"
                     },
                     "routeId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "the route id that you want to configure the plugin for\n"
                     },
                     "serviceId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "the service id that you want to configure the plugin for\n"
                     },
                     "strictMatch": {
                         "type": "boolean"
@@ -1100,7 +1114,8 @@
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of strings associated with the Plugin for grouping and filtering\n"
                     }
                 },
                 "type": "object"
@@ -1426,55 +1441,69 @@
             }
         },
         "kong:index/service:Service": {
-            "description": "## # kong.Service\n\nThe service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    connectTimeout: 1000,\n    host: \"test.org\",\n    path: \"/mypath\",\n    port: 8080,\n    protocol: \"http\",\n    readTimeout: 3000,\n    retries: 5,\n    writeTimeout: 2000,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    connect_timeout=1000,\n    host=\"test.org\",\n    path=\"/mypath\",\n    port=8080,\n    protocol=\"http\",\n    read_timeout=3000,\n    retries=5,\n    write_timeout=2000)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            ConnectTimeout = 1000,\n            Host = \"test.org\",\n            Path = \"/mypath\",\n            Port = 8080,\n            Protocol = \"http\",\n            ReadTimeout = 3000,\n            Retries = 5,\n            WriteTimeout = 2000,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tConnectTimeout: pulumi.Int(1000),\n\t\t\tHost:           pulumi.String(\"test.org\"),\n\t\t\tPath:           pulumi.String(\"/mypath\"),\n\t\t\tPort:           pulumi.Int(8080),\n\t\t\tProtocol:       pulumi.String(\"http\"),\n\t\t\tReadTimeout:    pulumi.Int(3000),\n\t\t\tRetries:        pulumi.Int(5),\n\t\t\tWriteTimeout:   pulumi.Int(2000),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst certificate = new kong.Certificate(\"certificate\", {\n    certificate: `    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n`,\n    privateKey: `    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n`,\n    snis: [\"foo.com\"],\n});\nconst ca = new kong.Certificate(\"ca\", {\n    certificate: `    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n`,\n    privateKey: `    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n`,\n    snis: [\"ca.com\"],\n});\nconst service = new kong.Service(\"service\", {\n    protocol: \"https\",\n    host: \"test.org\",\n    tlsVerify: true,\n    tlsVerifyDepth: 2,\n    clientCertificateId: certificate.id,\n    caCertificateIds: [ca.id],\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\ncertificate = kong.Certificate(\"certificate\",\n    certificate=\"\"\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\"\"\",\n    private_key=\"\"\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\"\"\",\n    snis=[\"foo.com\"])\nca = kong.Certificate(\"ca\",\n    certificate=\"\"\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\"\"\",\n    private_key=\"\"\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\"\"\",\n    snis=[\"ca.com\"])\nservice = kong.Service(\"service\",\n    protocol=\"https\",\n    host=\"test.org\",\n    tls_verify=True,\n    tls_verify_depth=2,\n    client_certificate_id=certificate.id,\n    ca_certificate_ids=[ca.id])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var certificate = new Kong.Certificate(\"certificate\", new Kong.CertificateArgs\n        {\n            Certificate = @\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\",\n            PrivateKey = @\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\",\n            Snis = \n            {\n                \"foo.com\",\n            },\n        });\n        var ca = new Kong.Certificate(\"ca\", new Kong.CertificateArgs\n        {\n            Certificate = @\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\",\n            PrivateKey = @\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\",\n            Snis = \n            {\n                \"ca.com\",\n            },\n        });\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Protocol = \"https\",\n            Host = \"test.org\",\n            TlsVerify = true,\n            TlsVerifyDepth = 2,\n            ClientCertificateId = certificate.Id,\n            CaCertificateIds = \n            {\n                ca.Id,\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcertificate, err := kong.NewCertificate(ctx, \"certificate\", \u0026kong.CertificateArgs{\n\t\t\tCertificate: pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN CERTIFICATE-----\\n\", \"    ......\\n\", \"    -----END CERTIFICATE-----\\n\")),\n\t\t\tPrivateKey:  pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN PRIVATE KEY-----\\n\", \"    .....\\n\", \"    -----END PRIVATE KEY-----\\n\")),\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"foo.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tca, err := kong.NewCertificate(ctx, \"ca\", \u0026kong.CertificateArgs{\n\t\t\tCertificate: pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN CERTIFICATE-----\\n\", \"    ......\\n\", \"    -----END CERTIFICATE-----\\n\")),\n\t\t\tPrivateKey:  pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN PRIVATE KEY-----\\n\", \"    .....\\n\", \"    -----END PRIVATE KEY-----\\n\")),\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"ca.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tProtocol:            pulumi.String(\"https\"),\n\t\t\tHost:                pulumi.String(\"test.org\"),\n\t\t\tTlsVerify:           pulumi.Bool(true),\n\t\t\tTlsVerifyDepth:      pulumi.Int(2),\n\t\t\tClientCertificateId: certificate.ID(),\n\t\t\tCaCertificateIds: pulumi.StringArray{\n\t\t\t\tca.ID(),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n## Argument reference\n\n* `name` - (Required) Service name\n* `protocol` - (Required) Protocol to use\n* `host` - (Optional) Host to map to\n* `port` - (Optional, int) Port to map to. Default: 80\n* `path` - (Optional) Path to map to\n* `retries` - (Optional, int) Number of retries. Default: 5\n* `connect_timeout` - (Optional, int) Connection timeout. Default(ms): 60000\n* `write_timeout` - (Optional, int) Write timout. Default(ms): 60000\n* `read_timeout` - (Optional, int) Read timeout. Default(ms): 60000\n* `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.\n* `client_certificate_id` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource\n* `tls_verify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.\n* `tls_verify_depth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.\n* `ca_certificate_ids` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.\n\n\n## Import\n\nTo import a service\n\n```sh\n $ pulumi import kong:index/service:Service \u003cservice_identifier\u003e \u003cservice_id\u003e\n```\n\n ",
+            "description": "## # kong.Service\n\nThe service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    connectTimeout: 1000,\n    host: \"test.org\",\n    path: \"/mypath\",\n    port: 8080,\n    protocol: \"http\",\n    readTimeout: 3000,\n    retries: 5,\n    writeTimeout: 2000,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    connect_timeout=1000,\n    host=\"test.org\",\n    path=\"/mypath\",\n    port=8080,\n    protocol=\"http\",\n    read_timeout=3000,\n    retries=5,\n    write_timeout=2000)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            ConnectTimeout = 1000,\n            Host = \"test.org\",\n            Path = \"/mypath\",\n            Port = 8080,\n            Protocol = \"http\",\n            ReadTimeout = 3000,\n            Retries = 5,\n            WriteTimeout = 2000,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tConnectTimeout: pulumi.Int(1000),\n\t\t\tHost:           pulumi.String(\"test.org\"),\n\t\t\tPath:           pulumi.String(\"/mypath\"),\n\t\t\tPort:           pulumi.Int(8080),\n\t\t\tProtocol:       pulumi.String(\"http\"),\n\t\t\tReadTimeout:    pulumi.Int(3000),\n\t\t\tRetries:        pulumi.Int(5),\n\t\t\tWriteTimeout:   pulumi.Int(2000),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst certificate = new kong.Certificate(\"certificate\", {\n    certificate: `    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n`,\n    privateKey: `    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n`,\n    snis: [\"foo.com\"],\n});\nconst ca = new kong.Certificate(\"ca\", {\n    certificate: `    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n`,\n    privateKey: `    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n`,\n    snis: [\"ca.com\"],\n});\nconst service = new kong.Service(\"service\", {\n    protocol: \"https\",\n    host: \"test.org\",\n    tlsVerify: true,\n    tlsVerifyDepth: 2,\n    clientCertificateId: certificate.id,\n    caCertificateIds: [ca.id],\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\ncertificate = kong.Certificate(\"certificate\",\n    certificate=\"\"\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\"\"\",\n    private_key=\"\"\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\"\"\",\n    snis=[\"foo.com\"])\nca = kong.Certificate(\"ca\",\n    certificate=\"\"\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\"\"\",\n    private_key=\"\"\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\"\"\",\n    snis=[\"ca.com\"])\nservice = kong.Service(\"service\",\n    protocol=\"https\",\n    host=\"test.org\",\n    tls_verify=True,\n    tls_verify_depth=2,\n    client_certificate_id=certificate.id,\n    ca_certificate_ids=[ca.id])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var certificate = new Kong.Certificate(\"certificate\", new Kong.CertificateArgs\n        {\n            Certificate = @\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\",\n            PrivateKey = @\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\",\n            Snis = \n            {\n                \"foo.com\",\n            },\n        });\n        var ca = new Kong.Certificate(\"ca\", new Kong.CertificateArgs\n        {\n            Certificate = @\"    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n\",\n            PrivateKey = @\"    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n\",\n            Snis = \n            {\n                \"ca.com\",\n            },\n        });\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Protocol = \"https\",\n            Host = \"test.org\",\n            TlsVerify = true,\n            TlsVerifyDepth = 2,\n            ClientCertificateId = certificate.Id,\n            CaCertificateIds = \n            {\n                ca.Id,\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcertificate, err := kong.NewCertificate(ctx, \"certificate\", \u0026kong.CertificateArgs{\n\t\t\tCertificate: pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN CERTIFICATE-----\\n\", \"    ......\\n\", \"    -----END CERTIFICATE-----\\n\")),\n\t\t\tPrivateKey:  pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN PRIVATE KEY-----\\n\", \"    .....\\n\", \"    -----END PRIVATE KEY-----\\n\")),\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"foo.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tca, err := kong.NewCertificate(ctx, \"ca\", \u0026kong.CertificateArgs{\n\t\t\tCertificate: pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN CERTIFICATE-----\\n\", \"    ......\\n\", \"    -----END CERTIFICATE-----\\n\")),\n\t\t\tPrivateKey:  pulumi.String(fmt.Sprintf(\"%v%v%v\", \"    -----BEGIN PRIVATE KEY-----\\n\", \"    .....\\n\", \"    -----END PRIVATE KEY-----\\n\")),\n\t\t\tSnis: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"ca.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tProtocol:            pulumi.String(\"https\"),\n\t\t\tHost:                pulumi.String(\"test.org\"),\n\t\t\tTlsVerify:           pulumi.Bool(true),\n\t\t\tTlsVerifyDepth:      pulumi.Int(2),\n\t\t\tClientCertificateId: certificate.ID(),\n\t\t\tCaCertificateIds: pulumi.StringArray{\n\t\t\t\tca.ID(),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a service\n\n```sh\n $ pulumi import kong:index/service:Service \u003cservice_identifier\u003e \u003cservice_id\u003e\n```\n\n ",
             "properties": {
                 "caCertificateIds": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.\n"
                 },
                 "clientCertificateId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource\n"
                 },
                 "connectTimeout": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Connection timeout. Default(ms): 60000\n"
                 },
                 "host": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Host to map to\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Service name\n"
                 },
                 "path": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Path to map to\n"
                 },
                 "port": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Port to map to. Default: 80\n"
                 },
                 "protocol": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Protocol to use\n"
                 },
                 "readTimeout": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Read timeout. Default(ms): 60000\n"
                 },
                 "retries": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of retries. Default: 5\n"
                 },
                 "tags": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the Service for grouping and filtering.\n"
                 },
                 "tlsVerify": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.\n"
                 },
                 "tlsVerifyDepth": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Maximum depth of chain while verifying Upstream server’s TLS certificate.\n"
                 },
                 "writeTimeout": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Write timout. Default(ms): 60000\n"
                 }
             },
             "required": [
@@ -1486,49 +1515,63 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.\n"
                 },
                 "clientCertificateId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource\n"
                 },
                 "connectTimeout": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Connection timeout. Default(ms): 60000\n"
                 },
                 "host": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Host to map to\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Service name\n"
                 },
                 "path": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Path to map to\n"
                 },
                 "port": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Port to map to. Default: 80\n"
                 },
                 "protocol": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Protocol to use\n"
                 },
                 "readTimeout": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Read timeout. Default(ms): 60000\n"
                 },
                 "retries": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of retries. Default: 5\n"
                 },
                 "tags": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings associated with the Service for grouping and filtering.\n"
                 },
                 "tlsVerify": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.\n"
                 },
                 "tlsVerifyDepth": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Maximum depth of chain while verifying Upstream server’s TLS certificate.\n"
                 },
                 "writeTimeout": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Write timout. Default(ms): 60000\n"
                 }
             },
             "requiredInputs": [
@@ -1541,49 +1584,63 @@
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.\n"
                     },
                     "clientCertificateId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource\n"
                     },
                     "connectTimeout": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Connection timeout. Default(ms): 60000\n"
                     },
                     "host": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Host to map to\n"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Service name\n"
                     },
                     "path": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Path to map to\n"
                     },
                     "port": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Port to map to. Default: 80\n"
                     },
                     "protocol": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Protocol to use\n"
                     },
                     "readTimeout": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Read timeout. Default(ms): 60000\n"
                     },
                     "retries": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Number of retries. Default: 5\n"
                     },
                     "tags": {
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": "A list of strings associated with the Service for grouping and filtering.\n"
                     },
                     "tlsVerify": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.\n"
                     },
                     "tlsVerifyDepth": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Maximum depth of chain while verifying Upstream server’s TLS certificate.\n"
                     },
                     "writeTimeout": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Write timout. Default(ms): 60000\n"
                     }
                 },
                 "type": "object"
@@ -1863,6 +1920,7 @@
             }
         },
         "go": {
+            "generateExtraInputTypes": true,
             "generateResourceContainerTypes": true,
             "importBasePath": "github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
         },

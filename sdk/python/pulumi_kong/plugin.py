@@ -23,7 +23,13 @@ class PluginArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Plugin resource.
-        :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
+        :param pulumi.Input[str] config_json: this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+               page of the plugin you are configuring
+        :param pulumi.Input[str] consumer_id: the consumer id you want to configure the plugin for
+        :param pulumi.Input[bool] enabled: whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        :param pulumi.Input[str] route_id: the route id that you want to configure the plugin for
+        :param pulumi.Input[str] service_id: the service id that you want to configure the plugin for
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Plugin for grouping and filtering
         """
         if config_json is not None:
             pulumi.set(__self__, "config_json", config_json)
@@ -46,7 +52,8 @@ class PluginArgs:
     @pulumi.getter(name="configJson")
     def config_json(self) -> Optional[pulumi.Input[str]]:
         """
-        plugin configuration in JSON format, configuration must be a valid JSON object.
+        this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        page of the plugin you are configuring
         """
         return pulumi.get(self, "config_json")
 
@@ -57,6 +64,9 @@ class PluginArgs:
     @property
     @pulumi.getter(name="consumerId")
     def consumer_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        the consumer id you want to configure the plugin for
+        """
         return pulumi.get(self, "consumer_id")
 
     @consumer_id.setter
@@ -66,6 +76,9 @@ class PluginArgs:
     @property
     @pulumi.getter
     def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
@@ -84,6 +97,9 @@ class PluginArgs:
     @property
     @pulumi.getter(name="routeId")
     def route_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        the route id that you want to configure the plugin for
+        """
         return pulumi.get(self, "route_id")
 
     @route_id.setter
@@ -93,6 +109,9 @@ class PluginArgs:
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        the service id that you want to configure the plugin for
+        """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
@@ -111,6 +130,9 @@ class PluginArgs:
     @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Plugin for grouping and filtering
+        """
         return pulumi.get(self, "tags")
 
     @tags.setter
@@ -132,7 +154,13 @@ class _PluginState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Plugin resources.
-        :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
+        :param pulumi.Input[str] config_json: this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+               page of the plugin you are configuring
+        :param pulumi.Input[str] consumer_id: the consumer id you want to configure the plugin for
+        :param pulumi.Input[bool] enabled: whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        :param pulumi.Input[str] route_id: the route id that you want to configure the plugin for
+        :param pulumi.Input[str] service_id: the service id that you want to configure the plugin for
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Plugin for grouping and filtering
         """
         if computed_config is not None:
             pulumi.set(__self__, "computed_config", computed_config)
@@ -166,7 +194,8 @@ class _PluginState:
     @pulumi.getter(name="configJson")
     def config_json(self) -> Optional[pulumi.Input[str]]:
         """
-        plugin configuration in JSON format, configuration must be a valid JSON object.
+        this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        page of the plugin you are configuring
         """
         return pulumi.get(self, "config_json")
 
@@ -177,6 +206,9 @@ class _PluginState:
     @property
     @pulumi.getter(name="consumerId")
     def consumer_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        the consumer id you want to configure the plugin for
+        """
         return pulumi.get(self, "consumer_id")
 
     @consumer_id.setter
@@ -186,6 +218,9 @@ class _PluginState:
     @property
     @pulumi.getter
     def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
@@ -204,6 +239,9 @@ class _PluginState:
     @property
     @pulumi.getter(name="routeId")
     def route_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        the route id that you want to configure the plugin for
+        """
         return pulumi.get(self, "route_id")
 
     @route_id.setter
@@ -213,6 +251,9 @@ class _PluginState:
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        the service id that you want to configure the plugin for
+        """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
@@ -231,6 +272,9 @@ class _PluginState:
     @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings associated with the Plugin for grouping and filtering
+        """
         return pulumi.get(self, "tags")
 
     @tags.setter
@@ -328,16 +372,6 @@ class Plugin(pulumi.CustomResource):
             enabled=True,
             service_id=service.id)
         ```
-        ## Argument reference
-
-        * `plugin_name` - (Required) the name of the plugin you want to configure
-        * `consumer_id` - (Optional) the consumer id you want to configure the plugin for
-        * `service_id`  - (Optional) the service id that you want to configure the plugin for
-        * `route_id` - (Optional) the route id that you want to configure the plugin for
-        * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-        * `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-          page of the plugin you are configuring
-        * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
 
         ## Import
 
@@ -349,7 +383,13 @@ class Plugin(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
+        :param pulumi.Input[str] config_json: this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+               page of the plugin you are configuring
+        :param pulumi.Input[str] consumer_id: the consumer id you want to configure the plugin for
+        :param pulumi.Input[bool] enabled: whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        :param pulumi.Input[str] route_id: the route id that you want to configure the plugin for
+        :param pulumi.Input[str] service_id: the service id that you want to configure the plugin for
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Plugin for grouping and filtering
         """
         ...
     @overload
@@ -433,16 +473,6 @@ class Plugin(pulumi.CustomResource):
             enabled=True,
             service_id=service.id)
         ```
-        ## Argument reference
-
-        * `plugin_name` - (Required) the name of the plugin you want to configure
-        * `consumer_id` - (Optional) the consumer id you want to configure the plugin for
-        * `service_id`  - (Optional) the service id that you want to configure the plugin for
-        * `route_id` - (Optional) the route id that you want to configure the plugin for
-        * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-        * `config_json` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-          page of the plugin you are configuring
-        * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
 
         ## Import
 
@@ -522,7 +552,13 @@ class Plugin(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] config_json: plugin configuration in JSON format, configuration must be a valid JSON object.
+        :param pulumi.Input[str] config_json: this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+               page of the plugin you are configuring
+        :param pulumi.Input[str] consumer_id: the consumer id you want to configure the plugin for
+        :param pulumi.Input[bool] enabled: whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        :param pulumi.Input[str] route_id: the route id that you want to configure the plugin for
+        :param pulumi.Input[str] service_id: the service id that you want to configure the plugin for
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Plugin for grouping and filtering
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -548,18 +584,25 @@ class Plugin(pulumi.CustomResource):
     @pulumi.getter(name="configJson")
     def config_json(self) -> pulumi.Output[Optional[str]]:
         """
-        plugin configuration in JSON format, configuration must be a valid JSON object.
+        this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+        page of the plugin you are configuring
         """
         return pulumi.get(self, "config_json")
 
     @property
     @pulumi.getter(name="consumerId")
     def consumer_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        the consumer id you want to configure the plugin for
+        """
         return pulumi.get(self, "consumer_id")
 
     @property
     @pulumi.getter
     def enabled(self) -> pulumi.Output[Optional[bool]]:
+        """
+        whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+        """
         return pulumi.get(self, "enabled")
 
     @property
@@ -570,11 +613,17 @@ class Plugin(pulumi.CustomResource):
     @property
     @pulumi.getter(name="routeId")
     def route_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        the route id that you want to configure the plugin for
+        """
         return pulumi.get(self, "route_id")
 
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        the service id that you want to configure the plugin for
+        """
         return pulumi.get(self, "service_id")
 
     @property
@@ -585,5 +634,8 @@ class Plugin(pulumi.CustomResource):
     @property
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        A list of strings associated with the Plugin for grouping and filtering
+        """
         return pulumi.get(self, "tags")
 

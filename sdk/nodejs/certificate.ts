@@ -85,28 +85,26 @@ export class Certificate extends pulumi.CustomResource {
      */
     constructor(name: string, args: CertificateArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: CertificateArgs | CertificateState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CertificateState | undefined;
-            inputs["certificate"] = state ? state.certificate : undefined;
-            inputs["privateKey"] = state ? state.privateKey : undefined;
-            inputs["snis"] = state ? state.snis : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["certificate"] = state ? state.certificate : undefined;
+            resourceInputs["privateKey"] = state ? state.privateKey : undefined;
+            resourceInputs["snis"] = state ? state.snis : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as CertificateArgs | undefined;
             if ((!args || args.certificate === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'certificate'");
             }
-            inputs["certificate"] = args ? args.certificate : undefined;
-            inputs["privateKey"] = args ? args.privateKey : undefined;
-            inputs["snis"] = args ? args.snis : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["certificate"] = args ? args.certificate : undefined;
+            resourceInputs["privateKey"] = args ? args.privateKey : undefined;
+            resourceInputs["snis"] = args ? args.snis : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Certificate.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Certificate.__pulumiType, name, resourceInputs, opts);
     }
 }
 
