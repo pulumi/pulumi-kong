@@ -85,14 +85,14 @@ export class ConsumerBasicAuth extends pulumi.CustomResource {
      */
     constructor(name: string, args: ConsumerBasicAuthArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerBasicAuthArgs | ConsumerBasicAuthState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerBasicAuthState | undefined;
-            inputs["consumerId"] = state ? state.consumerId : undefined;
-            inputs["password"] = state ? state.password : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
-            inputs["username"] = state ? state.username : undefined;
+            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
+            resourceInputs["password"] = state ? state.password : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["username"] = state ? state.username : undefined;
         } else {
             const args = argsOrState as ConsumerBasicAuthArgs | undefined;
             if ((!args || args.consumerId === undefined) && !opts.urn) {
@@ -104,15 +104,13 @@ export class ConsumerBasicAuth extends pulumi.CustomResource {
             if ((!args || args.username === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'username'");
             }
-            inputs["consumerId"] = args ? args.consumerId : undefined;
-            inputs["password"] = args ? args.password : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
-            inputs["username"] = args ? args.username : undefined;
+            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
+            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["username"] = args ? args.username : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(ConsumerBasicAuth.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(ConsumerBasicAuth.__pulumiType, name, resourceInputs, opts);
     }
 }
 

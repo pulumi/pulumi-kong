@@ -165,7 +165,7 @@ type ConsumerBasicAuthInput interface {
 }
 
 func (*ConsumerBasicAuth) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConsumerBasicAuth)(nil))
+	return reflect.TypeOf((**ConsumerBasicAuth)(nil)).Elem()
 }
 
 func (i *ConsumerBasicAuth) ToConsumerBasicAuthOutput() ConsumerBasicAuthOutput {
@@ -174,35 +174,6 @@ func (i *ConsumerBasicAuth) ToConsumerBasicAuthOutput() ConsumerBasicAuthOutput 
 
 func (i *ConsumerBasicAuth) ToConsumerBasicAuthOutputWithContext(ctx context.Context) ConsumerBasicAuthOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerBasicAuthOutput)
-}
-
-func (i *ConsumerBasicAuth) ToConsumerBasicAuthPtrOutput() ConsumerBasicAuthPtrOutput {
-	return i.ToConsumerBasicAuthPtrOutputWithContext(context.Background())
-}
-
-func (i *ConsumerBasicAuth) ToConsumerBasicAuthPtrOutputWithContext(ctx context.Context) ConsumerBasicAuthPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConsumerBasicAuthPtrOutput)
-}
-
-type ConsumerBasicAuthPtrInput interface {
-	pulumi.Input
-
-	ToConsumerBasicAuthPtrOutput() ConsumerBasicAuthPtrOutput
-	ToConsumerBasicAuthPtrOutputWithContext(ctx context.Context) ConsumerBasicAuthPtrOutput
-}
-
-type consumerBasicAuthPtrType ConsumerBasicAuthArgs
-
-func (*consumerBasicAuthPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ConsumerBasicAuth)(nil))
-}
-
-func (i *consumerBasicAuthPtrType) ToConsumerBasicAuthPtrOutput() ConsumerBasicAuthPtrOutput {
-	return i.ToConsumerBasicAuthPtrOutputWithContext(context.Background())
-}
-
-func (i *consumerBasicAuthPtrType) ToConsumerBasicAuthPtrOutputWithContext(ctx context.Context) ConsumerBasicAuthPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConsumerBasicAuthPtrOutput)
 }
 
 // ConsumerBasicAuthArrayInput is an input type that accepts ConsumerBasicAuthArray and ConsumerBasicAuthArrayOutput values.
@@ -258,7 +229,7 @@ func (i ConsumerBasicAuthMap) ToConsumerBasicAuthMapOutputWithContext(ctx contex
 type ConsumerBasicAuthOutput struct{ *pulumi.OutputState }
 
 func (ConsumerBasicAuthOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConsumerBasicAuth)(nil))
+	return reflect.TypeOf((**ConsumerBasicAuth)(nil)).Elem()
 }
 
 func (o ConsumerBasicAuthOutput) ToConsumerBasicAuthOutput() ConsumerBasicAuthOutput {
@@ -269,44 +240,10 @@ func (o ConsumerBasicAuthOutput) ToConsumerBasicAuthOutputWithContext(ctx contex
 	return o
 }
 
-func (o ConsumerBasicAuthOutput) ToConsumerBasicAuthPtrOutput() ConsumerBasicAuthPtrOutput {
-	return o.ToConsumerBasicAuthPtrOutputWithContext(context.Background())
-}
-
-func (o ConsumerBasicAuthOutput) ToConsumerBasicAuthPtrOutputWithContext(ctx context.Context) ConsumerBasicAuthPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConsumerBasicAuth) *ConsumerBasicAuth {
-		return &v
-	}).(ConsumerBasicAuthPtrOutput)
-}
-
-type ConsumerBasicAuthPtrOutput struct{ *pulumi.OutputState }
-
-func (ConsumerBasicAuthPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ConsumerBasicAuth)(nil))
-}
-
-func (o ConsumerBasicAuthPtrOutput) ToConsumerBasicAuthPtrOutput() ConsumerBasicAuthPtrOutput {
-	return o
-}
-
-func (o ConsumerBasicAuthPtrOutput) ToConsumerBasicAuthPtrOutputWithContext(ctx context.Context) ConsumerBasicAuthPtrOutput {
-	return o
-}
-
-func (o ConsumerBasicAuthPtrOutput) Elem() ConsumerBasicAuthOutput {
-	return o.ApplyT(func(v *ConsumerBasicAuth) ConsumerBasicAuth {
-		if v != nil {
-			return *v
-		}
-		var ret ConsumerBasicAuth
-		return ret
-	}).(ConsumerBasicAuthOutput)
-}
-
 type ConsumerBasicAuthArrayOutput struct{ *pulumi.OutputState }
 
 func (ConsumerBasicAuthArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ConsumerBasicAuth)(nil))
+	return reflect.TypeOf((*[]*ConsumerBasicAuth)(nil)).Elem()
 }
 
 func (o ConsumerBasicAuthArrayOutput) ToConsumerBasicAuthArrayOutput() ConsumerBasicAuthArrayOutput {
@@ -318,15 +255,15 @@ func (o ConsumerBasicAuthArrayOutput) ToConsumerBasicAuthArrayOutputWithContext(
 }
 
 func (o ConsumerBasicAuthArrayOutput) Index(i pulumi.IntInput) ConsumerBasicAuthOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConsumerBasicAuth {
-		return vs[0].([]ConsumerBasicAuth)[vs[1].(int)]
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ConsumerBasicAuth {
+		return vs[0].([]*ConsumerBasicAuth)[vs[1].(int)]
 	}).(ConsumerBasicAuthOutput)
 }
 
 type ConsumerBasicAuthMapOutput struct{ *pulumi.OutputState }
 
 func (ConsumerBasicAuthMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]ConsumerBasicAuth)(nil))
+	return reflect.TypeOf((*map[string]*ConsumerBasicAuth)(nil)).Elem()
 }
 
 func (o ConsumerBasicAuthMapOutput) ToConsumerBasicAuthMapOutput() ConsumerBasicAuthMapOutput {
@@ -338,18 +275,16 @@ func (o ConsumerBasicAuthMapOutput) ToConsumerBasicAuthMapOutputWithContext(ctx 
 }
 
 func (o ConsumerBasicAuthMapOutput) MapIndex(k pulumi.StringInput) ConsumerBasicAuthOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) ConsumerBasicAuth {
-		return vs[0].(map[string]ConsumerBasicAuth)[vs[1].(string)]
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *ConsumerBasicAuth {
+		return vs[0].(map[string]*ConsumerBasicAuth)[vs[1].(string)]
 	}).(ConsumerBasicAuthOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerBasicAuthInput)(nil)).Elem(), &ConsumerBasicAuth{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerBasicAuthPtrInput)(nil)).Elem(), &ConsumerBasicAuth{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerBasicAuthArrayInput)(nil)).Elem(), ConsumerBasicAuthArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConsumerBasicAuthMapInput)(nil)).Elem(), ConsumerBasicAuthMap{})
 	pulumi.RegisterOutputType(ConsumerBasicAuthOutput{})
-	pulumi.RegisterOutputType(ConsumerBasicAuthPtrOutput{})
 	pulumi.RegisterOutputType(ConsumerBasicAuthArrayOutput{})
 	pulumi.RegisterOutputType(ConsumerBasicAuthMapOutput{})
 }

@@ -96,22 +96,6 @@ namespace Pulumi.Kong
     /// 
     /// }
     /// ```
-    /// ## Argument reference
-    /// 
-    /// * `name` - (Required) Service name
-    /// * `protocol` - (Required) Protocol to use
-    /// * `host` - (Optional) Host to map to
-    /// * `port` - (Optional, int) Port to map to. Default: 80
-    /// * `path` - (Optional) Path to map to
-    /// * `retries` - (Optional, int) Number of retries. Default: 5
-    /// * `connect_timeout` - (Optional, int) Connection timeout. Default(ms): 60000
-    /// * `write_timeout` - (Optional, int) Write timout. Default(ms): 60000
-    /// * `read_timeout` - (Optional, int) Read timeout. Default(ms): 60000
-    /// * `tags` - (Optional) A list of strings associated with the Service for grouping and filtering.
-    /// * `client_certificate_id` - (Optional) ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
-    /// * `tls_verify` - (Optional) Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
-    /// * `tls_verify_depth` - (Optional) Maximum depth of chain while verifying Upstream server’s TLS certificate.
-    /// * `ca_certificate_ids` - (Optional) A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
     /// 
     /// ## Import
     /// 
@@ -124,45 +108,87 @@ namespace Pulumi.Kong
     [KongResourceType("kong:index/service:Service")]
     public partial class Service : Pulumi.CustomResource
     {
+        /// <summary>
+        /// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        /// </summary>
         [Output("caCertificateIds")]
         public Output<ImmutableArray<string>> CaCertificateIds { get; private set; } = null!;
 
+        /// <summary>
+        /// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
+        /// </summary>
         [Output("clientCertificateId")]
         public Output<string?> ClientCertificateId { get; private set; } = null!;
 
+        /// <summary>
+        /// Connection timeout. Default(ms): 60000
+        /// </summary>
         [Output("connectTimeout")]
         public Output<int?> ConnectTimeout { get; private set; } = null!;
 
+        /// <summary>
+        /// Host to map to
+        /// </summary>
         [Output("host")]
         public Output<string?> Host { get; private set; } = null!;
 
+        /// <summary>
+        /// Service name
+        /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// Path to map to
+        /// </summary>
         [Output("path")]
         public Output<string?> Path { get; private set; } = null!;
 
+        /// <summary>
+        /// Port to map to. Default: 80
+        /// </summary>
         [Output("port")]
         public Output<int?> Port { get; private set; } = null!;
 
+        /// <summary>
+        /// Protocol to use
+        /// </summary>
         [Output("protocol")]
         public Output<string> Protocol { get; private set; } = null!;
 
+        /// <summary>
+        /// Read timeout. Default(ms): 60000
+        /// </summary>
         [Output("readTimeout")]
         public Output<int?> ReadTimeout { get; private set; } = null!;
 
+        /// <summary>
+        /// Number of retries. Default: 5
+        /// </summary>
         [Output("retries")]
         public Output<int?> Retries { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of strings associated with the Service for grouping and filtering.
+        /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
+        /// <summary>
+        /// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        /// </summary>
         [Output("tlsVerify")]
         public Output<bool?> TlsVerify { get; private set; } = null!;
 
+        /// <summary>
+        /// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        /// </summary>
         [Output("tlsVerifyDepth")]
         public Output<int?> TlsVerifyDepth { get; private set; } = null!;
 
+        /// <summary>
+        /// Write timout. Default(ms): 60000
+        /// </summary>
         [Output("writeTimeout")]
         public Output<int?> WriteTimeout { get; private set; } = null!;
 
@@ -214,53 +240,97 @@ namespace Pulumi.Kong
     {
         [Input("caCertificateIds")]
         private InputList<string>? _caCertificateIds;
+
+        /// <summary>
+        /// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        /// </summary>
         public InputList<string> CaCertificateIds
         {
             get => _caCertificateIds ?? (_caCertificateIds = new InputList<string>());
             set => _caCertificateIds = value;
         }
 
+        /// <summary>
+        /// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
+        /// </summary>
         [Input("clientCertificateId")]
         public Input<string>? ClientCertificateId { get; set; }
 
+        /// <summary>
+        /// Connection timeout. Default(ms): 60000
+        /// </summary>
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
 
+        /// <summary>
+        /// Host to map to
+        /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
 
+        /// <summary>
+        /// Service name
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Path to map to
+        /// </summary>
         [Input("path")]
         public Input<string>? Path { get; set; }
 
+        /// <summary>
+        /// Port to map to. Default: 80
+        /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 
+        /// <summary>
+        /// Protocol to use
+        /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
 
+        /// <summary>
+        /// Read timeout. Default(ms): 60000
+        /// </summary>
         [Input("readTimeout")]
         public Input<int>? ReadTimeout { get; set; }
 
+        /// <summary>
+        /// Number of retries. Default: 5
+        /// </summary>
         [Input("retries")]
         public Input<int>? Retries { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Service for grouping and filtering.
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
         }
 
+        /// <summary>
+        /// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        /// </summary>
         [Input("tlsVerify")]
         public Input<bool>? TlsVerify { get; set; }
 
+        /// <summary>
+        /// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        /// </summary>
         [Input("tlsVerifyDepth")]
         public Input<int>? TlsVerifyDepth { get; set; }
 
+        /// <summary>
+        /// Write timout. Default(ms): 60000
+        /// </summary>
         [Input("writeTimeout")]
         public Input<int>? WriteTimeout { get; set; }
 
@@ -273,53 +343,97 @@ namespace Pulumi.Kong
     {
         [Input("caCertificateIds")]
         private InputList<string>? _caCertificateIds;
+
+        /// <summary>
+        /// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+        /// </summary>
         public InputList<string> CaCertificateIds
         {
             get => _caCertificateIds ?? (_caCertificateIds = new InputList<string>());
             set => _caCertificateIds = value;
         }
 
+        /// <summary>
+        /// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
+        /// </summary>
         [Input("clientCertificateId")]
         public Input<string>? ClientCertificateId { get; set; }
 
+        /// <summary>
+        /// Connection timeout. Default(ms): 60000
+        /// </summary>
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
 
+        /// <summary>
+        /// Host to map to
+        /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
 
+        /// <summary>
+        /// Service name
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Path to map to
+        /// </summary>
         [Input("path")]
         public Input<string>? Path { get; set; }
 
+        /// <summary>
+        /// Port to map to. Default: 80
+        /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 
+        /// <summary>
+        /// Protocol to use
+        /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
+        /// <summary>
+        /// Read timeout. Default(ms): 60000
+        /// </summary>
         [Input("readTimeout")]
         public Input<int>? ReadTimeout { get; set; }
 
+        /// <summary>
+        /// Number of retries. Default: 5
+        /// </summary>
         [Input("retries")]
         public Input<int>? Retries { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
+
+        /// <summary>
+        /// A list of strings associated with the Service for grouping and filtering.
+        /// </summary>
         public InputList<string> Tags
         {
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
         }
 
+        /// <summary>
+        /// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+        /// </summary>
         [Input("tlsVerify")]
         public Input<bool>? TlsVerify { get; set; }
 
+        /// <summary>
+        /// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+        /// </summary>
         [Input("tlsVerifyDepth")]
         public Input<int>? TlsVerifyDepth { get; set; }
 
+        /// <summary>
+        /// Write timout. Default(ms): 60000
+        /// </summary>
         [Input("writeTimeout")]
         public Input<int>? WriteTimeout { get; set; }
 

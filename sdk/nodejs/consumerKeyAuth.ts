@@ -80,26 +80,24 @@ export class ConsumerKeyAuth extends pulumi.CustomResource {
      */
     constructor(name: string, args: ConsumerKeyAuthArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerKeyAuthArgs | ConsumerKeyAuthState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerKeyAuthState | undefined;
-            inputs["consumerId"] = state ? state.consumerId : undefined;
-            inputs["key"] = state ? state.key : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
+            resourceInputs["key"] = state ? state.key : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as ConsumerKeyAuthArgs | undefined;
             if ((!args || args.consumerId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            inputs["consumerId"] = args ? args.consumerId : undefined;
-            inputs["key"] = args ? args.key : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
+            resourceInputs["key"] = args ? args.key : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(ConsumerKeyAuth.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(ConsumerKeyAuth.__pulumiType, name, resourceInputs, opts);
     }
 }
 

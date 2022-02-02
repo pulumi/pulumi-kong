@@ -189,28 +189,28 @@ export class Route extends pulumi.CustomResource {
      */
     constructor(name: string, args: RouteArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: RouteArgs | RouteState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as RouteState | undefined;
-            inputs["destinations"] = state ? state.destinations : undefined;
-            inputs["headers"] = state ? state.headers : undefined;
-            inputs["hosts"] = state ? state.hosts : undefined;
-            inputs["httpsRedirectStatusCode"] = state ? state.httpsRedirectStatusCode : undefined;
-            inputs["methods"] = state ? state.methods : undefined;
-            inputs["name"] = state ? state.name : undefined;
-            inputs["pathHandling"] = state ? state.pathHandling : undefined;
-            inputs["paths"] = state ? state.paths : undefined;
-            inputs["preserveHost"] = state ? state.preserveHost : undefined;
-            inputs["protocols"] = state ? state.protocols : undefined;
-            inputs["regexPriority"] = state ? state.regexPriority : undefined;
-            inputs["requestBuffering"] = state ? state.requestBuffering : undefined;
-            inputs["responseBuffering"] = state ? state.responseBuffering : undefined;
-            inputs["serviceId"] = state ? state.serviceId : undefined;
-            inputs["snis"] = state ? state.snis : undefined;
-            inputs["sources"] = state ? state.sources : undefined;
-            inputs["stripPath"] = state ? state.stripPath : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["destinations"] = state ? state.destinations : undefined;
+            resourceInputs["headers"] = state ? state.headers : undefined;
+            resourceInputs["hosts"] = state ? state.hosts : undefined;
+            resourceInputs["httpsRedirectStatusCode"] = state ? state.httpsRedirectStatusCode : undefined;
+            resourceInputs["methods"] = state ? state.methods : undefined;
+            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["pathHandling"] = state ? state.pathHandling : undefined;
+            resourceInputs["paths"] = state ? state.paths : undefined;
+            resourceInputs["preserveHost"] = state ? state.preserveHost : undefined;
+            resourceInputs["protocols"] = state ? state.protocols : undefined;
+            resourceInputs["regexPriority"] = state ? state.regexPriority : undefined;
+            resourceInputs["requestBuffering"] = state ? state.requestBuffering : undefined;
+            resourceInputs["responseBuffering"] = state ? state.responseBuffering : undefined;
+            resourceInputs["serviceId"] = state ? state.serviceId : undefined;
+            resourceInputs["snis"] = state ? state.snis : undefined;
+            resourceInputs["sources"] = state ? state.sources : undefined;
+            resourceInputs["stripPath"] = state ? state.stripPath : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as RouteArgs | undefined;
             if ((!args || args.protocols === undefined) && !opts.urn) {
@@ -219,29 +219,27 @@ export class Route extends pulumi.CustomResource {
             if ((!args || args.serviceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'serviceId'");
             }
-            inputs["destinations"] = args ? args.destinations : undefined;
-            inputs["headers"] = args ? args.headers : undefined;
-            inputs["hosts"] = args ? args.hosts : undefined;
-            inputs["httpsRedirectStatusCode"] = args ? args.httpsRedirectStatusCode : undefined;
-            inputs["methods"] = args ? args.methods : undefined;
-            inputs["name"] = args ? args.name : undefined;
-            inputs["pathHandling"] = args ? args.pathHandling : undefined;
-            inputs["paths"] = args ? args.paths : undefined;
-            inputs["preserveHost"] = args ? args.preserveHost : undefined;
-            inputs["protocols"] = args ? args.protocols : undefined;
-            inputs["regexPriority"] = args ? args.regexPriority : undefined;
-            inputs["requestBuffering"] = args ? args.requestBuffering : undefined;
-            inputs["responseBuffering"] = args ? args.responseBuffering : undefined;
-            inputs["serviceId"] = args ? args.serviceId : undefined;
-            inputs["snis"] = args ? args.snis : undefined;
-            inputs["sources"] = args ? args.sources : undefined;
-            inputs["stripPath"] = args ? args.stripPath : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["destinations"] = args ? args.destinations : undefined;
+            resourceInputs["headers"] = args ? args.headers : undefined;
+            resourceInputs["hosts"] = args ? args.hosts : undefined;
+            resourceInputs["httpsRedirectStatusCode"] = args ? args.httpsRedirectStatusCode : undefined;
+            resourceInputs["methods"] = args ? args.methods : undefined;
+            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["pathHandling"] = args ? args.pathHandling : undefined;
+            resourceInputs["paths"] = args ? args.paths : undefined;
+            resourceInputs["preserveHost"] = args ? args.preserveHost : undefined;
+            resourceInputs["protocols"] = args ? args.protocols : undefined;
+            resourceInputs["regexPriority"] = args ? args.regexPriority : undefined;
+            resourceInputs["requestBuffering"] = args ? args.requestBuffering : undefined;
+            resourceInputs["responseBuffering"] = args ? args.responseBuffering : undefined;
+            resourceInputs["serviceId"] = args ? args.serviceId : undefined;
+            resourceInputs["snis"] = args ? args.snis : undefined;
+            resourceInputs["sources"] = args ? args.sources : undefined;
+            resourceInputs["stripPath"] = args ? args.stripPath : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Route.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Route.__pulumiType, name, resourceInputs, opts);
     }
 }
 

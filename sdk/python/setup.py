@@ -55,6 +55,7 @@ setup(name='pulumi_kong',
       package_data={
           'pulumi_kong': [
               'py.typed',
+              'pulumi-plugin.json',
           ]
       },
       install_requires=[

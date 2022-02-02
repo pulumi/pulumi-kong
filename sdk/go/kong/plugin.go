@@ -138,16 +138,6 @@ import (
 // 	})
 // }
 // ```
-// ## Argument reference
-//
-// * `pluginName` - (Required) the name of the plugin you want to configure
-// * `consumerId` - (Optional) the consumer id you want to configure the plugin for
-// * `serviceId`  - (Optional) the service id that you want to configure the plugin for
-// * `routeId` - (Optional) the route id that you want to configure the plugin for
-// * `enabled` - (Optional) whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
-// * `configJson` - (Optional) this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
-//   page of the plugin you are configuring
-// * `tags` - (Optional) A list of strings associated with the Plugin for grouping and filtering
 //
 // ## Import
 //
@@ -160,15 +150,21 @@ type Plugin struct {
 	pulumi.CustomResourceState
 
 	ComputedConfig pulumi.StringOutput `pulumi:"computedConfig"`
-	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  pulumi.StringPtrOutput   `pulumi:"configJson"`
-	ConsumerId  pulumi.StringPtrOutput   `pulumi:"consumerId"`
-	Enabled     pulumi.BoolPtrOutput     `pulumi:"enabled"`
-	Name        pulumi.StringOutput      `pulumi:"name"`
-	RouteId     pulumi.StringPtrOutput   `pulumi:"routeId"`
-	ServiceId   pulumi.StringPtrOutput   `pulumi:"serviceId"`
-	StrictMatch pulumi.BoolPtrOutput     `pulumi:"strictMatch"`
-	Tags        pulumi.StringArrayOutput `pulumi:"tags"`
+	// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+	// page of the plugin you are configuring
+	ConfigJson pulumi.StringPtrOutput `pulumi:"configJson"`
+	// the consumer id you want to configure the plugin for
+	ConsumerId pulumi.StringPtrOutput `pulumi:"consumerId"`
+	// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+	Enabled pulumi.BoolPtrOutput `pulumi:"enabled"`
+	Name    pulumi.StringOutput  `pulumi:"name"`
+	// the route id that you want to configure the plugin for
+	RouteId pulumi.StringPtrOutput `pulumi:"routeId"`
+	// the service id that you want to configure the plugin for
+	ServiceId   pulumi.StringPtrOutput `pulumi:"serviceId"`
+	StrictMatch pulumi.BoolPtrOutput   `pulumi:"strictMatch"`
+	// A list of strings associated with the Plugin for grouping and filtering
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
 // NewPlugin registers a new resource with the given unique name, arguments, and options.
@@ -201,28 +197,40 @@ func GetPlugin(ctx *pulumi.Context,
 // Input properties used for looking up and filtering Plugin resources.
 type pluginState struct {
 	ComputedConfig *string `pulumi:"computedConfig"`
-	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  *string  `pulumi:"configJson"`
-	ConsumerId  *string  `pulumi:"consumerId"`
-	Enabled     *bool    `pulumi:"enabled"`
-	Name        *string  `pulumi:"name"`
-	RouteId     *string  `pulumi:"routeId"`
-	ServiceId   *string  `pulumi:"serviceId"`
-	StrictMatch *bool    `pulumi:"strictMatch"`
-	Tags        []string `pulumi:"tags"`
+	// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+	// page of the plugin you are configuring
+	ConfigJson *string `pulumi:"configJson"`
+	// the consumer id you want to configure the plugin for
+	ConsumerId *string `pulumi:"consumerId"`
+	// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+	Enabled *bool   `pulumi:"enabled"`
+	Name    *string `pulumi:"name"`
+	// the route id that you want to configure the plugin for
+	RouteId *string `pulumi:"routeId"`
+	// the service id that you want to configure the plugin for
+	ServiceId   *string `pulumi:"serviceId"`
+	StrictMatch *bool   `pulumi:"strictMatch"`
+	// A list of strings associated with the Plugin for grouping and filtering
+	Tags []string `pulumi:"tags"`
 }
 
 type PluginState struct {
 	ComputedConfig pulumi.StringPtrInput
-	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  pulumi.StringPtrInput
-	ConsumerId  pulumi.StringPtrInput
-	Enabled     pulumi.BoolPtrInput
-	Name        pulumi.StringPtrInput
-	RouteId     pulumi.StringPtrInput
+	// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+	// page of the plugin you are configuring
+	ConfigJson pulumi.StringPtrInput
+	// the consumer id you want to configure the plugin for
+	ConsumerId pulumi.StringPtrInput
+	// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+	Enabled pulumi.BoolPtrInput
+	Name    pulumi.StringPtrInput
+	// the route id that you want to configure the plugin for
+	RouteId pulumi.StringPtrInput
+	// the service id that you want to configure the plugin for
 	ServiceId   pulumi.StringPtrInput
 	StrictMatch pulumi.BoolPtrInput
-	Tags        pulumi.StringArrayInput
+	// A list of strings associated with the Plugin for grouping and filtering
+	Tags pulumi.StringArrayInput
 }
 
 func (PluginState) ElementType() reflect.Type {
@@ -230,28 +238,40 @@ func (PluginState) ElementType() reflect.Type {
 }
 
 type pluginArgs struct {
-	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  *string  `pulumi:"configJson"`
-	ConsumerId  *string  `pulumi:"consumerId"`
-	Enabled     *bool    `pulumi:"enabled"`
-	Name        *string  `pulumi:"name"`
-	RouteId     *string  `pulumi:"routeId"`
-	ServiceId   *string  `pulumi:"serviceId"`
-	StrictMatch *bool    `pulumi:"strictMatch"`
-	Tags        []string `pulumi:"tags"`
+	// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+	// page of the plugin you are configuring
+	ConfigJson *string `pulumi:"configJson"`
+	// the consumer id you want to configure the plugin for
+	ConsumerId *string `pulumi:"consumerId"`
+	// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+	Enabled *bool   `pulumi:"enabled"`
+	Name    *string `pulumi:"name"`
+	// the route id that you want to configure the plugin for
+	RouteId *string `pulumi:"routeId"`
+	// the service id that you want to configure the plugin for
+	ServiceId   *string `pulumi:"serviceId"`
+	StrictMatch *bool   `pulumi:"strictMatch"`
+	// A list of strings associated with the Plugin for grouping and filtering
+	Tags []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Plugin resource.
 type PluginArgs struct {
-	// plugin configuration in JSON format, configuration must be a valid JSON object.
-	ConfigJson  pulumi.StringPtrInput
-	ConsumerId  pulumi.StringPtrInput
-	Enabled     pulumi.BoolPtrInput
-	Name        pulumi.StringPtrInput
-	RouteId     pulumi.StringPtrInput
+	// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+	// page of the plugin you are configuring
+	ConfigJson pulumi.StringPtrInput
+	// the consumer id you want to configure the plugin for
+	ConsumerId pulumi.StringPtrInput
+	// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+	Enabled pulumi.BoolPtrInput
+	Name    pulumi.StringPtrInput
+	// the route id that you want to configure the plugin for
+	RouteId pulumi.StringPtrInput
+	// the service id that you want to configure the plugin for
 	ServiceId   pulumi.StringPtrInput
 	StrictMatch pulumi.BoolPtrInput
-	Tags        pulumi.StringArrayInput
+	// A list of strings associated with the Plugin for grouping and filtering
+	Tags pulumi.StringArrayInput
 }
 
 func (PluginArgs) ElementType() reflect.Type {
@@ -266,7 +286,7 @@ type PluginInput interface {
 }
 
 func (*Plugin) ElementType() reflect.Type {
-	return reflect.TypeOf((*Plugin)(nil))
+	return reflect.TypeOf((**Plugin)(nil)).Elem()
 }
 
 func (i *Plugin) ToPluginOutput() PluginOutput {
@@ -275,35 +295,6 @@ func (i *Plugin) ToPluginOutput() PluginOutput {
 
 func (i *Plugin) ToPluginOutputWithContext(ctx context.Context) PluginOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PluginOutput)
-}
-
-func (i *Plugin) ToPluginPtrOutput() PluginPtrOutput {
-	return i.ToPluginPtrOutputWithContext(context.Background())
-}
-
-func (i *Plugin) ToPluginPtrOutputWithContext(ctx context.Context) PluginPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PluginPtrOutput)
-}
-
-type PluginPtrInput interface {
-	pulumi.Input
-
-	ToPluginPtrOutput() PluginPtrOutput
-	ToPluginPtrOutputWithContext(ctx context.Context) PluginPtrOutput
-}
-
-type pluginPtrType PluginArgs
-
-func (*pluginPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**Plugin)(nil))
-}
-
-func (i *pluginPtrType) ToPluginPtrOutput() PluginPtrOutput {
-	return i.ToPluginPtrOutputWithContext(context.Background())
-}
-
-func (i *pluginPtrType) ToPluginPtrOutputWithContext(ctx context.Context) PluginPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PluginPtrOutput)
 }
 
 // PluginArrayInput is an input type that accepts PluginArray and PluginArrayOutput values.
@@ -359,7 +350,7 @@ func (i PluginMap) ToPluginMapOutputWithContext(ctx context.Context) PluginMapOu
 type PluginOutput struct{ *pulumi.OutputState }
 
 func (PluginOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Plugin)(nil))
+	return reflect.TypeOf((**Plugin)(nil)).Elem()
 }
 
 func (o PluginOutput) ToPluginOutput() PluginOutput {
@@ -370,44 +361,10 @@ func (o PluginOutput) ToPluginOutputWithContext(ctx context.Context) PluginOutpu
 	return o
 }
 
-func (o PluginOutput) ToPluginPtrOutput() PluginPtrOutput {
-	return o.ToPluginPtrOutputWithContext(context.Background())
-}
-
-func (o PluginOutput) ToPluginPtrOutputWithContext(ctx context.Context) PluginPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v Plugin) *Plugin {
-		return &v
-	}).(PluginPtrOutput)
-}
-
-type PluginPtrOutput struct{ *pulumi.OutputState }
-
-func (PluginPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**Plugin)(nil))
-}
-
-func (o PluginPtrOutput) ToPluginPtrOutput() PluginPtrOutput {
-	return o
-}
-
-func (o PluginPtrOutput) ToPluginPtrOutputWithContext(ctx context.Context) PluginPtrOutput {
-	return o
-}
-
-func (o PluginPtrOutput) Elem() PluginOutput {
-	return o.ApplyT(func(v *Plugin) Plugin {
-		if v != nil {
-			return *v
-		}
-		var ret Plugin
-		return ret
-	}).(PluginOutput)
-}
-
 type PluginArrayOutput struct{ *pulumi.OutputState }
 
 func (PluginArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Plugin)(nil))
+	return reflect.TypeOf((*[]*Plugin)(nil)).Elem()
 }
 
 func (o PluginArrayOutput) ToPluginArrayOutput() PluginArrayOutput {
@@ -419,15 +376,15 @@ func (o PluginArrayOutput) ToPluginArrayOutputWithContext(ctx context.Context) P
 }
 
 func (o PluginArrayOutput) Index(i pulumi.IntInput) PluginOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Plugin {
-		return vs[0].([]Plugin)[vs[1].(int)]
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Plugin {
+		return vs[0].([]*Plugin)[vs[1].(int)]
 	}).(PluginOutput)
 }
 
 type PluginMapOutput struct{ *pulumi.OutputState }
 
 func (PluginMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]Plugin)(nil))
+	return reflect.TypeOf((*map[string]*Plugin)(nil)).Elem()
 }
 
 func (o PluginMapOutput) ToPluginMapOutput() PluginMapOutput {
@@ -439,18 +396,16 @@ func (o PluginMapOutput) ToPluginMapOutputWithContext(ctx context.Context) Plugi
 }
 
 func (o PluginMapOutput) MapIndex(k pulumi.StringInput) PluginOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) Plugin {
-		return vs[0].(map[string]Plugin)[vs[1].(string)]
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *Plugin {
+		return vs[0].(map[string]*Plugin)[vs[1].(string)]
 	}).(PluginOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PluginInput)(nil)).Elem(), &Plugin{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PluginPtrInput)(nil)).Elem(), &Plugin{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PluginArrayInput)(nil)).Elem(), PluginArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PluginMapInput)(nil)).Elem(), PluginMap{})
 	pulumi.RegisterOutputType(PluginOutput{})
-	pulumi.RegisterOutputType(PluginPtrOutput{})
 	pulumi.RegisterOutputType(PluginArrayOutput{})
 	pulumi.RegisterOutputType(PluginMapOutput{})
 }

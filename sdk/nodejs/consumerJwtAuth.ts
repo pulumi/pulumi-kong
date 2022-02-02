@@ -96,16 +96,16 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
      */
     constructor(name: string, args: ConsumerJwtAuthArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConsumerJwtAuthArgs | ConsumerJwtAuthState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerJwtAuthState | undefined;
-            inputs["algorithm"] = state ? state.algorithm : undefined;
-            inputs["consumerId"] = state ? state.consumerId : undefined;
-            inputs["key"] = state ? state.key : undefined;
-            inputs["rsaPublicKey"] = state ? state.rsaPublicKey : undefined;
-            inputs["secret"] = state ? state.secret : undefined;
-            inputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["algorithm"] = state ? state.algorithm : undefined;
+            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
+            resourceInputs["key"] = state ? state.key : undefined;
+            resourceInputs["rsaPublicKey"] = state ? state.rsaPublicKey : undefined;
+            resourceInputs["secret"] = state ? state.secret : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as ConsumerJwtAuthArgs | undefined;
             if ((!args || args.consumerId === undefined) && !opts.urn) {
@@ -114,17 +114,15 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
             if ((!args || args.rsaPublicKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'rsaPublicKey'");
             }
-            inputs["algorithm"] = args ? args.algorithm : undefined;
-            inputs["consumerId"] = args ? args.consumerId : undefined;
-            inputs["key"] = args ? args.key : undefined;
-            inputs["rsaPublicKey"] = args ? args.rsaPublicKey : undefined;
-            inputs["secret"] = args ? args.secret : undefined;
-            inputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["algorithm"] = args ? args.algorithm : undefined;
+            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
+            resourceInputs["key"] = args ? args.key : undefined;
+            resourceInputs["rsaPublicKey"] = args ? args.rsaPublicKey : undefined;
+            resourceInputs["secret"] = args ? args.secret : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(ConsumerJwtAuth.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(ConsumerJwtAuth.__pulumiType, name, resourceInputs, opts);
     }
 }
 
