@@ -11,6 +11,7 @@ export * from "./consumerAcl";
 export * from "./consumerBasicAuth";
 export * from "./consumerJwtAuth";
 export * from "./consumerKeyAuth";
+export * from "./consumerOauth2";
 export * from "./plugin";
 export * from "./provider";
 export * from "./route";
@@ -34,6 +35,7 @@ import { ConsumerAcl } from "./consumerAcl";
 import { ConsumerBasicAuth } from "./consumerBasicAuth";
 import { ConsumerJwtAuth } from "./consumerJwtAuth";
 import { ConsumerKeyAuth } from "./consumerKeyAuth";
+import { ConsumerOauth2 } from "./consumerOauth2";
 import { Plugin } from "./plugin";
 import { Route } from "./route";
 import { Service } from "./service";
@@ -56,6 +58,8 @@ const _module = {
                 return new ConsumerJwtAuth(name, <any>undefined, { urn })
             case "kong:index/consumerKeyAuth:ConsumerKeyAuth":
                 return new ConsumerKeyAuth(name, <any>undefined, { urn })
+            case "kong:index/consumerOauth2:ConsumerOauth2":
+                return new ConsumerOauth2(name, <any>undefined, { urn })
             case "kong:index/plugin:Plugin":
                 return new Plugin(name, <any>undefined, { urn })
             case "kong:index/route:Route":
@@ -77,6 +81,7 @@ pulumi.runtime.registerResourceModule("kong", "index/consumerAcl", _module)
 pulumi.runtime.registerResourceModule("kong", "index/consumerBasicAuth", _module)
 pulumi.runtime.registerResourceModule("kong", "index/consumerJwtAuth", _module)
 pulumi.runtime.registerResourceModule("kong", "index/consumerKeyAuth", _module)
+pulumi.runtime.registerResourceModule("kong", "index/consumerOauth2", _module)
 pulumi.runtime.registerResourceModule("kong", "index/plugin", _module)
 pulumi.runtime.registerResourceModule("kong", "index/route", _module)
 pulumi.runtime.registerResourceModule("kong", "index/service", _module)

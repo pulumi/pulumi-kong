@@ -32,6 +32,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConsumerJwtAuth{}
 	case "kong:index/consumerKeyAuth:ConsumerKeyAuth":
 		r = &ConsumerKeyAuth{}
+	case "kong:index/consumerOauth2:ConsumerOauth2":
+		r = &ConsumerOauth2{}
 	case "kong:index/plugin:Plugin":
 		r = &Plugin{}
 	case "kong:index/route:Route":
@@ -101,6 +103,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"kong",
 		"index/consumerKeyAuth",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"kong",
+		"index/consumerOauth2",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

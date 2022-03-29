@@ -999,6 +999,130 @@
                 "type": "object"
             }
         },
+        "kong:index/consumerOauth2:ConsumerOauth2": {
+            "description": "## # kong.ConsumerOauth2\n\nResource that allows you to configure the OAuth2 plugin credentials for a consumer.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst myConsumer = new kong.Consumer(\"my_consumer\", {\n    customId: \"123\",\n    username: \"User1\",\n});\nconst oauth2Plugin = new kong.Plugin(\"oauth2_plugin\", {\n    configJson: `\t{\n\t\t\"global_credentials\": true,\n\t\t\"enable_password_grant\": true,\n\t\t\"token_expiration\": 180,\n\t\t\"refresh_token_ttl\": 180,\n\t\t\"provision_key\": \"testprovisionkey\"\n\t}\n`,\n});\nconst consumerOauth2 = new kong.ConsumerOauth2(\"consumer_oauth2\", {\n    clientId: \"client_id\",\n    clientSecret: \"client_secret\",\n    consumerId: myConsumer.id,\n    redirectUris: [\n        \"https://asdf.com/callback\",\n        \"https://test.cl/callback\",\n    ],\n    tags: [\"myTag\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nmy_consumer = kong.Consumer(\"myConsumer\",\n    custom_id=\"123\",\n    username=\"User1\")\noauth2_plugin = kong.Plugin(\"oauth2Plugin\", config_json=\"\"\"\t{\n\t\t\"global_credentials\": true,\n\t\t\"enable_password_grant\": true,\n\t\t\"token_expiration\": 180,\n\t\t\"refresh_token_ttl\": 180,\n\t\t\"provision_key\": \"testprovisionkey\"\n\t}\n\n\"\"\")\nconsumer_oauth2 = kong.ConsumerOauth2(\"consumerOauth2\",\n    client_id=\"client_id\",\n    client_secret=\"client_secret\",\n    consumer_id=my_consumer.id,\n    redirect_uris=[\n        \"https://asdf.com/callback\",\n        \"https://test.cl/callback\",\n    ],\n    tags=[\"myTag\"])\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var myConsumer = new Kong.Consumer(\"myConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"123\",\n            Username = \"User1\",\n        });\n        var oauth2Plugin = new Kong.Plugin(\"oauth2Plugin\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"global_credentials\"\": true,\n\t\t\"\"enable_password_grant\"\": true,\n\t\t\"\"token_expiration\"\": 180,\n\t\t\"\"refresh_token_ttl\"\": 180,\n\t\t\"\"provision_key\"\": \"\"testprovisionkey\"\"\n\t}\n\n\",\n        });\n        var consumerOauth2 = new Kong.ConsumerOauth2(\"consumerOauth2\", new Kong.ConsumerOauth2Args\n        {\n            ClientId = \"client_id\",\n            ClientSecret = \"client_secret\",\n            ConsumerId = myConsumer.Id,\n            RedirectUris = \n            {\n                \"https://asdf.com/callback\",\n                \"https://test.cl/callback\",\n            },\n            Tags = \n            {\n                \"myTag\",\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyConsumer, err := kong.NewConsumer(ctx, \"myConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"123\"),\n\t\t\tUsername: pulumi.String(\"User1\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"oauth2Plugin\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"global_credentials\\\": true,\\n\", \"\t\t\\\"enable_password_grant\\\": true,\\n\", \"\t\t\\\"token_expiration\\\": 180,\\n\", \"\t\t\\\"refresh_token_ttl\\\": 180,\\n\", \"\t\t\\\"provision_key\\\": \\\"testprovisionkey\\\"\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewConsumerOauth2(ctx, \"consumerOauth2\", \u0026kong.ConsumerOauth2Args{\n\t\t\tClientId:     pulumi.String(\"client_id\"),\n\t\t\tClientSecret: pulumi.String(\"client_secret\"),\n\t\t\tConsumerId:   myConsumer.ID(),\n\t\t\tRedirectUris: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"https://asdf.com/callback\"),\n\t\t\t\tpulumi.String(\"https://test.cl/callback\"),\n\t\t\t},\n\t\t\tTags: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"myTag\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "clientId": {
+                    "type": "string",
+                    "description": "Unique oauth2 client id. If not set, the oauth2 plugin will generate one\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "Unique oauth2 client secret. If not set, the oauth2 plugin will generate one\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "The id of the consumer to be configured with oauth2.\n"
+                },
+                "hashSecret": {
+                    "type": "boolean",
+                    "description": "A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name associated with the credential.\n"
+                },
+                "redirectUris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings associated with the consumer for grouping and filtering.\n"
+                }
+            },
+            "required": [
+                "consumerId",
+                "name",
+                "redirectUris"
+            ],
+            "inputProperties": {
+                "clientId": {
+                    "type": "string",
+                    "description": "Unique oauth2 client id. If not set, the oauth2 plugin will generate one\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "Unique oauth2 client secret. If not set, the oauth2 plugin will generate one\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "The id of the consumer to be configured with oauth2.\n"
+                },
+                "hashSecret": {
+                    "type": "boolean",
+                    "description": "A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name associated with the credential.\n"
+                },
+                "redirectUris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings associated with the consumer for grouping and filtering.\n"
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "redirectUris"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConsumerOauth2 resources.\n",
+                "properties": {
+                    "clientId": {
+                        "type": "string",
+                        "description": "Unique oauth2 client id. If not set, the oauth2 plugin will generate one\n"
+                    },
+                    "clientSecret": {
+                        "type": "string",
+                        "description": "Unique oauth2 client secret. If not set, the oauth2 plugin will generate one\n"
+                    },
+                    "consumerId": {
+                        "type": "string",
+                        "description": "The id of the consumer to be configured with oauth2.\n"
+                    },
+                    "hashSecret": {
+                        "type": "boolean",
+                        "description": "A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name associated with the credential.\n"
+                    },
+                    "redirectUris": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of strings associated with the consumer for grouping and filtering.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "kong:index/plugin:Plugin": {
             "description": "## # kong.Plugin\n\nThe plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).\nThe `config_json` is passed through to the plugin to configure it as is.  \n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nrate_limit = kong.Plugin(\"rateLimit\", config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\")\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\nTo apply a plugin to a consumer use the `consumer_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst pluginConsumer = new kong.Consumer(\"plugin_consumer\", {\n    customId: \"567\",\n    username: \"PluginUser\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n`,\n    consumerId: pluginConsumer.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nplugin_consumer = kong.Consumer(\"pluginConsumer\",\n    custom_id=\"567\",\n    username=\"PluginUser\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 5,\n\t\t\"hour\" : 1000\n\t}\n\n\"\"\",\n    consumer_id=plugin_consumer.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var pluginConsumer = new Kong.Consumer(\"pluginConsumer\", new Kong.ConsumerArgs\n        {\n            CustomId = \"567\",\n            Username = \"PluginUser\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 5,\n\t\t\"\"hour\"\" : 1000\n\t}\n\n\",\n            ConsumerId = pluginConsumer.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpluginConsumer, err := kong.NewConsumer(ctx, \"pluginConsumer\", \u0026kong.ConsumerArgs{\n\t\t\tCustomId: pulumi.String(\"567\"),\n\t\t\tUsername: pulumi.String(\"PluginUser\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 5,\\n\", \"\t\t\\\"hour\\\" : 1000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tConsumerId: pluginConsumer.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a service use the `service_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n`,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 10,\n\t\t\"hour\" : 2000\n\t}\n\n\"\"\",\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 10,\n\t\t\"\"hour\"\" : 2000\n\t}\n\n\",\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 10,\\n\", \"\t\t\\\"hour\\\" : 2000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n\nTo apply a plugin to a route use the `route_id` property, for example:\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as kong from \"@pulumi/kong\";\n\nconst service = new kong.Service(\"service\", {\n    host: \"test.org\",\n    protocol: \"http\",\n});\nconst rateLimit = new kong.Plugin(\"rate_limit\", {\n    configJson: `\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n`,\n    enabled: true,\n    serviceId: service.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_kong as kong\n\nservice = kong.Service(\"service\",\n    host=\"test.org\",\n    protocol=\"http\")\nrate_limit = kong.Plugin(\"rateLimit\",\n    config_json=\"\"\"\t{\n\t\t\"second\": 11,\n\t\t\"hour\" : 4000\n\t}\n\n\"\"\",\n    enabled=True,\n    service_id=service.id)\n```\n```csharp\nusing Pulumi;\nusing Kong = Pulumi.Kong;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var service = new Kong.Service(\"service\", new Kong.ServiceArgs\n        {\n            Host = \"test.org\",\n            Protocol = \"http\",\n        });\n        var rateLimit = new Kong.Plugin(\"rateLimit\", new Kong.PluginArgs\n        {\n            ConfigJson = @\"\t{\n\t\t\"\"second\"\": 11,\n\t\t\"\"hour\"\" : 4000\n\t}\n\n\",\n            Enabled = true,\n            ServiceId = service.Id,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/pulumi/pulumi-kong/sdk/v4/go/kong\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tservice, err := kong.NewService(ctx, \"service\", \u0026kong.ServiceArgs{\n\t\t\tHost:     pulumi.String(\"test.org\"),\n\t\t\tProtocol: pulumi.String(\"http\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = kong.NewPlugin(ctx, \"rateLimit\", \u0026kong.PluginArgs{\n\t\t\tConfigJson: pulumi.String(fmt.Sprintf(\"%v%v%v%v%v\", \"\t{\\n\", \"\t\t\\\"second\\\": 11,\\n\", \"\t\t\\\"hour\\\" : 4000\\n\", \"\t}\\n\", \"\\n\")),\n\t\t\tEnabled:   pulumi.Bool(true),\n\t\t\tServiceId: service.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTo import a plugin\n\n```sh\n $ pulumi import kong:index/plugin:Plugin \u003cplugin_identifier\u003e \u003cplugin_id\u003e\n```\n\n ",
             "properties": {
