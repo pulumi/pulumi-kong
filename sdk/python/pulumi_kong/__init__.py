@@ -11,6 +11,7 @@ from .consumer_acl import *
 from .consumer_basic_auth import *
 from .consumer_jwt_auth import *
 from .consumer_key_auth import *
+from .consumer_oauth2 import *
 from .plugin import *
 from .provider import *
 from .route import *
@@ -76,6 +77,14 @@ _utilities.register(
   "fqn": "pulumi_kong",
   "classes": {
    "kong:index/consumerKeyAuth:ConsumerKeyAuth": "ConsumerKeyAuth"
+  }
+ },
+ {
+  "pkg": "kong",
+  "mod": "index/consumerOauth2",
+  "fqn": "pulumi_kong",
+  "classes": {
+   "kong:index/consumerOauth2:ConsumerOauth2": "ConsumerOauth2"
   }
  },
  {

@@ -21,6 +21,7 @@
         "consumerBasicAuth.ts",
         "consumerJwtAuth.ts",
         "consumerKeyAuth.ts",
+        "consumerOauth2.ts",
         "index.ts",
         "plugin.ts",
         "provider.ts",
