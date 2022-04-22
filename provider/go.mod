@@ -4,8 +4,8 @@ go 1.16
 
 require (
 	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20220328204855-9e50bd93437f
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.20.0
-	github.com/pulumi/pulumi/sdk/v3 v3.27.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.21.0
+	github.com/pulumi/pulumi/sdk/v3 v3.30.0
 )
 
 replace (
