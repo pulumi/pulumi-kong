@@ -21,40 +21,43 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-// 			CustomId: pulumi.String("123"),
-// 			Username: pulumi.String("User1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "jwtPlugin", &kong.PluginArgs{
-// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v", "	{\n", "		\"claims_to_verify\": [\"exp\"]\n", "	}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewConsumerJwtAuth(ctx, "consumerJwtConfig", &kong.ConsumerJwtAuthArgs{
-// 			Algorithm:    pulumi.String("HS256"),
-// 			ConsumerId:   myConsumer.ID(),
-// 			Key:          pulumi.String("my_key"),
-// 			RsaPublicKey: pulumi.String("foo"),
-// 			Secret:       pulumi.String("my_secret"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
+//				CustomId: pulumi.String("123"),
+//				Username: pulumi.String("User1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "jwtPlugin", &kong.PluginArgs{
+//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v", "	{\n", "		\"claims_to_verify\": [\"exp\"]\n", "	}\n", "\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewConsumerJwtAuth(ctx, "consumerJwtConfig", &kong.ConsumerJwtAuthArgs{
+//				Algorithm:    pulumi.String("HS256"),
+//				ConsumerId:   myConsumer.ID(),
+//				Key:          pulumi.String("my_key"),
+//				RsaPublicKey: pulumi.String("foo"),
+//				Secret:       pulumi.String("my_secret"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConsumerJwtAuth struct {
 	pulumi.CustomResourceState
@@ -198,7 +201,7 @@ func (i *ConsumerJwtAuth) ToConsumerJwtAuthOutputWithContext(ctx context.Context
 // ConsumerJwtAuthArrayInput is an input type that accepts ConsumerJwtAuthArray and ConsumerJwtAuthArrayOutput values.
 // You can construct a concrete instance of `ConsumerJwtAuthArrayInput` via:
 //
-//          ConsumerJwtAuthArray{ ConsumerJwtAuthArgs{...} }
+//	ConsumerJwtAuthArray{ ConsumerJwtAuthArgs{...} }
 type ConsumerJwtAuthArrayInput interface {
 	pulumi.Input
 
@@ -223,7 +226,7 @@ func (i ConsumerJwtAuthArray) ToConsumerJwtAuthArrayOutputWithContext(ctx contex
 // ConsumerJwtAuthMapInput is an input type that accepts ConsumerJwtAuthMap and ConsumerJwtAuthMapOutput values.
 // You can construct a concrete instance of `ConsumerJwtAuthMapInput` via:
 //
-//          ConsumerJwtAuthMap{ "key": ConsumerJwtAuthArgs{...} }
+//	ConsumerJwtAuthMap{ "key": ConsumerJwtAuthArgs{...} }
 type ConsumerJwtAuthMapInput interface {
 	pulumi.Input
 

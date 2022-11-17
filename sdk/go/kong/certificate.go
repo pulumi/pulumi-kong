@@ -21,37 +21,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
-// 			Certificate: pulumi.String("public key --- 123 ----"),
-// 			PrivateKey:  pulumi.String("private key --- 456 ----"),
-// 			Snis: pulumi.StringArray{
-// 				pulumi.String("foo.com"),
-// 				pulumi.String("bar.com"),
-// 			},
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("myTag"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
+//				Certificate: pulumi.String("public key --- 123 ----"),
+//				PrivateKey:  pulumi.String("private key --- 456 ----"),
+//				Snis: pulumi.StringArray{
+//					pulumi.String("foo.com"),
+//					pulumi.String("bar.com"),
+//				},
+//				Tags: pulumi.StringArray{
+//					pulumi.String("myTag"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// To import a certificate
+// # To import a certificate
 //
 // ```sh
-//  $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
+//
+//	$ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
+//
 // ```
 type Certificate struct {
 	pulumi.CustomResourceState
@@ -167,7 +172,7 @@ func (i *Certificate) ToCertificateOutputWithContext(ctx context.Context) Certif
 // CertificateArrayInput is an input type that accepts CertificateArray and CertificateArrayOutput values.
 // You can construct a concrete instance of `CertificateArrayInput` via:
 //
-//          CertificateArray{ CertificateArgs{...} }
+//	CertificateArray{ CertificateArgs{...} }
 type CertificateArrayInput interface {
 	pulumi.Input
 
@@ -192,7 +197,7 @@ func (i CertificateArray) ToCertificateArrayOutputWithContext(ctx context.Contex
 // CertificateMapInput is an input type that accepts CertificateMap and CertificateMapOutput values.
 // You can construct a concrete instance of `CertificateMapInput` via:
 //
-//          CertificateMap{ "key": CertificateArgs{...} }
+//	CertificateMap{ "key": CertificateArgs{...} }
 type CertificateMapInput interface {
 	pulumi.Input
 

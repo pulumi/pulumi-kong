@@ -21,38 +21,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-// 			CustomId: pulumi.String("123"),
-// 			Username: pulumi.String("User1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "basicAuthPlugin", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewConsumerBasicAuth(ctx, "consumerBasicAuth", &kong.ConsumerBasicAuthArgs{
-// 			ConsumerId: myConsumer.ID(),
-// 			Password:   pulumi.String("bar_updated"),
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("myTag"),
-// 				pulumi.String("anotherTag"),
-// 			},
-// 			Username: pulumi.String("foo_updated"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
+//				CustomId: pulumi.String("123"),
+//				Username: pulumi.String("User1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "basicAuthPlugin", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewConsumerBasicAuth(ctx, "consumerBasicAuth", &kong.ConsumerBasicAuthArgs{
+//				ConsumerId: myConsumer.ID(),
+//				Password:   pulumi.String("bar_updated"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("myTag"),
+//					pulumi.String("anotherTag"),
+//				},
+//				Username: pulumi.String("foo_updated"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConsumerBasicAuth struct {
 	pulumi.CustomResourceState
@@ -179,7 +182,7 @@ func (i *ConsumerBasicAuth) ToConsumerBasicAuthOutputWithContext(ctx context.Con
 // ConsumerBasicAuthArrayInput is an input type that accepts ConsumerBasicAuthArray and ConsumerBasicAuthArrayOutput values.
 // You can construct a concrete instance of `ConsumerBasicAuthArrayInput` via:
 //
-//          ConsumerBasicAuthArray{ ConsumerBasicAuthArgs{...} }
+//	ConsumerBasicAuthArray{ ConsumerBasicAuthArgs{...} }
 type ConsumerBasicAuthArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +207,7 @@ func (i ConsumerBasicAuthArray) ToConsumerBasicAuthArrayOutputWithContext(ctx co
 // ConsumerBasicAuthMapInput is an input type that accepts ConsumerBasicAuthMap and ConsumerBasicAuthMapOutput values.
 // You can construct a concrete instance of `ConsumerBasicAuthMapInput` via:
 //
-//          ConsumerBasicAuthMap{ "key": ConsumerBasicAuthArgs{...} }
+//	ConsumerBasicAuthMap{ "key": ConsumerBasicAuthArgs{...} }
 type ConsumerBasicAuthMapInput interface {
 	pulumi.Input
 
