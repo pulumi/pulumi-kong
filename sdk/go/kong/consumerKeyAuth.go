@@ -21,37 +21,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-// 			Username: pulumi.String("User1"),
-// 			CustomId: pulumi.String("123"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "keyAuthPlugin", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewConsumerKeyAuth(ctx, "consumerKeyAuth", &kong.ConsumerKeyAuthArgs{
-// 			ConsumerId: myConsumer.ID(),
-// 			Key:        pulumi.String("secret"),
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("myTag"),
-// 				pulumi.String("anotherTag"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
+//				Username: pulumi.String("User1"),
+//				CustomId: pulumi.String("123"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "keyAuthPlugin", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewConsumerKeyAuth(ctx, "consumerKeyAuth", &kong.ConsumerKeyAuthArgs{
+//				ConsumerId: myConsumer.ID(),
+//				Key:        pulumi.String("secret"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("myTag"),
+//					pulumi.String("anotherTag"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConsumerKeyAuth struct {
 	pulumi.CustomResourceState
@@ -162,7 +165,7 @@ func (i *ConsumerKeyAuth) ToConsumerKeyAuthOutputWithContext(ctx context.Context
 // ConsumerKeyAuthArrayInput is an input type that accepts ConsumerKeyAuthArray and ConsumerKeyAuthArrayOutput values.
 // You can construct a concrete instance of `ConsumerKeyAuthArrayInput` via:
 //
-//          ConsumerKeyAuthArray{ ConsumerKeyAuthArgs{...} }
+//	ConsumerKeyAuthArray{ ConsumerKeyAuthArgs{...} }
 type ConsumerKeyAuthArrayInput interface {
 	pulumi.Input
 
@@ -187,7 +190,7 @@ func (i ConsumerKeyAuthArray) ToConsumerKeyAuthArrayOutputWithContext(ctx contex
 // ConsumerKeyAuthMapInput is an input type that accepts ConsumerKeyAuthMap and ConsumerKeyAuthMapOutput values.
 // You can construct a concrete instance of `ConsumerKeyAuthMapInput` via:
 //
-//          ConsumerKeyAuthMap{ "key": ConsumerKeyAuthArgs{...} }
+//	ConsumerKeyAuthMap{ "key": ConsumerKeyAuthArgs{...} }
 type ConsumerKeyAuthMapInput interface {
 	pulumi.Input
 

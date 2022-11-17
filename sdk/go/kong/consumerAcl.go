@@ -21,41 +21,44 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-// 			CustomId: pulumi.String("123"),
-// 			Username: pulumi.String("User1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "aclPlugin", &kong.PluginArgs{
-// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v", "	{\n", "		\"allow\": [\"group1\", \"group2\"]\n", "	}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewConsumerAcl(ctx, "consumerAcl", &kong.ConsumerAclArgs{
-// 			ConsumerId: myConsumer.ID(),
-// 			Group:      pulumi.String("group2"),
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("myTag"),
-// 				pulumi.String("otherTag"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
+//				CustomId: pulumi.String("123"),
+//				Username: pulumi.String("User1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "aclPlugin", &kong.PluginArgs{
+//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v", "	{\n", "		\"allow\": [\"group1\", \"group2\"]\n", "	}\n", "\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewConsumerAcl(ctx, "consumerAcl", &kong.ConsumerAclArgs{
+//				ConsumerId: myConsumer.ID(),
+//				Group:      pulumi.String("group2"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("myTag"),
+//					pulumi.String("otherTag"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConsumerAcl struct {
 	pulumi.CustomResourceState
@@ -169,7 +172,7 @@ func (i *ConsumerAcl) ToConsumerAclOutputWithContext(ctx context.Context) Consum
 // ConsumerAclArrayInput is an input type that accepts ConsumerAclArray and ConsumerAclArrayOutput values.
 // You can construct a concrete instance of `ConsumerAclArrayInput` via:
 //
-//          ConsumerAclArray{ ConsumerAclArgs{...} }
+//	ConsumerAclArray{ ConsumerAclArgs{...} }
 type ConsumerAclArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +197,7 @@ func (i ConsumerAclArray) ToConsumerAclArrayOutputWithContext(ctx context.Contex
 // ConsumerAclMapInput is an input type that accepts ConsumerAclMap and ConsumerAclMapOutput values.
 // You can construct a concrete instance of `ConsumerAclMapInput` via:
 //
-//          ConsumerAclMap{ "key": ConsumerAclArgs{...} }
+//	ConsumerAclMap{ "key": ConsumerAclArgs{...} }
 type ConsumerAclMapInput interface {
 	pulumi.Input
 

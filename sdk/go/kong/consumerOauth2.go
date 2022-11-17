@@ -21,45 +21,48 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-// 			CustomId: pulumi.String("123"),
-// 			Username: pulumi.String("User1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "oauth2Plugin", &kong.PluginArgs{
-// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v", "	{\n", "		\"global_credentials\": true,\n", "		\"enable_password_grant\": true,\n", "		\"token_expiration\": 180,\n", "		\"refresh_token_ttl\": 180,\n", "		\"provision_key\": \"testprovisionkey\"\n", "	}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewConsumerOauth2(ctx, "consumerOauth2", &kong.ConsumerOauth2Args{
-// 			ClientId:     pulumi.String("client_id"),
-// 			ClientSecret: pulumi.String("client_secret"),
-// 			ConsumerId:   myConsumer.ID(),
-// 			RedirectUris: pulumi.StringArray{
-// 				pulumi.String("https://asdf.com/callback"),
-// 				pulumi.String("https://test.cl/callback"),
-// 			},
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("myTag"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
+//				CustomId: pulumi.String("123"),
+//				Username: pulumi.String("User1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "oauth2Plugin", &kong.PluginArgs{
+//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v", "	{\n", "		\"global_credentials\": true,\n", "		\"enable_password_grant\": true,\n", "		\"token_expiration\": 180,\n", "		\"refresh_token_ttl\": 180,\n", "		\"provision_key\": \"testprovisionkey\"\n", "	}\n", "\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewConsumerOauth2(ctx, "consumerOauth2", &kong.ConsumerOauth2Args{
+//				ClientId:     pulumi.String("client_id"),
+//				ClientSecret: pulumi.String("client_secret"),
+//				ConsumerId:   myConsumer.ID(),
+//				RedirectUris: pulumi.StringArray{
+//					pulumi.String("https://asdf.com/callback"),
+//					pulumi.String("https://test.cl/callback"),
+//				},
+//				Tags: pulumi.StringArray{
+//					pulumi.String("myTag"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConsumerOauth2 struct {
 	pulumi.CustomResourceState
@@ -213,7 +216,7 @@ func (i *ConsumerOauth2) ToConsumerOauth2OutputWithContext(ctx context.Context) 
 // ConsumerOauth2ArrayInput is an input type that accepts ConsumerOauth2Array and ConsumerOauth2ArrayOutput values.
 // You can construct a concrete instance of `ConsumerOauth2ArrayInput` via:
 //
-//          ConsumerOauth2Array{ ConsumerOauth2Args{...} }
+//	ConsumerOauth2Array{ ConsumerOauth2Args{...} }
 type ConsumerOauth2ArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +241,7 @@ func (i ConsumerOauth2Array) ToConsumerOauth2ArrayOutputWithContext(ctx context.
 // ConsumerOauth2MapInput is an input type that accepts ConsumerOauth2Map and ConsumerOauth2MapOutput values.
 // You can construct a concrete instance of `ConsumerOauth2MapInput` via:
 //
-//          ConsumerOauth2Map{ "key": ConsumerOauth2Args{...} }
+//	ConsumerOauth2Map{ "key": ConsumerOauth2Args{...} }
 type ConsumerOauth2MapInput interface {
 	pulumi.Input
 

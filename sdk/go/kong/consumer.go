@@ -20,33 +20,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := kong.NewConsumer(ctx, "consumer", &kong.ConsumerArgs{
-// 			CustomId: pulumi.String("123"),
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("mySuperTag"),
-// 			},
-// 			Username: pulumi.String("User1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewConsumer(ctx, "consumer", &kong.ConsumerArgs{
+//				CustomId: pulumi.String("123"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("mySuperTag"),
+//				},
+//				Username: pulumi.String("User1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// To import a consumer
+// # To import a consumer
 //
 // ```sh
-//  $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+//
+//	$ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+//
 // ```
 type Consumer struct {
 	pulumi.CustomResourceState
@@ -154,7 +159,7 @@ func (i *Consumer) ToConsumerOutputWithContext(ctx context.Context) ConsumerOutp
 // ConsumerArrayInput is an input type that accepts ConsumerArray and ConsumerArrayOutput values.
 // You can construct a concrete instance of `ConsumerArrayInput` via:
 //
-//          ConsumerArray{ ConsumerArgs{...} }
+//	ConsumerArray{ ConsumerArgs{...} }
 type ConsumerArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +184,7 @@ func (i ConsumerArray) ToConsumerArrayOutputWithContext(ctx context.Context) Con
 // ConsumerMapInput is an input type that accepts ConsumerMap and ConsumerMapOutput values.
 // You can construct a concrete instance of `ConsumerMapInput` via:
 //
-//          ConsumerMap{ "key": ConsumerArgs{...} }
+//	ConsumerMap{ "key": ConsumerArgs{...} }
 type ConsumerMapInput interface {
 	pulumi.Input
 

@@ -21,23 +21,26 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // To apply a plugin to a consumer use the `consumerId` property, for example:
 //
@@ -45,31 +48,34 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		pluginConsumer, err := kong.NewConsumer(ctx, "pluginConsumer", &kong.ConsumerArgs{
-// 			CustomId: pulumi.String("567"),
-// 			Username: pulumi.String("PluginUser"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
-// 			ConsumerId: pluginConsumer.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			pluginConsumer, err := kong.NewConsumer(ctx, "pluginConsumer", &kong.ConsumerArgs{
+//				CustomId: pulumi.String("567"),
+//				Username: pulumi.String("PluginUser"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
+//				ConsumerId: pluginConsumer.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // To apply a plugin to a service use the `serviceId` property, for example:
@@ -78,31 +84,34 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
-// 			Host:     pulumi.String("test.org"),
-// 			Protocol: pulumi.String("http"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 10,\n", "		\"hour\" : 2000\n", "	}\n", "\n")),
-// 			ServiceId: service.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
+//				Host:     pulumi.String("test.org"),
+//				Protocol: pulumi.String("http"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 10,\n", "		\"hour\" : 2000\n", "	}\n", "\n")),
+//				ServiceId:  service.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // To apply a plugin to a route use the `routeId` property, for example:
@@ -111,40 +120,45 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
-// 			Host:     pulumi.String("test.org"),
-// 			Protocol: pulumi.String("http"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-// 			ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 11,\n", "		\"hour\" : 4000\n", "	}\n", "\n")),
-// 			Enabled:   pulumi.Bool(true),
-// 			ServiceId: service.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
+//				Host:     pulumi.String("test.org"),
+//				Protocol: pulumi.String("http"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
+//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 11,\n", "		\"hour\" : 4000\n", "	}\n", "\n")),
+//				Enabled:    pulumi.Bool(true),
+//				ServiceId:  service.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// To import a plugin
+// # To import a plugin
 //
 // ```sh
-//  $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+//
+//	$ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+//
 // ```
 type Plugin struct {
 	pulumi.CustomResourceState
@@ -300,7 +314,7 @@ func (i *Plugin) ToPluginOutputWithContext(ctx context.Context) PluginOutput {
 // PluginArrayInput is an input type that accepts PluginArray and PluginArrayOutput values.
 // You can construct a concrete instance of `PluginArrayInput` via:
 //
-//          PluginArray{ PluginArgs{...} }
+//	PluginArray{ PluginArgs{...} }
 type PluginArrayInput interface {
 	pulumi.Input
 
@@ -325,7 +339,7 @@ func (i PluginArray) ToPluginArrayOutputWithContext(ctx context.Context) PluginA
 // PluginMapInput is an input type that accepts PluginMap and PluginMapOutput values.
 // You can construct a concrete instance of `PluginMapInput` via:
 //
-//          PluginMap{ "key": PluginArgs{...} }
+//	PluginMap{ "key": PluginArgs{...} }
 type PluginMapInput interface {
 	pulumi.Input
 

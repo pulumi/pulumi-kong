@@ -17,31 +17,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := kong.NewTarget(ctx, "target", &kong.TargetArgs{
-// 			Target:     pulumi.String("sample_target:80"),
-// 			UpstreamId: pulumi.Any(kong_upstream.Upstream.Id),
-// 			Weight:     pulumi.Int(10),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewTarget(ctx, "target", &kong.TargetArgs{
+//				Target:     pulumi.String("sample_target:80"),
+//				UpstreamId: pulumi.Any(kong_upstream.Upstream.Id),
+//				Weight:     pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// To import a target use a combination of the upstream id and the target id as follows
+// # To import a target use a combination of the upstream id and the target id as follows
 //
 // ```sh
-//  $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
+//
+//	$ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
+//
 // ```
 type Target struct {
 	pulumi.CustomResourceState
@@ -168,7 +173,7 @@ func (i *Target) ToTargetOutputWithContext(ctx context.Context) TargetOutput {
 // TargetArrayInput is an input type that accepts TargetArray and TargetArrayOutput values.
 // You can construct a concrete instance of `TargetArrayInput` via:
 //
-//          TargetArray{ TargetArgs{...} }
+//	TargetArray{ TargetArgs{...} }
 type TargetArrayInput interface {
 	pulumi.Input
 
@@ -193,7 +198,7 @@ func (i TargetArray) ToTargetArrayOutputWithContext(ctx context.Context) TargetA
 // TargetMapInput is an input type that accepts TargetMap and TargetMapOutput values.
 // You can construct a concrete instance of `TargetMapInput` via:
 //
-//          TargetMap{ "key": TargetArgs{...} }
+//	TargetMap{ "key": TargetArgs{...} }
 type TargetMapInput interface {
 	pulumi.Input
 

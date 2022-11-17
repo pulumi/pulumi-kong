@@ -23,47 +23,50 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
-// 			Protocols: pulumi.StringArray{
-// 				pulumi.String("http"),
-// 				pulumi.String("https"),
-// 			},
-// 			Methods: pulumi.StringArray{
-// 				pulumi.String("GET"),
-// 				pulumi.String("POST"),
-// 			},
-// 			Hosts: pulumi.StringArray{
-// 				pulumi.String("example2.com"),
-// 			},
-// 			Paths: pulumi.StringArray{
-// 				pulumi.String("/test"),
-// 			},
-// 			StripPath:     pulumi.Bool(false),
-// 			PreserveHost:  pulumi.Bool(true),
-// 			RegexPriority: pulumi.Int(1),
-// 			ServiceId:     pulumi.Any(kong_service.Service.Id),
-// 			Headers: RouteHeaderArray{
-// 				&RouteHeaderArgs{
-// 					Name: pulumi.String("x-test-1"),
-// 					Values: pulumi.StringArray{
-// 						pulumi.String("a"),
-// 						pulumi.String("b"),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
+//				Protocols: pulumi.StringArray{
+//					pulumi.String("http"),
+//					pulumi.String("https"),
+//				},
+//				Methods: pulumi.StringArray{
+//					pulumi.String("GET"),
+//					pulumi.String("POST"),
+//				},
+//				Hosts: pulumi.StringArray{
+//					pulumi.String("example2.com"),
+//				},
+//				Paths: pulumi.StringArray{
+//					pulumi.String("/test"),
+//				},
+//				StripPath:     pulumi.Bool(false),
+//				PreserveHost:  pulumi.Bool(true),
+//				RegexPriority: pulumi.Int(1),
+//				ServiceId:     pulumi.Any(kong_service.Service.Id),
+//				Headers: RouteHeaderArray{
+//					&RouteHeaderArgs{
+//						Name: pulumi.String("x-test-1"),
+//						Values: pulumi.StringArray{
+//							pulumi.String("a"),
+//							pulumi.String("b"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
@@ -72,52 +75,57 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
-// 			Protocols: pulumi.StringArray{
-// 				pulumi.String("tcp"),
-// 			},
-// 			StripPath:    pulumi.Bool(true),
-// 			PreserveHost: pulumi.Bool(false),
-// 			Sources: RouteSourceArray{
-// 				&RouteSourceArgs{
-// 					Ip:   pulumi.String("192.168.1.1"),
-// 					Port: pulumi.Int(80),
-// 				},
-// 				&RouteSourceArgs{
-// 					Ip: pulumi.String("192.168.1.2"),
-// 				},
-// 			},
-// 			Destinations: RouteDestinationArray{
-// 				&RouteDestinationArgs{
-// 					Ip:   pulumi.String("172.10.1.1"),
-// 					Port: pulumi.Int(81),
-// 				},
-// 			},
-// 			Snis: pulumi.StringArray{
-// 				pulumi.String("foo.com"),
-// 			},
-// 			ServiceId: pulumi.Any(kong_service.Service.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
+//				Protocols: pulumi.StringArray{
+//					pulumi.String("tcp"),
+//				},
+//				StripPath:    pulumi.Bool(true),
+//				PreserveHost: pulumi.Bool(false),
+//				Sources: RouteSourceArray{
+//					&RouteSourceArgs{
+//						Ip:   pulumi.String("192.168.1.1"),
+//						Port: pulumi.Int(80),
+//					},
+//					&RouteSourceArgs{
+//						Ip: pulumi.String("192.168.1.2"),
+//					},
+//				},
+//				Destinations: RouteDestinationArray{
+//					&RouteDestinationArgs{
+//						Ip:   pulumi.String("172.10.1.1"),
+//						Port: pulumi.Int(81),
+//					},
+//				},
+//				Snis: pulumi.StringArray{
+//					pulumi.String("foo.com"),
+//				},
+//				ServiceId: pulumi.Any(kong_service.Service.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// To import a route
+// # To import a route
 //
 // ```sh
-//  $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+//
+//	$ pulumi import kong:index/route:Route <route_identifier> <route_id>
+//
 // ```
 type Route struct {
 	pulumi.CustomResourceState
@@ -381,7 +389,7 @@ func (i *Route) ToRouteOutputWithContext(ctx context.Context) RouteOutput {
 // RouteArrayInput is an input type that accepts RouteArray and RouteArrayOutput values.
 // You can construct a concrete instance of `RouteArrayInput` via:
 //
-//          RouteArray{ RouteArgs{...} }
+//	RouteArray{ RouteArgs{...} }
 type RouteArrayInput interface {
 	pulumi.Input
 
@@ -406,7 +414,7 @@ func (i RouteArray) ToRouteArrayOutputWithContext(ctx context.Context) RouteArra
 // RouteMapInput is an input type that accepts RouteMap and RouteMapOutput values.
 // You can construct a concrete instance of `RouteMapInput` via:
 //
-//          RouteMap{ "key": RouteArgs{...} }
+//	RouteMap{ "key": RouteArgs{...} }
 type RouteMapInput interface {
 	pulumi.Input
 
