@@ -22,8 +22,10 @@ import (
 	"github.com/kevholditch/terraform-provider-kong/kong"
 	"github.com/pulumi/pulumi-kong/provider/v4/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/x"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
 // all of the token components used below.
@@ -142,6 +144,9 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
+	defaults := x.TokensSingleModule("kong_", mainMod, x.MakeStandardToken(mainPkg))
+	err := x.ComputeDefaults(&prov, defaults)
+	contract.AssertNoErrorf(err)
 	prov.SetAutonaming(255, "-")
 
 	return prov
