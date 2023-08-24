@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-kong/provider/v4
 
-go 1.19
+go 1.20
 
 require (
 	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20220328204855-9e50bd93437f
