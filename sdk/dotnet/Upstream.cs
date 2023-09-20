@@ -13,108 +13,108 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var certificate = new Kong.Certificate("certificate", new()
     ///     {
-    ///         var certificate = new Kong.Certificate("certificate", new Kong.CertificateArgs
-    ///         {
-    ///             Certificate = @"    -----BEGIN CERTIFICATE-----
+    ///         Cert = @"    -----BEGIN CERTIFICATE-----
     ///     ......
     ///     -----END CERTIFICATE-----
     /// ",
-    ///             PrivateKey = @"    -----BEGIN PRIVATE KEY-----
+    ///         PrivateKey = @"    -----BEGIN PRIVATE KEY-----
     ///     .....
     ///     -----END PRIVATE KEY-----
     /// ",
-    ///             Snis = 
-    ///             {
-    ///                 "foo.com",
-    ///             },
-    ///         });
-    ///         var upstream = new Kong.Upstream("upstream", new Kong.UpstreamArgs
+    ///         Snis = new[]
     ///         {
-    ///             Slots = 10,
-    ///             HashOn = "header",
-    ///             HashFallback = "cookie",
-    ///             HashOnHeader = "HeaderName",
-    ///             HashFallbackHeader = "FallbackHeaderName",
-    ///             HashOnCookie = "CookieName",
-    ///             HashOnCookiePath = "/path",
-    ///             HostHeader = "x-host",
-    ///             Tags = 
-    ///             {
-    ///                 "a",
-    ///                 "b",
-    ///             },
-    ///             ClientCertificateId = certificate.Id,
-    ///             Healthchecks = new Kong.Inputs.UpstreamHealthchecksArgs
-    ///             {
-    ///                 Active = new Kong.Inputs.UpstreamHealthchecksActiveArgs
-    ///                 {
-    ///                     Type = "https",
-    ///                     HttpPath = "/status",
-    ///                     Timeout = 10,
-    ///                     Concurrency = 20,
-    ///                     HttpsVerifyCertificate = false,
-    ///                     HttpsSni = "some.domain.com",
-    ///                     Healthy = new Kong.Inputs.UpstreamHealthchecksActiveHealthyArgs
-    ///                     {
-    ///                         Successes = 1,
-    ///                         Interval = 5,
-    ///                         HttpStatuses = 
-    ///                         {
-    ///                             200,
-    ///                             201,
-    ///                         },
-    ///                     },
-    ///                     Unhealthy = new Kong.Inputs.UpstreamHealthchecksActiveUnhealthyArgs
-    ///                     {
-    ///                         Timeouts = 7,
-    ///                         Interval = 3,
-    ///                         TcpFailures = 1,
-    ///                         HttpFailures = 2,
-    ///                         HttpStatuses = 
-    ///                         {
-    ///                             500,
-    ///                             501,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 Passive = new Kong.Inputs.UpstreamHealthchecksPassiveArgs
-    ///                 {
-    ///                     Type = "https",
-    ///                     Healthy = new Kong.Inputs.UpstreamHealthchecksPassiveHealthyArgs
-    ///                     {
-    ///                         Successes = 1,
-    ///                         HttpStatuses = 
-    ///                         {
-    ///                             200,
-    ///                             201,
-    ///                             202,
-    ///                         },
-    ///                     },
-    ///                     Unhealthy = new Kong.Inputs.UpstreamHealthchecksPassiveUnhealthyArgs
-    ///                     {
-    ///                         Timeouts = 3,
-    ///                         TcpFailures = 5,
-    ///                         HttpFailures = 6,
-    ///                         HttpStatuses = 
-    ///                         {
-    ///                             500,
-    ///                             501,
-    ///                             502,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///             "foo.com",
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var upstream = new Kong.Upstream("upstream", new()
+    ///     {
+    ///         Slots = 10,
+    ///         HashOn = "header",
+    ///         HashFallback = "cookie",
+    ///         HashOnHeader = "HeaderName",
+    ///         HashFallbackHeader = "FallbackHeaderName",
+    ///         HashOnCookie = "CookieName",
+    ///         HashOnCookiePath = "/path",
+    ///         HostHeader = "x-host",
+    ///         Tags = new[]
+    ///         {
+    ///             "a",
+    ///             "b",
+    ///         },
+    ///         ClientCertificateId = certificate.Id,
+    ///         Healthchecks = new Kong.Inputs.UpstreamHealthchecksArgs
+    ///         {
+    ///             Active = new Kong.Inputs.UpstreamHealthchecksActiveArgs
+    ///             {
+    ///                 Type = "https",
+    ///                 HttpPath = "/status",
+    ///                 Timeout = 10,
+    ///                 Concurrency = 20,
+    ///                 HttpsVerifyCertificate = false,
+    ///                 HttpsSni = "some.domain.com",
+    ///                 Healthy = new Kong.Inputs.UpstreamHealthchecksActiveHealthyArgs
+    ///                 {
+    ///                     Successes = 1,
+    ///                     Interval = 5,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         200,
+    ///                         201,
+    ///                     },
+    ///                 },
+    ///                 Unhealthy = new Kong.Inputs.UpstreamHealthchecksActiveUnhealthyArgs
+    ///                 {
+    ///                     Timeouts = 7,
+    ///                     Interval = 3,
+    ///                     TcpFailures = 1,
+    ///                     HttpFailures = 2,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         500,
+    ///                         501,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Passive = new Kong.Inputs.UpstreamHealthchecksPassiveArgs
+    ///             {
+    ///                 Type = "https",
+    ///                 Healthy = new Kong.Inputs.UpstreamHealthchecksPassiveHealthyArgs
+    ///                 {
+    ///                     Successes = 1,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         200,
+    ///                         201,
+    ///                         202,
+    ///                     },
+    ///                 },
+    ///                 Unhealthy = new Kong.Inputs.UpstreamHealthchecksPassiveUnhealthyArgs
+    ///                 {
+    ///                     Timeouts = 3,
+    ///                     TcpFailures = 5,
+    ///                     HttpFailures = 6,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         500,
+    ///                         501,
+    ///                         502,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -126,7 +126,7 @@ namespace Pulumi.Kong
     /// ```
     /// </summary>
     [KongResourceType("kong:index/upstream:Upstream")]
-    public partial class Upstream : Pulumi.CustomResource
+    public partial class Upstream : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
@@ -262,7 +262,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class UpstreamArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
@@ -363,9 +363,10 @@ namespace Pulumi.Kong
         public UpstreamArgs()
         {
         }
+        public static new UpstreamArgs Empty => new UpstreamArgs();
     }
 
-    public sealed class UpstreamState : Pulumi.ResourceArgs
+    public sealed class UpstreamState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
@@ -466,5 +467,6 @@ namespace Pulumi.Kong
         public UpstreamState()
         {
         }
+        public static new UpstreamState Empty => new UpstreamState();
     }
 }

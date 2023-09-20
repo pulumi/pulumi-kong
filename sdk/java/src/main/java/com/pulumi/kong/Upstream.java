@@ -19,6 +19,113 @@ import javax.annotation.Nullable;
 
 /**
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Certificate;
+ * import com.pulumi.kong.CertificateArgs;
+ * import com.pulumi.kong.Upstream;
+ * import com.pulumi.kong.UpstreamArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksActiveArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksActiveHealthyArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksActiveUnhealthyArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksPassiveArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksPassiveHealthyArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksPassiveUnhealthyArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
+ *             .certificate(&#34;&#34;&#34;
+ *     -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ *             &#34;&#34;&#34;)
+ *             .privateKey(&#34;&#34;&#34;
+ *     -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ *             &#34;&#34;&#34;)
+ *             .snis(&#34;foo.com&#34;)
+ *             .build());
+ * 
+ *         var upstream = new Upstream(&#34;upstream&#34;, UpstreamArgs.builder()        
+ *             .slots(10)
+ *             .hashOn(&#34;header&#34;)
+ *             .hashFallback(&#34;cookie&#34;)
+ *             .hashOnHeader(&#34;HeaderName&#34;)
+ *             .hashFallbackHeader(&#34;FallbackHeaderName&#34;)
+ *             .hashOnCookie(&#34;CookieName&#34;)
+ *             .hashOnCookiePath(&#34;/path&#34;)
+ *             .hostHeader(&#34;x-host&#34;)
+ *             .tags(            
+ *                 &#34;a&#34;,
+ *                 &#34;b&#34;)
+ *             .clientCertificateId(certificate.id())
+ *             .healthchecks(UpstreamHealthchecksArgs.builder()
+ *                 .active(UpstreamHealthchecksActiveArgs.builder()
+ *                     .type(&#34;https&#34;)
+ *                     .httpPath(&#34;/status&#34;)
+ *                     .timeout(10)
+ *                     .concurrency(20)
+ *                     .httpsVerifyCertificate(false)
+ *                     .httpsSni(&#34;some.domain.com&#34;)
+ *                     .healthy(UpstreamHealthchecksActiveHealthyArgs.builder()
+ *                         .successes(1)
+ *                         .interval(5)
+ *                         .httpStatuses(                        
+ *                             200,
+ *                             201)
+ *                         .build())
+ *                     .unhealthy(UpstreamHealthchecksActiveUnhealthyArgs.builder()
+ *                         .timeouts(7)
+ *                         .interval(3)
+ *                         .tcpFailures(1)
+ *                         .httpFailures(2)
+ *                         .httpStatuses(                        
+ *                             500,
+ *                             501)
+ *                         .build())
+ *                     .build())
+ *                 .passive(UpstreamHealthchecksPassiveArgs.builder()
+ *                     .type(&#34;https&#34;)
+ *                     .healthy(UpstreamHealthchecksPassiveHealthyArgs.builder()
+ *                         .successes(1)
+ *                         .httpStatuses(                        
+ *                             200,
+ *                             201,
+ *                             202)
+ *                         .build())
+ *                     .unhealthy(UpstreamHealthchecksPassiveUnhealthyArgs.builder()
+ *                         .timeouts(3)
+ *                         .tcpFailures(5)
+ *                         .httpFailures(6)
+ *                         .httpStatuses(                        
+ *                             500,
+ *                             501,
+ *                             502)
+ *                         .build())
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 
@@ -35,7 +142,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
      * 
      */
-    @Export(name="clientCertificateId", type=String.class, parameters={})
+    @Export(name="clientCertificateId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> clientCertificateId;
 
     /**
@@ -49,7 +156,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
      * 
      */
-    @Export(name="hashFallback", type=String.class, parameters={})
+    @Export(name="hashFallback", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashFallback;
 
     /**
@@ -63,7 +170,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
      * 
      */
-    @Export(name="hashFallbackHeader", type=String.class, parameters={})
+    @Export(name="hashFallbackHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashFallbackHeader;
 
     /**
@@ -77,7 +184,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      * 
      */
-    @Export(name="hashOn", type=String.class, parameters={})
+    @Export(name="hashOn", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOn;
 
     /**
@@ -91,7 +198,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      * 
      */
-    @Export(name="hashOnCookie", type=String.class, parameters={})
+    @Export(name="hashOnCookie", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnCookie;
 
     /**
@@ -126,7 +233,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
      * 
      */
-    @Export(name="hashOnCookiePath", type=String.class, parameters={})
+    @Export(name="hashOnCookiePath", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnCookiePath;
 
     /**
@@ -161,7 +268,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
      * 
      */
-    @Export(name="hashOnHeader", type=String.class, parameters={})
+    @Export(name="hashOnHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnHeader;
 
     /**
@@ -171,7 +278,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
     public Output<Optional<String>> hashOnHeader() {
         return Codegen.optional(this.hashOnHeader);
     }
-    @Export(name="healthchecks", type=UpstreamHealthchecks.class, parameters={})
+    @Export(name="healthchecks", refs={UpstreamHealthchecks.class}, tree="[0]")
     private Output<UpstreamHealthchecks> healthchecks;
 
     public Output<UpstreamHealthchecks> healthchecks() {
@@ -181,7 +288,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * The hostname to be used as Host header when proxying requests through Kong.
      * 
      */
-    @Export(name="hostHeader", type=String.class, parameters={})
+    @Export(name="hostHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hostHeader;
 
     /**
@@ -195,7 +302,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a hostname, which must be equal to the host of a Service.
      * 
      */
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     /**
@@ -209,7 +316,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      * 
      */
-    @Export(name="slots", type=Integer.class, parameters={})
+    @Export(name="slots", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> slots;
 
     /**
@@ -223,7 +330,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Upstream for grouping and filtering.
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

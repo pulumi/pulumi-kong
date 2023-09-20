@@ -18,115 +18,114 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
     ///     {
-    ///         var rateLimit = new Kong.Plugin("rateLimit", new Kong.PluginArgs
-    ///         {
-    ///             ConfigJson = @"	{
+    ///         ConfigJson = @"	{
     /// 		""second"": 5,
     /// 		""hour"" : 1000
     /// 	}
     /// 
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// To apply a plugin to a consumer use the `consumer_id` property, for example:
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var pluginConsumer = new Kong.Consumer("pluginConsumer", new()
     ///     {
-    ///         var pluginConsumer = new Kong.Consumer("pluginConsumer", new Kong.ConsumerArgs
-    ///         {
-    ///             CustomId = "567",
-    ///             Username = "PluginUser",
-    ///         });
-    ///         var rateLimit = new Kong.Plugin("rateLimit", new Kong.PluginArgs
-    ///         {
-    ///             ConfigJson = @"	{
+    ///         CustomId = "567",
+    ///         Username = "PluginUser",
+    ///     });
+    /// 
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     {
+    ///         ConfigJson = @"	{
     /// 		""second"": 5,
     /// 		""hour"" : 1000
     /// 	}
     /// 
     /// ",
-    ///             ConsumerId = pluginConsumer.Id,
-    ///         });
-    ///     }
+    ///         ConsumerId = pluginConsumer.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// To apply a plugin to a service use the `service_id` property, for example:
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var service = new Kong.Service("service", new()
     ///     {
-    ///         var service = new Kong.Service("service", new Kong.ServiceArgs
-    ///         {
-    ///             Host = "test.org",
-    ///             Protocol = "http",
-    ///         });
-    ///         var rateLimit = new Kong.Plugin("rateLimit", new Kong.PluginArgs
-    ///         {
-    ///             ConfigJson = @"	{
+    ///         Host = "test.org",
+    ///         Protocol = "http",
+    ///     });
+    /// 
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     {
+    ///         ConfigJson = @"	{
     /// 		""second"": 10,
     /// 		""hour"" : 2000
     /// 	}
     /// 
     /// ",
-    ///             ServiceId = service.Id,
-    ///         });
-    ///     }
+    ///         ServiceId = service.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// To apply a plugin to a route use the `route_id` property, for example:
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var service = new Kong.Service("service", new()
     ///     {
-    ///         var service = new Kong.Service("service", new Kong.ServiceArgs
-    ///         {
-    ///             Host = "test.org",
-    ///             Protocol = "http",
-    ///         });
-    ///         var rateLimit = new Kong.Plugin("rateLimit", new Kong.PluginArgs
-    ///         {
-    ///             ConfigJson = @"	{
+    ///         Host = "test.org",
+    ///         Protocol = "http",
+    ///     });
+    /// 
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     {
+    ///         ConfigJson = @"	{
     /// 		""second"": 11,
     /// 		""hour"" : 4000
     /// 	}
     /// 
     /// ",
-    ///             Enabled = true,
-    ///             ServiceId = service.Id,
-    ///         });
-    ///     }
+    ///         Enabled = true,
+    ///         ServiceId = service.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -138,7 +137,7 @@ namespace Pulumi.Kong
     /// ```
     /// </summary>
     [KongResourceType("kong:index/plugin:Plugin")]
-    public partial class Plugin : Pulumi.CustomResource
+    public partial class Plugin : global::Pulumi.CustomResource
     {
         [Output("computedConfig")]
         public Output<string> ComputedConfig { get; private set; } = null!;
@@ -230,7 +229,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class PluginArgs : Pulumi.ResourceArgs
+    public sealed class PluginArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
@@ -284,9 +283,10 @@ namespace Pulumi.Kong
         public PluginArgs()
         {
         }
+        public static new PluginArgs Empty => new PluginArgs();
     }
 
-    public sealed class PluginState : Pulumi.ResourceArgs
+    public sealed class PluginState : global::Pulumi.ResourceArgs
     {
         [Input("computedConfig")]
         public Input<string>? ComputedConfig { get; set; }
@@ -343,5 +343,6 @@ namespace Pulumi.Kong
         public PluginState()
         {
         }
+        public static new PluginState Empty => new PluginState();
     }
 }

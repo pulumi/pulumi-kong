@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # ConsumerKeyAuth
@@ -77,6 +79,14 @@ func NewConsumerKeyAuth(ctx *pulumi.Context,
 	if args.ConsumerId == nil {
 		return nil, errors.New("invalid value for required argument 'ConsumerId'")
 	}
+	if args.Key != nil {
+		args.Key = pulumi.ToSecret(args.Key).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"key",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConsumerKeyAuth
 	err := ctx.RegisterResource("kong:index/consumerKeyAuth:ConsumerKeyAuth", name, args, &resource, opts...)
 	if err != nil {
@@ -162,6 +172,12 @@ func (i *ConsumerKeyAuth) ToConsumerKeyAuthOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerKeyAuthOutput)
 }
 
+func (i *ConsumerKeyAuth) ToOutput(ctx context.Context) pulumix.Output[*ConsumerKeyAuth] {
+	return pulumix.Output[*ConsumerKeyAuth]{
+		OutputState: i.ToConsumerKeyAuthOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ConsumerKeyAuthArrayInput is an input type that accepts ConsumerKeyAuthArray and ConsumerKeyAuthArrayOutput values.
 // You can construct a concrete instance of `ConsumerKeyAuthArrayInput` via:
 //
@@ -185,6 +201,12 @@ func (i ConsumerKeyAuthArray) ToConsumerKeyAuthArrayOutput() ConsumerKeyAuthArra
 
 func (i ConsumerKeyAuthArray) ToConsumerKeyAuthArrayOutputWithContext(ctx context.Context) ConsumerKeyAuthArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerKeyAuthArrayOutput)
+}
+
+func (i ConsumerKeyAuthArray) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerKeyAuth] {
+	return pulumix.Output[[]*ConsumerKeyAuth]{
+		OutputState: i.ToConsumerKeyAuthArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ConsumerKeyAuthMapInput is an input type that accepts ConsumerKeyAuthMap and ConsumerKeyAuthMapOutput values.
@@ -212,6 +234,12 @@ func (i ConsumerKeyAuthMap) ToConsumerKeyAuthMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerKeyAuthMapOutput)
 }
 
+func (i ConsumerKeyAuthMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerKeyAuth] {
+	return pulumix.Output[map[string]*ConsumerKeyAuth]{
+		OutputState: i.ToConsumerKeyAuthMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ConsumerKeyAuthOutput struct{ *pulumi.OutputState }
 
 func (ConsumerKeyAuthOutput) ElementType() reflect.Type {
@@ -226,6 +254,27 @@ func (o ConsumerKeyAuthOutput) ToConsumerKeyAuthOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o ConsumerKeyAuthOutput) ToOutput(ctx context.Context) pulumix.Output[*ConsumerKeyAuth] {
+	return pulumix.Output[*ConsumerKeyAuth]{
+		OutputState: o.OutputState,
+	}
+}
+
+// the id of the consumer to associate the credentials to
+func (o ConsumerKeyAuthOutput) ConsumerId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerKeyAuth) pulumi.StringOutput { return v.ConsumerId }).(pulumi.StringOutput)
+}
+
+// Unique key to authenticate the client; if omitted the plugin will generate one
+func (o ConsumerKeyAuthOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerKeyAuth) pulumi.StringOutput { return v.Key }).(pulumi.StringOutput)
+}
+
+// A list of strings associated with the consumer key auth for grouping and filtering
+func (o ConsumerKeyAuthOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ConsumerKeyAuth) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
 type ConsumerKeyAuthArrayOutput struct{ *pulumi.OutputState }
 
 func (ConsumerKeyAuthArrayOutput) ElementType() reflect.Type {
@@ -238,6 +287,12 @@ func (o ConsumerKeyAuthArrayOutput) ToConsumerKeyAuthArrayOutput() ConsumerKeyAu
 
 func (o ConsumerKeyAuthArrayOutput) ToConsumerKeyAuthArrayOutputWithContext(ctx context.Context) ConsumerKeyAuthArrayOutput {
 	return o
+}
+
+func (o ConsumerKeyAuthArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerKeyAuth] {
+	return pulumix.Output[[]*ConsumerKeyAuth]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerKeyAuthArrayOutput) Index(i pulumi.IntInput) ConsumerKeyAuthOutput {
@@ -258,6 +313,12 @@ func (o ConsumerKeyAuthMapOutput) ToConsumerKeyAuthMapOutput() ConsumerKeyAuthMa
 
 func (o ConsumerKeyAuthMapOutput) ToConsumerKeyAuthMapOutputWithContext(ctx context.Context) ConsumerKeyAuthMapOutput {
 	return o
+}
+
+func (o ConsumerKeyAuthMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerKeyAuth] {
+	return pulumix.Output[map[string]*ConsumerKeyAuth]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerKeyAuthMapOutput) MapIndex(k pulumi.StringInput) ConsumerKeyAuthOutput {

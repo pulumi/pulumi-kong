@@ -21,6 +21,56 @@ import javax.annotation.Nullable;
  * Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import com.pulumi.kong.ConsumerAcl;
+ * import com.pulumi.kong.ConsumerAclArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
+ *             .customId(&#34;123&#34;)
+ *             .username(&#34;User1&#34;)
+ *             .build());
+ * 
+ *         var aclPlugin = new Plugin(&#34;aclPlugin&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;allow&#34;: [&#34;group1&#34;, &#34;group2&#34;]
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .build());
+ * 
+ *         var consumerAcl = new ConsumerAcl(&#34;consumerAcl&#34;, ConsumerAclArgs.builder()        
+ *             .consumerId(myConsumer.id())
+ *             .group(&#34;group2&#34;)
+ *             .tags(            
+ *                 &#34;myTag&#34;,
+ *                 &#34;otherTag&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  */
 @ResourceType(type="kong:index/consumerAcl:ConsumerAcl")
@@ -29,7 +79,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * the id of the consumer to be configured
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output<String> consumerId;
 
     /**
@@ -43,7 +93,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * the acl group
      * 
      */
-    @Export(name="group", type=String.class, parameters={})
+    @Export(name="group", refs={String.class}, tree="[0]")
     private Output<String> group;
 
     /**
@@ -57,7 +107,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the consumer acl for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

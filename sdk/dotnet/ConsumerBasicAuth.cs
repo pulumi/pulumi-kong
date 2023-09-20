@@ -17,39 +17,38 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
     ///     {
-    ///         var myConsumer = new Kong.Consumer("myConsumer", new Kong.ConsumerArgs
-    ///         {
-    ///             CustomId = "123",
-    ///             Username = "User1",
-    ///         });
-    ///         var basicAuthPlugin = new Kong.Plugin("basicAuthPlugin", new Kong.PluginArgs
-    ///         {
-    ///         });
-    ///         var consumerBasicAuth = new Kong.ConsumerBasicAuth("consumerBasicAuth", new Kong.ConsumerBasicAuthArgs
-    ///         {
-    ///             ConsumerId = myConsumer.Id,
-    ///             Password = "bar_updated",
-    ///             Tags = 
-    ///             {
-    ///                 "myTag",
-    ///                 "anotherTag",
-    ///             },
-    ///             Username = "foo_updated",
-    ///         });
-    ///     }
+    ///         CustomId = "123",
+    ///         Username = "User1",
+    ///     });
     /// 
-    /// }
+    ///     var basicAuthPlugin = new Kong.Plugin("basicAuthPlugin");
+    /// 
+    ///     var consumerBasicAuth = new Kong.ConsumerBasicAuth("consumerBasicAuth", new()
+    ///     {
+    ///         ConsumerId = myConsumer.Id,
+    ///         Password = "bar_updated",
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///             "anotherTag",
+    ///         },
+    ///         Username = "foo_updated",
+    ///     });
+    /// 
+    /// });
     /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerBasicAuth:ConsumerBasicAuth")]
-    public partial class ConsumerBasicAuth : Pulumi.CustomResource
+    public partial class ConsumerBasicAuth : global::Pulumi.CustomResource
     {
         /// <summary>
         /// the id of the consumer to be configured with basic auth
@@ -119,7 +118,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ConsumerBasicAuthArgs : Pulumi.ResourceArgs
+    public sealed class ConsumerBasicAuthArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the id of the consumer to be configured with basic auth
@@ -154,9 +153,10 @@ namespace Pulumi.Kong
         public ConsumerBasicAuthArgs()
         {
         }
+        public static new ConsumerBasicAuthArgs Empty => new ConsumerBasicAuthArgs();
     }
 
-    public sealed class ConsumerBasicAuthState : Pulumi.ResourceArgs
+    public sealed class ConsumerBasicAuthState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the id of the consumer to be configured with basic auth
@@ -191,5 +191,6 @@ namespace Pulumi.Kong
         public ConsumerBasicAuthState()
         {
         }
+        public static new ConsumerBasicAuthState Empty => new ConsumerBasicAuthState();
     }
 }

@@ -4,9 +4,12 @@
 package config
 
 import (
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
+
+var _ = internal.GetEnvOrDefault
 
 // An basic auth password for kong admin
 func GetKongAdminPassword(ctx *pulumi.Context) string {
@@ -44,7 +47,11 @@ func GetStrictPluginsMatch(ctx *pulumi.Context) bool {
 	if err == nil {
 		return v
 	}
-	return getEnvOrDefault(false, parseEnvBool, "STRICT_PLUGINS_MATCH").(bool)
+	var value bool
+	if d := internal.GetEnvOrDefault(nil, internal.ParseEnvBool, "STRICT_PLUGINS_MATCH"); d != nil {
+		value = d.(bool)
+	}
+	return value
 }
 
 // Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
@@ -53,5 +60,9 @@ func GetTlsSkipVerify(ctx *pulumi.Context) bool {
 	if err == nil {
 		return v
 	}
-	return getEnvOrDefault(false, parseEnvBool, "TLS_SKIP_VERIFY").(bool)
+	var value bool
+	if d := internal.GetEnvOrDefault(false, internal.ParseEnvBool, "TLS_SKIP_VERIFY"); d != nil {
+		value = d.(bool)
+	}
+	return value
 }

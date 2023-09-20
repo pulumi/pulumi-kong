@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # ConsumerJwtAuth
@@ -21,8 +23,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -39,7 +39,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewPlugin(ctx, "jwtPlugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v", "	{\n", "		\"claims_to_verify\": [\"exp\"]\n", "	}\n", "\n")),
+//				ConfigJson: pulumi.String("	{\n		\"claims_to_verify\": [\"exp\"]\n	}\n\n"),
 //			})
 //			if err != nil {
 //				return err
@@ -89,6 +89,7 @@ func NewConsumerJwtAuth(ctx *pulumi.Context,
 	if args.RsaPublicKey == nil {
 		return nil, errors.New("invalid value for required argument 'RsaPublicKey'")
 	}
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConsumerJwtAuth
 	err := ctx.RegisterResource("kong:index/consumerJwtAuth:ConsumerJwtAuth", name, args, &resource, opts...)
 	if err != nil {
@@ -198,6 +199,12 @@ func (i *ConsumerJwtAuth) ToConsumerJwtAuthOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthOutput)
 }
 
+func (i *ConsumerJwtAuth) ToOutput(ctx context.Context) pulumix.Output[*ConsumerJwtAuth] {
+	return pulumix.Output[*ConsumerJwtAuth]{
+		OutputState: i.ToConsumerJwtAuthOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ConsumerJwtAuthArrayInput is an input type that accepts ConsumerJwtAuthArray and ConsumerJwtAuthArrayOutput values.
 // You can construct a concrete instance of `ConsumerJwtAuthArrayInput` via:
 //
@@ -221,6 +228,12 @@ func (i ConsumerJwtAuthArray) ToConsumerJwtAuthArrayOutput() ConsumerJwtAuthArra
 
 func (i ConsumerJwtAuthArray) ToConsumerJwtAuthArrayOutputWithContext(ctx context.Context) ConsumerJwtAuthArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthArrayOutput)
+}
+
+func (i ConsumerJwtAuthArray) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerJwtAuth] {
+	return pulumix.Output[[]*ConsumerJwtAuth]{
+		OutputState: i.ToConsumerJwtAuthArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ConsumerJwtAuthMapInput is an input type that accepts ConsumerJwtAuthMap and ConsumerJwtAuthMapOutput values.
@@ -248,6 +261,12 @@ func (i ConsumerJwtAuthMap) ToConsumerJwtAuthMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthMapOutput)
 }
 
+func (i ConsumerJwtAuthMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerJwtAuth] {
+	return pulumix.Output[map[string]*ConsumerJwtAuth]{
+		OutputState: i.ToConsumerJwtAuthMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ConsumerJwtAuthOutput struct{ *pulumi.OutputState }
 
 func (ConsumerJwtAuthOutput) ElementType() reflect.Type {
@@ -262,6 +281,42 @@ func (o ConsumerJwtAuthOutput) ToConsumerJwtAuthOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o ConsumerJwtAuthOutput) ToOutput(ctx context.Context) pulumix.Output[*ConsumerJwtAuth] {
+	return pulumix.Output[*ConsumerJwtAuth]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
+func (o ConsumerJwtAuthOutput) Algorithm() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConsumerJwtAuth) pulumi.StringPtrOutput { return v.Algorithm }).(pulumi.StringPtrOutput)
+}
+
+// the id of the consumer to be configured with jwt auth
+func (o ConsumerJwtAuthOutput) ConsumerId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerJwtAuth) pulumi.StringOutput { return v.ConsumerId }).(pulumi.StringOutput)
+}
+
+// A unique string identifying the credential. If left out, it will be auto-generated.
+func (o ConsumerJwtAuthOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConsumerJwtAuth) pulumi.StringPtrOutput { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
+func (o ConsumerJwtAuthOutput) RsaPublicKey() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerJwtAuth) pulumi.StringOutput { return v.RsaPublicKey }).(pulumi.StringOutput)
+}
+
+// If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
+func (o ConsumerJwtAuthOutput) Secret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConsumerJwtAuth) pulumi.StringPtrOutput { return v.Secret }).(pulumi.StringPtrOutput)
+}
+
+// A list of strings associated with the consumer JWT auth for grouping and filtering
+func (o ConsumerJwtAuthOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ConsumerJwtAuth) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
 type ConsumerJwtAuthArrayOutput struct{ *pulumi.OutputState }
 
 func (ConsumerJwtAuthArrayOutput) ElementType() reflect.Type {
@@ -274,6 +329,12 @@ func (o ConsumerJwtAuthArrayOutput) ToConsumerJwtAuthArrayOutput() ConsumerJwtAu
 
 func (o ConsumerJwtAuthArrayOutput) ToConsumerJwtAuthArrayOutputWithContext(ctx context.Context) ConsumerJwtAuthArrayOutput {
 	return o
+}
+
+func (o ConsumerJwtAuthArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerJwtAuth] {
+	return pulumix.Output[[]*ConsumerJwtAuth]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerJwtAuthArrayOutput) Index(i pulumi.IntInput) ConsumerJwtAuthOutput {
@@ -294,6 +355,12 @@ func (o ConsumerJwtAuthMapOutput) ToConsumerJwtAuthMapOutput() ConsumerJwtAuthMa
 
 func (o ConsumerJwtAuthMapOutput) ToConsumerJwtAuthMapOutputWithContext(ctx context.Context) ConsumerJwtAuthMapOutput {
 	return o
+}
+
+func (o ConsumerJwtAuthMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerJwtAuth] {
+	return pulumix.Output[map[string]*ConsumerJwtAuth]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerJwtAuthMapOutput) MapIndex(k pulumi.StringInput) ConsumerJwtAuthOutput {

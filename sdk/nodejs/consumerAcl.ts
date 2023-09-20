@@ -15,17 +15,16 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const myConsumer = new kong.Consumer("my_consumer", {
+ * const myConsumer = new kong.Consumer("myConsumer", {
  *     customId: "123",
  *     username: "User1",
  * });
- * const aclPlugin = new kong.Plugin("acl_plugin", {
- *     configJson: `	{
+ * const aclPlugin = new kong.Plugin("aclPlugin", {configJson: `	{
  * 		"allow": ["group1", "group2"]
  * 	}
- * `,
- * });
- * const consumerAcl = new kong.ConsumerAcl("consumer_acl", {
+ *
+ * `});
+ * const consumerAcl = new kong.ConsumerAcl("consumerAcl", {
  *     consumerId: myConsumer.id,
  *     group: "group2",
  *     tags: [

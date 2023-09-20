@@ -15,12 +15,12 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const myConsumer = new kong.Consumer("my_consumer", {
+ * const myConsumer = new kong.Consumer("myConsumer", {
  *     customId: "123",
  *     username: "User1",
  * });
- * const basicAuthPlugin = new kong.Plugin("basic_auth_plugin", {});
- * const consumerBasicAuth = new kong.ConsumerBasicAuth("consumer_basic_auth", {
+ * const basicAuthPlugin = new kong.Plugin("basicAuthPlugin", {});
+ * const consumerBasicAuth = new kong.ConsumerBasicAuth("consumerBasicAuth", {
  *     consumerId: myConsumer.id,
  *     password: "bar_updated",
  *     tags: [

@@ -17,38 +17,37 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
     ///     {
-    ///         var myConsumer = new Kong.Consumer("myConsumer", new Kong.ConsumerArgs
-    ///         {
-    ///             Username = "User1",
-    ///             CustomId = "123",
-    ///         });
-    ///         var keyAuthPlugin = new Kong.Plugin("keyAuthPlugin", new Kong.PluginArgs
-    ///         {
-    ///         });
-    ///         var consumerKeyAuth = new Kong.ConsumerKeyAuth("consumerKeyAuth", new Kong.ConsumerKeyAuthArgs
-    ///         {
-    ///             ConsumerId = myConsumer.Id,
-    ///             Key = "secret",
-    ///             Tags = 
-    ///             {
-    ///                 "myTag",
-    ///                 "anotherTag",
-    ///             },
-    ///         });
-    ///     }
+    ///         Username = "User1",
+    ///         CustomId = "123",
+    ///     });
     /// 
-    /// }
+    ///     var keyAuthPlugin = new Kong.Plugin("keyAuthPlugin");
+    /// 
+    ///     var consumerKeyAuth = new Kong.ConsumerKeyAuth("consumerKeyAuth", new()
+    ///     {
+    ///         ConsumerId = myConsumer.Id,
+    ///         Key = "secret",
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///             "anotherTag",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerKeyAuth:ConsumerKeyAuth")]
-    public partial class ConsumerKeyAuth : Pulumi.CustomResource
+    public partial class ConsumerKeyAuth : global::Pulumi.CustomResource
     {
         /// <summary>
         /// the id of the consumer to associate the credentials to
@@ -91,6 +90,10 @@ namespace Pulumi.Kong
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "key",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -112,7 +115,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ConsumerKeyAuthArgs : Pulumi.ResourceArgs
+    public sealed class ConsumerKeyAuthArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the id of the consumer to associate the credentials to
@@ -120,11 +123,21 @@ namespace Pulumi.Kong
         [Input("consumerId", required: true)]
         public Input<string> ConsumerId { get; set; } = null!;
 
+        [Input("key")]
+        private Input<string>? _key;
+
         /// <summary>
         /// Unique key to authenticate the client; if omitted the plugin will generate one
         /// </summary>
-        [Input("key")]
-        public Input<string>? Key { get; set; }
+        public Input<string>? Key
+        {
+            get => _key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -141,9 +154,10 @@ namespace Pulumi.Kong
         public ConsumerKeyAuthArgs()
         {
         }
+        public static new ConsumerKeyAuthArgs Empty => new ConsumerKeyAuthArgs();
     }
 
-    public sealed class ConsumerKeyAuthState : Pulumi.ResourceArgs
+    public sealed class ConsumerKeyAuthState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the id of the consumer to associate the credentials to
@@ -151,11 +165,21 @@ namespace Pulumi.Kong
         [Input("consumerId")]
         public Input<string>? ConsumerId { get; set; }
 
+        [Input("key")]
+        private Input<string>? _key;
+
         /// <summary>
         /// Unique key to authenticate the client; if omitted the plugin will generate one
         /// </summary>
-        [Input("key")]
-        public Input<string>? Key { get; set; }
+        public Input<string>? Key
+        {
+            get => _key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -172,5 +196,6 @@ namespace Pulumi.Kong
         public ConsumerKeyAuthState()
         {
         }
+        public static new ConsumerKeyAuthState Empty => new ConsumerKeyAuthState();
     }
 }

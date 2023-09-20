@@ -21,6 +21,36 @@ import javax.annotation.Nullable;
  * The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var consumer = new Consumer(&#34;consumer&#34;, ConsumerArgs.builder()        
+ *             .customId(&#34;123&#34;)
+ *             .tags(&#34;mySuperTag&#34;)
+ *             .username(&#34;User1&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 
@@ -37,7 +67,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * A custom id for the consumer, you must set either the username or custom_id
      * 
      */
-    @Export(name="customId", type=String.class, parameters={})
+    @Export(name="customId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> customId;
 
     /**
@@ -51,7 +81,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Consumer for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**
@@ -65,7 +95,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * The username to use, you must set either the username or custom_id
      * 
      */
-    @Export(name="username", type=String.class, parameters={})
+    @Export(name="username", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> username;
 
     /**

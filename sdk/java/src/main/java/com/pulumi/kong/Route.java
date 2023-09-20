@@ -28,6 +28,100 @@ import javax.annotation.Nullable;
  * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Route;
+ * import com.pulumi.kong.RouteArgs;
+ * import com.pulumi.kong.inputs.RouteHeaderArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var route = new Route(&#34;route&#34;, RouteArgs.builder()        
+ *             .protocols(            
+ *                 &#34;http&#34;,
+ *                 &#34;https&#34;)
+ *             .methods(            
+ *                 &#34;GET&#34;,
+ *                 &#34;POST&#34;)
+ *             .hosts(&#34;example2.com&#34;)
+ *             .paths(&#34;/test&#34;)
+ *             .stripPath(false)
+ *             .preserveHost(true)
+ *             .regexPriority(1)
+ *             .serviceId(kong_service.service().id())
+ *             .headers(RouteHeaderArgs.builder()
+ *                 .name(&#34;x-test-1&#34;)
+ *                 .values(                
+ *                     &#34;a&#34;,
+ *                     &#34;b&#34;)
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Route;
+ * import com.pulumi.kong.RouteArgs;
+ * import com.pulumi.kong.inputs.RouteSourceArgs;
+ * import com.pulumi.kong.inputs.RouteDestinationArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var route = new Route(&#34;route&#34;, RouteArgs.builder()        
+ *             .protocols(&#34;tcp&#34;)
+ *             .stripPath(true)
+ *             .preserveHost(false)
+ *             .sources(            
+ *                 RouteSourceArgs.builder()
+ *                     .ip(&#34;192.168.1.1&#34;)
+ *                     .port(80)
+ *                     .build(),
+ *                 RouteSourceArgs.builder()
+ *                     .ip(&#34;192.168.1.2&#34;)
+ *                     .build())
+ *             .destinations(RouteDestinationArgs.builder()
+ *                 .ip(&#34;172.10.1.1&#34;)
+ *                 .port(81)
+ *                 .build())
+ *             .snis(&#34;foo.com&#34;)
+ *             .serviceId(kong_service.service().id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 
@@ -44,7 +138,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A list of destination `ip` and `port`
      * 
      */
-    @Export(name="destinations", type=List.class, parameters={RouteDestination.class})
+    @Export(name="destinations", refs={List.class,RouteDestination.class}, tree="[0,1]")
     private Output</* @Nullable */ List<RouteDestination>> destinations;
 
     /**
@@ -58,7 +152,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
      * 
      */
-    @Export(name="headers", type=List.class, parameters={RouteHeader.class})
+    @Export(name="headers", refs={List.class,RouteHeader.class}, tree="[0,1]")
     private Output</* @Nullable */ List<RouteHeader>> headers;
 
     /**
@@ -72,7 +166,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A list of domain names that match this Route
      * 
      */
-    @Export(name="hosts", type=List.class, parameters={String.class})
+    @Export(name="hosts", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> hosts;
 
     /**
@@ -86,7 +180,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
      * 
      */
-    @Export(name="httpsRedirectStatusCode", type=Integer.class, parameters={})
+    @Export(name="httpsRedirectStatusCode", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> httpsRedirectStatusCode;
 
     /**
@@ -100,7 +194,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A list of HTTP methods that match this Route
      * 
      */
-    @Export(name="methods", type=List.class, parameters={String.class})
+    @Export(name="methods", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> methods;
 
     /**
@@ -114,7 +208,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * The name of the route
      * 
      */
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     /**
@@ -128,7 +222,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
      * 
      */
-    @Export(name="pathHandling", type=String.class, parameters={})
+    @Export(name="pathHandling", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> pathHandling;
 
     /**
@@ -142,7 +236,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A list of paths that match this Route
      * 
      */
-    @Export(name="paths", type=List.class, parameters={String.class})
+    @Export(name="paths", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> paths;
 
     /**
@@ -156,7 +250,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
      * 
      */
-    @Export(name="preserveHost", type=Boolean.class, parameters={})
+    @Export(name="preserveHost", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> preserveHost;
 
     /**
@@ -170,7 +264,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * The list of protocols to use
      * 
      */
-    @Export(name="protocols", type=List.class, parameters={String.class})
+    @Export(name="protocols", refs={List.class,String.class}, tree="[0,1]")
     private Output<List<String>> protocols;
 
     /**
@@ -184,7 +278,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
      * 
      */
-    @Export(name="regexPriority", type=Integer.class, parameters={})
+    @Export(name="regexPriority", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> regexPriority;
 
     /**
@@ -198,7 +292,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
      * 
      */
-    @Export(name="requestBuffering", type=Boolean.class, parameters={})
+    @Export(name="requestBuffering", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> requestBuffering;
 
     /**
@@ -212,7 +306,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
      * 
      */
-    @Export(name="responseBuffering", type=Boolean.class, parameters={})
+    @Export(name="responseBuffering", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> responseBuffering;
 
     /**
@@ -226,7 +320,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * Service ID to map to
      * 
      */
-    @Export(name="serviceId", type=String.class, parameters={})
+    @Export(name="serviceId", refs={String.class}, tree="[0]")
     private Output<String> serviceId;
 
     /**
@@ -240,7 +334,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A list of SNIs that match this Route when using stream routing.
      * 
      */
-    @Export(name="snis", type=List.class, parameters={String.class})
+    @Export(name="snis", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> snis;
 
     /**
@@ -254,7 +348,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A list of source `ip` and `port`
      * 
      */
-    @Export(name="sources", type=List.class, parameters={RouteSource.class})
+    @Export(name="sources", refs={List.class,RouteSource.class}, tree="[0,1]")
     private Output</* @Nullable */ List<RouteSource>> sources;
 
     /**
@@ -268,7 +362,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
      * 
      */
-    @Export(name="stripPath", type=Boolean.class, parameters={})
+    @Export(name="stripPath", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> stripPath;
 
     /**
@@ -282,7 +376,7 @@ public class Route extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Route for grouping and filtering.
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong.Inputs
 {
 
-    public sealed class RouteHeaderArgs : Pulumi.ResourceArgs
+    public sealed class RouteHeaderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the route
@@ -29,5 +29,6 @@ namespace Pulumi.Kong.Inputs
         public RouteHeaderArgs()
         {
         }
+        public static new RouteHeaderArgs Empty => new RouteHeaderArgs();
     }
 }

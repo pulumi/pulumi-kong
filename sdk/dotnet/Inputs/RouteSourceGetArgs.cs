@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong.Inputs
 {
 
-    public sealed class RouteSourceGetArgs : Pulumi.ResourceArgs
+    public sealed class RouteSourceGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("ip")]
         public Input<string>? Ip { get; set; }
@@ -21,5 +21,6 @@ namespace Pulumi.Kong.Inputs
         public RouteSourceGetArgs()
         {
         }
+        public static new RouteSourceGetArgs Empty => new RouteSourceGetArgs();
     }
 }

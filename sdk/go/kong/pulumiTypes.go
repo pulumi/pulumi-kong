@@ -7,8 +7,12 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type RouteDestination struct {
 	Ip   *string `pulumi:"ip"`
@@ -43,6 +47,12 @@ func (i RouteDestinationArgs) ToRouteDestinationOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(RouteDestinationOutput)
 }
 
+func (i RouteDestinationArgs) ToOutput(ctx context.Context) pulumix.Output[RouteDestination] {
+	return pulumix.Output[RouteDestination]{
+		OutputState: i.ToRouteDestinationOutputWithContext(ctx).OutputState,
+	}
+}
+
 // RouteDestinationArrayInput is an input type that accepts RouteDestinationArray and RouteDestinationArrayOutput values.
 // You can construct a concrete instance of `RouteDestinationArrayInput` via:
 //
@@ -68,6 +78,12 @@ func (i RouteDestinationArray) ToRouteDestinationArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(RouteDestinationArrayOutput)
 }
 
+func (i RouteDestinationArray) ToOutput(ctx context.Context) pulumix.Output[[]RouteDestination] {
+	return pulumix.Output[[]RouteDestination]{
+		OutputState: i.ToRouteDestinationArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type RouteDestinationOutput struct{ *pulumi.OutputState }
 
 func (RouteDestinationOutput) ElementType() reflect.Type {
@@ -80,6 +96,12 @@ func (o RouteDestinationOutput) ToRouteDestinationOutput() RouteDestinationOutpu
 
 func (o RouteDestinationOutput) ToRouteDestinationOutputWithContext(ctx context.Context) RouteDestinationOutput {
 	return o
+}
+
+func (o RouteDestinationOutput) ToOutput(ctx context.Context) pulumix.Output[RouteDestination] {
+	return pulumix.Output[RouteDestination]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RouteDestinationOutput) Ip() pulumi.StringPtrOutput {
@@ -102,6 +124,12 @@ func (o RouteDestinationArrayOutput) ToRouteDestinationArrayOutput() RouteDestin
 
 func (o RouteDestinationArrayOutput) ToRouteDestinationArrayOutputWithContext(ctx context.Context) RouteDestinationArrayOutput {
 	return o
+}
+
+func (o RouteDestinationArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]RouteDestination] {
+	return pulumix.Output[[]RouteDestination]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RouteDestinationArrayOutput) Index(i pulumi.IntInput) RouteDestinationOutput {
@@ -145,6 +173,12 @@ func (i RouteHeaderArgs) ToRouteHeaderOutputWithContext(ctx context.Context) Rou
 	return pulumi.ToOutputWithContext(ctx, i).(RouteHeaderOutput)
 }
 
+func (i RouteHeaderArgs) ToOutput(ctx context.Context) pulumix.Output[RouteHeader] {
+	return pulumix.Output[RouteHeader]{
+		OutputState: i.ToRouteHeaderOutputWithContext(ctx).OutputState,
+	}
+}
+
 // RouteHeaderArrayInput is an input type that accepts RouteHeaderArray and RouteHeaderArrayOutput values.
 // You can construct a concrete instance of `RouteHeaderArrayInput` via:
 //
@@ -170,6 +204,12 @@ func (i RouteHeaderArray) ToRouteHeaderArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(RouteHeaderArrayOutput)
 }
 
+func (i RouteHeaderArray) ToOutput(ctx context.Context) pulumix.Output[[]RouteHeader] {
+	return pulumix.Output[[]RouteHeader]{
+		OutputState: i.ToRouteHeaderArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type RouteHeaderOutput struct{ *pulumi.OutputState }
 
 func (RouteHeaderOutput) ElementType() reflect.Type {
@@ -182,6 +222,12 @@ func (o RouteHeaderOutput) ToRouteHeaderOutput() RouteHeaderOutput {
 
 func (o RouteHeaderOutput) ToRouteHeaderOutputWithContext(ctx context.Context) RouteHeaderOutput {
 	return o
+}
+
+func (o RouteHeaderOutput) ToOutput(ctx context.Context) pulumix.Output[RouteHeader] {
+	return pulumix.Output[RouteHeader]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The name of the route
@@ -205,6 +251,12 @@ func (o RouteHeaderArrayOutput) ToRouteHeaderArrayOutput() RouteHeaderArrayOutpu
 
 func (o RouteHeaderArrayOutput) ToRouteHeaderArrayOutputWithContext(ctx context.Context) RouteHeaderArrayOutput {
 	return o
+}
+
+func (o RouteHeaderArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]RouteHeader] {
+	return pulumix.Output[[]RouteHeader]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RouteHeaderArrayOutput) Index(i pulumi.IntInput) RouteHeaderOutput {
@@ -246,6 +298,12 @@ func (i RouteSourceArgs) ToRouteSourceOutputWithContext(ctx context.Context) Rou
 	return pulumi.ToOutputWithContext(ctx, i).(RouteSourceOutput)
 }
 
+func (i RouteSourceArgs) ToOutput(ctx context.Context) pulumix.Output[RouteSource] {
+	return pulumix.Output[RouteSource]{
+		OutputState: i.ToRouteSourceOutputWithContext(ctx).OutputState,
+	}
+}
+
 // RouteSourceArrayInput is an input type that accepts RouteSourceArray and RouteSourceArrayOutput values.
 // You can construct a concrete instance of `RouteSourceArrayInput` via:
 //
@@ -271,6 +329,12 @@ func (i RouteSourceArray) ToRouteSourceArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(RouteSourceArrayOutput)
 }
 
+func (i RouteSourceArray) ToOutput(ctx context.Context) pulumix.Output[[]RouteSource] {
+	return pulumix.Output[[]RouteSource]{
+		OutputState: i.ToRouteSourceArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type RouteSourceOutput struct{ *pulumi.OutputState }
 
 func (RouteSourceOutput) ElementType() reflect.Type {
@@ -283,6 +347,12 @@ func (o RouteSourceOutput) ToRouteSourceOutput() RouteSourceOutput {
 
 func (o RouteSourceOutput) ToRouteSourceOutputWithContext(ctx context.Context) RouteSourceOutput {
 	return o
+}
+
+func (o RouteSourceOutput) ToOutput(ctx context.Context) pulumix.Output[RouteSource] {
+	return pulumix.Output[RouteSource]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RouteSourceOutput) Ip() pulumi.StringPtrOutput {
@@ -305,6 +375,12 @@ func (o RouteSourceArrayOutput) ToRouteSourceArrayOutput() RouteSourceArrayOutpu
 
 func (o RouteSourceArrayOutput) ToRouteSourceArrayOutputWithContext(ctx context.Context) RouteSourceArrayOutput {
 	return o
+}
+
+func (o RouteSourceArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]RouteSource] {
+	return pulumix.Output[[]RouteSource]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RouteSourceArrayOutput) Index(i pulumi.IntInput) RouteSourceOutput {
@@ -344,6 +420,12 @@ func (i UpstreamHealthchecksArgs) ToUpstreamHealthchecksOutput() UpstreamHealthc
 
 func (i UpstreamHealthchecksArgs) ToUpstreamHealthchecksOutputWithContext(ctx context.Context) UpstreamHealthchecksOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksOutput)
+}
+
+func (i UpstreamHealthchecksArgs) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecks] {
+	return pulumix.Output[UpstreamHealthchecks]{
+		OutputState: i.ToUpstreamHealthchecksOutputWithContext(ctx).OutputState,
+	}
 }
 
 func (i UpstreamHealthchecksArgs) ToUpstreamHealthchecksPtrOutput() UpstreamHealthchecksPtrOutput {
@@ -387,6 +469,12 @@ func (i *upstreamHealthchecksPtrType) ToUpstreamHealthchecksPtrOutputWithContext
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksPtrOutput)
 }
 
+func (i *upstreamHealthchecksPtrType) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecks] {
+	return pulumix.Output[*UpstreamHealthchecks]{
+		OutputState: i.ToUpstreamHealthchecksPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamHealthchecksOutput struct{ *pulumi.OutputState }
 
 func (UpstreamHealthchecksOutput) ElementType() reflect.Type {
@@ -411,6 +499,12 @@ func (o UpstreamHealthchecksOutput) ToUpstreamHealthchecksPtrOutputWithContext(c
 	}).(UpstreamHealthchecksPtrOutput)
 }
 
+func (o UpstreamHealthchecksOutput) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecks] {
+	return pulumix.Output[UpstreamHealthchecks]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o UpstreamHealthchecksOutput) Active() UpstreamHealthchecksActivePtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecks) *UpstreamHealthchecksActive { return v.Active }).(UpstreamHealthchecksActivePtrOutput)
 }
@@ -431,6 +525,12 @@ func (o UpstreamHealthchecksPtrOutput) ToUpstreamHealthchecksPtrOutput() Upstrea
 
 func (o UpstreamHealthchecksPtrOutput) ToUpstreamHealthchecksPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPtrOutput {
 	return o
+}
+
+func (o UpstreamHealthchecksPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecks] {
+	return pulumix.Output[*UpstreamHealthchecks]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksPtrOutput) Elem() UpstreamHealthchecksOutput {
@@ -506,6 +606,12 @@ func (i UpstreamHealthchecksActiveArgs) ToUpstreamHealthchecksActiveOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksActiveOutput)
 }
 
+func (i UpstreamHealthchecksActiveArgs) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksActive] {
+	return pulumix.Output[UpstreamHealthchecksActive]{
+		OutputState: i.ToUpstreamHealthchecksActiveOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i UpstreamHealthchecksActiveArgs) ToUpstreamHealthchecksActivePtrOutput() UpstreamHealthchecksActivePtrOutput {
 	return i.ToUpstreamHealthchecksActivePtrOutputWithContext(context.Background())
 }
@@ -547,6 +653,12 @@ func (i *upstreamHealthchecksActivePtrType) ToUpstreamHealthchecksActivePtrOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksActivePtrOutput)
 }
 
+func (i *upstreamHealthchecksActivePtrType) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksActive] {
+	return pulumix.Output[*UpstreamHealthchecksActive]{
+		OutputState: i.ToUpstreamHealthchecksActivePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamHealthchecksActiveOutput struct{ *pulumi.OutputState }
 
 func (UpstreamHealthchecksActiveOutput) ElementType() reflect.Type {
@@ -569,6 +681,12 @@ func (o UpstreamHealthchecksActiveOutput) ToUpstreamHealthchecksActivePtrOutputW
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksActive) *UpstreamHealthchecksActive {
 		return &v
 	}).(UpstreamHealthchecksActivePtrOutput)
+}
+
+func (o UpstreamHealthchecksActiveOutput) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksActive] {
+	return pulumix.Output[UpstreamHealthchecksActive]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksActiveOutput) Concurrency() pulumi.IntPtrOutput {
@@ -615,6 +733,12 @@ func (o UpstreamHealthchecksActivePtrOutput) ToUpstreamHealthchecksActivePtrOutp
 
 func (o UpstreamHealthchecksActivePtrOutput) ToUpstreamHealthchecksActivePtrOutputWithContext(ctx context.Context) UpstreamHealthchecksActivePtrOutput {
 	return o
+}
+
+func (o UpstreamHealthchecksActivePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksActive] {
+	return pulumix.Output[*UpstreamHealthchecksActive]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksActivePtrOutput) Elem() UpstreamHealthchecksActiveOutput {
@@ -734,6 +858,12 @@ func (i UpstreamHealthchecksActiveHealthyArgs) ToUpstreamHealthchecksActiveHealt
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksActiveHealthyOutput)
 }
 
+func (i UpstreamHealthchecksActiveHealthyArgs) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksActiveHealthy] {
+	return pulumix.Output[UpstreamHealthchecksActiveHealthy]{
+		OutputState: i.ToUpstreamHealthchecksActiveHealthyOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i UpstreamHealthchecksActiveHealthyArgs) ToUpstreamHealthchecksActiveHealthyPtrOutput() UpstreamHealthchecksActiveHealthyPtrOutput {
 	return i.ToUpstreamHealthchecksActiveHealthyPtrOutputWithContext(context.Background())
 }
@@ -775,6 +905,12 @@ func (i *upstreamHealthchecksActiveHealthyPtrType) ToUpstreamHealthchecksActiveH
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksActiveHealthyPtrOutput)
 }
 
+func (i *upstreamHealthchecksActiveHealthyPtrType) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksActiveHealthy] {
+	return pulumix.Output[*UpstreamHealthchecksActiveHealthy]{
+		OutputState: i.ToUpstreamHealthchecksActiveHealthyPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamHealthchecksActiveHealthyOutput struct{ *pulumi.OutputState }
 
 func (UpstreamHealthchecksActiveHealthyOutput) ElementType() reflect.Type {
@@ -797,6 +933,12 @@ func (o UpstreamHealthchecksActiveHealthyOutput) ToUpstreamHealthchecksActiveHea
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksActiveHealthy) *UpstreamHealthchecksActiveHealthy {
 		return &v
 	}).(UpstreamHealthchecksActiveHealthyPtrOutput)
+}
+
+func (o UpstreamHealthchecksActiveHealthyOutput) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksActiveHealthy] {
+	return pulumix.Output[UpstreamHealthchecksActiveHealthy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksActiveHealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
@@ -823,6 +965,12 @@ func (o UpstreamHealthchecksActiveHealthyPtrOutput) ToUpstreamHealthchecksActive
 
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) ToUpstreamHealthchecksActiveHealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksActiveHealthyPtrOutput {
 	return o
+}
+
+func (o UpstreamHealthchecksActiveHealthyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksActiveHealthy] {
+	return pulumix.Output[*UpstreamHealthchecksActiveHealthy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) Elem() UpstreamHealthchecksActiveHealthyOutput {
@@ -901,6 +1049,12 @@ func (i UpstreamHealthchecksActiveUnhealthyArgs) ToUpstreamHealthchecksActiveUnh
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksActiveUnhealthyOutput)
 }
 
+func (i UpstreamHealthchecksActiveUnhealthyArgs) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksActiveUnhealthy] {
+	return pulumix.Output[UpstreamHealthchecksActiveUnhealthy]{
+		OutputState: i.ToUpstreamHealthchecksActiveUnhealthyOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i UpstreamHealthchecksActiveUnhealthyArgs) ToUpstreamHealthchecksActiveUnhealthyPtrOutput() UpstreamHealthchecksActiveUnhealthyPtrOutput {
 	return i.ToUpstreamHealthchecksActiveUnhealthyPtrOutputWithContext(context.Background())
 }
@@ -942,6 +1096,12 @@ func (i *upstreamHealthchecksActiveUnhealthyPtrType) ToUpstreamHealthchecksActiv
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksActiveUnhealthyPtrOutput)
 }
 
+func (i *upstreamHealthchecksActiveUnhealthyPtrType) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksActiveUnhealthy] {
+	return pulumix.Output[*UpstreamHealthchecksActiveUnhealthy]{
+		OutputState: i.ToUpstreamHealthchecksActiveUnhealthyPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamHealthchecksActiveUnhealthyOutput struct{ *pulumi.OutputState }
 
 func (UpstreamHealthchecksActiveUnhealthyOutput) ElementType() reflect.Type {
@@ -964,6 +1124,12 @@ func (o UpstreamHealthchecksActiveUnhealthyOutput) ToUpstreamHealthchecksActiveU
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksActiveUnhealthy) *UpstreamHealthchecksActiveUnhealthy {
 		return &v
 	}).(UpstreamHealthchecksActiveUnhealthyPtrOutput)
+}
+
+func (o UpstreamHealthchecksActiveUnhealthyOutput) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksActiveUnhealthy] {
+	return pulumix.Output[UpstreamHealthchecksActiveUnhealthy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyOutput) HttpFailures() pulumi.IntPtrOutput {
@@ -998,6 +1164,12 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) ToUpstreamHealthchecksActi
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) ToUpstreamHealthchecksActiveUnhealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksActiveUnhealthyPtrOutput {
 	return o
+}
+
+func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksActiveUnhealthy] {
+	return pulumix.Output[*UpstreamHealthchecksActiveUnhealthy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Elem() UpstreamHealthchecksActiveUnhealthyOutput {
@@ -1090,6 +1262,12 @@ func (i UpstreamHealthchecksPassiveArgs) ToUpstreamHealthchecksPassiveOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksPassiveOutput)
 }
 
+func (i UpstreamHealthchecksPassiveArgs) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksPassive] {
+	return pulumix.Output[UpstreamHealthchecksPassive]{
+		OutputState: i.ToUpstreamHealthchecksPassiveOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i UpstreamHealthchecksPassiveArgs) ToUpstreamHealthchecksPassivePtrOutput() UpstreamHealthchecksPassivePtrOutput {
 	return i.ToUpstreamHealthchecksPassivePtrOutputWithContext(context.Background())
 }
@@ -1131,6 +1309,12 @@ func (i *upstreamHealthchecksPassivePtrType) ToUpstreamHealthchecksPassivePtrOut
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksPassivePtrOutput)
 }
 
+func (i *upstreamHealthchecksPassivePtrType) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksPassive] {
+	return pulumix.Output[*UpstreamHealthchecksPassive]{
+		OutputState: i.ToUpstreamHealthchecksPassivePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamHealthchecksPassiveOutput struct{ *pulumi.OutputState }
 
 func (UpstreamHealthchecksPassiveOutput) ElementType() reflect.Type {
@@ -1153,6 +1337,12 @@ func (o UpstreamHealthchecksPassiveOutput) ToUpstreamHealthchecksPassivePtrOutpu
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksPassive) *UpstreamHealthchecksPassive {
 		return &v
 	}).(UpstreamHealthchecksPassivePtrOutput)
+}
+
+func (o UpstreamHealthchecksPassiveOutput) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksPassive] {
+	return pulumix.Output[UpstreamHealthchecksPassive]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksPassiveOutput) Healthy() UpstreamHealthchecksPassiveHealthyPtrOutput {
@@ -1179,6 +1369,12 @@ func (o UpstreamHealthchecksPassivePtrOutput) ToUpstreamHealthchecksPassivePtrOu
 
 func (o UpstreamHealthchecksPassivePtrOutput) ToUpstreamHealthchecksPassivePtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPassivePtrOutput {
 	return o
+}
+
+func (o UpstreamHealthchecksPassivePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksPassive] {
+	return pulumix.Output[*UpstreamHealthchecksPassive]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksPassivePtrOutput) Elem() UpstreamHealthchecksPassiveOutput {
@@ -1251,6 +1447,12 @@ func (i UpstreamHealthchecksPassiveHealthyArgs) ToUpstreamHealthchecksPassiveHea
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksPassiveHealthyOutput)
 }
 
+func (i UpstreamHealthchecksPassiveHealthyArgs) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksPassiveHealthy] {
+	return pulumix.Output[UpstreamHealthchecksPassiveHealthy]{
+		OutputState: i.ToUpstreamHealthchecksPassiveHealthyOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i UpstreamHealthchecksPassiveHealthyArgs) ToUpstreamHealthchecksPassiveHealthyPtrOutput() UpstreamHealthchecksPassiveHealthyPtrOutput {
 	return i.ToUpstreamHealthchecksPassiveHealthyPtrOutputWithContext(context.Background())
 }
@@ -1292,6 +1494,12 @@ func (i *upstreamHealthchecksPassiveHealthyPtrType) ToUpstreamHealthchecksPassiv
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
 
+func (i *upstreamHealthchecksPassiveHealthyPtrType) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksPassiveHealthy] {
+	return pulumix.Output[*UpstreamHealthchecksPassiveHealthy]{
+		OutputState: i.ToUpstreamHealthchecksPassiveHealthyPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamHealthchecksPassiveHealthyOutput struct{ *pulumi.OutputState }
 
 func (UpstreamHealthchecksPassiveHealthyOutput) ElementType() reflect.Type {
@@ -1316,6 +1524,12 @@ func (o UpstreamHealthchecksPassiveHealthyOutput) ToUpstreamHealthchecksPassiveH
 	}).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
 
+func (o UpstreamHealthchecksPassiveHealthyOutput) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksPassiveHealthy] {
+	return pulumix.Output[UpstreamHealthchecksPassiveHealthy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o UpstreamHealthchecksPassiveHealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveHealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
 }
@@ -1336,6 +1550,12 @@ func (o UpstreamHealthchecksPassiveHealthyPtrOutput) ToUpstreamHealthchecksPassi
 
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) ToUpstreamHealthchecksPassiveHealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPassiveHealthyPtrOutput {
 	return o
+}
+
+func (o UpstreamHealthchecksPassiveHealthyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksPassiveHealthy] {
+	return pulumix.Output[*UpstreamHealthchecksPassiveHealthy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) Elem() UpstreamHealthchecksPassiveHealthyOutput {
@@ -1403,6 +1623,12 @@ func (i UpstreamHealthchecksPassiveUnhealthyArgs) ToUpstreamHealthchecksPassiveU
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksPassiveUnhealthyOutput)
 }
 
+func (i UpstreamHealthchecksPassiveUnhealthyArgs) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksPassiveUnhealthy] {
+	return pulumix.Output[UpstreamHealthchecksPassiveUnhealthy]{
+		OutputState: i.ToUpstreamHealthchecksPassiveUnhealthyOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i UpstreamHealthchecksPassiveUnhealthyArgs) ToUpstreamHealthchecksPassiveUnhealthyPtrOutput() UpstreamHealthchecksPassiveUnhealthyPtrOutput {
 	return i.ToUpstreamHealthchecksPassiveUnhealthyPtrOutputWithContext(context.Background())
 }
@@ -1444,6 +1670,12 @@ func (i *upstreamHealthchecksPassiveUnhealthyPtrType) ToUpstreamHealthchecksPass
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamHealthchecksPassiveUnhealthyPtrOutput)
 }
 
+func (i *upstreamHealthchecksPassiveUnhealthyPtrType) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksPassiveUnhealthy] {
+	return pulumix.Output[*UpstreamHealthchecksPassiveUnhealthy]{
+		OutputState: i.ToUpstreamHealthchecksPassiveUnhealthyPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamHealthchecksPassiveUnhealthyOutput struct{ *pulumi.OutputState }
 
 func (UpstreamHealthchecksPassiveUnhealthyOutput) ElementType() reflect.Type {
@@ -1466,6 +1698,12 @@ func (o UpstreamHealthchecksPassiveUnhealthyOutput) ToUpstreamHealthchecksPassiv
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpstreamHealthchecksPassiveUnhealthy) *UpstreamHealthchecksPassiveUnhealthy {
 		return &v
 	}).(UpstreamHealthchecksPassiveUnhealthyPtrOutput)
+}
+
+func (o UpstreamHealthchecksPassiveUnhealthyOutput) ToOutput(ctx context.Context) pulumix.Output[UpstreamHealthchecksPassiveUnhealthy] {
+	return pulumix.Output[UpstreamHealthchecksPassiveUnhealthy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyOutput) HttpFailures() pulumi.IntPtrOutput {
@@ -1496,6 +1734,12 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) ToUpstreamHealthchecksPas
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) ToUpstreamHealthchecksPassiveUnhealthyPtrOutputWithContext(ctx context.Context) UpstreamHealthchecksPassiveUnhealthyPtrOutput {
 	return o
+}
+
+func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*UpstreamHealthchecksPassiveUnhealthy] {
+	return pulumix.Output[*UpstreamHealthchecksPassiveUnhealthy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Elem() UpstreamHealthchecksPassiveUnhealthyOutput {

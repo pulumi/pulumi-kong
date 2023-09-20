@@ -17,43 +17,44 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
     ///     {
-    ///         var myConsumer = new Kong.Consumer("myConsumer", new Kong.ConsumerArgs
-    ///         {
-    ///             CustomId = "123",
-    ///             Username = "User1",
-    ///         });
-    ///         var aclPlugin = new Kong.Plugin("aclPlugin", new Kong.PluginArgs
-    ///         {
-    ///             ConfigJson = @"	{
+    ///         CustomId = "123",
+    ///         Username = "User1",
+    ///     });
+    /// 
+    ///     var aclPlugin = new Kong.Plugin("aclPlugin", new()
+    ///     {
+    ///         ConfigJson = @"	{
     /// 		""allow"": [""group1"", ""group2""]
     /// 	}
     /// 
     /// ",
-    ///         });
-    ///         var consumerAcl = new Kong.ConsumerAcl("consumerAcl", new Kong.ConsumerAclArgs
-    ///         {
-    ///             ConsumerId = myConsumer.Id,
-    ///             Group = "group2",
-    ///             Tags = 
-    ///             {
-    ///                 "myTag",
-    ///                 "otherTag",
-    ///             },
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    ///     var consumerAcl = new Kong.ConsumerAcl("consumerAcl", new()
+    ///     {
+    ///         ConsumerId = myConsumer.Id,
+    ///         Group = "group2",
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///             "otherTag",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerAcl:ConsumerAcl")]
-    public partial class ConsumerAcl : Pulumi.CustomResource
+    public partial class ConsumerAcl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// the id of the consumer to be configured
@@ -117,7 +118,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ConsumerAclArgs : Pulumi.ResourceArgs
+    public sealed class ConsumerAclArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the id of the consumer to be configured
@@ -146,9 +147,10 @@ namespace Pulumi.Kong
         public ConsumerAclArgs()
         {
         }
+        public static new ConsumerAclArgs Empty => new ConsumerAclArgs();
     }
 
-    public sealed class ConsumerAclState : Pulumi.ResourceArgs
+    public sealed class ConsumerAclState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the id of the consumer to be configured
@@ -177,5 +179,6 @@ namespace Pulumi.Kong
         public ConsumerAclState()
         {
         }
+        public static new ConsumerAclState Empty => new ConsumerAclState();
     }
 }

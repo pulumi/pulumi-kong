@@ -21,6 +21,39 @@ import javax.annotation.Nullable;
  * For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Certificate;
+ * import com.pulumi.kong.CertificateArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
+ *             .certificate(&#34;public key --- 123 ----&#34;)
+ *             .privateKey(&#34;private key --- 456 ----&#34;)
+ *             .snis(            
+ *                 &#34;foo.com&#34;,
+ *                 &#34;bar.com&#34;)
+ *             .tags(&#34;myTag&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 
@@ -37,7 +70,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
      * should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
      * 
      */
-    @Export(name="certificate", type=String.class, parameters={})
+    @Export(name="certificate", refs={String.class}, tree="[0]")
     private Output<String> certificate;
 
     /**
@@ -51,7 +84,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
      * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
      * 
      */
-    @Export(name="privateKey", type=String.class, parameters={})
+    @Export(name="privateKey", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> privateKey;
 
     /**
@@ -65,7 +98,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Certificate for grouping and filtering
      * 
      */
-    @Export(name="snis", type=List.class, parameters={String.class})
+    @Export(name="snis", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> snis;
 
     /**
@@ -75,7 +108,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
     public Output<Optional<List<String>>> snis() {
         return Codegen.optional(this.snis);
     }
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     public Output<Optional<List<String>>> tags() {
@@ -114,6 +147,9 @@ public class Certificate extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .additionalSecretOutputs(List.of(
+                "privateKey"
+            ))
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

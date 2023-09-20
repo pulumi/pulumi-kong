@@ -21,6 +21,48 @@ import javax.annotation.Nullable;
  * Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.ConsumerKeyAuth;
+ * import com.pulumi.kong.ConsumerKeyAuthArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
+ *             .username(&#34;User1&#34;)
+ *             .customId(&#34;123&#34;)
+ *             .build());
+ * 
+ *         var keyAuthPlugin = new Plugin(&#34;keyAuthPlugin&#34;);
+ * 
+ *         var consumerKeyAuth = new ConsumerKeyAuth(&#34;consumerKeyAuth&#34;, ConsumerKeyAuthArgs.builder()        
+ *             .consumerId(myConsumer.id())
+ *             .key(&#34;secret&#34;)
+ *             .tags(            
+ *                 &#34;myTag&#34;,
+ *                 &#34;anotherTag&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  */
 @ResourceType(type="kong:index/consumerKeyAuth:ConsumerKeyAuth")
@@ -29,7 +71,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * the id of the consumer to associate the credentials to
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output<String> consumerId;
 
     /**
@@ -43,7 +85,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * Unique key to authenticate the client; if omitted the plugin will generate one
      * 
      */
-    @Export(name="key", type=String.class, parameters={})
+    @Export(name="key", refs={String.class}, tree="[0]")
     private Output<String> key;
 
     /**
@@ -57,7 +99,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the consumer key auth for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**
@@ -100,6 +142,9 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .additionalSecretOutputs(List.of(
+                "key"
+            ))
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

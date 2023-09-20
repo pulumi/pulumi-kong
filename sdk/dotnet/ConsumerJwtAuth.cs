@@ -17,41 +17,42 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
     ///     {
-    ///         var myConsumer = new Kong.Consumer("myConsumer", new Kong.ConsumerArgs
-    ///         {
-    ///             CustomId = "123",
-    ///             Username = "User1",
-    ///         });
-    ///         var jwtPlugin = new Kong.Plugin("jwtPlugin", new Kong.PluginArgs
-    ///         {
-    ///             ConfigJson = @"	{
+    ///         CustomId = "123",
+    ///         Username = "User1",
+    ///     });
+    /// 
+    ///     var jwtPlugin = new Kong.Plugin("jwtPlugin", new()
+    ///     {
+    ///         ConfigJson = @"	{
     /// 		""claims_to_verify"": [""exp""]
     /// 	}
     /// 
     /// ",
-    ///         });
-    ///         var consumerJwtConfig = new Kong.ConsumerJwtAuth("consumerJwtConfig", new Kong.ConsumerJwtAuthArgs
-    ///         {
-    ///             Algorithm = "HS256",
-    ///             ConsumerId = myConsumer.Id,
-    ///             Key = "my_key",
-    ///             RsaPublicKey = "foo",
-    ///             Secret = "my_secret",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    ///     var consumerJwtConfig = new Kong.ConsumerJwtAuth("consumerJwtConfig", new()
+    ///     {
+    ///         Algorithm = "HS256",
+    ///         ConsumerId = myConsumer.Id,
+    ///         Key = "my_key",
+    ///         RsaPublicKey = "foo",
+    ///         Secret = "my_secret",
+    ///     });
+    /// 
+    /// });
     /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerJwtAuth:ConsumerJwtAuth")]
-    public partial class ConsumerJwtAuth : Pulumi.CustomResource
+    public partial class ConsumerJwtAuth : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
@@ -133,7 +134,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ConsumerJwtAuthArgs : Pulumi.ResourceArgs
+    public sealed class ConsumerJwtAuthArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
@@ -180,9 +181,10 @@ namespace Pulumi.Kong
         public ConsumerJwtAuthArgs()
         {
         }
+        public static new ConsumerJwtAuthArgs Empty => new ConsumerJwtAuthArgs();
     }
 
-    public sealed class ConsumerJwtAuthState : Pulumi.ResourceArgs
+    public sealed class ConsumerJwtAuthState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
@@ -229,5 +231,6 @@ namespace Pulumi.Kong
         public ConsumerJwtAuthState()
         {
         }
+        public static new ConsumerJwtAuthState Empty => new ConsumerJwtAuthState();
     }
 }

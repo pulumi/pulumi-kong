@@ -23,6 +23,172 @@ import javax.annotation.Nullable;
  * The `config_json` is passed through to the plugin to configure it as is.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 5,
+ * 		&#34;hour&#34; : 1000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * To apply a plugin to a consumer use the `consumer_id` property, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var pluginConsumer = new Consumer(&#34;pluginConsumer&#34;, ConsumerArgs.builder()        
+ *             .customId(&#34;567&#34;)
+ *             .username(&#34;PluginUser&#34;)
+ *             .build());
+ * 
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 5,
+ * 		&#34;hour&#34; : 1000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .consumerId(pluginConsumer.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To apply a plugin to a service use the `service_id` property, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .host(&#34;test.org&#34;)
+ *             .protocol(&#34;http&#34;)
+ *             .build());
+ * 
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 10,
+ * 		&#34;hour&#34; : 2000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .serviceId(service.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To apply a plugin to a route use the `route_id` property, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .host(&#34;test.org&#34;)
+ *             .protocol(&#34;http&#34;)
+ *             .build());
+ * 
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 11,
+ * 		&#34;hour&#34; : 4000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .enabled(true)
+ *             .serviceId(service.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 
@@ -35,7 +201,7 @@ import javax.annotation.Nullable;
  */
 @ResourceType(type="kong:index/plugin:Plugin")
 public class Plugin extends com.pulumi.resources.CustomResource {
-    @Export(name="computedConfig", type=String.class, parameters={})
+    @Export(name="computedConfig", refs={String.class}, tree="[0]")
     private Output<String> computedConfig;
 
     public Output<String> computedConfig() {
@@ -46,7 +212,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * page of the plugin you are configuring
      * 
      */
-    @Export(name="configJson", type=String.class, parameters={})
+    @Export(name="configJson", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> configJson;
 
     /**
@@ -61,7 +227,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * the consumer id you want to configure the plugin for
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> consumerId;
 
     /**
@@ -75,7 +241,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
      * 
      */
-    @Export(name="enabled", type=Boolean.class, parameters={})
+    @Export(name="enabled", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> enabled;
 
     /**
@@ -85,7 +251,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
     public Output<Optional<Boolean>> enabled() {
         return Codegen.optional(this.enabled);
     }
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     public Output<String> name() {
@@ -95,7 +261,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * the route id that you want to configure the plugin for
      * 
      */
-    @Export(name="routeId", type=String.class, parameters={})
+    @Export(name="routeId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> routeId;
 
     /**
@@ -109,7 +275,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * the service id that you want to configure the plugin for
      * 
      */
-    @Export(name="serviceId", type=String.class, parameters={})
+    @Export(name="serviceId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> serviceId;
 
     /**
@@ -119,7 +285,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
     public Output<Optional<String>> serviceId() {
         return Codegen.optional(this.serviceId);
     }
-    @Export(name="strictMatch", type=Boolean.class, parameters={})
+    @Export(name="strictMatch", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> strictMatch;
 
     public Output<Optional<Boolean>> strictMatch() {
@@ -129,7 +295,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Plugin for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

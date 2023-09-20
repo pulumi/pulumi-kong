@@ -30,7 +30,7 @@ namespace Pulumi.Kong
             }
         }
 
-        private static readonly Pulumi.Config __config = new Pulumi.Config("kong");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("kong");
 
         private static readonly __Value<string?> _kongAdminPassword = new __Value<string?>(() => __config.Get("kongAdminPassword"));
         /// <summary>

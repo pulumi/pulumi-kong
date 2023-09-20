@@ -23,6 +23,106 @@ import javax.annotation.Nullable;
  * The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .connectTimeout(1000)
+ *             .host(&#34;test.org&#34;)
+ *             .path(&#34;/mypath&#34;)
+ *             .port(8080)
+ *             .protocol(&#34;http&#34;)
+ *             .readTimeout(3000)
+ *             .retries(5)
+ *             .writeTimeout(2000)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Certificate;
+ * import com.pulumi.kong.CertificateArgs;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
+ *             .certificate(&#34;&#34;&#34;
+ *     -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ *             &#34;&#34;&#34;)
+ *             .privateKey(&#34;&#34;&#34;
+ *     -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ *             &#34;&#34;&#34;)
+ *             .snis(&#34;foo.com&#34;)
+ *             .build());
+ * 
+ *         var ca = new Certificate(&#34;ca&#34;, CertificateArgs.builder()        
+ *             .certificate(&#34;&#34;&#34;
+ *     -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ *             &#34;&#34;&#34;)
+ *             .privateKey(&#34;&#34;&#34;
+ *     -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ *             &#34;&#34;&#34;)
+ *             .snis(&#34;ca.com&#34;)
+ *             .build());
+ * 
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .protocol(&#34;https&#34;)
+ *             .host(&#34;test.org&#34;)
+ *             .tlsVerify(true)
+ *             .tlsVerifyDepth(2)
+ *             .clientCertificateId(certificate.id())
+ *             .caCertificateIds(ca.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 
@@ -39,7 +139,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
      * 
      */
-    @Export(name="caCertificateIds", type=List.class, parameters={String.class})
+    @Export(name="caCertificateIds", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> caCertificateIds;
 
     /**
@@ -53,7 +153,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
      * 
      */
-    @Export(name="clientCertificateId", type=String.class, parameters={})
+    @Export(name="clientCertificateId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> clientCertificateId;
 
     /**
@@ -67,7 +167,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Connection timeout. Default(ms): 60000
      * 
      */
-    @Export(name="connectTimeout", type=Integer.class, parameters={})
+    @Export(name="connectTimeout", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> connectTimeout;
 
     /**
@@ -81,7 +181,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Host to map to
      * 
      */
-    @Export(name="host", type=String.class, parameters={})
+    @Export(name="host", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> host;
 
     /**
@@ -95,7 +195,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Service name
      * 
      */
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     /**
@@ -109,7 +209,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Path to map to
      * 
      */
-    @Export(name="path", type=String.class, parameters={})
+    @Export(name="path", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> path;
 
     /**
@@ -123,7 +223,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Port to map to. Default: 80
      * 
      */
-    @Export(name="port", type=Integer.class, parameters={})
+    @Export(name="port", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> port;
 
     /**
@@ -137,7 +237,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Protocol to use
      * 
      */
-    @Export(name="protocol", type=String.class, parameters={})
+    @Export(name="protocol", refs={String.class}, tree="[0]")
     private Output<String> protocol;
 
     /**
@@ -151,7 +251,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Read timeout. Default(ms): 60000
      * 
      */
-    @Export(name="readTimeout", type=Integer.class, parameters={})
+    @Export(name="readTimeout", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> readTimeout;
 
     /**
@@ -165,7 +265,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Number of retries. Default: 5
      * 
      */
-    @Export(name="retries", type=Integer.class, parameters={})
+    @Export(name="retries", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> retries;
 
     /**
@@ -179,7 +279,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Service for grouping and filtering.
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**
@@ -193,7 +293,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
      * 
      */
-    @Export(name="tlsVerify", type=Boolean.class, parameters={})
+    @Export(name="tlsVerify", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> tlsVerify;
 
     /**
@@ -207,7 +307,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Maximum depth of chain while verifying Upstream server’s TLS certificate.
      * 
      */
-    @Export(name="tlsVerifyDepth", type=Integer.class, parameters={})
+    @Export(name="tlsVerifyDepth", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> tlsVerifyDepth;
 
     /**
@@ -221,7 +321,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Write timout. Default(ms): 60000
      * 
      */
-    @Export(name="writeTimeout", type=Integer.class, parameters={})
+    @Export(name="writeTimeout", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> writeTimeout;
 
     /**

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong.Inputs
 {
 
-    public sealed class UpstreamHealthchecksActiveArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamHealthchecksActiveArgs : global::Pulumi.ResourceArgs
     {
         [Input("concurrency")]
         public Input<int>? Concurrency { get; set; }
@@ -39,5 +39,6 @@ namespace Pulumi.Kong.Inputs
         public UpstreamHealthchecksActiveArgs()
         {
         }
+        public static new UpstreamHealthchecksActiveArgs Empty => new UpstreamHealthchecksActiveArgs();
     }
 }
