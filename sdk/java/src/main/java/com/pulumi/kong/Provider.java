@@ -26,7 +26,7 @@ public class Provider extends com.pulumi.resources.ProviderResource {
      * An basic auth password for kong admin
      * 
      */
-    @Export(name="kongAdminPassword", type=String.class, parameters={})
+    @Export(name="kongAdminPassword", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> kongAdminPassword;
 
     /**
@@ -40,7 +40,7 @@ public class Provider extends com.pulumi.resources.ProviderResource {
      * API key for the kong api (Enterprise Edition)
      * 
      */
-    @Export(name="kongAdminToken", type=String.class, parameters={})
+    @Export(name="kongAdminToken", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> kongAdminToken;
 
     /**
@@ -54,7 +54,7 @@ public class Provider extends com.pulumi.resources.ProviderResource {
      * The address of the kong admin url e.g. http://localhost:8001
      * 
      */
-    @Export(name="kongAdminUri", type=String.class, parameters={})
+    @Export(name="kongAdminUri", refs={String.class}, tree="[0]")
     private Output<String> kongAdminUri;
 
     /**
@@ -68,7 +68,7 @@ public class Provider extends com.pulumi.resources.ProviderResource {
      * An basic auth user for kong admin
      * 
      */
-    @Export(name="kongAdminUsername", type=String.class, parameters={})
+    @Export(name="kongAdminUsername", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> kongAdminUsername;
 
     /**
@@ -82,7 +82,7 @@ public class Provider extends com.pulumi.resources.ProviderResource {
      * API key for the kong api (if you have locked it down)
      * 
      */
-    @Export(name="kongApiKey", type=String.class, parameters={})
+    @Export(name="kongApiKey", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> kongApiKey;
 
     /**
@@ -96,7 +96,7 @@ public class Provider extends com.pulumi.resources.ProviderResource {
      * Workspace context (Enterprise Edition)
      * 
      */
-    @Export(name="kongWorkspace", type=String.class, parameters={})
+    @Export(name="kongWorkspace", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> kongWorkspace;
 
     /**

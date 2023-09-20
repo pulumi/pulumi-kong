@@ -79,7 +79,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * the id of the consumer to be configured
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output<String> consumerId;
 
     /**
@@ -93,7 +93,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * the acl group
      * 
      */
-    @Export(name="group", type=String.class, parameters={})
+    @Export(name="group", refs={String.class}, tree="[0]")
     private Output<String> group;
 
     /**
@@ -107,7 +107,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the consumer acl for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

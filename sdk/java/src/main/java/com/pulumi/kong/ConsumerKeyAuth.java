@@ -71,7 +71,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * the id of the consumer to associate the credentials to
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output<String> consumerId;
 
     /**
@@ -85,7 +85,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * Unique key to authenticate the client; if omitted the plugin will generate one
      * 
      */
-    @Export(name="key", type=String.class, parameters={})
+    @Export(name="key", refs={String.class}, tree="[0]")
     private Output<String> key;
 
     /**
@@ -99,7 +99,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the consumer key auth for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

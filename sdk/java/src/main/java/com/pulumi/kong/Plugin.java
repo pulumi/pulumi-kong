@@ -201,7 +201,7 @@ import javax.annotation.Nullable;
  */
 @ResourceType(type="kong:index/plugin:Plugin")
 public class Plugin extends com.pulumi.resources.CustomResource {
-    @Export(name="computedConfig", type=String.class, parameters={})
+    @Export(name="computedConfig", refs={String.class}, tree="[0]")
     private Output<String> computedConfig;
 
     public Output<String> computedConfig() {
@@ -212,7 +212,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * page of the plugin you are configuring
      * 
      */
-    @Export(name="configJson", type=String.class, parameters={})
+    @Export(name="configJson", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> configJson;
 
     /**
@@ -227,7 +227,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * the consumer id you want to configure the plugin for
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> consumerId;
 
     /**
@@ -241,7 +241,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
      * 
      */
-    @Export(name="enabled", type=Boolean.class, parameters={})
+    @Export(name="enabled", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> enabled;
 
     /**
@@ -251,7 +251,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
     public Output<Optional<Boolean>> enabled() {
         return Codegen.optional(this.enabled);
     }
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     public Output<String> name() {
@@ -261,7 +261,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * the route id that you want to configure the plugin for
      * 
      */
-    @Export(name="routeId", type=String.class, parameters={})
+    @Export(name="routeId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> routeId;
 
     /**
@@ -275,7 +275,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * the service id that you want to configure the plugin for
      * 
      */
-    @Export(name="serviceId", type=String.class, parameters={})
+    @Export(name="serviceId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> serviceId;
 
     /**
@@ -285,7 +285,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
     public Output<Optional<String>> serviceId() {
         return Codegen.optional(this.serviceId);
     }
-    @Export(name="strictMatch", type=Boolean.class, parameters={})
+    @Export(name="strictMatch", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> strictMatch;
 
     public Output<Optional<Boolean>> strictMatch() {
@@ -295,7 +295,7 @@ public class Plugin extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Plugin for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

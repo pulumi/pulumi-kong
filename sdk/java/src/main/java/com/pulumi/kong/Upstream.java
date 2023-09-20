@@ -142,7 +142,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
      * 
      */
-    @Export(name="clientCertificateId", type=String.class, parameters={})
+    @Export(name="clientCertificateId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> clientCertificateId;
 
     /**
@@ -156,7 +156,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
      * 
      */
-    @Export(name="hashFallback", type=String.class, parameters={})
+    @Export(name="hashFallback", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashFallback;
 
     /**
@@ -170,7 +170,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
      * 
      */
-    @Export(name="hashFallbackHeader", type=String.class, parameters={})
+    @Export(name="hashFallbackHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashFallbackHeader;
 
     /**
@@ -184,7 +184,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      * 
      */
-    @Export(name="hashOn", type=String.class, parameters={})
+    @Export(name="hashOn", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOn;
 
     /**
@@ -198,7 +198,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      * 
      */
-    @Export(name="hashOnCookie", type=String.class, parameters={})
+    @Export(name="hashOnCookie", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnCookie;
 
     /**
@@ -233,7 +233,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
      * 
      */
-    @Export(name="hashOnCookiePath", type=String.class, parameters={})
+    @Export(name="hashOnCookiePath", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnCookiePath;
 
     /**
@@ -268,7 +268,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
      * 
      */
-    @Export(name="hashOnHeader", type=String.class, parameters={})
+    @Export(name="hashOnHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnHeader;
 
     /**
@@ -278,7 +278,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
     public Output<Optional<String>> hashOnHeader() {
         return Codegen.optional(this.hashOnHeader);
     }
-    @Export(name="healthchecks", type=UpstreamHealthchecks.class, parameters={})
+    @Export(name="healthchecks", refs={UpstreamHealthchecks.class}, tree="[0]")
     private Output<UpstreamHealthchecks> healthchecks;
 
     public Output<UpstreamHealthchecks> healthchecks() {
@@ -288,7 +288,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * The hostname to be used as Host header when proxying requests through Kong.
      * 
      */
-    @Export(name="hostHeader", type=String.class, parameters={})
+    @Export(name="hostHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hostHeader;
 
     /**
@@ -302,7 +302,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is a hostname, which must be equal to the host of a Service.
      * 
      */
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     /**
@@ -316,7 +316,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      * 
      */
-    @Export(name="slots", type=Integer.class, parameters={})
+    @Export(name="slots", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> slots;
 
     /**
@@ -330,7 +330,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Upstream for grouping and filtering.
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

@@ -79,7 +79,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      * 
      */
-    @Export(name="algorithm", type=String.class, parameters={})
+    @Export(name="algorithm", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> algorithm;
 
     /**
@@ -93,7 +93,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * the id of the consumer to be configured with jwt auth
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output<String> consumerId;
 
     /**
@@ -107,7 +107,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * A unique string identifying the credential. If left out, it will be auto-generated.
      * 
      */
-    @Export(name="key", type=String.class, parameters={})
+    @Export(name="key", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> key;
 
     /**
@@ -121,7 +121,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      * 
      */
-    @Export(name="rsaPublicKey", type=String.class, parameters={})
+    @Export(name="rsaPublicKey", refs={String.class}, tree="[0]")
     private Output<String> rsaPublicKey;
 
     /**
@@ -135,7 +135,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      * 
      */
-    @Export(name="secret", type=String.class, parameters={})
+    @Export(name="secret", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> secret;
 
     /**
@@ -149,7 +149,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the consumer JWT auth for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

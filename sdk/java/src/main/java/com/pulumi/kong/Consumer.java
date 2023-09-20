@@ -67,7 +67,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * A custom id for the consumer, you must set either the username or custom_id
      * 
      */
-    @Export(name="customId", type=String.class, parameters={})
+    @Export(name="customId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> customId;
 
     /**
@@ -81,7 +81,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Consumer for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**
@@ -95,7 +95,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * The username to use, you must set either the username or custom_id
      * 
      */
-    @Export(name="username", type=String.class, parameters={})
+    @Export(name="username", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> username;
 
     /**

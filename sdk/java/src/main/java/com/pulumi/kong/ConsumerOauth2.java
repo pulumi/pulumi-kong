@@ -86,7 +86,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * Unique oauth2 client id. If not set, the oauth2 plugin will generate one
      * 
      */
-    @Export(name="clientId", type=String.class, parameters={})
+    @Export(name="clientId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> clientId;
 
     /**
@@ -100,7 +100,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * Unique oauth2 client secret. If not set, the oauth2 plugin will generate one
      * 
      */
-    @Export(name="clientSecret", type=String.class, parameters={})
+    @Export(name="clientSecret", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> clientSecret;
 
     /**
@@ -114,7 +114,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * The id of the consumer to be configured with oauth2.
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output<String> consumerId;
 
     /**
@@ -128,7 +128,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      * 
      */
-    @Export(name="hashSecret", type=Boolean.class, parameters={})
+    @Export(name="hashSecret", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> hashSecret;
 
     /**
@@ -142,7 +142,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * The name associated with the credential.
      * 
      */
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     /**
@@ -156,7 +156,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).
      * 
      */
-    @Export(name="redirectUris", type=List.class, parameters={String.class})
+    @Export(name="redirectUris", refs={List.class,String.class}, tree="[0,1]")
     private Output<List<String>> redirectUris;
 
     /**
@@ -170,7 +170,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the consumer for grouping and filtering.
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**

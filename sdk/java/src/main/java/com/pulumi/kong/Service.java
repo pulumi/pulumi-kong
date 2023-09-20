@@ -139,7 +139,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
      * 
      */
-    @Export(name="caCertificateIds", type=List.class, parameters={String.class})
+    @Export(name="caCertificateIds", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> caCertificateIds;
 
     /**
@@ -153,7 +153,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
      * 
      */
-    @Export(name="clientCertificateId", type=String.class, parameters={})
+    @Export(name="clientCertificateId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> clientCertificateId;
 
     /**
@@ -167,7 +167,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Connection timeout. Default(ms): 60000
      * 
      */
-    @Export(name="connectTimeout", type=Integer.class, parameters={})
+    @Export(name="connectTimeout", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> connectTimeout;
 
     /**
@@ -181,7 +181,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Host to map to
      * 
      */
-    @Export(name="host", type=String.class, parameters={})
+    @Export(name="host", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> host;
 
     /**
@@ -195,7 +195,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Service name
      * 
      */
-    @Export(name="name", type=String.class, parameters={})
+    @Export(name="name", refs={String.class}, tree="[0]")
     private Output<String> name;
 
     /**
@@ -209,7 +209,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Path to map to
      * 
      */
-    @Export(name="path", type=String.class, parameters={})
+    @Export(name="path", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> path;
 
     /**
@@ -223,7 +223,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Port to map to. Default: 80
      * 
      */
-    @Export(name="port", type=Integer.class, parameters={})
+    @Export(name="port", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> port;
 
     /**
@@ -237,7 +237,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Protocol to use
      * 
      */
-    @Export(name="protocol", type=String.class, parameters={})
+    @Export(name="protocol", refs={String.class}, tree="[0]")
     private Output<String> protocol;
 
     /**
@@ -251,7 +251,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Read timeout. Default(ms): 60000
      * 
      */
-    @Export(name="readTimeout", type=Integer.class, parameters={})
+    @Export(name="readTimeout", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> readTimeout;
 
     /**
@@ -265,7 +265,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Number of retries. Default: 5
      * 
      */
-    @Export(name="retries", type=Integer.class, parameters={})
+    @Export(name="retries", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> retries;
 
     /**
@@ -279,7 +279,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Service for grouping and filtering.
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**
@@ -293,7 +293,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
      * 
      */
-    @Export(name="tlsVerify", type=Boolean.class, parameters={})
+    @Export(name="tlsVerify", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> tlsVerify;
 
     /**
@@ -307,7 +307,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Maximum depth of chain while verifying Upstream server’s TLS certificate.
      * 
      */
-    @Export(name="tlsVerifyDepth", type=Integer.class, parameters={})
+    @Export(name="tlsVerifyDepth", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> tlsVerifyDepth;
 
     /**
@@ -321,7 +321,7 @@ public class Service extends com.pulumi.resources.CustomResource {
      * Write timout. Default(ms): 60000
      * 
      */
-    @Export(name="writeTimeout", type=Integer.class, parameters={})
+    @Export(name="writeTimeout", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> writeTimeout;
 
     /**

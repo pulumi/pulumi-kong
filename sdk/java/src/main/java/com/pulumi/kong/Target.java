@@ -64,7 +64,7 @@ public class Target extends com.pulumi.resources.CustomResource {
      * A list set of strings associated with the Plugin for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**
@@ -78,7 +78,7 @@ public class Target extends com.pulumi.resources.CustomResource {
      * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
      * 
      */
-    @Export(name="target", type=String.class, parameters={})
+    @Export(name="target", refs={String.class}, tree="[0]")
     private Output<String> target;
 
     /**
@@ -92,7 +92,7 @@ public class Target extends com.pulumi.resources.CustomResource {
      * is the id of the upstream to apply this target to.
      * 
      */
-    @Export(name="upstreamId", type=String.class, parameters={})
+    @Export(name="upstreamId", refs={String.class}, tree="[0]")
     private Output<String> upstreamId;
 
     /**
@@ -106,7 +106,7 @@ public class Target extends com.pulumi.resources.CustomResource {
      * is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
      * 
      */
-    @Export(name="weight", type=Integer.class, parameters={})
+    @Export(name="weight", refs={Integer.class}, tree="[0]")
     private Output<Integer> weight;
 
     /**

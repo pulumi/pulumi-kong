@@ -70,7 +70,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
      * should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
      * 
      */
-    @Export(name="certificate", type=String.class, parameters={})
+    @Export(name="certificate", refs={String.class}, tree="[0]")
     private Output<String> certificate;
 
     /**
@@ -84,7 +84,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
      * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
      * 
      */
-    @Export(name="privateKey", type=String.class, parameters={})
+    @Export(name="privateKey", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> privateKey;
 
     /**
@@ -98,7 +98,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the Certificate for grouping and filtering
      * 
      */
-    @Export(name="snis", type=List.class, parameters={String.class})
+    @Export(name="snis", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> snis;
 
     /**
@@ -108,7 +108,7 @@ public class Certificate extends com.pulumi.resources.CustomResource {
     public Output<Optional<List<String>>> snis() {
         return Codegen.optional(this.snis);
     }
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     public Output<Optional<List<String>>> tags() {

@@ -72,7 +72,7 @@ public class ConsumerBasicAuth extends com.pulumi.resources.CustomResource {
      * the id of the consumer to be configured with basic auth
      * 
      */
-    @Export(name="consumerId", type=String.class, parameters={})
+    @Export(name="consumerId", refs={String.class}, tree="[0]")
     private Output<String> consumerId;
 
     /**
@@ -86,7 +86,7 @@ public class ConsumerBasicAuth extends com.pulumi.resources.CustomResource {
      * password to be used for basic auth
      * 
      */
-    @Export(name="password", type=String.class, parameters={})
+    @Export(name="password", refs={String.class}, tree="[0]")
     private Output<String> password;
 
     /**
@@ -100,7 +100,7 @@ public class ConsumerBasicAuth extends com.pulumi.resources.CustomResource {
      * A list of strings associated with the consumer basic auth for grouping and filtering
      * 
      */
-    @Export(name="tags", type=List.class, parameters={String.class})
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> tags;
 
     /**
@@ -114,7 +114,7 @@ public class ConsumerBasicAuth extends com.pulumi.resources.CustomResource {
      * username to be used for basic auth
      * 
      */
-    @Export(name="username", type=String.class, parameters={})
+    @Export(name="username", refs={String.class}, tree="[0]")
     private Output<String> username;
 
     /**
