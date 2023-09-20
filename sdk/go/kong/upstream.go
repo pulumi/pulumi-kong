@@ -7,7 +7,9 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -17,8 +19,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
@@ -27,8 +27,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			certificate, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
-//				Certificate: pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN CERTIFICATE-----\n", "    ......\n", "    -----END CERTIFICATE-----\n")),
-//				PrivateKey:  pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN PRIVATE KEY-----\n", "    .....\n", "    -----END PRIVATE KEY-----\n")),
+//				Certificate: pulumi.String("    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n"),
+//				PrivateKey:  pulumi.String("    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n"),
 //				Snis: pulumi.StringArray{
 //					pulumi.String("foo.com"),
 //				},
@@ -50,15 +50,15 @@ import (
 //					pulumi.String("b"),
 //				},
 //				ClientCertificateId: certificate.ID(),
-//				Healthchecks: &UpstreamHealthchecksArgs{
-//					Active: &UpstreamHealthchecksActiveArgs{
+//				Healthchecks: &kong.UpstreamHealthchecksArgs{
+//					Active: &kong.UpstreamHealthchecksActiveArgs{
 //						Type:                   pulumi.String("https"),
 //						HttpPath:               pulumi.String("/status"),
 //						Timeout:                pulumi.Int(10),
 //						Concurrency:            pulumi.Int(20),
 //						HttpsVerifyCertificate: pulumi.Bool(false),
 //						HttpsSni:               pulumi.String("some.domain.com"),
-//						Healthy: &UpstreamHealthchecksActiveHealthyArgs{
+//						Healthy: &kong.UpstreamHealthchecksActiveHealthyArgs{
 //							Successes: pulumi.Int(1),
 //							Interval:  pulumi.Int(5),
 //							HttpStatuses: pulumi.IntArray{
@@ -66,7 +66,7 @@ import (
 //								pulumi.Int(201),
 //							},
 //						},
-//						Unhealthy: &UpstreamHealthchecksActiveUnhealthyArgs{
+//						Unhealthy: &kong.UpstreamHealthchecksActiveUnhealthyArgs{
 //							Timeouts:     pulumi.Int(7),
 //							Interval:     pulumi.Int(3),
 //							TcpFailures:  pulumi.Int(1),
@@ -77,9 +77,9 @@ import (
 //							},
 //						},
 //					},
-//					Passive: &UpstreamHealthchecksPassiveArgs{
+//					Passive: &kong.UpstreamHealthchecksPassiveArgs{
 //						Type: pulumi.String("https"),
-//						Healthy: &UpstreamHealthchecksPassiveHealthyArgs{
+//						Healthy: &kong.UpstreamHealthchecksPassiveHealthyArgs{
 //							Successes: pulumi.Int(1),
 //							HttpStatuses: pulumi.IntArray{
 //								pulumi.Int(200),
@@ -87,7 +87,7 @@ import (
 //								pulumi.Int(202),
 //							},
 //						},
-//						Unhealthy: &UpstreamHealthchecksPassiveUnhealthyArgs{
+//						Unhealthy: &kong.UpstreamHealthchecksPassiveUnhealthyArgs{
 //							Timeouts:     pulumi.Int(3),
 //							TcpFailures:  pulumi.Int(5),
 //							HttpFailures: pulumi.Int(6),
@@ -174,6 +174,7 @@ func NewUpstream(ctx *pulumi.Context,
 		args = &UpstreamArgs{}
 	}
 
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Upstream
 	err := ctx.RegisterResource("kong:index/upstream:Upstream", name, args, &resource, opts...)
 	if err != nil {
@@ -411,6 +412,12 @@ func (i *Upstream) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutp
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamOutput)
 }
 
+func (i *Upstream) ToOutput(ctx context.Context) pulumix.Output[*Upstream] {
+	return pulumix.Output[*Upstream]{
+		OutputState: i.ToUpstreamOutputWithContext(ctx).OutputState,
+	}
+}
+
 // UpstreamArrayInput is an input type that accepts UpstreamArray and UpstreamArrayOutput values.
 // You can construct a concrete instance of `UpstreamArrayInput` via:
 //
@@ -434,6 +441,12 @@ func (i UpstreamArray) ToUpstreamArrayOutput() UpstreamArrayOutput {
 
 func (i UpstreamArray) ToUpstreamArrayOutputWithContext(ctx context.Context) UpstreamArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamArrayOutput)
+}
+
+func (i UpstreamArray) ToOutput(ctx context.Context) pulumix.Output[[]*Upstream] {
+	return pulumix.Output[[]*Upstream]{
+		OutputState: i.ToUpstreamArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // UpstreamMapInput is an input type that accepts UpstreamMap and UpstreamMapOutput values.
@@ -461,6 +474,12 @@ func (i UpstreamMap) ToUpstreamMapOutputWithContext(ctx context.Context) Upstrea
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamMapOutput)
 }
 
+func (i UpstreamMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Upstream] {
+	return pulumix.Output[map[string]*Upstream]{
+		OutputState: i.ToUpstreamMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UpstreamOutput struct{ *pulumi.OutputState }
 
 func (UpstreamOutput) ElementType() reflect.Type {
@@ -475,6 +494,92 @@ func (o UpstreamOutput) ToUpstreamOutputWithContext(ctx context.Context) Upstrea
 	return o
 }
 
+func (o UpstreamOutput) ToOutput(ctx context.Context) pulumix.Output[*Upstream] {
+	return pulumix.Output[*Upstream]{
+		OutputState: o.OutputState,
+	}
+}
+
+// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
+func (o UpstreamOutput) ClientCertificateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.ClientCertificateId }).(pulumi.StringPtrOutput)
+}
+
+// is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
+func (o UpstreamOutput) HashFallback() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.HashFallback }).(pulumi.StringPtrOutput)
+}
+
+// is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
+func (o UpstreamOutput) HashFallbackHeader() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.HashFallbackHeader }).(pulumi.StringPtrOutput)
+}
+
+// is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+func (o UpstreamOutput) HashOn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.HashOn }).(pulumi.StringPtrOutput)
+}
+
+// is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+func (o UpstreamOutput) HashOnCookie() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.HashOnCookie }).(pulumi.StringPtrOutput)
+}
+
+// is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
+// * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+// * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
+// * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
+// * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+// * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+// * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+// * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+// * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+// * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+// * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
+// * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+// * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+// * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+// * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
+// * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
+// * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
+// * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
+// * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+// * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+// * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
+// * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
+func (o UpstreamOutput) HashOnCookiePath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.HashOnCookiePath }).(pulumi.StringPtrOutput)
+}
+
+// is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
+func (o UpstreamOutput) HashOnHeader() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.HashOnHeader }).(pulumi.StringPtrOutput)
+}
+
+func (o UpstreamOutput) Healthchecks() UpstreamHealthchecksOutput {
+	return o.ApplyT(func(v *Upstream) UpstreamHealthchecksOutput { return v.Healthchecks }).(UpstreamHealthchecksOutput)
+}
+
+// The hostname to be used as Host header when proxying requests through Kong.
+func (o UpstreamOutput) HostHeader() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringPtrOutput { return v.HostHeader }).(pulumi.StringPtrOutput)
+}
+
+// is a hostname, which must be equal to the host of a Service.
+func (o UpstreamOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
+func (o UpstreamOutput) Slots() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.IntPtrOutput { return v.Slots }).(pulumi.IntPtrOutput)
+}
+
+// A list of strings associated with the Upstream for grouping and filtering.
+func (o UpstreamOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Upstream) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
 type UpstreamArrayOutput struct{ *pulumi.OutputState }
 
 func (UpstreamArrayOutput) ElementType() reflect.Type {
@@ -487,6 +592,12 @@ func (o UpstreamArrayOutput) ToUpstreamArrayOutput() UpstreamArrayOutput {
 
 func (o UpstreamArrayOutput) ToUpstreamArrayOutputWithContext(ctx context.Context) UpstreamArrayOutput {
 	return o
+}
+
+func (o UpstreamArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Upstream] {
+	return pulumix.Output[[]*Upstream]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamArrayOutput) Index(i pulumi.IntInput) UpstreamOutput {
@@ -507,6 +618,12 @@ func (o UpstreamMapOutput) ToUpstreamMapOutput() UpstreamMapOutput {
 
 func (o UpstreamMapOutput) ToUpstreamMapOutputWithContext(ctx context.Context) UpstreamMapOutput {
 	return o
+}
+
+func (o UpstreamMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Upstream] {
+	return pulumix.Output[map[string]*Upstream]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UpstreamMapOutput) MapIndex(k pulumi.StringInput) UpstreamOutput {

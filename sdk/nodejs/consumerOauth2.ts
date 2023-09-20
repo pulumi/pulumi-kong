@@ -15,21 +15,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const myConsumer = new kong.Consumer("my_consumer", {
+ * const myConsumer = new kong.Consumer("myConsumer", {
  *     customId: "123",
  *     username: "User1",
  * });
- * const oauth2Plugin = new kong.Plugin("oauth2_plugin", {
- *     configJson: `	{
+ * const oauth2Plugin = new kong.Plugin("oauth2Plugin", {configJson: `	{
  * 		"global_credentials": true,
  * 		"enable_password_grant": true,
  * 		"token_expiration": 180,
  * 		"refresh_token_ttl": 180,
  * 		"provision_key": "testprovisionkey"
  * 	}
- * `,
- * });
- * const consumerOauth2 = new kong.ConsumerOauth2("consumer_oauth2", {
+ *
+ * `});
+ * const consumerOauth2 = new kong.ConsumerOauth2("consumerOauth2", {
  *     clientId: "client_id",
  *     clientSecret: "client_secret",
  *     consumerId: myConsumer.id,

@@ -17,30 +17,29 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var certificate = new Kong.Certificate("certificate", new()
     ///     {
-    ///         var certificate = new Kong.Certificate("certificate", new Kong.CertificateArgs
+    ///         Cert = "public key --- 123 ----",
+    ///         PrivateKey = "private key --- 456 ----",
+    ///         Snis = new[]
     ///         {
-    ///             Certificate = "public key --- 123 ----",
-    ///             PrivateKey = "private key --- 456 ----",
-    ///             Snis = 
-    ///             {
-    ///                 "foo.com",
-    ///                 "bar.com",
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 "myTag",
-    ///             },
-    ///         });
-    ///     }
+    ///             "foo.com",
+    ///             "bar.com",
+    ///         },
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -52,7 +51,7 @@ namespace Pulumi.Kong
     /// ```
     /// </summary>
     [KongResourceType("kong:index/certificate:Certificate")]
-    public partial class Certificate : Pulumi.CustomResource
+    public partial class Certificate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
@@ -98,6 +97,10 @@ namespace Pulumi.Kong
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "privateKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -119,7 +122,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class CertificateArgs : Pulumi.ResourceArgs
+    public sealed class CertificateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
@@ -127,11 +130,21 @@ namespace Pulumi.Kong
         [Input("certificate", required: true)]
         public Input<string> Cert { get; set; } = null!;
 
+        [Input("privateKey")]
+        private Input<string>? _privateKey;
+
         /// <summary>
         /// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
         /// </summary>
-        [Input("privateKey")]
-        public Input<string>? PrivateKey { get; set; }
+        public Input<string>? PrivateKey
+        {
+            get => _privateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("snis")]
         private InputList<string>? _snis;
@@ -156,9 +169,10 @@ namespace Pulumi.Kong
         public CertificateArgs()
         {
         }
+        public static new CertificateArgs Empty => new CertificateArgs();
     }
 
-    public sealed class CertificateState : Pulumi.ResourceArgs
+    public sealed class CertificateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
@@ -166,11 +180,21 @@ namespace Pulumi.Kong
         [Input("certificate")]
         public Input<string>? Cert { get; set; }
 
+        [Input("privateKey")]
+        private Input<string>? _privateKey;
+
         /// <summary>
         /// should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
         /// </summary>
-        [Input("privateKey")]
-        public Input<string>? PrivateKey { get; set; }
+        public Input<string>? PrivateKey
+        {
+            get => _privateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("snis")]
         private InputList<string>? _snis;
@@ -195,5 +219,6 @@ namespace Pulumi.Kong
         public CertificateState()
         {
         }
+        public static new CertificateState Empty => new CertificateState();
     }
 }

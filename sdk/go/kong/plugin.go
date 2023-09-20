@@ -7,7 +7,9 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # Plugin
@@ -22,8 +24,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
@@ -32,7 +32,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 5,\n		\"hour\" : 1000\n	}\n\n"),
 //			})
 //			if err != nil {
 //				return err
@@ -49,8 +49,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
@@ -66,7 +64,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 5,\n", "		\"hour\" : 1000\n", "	}\n", "\n")),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 5,\n		\"hour\" : 1000\n	}\n\n"),
 //				ConsumerId: pluginConsumer.ID(),
 //			})
 //			if err != nil {
@@ -85,8 +83,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
@@ -102,7 +98,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 10,\n", "		\"hour\" : 2000\n", "	}\n", "\n")),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 10,\n		\"hour\" : 2000\n	}\n\n"),
 //				ServiceId:  service.ID(),
 //			})
 //			if err != nil {
@@ -121,8 +117,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
@@ -138,7 +132,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "	{\n", "		\"second\": 11,\n", "		\"hour\" : 4000\n", "	}\n", "\n")),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 11,\n		\"hour\" : 4000\n	}\n\n"),
 //				Enabled:    pulumi.Bool(true),
 //				ServiceId:  service.ID(),
 //			})
@@ -188,6 +182,7 @@ func NewPlugin(ctx *pulumi.Context,
 		args = &PluginArgs{}
 	}
 
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Plugin
 	err := ctx.RegisterResource("kong:index/plugin:Plugin", name, args, &resource, opts...)
 	if err != nil {
@@ -311,6 +306,12 @@ func (i *Plugin) ToPluginOutputWithContext(ctx context.Context) PluginOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PluginOutput)
 }
 
+func (i *Plugin) ToOutput(ctx context.Context) pulumix.Output[*Plugin] {
+	return pulumix.Output[*Plugin]{
+		OutputState: i.ToPluginOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PluginArrayInput is an input type that accepts PluginArray and PluginArrayOutput values.
 // You can construct a concrete instance of `PluginArrayInput` via:
 //
@@ -334,6 +335,12 @@ func (i PluginArray) ToPluginArrayOutput() PluginArrayOutput {
 
 func (i PluginArray) ToPluginArrayOutputWithContext(ctx context.Context) PluginArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PluginArrayOutput)
+}
+
+func (i PluginArray) ToOutput(ctx context.Context) pulumix.Output[[]*Plugin] {
+	return pulumix.Output[[]*Plugin]{
+		OutputState: i.ToPluginArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PluginMapInput is an input type that accepts PluginMap and PluginMapOutput values.
@@ -361,6 +368,12 @@ func (i PluginMap) ToPluginMapOutputWithContext(ctx context.Context) PluginMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(PluginMapOutput)
 }
 
+func (i PluginMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Plugin] {
+	return pulumix.Output[map[string]*Plugin]{
+		OutputState: i.ToPluginMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PluginOutput struct{ *pulumi.OutputState }
 
 func (PluginOutput) ElementType() reflect.Type {
@@ -375,6 +388,55 @@ func (o PluginOutput) ToPluginOutputWithContext(ctx context.Context) PluginOutpu
 	return o
 }
 
+func (o PluginOutput) ToOutput(ctx context.Context) pulumix.Output[*Plugin] {
+	return pulumix.Output[*Plugin]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o PluginOutput) ComputedConfig() pulumi.StringOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.StringOutput { return v.ComputedConfig }).(pulumi.StringOutput)
+}
+
+// this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
+// page of the plugin you are configuring
+func (o PluginOutput) ConfigJson() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.StringPtrOutput { return v.ConfigJson }).(pulumi.StringPtrOutput)
+}
+
+// the consumer id you want to configure the plugin for
+func (o PluginOutput) ConsumerId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.StringPtrOutput { return v.ConsumerId }).(pulumi.StringPtrOutput)
+}
+
+// whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
+func (o PluginOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+func (o PluginOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// the route id that you want to configure the plugin for
+func (o PluginOutput) RouteId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.StringPtrOutput { return v.RouteId }).(pulumi.StringPtrOutput)
+}
+
+// the service id that you want to configure the plugin for
+func (o PluginOutput) ServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.StringPtrOutput { return v.ServiceId }).(pulumi.StringPtrOutput)
+}
+
+func (o PluginOutput) StrictMatch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.BoolPtrOutput { return v.StrictMatch }).(pulumi.BoolPtrOutput)
+}
+
+// A list of strings associated with the Plugin for grouping and filtering
+func (o PluginOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Plugin) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
 type PluginArrayOutput struct{ *pulumi.OutputState }
 
 func (PluginArrayOutput) ElementType() reflect.Type {
@@ -387,6 +449,12 @@ func (o PluginArrayOutput) ToPluginArrayOutput() PluginArrayOutput {
 
 func (o PluginArrayOutput) ToPluginArrayOutputWithContext(ctx context.Context) PluginArrayOutput {
 	return o
+}
+
+func (o PluginArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Plugin] {
+	return pulumix.Output[[]*Plugin]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PluginArrayOutput) Index(i pulumi.IntInput) PluginOutput {
@@ -407,6 +475,12 @@ func (o PluginMapOutput) ToPluginMapOutput() PluginMapOutput {
 
 func (o PluginMapOutput) ToPluginMapOutputWithContext(ctx context.Context) PluginMapOutput {
 	return o
+}
+
+func (o PluginMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Plugin] {
+	return pulumix.Output[map[string]*Plugin]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PluginMapOutput) MapIndex(k pulumi.StringInput) PluginOutput {

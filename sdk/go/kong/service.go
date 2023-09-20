@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # Service
@@ -55,8 +57,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
@@ -65,8 +65,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			certificate, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
-//				Certificate: pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN CERTIFICATE-----\n", "    ......\n", "    -----END CERTIFICATE-----\n")),
-//				PrivateKey:  pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN PRIVATE KEY-----\n", "    .....\n", "    -----END PRIVATE KEY-----\n")),
+//				Certificate: pulumi.String("    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n"),
+//				PrivateKey:  pulumi.String("    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n"),
 //				Snis: pulumi.StringArray{
 //					pulumi.String("foo.com"),
 //				},
@@ -75,8 +75,8 @@ import (
 //				return err
 //			}
 //			ca, err := kong.NewCertificate(ctx, "ca", &kong.CertificateArgs{
-//				Certificate: pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN CERTIFICATE-----\n", "    ......\n", "    -----END CERTIFICATE-----\n")),
-//				PrivateKey:  pulumi.String(fmt.Sprintf("%v%v%v", "    -----BEGIN PRIVATE KEY-----\n", "    .....\n", "    -----END PRIVATE KEY-----\n")),
+//				Certificate: pulumi.String("    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n"),
+//				PrivateKey:  pulumi.String("    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n"),
 //				Snis: pulumi.StringArray{
 //					pulumi.String("ca.com"),
 //				},
@@ -155,6 +155,7 @@ func NewService(ctx *pulumi.Context,
 	if args.Protocol == nil {
 		return nil, errors.New("invalid value for required argument 'Protocol'")
 	}
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Service
 	err := ctx.RegisterResource("kong:index/service:Service", name, args, &resource, opts...)
 	if err != nil {
@@ -328,6 +329,12 @@ func (i *Service) ToServiceOutputWithContext(ctx context.Context) ServiceOutput 
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceOutput)
 }
 
+func (i *Service) ToOutput(ctx context.Context) pulumix.Output[*Service] {
+	return pulumix.Output[*Service]{
+		OutputState: i.ToServiceOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ServiceArrayInput is an input type that accepts ServiceArray and ServiceArrayOutput values.
 // You can construct a concrete instance of `ServiceArrayInput` via:
 //
@@ -351,6 +358,12 @@ func (i ServiceArray) ToServiceArrayOutput() ServiceArrayOutput {
 
 func (i ServiceArray) ToServiceArrayOutputWithContext(ctx context.Context) ServiceArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceArrayOutput)
+}
+
+func (i ServiceArray) ToOutput(ctx context.Context) pulumix.Output[[]*Service] {
+	return pulumix.Output[[]*Service]{
+		OutputState: i.ToServiceArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ServiceMapInput is an input type that accepts ServiceMap and ServiceMapOutput values.
@@ -378,6 +391,12 @@ func (i ServiceMap) ToServiceMapOutputWithContext(ctx context.Context) ServiceMa
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceMapOutput)
 }
 
+func (i ServiceMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Service] {
+	return pulumix.Output[map[string]*Service]{
+		OutputState: i.ToServiceMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ServiceOutput struct{ *pulumi.OutputState }
 
 func (ServiceOutput) ElementType() reflect.Type {
@@ -392,6 +411,82 @@ func (o ServiceOutput) ToServiceOutputWithContext(ctx context.Context) ServiceOu
 	return o
 }
 
+func (o ServiceOutput) ToOutput(ctx context.Context) pulumix.Output[*Service] {
+	return pulumix.Output[*Service]{
+		OutputState: o.OutputState,
+	}
+}
+
+// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
+func (o ServiceOutput) CaCertificateIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringArrayOutput { return v.CaCertificateIds }).(pulumi.StringArrayOutput)
+}
+
+// ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
+func (o ServiceOutput) ClientCertificateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.ClientCertificateId }).(pulumi.StringPtrOutput)
+}
+
+// Connection timeout. Default(ms): 60000
+func (o ServiceOutput) ConnectTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.ConnectTimeout }).(pulumi.IntPtrOutput)
+}
+
+// Host to map to
+func (o ServiceOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+// Service name
+func (o ServiceOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Path to map to
+func (o ServiceOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// Port to map to. Default: 80
+func (o ServiceOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Protocol to use
+func (o ServiceOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Read timeout. Default(ms): 60000
+func (o ServiceOutput) ReadTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.ReadTimeout }).(pulumi.IntPtrOutput)
+}
+
+// Number of retries. Default: 5
+func (o ServiceOutput) Retries() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.Retries }).(pulumi.IntPtrOutput)
+}
+
+// A list of strings associated with the Service for grouping and filtering.
+func (o ServiceOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
+func (o ServiceOutput) TlsVerify() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.BoolPtrOutput { return v.TlsVerify }).(pulumi.BoolPtrOutput)
+}
+
+// Maximum depth of chain while verifying Upstream server’s TLS certificate.
+func (o ServiceOutput) TlsVerifyDepth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.TlsVerifyDepth }).(pulumi.IntPtrOutput)
+}
+
+// Write timout. Default(ms): 60000
+func (o ServiceOutput) WriteTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.WriteTimeout }).(pulumi.IntPtrOutput)
+}
+
 type ServiceArrayOutput struct{ *pulumi.OutputState }
 
 func (ServiceArrayOutput) ElementType() reflect.Type {
@@ -404,6 +499,12 @@ func (o ServiceArrayOutput) ToServiceArrayOutput() ServiceArrayOutput {
 
 func (o ServiceArrayOutput) ToServiceArrayOutputWithContext(ctx context.Context) ServiceArrayOutput {
 	return o
+}
+
+func (o ServiceArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Service] {
+	return pulumix.Output[[]*Service]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ServiceArrayOutput) Index(i pulumi.IntInput) ServiceOutput {
@@ -424,6 +525,12 @@ func (o ServiceMapOutput) ToServiceMapOutput() ServiceMapOutput {
 
 func (o ServiceMapOutput) ToServiceMapOutputWithContext(ctx context.Context) ServiceMapOutput {
 	return o
+}
+
+func (o ServiceMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Service] {
+	return pulumix.Output[map[string]*Service]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ServiceMapOutput) MapIndex(k pulumi.StringInput) ServiceOutput {

@@ -13,22 +13,21 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var target = new Kong.Target("target", new()
     ///     {
-    ///         var target = new Kong.Target("target", new Kong.TargetArgs
-    ///         {
-    ///             Target = "sample_target:80",
-    ///             UpstreamId = kong_upstream.Upstream.Id,
-    ///             Weight = 10,
-    ///         });
-    ///     }
+    ///         TargetAddress = "sample_target:80",
+    ///         UpstreamId = kong_upstream.Upstream.Id,
+    ///         Weight = 10,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -40,7 +39,7 @@ namespace Pulumi.Kong
     /// ```
     /// </summary>
     [KongResourceType("kong:index/target:Target")]
-    public partial class Target : Pulumi.CustomResource
+    public partial class Target : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A list set of strings associated with the Plugin for grouping and filtering
@@ -110,7 +109,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class TargetArgs : Pulumi.ResourceArgs
+    public sealed class TargetArgs : global::Pulumi.ResourceArgs
     {
         [Input("tags")]
         private InputList<string>? _tags;
@@ -145,9 +144,10 @@ namespace Pulumi.Kong
         public TargetArgs()
         {
         }
+        public static new TargetArgs Empty => new TargetArgs();
     }
 
-    public sealed class TargetState : Pulumi.ResourceArgs
+    public sealed class TargetState : global::Pulumi.ResourceArgs
     {
         [Input("tags")]
         private InputList<string>? _tags;
@@ -182,5 +182,6 @@ namespace Pulumi.Kong
         public TargetState()
         {
         }
+        public static new TargetState Empty => new TargetState();
     }
 }

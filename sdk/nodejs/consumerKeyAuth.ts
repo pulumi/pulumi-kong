@@ -93,10 +93,12 @@ export class ConsumerKeyAuth extends pulumi.CustomResource {
                 throw new Error("Missing required property 'consumerId'");
             }
             resourceInputs["consumerId"] = args ? args.consumerId : undefined;
-            resourceInputs["key"] = args ? args.key : undefined;
+            resourceInputs["key"] = args?.key ? pulumi.secret(args.key) : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["key"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ConsumerKeyAuth.__pulumiType, name, resourceInputs, opts);
     }
 }

@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  *
  * const target = new kong.Target("target", {
  *     target: "sample_target:80",
- *     upstreamId: kong_upstream_upstream.id,
+ *     upstreamId: kong_upstream.upstream.id,
  *     weight: 10,
  * });
  * ```

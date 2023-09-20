@@ -21,6 +21,49 @@ import javax.annotation.Nullable;
  * Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.ConsumerBasicAuth;
+ * import com.pulumi.kong.ConsumerBasicAuthArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
+ *             .customId(&#34;123&#34;)
+ *             .username(&#34;User1&#34;)
+ *             .build());
+ * 
+ *         var basicAuthPlugin = new Plugin(&#34;basicAuthPlugin&#34;);
+ * 
+ *         var consumerBasicAuth = new ConsumerBasicAuth(&#34;consumerBasicAuth&#34;, ConsumerBasicAuthArgs.builder()        
+ *             .consumerId(myConsumer.id())
+ *             .password(&#34;bar_updated&#34;)
+ *             .tags(            
+ *                 &#34;myTag&#34;,
+ *                 &#34;anotherTag&#34;)
+ *             .username(&#34;foo_updated&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  */
 @ResourceType(type="kong:index/consumerBasicAuth:ConsumerBasicAuth")

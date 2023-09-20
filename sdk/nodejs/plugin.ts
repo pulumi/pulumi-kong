@@ -16,13 +16,12 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const rateLimit = new kong.Plugin("rate_limit", {
- *     configJson: `	{
+ * const rateLimit = new kong.Plugin("rateLimit", {configJson: `	{
  * 		"second": 5,
  * 		"hour" : 1000
  * 	}
- * `,
- * });
+ *
+ * `});
  * ```
  * To apply a plugin to a consumer use the `consumerId` property, for example:
  *
@@ -30,15 +29,16 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const pluginConsumer = new kong.Consumer("plugin_consumer", {
+ * const pluginConsumer = new kong.Consumer("pluginConsumer", {
  *     customId: "567",
  *     username: "PluginUser",
  * });
- * const rateLimit = new kong.Plugin("rate_limit", {
+ * const rateLimit = new kong.Plugin("rateLimit", {
  *     configJson: `	{
  * 		"second": 5,
  * 		"hour" : 1000
  * 	}
+ *
  * `,
  *     consumerId: pluginConsumer.id,
  * });
@@ -54,11 +54,12 @@ import * as utilities from "./utilities";
  *     host: "test.org",
  *     protocol: "http",
  * });
- * const rateLimit = new kong.Plugin("rate_limit", {
+ * const rateLimit = new kong.Plugin("rateLimit", {
  *     configJson: `	{
  * 		"second": 10,
  * 		"hour" : 2000
  * 	}
+ *
  * `,
  *     serviceId: service.id,
  * });
@@ -74,11 +75,12 @@ import * as utilities from "./utilities";
  *     host: "test.org",
  *     protocol: "http",
  * });
- * const rateLimit = new kong.Plugin("rate_limit", {
+ * const rateLimit = new kong.Plugin("rateLimit", {
  *     configJson: `	{
  * 		"second": 11,
  * 		"hour" : 4000
  * 	}
+ *
  * `,
  *     enabled: true,
  *     serviceId: service.id,

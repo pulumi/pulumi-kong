@@ -21,6 +21,56 @@ import javax.annotation.Nullable;
  * Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import com.pulumi.kong.ConsumerJwtAuth;
+ * import com.pulumi.kong.ConsumerJwtAuthArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
+ *             .customId(&#34;123&#34;)
+ *             .username(&#34;User1&#34;)
+ *             .build());
+ * 
+ *         var jwtPlugin = new Plugin(&#34;jwtPlugin&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;claims_to_verify&#34;: [&#34;exp&#34;]
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .build());
+ * 
+ *         var consumerJwtConfig = new ConsumerJwtAuth(&#34;consumerJwtConfig&#34;, ConsumerJwtAuthArgs.builder()        
+ *             .algorithm(&#34;HS256&#34;)
+ *             .consumerId(myConsumer.id())
+ *             .key(&#34;my_key&#34;)
+ *             .rsaPublicKey(&#34;foo&#34;)
+ *             .secret(&#34;my_secret&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  */
 @ResourceType(type="kong:index/consumerJwtAuth:ConsumerJwtAuth")

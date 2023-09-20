@@ -23,6 +23,106 @@ import javax.annotation.Nullable;
  * The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .connectTimeout(1000)
+ *             .host(&#34;test.org&#34;)
+ *             .path(&#34;/mypath&#34;)
+ *             .port(8080)
+ *             .protocol(&#34;http&#34;)
+ *             .readTimeout(3000)
+ *             .retries(5)
+ *             .writeTimeout(2000)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Certificate;
+ * import com.pulumi.kong.CertificateArgs;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
+ *             .certificate(&#34;&#34;&#34;
+ *     -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ *             &#34;&#34;&#34;)
+ *             .privateKey(&#34;&#34;&#34;
+ *     -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ *             &#34;&#34;&#34;)
+ *             .snis(&#34;foo.com&#34;)
+ *             .build());
+ * 
+ *         var ca = new Certificate(&#34;ca&#34;, CertificateArgs.builder()        
+ *             .certificate(&#34;&#34;&#34;
+ *     -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ *             &#34;&#34;&#34;)
+ *             .privateKey(&#34;&#34;&#34;
+ *     -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ *             &#34;&#34;&#34;)
+ *             .snis(&#34;ca.com&#34;)
+ *             .build());
+ * 
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .protocol(&#34;https&#34;)
+ *             .host(&#34;test.org&#34;)
+ *             .tlsVerify(true)
+ *             .tlsVerifyDepth(2)
+ *             .clientCertificateId(certificate.id())
+ *             .caCertificateIds(ca.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 

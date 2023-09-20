@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # ConsumerAcl
@@ -21,8 +23,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -39,7 +39,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewPlugin(ctx, "aclPlugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v", "	{\n", "		\"allow\": [\"group1\", \"group2\"]\n", "	}\n", "\n")),
+//				ConfigJson: pulumi.String("	{\n		\"allow\": [\"group1\", \"group2\"]\n	}\n\n"),
 //			})
 //			if err != nil {
 //				return err
@@ -84,6 +84,7 @@ func NewConsumerAcl(ctx *pulumi.Context,
 	if args.Group == nil {
 		return nil, errors.New("invalid value for required argument 'Group'")
 	}
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConsumerAcl
 	err := ctx.RegisterResource("kong:index/consumerAcl:ConsumerAcl", name, args, &resource, opts...)
 	if err != nil {
@@ -169,6 +170,12 @@ func (i *ConsumerAcl) ToConsumerAclOutputWithContext(ctx context.Context) Consum
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerAclOutput)
 }
 
+func (i *ConsumerAcl) ToOutput(ctx context.Context) pulumix.Output[*ConsumerAcl] {
+	return pulumix.Output[*ConsumerAcl]{
+		OutputState: i.ToConsumerAclOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ConsumerAclArrayInput is an input type that accepts ConsumerAclArray and ConsumerAclArrayOutput values.
 // You can construct a concrete instance of `ConsumerAclArrayInput` via:
 //
@@ -192,6 +199,12 @@ func (i ConsumerAclArray) ToConsumerAclArrayOutput() ConsumerAclArrayOutput {
 
 func (i ConsumerAclArray) ToConsumerAclArrayOutputWithContext(ctx context.Context) ConsumerAclArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerAclArrayOutput)
+}
+
+func (i ConsumerAclArray) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerAcl] {
+	return pulumix.Output[[]*ConsumerAcl]{
+		OutputState: i.ToConsumerAclArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ConsumerAclMapInput is an input type that accepts ConsumerAclMap and ConsumerAclMapOutput values.
@@ -219,6 +232,12 @@ func (i ConsumerAclMap) ToConsumerAclMapOutputWithContext(ctx context.Context) C
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerAclMapOutput)
 }
 
+func (i ConsumerAclMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerAcl] {
+	return pulumix.Output[map[string]*ConsumerAcl]{
+		OutputState: i.ToConsumerAclMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ConsumerAclOutput struct{ *pulumi.OutputState }
 
 func (ConsumerAclOutput) ElementType() reflect.Type {
@@ -233,6 +252,27 @@ func (o ConsumerAclOutput) ToConsumerAclOutputWithContext(ctx context.Context) C
 	return o
 }
 
+func (o ConsumerAclOutput) ToOutput(ctx context.Context) pulumix.Output[*ConsumerAcl] {
+	return pulumix.Output[*ConsumerAcl]{
+		OutputState: o.OutputState,
+	}
+}
+
+// the id of the consumer to be configured
+func (o ConsumerAclOutput) ConsumerId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerAcl) pulumi.StringOutput { return v.ConsumerId }).(pulumi.StringOutput)
+}
+
+// the acl group
+func (o ConsumerAclOutput) Group() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerAcl) pulumi.StringOutput { return v.Group }).(pulumi.StringOutput)
+}
+
+// A list of strings associated with the consumer acl for grouping and filtering
+func (o ConsumerAclOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ConsumerAcl) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
 type ConsumerAclArrayOutput struct{ *pulumi.OutputState }
 
 func (ConsumerAclArrayOutput) ElementType() reflect.Type {
@@ -245,6 +285,12 @@ func (o ConsumerAclArrayOutput) ToConsumerAclArrayOutput() ConsumerAclArrayOutpu
 
 func (o ConsumerAclArrayOutput) ToConsumerAclArrayOutputWithContext(ctx context.Context) ConsumerAclArrayOutput {
 	return o
+}
+
+func (o ConsumerAclArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerAcl] {
+	return pulumix.Output[[]*ConsumerAcl]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerAclArrayOutput) Index(i pulumi.IntInput) ConsumerAclOutput {
@@ -265,6 +311,12 @@ func (o ConsumerAclMapOutput) ToConsumerAclMapOutput() ConsumerAclMapOutput {
 
 func (o ConsumerAclMapOutput) ToConsumerAclMapOutputWithContext(ctx context.Context) ConsumerAclMapOutput {
 	return o
+}
+
+func (o ConsumerAclMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerAcl] {
+	return pulumix.Output[map[string]*ConsumerAcl]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerAclMapOutput) MapIndex(k pulumi.StringInput) ConsumerAclOutput {

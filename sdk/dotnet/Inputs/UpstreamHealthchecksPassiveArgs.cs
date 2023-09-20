@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong.Inputs
 {
 
-    public sealed class UpstreamHealthchecksPassiveArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamHealthchecksPassiveArgs : global::Pulumi.ResourceArgs
     {
         [Input("healthy")]
         public Input<Inputs.UpstreamHealthchecksPassiveHealthyArgs>? Healthy { get; set; }
@@ -24,5 +24,6 @@ namespace Pulumi.Kong.Inputs
         public UpstreamHealthchecksPassiveArgs()
         {
         }
+        public static new UpstreamHealthchecksPassiveArgs Empty => new UpstreamHealthchecksPassiveArgs();
     }
 }

@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // The provider type for the kong package. By default, resources use package-wide configuration
@@ -42,12 +44,17 @@ func NewProvider(ctx *pulumi.Context,
 	if args.KongAdminUri == nil {
 		return nil, errors.New("invalid value for required argument 'KongAdminUri'")
 	}
-	if isZero(args.StrictPluginsMatch) {
-		args.StrictPluginsMatch = pulumi.BoolPtr(getEnvOrDefault(false, parseEnvBool, "STRICT_PLUGINS_MATCH").(bool))
+	if args.StrictPluginsMatch == nil {
+		if d := internal.GetEnvOrDefault(nil, internal.ParseEnvBool, "STRICT_PLUGINS_MATCH"); d != nil {
+			args.StrictPluginsMatch = pulumi.BoolPtr(d.(bool))
+		}
 	}
-	if isZero(args.TlsSkipVerify) {
-		args.TlsSkipVerify = pulumi.BoolPtr(getEnvOrDefault(false, parseEnvBool, "TLS_SKIP_VERIFY").(bool))
+	if args.TlsSkipVerify == nil {
+		if d := internal.GetEnvOrDefault(false, internal.ParseEnvBool, "TLS_SKIP_VERIFY"); d != nil {
+			args.TlsSkipVerify = pulumi.BoolPtr(d.(bool))
+		}
 	}
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:kong", name, args, &resource, opts...)
 	if err != nil {
@@ -118,6 +125,12 @@ func (i *Provider) ToProviderOutputWithContext(ctx context.Context) ProviderOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderOutput)
 }
 
+func (i *Provider) ToOutput(ctx context.Context) pulumix.Output[*Provider] {
+	return pulumix.Output[*Provider]{
+		OutputState: i.ToProviderOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProviderOutput struct{ *pulumi.OutputState }
 
 func (ProviderOutput) ElementType() reflect.Type {
@@ -130,6 +143,42 @@ func (o ProviderOutput) ToProviderOutput() ProviderOutput {
 
 func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) ProviderOutput {
 	return o
+}
+
+func (o ProviderOutput) ToOutput(ctx context.Context) pulumix.Output[*Provider] {
+	return pulumix.Output[*Provider]{
+		OutputState: o.OutputState,
+	}
+}
+
+// An basic auth password for kong admin
+func (o ProviderOutput) KongAdminPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.KongAdminPassword }).(pulumi.StringPtrOutput)
+}
+
+// API key for the kong api (Enterprise Edition)
+func (o ProviderOutput) KongAdminToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.KongAdminToken }).(pulumi.StringPtrOutput)
+}
+
+// The address of the kong admin url e.g. http://localhost:8001
+func (o ProviderOutput) KongAdminUri() pulumi.StringOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.KongAdminUri }).(pulumi.StringOutput)
+}
+
+// An basic auth user for kong admin
+func (o ProviderOutput) KongAdminUsername() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.KongAdminUsername }).(pulumi.StringPtrOutput)
+}
+
+// API key for the kong api (if you have locked it down)
+func (o ProviderOutput) KongApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.KongApiKey }).(pulumi.StringPtrOutput)
+}
+
+// Workspace context (Enterprise Edition)
+func (o ProviderOutput) KongWorkspace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.KongWorkspace }).(pulumi.StringPtrOutput)
 }
 
 func init() {

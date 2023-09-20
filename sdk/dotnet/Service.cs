@@ -17,84 +17,84 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var service = new Kong.Service("service", new()
     ///     {
-    ///         var service = new Kong.Service("service", new Kong.ServiceArgs
-    ///         {
-    ///             ConnectTimeout = 1000,
-    ///             Host = "test.org",
-    ///             Path = "/mypath",
-    ///             Port = 8080,
-    ///             Protocol = "http",
-    ///             ReadTimeout = 3000,
-    ///             Retries = 5,
-    ///             WriteTimeout = 2000,
-    ///         });
-    ///     }
+    ///         ConnectTimeout = 1000,
+    ///         Host = "test.org",
+    ///         Path = "/mypath",
+    ///         Port = 8080,
+    ///         Protocol = "http",
+    ///         ReadTimeout = 3000,
+    ///         Retries = 5,
+    ///         WriteTimeout = 2000,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var certificate = new Kong.Certificate("certificate", new()
     ///     {
-    ///         var certificate = new Kong.Certificate("certificate", new Kong.CertificateArgs
-    ///         {
-    ///             Certificate = @"    -----BEGIN CERTIFICATE-----
+    ///         Cert = @"    -----BEGIN CERTIFICATE-----
     ///     ......
     ///     -----END CERTIFICATE-----
     /// ",
-    ///             PrivateKey = @"    -----BEGIN PRIVATE KEY-----
+    ///         PrivateKey = @"    -----BEGIN PRIVATE KEY-----
     ///     .....
     ///     -----END PRIVATE KEY-----
     /// ",
-    ///             Snis = 
-    ///             {
-    ///                 "foo.com",
-    ///             },
-    ///         });
-    ///         var ca = new Kong.Certificate("ca", new Kong.CertificateArgs
+    ///         Snis = new[]
     ///         {
-    ///             Certificate = @"    -----BEGIN CERTIFICATE-----
-    ///     ......
-    ///     -----END CERTIFICATE-----
-    /// ",
-    ///             PrivateKey = @"    -----BEGIN PRIVATE KEY-----
-    ///     .....
-    ///     -----END PRIVATE KEY-----
-    /// ",
-    ///             Snis = 
-    ///             {
-    ///                 "ca.com",
-    ///             },
-    ///         });
-    ///         var service = new Kong.Service("service", new Kong.ServiceArgs
-    ///         {
-    ///             Protocol = "https",
-    ///             Host = "test.org",
-    ///             TlsVerify = true,
-    ///             TlsVerifyDepth = 2,
-    ///             ClientCertificateId = certificate.Id,
-    ///             CaCertificateIds = 
-    ///             {
-    ///                 ca.Id,
-    ///             },
-    ///         });
-    ///     }
+    ///             "foo.com",
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var ca = new Kong.Certificate("ca", new()
+    ///     {
+    ///         Cert = @"    -----BEGIN CERTIFICATE-----
+    ///     ......
+    ///     -----END CERTIFICATE-----
+    /// ",
+    ///         PrivateKey = @"    -----BEGIN PRIVATE KEY-----
+    ///     .....
+    ///     -----END PRIVATE KEY-----
+    /// ",
+    ///         Snis = new[]
+    ///         {
+    ///             "ca.com",
+    ///         },
+    ///     });
+    /// 
+    ///     var service = new Kong.Service("service", new()
+    ///     {
+    ///         Protocol = "https",
+    ///         Host = "test.org",
+    ///         TlsVerify = true,
+    ///         TlsVerifyDepth = 2,
+    ///         ClientCertificateId = certificate.Id,
+    ///         CaCertificateIds = new[]
+    ///         {
+    ///             ca.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -106,7 +106,7 @@ namespace Pulumi.Kong
     /// ```
     /// </summary>
     [KongResourceType("kong:index/service:Service")]
-    public partial class Service : Pulumi.CustomResource
+    public partial class Service : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
@@ -236,7 +236,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ServiceArgs : Pulumi.ResourceArgs
+    public sealed class ServiceArgs : global::Pulumi.ResourceArgs
     {
         [Input("caCertificateIds")]
         private InputList<string>? _caCertificateIds;
@@ -337,9 +337,10 @@ namespace Pulumi.Kong
         public ServiceArgs()
         {
         }
+        public static new ServiceArgs Empty => new ServiceArgs();
     }
 
-    public sealed class ServiceState : Pulumi.ResourceArgs
+    public sealed class ServiceState : global::Pulumi.ResourceArgs
     {
         [Input("caCertificateIds")]
         private InputList<string>? _caCertificateIds;
@@ -440,5 +441,6 @@ namespace Pulumi.Kong
         public ServiceState()
         {
         }
+        public static new ServiceState Empty => new ServiceState();
     }
 }

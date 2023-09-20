@@ -17,21 +17,22 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
     ///     {
-    ///         var myConsumer = new Kong.Consumer("myConsumer", new Kong.ConsumerArgs
-    ///         {
-    ///             CustomId = "123",
-    ///             Username = "User1",
-    ///         });
-    ///         var oauth2Plugin = new Kong.Plugin("oauth2Plugin", new Kong.PluginArgs
-    ///         {
-    ///             ConfigJson = @"	{
+    ///         CustomId = "123",
+    ///         Username = "User1",
+    ///     });
+    /// 
+    ///     var oauth2Plugin = new Kong.Plugin("oauth2Plugin", new()
+    ///     {
+    ///         ConfigJson = @"	{
     /// 		""global_credentials"": true,
     /// 		""enable_password_grant"": true,
     /// 		""token_expiration"": 180,
@@ -40,29 +41,29 @@ namespace Pulumi.Kong
     /// 	}
     /// 
     /// ",
-    ///         });
-    ///         var consumerOauth2 = new Kong.ConsumerOauth2("consumerOauth2", new Kong.ConsumerOauth2Args
-    ///         {
-    ///             ClientId = "client_id",
-    ///             ClientSecret = "client_secret",
-    ///             ConsumerId = myConsumer.Id,
-    ///             RedirectUris = 
-    ///             {
-    ///                 "https://asdf.com/callback",
-    ///                 "https://test.cl/callback",
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 "myTag",
-    ///             },
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    ///     var consumerOauth2 = new Kong.ConsumerOauth2("consumerOauth2", new()
+    ///     {
+    ///         ClientId = "client_id",
+    ///         ClientSecret = "client_secret",
+    ///         ConsumerId = myConsumer.Id,
+    ///         RedirectUris = new[]
+    ///         {
+    ///             "https://asdf.com/callback",
+    ///             "https://test.cl/callback",
+    ///         },
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerOauth2:ConsumerOauth2")]
-    public partial class ConsumerOauth2 : Pulumi.CustomResource
+    public partial class ConsumerOauth2 : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Unique oauth2 client id. If not set, the oauth2 plugin will generate one
@@ -150,7 +151,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ConsumerOauth2Args : Pulumi.ResourceArgs
+    public sealed class ConsumerOauth2Args : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Unique oauth2 client id. If not set, the oauth2 plugin will generate one
@@ -209,9 +210,10 @@ namespace Pulumi.Kong
         public ConsumerOauth2Args()
         {
         }
+        public static new ConsumerOauth2Args Empty => new ConsumerOauth2Args();
     }
 
-    public sealed class ConsumerOauth2State : Pulumi.ResourceArgs
+    public sealed class ConsumerOauth2State : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Unique oauth2 client id. If not set, the oauth2 plugin will generate one
@@ -270,5 +272,6 @@ namespace Pulumi.Kong
         public ConsumerOauth2State()
         {
         }
+        public static new ConsumerOauth2State Empty => new ConsumerOauth2State();
     }
 }

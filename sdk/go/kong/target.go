@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -77,6 +79,7 @@ func NewTarget(ctx *pulumi.Context,
 	if args.Weight == nil {
 		return nil, errors.New("invalid value for required argument 'Weight'")
 	}
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Target
 	err := ctx.RegisterResource("kong:index/target:Target", name, args, &resource, opts...)
 	if err != nil {
@@ -170,6 +173,12 @@ func (i *Target) ToTargetOutputWithContext(ctx context.Context) TargetOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(TargetOutput)
 }
 
+func (i *Target) ToOutput(ctx context.Context) pulumix.Output[*Target] {
+	return pulumix.Output[*Target]{
+		OutputState: i.ToTargetOutputWithContext(ctx).OutputState,
+	}
+}
+
 // TargetArrayInput is an input type that accepts TargetArray and TargetArrayOutput values.
 // You can construct a concrete instance of `TargetArrayInput` via:
 //
@@ -193,6 +202,12 @@ func (i TargetArray) ToTargetArrayOutput() TargetArrayOutput {
 
 func (i TargetArray) ToTargetArrayOutputWithContext(ctx context.Context) TargetArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(TargetArrayOutput)
+}
+
+func (i TargetArray) ToOutput(ctx context.Context) pulumix.Output[[]*Target] {
+	return pulumix.Output[[]*Target]{
+		OutputState: i.ToTargetArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // TargetMapInput is an input type that accepts TargetMap and TargetMapOutput values.
@@ -220,6 +235,12 @@ func (i TargetMap) ToTargetMapOutputWithContext(ctx context.Context) TargetMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(TargetMapOutput)
 }
 
+func (i TargetMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Target] {
+	return pulumix.Output[map[string]*Target]{
+		OutputState: i.ToTargetMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type TargetOutput struct{ *pulumi.OutputState }
 
 func (TargetOutput) ElementType() reflect.Type {
@@ -234,6 +255,32 @@ func (o TargetOutput) ToTargetOutputWithContext(ctx context.Context) TargetOutpu
 	return o
 }
 
+func (o TargetOutput) ToOutput(ctx context.Context) pulumix.Output[*Target] {
+	return pulumix.Output[*Target]{
+		OutputState: o.OutputState,
+	}
+}
+
+// A list set of strings associated with the Plugin for grouping and filtering
+func (o TargetOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Target) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
+func (o TargetOutput) Target() pulumi.StringOutput {
+	return o.ApplyT(func(v *Target) pulumi.StringOutput { return v.Target }).(pulumi.StringOutput)
+}
+
+// is the id of the upstream to apply this target to.
+func (o TargetOutput) UpstreamId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Target) pulumi.StringOutput { return v.UpstreamId }).(pulumi.StringOutput)
+}
+
+// is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
+func (o TargetOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v *Target) pulumi.IntOutput { return v.Weight }).(pulumi.IntOutput)
+}
+
 type TargetArrayOutput struct{ *pulumi.OutputState }
 
 func (TargetArrayOutput) ElementType() reflect.Type {
@@ -246,6 +293,12 @@ func (o TargetArrayOutput) ToTargetArrayOutput() TargetArrayOutput {
 
 func (o TargetArrayOutput) ToTargetArrayOutputWithContext(ctx context.Context) TargetArrayOutput {
 	return o
+}
+
+func (o TargetArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Target] {
+	return pulumix.Output[[]*Target]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o TargetArrayOutput) Index(i pulumi.IntInput) TargetOutput {
@@ -266,6 +319,12 @@ func (o TargetMapOutput) ToTargetMapOutput() TargetMapOutput {
 
 func (o TargetMapOutput) ToTargetMapOutputWithContext(ctx context.Context) TargetMapOutput {
 	return o
+}
+
+func (o TargetMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Target] {
+	return pulumix.Output[map[string]*Target]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o TargetMapOutput) MapIndex(k pulumi.StringInput) TargetOutput {

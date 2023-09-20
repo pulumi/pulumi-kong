@@ -22,6 +22,62 @@ import javax.annotation.Nullable;
  * Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import com.pulumi.kong.ConsumerOauth2;
+ * import com.pulumi.kong.ConsumerOauth2Args;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
+ *             .customId(&#34;123&#34;)
+ *             .username(&#34;User1&#34;)
+ *             .build());
+ * 
+ *         var oauth2Plugin = new Plugin(&#34;oauth2Plugin&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;global_credentials&#34;: true,
+ * 		&#34;enable_password_grant&#34;: true,
+ * 		&#34;token_expiration&#34;: 180,
+ * 		&#34;refresh_token_ttl&#34;: 180,
+ * 		&#34;provision_key&#34;: &#34;testprovisionkey&#34;
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .build());
+ * 
+ *         var consumerOauth2 = new ConsumerOauth2(&#34;consumerOauth2&#34;, ConsumerOauth2Args.builder()        
+ *             .clientId(&#34;client_id&#34;)
+ *             .clientSecret(&#34;client_secret&#34;)
+ *             .consumerId(myConsumer.id())
+ *             .redirectUris(            
+ *                 &#34;https://asdf.com/callback&#34;,
+ *                 &#34;https://test.cl/callback&#34;)
+ *             .tags(&#34;myTag&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  */
 @ResourceType(type="kong:index/consumerOauth2:ConsumerOauth2")

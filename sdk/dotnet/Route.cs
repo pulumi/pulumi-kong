@@ -19,102 +19,100 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var route = new Kong.Route("route", new()
     ///     {
-    ///         var route = new Kong.Route("route", new Kong.RouteArgs
+    ///         Protocols = new[]
     ///         {
-    ///             Protocols = 
+    ///             "http",
+    ///             "https",
+    ///         },
+    ///         Methods = new[]
+    ///         {
+    ///             "GET",
+    ///             "POST",
+    ///         },
+    ///         Hosts = new[]
+    ///         {
+    ///             "example2.com",
+    ///         },
+    ///         Paths = new[]
+    ///         {
+    ///             "/test",
+    ///         },
+    ///         StripPath = false,
+    ///         PreserveHost = true,
+    ///         RegexPriority = 1,
+    ///         ServiceId = kong_service.Service.Id,
+    ///         Headers = new[]
+    ///         {
+    ///             new Kong.Inputs.RouteHeaderArgs
     ///             {
-    ///                 "http",
-    ///                 "https",
-    ///             },
-    ///             Methods = 
-    ///             {
-    ///                 "GET",
-    ///                 "POST",
-    ///             },
-    ///             Hosts = 
-    ///             {
-    ///                 "example2.com",
-    ///             },
-    ///             Paths = 
-    ///             {
-    ///                 "/test",
-    ///             },
-    ///             StripPath = false,
-    ///             PreserveHost = true,
-    ///             RegexPriority = 1,
-    ///             ServiceId = kong_service.Service.Id,
-    ///             Headers = 
-    ///             {
-    ///                 new Kong.Inputs.RouteHeaderArgs
+    ///                 Name = "x-test-1",
+    ///                 Values = new[]
     ///                 {
-    ///                     Name = "x-test-1",
-    ///                     Values = 
-    ///                     {
-    ///                         "a",
-    ///                         "b",
-    ///                     },
+    ///                     "a",
+    ///                     "b",
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var route = new Kong.Route("route", new()
     ///     {
-    ///         var route = new Kong.Route("route", new Kong.RouteArgs
+    ///         Protocols = new[]
     ///         {
-    ///             Protocols = 
+    ///             "tcp",
+    ///         },
+    ///         StripPath = true,
+    ///         PreserveHost = false,
+    ///         Sources = new[]
+    ///         {
+    ///             new Kong.Inputs.RouteSourceArgs
     ///             {
-    ///                 "tcp",
+    ///                 Ip = "192.168.1.1",
+    ///                 Port = 80,
     ///             },
-    ///             StripPath = true,
-    ///             PreserveHost = false,
-    ///             Sources = 
+    ///             new Kong.Inputs.RouteSourceArgs
     ///             {
-    ///                 new Kong.Inputs.RouteSourceArgs
-    ///                 {
-    ///                     Ip = "192.168.1.1",
-    ///                     Port = 80,
-    ///                 },
-    ///                 new Kong.Inputs.RouteSourceArgs
-    ///                 {
-    ///                     Ip = "192.168.1.2",
-    ///                 },
+    ///                 Ip = "192.168.1.2",
     ///             },
-    ///             Destinations = 
+    ///         },
+    ///         Destinations = new[]
+    ///         {
+    ///             new Kong.Inputs.RouteDestinationArgs
     ///             {
-    ///                 new Kong.Inputs.RouteDestinationArgs
-    ///                 {
-    ///                     Ip = "172.10.1.1",
-    ///                     Port = 81,
-    ///                 },
+    ///                 Ip = "172.10.1.1",
+    ///                 Port = 81,
     ///             },
-    ///             Snis = 
-    ///             {
-    ///                 "foo.com",
-    ///             },
-    ///             ServiceId = kong_service.Service.Id,
-    ///         });
-    ///     }
+    ///         },
+    ///         Snis = new[]
+    ///         {
+    ///             "foo.com",
+    ///         },
+    ///         ServiceId = kong_service.Service.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -126,7 +124,7 @@ namespace Pulumi.Kong
     /// ```
     /// </summary>
     [KongResourceType("kong:index/route:Route")]
-    public partial class Route : Pulumi.CustomResource
+    public partial class Route : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A list of destination `ip` and `port`
@@ -280,7 +278,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class RouteArgs : Pulumi.ResourceArgs
+    public sealed class RouteArgs : global::Pulumi.ResourceArgs
     {
         [Input("destinations")]
         private InputList<Inputs.RouteDestinationArgs>? _destinations;
@@ -447,9 +445,10 @@ namespace Pulumi.Kong
         public RouteArgs()
         {
         }
+        public static new RouteArgs Empty => new RouteArgs();
     }
 
-    public sealed class RouteState : Pulumi.ResourceArgs
+    public sealed class RouteState : global::Pulumi.ResourceArgs
     {
         [Input("destinations")]
         private InputList<Inputs.RouteDestinationGetArgs>? _destinations;
@@ -616,5 +615,6 @@ namespace Pulumi.Kong
         public RouteState()
         {
         }
+        public static new RouteState Empty => new RouteState();
     }
 }

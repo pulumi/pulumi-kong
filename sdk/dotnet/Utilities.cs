@@ -74,7 +74,7 @@ namespace Pulumi.Kong
         }
     }
 
-    internal sealed class KongResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    internal sealed class KongResourceTypeAttribute : global::Pulumi.ResourceTypeAttribute
     {
         public KongResourceTypeAttribute(string type) : base(type, Utilities.Version)
         {

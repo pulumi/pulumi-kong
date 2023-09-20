@@ -17,25 +17,24 @@ namespace Pulumi.Kong
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Kong = Pulumi.Kong;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var consumer = new Kong.Consumer("consumer", new()
     ///     {
-    ///         var consumer = new Kong.Consumer("consumer", new Kong.ConsumerArgs
+    ///         CustomId = "123",
+    ///         Tags = new[]
     ///         {
-    ///             CustomId = "123",
-    ///             Tags = 
-    ///             {
-    ///                 "mySuperTag",
-    ///             },
-    ///             Username = "User1",
-    ///         });
-    ///     }
+    ///             "mySuperTag",
+    ///         },
+    ///         Username = "User1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -47,7 +46,7 @@ namespace Pulumi.Kong
     /// ```
     /// </summary>
     [KongResourceType("kong:index/consumer:Consumer")]
-    public partial class Consumer : Pulumi.CustomResource
+    public partial class Consumer : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A custom id for the consumer, you must set either the username or custom_id
@@ -111,7 +110,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ConsumerArgs : Pulumi.ResourceArgs
+    public sealed class ConsumerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// A custom id for the consumer, you must set either the username or custom_id
@@ -140,9 +139,10 @@ namespace Pulumi.Kong
         public ConsumerArgs()
         {
         }
+        public static new ConsumerArgs Empty => new ConsumerArgs();
     }
 
-    public sealed class ConsumerState : Pulumi.ResourceArgs
+    public sealed class ConsumerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// A custom id for the consumer, you must set either the username or custom_id
@@ -171,5 +171,6 @@ namespace Pulumi.Kong
         public ConsumerState()
         {
         }
+        public static new ConsumerState Empty => new ConsumerState();
     }
 }

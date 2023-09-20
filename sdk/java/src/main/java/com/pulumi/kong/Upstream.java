@@ -19,6 +19,113 @@ import javax.annotation.Nullable;
 
 /**
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Certificate;
+ * import com.pulumi.kong.CertificateArgs;
+ * import com.pulumi.kong.Upstream;
+ * import com.pulumi.kong.UpstreamArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksActiveArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksActiveHealthyArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksActiveUnhealthyArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksPassiveArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksPassiveHealthyArgs;
+ * import com.pulumi.kong.inputs.UpstreamHealthchecksPassiveUnhealthyArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
+ *             .certificate(&#34;&#34;&#34;
+ *     -----BEGIN CERTIFICATE-----
+ *     ......
+ *     -----END CERTIFICATE-----
+ *             &#34;&#34;&#34;)
+ *             .privateKey(&#34;&#34;&#34;
+ *     -----BEGIN PRIVATE KEY-----
+ *     .....
+ *     -----END PRIVATE KEY-----
+ *             &#34;&#34;&#34;)
+ *             .snis(&#34;foo.com&#34;)
+ *             .build());
+ * 
+ *         var upstream = new Upstream(&#34;upstream&#34;, UpstreamArgs.builder()        
+ *             .slots(10)
+ *             .hashOn(&#34;header&#34;)
+ *             .hashFallback(&#34;cookie&#34;)
+ *             .hashOnHeader(&#34;HeaderName&#34;)
+ *             .hashFallbackHeader(&#34;FallbackHeaderName&#34;)
+ *             .hashOnCookie(&#34;CookieName&#34;)
+ *             .hashOnCookiePath(&#34;/path&#34;)
+ *             .hostHeader(&#34;x-host&#34;)
+ *             .tags(            
+ *                 &#34;a&#34;,
+ *                 &#34;b&#34;)
+ *             .clientCertificateId(certificate.id())
+ *             .healthchecks(UpstreamHealthchecksArgs.builder()
+ *                 .active(UpstreamHealthchecksActiveArgs.builder()
+ *                     .type(&#34;https&#34;)
+ *                     .httpPath(&#34;/status&#34;)
+ *                     .timeout(10)
+ *                     .concurrency(20)
+ *                     .httpsVerifyCertificate(false)
+ *                     .httpsSni(&#34;some.domain.com&#34;)
+ *                     .healthy(UpstreamHealthchecksActiveHealthyArgs.builder()
+ *                         .successes(1)
+ *                         .interval(5)
+ *                         .httpStatuses(                        
+ *                             200,
+ *                             201)
+ *                         .build())
+ *                     .unhealthy(UpstreamHealthchecksActiveUnhealthyArgs.builder()
+ *                         .timeouts(7)
+ *                         .interval(3)
+ *                         .tcpFailures(1)
+ *                         .httpFailures(2)
+ *                         .httpStatuses(                        
+ *                             500,
+ *                             501)
+ *                         .build())
+ *                     .build())
+ *                 .passive(UpstreamHealthchecksPassiveArgs.builder()
+ *                     .type(&#34;https&#34;)
+ *                     .healthy(UpstreamHealthchecksPassiveHealthyArgs.builder()
+ *                         .successes(1)
+ *                         .httpStatuses(                        
+ *                             200,
+ *                             201,
+ *                             202)
+ *                         .build())
+ *                     .unhealthy(UpstreamHealthchecksPassiveUnhealthyArgs.builder()
+ *                         .timeouts(3)
+ *                         .tcpFailures(5)
+ *                         .httpFailures(6)
+ *                         .httpStatuses(                        
+ *                             500,
+ *                             501,
+ *                             502)
+ *                         .build())
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 

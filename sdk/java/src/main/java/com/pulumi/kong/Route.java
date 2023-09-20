@@ -28,6 +28,100 @@ import javax.annotation.Nullable;
  * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Route;
+ * import com.pulumi.kong.RouteArgs;
+ * import com.pulumi.kong.inputs.RouteHeaderArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var route = new Route(&#34;route&#34;, RouteArgs.builder()        
+ *             .protocols(            
+ *                 &#34;http&#34;,
+ *                 &#34;https&#34;)
+ *             .methods(            
+ *                 &#34;GET&#34;,
+ *                 &#34;POST&#34;)
+ *             .hosts(&#34;example2.com&#34;)
+ *             .paths(&#34;/test&#34;)
+ *             .stripPath(false)
+ *             .preserveHost(true)
+ *             .regexPriority(1)
+ *             .serviceId(kong_service.service().id())
+ *             .headers(RouteHeaderArgs.builder()
+ *                 .name(&#34;x-test-1&#34;)
+ *                 .values(                
+ *                     &#34;a&#34;,
+ *                     &#34;b&#34;)
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Route;
+ * import com.pulumi.kong.RouteArgs;
+ * import com.pulumi.kong.inputs.RouteSourceArgs;
+ * import com.pulumi.kong.inputs.RouteDestinationArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var route = new Route(&#34;route&#34;, RouteArgs.builder()        
+ *             .protocols(&#34;tcp&#34;)
+ *             .stripPath(true)
+ *             .preserveHost(false)
+ *             .sources(            
+ *                 RouteSourceArgs.builder()
+ *                     .ip(&#34;192.168.1.1&#34;)
+ *                     .port(80)
+ *                     .build(),
+ *                 RouteSourceArgs.builder()
+ *                     .ip(&#34;192.168.1.2&#34;)
+ *                     .build())
+ *             .destinations(RouteDestinationArgs.builder()
+ *                 .ip(&#34;172.10.1.1&#34;)
+ *                 .port(81)
+ *                 .build())
+ *             .snis(&#34;foo.com&#34;)
+ *             .serviceId(kong_service.service().id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 

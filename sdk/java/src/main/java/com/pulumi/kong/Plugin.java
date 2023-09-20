@@ -23,6 +23,172 @@ import javax.annotation.Nullable;
  * The `config_json` is passed through to the plugin to configure it as is.
  * 
  * ## Example Usage
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 5,
+ * 		&#34;hour&#34; : 1000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * To apply a plugin to a consumer use the `consumer_id` property, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Consumer;
+ * import com.pulumi.kong.ConsumerArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var pluginConsumer = new Consumer(&#34;pluginConsumer&#34;, ConsumerArgs.builder()        
+ *             .customId(&#34;567&#34;)
+ *             .username(&#34;PluginUser&#34;)
+ *             .build());
+ * 
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 5,
+ * 		&#34;hour&#34; : 1000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .consumerId(pluginConsumer.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To apply a plugin to a service use the `service_id` property, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .host(&#34;test.org&#34;)
+ *             .protocol(&#34;http&#34;)
+ *             .build());
+ * 
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 10,
+ * 		&#34;hour&#34; : 2000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .serviceId(service.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
+ * 
+ * To apply a plugin to a route use the `route_id` property, for example:
+ * ```java
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.kong.Service;
+ * import com.pulumi.kong.ServiceArgs;
+ * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .host(&#34;test.org&#34;)
+ *             .protocol(&#34;http&#34;)
+ *             .build());
+ * 
+ *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .configJson(&#34;&#34;&#34;
+ * 	{
+ * 		&#34;second&#34;: 11,
+ * 		&#34;hour&#34; : 4000
+ * 	}
+ * 
+ *             &#34;&#34;&#34;)
+ *             .enabled(true)
+ *             .serviceId(service.id())
+ *             .build());
+ * 
+ *     }
+ * }
+ * ```
  * 
  * ## Import
  * 

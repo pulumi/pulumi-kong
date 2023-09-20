@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # Route
@@ -50,8 +52,8 @@ import (
 //				PreserveHost:  pulumi.Bool(true),
 //				RegexPriority: pulumi.Int(1),
 //				ServiceId:     pulumi.Any(kong_service.Service.Id),
-//				Headers: RouteHeaderArray{
-//					&RouteHeaderArgs{
+//				Headers: kong.RouteHeaderArray{
+//					&kong.RouteHeaderArgs{
 //						Name: pulumi.String("x-test-1"),
 //						Values: pulumi.StringArray{
 //							pulumi.String("a"),
@@ -89,17 +91,17 @@ import (
 //				},
 //				StripPath:    pulumi.Bool(true),
 //				PreserveHost: pulumi.Bool(false),
-//				Sources: RouteSourceArray{
-//					&RouteSourceArgs{
+//				Sources: kong.RouteSourceArray{
+//					&kong.RouteSourceArgs{
 //						Ip:   pulumi.String("192.168.1.1"),
 //						Port: pulumi.Int(80),
 //					},
-//					&RouteSourceArgs{
+//					&kong.RouteSourceArgs{
 //						Ip: pulumi.String("192.168.1.2"),
 //					},
 //				},
-//				Destinations: RouteDestinationArray{
-//					&RouteDestinationArgs{
+//				Destinations: kong.RouteDestinationArray{
+//					&kong.RouteDestinationArgs{
 //						Ip:   pulumi.String("172.10.1.1"),
 //						Port: pulumi.Int(81),
 //					},
@@ -181,6 +183,7 @@ func NewRoute(ctx *pulumi.Context,
 	if args.ServiceId == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Route
 	err := ctx.RegisterResource("kong:index/route:Route", name, args, &resource, opts...)
 	if err != nil {
@@ -386,6 +389,12 @@ func (i *Route) ToRouteOutputWithContext(ctx context.Context) RouteOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(RouteOutput)
 }
 
+func (i *Route) ToOutput(ctx context.Context) pulumix.Output[*Route] {
+	return pulumix.Output[*Route]{
+		OutputState: i.ToRouteOutputWithContext(ctx).OutputState,
+	}
+}
+
 // RouteArrayInput is an input type that accepts RouteArray and RouteArrayOutput values.
 // You can construct a concrete instance of `RouteArrayInput` via:
 //
@@ -409,6 +418,12 @@ func (i RouteArray) ToRouteArrayOutput() RouteArrayOutput {
 
 func (i RouteArray) ToRouteArrayOutputWithContext(ctx context.Context) RouteArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(RouteArrayOutput)
+}
+
+func (i RouteArray) ToOutput(ctx context.Context) pulumix.Output[[]*Route] {
+	return pulumix.Output[[]*Route]{
+		OutputState: i.ToRouteArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // RouteMapInput is an input type that accepts RouteMap and RouteMapOutput values.
@@ -436,6 +451,12 @@ func (i RouteMap) ToRouteMapOutputWithContext(ctx context.Context) RouteMapOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(RouteMapOutput)
 }
 
+func (i RouteMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Route] {
+	return pulumix.Output[map[string]*Route]{
+		OutputState: i.ToRouteMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type RouteOutput struct{ *pulumi.OutputState }
 
 func (RouteOutput) ElementType() reflect.Type {
@@ -450,6 +471,102 @@ func (o RouteOutput) ToRouteOutputWithContext(ctx context.Context) RouteOutput {
 	return o
 }
 
+func (o RouteOutput) ToOutput(ctx context.Context) pulumix.Output[*Route] {
+	return pulumix.Output[*Route]{
+		OutputState: o.OutputState,
+	}
+}
+
+// A list of destination `ip` and `port`
+func (o RouteOutput) Destinations() RouteDestinationArrayOutput {
+	return o.ApplyT(func(v *Route) RouteDestinationArrayOutput { return v.Destinations }).(RouteDestinationArrayOutput)
+}
+
+// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+func (o RouteOutput) Headers() RouteHeaderArrayOutput {
+	return o.ApplyT(func(v *Route) RouteHeaderArrayOutput { return v.Headers }).(RouteHeaderArrayOutput)
+}
+
+// A list of domain names that match this Route
+func (o RouteOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringArrayOutput { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+// The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
+func (o RouteOutput) HttpsRedirectStatusCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Route) pulumi.IntPtrOutput { return v.HttpsRedirectStatusCode }).(pulumi.IntPtrOutput)
+}
+
+// A list of HTTP methods that match this Route
+func (o RouteOutput) Methods() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringArrayOutput { return v.Methods }).(pulumi.StringArrayOutput)
+}
+
+// The name of the route
+func (o RouteOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
+func (o RouteOutput) PathHandling() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringPtrOutput { return v.PathHandling }).(pulumi.StringPtrOutput)
+}
+
+// A list of paths that match this Route
+func (o RouteOutput) Paths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringArrayOutput { return v.Paths }).(pulumi.StringArrayOutput)
+}
+
+// When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
+func (o RouteOutput) PreserveHost() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Route) pulumi.BoolPtrOutput { return v.PreserveHost }).(pulumi.BoolPtrOutput)
+}
+
+// The list of protocols to use
+func (o RouteOutput) Protocols() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringArrayOutput { return v.Protocols }).(pulumi.StringArrayOutput)
+}
+
+// A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
+func (o RouteOutput) RegexPriority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Route) pulumi.IntPtrOutput { return v.RegexPriority }).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
+func (o RouteOutput) RequestBuffering() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Route) pulumi.BoolPtrOutput { return v.RequestBuffering }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
+func (o RouteOutput) ResponseBuffering() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Route) pulumi.BoolPtrOutput { return v.ResponseBuffering }).(pulumi.BoolPtrOutput)
+}
+
+// Service ID to map to
+func (o RouteOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringOutput { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// A list of SNIs that match this Route when using stream routing.
+func (o RouteOutput) Snis() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringArrayOutput { return v.Snis }).(pulumi.StringArrayOutput)
+}
+
+// A list of source `ip` and `port`
+func (o RouteOutput) Sources() RouteSourceArrayOutput {
+	return o.ApplyT(func(v *Route) RouteSourceArrayOutput { return v.Sources }).(RouteSourceArrayOutput)
+}
+
+// When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
+func (o RouteOutput) StripPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Route) pulumi.BoolPtrOutput { return v.StripPath }).(pulumi.BoolPtrOutput)
+}
+
+// A list of strings associated with the Route for grouping and filtering.
+func (o RouteOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
 type RouteArrayOutput struct{ *pulumi.OutputState }
 
 func (RouteArrayOutput) ElementType() reflect.Type {
@@ -462,6 +579,12 @@ func (o RouteArrayOutput) ToRouteArrayOutput() RouteArrayOutput {
 
 func (o RouteArrayOutput) ToRouteArrayOutputWithContext(ctx context.Context) RouteArrayOutput {
 	return o
+}
+
+func (o RouteArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Route] {
+	return pulumix.Output[[]*Route]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RouteArrayOutput) Index(i pulumi.IntInput) RouteOutput {
@@ -482,6 +605,12 @@ func (o RouteMapOutput) ToRouteMapOutput() RouteMapOutput {
 
 func (o RouteMapOutput) ToRouteMapOutputWithContext(ctx context.Context) RouteMapOutput {
 	return o
+}
+
+func (o RouteMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Route] {
+	return pulumix.Output[map[string]*Route]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RouteMapOutput) MapIndex(k pulumi.StringInput) RouteOutput {

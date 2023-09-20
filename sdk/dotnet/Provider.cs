@@ -16,7 +16,7 @@ namespace Pulumi.Kong
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
     [KongResourceType("pulumi:providers:kong")]
-    public partial class Provider : Pulumi.ProviderResource
+    public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
         /// An basic auth password for kong admin
@@ -80,7 +80,7 @@ namespace Pulumi.Kong
         }
     }
 
-    public sealed class ProviderArgs : Pulumi.ResourceArgs
+    public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// An basic auth password for kong admin
@@ -135,5 +135,6 @@ namespace Pulumi.Kong
             StrictPluginsMatch = Utilities.GetEnvBoolean("STRICT_PLUGINS_MATCH");
             TlsSkipVerify = Utilities.GetEnvBoolean("TLS_SKIP_VERIFY") ?? false;
         }
+        public static new ProviderArgs Empty => new ProviderArgs();
     }
 }

@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # ConsumerOauth2
@@ -21,8 +23,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -39,7 +39,16 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewPlugin(ctx, "oauth2Plugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v", "	{\n", "		\"global_credentials\": true,\n", "		\"enable_password_grant\": true,\n", "		\"token_expiration\": 180,\n", "		\"refresh_token_ttl\": 180,\n", "		\"provision_key\": \"testprovisionkey\"\n", "	}\n", "\n")),
+//				ConfigJson: pulumi.String(`	{
+//			"global_credentials": true,
+//			"enable_password_grant": true,
+//			"token_expiration": 180,
+//			"refresh_token_ttl": 180,
+//			"provision_key": "testprovisionkey"
+//		}
+//
+// `),
+//
 //			})
 //			if err != nil {
 //				return err
@@ -96,6 +105,7 @@ func NewConsumerOauth2(ctx *pulumi.Context,
 	if args.RedirectUris == nil {
 		return nil, errors.New("invalid value for required argument 'RedirectUris'")
 	}
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConsumerOauth2
 	err := ctx.RegisterResource("kong:index/consumerOauth2:ConsumerOauth2", name, args, &resource, opts...)
 	if err != nil {
@@ -213,6 +223,12 @@ func (i *ConsumerOauth2) ToConsumerOauth2OutputWithContext(ctx context.Context) 
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerOauth2Output)
 }
 
+func (i *ConsumerOauth2) ToOutput(ctx context.Context) pulumix.Output[*ConsumerOauth2] {
+	return pulumix.Output[*ConsumerOauth2]{
+		OutputState: i.ToConsumerOauth2OutputWithContext(ctx).OutputState,
+	}
+}
+
 // ConsumerOauth2ArrayInput is an input type that accepts ConsumerOauth2Array and ConsumerOauth2ArrayOutput values.
 // You can construct a concrete instance of `ConsumerOauth2ArrayInput` via:
 //
@@ -236,6 +252,12 @@ func (i ConsumerOauth2Array) ToConsumerOauth2ArrayOutput() ConsumerOauth2ArrayOu
 
 func (i ConsumerOauth2Array) ToConsumerOauth2ArrayOutputWithContext(ctx context.Context) ConsumerOauth2ArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerOauth2ArrayOutput)
+}
+
+func (i ConsumerOauth2Array) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerOauth2] {
+	return pulumix.Output[[]*ConsumerOauth2]{
+		OutputState: i.ToConsumerOauth2ArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ConsumerOauth2MapInput is an input type that accepts ConsumerOauth2Map and ConsumerOauth2MapOutput values.
@@ -263,6 +285,12 @@ func (i ConsumerOauth2Map) ToConsumerOauth2MapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerOauth2MapOutput)
 }
 
+func (i ConsumerOauth2Map) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerOauth2] {
+	return pulumix.Output[map[string]*ConsumerOauth2]{
+		OutputState: i.ToConsumerOauth2MapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ConsumerOauth2Output struct{ *pulumi.OutputState }
 
 func (ConsumerOauth2Output) ElementType() reflect.Type {
@@ -277,6 +305,47 @@ func (o ConsumerOauth2Output) ToConsumerOauth2OutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o ConsumerOauth2Output) ToOutput(ctx context.Context) pulumix.Output[*ConsumerOauth2] {
+	return pulumix.Output[*ConsumerOauth2]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Unique oauth2 client id. If not set, the oauth2 plugin will generate one
+func (o ConsumerOauth2Output) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConsumerOauth2) pulumi.StringPtrOutput { return v.ClientId }).(pulumi.StringPtrOutput)
+}
+
+// Unique oauth2 client secret. If not set, the oauth2 plugin will generate one
+func (o ConsumerOauth2Output) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConsumerOauth2) pulumi.StringPtrOutput { return v.ClientSecret }).(pulumi.StringPtrOutput)
+}
+
+// The id of the consumer to be configured with oauth2.
+func (o ConsumerOauth2Output) ConsumerId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerOauth2) pulumi.StringOutput { return v.ConsumerId }).(pulumi.StringOutput)
+}
+
+// A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+func (o ConsumerOauth2Output) HashSecret() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConsumerOauth2) pulumi.BoolPtrOutput { return v.HashSecret }).(pulumi.BoolPtrOutput)
+}
+
+// The name associated with the credential.
+func (o ConsumerOauth2Output) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConsumerOauth2) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).
+func (o ConsumerOauth2Output) RedirectUris() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ConsumerOauth2) pulumi.StringArrayOutput { return v.RedirectUris }).(pulumi.StringArrayOutput)
+}
+
+// A list of strings associated with the consumer for grouping and filtering.
+func (o ConsumerOauth2Output) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ConsumerOauth2) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
 type ConsumerOauth2ArrayOutput struct{ *pulumi.OutputState }
 
 func (ConsumerOauth2ArrayOutput) ElementType() reflect.Type {
@@ -289,6 +358,12 @@ func (o ConsumerOauth2ArrayOutput) ToConsumerOauth2ArrayOutput() ConsumerOauth2A
 
 func (o ConsumerOauth2ArrayOutput) ToConsumerOauth2ArrayOutputWithContext(ctx context.Context) ConsumerOauth2ArrayOutput {
 	return o
+}
+
+func (o ConsumerOauth2ArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerOauth2] {
+	return pulumix.Output[[]*ConsumerOauth2]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerOauth2ArrayOutput) Index(i pulumi.IntInput) ConsumerOauth2Output {
@@ -309,6 +384,12 @@ func (o ConsumerOauth2MapOutput) ToConsumerOauth2MapOutput() ConsumerOauth2MapOu
 
 func (o ConsumerOauth2MapOutput) ToConsumerOauth2MapOutputWithContext(ctx context.Context) ConsumerOauth2MapOutput {
 	return o
+}
+
+func (o ConsumerOauth2MapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerOauth2] {
+	return pulumix.Output[map[string]*ConsumerOauth2]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConsumerOauth2MapOutput) MapIndex(k pulumi.StringInput) ConsumerOauth2Output {

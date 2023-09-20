@@ -5,19 +5,71 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./certificate";
-export * from "./consumer";
-export * from "./consumerAcl";
-export * from "./consumerBasicAuth";
-export * from "./consumerJwtAuth";
-export * from "./consumerKeyAuth";
-export * from "./consumerOauth2";
-export * from "./plugin";
-export * from "./provider";
-export * from "./route";
-export * from "./service";
-export * from "./target";
-export * from "./upstream";
+export { CertificateArgs, CertificateState } from "./certificate";
+export type Certificate = import("./certificate").Certificate;
+export const Certificate: typeof import("./certificate").Certificate = null as any;
+utilities.lazyLoad(exports, ["Certificate"], () => require("./certificate"));
+
+export { ConsumerArgs, ConsumerState } from "./consumer";
+export type Consumer = import("./consumer").Consumer;
+export const Consumer: typeof import("./consumer").Consumer = null as any;
+utilities.lazyLoad(exports, ["Consumer"], () => require("./consumer"));
+
+export { ConsumerAclArgs, ConsumerAclState } from "./consumerAcl";
+export type ConsumerAcl = import("./consumerAcl").ConsumerAcl;
+export const ConsumerAcl: typeof import("./consumerAcl").ConsumerAcl = null as any;
+utilities.lazyLoad(exports, ["ConsumerAcl"], () => require("./consumerAcl"));
+
+export { ConsumerBasicAuthArgs, ConsumerBasicAuthState } from "./consumerBasicAuth";
+export type ConsumerBasicAuth = import("./consumerBasicAuth").ConsumerBasicAuth;
+export const ConsumerBasicAuth: typeof import("./consumerBasicAuth").ConsumerBasicAuth = null as any;
+utilities.lazyLoad(exports, ["ConsumerBasicAuth"], () => require("./consumerBasicAuth"));
+
+export { ConsumerJwtAuthArgs, ConsumerJwtAuthState } from "./consumerJwtAuth";
+export type ConsumerJwtAuth = import("./consumerJwtAuth").ConsumerJwtAuth;
+export const ConsumerJwtAuth: typeof import("./consumerJwtAuth").ConsumerJwtAuth = null as any;
+utilities.lazyLoad(exports, ["ConsumerJwtAuth"], () => require("./consumerJwtAuth"));
+
+export { ConsumerKeyAuthArgs, ConsumerKeyAuthState } from "./consumerKeyAuth";
+export type ConsumerKeyAuth = import("./consumerKeyAuth").ConsumerKeyAuth;
+export const ConsumerKeyAuth: typeof import("./consumerKeyAuth").ConsumerKeyAuth = null as any;
+utilities.lazyLoad(exports, ["ConsumerKeyAuth"], () => require("./consumerKeyAuth"));
+
+export { ConsumerOauth2Args, ConsumerOauth2State } from "./consumerOauth2";
+export type ConsumerOauth2 = import("./consumerOauth2").ConsumerOauth2;
+export const ConsumerOauth2: typeof import("./consumerOauth2").ConsumerOauth2 = null as any;
+utilities.lazyLoad(exports, ["ConsumerOauth2"], () => require("./consumerOauth2"));
+
+export { PluginArgs, PluginState } from "./plugin";
+export type Plugin = import("./plugin").Plugin;
+export const Plugin: typeof import("./plugin").Plugin = null as any;
+utilities.lazyLoad(exports, ["Plugin"], () => require("./plugin"));
+
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
+export { RouteArgs, RouteState } from "./route";
+export type Route = import("./route").Route;
+export const Route: typeof import("./route").Route = null as any;
+utilities.lazyLoad(exports, ["Route"], () => require("./route"));
+
+export { ServiceArgs, ServiceState } from "./service";
+export type Service = import("./service").Service;
+export const Service: typeof import("./service").Service = null as any;
+utilities.lazyLoad(exports, ["Service"], () => require("./service"));
+
+export { TargetArgs, TargetState } from "./target";
+export type Target = import("./target").Target;
+export const Target: typeof import("./target").Target = null as any;
+utilities.lazyLoad(exports, ["Target"], () => require("./target"));
+
+export { UpstreamArgs, UpstreamState } from "./upstream";
+export type Upstream = import("./upstream").Upstream;
+export const Upstream: typeof import("./upstream").Upstream = null as any;
+utilities.lazyLoad(exports, ["Upstream"], () => require("./upstream"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -27,20 +79,6 @@ export {
     config,
     types,
 };
-
-// Import resources to register:
-import { Certificate } from "./certificate";
-import { Consumer } from "./consumer";
-import { ConsumerAcl } from "./consumerAcl";
-import { ConsumerBasicAuth } from "./consumerBasicAuth";
-import { ConsumerJwtAuth } from "./consumerJwtAuth";
-import { ConsumerKeyAuth } from "./consumerKeyAuth";
-import { ConsumerOauth2 } from "./consumerOauth2";
-import { Plugin } from "./plugin";
-import { Route } from "./route";
-import { Service } from "./service";
-import { Target } from "./target";
-import { Upstream } from "./upstream";
 
 const _module = {
     version: utilities.getVersion(),
@@ -87,9 +125,6 @@ pulumi.runtime.registerResourceModule("kong", "index/route", _module)
 pulumi.runtime.registerResourceModule("kong", "index/service", _module)
 pulumi.runtime.registerResourceModule("kong", "index/target", _module)
 pulumi.runtime.registerResourceModule("kong", "index/upstream", _module)
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("kong", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
