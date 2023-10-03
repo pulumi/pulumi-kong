@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ConsumerBasicAuthArgs', 'ConsumerBasicAuth']
@@ -25,11 +25,26 @@ class ConsumerBasicAuthArgs:
         :param pulumi.Input[str] username: username to be used for basic auth
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         """
-        pulumi.set(__self__, "consumer_id", consumer_id)
-        pulumi.set(__self__, "password", password)
-        pulumi.set(__self__, "username", username)
+        ConsumerBasicAuthArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            consumer_id=consumer_id,
+            password=password,
+            username=username,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             consumer_id: pulumi.Input[str],
+             password: pulumi.Input[str],
+             username: pulumi.Input[str],
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
+        _setter("consumer_id", consumer_id)
+        _setter("password", password)
+        _setter("username", username)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -94,14 +109,29 @@ class _ConsumerBasicAuthState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         :param pulumi.Input[str] username: username to be used for basic auth
         """
+        _ConsumerBasicAuthState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            consumer_id=consumer_id,
+            password=password,
+            tags=tags,
+            username=username,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             consumer_id: Optional[pulumi.Input[str]] = None,
+             password: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             username: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if consumer_id is not None:
-            pulumi.set(__self__, "consumer_id", consumer_id)
+            _setter("consumer_id", consumer_id)
         if password is not None:
-            pulumi.set(__self__, "password", password)
+            _setter("password", password)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
         if username is not None:
-            pulumi.set(__self__, "username", username)
+            _setter("username", username)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -235,6 +265,10 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ConsumerBasicAuthArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

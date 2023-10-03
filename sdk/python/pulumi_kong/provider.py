@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ProviderArgs', 'Provider']
@@ -33,25 +33,48 @@ class ProviderArgs:
         :param pulumi.Input[bool] strict_plugins_match: Should plugins `config_json` field strictly match plugin configuration
         :param pulumi.Input[bool] tls_skip_verify: Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
         """
-        pulumi.set(__self__, "kong_admin_uri", kong_admin_uri)
+        ProviderArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            kong_admin_uri=kong_admin_uri,
+            kong_admin_password=kong_admin_password,
+            kong_admin_token=kong_admin_token,
+            kong_admin_username=kong_admin_username,
+            kong_api_key=kong_api_key,
+            kong_workspace=kong_workspace,
+            strict_plugins_match=strict_plugins_match,
+            tls_skip_verify=tls_skip_verify,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             kong_admin_uri: pulumi.Input[str],
+             kong_admin_password: Optional[pulumi.Input[str]] = None,
+             kong_admin_token: Optional[pulumi.Input[str]] = None,
+             kong_admin_username: Optional[pulumi.Input[str]] = None,
+             kong_api_key: Optional[pulumi.Input[str]] = None,
+             kong_workspace: Optional[pulumi.Input[str]] = None,
+             strict_plugins_match: Optional[pulumi.Input[bool]] = None,
+             tls_skip_verify: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
+        _setter("kong_admin_uri", kong_admin_uri)
         if kong_admin_password is not None:
-            pulumi.set(__self__, "kong_admin_password", kong_admin_password)
+            _setter("kong_admin_password", kong_admin_password)
         if kong_admin_token is not None:
-            pulumi.set(__self__, "kong_admin_token", kong_admin_token)
+            _setter("kong_admin_token", kong_admin_token)
         if kong_admin_username is not None:
-            pulumi.set(__self__, "kong_admin_username", kong_admin_username)
+            _setter("kong_admin_username", kong_admin_username)
         if kong_api_key is not None:
-            pulumi.set(__self__, "kong_api_key", kong_api_key)
+            _setter("kong_api_key", kong_api_key)
         if kong_workspace is not None:
-            pulumi.set(__self__, "kong_workspace", kong_workspace)
+            _setter("kong_workspace", kong_workspace)
         if strict_plugins_match is None:
             strict_plugins_match = _utilities.get_env_bool('STRICT_PLUGINS_MATCH')
         if strict_plugins_match is not None:
-            pulumi.set(__self__, "strict_plugins_match", strict_plugins_match)
+            _setter("strict_plugins_match", strict_plugins_match)
         if tls_skip_verify is None:
             tls_skip_verify = (_utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
         if tls_skip_verify is not None:
-            pulumi.set(__self__, "tls_skip_verify", tls_skip_verify)
+            _setter("tls_skip_verify", tls_skip_verify)
 
     @property
     @pulumi.getter(name="kongAdminUri")
@@ -203,6 +226,10 @@ class Provider(pulumi.ProviderResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ProviderArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
