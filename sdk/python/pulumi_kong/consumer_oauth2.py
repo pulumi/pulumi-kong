@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ConsumerOauth2Args', 'ConsumerOauth2']
@@ -31,18 +31,51 @@ class ConsumerOauth2Args:
         :param pulumi.Input[str] name: The name associated with the credential.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer for grouping and filtering.
         """
-        pulumi.set(__self__, "consumer_id", consumer_id)
-        pulumi.set(__self__, "redirect_uris", redirect_uris)
+        ConsumerOauth2Args._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            consumer_id=consumer_id,
+            redirect_uris=redirect_uris,
+            client_id=client_id,
+            client_secret=client_secret,
+            hash_secret=hash_secret,
+            name=name,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             consumer_id: pulumi.Input[str],
+             redirect_uris: pulumi.Input[Sequence[pulumi.Input[str]]],
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             hash_secret: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'consumerId' in kwargs:
+            consumer_id = kwargs['consumerId']
+        if 'redirectUris' in kwargs:
+            redirect_uris = kwargs['redirectUris']
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'hashSecret' in kwargs:
+            hash_secret = kwargs['hashSecret']
+
+        _setter("consumer_id", consumer_id)
+        _setter("redirect_uris", redirect_uris)
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if hash_secret is not None:
-            pulumi.set(__self__, "hash_secret", hash_secret)
+            _setter("hash_secret", hash_secret)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -149,20 +182,53 @@ class _ConsumerOauth2State:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] redirect_uris: An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer for grouping and filtering.
         """
+        _ConsumerOauth2State._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_id=client_id,
+            client_secret=client_secret,
+            consumer_id=consumer_id,
+            hash_secret=hash_secret,
+            name=name,
+            redirect_uris=redirect_uris,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             consumer_id: Optional[pulumi.Input[str]] = None,
+             hash_secret: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'consumerId' in kwargs:
+            consumer_id = kwargs['consumerId']
+        if 'hashSecret' in kwargs:
+            hash_secret = kwargs['hashSecret']
+        if 'redirectUris' in kwargs:
+            redirect_uris = kwargs['redirectUris']
+
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if consumer_id is not None:
-            pulumi.set(__self__, "consumer_id", consumer_id)
+            _setter("consumer_id", consumer_id)
         if hash_secret is not None:
-            pulumi.set(__self__, "hash_secret", hash_secret)
+            _setter("hash_secret", hash_secret)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if redirect_uris is not None:
-            pulumi.set(__self__, "redirect_uris", redirect_uris)
+            _setter("redirect_uris", redirect_uris)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="clientId")
@@ -356,6 +422,10 @@ class ConsumerOauth2(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ConsumerOauth2Args._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

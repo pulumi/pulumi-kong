@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -63,30 +63,79 @@ class UpstreamArgs:
         :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Upstream for grouping and filtering.
         """
+        UpstreamArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_certificate_id=client_certificate_id,
+            hash_fallback=hash_fallback,
+            hash_fallback_header=hash_fallback_header,
+            hash_on=hash_on,
+            hash_on_cookie=hash_on_cookie,
+            hash_on_cookie_path=hash_on_cookie_path,
+            hash_on_header=hash_on_header,
+            healthchecks=healthchecks,
+            host_header=host_header,
+            name=name,
+            slots=slots,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_certificate_id: Optional[pulumi.Input[str]] = None,
+             hash_fallback: Optional[pulumi.Input[str]] = None,
+             hash_fallback_header: Optional[pulumi.Input[str]] = None,
+             hash_on: Optional[pulumi.Input[str]] = None,
+             hash_on_cookie: Optional[pulumi.Input[str]] = None,
+             hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
+             hash_on_header: Optional[pulumi.Input[str]] = None,
+             healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
+             host_header: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             slots: Optional[pulumi.Input[int]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientCertificateId' in kwargs:
+            client_certificate_id = kwargs['clientCertificateId']
+        if 'hashFallback' in kwargs:
+            hash_fallback = kwargs['hashFallback']
+        if 'hashFallbackHeader' in kwargs:
+            hash_fallback_header = kwargs['hashFallbackHeader']
+        if 'hashOn' in kwargs:
+            hash_on = kwargs['hashOn']
+        if 'hashOnCookie' in kwargs:
+            hash_on_cookie = kwargs['hashOnCookie']
+        if 'hashOnCookiePath' in kwargs:
+            hash_on_cookie_path = kwargs['hashOnCookiePath']
+        if 'hashOnHeader' in kwargs:
+            hash_on_header = kwargs['hashOnHeader']
+        if 'hostHeader' in kwargs:
+            host_header = kwargs['hostHeader']
+
         if client_certificate_id is not None:
-            pulumi.set(__self__, "client_certificate_id", client_certificate_id)
+            _setter("client_certificate_id", client_certificate_id)
         if hash_fallback is not None:
-            pulumi.set(__self__, "hash_fallback", hash_fallback)
+            _setter("hash_fallback", hash_fallback)
         if hash_fallback_header is not None:
-            pulumi.set(__self__, "hash_fallback_header", hash_fallback_header)
+            _setter("hash_fallback_header", hash_fallback_header)
         if hash_on is not None:
-            pulumi.set(__self__, "hash_on", hash_on)
+            _setter("hash_on", hash_on)
         if hash_on_cookie is not None:
-            pulumi.set(__self__, "hash_on_cookie", hash_on_cookie)
+            _setter("hash_on_cookie", hash_on_cookie)
         if hash_on_cookie_path is not None:
-            pulumi.set(__self__, "hash_on_cookie_path", hash_on_cookie_path)
+            _setter("hash_on_cookie_path", hash_on_cookie_path)
         if hash_on_header is not None:
-            pulumi.set(__self__, "hash_on_header", hash_on_header)
+            _setter("hash_on_header", hash_on_header)
         if healthchecks is not None:
-            pulumi.set(__self__, "healthchecks", healthchecks)
+            _setter("healthchecks", healthchecks)
         if host_header is not None:
-            pulumi.set(__self__, "host_header", host_header)
+            _setter("host_header", host_header)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if slots is not None:
-            pulumi.set(__self__, "slots", slots)
+            _setter("slots", slots)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="clientCertificateId")
@@ -301,30 +350,79 @@ class _UpstreamState:
         :param pulumi.Input[int] slots: is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Upstream for grouping and filtering.
         """
+        _UpstreamState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_certificate_id=client_certificate_id,
+            hash_fallback=hash_fallback,
+            hash_fallback_header=hash_fallback_header,
+            hash_on=hash_on,
+            hash_on_cookie=hash_on_cookie,
+            hash_on_cookie_path=hash_on_cookie_path,
+            hash_on_header=hash_on_header,
+            healthchecks=healthchecks,
+            host_header=host_header,
+            name=name,
+            slots=slots,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_certificate_id: Optional[pulumi.Input[str]] = None,
+             hash_fallback: Optional[pulumi.Input[str]] = None,
+             hash_fallback_header: Optional[pulumi.Input[str]] = None,
+             hash_on: Optional[pulumi.Input[str]] = None,
+             hash_on_cookie: Optional[pulumi.Input[str]] = None,
+             hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
+             hash_on_header: Optional[pulumi.Input[str]] = None,
+             healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
+             host_header: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             slots: Optional[pulumi.Input[int]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientCertificateId' in kwargs:
+            client_certificate_id = kwargs['clientCertificateId']
+        if 'hashFallback' in kwargs:
+            hash_fallback = kwargs['hashFallback']
+        if 'hashFallbackHeader' in kwargs:
+            hash_fallback_header = kwargs['hashFallbackHeader']
+        if 'hashOn' in kwargs:
+            hash_on = kwargs['hashOn']
+        if 'hashOnCookie' in kwargs:
+            hash_on_cookie = kwargs['hashOnCookie']
+        if 'hashOnCookiePath' in kwargs:
+            hash_on_cookie_path = kwargs['hashOnCookiePath']
+        if 'hashOnHeader' in kwargs:
+            hash_on_header = kwargs['hashOnHeader']
+        if 'hostHeader' in kwargs:
+            host_header = kwargs['hostHeader']
+
         if client_certificate_id is not None:
-            pulumi.set(__self__, "client_certificate_id", client_certificate_id)
+            _setter("client_certificate_id", client_certificate_id)
         if hash_fallback is not None:
-            pulumi.set(__self__, "hash_fallback", hash_fallback)
+            _setter("hash_fallback", hash_fallback)
         if hash_fallback_header is not None:
-            pulumi.set(__self__, "hash_fallback_header", hash_fallback_header)
+            _setter("hash_fallback_header", hash_fallback_header)
         if hash_on is not None:
-            pulumi.set(__self__, "hash_on", hash_on)
+            _setter("hash_on", hash_on)
         if hash_on_cookie is not None:
-            pulumi.set(__self__, "hash_on_cookie", hash_on_cookie)
+            _setter("hash_on_cookie", hash_on_cookie)
         if hash_on_cookie_path is not None:
-            pulumi.set(__self__, "hash_on_cookie_path", hash_on_cookie_path)
+            _setter("hash_on_cookie_path", hash_on_cookie_path)
         if hash_on_header is not None:
-            pulumi.set(__self__, "hash_on_header", hash_on_header)
+            _setter("hash_on_header", hash_on_header)
         if healthchecks is not None:
-            pulumi.set(__self__, "healthchecks", healthchecks)
+            _setter("healthchecks", healthchecks)
         if host_header is not None:
-            pulumi.set(__self__, "host_header", host_header)
+            _setter("host_header", host_header)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if slots is not None:
-            pulumi.set(__self__, "slots", slots)
+            _setter("slots", slots)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="clientCertificateId")
@@ -738,6 +836,10 @@ class Upstream(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            UpstreamArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -771,6 +873,11 @@ class Upstream(pulumi.CustomResource):
             __props__.__dict__["hash_on_cookie"] = hash_on_cookie
             __props__.__dict__["hash_on_cookie_path"] = hash_on_cookie_path
             __props__.__dict__["hash_on_header"] = hash_on_header
+            if healthchecks is not None and not isinstance(healthchecks, UpstreamHealthchecksArgs):
+                healthchecks = healthchecks or {}
+                def _setter(key, value):
+                    healthchecks[key] = value
+                UpstreamHealthchecksArgs._configure(_setter, **healthchecks)
             __props__.__dict__["healthchecks"] = healthchecks
             __props__.__dict__["host_header"] = host_header
             __props__.__dict__["name"] = name

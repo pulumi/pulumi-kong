@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['TargetArgs', 'Target']
@@ -25,11 +25,30 @@ class TargetArgs:
         :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list set of strings associated with the Plugin for grouping and filtering
         """
-        pulumi.set(__self__, "target", target)
-        pulumi.set(__self__, "upstream_id", upstream_id)
-        pulumi.set(__self__, "weight", weight)
+        TargetArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            target=target,
+            upstream_id=upstream_id,
+            weight=weight,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             target: pulumi.Input[str],
+             upstream_id: pulumi.Input[str],
+             weight: pulumi.Input[int],
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'upstreamId' in kwargs:
+            upstream_id = kwargs['upstreamId']
+
+        _setter("target", target)
+        _setter("upstream_id", upstream_id)
+        _setter("weight", weight)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter
@@ -94,14 +113,33 @@ class _TargetState:
         :param pulumi.Input[str] upstream_id: is the id of the upstream to apply this target to.
         :param pulumi.Input[int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
         """
+        _TargetState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            tags=tags,
+            target=target,
+            upstream_id=upstream_id,
+            weight=weight,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             target: Optional[pulumi.Input[str]] = None,
+             upstream_id: Optional[pulumi.Input[str]] = None,
+             weight: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'upstreamId' in kwargs:
+            upstream_id = kwargs['upstreamId']
+
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
         if target is not None:
-            pulumi.set(__self__, "target", target)
+            _setter("target", target)
         if upstream_id is not None:
-            pulumi.set(__self__, "upstream_id", upstream_id)
+            _setter("upstream_id", upstream_id)
         if weight is not None:
-            pulumi.set(__self__, "weight", weight)
+            _setter("weight", weight)
 
     @property
     @pulumi.getter
@@ -227,6 +265,10 @@ class Target(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            TargetArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
