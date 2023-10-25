@@ -13,43 +13,6 @@ namespace Pulumi.Kong
     /// ## # kong.ConsumerJwtAuth
     /// 
     /// Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Kong = Pulumi.Kong;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
-    ///     {
-    ///         CustomId = "123",
-    ///         Username = "User1",
-    ///     });
-    /// 
-    ///     var jwtPlugin = new Kong.Plugin("jwtPlugin", new()
-    ///     {
-    ///         ConfigJson = @"	{
-    /// 		""claims_to_verify"": [""exp""]
-    /// 	}
-    /// 
-    /// ",
-    ///     });
-    /// 
-    ///     var consumerJwtConfig = new Kong.ConsumerJwtAuth("consumerJwtConfig", new()
-    ///     {
-    ///         Algorithm = "HS256",
-    ///         ConsumerId = myConsumer.Id,
-    ///         Key = "my_key",
-    ///         RsaPublicKey = "foo",
-    ///         Secret = "my_secret",
-    ///     });
-    /// 
-    /// });
-    /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerJwtAuth:ConsumerJwtAuth")]
     public partial class ConsumerJwtAuth : global::Pulumi.CustomResource

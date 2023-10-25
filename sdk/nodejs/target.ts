@@ -5,19 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as kong from "@pulumi/kong";
- *
- * const target = new kong.Target("target", {
- *     target: "sample_target:80",
- *     upstreamId: kong_upstream.upstream.id,
- *     weight: 10,
- * });
- * ```
- *
  * ## Import
  *
  * To import a target use a combination of the upstream id and the target id as follows

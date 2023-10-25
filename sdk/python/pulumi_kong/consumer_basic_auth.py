@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ConsumerBasicAuthArgs', 'ConsumerBasicAuth']
@@ -25,11 +25,36 @@ class ConsumerBasicAuthArgs:
         :param pulumi.Input[str] username: username to be used for basic auth
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         """
-        pulumi.set(__self__, "consumer_id", consumer_id)
-        pulumi.set(__self__, "password", password)
-        pulumi.set(__self__, "username", username)
+        ConsumerBasicAuthArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            consumer_id=consumer_id,
+            password=password,
+            username=username,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             consumer_id: Optional[pulumi.Input[str]] = None,
+             password: Optional[pulumi.Input[str]] = None,
+             username: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if consumer_id is None and 'consumerId' in kwargs:
+            consumer_id = kwargs['consumerId']
+        if consumer_id is None:
+            raise TypeError("Missing 'consumer_id' argument")
+        if password is None:
+            raise TypeError("Missing 'password' argument")
+        if username is None:
+            raise TypeError("Missing 'username' argument")
+
+        _setter("consumer_id", consumer_id)
+        _setter("password", password)
+        _setter("username", username)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -94,14 +119,33 @@ class _ConsumerBasicAuthState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
         :param pulumi.Input[str] username: username to be used for basic auth
         """
+        _ConsumerBasicAuthState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            consumer_id=consumer_id,
+            password=password,
+            tags=tags,
+            username=username,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             consumer_id: Optional[pulumi.Input[str]] = None,
+             password: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             username: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if consumer_id is None and 'consumerId' in kwargs:
+            consumer_id = kwargs['consumerId']
+
         if consumer_id is not None:
-            pulumi.set(__self__, "consumer_id", consumer_id)
+            _setter("consumer_id", consumer_id)
         if password is not None:
-            pulumi.set(__self__, "password", password)
+            _setter("password", password)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
         if username is not None:
-            pulumi.set(__self__, "username", username)
+            _setter("username", username)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -167,26 +211,6 @@ class ConsumerBasicAuth(pulumi.CustomResource):
 
         Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
-        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
-            consumer_id=my_consumer.id,
-            password="bar_updated",
-            tags=[
-                "myTag",
-                "anotherTag",
-            ],
-            username="foo_updated")
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
@@ -205,26 +229,6 @@ class ConsumerBasicAuth(pulumi.CustomResource):
 
         Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
-        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
-            consumer_id=my_consumer.id,
-            password="bar_updated",
-            tags=[
-                "myTag",
-                "anotherTag",
-            ],
-            username="foo_updated")
-        ```
-
         :param str resource_name: The name of the resource.
         :param ConsumerBasicAuthArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -235,6 +239,10 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ConsumerBasicAuthArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

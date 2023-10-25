@@ -8,30 +8,6 @@ import * as utilities from "./utilities";
  * ## # kong.ConsumerJwtAuth
  *
  * Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as kong from "@pulumi/kong";
- *
- * const myConsumer = new kong.Consumer("myConsumer", {
- *     customId: "123",
- *     username: "User1",
- * });
- * const jwtPlugin = new kong.Plugin("jwtPlugin", {configJson: `	{
- * 		"claims_to_verify": ["exp"]
- * 	}
- *
- * `});
- * const consumerJwtConfig = new kong.ConsumerJwtAuth("consumerJwtConfig", {
- *     algorithm: "HS256",
- *     consumerId: myConsumer.id,
- *     key: "my_key",
- *     rsaPublicKey: "foo",
- *     secret: "my_secret",
- * });
- * ```
  */
 export class ConsumerJwtAuth extends pulumi.CustomResource {
     /**
