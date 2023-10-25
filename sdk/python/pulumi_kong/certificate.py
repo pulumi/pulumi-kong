@@ -201,6 +201,22 @@ class Certificate(pulumi.CustomResource):
 
         For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        certificate = kong.Certificate("certificate",
+            certificate="public key --- 123 ----",
+            private_key="private key --- 456 ----",
+            snis=[
+                "foo.com",
+                "bar.com",
+            ],
+            tags=["myTag"])
+        ```
+
         ## Import
 
         To import a certificate
@@ -225,6 +241,22 @@ class Certificate(pulumi.CustomResource):
         ## # Certificate
 
         For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        certificate = kong.Certificate("certificate",
+            certificate="public key --- 123 ----",
+            private_key="private key --- 456 ----",
+            snis=[
+                "foo.com",
+                "bar.com",
+            ],
+            tags=["myTag"])
+        ```
 
         ## Import
 

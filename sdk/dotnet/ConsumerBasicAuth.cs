@@ -13,6 +13,39 @@ namespace Pulumi.Kong
     /// ## # kong.ConsumerBasicAuth
     /// 
     /// Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     {
+    ///         CustomId = "123",
+    ///         Username = "User1",
+    ///     });
+    /// 
+    ///     var basicAuthPlugin = new Kong.Plugin("basicAuthPlugin");
+    /// 
+    ///     var consumerBasicAuth = new Kong.ConsumerBasicAuth("consumerBasicAuth", new()
+    ///     {
+    ///         ConsumerId = myConsumer.Id,
+    ///         Password = "bar_updated",
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///             "anotherTag",
+    ///         },
+    ///         Username = "foo_updated",
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerBasicAuth:ConsumerBasicAuth")]
     public partial class ConsumerBasicAuth : global::Pulumi.CustomResource

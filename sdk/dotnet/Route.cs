@@ -16,6 +16,105 @@ namespace Pulumi.Kong
     /// 
     /// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var route = new Kong.Route("route", new()
+    ///     {
+    ///         Protocols = new[]
+    ///         {
+    ///             "http",
+    ///             "https",
+    ///         },
+    ///         Methods = new[]
+    ///         {
+    ///             "GET",
+    ///             "POST",
+    ///         },
+    ///         Hosts = new[]
+    ///         {
+    ///             "example2.com",
+    ///         },
+    ///         Paths = new[]
+    ///         {
+    ///             "/test",
+    ///         },
+    ///         StripPath = false,
+    ///         PreserveHost = true,
+    ///         RegexPriority = 1,
+    ///         ServiceId = kong_service.Service.Id,
+    ///         Headers = new[]
+    ///         {
+    ///             new Kong.Inputs.RouteHeaderArgs
+    ///             {
+    ///                 Name = "x-test-1",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "a",
+    ///                     "b",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var route = new Kong.Route("route", new()
+    ///     {
+    ///         Protocols = new[]
+    ///         {
+    ///             "tcp",
+    ///         },
+    ///         StripPath = true,
+    ///         PreserveHost = false,
+    ///         Sources = new[]
+    ///         {
+    ///             new Kong.Inputs.RouteSourceArgs
+    ///             {
+    ///                 Ip = "192.168.1.1",
+    ///                 Port = 80,
+    ///             },
+    ///             new Kong.Inputs.RouteSourceArgs
+    ///             {
+    ///                 Ip = "192.168.1.2",
+    ///             },
+    ///         },
+    ///         Destinations = new[]
+    ///         {
+    ///             new Kong.Inputs.RouteDestinationArgs
+    ///             {
+    ///                 Ip = "172.10.1.1",
+    ///                 Port = 81,
+    ///             },
+    ///         },
+    ///         Snis = new[]
+    ///         {
+    ///             "foo.com",
+    ///         },
+    ///         ServiceId = kong_service.Service.Id,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// To import a route

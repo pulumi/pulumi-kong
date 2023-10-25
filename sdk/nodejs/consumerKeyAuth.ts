@@ -8,6 +8,27 @@ import * as utilities from "./utilities";
  * ## # kong.ConsumerKeyAuth
  *
  * Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const myConsumer = new kong.Consumer("myConsumer", {
+ *     username: "User1",
+ *     customId: "123",
+ * });
+ * const keyAuthPlugin = new kong.Plugin("keyAuthPlugin", {});
+ * const consumerKeyAuth = new kong.ConsumerKeyAuth("consumerKeyAuth", {
+ *     consumerId: myConsumer.id,
+ *     key: "secret",
+ *     tags: [
+ *         "myTag",
+ *         "anotherTag",
+ *     ],
+ * });
+ * ```
  */
 export class ConsumerKeyAuth extends pulumi.CustomResource {
     /**

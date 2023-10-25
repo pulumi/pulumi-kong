@@ -13,6 +13,45 @@ namespace Pulumi.Kong
     /// ## # kong.ConsumerAcl
     /// 
     /// Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     {
+    ///         CustomId = "123",
+    ///         Username = "User1",
+    ///     });
+    /// 
+    ///     var aclPlugin = new Kong.Plugin("aclPlugin", new()
+    ///     {
+    ///         ConfigJson = @"	{
+    /// 		""allow"": [""group1"", ""group2""]
+    /// 	}
+    /// 
+    /// ",
+    ///     });
+    /// 
+    ///     var consumerAcl = new Kong.ConsumerAcl("consumerAcl", new()
+    ///     {
+    ///         ConsumerId = myConsumer.Id,
+    ///         Group = "group2",
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///             "otherTag",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerAcl:ConsumerAcl")]
     public partial class ConsumerAcl : global::Pulumi.CustomResource

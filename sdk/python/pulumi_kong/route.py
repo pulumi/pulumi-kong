@@ -760,6 +760,63 @@ class Route(pulumi.CustomResource):
 
         To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=[
+                "http",
+                "https",
+            ],
+            methods=[
+                "GET",
+                "POST",
+            ],
+            hosts=["example2.com"],
+            paths=["/test"],
+            strip_path=False,
+            preserve_host=True,
+            regex_priority=1,
+            service_id=kong_service["service"]["id"],
+            headers=[kong.RouteHeaderArgs(
+                name="x-test-1",
+                values=[
+                    "a",
+                    "b",
+                ],
+            )])
+        ```
+
+        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=["tcp"],
+            strip_path=True,
+            preserve_host=False,
+            sources=[
+                kong.RouteSourceArgs(
+                    ip="192.168.1.1",
+                    port=80,
+                ),
+                kong.RouteSourceArgs(
+                    ip="192.168.1.2",
+                ),
+            ],
+            destinations=[kong.RouteDestinationArgs(
+                ip="172.10.1.1",
+                port=81,
+            )],
+            snis=["foo.com"],
+            service_id=kong_service["service"]["id"])
+        ```
+
         ## Import
 
         To import a route
@@ -801,6 +858,63 @@ class Route(pulumi.CustomResource):
         The route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).
 
         To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=[
+                "http",
+                "https",
+            ],
+            methods=[
+                "GET",
+                "POST",
+            ],
+            hosts=["example2.com"],
+            paths=["/test"],
+            strip_path=False,
+            preserve_host=True,
+            regex_priority=1,
+            service_id=kong_service["service"]["id"],
+            headers=[kong.RouteHeaderArgs(
+                name="x-test-1",
+                values=[
+                    "a",
+                    "b",
+                ],
+            )])
+        ```
+
+        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        route = kong.Route("route",
+            protocols=["tcp"],
+            strip_path=True,
+            preserve_host=False,
+            sources=[
+                kong.RouteSourceArgs(
+                    ip="192.168.1.1",
+                    port=80,
+                ),
+                kong.RouteSourceArgs(
+                    ip="192.168.1.2",
+                ),
+            ],
+            destinations=[kong.RouteDestinationArgs(
+                ip="172.10.1.1",
+                port=81,
+            )],
+            snis=["foo.com"],
+            service_id=kong_service["service"]["id"])
+        ```
 
         ## Import
 

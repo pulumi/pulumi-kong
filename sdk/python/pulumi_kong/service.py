@@ -603,6 +603,58 @@ class Service(pulumi.CustomResource):
 
         The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        service = kong.Service("service",
+            connect_timeout=1000,
+            host="test.org",
+            path="/mypath",
+            port=8080,
+            protocol="http",
+            read_timeout=3000,
+            retries=5,
+            write_timeout=2000)
+        ```
+
+        To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        certificate = kong.Certificate("certificate",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["foo.com"])
+        ca = kong.Certificate("ca",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["ca.com"])
+        service = kong.Service("service",
+            protocol="https",
+            host="test.org",
+            tls_verify=True,
+            tls_verify_depth=2,
+            client_certificate_id=certificate.id,
+            ca_certificate_ids=[ca.id])
+        ```
+
         ## Import
 
         To import a service
@@ -638,6 +690,58 @@ class Service(pulumi.CustomResource):
         ## # Service
 
         The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        service = kong.Service("service",
+            connect_timeout=1000,
+            host="test.org",
+            path="/mypath",
+            port=8080,
+            protocol="http",
+            read_timeout=3000,
+            retries=5,
+            write_timeout=2000)
+        ```
+
+        To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        certificate = kong.Certificate("certificate",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["foo.com"])
+        ca = kong.Certificate("ca",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["ca.com"])
+        service = kong.Service("service",
+            protocol="https",
+            host="test.org",
+            tls_verify=True,
+            tls_verify_depth=2,
+            client_certificate_id=certificate.id,
+            ca_certificate_ids=[ca.id])
+        ```
 
         ## Import
 

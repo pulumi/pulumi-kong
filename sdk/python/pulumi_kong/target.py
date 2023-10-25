@@ -207,6 +207,18 @@ class Target(pulumi.CustomResource):
                  weight: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        target = kong.Target("target",
+            target="sample_target:80",
+            upstream_id=kong_upstream["upstream"]["id"],
+            weight=10)
+        ```
+
         ## Import
 
         To import a target use a combination of the upstream id and the target id as follows
@@ -229,6 +241,18 @@ class Target(pulumi.CustomResource):
                  args: TargetArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        target = kong.Target("target",
+            target="sample_target:80",
+            upstream_id=kong_upstream["upstream"]["id"],
+            weight=10)
+        ```
+
         ## Import
 
         To import a target use a combination of the upstream id and the target id as follows

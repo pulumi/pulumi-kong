@@ -211,6 +211,26 @@ class ConsumerBasicAuth(pulumi.CustomResource):
 
         Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
+        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
+            consumer_id=my_consumer.id,
+            password="bar_updated",
+            tags=[
+                "myTag",
+                "anotherTag",
+            ],
+            username="foo_updated")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured with basic auth
@@ -228,6 +248,26 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         ## # ConsumerBasicAuth
 
         Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
+        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
+            consumer_id=my_consumer.id,
+            password="bar_updated",
+            tags=[
+                "myTag",
+                "anotherTag",
+            ],
+            username="foo_updated")
+        ```
 
         :param str resource_name: The name of the resource.
         :param ConsumerBasicAuthArgs args: The arguments to use to populate this resource's properties.

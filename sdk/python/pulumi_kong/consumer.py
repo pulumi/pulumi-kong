@@ -171,6 +171,18 @@ class Consumer(pulumi.CustomResource):
 
         The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        consumer = kong.Consumer("consumer",
+            custom_id="123",
+            tags=["mySuperTag"],
+            username="User1")
+        ```
+
         ## Import
 
         To import a consumer
@@ -195,6 +207,18 @@ class Consumer(pulumi.CustomResource):
         ## # Consumer
 
         The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        consumer = kong.Consumer("consumer",
+            custom_id="123",
+            tags=["mySuperTag"],
+            username="User1")
+        ```
 
         ## Import
 

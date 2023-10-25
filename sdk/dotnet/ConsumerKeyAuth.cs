@@ -13,6 +13,38 @@ namespace Pulumi.Kong
     /// ## # kong.ConsumerKeyAuth
     /// 
     /// Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     {
+    ///         Username = "User1",
+    ///         CustomId = "123",
+    ///     });
+    /// 
+    ///     var keyAuthPlugin = new Kong.Plugin("keyAuthPlugin");
+    /// 
+    ///     var consumerKeyAuth = new Kong.ConsumerKeyAuth("consumerKeyAuth", new()
+    ///     {
+    ///         ConsumerId = myConsumer.Id,
+    ///         Key = "secret",
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///             "anotherTag",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerKeyAuth:ConsumerKeyAuth")]
     public partial class ConsumerKeyAuth : global::Pulumi.CustomResource

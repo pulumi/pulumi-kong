@@ -15,6 +15,119 @@ namespace Pulumi.Kong
     /// The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
     /// The `config_json` is passed through to the plugin to configure it as is.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     {
+    ///         ConfigJson = @"	{
+    /// 		""second"": 5,
+    /// 		""hour"" : 1000
+    /// 	}
+    /// 
+    /// ",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// To apply a plugin to a consumer use the `consumer_id` property, for example:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var pluginConsumer = new Kong.Consumer("pluginConsumer", new()
+    ///     {
+    ///         CustomId = "567",
+    ///         Username = "PluginUser",
+    ///     });
+    /// 
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     {
+    ///         ConfigJson = @"	{
+    /// 		""second"": 5,
+    /// 		""hour"" : 1000
+    /// 	}
+    /// 
+    /// ",
+    ///         ConsumerId = pluginConsumer.Id,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// To apply a plugin to a service use the `service_id` property, for example:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var service = new Kong.Service("service", new()
+    ///     {
+    ///         Host = "test.org",
+    ///         Protocol = "http",
+    ///     });
+    /// 
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     {
+    ///         ConfigJson = @"	{
+    /// 		""second"": 10,
+    /// 		""hour"" : 2000
+    /// 	}
+    /// 
+    /// ",
+    ///         ServiceId = service.Id,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// To apply a plugin to a route use the `route_id` property, for example:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var service = new Kong.Service("service", new()
+    ///     {
+    ///         Host = "test.org",
+    ///         Protocol = "http",
+    ///     });
+    /// 
+    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     {
+    ///         ConfigJson = @"	{
+    /// 		""second"": 11,
+    /// 		""hour"" : 4000
+    /// 	}
+    /// 
+    /// ",
+    ///         Enabled = true,
+    ///         ServiceId = service.Id,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// To import a plugin
