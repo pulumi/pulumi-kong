@@ -16,50 +16,6 @@ import (
 // ## # ConsumerAcl
 //
 // Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
-//				Username: pulumi.String("User1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewPlugin(ctx, "aclPlugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"allow\": [\"group1\", \"group2\"]\n	}\n\n"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewConsumerAcl(ctx, "consumerAcl", &kong.ConsumerAclArgs{
-//				ConsumerId: myConsumer.ID(),
-//				Group:      pulumi.String("group2"),
-//				Tags: pulumi.StringArray{
-//					pulumi.String("myTag"),
-//					pulumi.String("otherTag"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type ConsumerAcl struct {
 	pulumi.CustomResourceState
 

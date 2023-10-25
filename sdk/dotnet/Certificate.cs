@@ -14,34 +14,6 @@ namespace Pulumi.Kong
     /// 
     /// For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Kong = Pulumi.Kong;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var certificate = new Kong.Certificate("certificate", new()
-    ///     {
-    ///         Cert = "public key --- 123 ----",
-    ///         PrivateKey = "private key --- 456 ----",
-    ///         Snis = new[]
-    ///         {
-    ///             "foo.com",
-    ///             "bar.com",
-    ///         },
-    ///         Tags = new[]
-    ///         {
-    ///             "myTag",
-    ///         },
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// To import a certificate

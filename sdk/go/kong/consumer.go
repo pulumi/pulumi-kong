@@ -16,36 +16,6 @@ import (
 //
 // The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := kong.NewConsumer(ctx, "consumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
-//				Tags: pulumi.StringArray{
-//					pulumi.String("mySuperTag"),
-//				},
-//				Username: pulumi.String("User1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
 // ## Import
 //
 // # To import a consumer

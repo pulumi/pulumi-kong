@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ConsumerKeyAuthArgs', 'ConsumerKeyAuth']
@@ -23,11 +23,30 @@ class ConsumerKeyAuthArgs:
         :param pulumi.Input[str] key: Unique key to authenticate the client; if omitted the plugin will generate one
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer key auth for grouping and filtering
         """
-        pulumi.set(__self__, "consumer_id", consumer_id)
+        ConsumerKeyAuthArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            consumer_id=consumer_id,
+            key=key,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             consumer_id: Optional[pulumi.Input[str]] = None,
+             key: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if consumer_id is None and 'consumerId' in kwargs:
+            consumer_id = kwargs['consumerId']
+        if consumer_id is None:
+            raise TypeError("Missing 'consumer_id' argument")
+
+        _setter("consumer_id", consumer_id)
         if key is not None:
-            pulumi.set(__self__, "key", key)
+            _setter("key", key)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -78,12 +97,29 @@ class _ConsumerKeyAuthState:
         :param pulumi.Input[str] key: Unique key to authenticate the client; if omitted the plugin will generate one
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer key auth for grouping and filtering
         """
+        _ConsumerKeyAuthState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            consumer_id=consumer_id,
+            key=key,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             consumer_id: Optional[pulumi.Input[str]] = None,
+             key: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if consumer_id is None and 'consumerId' in kwargs:
+            consumer_id = kwargs['consumerId']
+
         if consumer_id is not None:
-            pulumi.set(__self__, "consumer_id", consumer_id)
+            _setter("consumer_id", consumer_id)
         if key is not None:
-            pulumi.set(__self__, "key", key)
+            _setter("key", key)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -136,25 +172,6 @@ class ConsumerKeyAuth(pulumi.CustomResource):
 
         Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        my_consumer = kong.Consumer("myConsumer",
-            username="User1",
-            custom_id="123")
-        key_auth_plugin = kong.Plugin("keyAuthPlugin")
-        consumer_key_auth = kong.ConsumerKeyAuth("consumerKeyAuth",
-            consumer_id=my_consumer.id,
-            key="secret",
-            tags=[
-                "myTag",
-                "anotherTag",
-            ])
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to associate the credentials to
@@ -172,25 +189,6 @@ class ConsumerKeyAuth(pulumi.CustomResource):
 
         Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        my_consumer = kong.Consumer("myConsumer",
-            username="User1",
-            custom_id="123")
-        key_auth_plugin = kong.Plugin("keyAuthPlugin")
-        consumer_key_auth = kong.ConsumerKeyAuth("consumerKeyAuth",
-            consumer_id=my_consumer.id,
-            key="secret",
-            tags=[
-                "myTag",
-                "anotherTag",
-            ])
-        ```
-
         :param str resource_name: The name of the resource.
         :param ConsumerKeyAuthArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,6 +199,10 @@ class ConsumerKeyAuth(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ConsumerKeyAuthArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

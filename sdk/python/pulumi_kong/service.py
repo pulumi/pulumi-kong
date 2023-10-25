@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ServiceArgs', 'Service']
@@ -45,33 +45,86 @@ class ServiceArgs:
         :param pulumi.Input[int] tls_verify_depth: Maximum depth of chain while verifying Upstream server’s TLS certificate.
         :param pulumi.Input[int] write_timeout: Write timout. Default(ms): 60000
         """
-        pulumi.set(__self__, "protocol", protocol)
+        ServiceArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            protocol=protocol,
+            ca_certificate_ids=ca_certificate_ids,
+            client_certificate_id=client_certificate_id,
+            connect_timeout=connect_timeout,
+            host=host,
+            name=name,
+            path=path,
+            port=port,
+            read_timeout=read_timeout,
+            retries=retries,
+            tags=tags,
+            tls_verify=tls_verify,
+            tls_verify_depth=tls_verify_depth,
+            write_timeout=write_timeout,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             protocol: Optional[pulumi.Input[str]] = None,
+             ca_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             client_certificate_id: Optional[pulumi.Input[str]] = None,
+             connect_timeout: Optional[pulumi.Input[int]] = None,
+             host: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             path: Optional[pulumi.Input[str]] = None,
+             port: Optional[pulumi.Input[int]] = None,
+             read_timeout: Optional[pulumi.Input[int]] = None,
+             retries: Optional[pulumi.Input[int]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             tls_verify: Optional[pulumi.Input[bool]] = None,
+             tls_verify_depth: Optional[pulumi.Input[int]] = None,
+             write_timeout: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if protocol is None:
+            raise TypeError("Missing 'protocol' argument")
+        if ca_certificate_ids is None and 'caCertificateIds' in kwargs:
+            ca_certificate_ids = kwargs['caCertificateIds']
+        if client_certificate_id is None and 'clientCertificateId' in kwargs:
+            client_certificate_id = kwargs['clientCertificateId']
+        if connect_timeout is None and 'connectTimeout' in kwargs:
+            connect_timeout = kwargs['connectTimeout']
+        if read_timeout is None and 'readTimeout' in kwargs:
+            read_timeout = kwargs['readTimeout']
+        if tls_verify is None and 'tlsVerify' in kwargs:
+            tls_verify = kwargs['tlsVerify']
+        if tls_verify_depth is None and 'tlsVerifyDepth' in kwargs:
+            tls_verify_depth = kwargs['tlsVerifyDepth']
+        if write_timeout is None and 'writeTimeout' in kwargs:
+            write_timeout = kwargs['writeTimeout']
+
+        _setter("protocol", protocol)
         if ca_certificate_ids is not None:
-            pulumi.set(__self__, "ca_certificate_ids", ca_certificate_ids)
+            _setter("ca_certificate_ids", ca_certificate_ids)
         if client_certificate_id is not None:
-            pulumi.set(__self__, "client_certificate_id", client_certificate_id)
+            _setter("client_certificate_id", client_certificate_id)
         if connect_timeout is not None:
-            pulumi.set(__self__, "connect_timeout", connect_timeout)
+            _setter("connect_timeout", connect_timeout)
         if host is not None:
-            pulumi.set(__self__, "host", host)
+            _setter("host", host)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if path is not None:
-            pulumi.set(__self__, "path", path)
+            _setter("path", path)
         if port is not None:
-            pulumi.set(__self__, "port", port)
+            _setter("port", port)
         if read_timeout is not None:
-            pulumi.set(__self__, "read_timeout", read_timeout)
+            _setter("read_timeout", read_timeout)
         if retries is not None:
-            pulumi.set(__self__, "retries", retries)
+            _setter("retries", retries)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
         if tls_verify is not None:
-            pulumi.set(__self__, "tls_verify", tls_verify)
+            _setter("tls_verify", tls_verify)
         if tls_verify_depth is not None:
-            pulumi.set(__self__, "tls_verify_depth", tls_verify_depth)
+            _setter("tls_verify_depth", tls_verify_depth)
         if write_timeout is not None:
-            pulumi.set(__self__, "write_timeout", write_timeout)
+            _setter("write_timeout", write_timeout)
 
     @property
     @pulumi.getter
@@ -276,34 +329,85 @@ class _ServiceState:
         :param pulumi.Input[int] tls_verify_depth: Maximum depth of chain while verifying Upstream server’s TLS certificate.
         :param pulumi.Input[int] write_timeout: Write timout. Default(ms): 60000
         """
+        _ServiceState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            ca_certificate_ids=ca_certificate_ids,
+            client_certificate_id=client_certificate_id,
+            connect_timeout=connect_timeout,
+            host=host,
+            name=name,
+            path=path,
+            port=port,
+            protocol=protocol,
+            read_timeout=read_timeout,
+            retries=retries,
+            tags=tags,
+            tls_verify=tls_verify,
+            tls_verify_depth=tls_verify_depth,
+            write_timeout=write_timeout,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             ca_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             client_certificate_id: Optional[pulumi.Input[str]] = None,
+             connect_timeout: Optional[pulumi.Input[int]] = None,
+             host: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             path: Optional[pulumi.Input[str]] = None,
+             port: Optional[pulumi.Input[int]] = None,
+             protocol: Optional[pulumi.Input[str]] = None,
+             read_timeout: Optional[pulumi.Input[int]] = None,
+             retries: Optional[pulumi.Input[int]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             tls_verify: Optional[pulumi.Input[bool]] = None,
+             tls_verify_depth: Optional[pulumi.Input[int]] = None,
+             write_timeout: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if ca_certificate_ids is None and 'caCertificateIds' in kwargs:
+            ca_certificate_ids = kwargs['caCertificateIds']
+        if client_certificate_id is None and 'clientCertificateId' in kwargs:
+            client_certificate_id = kwargs['clientCertificateId']
+        if connect_timeout is None and 'connectTimeout' in kwargs:
+            connect_timeout = kwargs['connectTimeout']
+        if read_timeout is None and 'readTimeout' in kwargs:
+            read_timeout = kwargs['readTimeout']
+        if tls_verify is None and 'tlsVerify' in kwargs:
+            tls_verify = kwargs['tlsVerify']
+        if tls_verify_depth is None and 'tlsVerifyDepth' in kwargs:
+            tls_verify_depth = kwargs['tlsVerifyDepth']
+        if write_timeout is None and 'writeTimeout' in kwargs:
+            write_timeout = kwargs['writeTimeout']
+
         if ca_certificate_ids is not None:
-            pulumi.set(__self__, "ca_certificate_ids", ca_certificate_ids)
+            _setter("ca_certificate_ids", ca_certificate_ids)
         if client_certificate_id is not None:
-            pulumi.set(__self__, "client_certificate_id", client_certificate_id)
+            _setter("client_certificate_id", client_certificate_id)
         if connect_timeout is not None:
-            pulumi.set(__self__, "connect_timeout", connect_timeout)
+            _setter("connect_timeout", connect_timeout)
         if host is not None:
-            pulumi.set(__self__, "host", host)
+            _setter("host", host)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if path is not None:
-            pulumi.set(__self__, "path", path)
+            _setter("path", path)
         if port is not None:
-            pulumi.set(__self__, "port", port)
+            _setter("port", port)
         if protocol is not None:
-            pulumi.set(__self__, "protocol", protocol)
+            _setter("protocol", protocol)
         if read_timeout is not None:
-            pulumi.set(__self__, "read_timeout", read_timeout)
+            _setter("read_timeout", read_timeout)
         if retries is not None:
-            pulumi.set(__self__, "retries", retries)
+            _setter("retries", retries)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
         if tls_verify is not None:
-            pulumi.set(__self__, "tls_verify", tls_verify)
+            _setter("tls_verify", tls_verify)
         if tls_verify_depth is not None:
-            pulumi.set(__self__, "tls_verify_depth", tls_verify_depth)
+            _setter("tls_verify_depth", tls_verify_depth)
         if write_timeout is not None:
-            pulumi.set(__self__, "write_timeout", write_timeout)
+            _setter("write_timeout", write_timeout)
 
     @property
     @pulumi.getter(name="caCertificateIds")
@@ -499,58 +603,6 @@ class Service(pulumi.CustomResource):
 
         The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        service = kong.Service("service",
-            connect_timeout=1000,
-            host="test.org",
-            path="/mypath",
-            port=8080,
-            protocol="http",
-            read_timeout=3000,
-            retries=5,
-            write_timeout=2000)
-        ```
-
-        To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        certificate = kong.Certificate("certificate",
-            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
-            ......
-            -----END CERTIFICATE-----
-        \"\"\",
-            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
-            .....
-            -----END PRIVATE KEY-----
-        \"\"\",
-            snis=["foo.com"])
-        ca = kong.Certificate("ca",
-            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
-            ......
-            -----END CERTIFICATE-----
-        \"\"\",
-            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
-            .....
-            -----END PRIVATE KEY-----
-        \"\"\",
-            snis=["ca.com"])
-        service = kong.Service("service",
-            protocol="https",
-            host="test.org",
-            tls_verify=True,
-            tls_verify_depth=2,
-            client_certificate_id=certificate.id,
-            ca_certificate_ids=[ca.id])
-        ```
-
         ## Import
 
         To import a service
@@ -587,58 +639,6 @@ class Service(pulumi.CustomResource):
 
         The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        service = kong.Service("service",
-            connect_timeout=1000,
-            host="test.org",
-            path="/mypath",
-            port=8080,
-            protocol="http",
-            read_timeout=3000,
-            retries=5,
-            write_timeout=2000)
-        ```
-
-        To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        certificate = kong.Certificate("certificate",
-            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
-            ......
-            -----END CERTIFICATE-----
-        \"\"\",
-            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
-            .....
-            -----END PRIVATE KEY-----
-        \"\"\",
-            snis=["foo.com"])
-        ca = kong.Certificate("ca",
-            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
-            ......
-            -----END CERTIFICATE-----
-        \"\"\",
-            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
-            .....
-            -----END PRIVATE KEY-----
-        \"\"\",
-            snis=["ca.com"])
-        service = kong.Service("service",
-            protocol="https",
-            host="test.org",
-            tls_verify=True,
-            tls_verify_depth=2,
-            client_certificate_id=certificate.id,
-            ca_certificate_ids=[ca.id])
-        ```
-
         ## Import
 
         To import a service
@@ -657,6 +657,10 @@ class Service(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ServiceArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

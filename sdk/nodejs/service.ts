@@ -9,62 +9,6 @@ import * as utilities from "./utilities";
  *
  * The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as kong from "@pulumi/kong";
- *
- * const service = new kong.Service("service", {
- *     connectTimeout: 1000,
- *     host: "test.org",
- *     path: "/mypath",
- *     port: 8080,
- *     protocol: "http",
- *     readTimeout: 3000,
- *     retries: 5,
- *     writeTimeout: 2000,
- * });
- * ```
- *
- * To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as kong from "@pulumi/kong";
- *
- * const certificate = new kong.Certificate("certificate", {
- *     certificate: `    -----BEGIN CERTIFICATE-----
- *     ......
- *     -----END CERTIFICATE-----
- * `,
- *     privateKey: `    -----BEGIN PRIVATE KEY-----
- *     .....
- *     -----END PRIVATE KEY-----
- * `,
- *     snis: ["foo.com"],
- * });
- * const ca = new kong.Certificate("ca", {
- *     certificate: `    -----BEGIN CERTIFICATE-----
- *     ......
- *     -----END CERTIFICATE-----
- * `,
- *     privateKey: `    -----BEGIN PRIVATE KEY-----
- *     .....
- *     -----END PRIVATE KEY-----
- * `,
- *     snis: ["ca.com"],
- * });
- * const service = new kong.Service("service", {
- *     protocol: "https",
- *     host: "test.org",
- *     tlsVerify: true,
- *     tlsVerifyDepth: 2,
- *     clientCertificateId: certificate.id,
- *     caCertificateIds: [ca.id],
- * });
- * ```
- *
  * ## Import
  *
  * To import a service

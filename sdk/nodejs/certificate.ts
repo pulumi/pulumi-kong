@@ -9,23 +9,6 @@ import * as utilities from "./utilities";
  *
  * For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as kong from "@pulumi/kong";
- *
- * const certificate = new kong.Certificate("certificate", {
- *     certificate: "public key --- 123 ----",
- *     privateKey: "private key --- 456 ----",
- *     snis: [
- *         "foo.com",
- *         "bar.com",
- *     ],
- *     tags: ["myTag"],
- * });
- * ```
- *
  * ## Import
  *
  * To import a certificate

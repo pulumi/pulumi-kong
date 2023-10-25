@@ -16,49 +16,6 @@ import (
 // ## # ConsumerJwtAuth
 //
 // Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
-//				Username: pulumi.String("User1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewPlugin(ctx, "jwtPlugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"claims_to_verify\": [\"exp\"]\n	}\n\n"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewConsumerJwtAuth(ctx, "consumerJwtConfig", &kong.ConsumerJwtAuthArgs{
-//				Algorithm:    pulumi.String("HS256"),
-//				ConsumerId:   myConsumer.ID(),
-//				Key:          pulumi.String("my_key"),
-//				RsaPublicKey: pulumi.String("foo"),
-//				Secret:       pulumi.String("my_secret"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type ConsumerJwtAuth struct {
 	pulumi.CustomResourceState
 

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -55,40 +55,105 @@ class RouteArgs:
         :param pulumi.Input[bool] strip_path: When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Route for grouping and filtering.
         """
-        pulumi.set(__self__, "protocols", protocols)
-        pulumi.set(__self__, "service_id", service_id)
+        RouteArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            protocols=protocols,
+            service_id=service_id,
+            destinations=destinations,
+            headers=headers,
+            hosts=hosts,
+            https_redirect_status_code=https_redirect_status_code,
+            methods=methods,
+            name=name,
+            path_handling=path_handling,
+            paths=paths,
+            preserve_host=preserve_host,
+            regex_priority=regex_priority,
+            request_buffering=request_buffering,
+            response_buffering=response_buffering,
+            snis=snis,
+            sources=sources,
+            strip_path=strip_path,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             protocols: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             service_id: Optional[pulumi.Input[str]] = None,
+             destinations: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]] = None,
+             headers: Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]] = None,
+             hosts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             https_redirect_status_code: Optional[pulumi.Input[int]] = None,
+             methods: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             path_handling: Optional[pulumi.Input[str]] = None,
+             paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             preserve_host: Optional[pulumi.Input[bool]] = None,
+             regex_priority: Optional[pulumi.Input[int]] = None,
+             request_buffering: Optional[pulumi.Input[bool]] = None,
+             response_buffering: Optional[pulumi.Input[bool]] = None,
+             snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             sources: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]] = None,
+             strip_path: Optional[pulumi.Input[bool]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if protocols is None:
+            raise TypeError("Missing 'protocols' argument")
+        if service_id is None and 'serviceId' in kwargs:
+            service_id = kwargs['serviceId']
+        if service_id is None:
+            raise TypeError("Missing 'service_id' argument")
+        if https_redirect_status_code is None and 'httpsRedirectStatusCode' in kwargs:
+            https_redirect_status_code = kwargs['httpsRedirectStatusCode']
+        if path_handling is None and 'pathHandling' in kwargs:
+            path_handling = kwargs['pathHandling']
+        if preserve_host is None and 'preserveHost' in kwargs:
+            preserve_host = kwargs['preserveHost']
+        if regex_priority is None and 'regexPriority' in kwargs:
+            regex_priority = kwargs['regexPriority']
+        if request_buffering is None and 'requestBuffering' in kwargs:
+            request_buffering = kwargs['requestBuffering']
+        if response_buffering is None and 'responseBuffering' in kwargs:
+            response_buffering = kwargs['responseBuffering']
+        if strip_path is None and 'stripPath' in kwargs:
+            strip_path = kwargs['stripPath']
+
+        _setter("protocols", protocols)
+        _setter("service_id", service_id)
         if destinations is not None:
-            pulumi.set(__self__, "destinations", destinations)
+            _setter("destinations", destinations)
         if headers is not None:
-            pulumi.set(__self__, "headers", headers)
+            _setter("headers", headers)
         if hosts is not None:
-            pulumi.set(__self__, "hosts", hosts)
+            _setter("hosts", hosts)
         if https_redirect_status_code is not None:
-            pulumi.set(__self__, "https_redirect_status_code", https_redirect_status_code)
+            _setter("https_redirect_status_code", https_redirect_status_code)
         if methods is not None:
-            pulumi.set(__self__, "methods", methods)
+            _setter("methods", methods)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if path_handling is not None:
-            pulumi.set(__self__, "path_handling", path_handling)
+            _setter("path_handling", path_handling)
         if paths is not None:
-            pulumi.set(__self__, "paths", paths)
+            _setter("paths", paths)
         if preserve_host is not None:
-            pulumi.set(__self__, "preserve_host", preserve_host)
+            _setter("preserve_host", preserve_host)
         if regex_priority is not None:
-            pulumi.set(__self__, "regex_priority", regex_priority)
+            _setter("regex_priority", regex_priority)
         if request_buffering is not None:
-            pulumi.set(__self__, "request_buffering", request_buffering)
+            _setter("request_buffering", request_buffering)
         if response_buffering is not None:
-            pulumi.set(__self__, "response_buffering", response_buffering)
+            _setter("response_buffering", response_buffering)
         if snis is not None:
-            pulumi.set(__self__, "snis", snis)
+            _setter("snis", snis)
         if sources is not None:
-            pulumi.set(__self__, "sources", sources)
+            _setter("sources", sources)
         if strip_path is not None:
-            pulumi.set(__self__, "strip_path", strip_path)
+            _setter("strip_path", strip_path)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter
@@ -349,42 +414,103 @@ class _RouteState:
         :param pulumi.Input[bool] strip_path: When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Route for grouping and filtering.
         """
+        _RouteState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            destinations=destinations,
+            headers=headers,
+            hosts=hosts,
+            https_redirect_status_code=https_redirect_status_code,
+            methods=methods,
+            name=name,
+            path_handling=path_handling,
+            paths=paths,
+            preserve_host=preserve_host,
+            protocols=protocols,
+            regex_priority=regex_priority,
+            request_buffering=request_buffering,
+            response_buffering=response_buffering,
+            service_id=service_id,
+            snis=snis,
+            sources=sources,
+            strip_path=strip_path,
+            tags=tags,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             destinations: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]] = None,
+             headers: Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]] = None,
+             hosts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             https_redirect_status_code: Optional[pulumi.Input[int]] = None,
+             methods: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             path_handling: Optional[pulumi.Input[str]] = None,
+             paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             preserve_host: Optional[pulumi.Input[bool]] = None,
+             protocols: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             regex_priority: Optional[pulumi.Input[int]] = None,
+             request_buffering: Optional[pulumi.Input[bool]] = None,
+             response_buffering: Optional[pulumi.Input[bool]] = None,
+             service_id: Optional[pulumi.Input[str]] = None,
+             snis: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             sources: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]] = None,
+             strip_path: Optional[pulumi.Input[bool]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if https_redirect_status_code is None and 'httpsRedirectStatusCode' in kwargs:
+            https_redirect_status_code = kwargs['httpsRedirectStatusCode']
+        if path_handling is None and 'pathHandling' in kwargs:
+            path_handling = kwargs['pathHandling']
+        if preserve_host is None and 'preserveHost' in kwargs:
+            preserve_host = kwargs['preserveHost']
+        if regex_priority is None and 'regexPriority' in kwargs:
+            regex_priority = kwargs['regexPriority']
+        if request_buffering is None and 'requestBuffering' in kwargs:
+            request_buffering = kwargs['requestBuffering']
+        if response_buffering is None and 'responseBuffering' in kwargs:
+            response_buffering = kwargs['responseBuffering']
+        if service_id is None and 'serviceId' in kwargs:
+            service_id = kwargs['serviceId']
+        if strip_path is None and 'stripPath' in kwargs:
+            strip_path = kwargs['stripPath']
+
         if destinations is not None:
-            pulumi.set(__self__, "destinations", destinations)
+            _setter("destinations", destinations)
         if headers is not None:
-            pulumi.set(__self__, "headers", headers)
+            _setter("headers", headers)
         if hosts is not None:
-            pulumi.set(__self__, "hosts", hosts)
+            _setter("hosts", hosts)
         if https_redirect_status_code is not None:
-            pulumi.set(__self__, "https_redirect_status_code", https_redirect_status_code)
+            _setter("https_redirect_status_code", https_redirect_status_code)
         if methods is not None:
-            pulumi.set(__self__, "methods", methods)
+            _setter("methods", methods)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if path_handling is not None:
-            pulumi.set(__self__, "path_handling", path_handling)
+            _setter("path_handling", path_handling)
         if paths is not None:
-            pulumi.set(__self__, "paths", paths)
+            _setter("paths", paths)
         if preserve_host is not None:
-            pulumi.set(__self__, "preserve_host", preserve_host)
+            _setter("preserve_host", preserve_host)
         if protocols is not None:
-            pulumi.set(__self__, "protocols", protocols)
+            _setter("protocols", protocols)
         if regex_priority is not None:
-            pulumi.set(__self__, "regex_priority", regex_priority)
+            _setter("regex_priority", regex_priority)
         if request_buffering is not None:
-            pulumi.set(__self__, "request_buffering", request_buffering)
+            _setter("request_buffering", request_buffering)
         if response_buffering is not None:
-            pulumi.set(__self__, "response_buffering", response_buffering)
+            _setter("response_buffering", response_buffering)
         if service_id is not None:
-            pulumi.set(__self__, "service_id", service_id)
+            _setter("service_id", service_id)
         if snis is not None:
-            pulumi.set(__self__, "snis", snis)
+            _setter("snis", snis)
         if sources is not None:
-            pulumi.set(__self__, "sources", sources)
+            _setter("sources", sources)
         if strip_path is not None:
-            pulumi.set(__self__, "strip_path", strip_path)
+            _setter("strip_path", strip_path)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
 
     @property
     @pulumi.getter
@@ -634,63 +760,6 @@ class Route(pulumi.CustomResource):
 
         To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        route = kong.Route("route",
-            protocols=[
-                "http",
-                "https",
-            ],
-            methods=[
-                "GET",
-                "POST",
-            ],
-            hosts=["example2.com"],
-            paths=["/test"],
-            strip_path=False,
-            preserve_host=True,
-            regex_priority=1,
-            service_id=kong_service["service"]["id"],
-            headers=[kong.RouteHeaderArgs(
-                name="x-test-1",
-                values=[
-                    "a",
-                    "b",
-                ],
-            )])
-        ```
-
-        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        route = kong.Route("route",
-            protocols=["tcp"],
-            strip_path=True,
-            preserve_host=False,
-            sources=[
-                kong.RouteSourceArgs(
-                    ip="192.168.1.1",
-                    port=80,
-                ),
-                kong.RouteSourceArgs(
-                    ip="192.168.1.2",
-                ),
-            ],
-            destinations=[kong.RouteDestinationArgs(
-                ip="172.10.1.1",
-                port=81,
-            )],
-            snis=["foo.com"],
-            service_id=kong_service["service"]["id"])
-        ```
-
         ## Import
 
         To import a route
@@ -733,63 +802,6 @@ class Route(pulumi.CustomResource):
 
         To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        route = kong.Route("route",
-            protocols=[
-                "http",
-                "https",
-            ],
-            methods=[
-                "GET",
-                "POST",
-            ],
-            hosts=["example2.com"],
-            paths=["/test"],
-            strip_path=False,
-            preserve_host=True,
-            regex_priority=1,
-            service_id=kong_service["service"]["id"],
-            headers=[kong.RouteHeaderArgs(
-                name="x-test-1",
-                values=[
-                    "a",
-                    "b",
-                ],
-            )])
-        ```
-
-        To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
-
-        ```python
-        import pulumi
-        import pulumi_kong as kong
-
-        route = kong.Route("route",
-            protocols=["tcp"],
-            strip_path=True,
-            preserve_host=False,
-            sources=[
-                kong.RouteSourceArgs(
-                    ip="192.168.1.1",
-                    port=80,
-                ),
-                kong.RouteSourceArgs(
-                    ip="192.168.1.2",
-                ),
-            ],
-            destinations=[kong.RouteDestinationArgs(
-                ip="172.10.1.1",
-                port=81,
-            )],
-            snis=["foo.com"],
-            service_id=kong_service["service"]["id"])
-        ```
-
         ## Import
 
         To import a route
@@ -808,6 +820,10 @@ class Route(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            RouteArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
