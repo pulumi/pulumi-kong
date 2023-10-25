@@ -173,6 +173,29 @@ class ConsumerAcl(pulumi.CustomResource):
 
         Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        acl_plugin = kong.Plugin("aclPlugin", config_json=\"\"\"	{
+        		"allow": ["group1", "group2"]
+        	}
+
+        \"\"\")
+        consumer_acl = kong.ConsumerAcl("consumerAcl",
+            consumer_id=my_consumer.id,
+            group="group2",
+            tags=[
+                "myTag",
+                "otherTag",
+            ])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to be configured
@@ -189,6 +212,29 @@ class ConsumerAcl(pulumi.CustomResource):
         ## # ConsumerAcl
 
         Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        acl_plugin = kong.Plugin("aclPlugin", config_json=\"\"\"	{
+        		"allow": ["group1", "group2"]
+        	}
+
+        \"\"\")
+        consumer_acl = kong.ConsumerAcl("consumerAcl",
+            consumer_id=my_consumer.id,
+            group="group2",
+            tags=[
+                "myTag",
+                "otherTag",
+            ])
+        ```
 
         :param str resource_name: The name of the resource.
         :param ConsumerAclArgs args: The arguments to use to populate this resource's properties.

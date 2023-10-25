@@ -13,6 +13,34 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewTarget(ctx, "target", &kong.TargetArgs{
+//				Target:     pulumi.String("sample_target:80"),
+//				UpstreamId: pulumi.Any(kong_upstream.Upstream.Id),
+//				Weight:     pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // # To import a target use a combination of the upstream id and the target id as follows

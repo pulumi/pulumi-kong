@@ -172,6 +172,25 @@ class ConsumerKeyAuth(pulumi.CustomResource):
 
         Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            username="User1",
+            custom_id="123")
+        key_auth_plugin = kong.Plugin("keyAuthPlugin")
+        consumer_key_auth = kong.ConsumerKeyAuth("consumerKeyAuth",
+            consumer_id=my_consumer.id,
+            key="secret",
+            tags=[
+                "myTag",
+                "anotherTag",
+            ])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] consumer_id: the id of the consumer to associate the credentials to
@@ -188,6 +207,25 @@ class ConsumerKeyAuth(pulumi.CustomResource):
         ## # ConsumerKeyAuth
 
         Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            username="User1",
+            custom_id="123")
+        key_auth_plugin = kong.Plugin("keyAuthPlugin")
+        consumer_key_auth = kong.ConsumerKeyAuth("consumerKeyAuth",
+            consumer_id=my_consumer.id,
+            key="secret",
+            tags=[
+                "myTag",
+                "anotherTag",
+            ])
+        ```
 
         :param str resource_name: The name of the resource.
         :param ConsumerKeyAuthArgs args: The arguments to use to populate this resource's properties.

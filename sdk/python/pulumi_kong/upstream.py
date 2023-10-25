@@ -606,6 +606,87 @@ class Upstream(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        certificate = kong.Certificate("certificate",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["foo.com"])
+        upstream = kong.Upstream("upstream",
+            slots=10,
+            hash_on="header",
+            hash_fallback="cookie",
+            hash_on_header="HeaderName",
+            hash_fallback_header="FallbackHeaderName",
+            hash_on_cookie="CookieName",
+            hash_on_cookie_path="/path",
+            host_header="x-host",
+            tags=[
+                "a",
+                "b",
+            ],
+            client_certificate_id=certificate.id,
+            healthchecks=kong.UpstreamHealthchecksArgs(
+                active=kong.UpstreamHealthchecksActiveArgs(
+                    type="https",
+                    http_path="/status",
+                    timeout=10,
+                    concurrency=20,
+                    https_verify_certificate=False,
+                    https_sni="some.domain.com",
+                    healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
+                        successes=1,
+                        interval=5,
+                        http_statuses=[
+                            200,
+                            201,
+                        ],
+                    ),
+                    unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
+                        timeouts=7,
+                        interval=3,
+                        tcp_failures=1,
+                        http_failures=2,
+                        http_statuses=[
+                            500,
+                            501,
+                        ],
+                    ),
+                ),
+                passive=kong.UpstreamHealthchecksPassiveArgs(
+                    type="https",
+                    healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
+                        successes=1,
+                        http_statuses=[
+                            200,
+                            201,
+                            202,
+                        ],
+                    ),
+                    unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
+                        timeouts=3,
+                        tcp_failures=5,
+                        http_failures=6,
+                        http_statuses=[
+                            500,
+                            501,
+                            502,
+                        ],
+                    ),
+                ),
+            ))
+        ```
+
         ## Import
 
         To import an upstream
@@ -656,6 +737,87 @@ class Upstream(pulumi.CustomResource):
                  args: Optional[UpstreamArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        certificate = kong.Certificate("certificate",
+            certificate=\"\"\"    -----BEGIN CERTIFICATE-----
+            ......
+            -----END CERTIFICATE-----
+        \"\"\",
+            private_key=\"\"\"    -----BEGIN PRIVATE KEY-----
+            .....
+            -----END PRIVATE KEY-----
+        \"\"\",
+            snis=["foo.com"])
+        upstream = kong.Upstream("upstream",
+            slots=10,
+            hash_on="header",
+            hash_fallback="cookie",
+            hash_on_header="HeaderName",
+            hash_fallback_header="FallbackHeaderName",
+            hash_on_cookie="CookieName",
+            hash_on_cookie_path="/path",
+            host_header="x-host",
+            tags=[
+                "a",
+                "b",
+            ],
+            client_certificate_id=certificate.id,
+            healthchecks=kong.UpstreamHealthchecksArgs(
+                active=kong.UpstreamHealthchecksActiveArgs(
+                    type="https",
+                    http_path="/status",
+                    timeout=10,
+                    concurrency=20,
+                    https_verify_certificate=False,
+                    https_sni="some.domain.com",
+                    healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
+                        successes=1,
+                        interval=5,
+                        http_statuses=[
+                            200,
+                            201,
+                        ],
+                    ),
+                    unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
+                        timeouts=7,
+                        interval=3,
+                        tcp_failures=1,
+                        http_failures=2,
+                        http_statuses=[
+                            500,
+                            501,
+                        ],
+                    ),
+                ),
+                passive=kong.UpstreamHealthchecksPassiveArgs(
+                    type="https",
+                    healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
+                        successes=1,
+                        http_statuses=[
+                            200,
+                            201,
+                            202,
+                        ],
+                    ),
+                    unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
+                        timeouts=3,
+                        tcp_failures=5,
+                        http_failures=6,
+                        http_statuses=[
+                            500,
+                            501,
+                            502,
+                        ],
+                    ),
+                ),
+            ))
+        ```
+
         ## Import
 
         To import an upstream

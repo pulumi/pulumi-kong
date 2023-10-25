@@ -10,6 +10,26 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var target = new Kong.Target("target", new()
+    ///     {
+    ///         TargetAddress = "sample_target:80",
+    ///         UpstreamId = kong_upstream.Upstream.Id,
+    ///         Weight = 10,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// To import a target use a combination of the upstream id and the target id as follows

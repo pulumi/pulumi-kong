@@ -337,6 +337,35 @@ class ConsumerOauth2(pulumi.CustomResource):
 
         Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"	{
+        		"global_credentials": true,
+        		"enable_password_grant": true,
+        		"token_expiration": 180,
+        		"refresh_token_ttl": 180,
+        		"provision_key": "testprovisionkey"
+        	}
+
+        \"\"\")
+        consumer_oauth2 = kong.ConsumerOauth2("consumerOauth2",
+            client_id="client_id",
+            client_secret="client_secret",
+            consumer_id=my_consumer.id,
+            redirect_uris=[
+                "https://asdf.com/callback",
+                "https://test.cl/callback",
+            ],
+            tags=["myTag"])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] client_id: Unique oauth2 client id. If not set, the oauth2 plugin will generate one
@@ -357,6 +386,35 @@ class ConsumerOauth2(pulumi.CustomResource):
         ## # ConsumerOauth2
 
         Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"	{
+        		"global_credentials": true,
+        		"enable_password_grant": true,
+        		"token_expiration": 180,
+        		"refresh_token_ttl": 180,
+        		"provision_key": "testprovisionkey"
+        	}
+
+        \"\"\")
+        consumer_oauth2 = kong.ConsumerOauth2("consumerOauth2",
+            client_id="client_id",
+            client_secret="client_secret",
+            consumer_id=my_consumer.id,
+            redirect_uris=[
+                "https://asdf.com/callback",
+                "https://test.cl/callback",
+            ],
+            tags=["myTag"])
+        ```
 
         :param str resource_name: The name of the resource.
         :param ConsumerOauth2Args args: The arguments to use to populate this resource's properties.

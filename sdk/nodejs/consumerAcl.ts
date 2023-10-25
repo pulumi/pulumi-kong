@@ -8,6 +8,31 @@ import * as utilities from "./utilities";
  * ## # kong.ConsumerAcl
  *
  * Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const myConsumer = new kong.Consumer("myConsumer", {
+ *     customId: "123",
+ *     username: "User1",
+ * });
+ * const aclPlugin = new kong.Plugin("aclPlugin", {configJson: `	{
+ * 		"allow": ["group1", "group2"]
+ * 	}
+ *
+ * `});
+ * const consumerAcl = new kong.ConsumerAcl("consumerAcl", {
+ *     consumerId: myConsumer.id,
+ *     group: "group2",
+ *     tags: [
+ *         "myTag",
+ *         "otherTag",
+ *     ],
+ * });
+ * ```
  */
 export class ConsumerAcl extends pulumi.CustomResource {
     /**

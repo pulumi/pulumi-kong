@@ -17,6 +17,40 @@ import (
 //
 // For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
 //
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
+//				Certificate: pulumi.String("public key --- 123 ----"),
+//				PrivateKey:  pulumi.String("private key --- 456 ----"),
+//				Snis: pulumi.StringArray{
+//					pulumi.String("foo.com"),
+//					pulumi.String("bar.com"),
+//				},
+//				Tags: pulumi.StringArray{
+//					pulumi.String("myTag"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // # To import a certificate

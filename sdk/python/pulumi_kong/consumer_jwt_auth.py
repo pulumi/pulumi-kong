@@ -288,6 +288,28 @@ class ConsumerJwtAuth(pulumi.CustomResource):
 
         Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        jwt_plugin = kong.Plugin("jwtPlugin", config_json=\"\"\"	{
+        		"claims_to_verify": ["exp"]
+        	}
+
+        \"\"\")
+        consumer_jwt_config = kong.ConsumerJwtAuth("consumerJwtConfig",
+            algorithm="HS256",
+            consumer_id=my_consumer.id,
+            key="my_key",
+            rsa_public_key="foo",
+            secret="my_secret")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
@@ -307,6 +329,28 @@ class ConsumerJwtAuth(pulumi.CustomResource):
         ## # ConsumerJwtAuth
 
         Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_kong as kong
+
+        my_consumer = kong.Consumer("myConsumer",
+            custom_id="123",
+            username="User1")
+        jwt_plugin = kong.Plugin("jwtPlugin", config_json=\"\"\"	{
+        		"claims_to_verify": ["exp"]
+        	}
+
+        \"\"\")
+        consumer_jwt_config = kong.ConsumerJwtAuth("consumerJwtConfig",
+            algorithm="HS256",
+            consumer_id=my_consumer.id,
+            key="my_key",
+            rsa_public_key="foo",
+            secret="my_secret")
+        ```
 
         :param str resource_name: The name of the resource.
         :param ConsumerJwtAuthArgs args: The arguments to use to populate this resource's properties.

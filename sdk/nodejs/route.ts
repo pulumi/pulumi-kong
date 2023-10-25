@@ -13,6 +13,65 @@ import * as utilities from "./utilities";
  *
  * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
  *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const route = new kong.Route("route", {
+ *     protocols: [
+ *         "http",
+ *         "https",
+ *     ],
+ *     methods: [
+ *         "GET",
+ *         "POST",
+ *     ],
+ *     hosts: ["example2.com"],
+ *     paths: ["/test"],
+ *     stripPath: false,
+ *     preserveHost: true,
+ *     regexPriority: 1,
+ *     serviceId: kong_service.service.id,
+ *     headers: [{
+ *         name: "x-test-1",
+ *         values: [
+ *             "a",
+ *             "b",
+ *         ],
+ *     }],
+ * });
+ * ```
+ *
+ * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const route = new kong.Route("route", {
+ *     protocols: ["tcp"],
+ *     stripPath: true,
+ *     preserveHost: false,
+ *     sources: [
+ *         {
+ *             ip: "192.168.1.1",
+ *             port: 80,
+ *         },
+ *         {
+ *             ip: "192.168.1.2",
+ *         },
+ *     ],
+ *     destinations: [{
+ *         ip: "172.10.1.1",
+ *         port: 81,
+ *     }],
+ *     snis: ["foo.com"],
+ *     serviceId: kong_service.service.id,
+ * });
+ * ```
+ *
  * ## Import
  *
  * To import a route

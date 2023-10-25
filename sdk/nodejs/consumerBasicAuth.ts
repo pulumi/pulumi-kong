@@ -8,6 +8,28 @@ import * as utilities from "./utilities";
  * ## # kong.ConsumerBasicAuth
  *
  * Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as kong from "@pulumi/kong";
+ *
+ * const myConsumer = new kong.Consumer("myConsumer", {
+ *     customId: "123",
+ *     username: "User1",
+ * });
+ * const basicAuthPlugin = new kong.Plugin("basicAuthPlugin", {});
+ * const consumerBasicAuth = new kong.ConsumerBasicAuth("consumerBasicAuth", {
+ *     consumerId: myConsumer.id,
+ *     password: "bar_updated",
+ *     tags: [
+ *         "myTag",
+ *         "anotherTag",
+ *     ],
+ *     username: "foo_updated",
+ * });
+ * ```
  */
 export class ConsumerBasicAuth extends pulumi.CustomResource {
     /**

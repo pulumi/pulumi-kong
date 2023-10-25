@@ -13,6 +13,54 @@ namespace Pulumi.Kong
     /// ## # kong.ConsumerOauth2
     /// 
     /// Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     {
+    ///         CustomId = "123",
+    ///         Username = "User1",
+    ///     });
+    /// 
+    ///     var oauth2Plugin = new Kong.Plugin("oauth2Plugin", new()
+    ///     {
+    ///         ConfigJson = @"	{
+    /// 		""global_credentials"": true,
+    /// 		""enable_password_grant"": true,
+    /// 		""token_expiration"": 180,
+    /// 		""refresh_token_ttl"": 180,
+    /// 		""provision_key"": ""testprovisionkey""
+    /// 	}
+    /// 
+    /// ",
+    ///     });
+    /// 
+    ///     var consumerOauth2 = new Kong.ConsumerOauth2("consumerOauth2", new()
+    ///     {
+    ///         ClientId = "client_id",
+    ///         ClientSecret = "client_secret",
+    ///         ConsumerId = myConsumer.Id,
+    ///         RedirectUris = new[]
+    ///         {
+    ///             "https://asdf.com/callback",
+    ///             "https://test.cl/callback",
+    ///         },
+    ///         Tags = new[]
+    ///         {
+    ///             "myTag",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [KongResourceType("kong:index/consumerOauth2:ConsumerOauth2")]
     public partial class ConsumerOauth2 : global::Pulumi.CustomResource

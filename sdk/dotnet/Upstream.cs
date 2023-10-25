@@ -10,6 +10,113 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Kong = Pulumi.Kong;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var certificate = new Kong.Certificate("certificate", new()
+    ///     {
+    ///         Cert = @"    -----BEGIN CERTIFICATE-----
+    ///     ......
+    ///     -----END CERTIFICATE-----
+    /// ",
+    ///         PrivateKey = @"    -----BEGIN PRIVATE KEY-----
+    ///     .....
+    ///     -----END PRIVATE KEY-----
+    /// ",
+    ///         Snis = new[]
+    ///         {
+    ///             "foo.com",
+    ///         },
+    ///     });
+    /// 
+    ///     var upstream = new Kong.Upstream("upstream", new()
+    ///     {
+    ///         Slots = 10,
+    ///         HashOn = "header",
+    ///         HashFallback = "cookie",
+    ///         HashOnHeader = "HeaderName",
+    ///         HashFallbackHeader = "FallbackHeaderName",
+    ///         HashOnCookie = "CookieName",
+    ///         HashOnCookiePath = "/path",
+    ///         HostHeader = "x-host",
+    ///         Tags = new[]
+    ///         {
+    ///             "a",
+    ///             "b",
+    ///         },
+    ///         ClientCertificateId = certificate.Id,
+    ///         Healthchecks = new Kong.Inputs.UpstreamHealthchecksArgs
+    ///         {
+    ///             Active = new Kong.Inputs.UpstreamHealthchecksActiveArgs
+    ///             {
+    ///                 Type = "https",
+    ///                 HttpPath = "/status",
+    ///                 Timeout = 10,
+    ///                 Concurrency = 20,
+    ///                 HttpsVerifyCertificate = false,
+    ///                 HttpsSni = "some.domain.com",
+    ///                 Healthy = new Kong.Inputs.UpstreamHealthchecksActiveHealthyArgs
+    ///                 {
+    ///                     Successes = 1,
+    ///                     Interval = 5,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         200,
+    ///                         201,
+    ///                     },
+    ///                 },
+    ///                 Unhealthy = new Kong.Inputs.UpstreamHealthchecksActiveUnhealthyArgs
+    ///                 {
+    ///                     Timeouts = 7,
+    ///                     Interval = 3,
+    ///                     TcpFailures = 1,
+    ///                     HttpFailures = 2,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         500,
+    ///                         501,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Passive = new Kong.Inputs.UpstreamHealthchecksPassiveArgs
+    ///             {
+    ///                 Type = "https",
+    ///                 Healthy = new Kong.Inputs.UpstreamHealthchecksPassiveHealthyArgs
+    ///                 {
+    ///                     Successes = 1,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         200,
+    ///                         201,
+    ///                         202,
+    ///                     },
+    ///                 },
+    ///                 Unhealthy = new Kong.Inputs.UpstreamHealthchecksPassiveUnhealthyArgs
+    ///                 {
+    ///                     Timeouts = 3,
+    ///                     TcpFailures = 5,
+    ///                     HttpFailures = 6,
+    ///                     HttpStatuses = new[]
+    ///                     {
+    ///                         500,
+    ///                         501,
+    ///                         502,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// To import an upstream
