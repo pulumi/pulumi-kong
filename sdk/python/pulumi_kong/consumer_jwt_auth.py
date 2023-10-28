@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ConsumerJwtAuthArgs', 'ConsumerJwtAuth']
@@ -29,45 +29,16 @@ class ConsumerJwtAuthArgs:
         :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer JWT auth for grouping and filtering
         """
-        ConsumerJwtAuthArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            consumer_id=consumer_id,
-            rsa_public_key=rsa_public_key,
-            algorithm=algorithm,
-            key=key,
-            secret=secret,
-            tags=tags,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             consumer_id: Optional[pulumi.Input[str]] = None,
-             rsa_public_key: Optional[pulumi.Input[str]] = None,
-             algorithm: Optional[pulumi.Input[str]] = None,
-             key: Optional[pulumi.Input[str]] = None,
-             secret: Optional[pulumi.Input[str]] = None,
-             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if consumer_id is None and 'consumerId' in kwargs:
-            consumer_id = kwargs['consumerId']
-        if consumer_id is None:
-            raise TypeError("Missing 'consumer_id' argument")
-        if rsa_public_key is None and 'rsaPublicKey' in kwargs:
-            rsa_public_key = kwargs['rsaPublicKey']
-        if rsa_public_key is None:
-            raise TypeError("Missing 'rsa_public_key' argument")
-
-        _setter("consumer_id", consumer_id)
-        _setter("rsa_public_key", rsa_public_key)
+        pulumi.set(__self__, "consumer_id", consumer_id)
+        pulumi.set(__self__, "rsa_public_key", rsa_public_key)
         if algorithm is not None:
-            _setter("algorithm", algorithm)
+            pulumi.set(__self__, "algorithm", algorithm)
         if key is not None:
-            _setter("key", key)
+            pulumi.set(__self__, "key", key)
         if secret is not None:
-            _setter("secret", secret)
+            pulumi.set(__self__, "secret", secret)
         if tags is not None:
-            _setter("tags", tags)
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -160,43 +131,18 @@ class _ConsumerJwtAuthState:
         :param pulumi.Input[str] secret: If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer JWT auth for grouping and filtering
         """
-        _ConsumerJwtAuthState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            algorithm=algorithm,
-            consumer_id=consumer_id,
-            key=key,
-            rsa_public_key=rsa_public_key,
-            secret=secret,
-            tags=tags,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             algorithm: Optional[pulumi.Input[str]] = None,
-             consumer_id: Optional[pulumi.Input[str]] = None,
-             key: Optional[pulumi.Input[str]] = None,
-             rsa_public_key: Optional[pulumi.Input[str]] = None,
-             secret: Optional[pulumi.Input[str]] = None,
-             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if consumer_id is None and 'consumerId' in kwargs:
-            consumer_id = kwargs['consumerId']
-        if rsa_public_key is None and 'rsaPublicKey' in kwargs:
-            rsa_public_key = kwargs['rsaPublicKey']
-
         if algorithm is not None:
-            _setter("algorithm", algorithm)
+            pulumi.set(__self__, "algorithm", algorithm)
         if consumer_id is not None:
-            _setter("consumer_id", consumer_id)
+            pulumi.set(__self__, "consumer_id", consumer_id)
         if key is not None:
-            _setter("key", key)
+            pulumi.set(__self__, "key", key)
         if rsa_public_key is not None:
-            _setter("rsa_public_key", rsa_public_key)
+            pulumi.set(__self__, "rsa_public_key", rsa_public_key)
         if secret is not None:
-            _setter("secret", secret)
+            pulumi.set(__self__, "secret", secret)
         if tags is not None:
-            _setter("tags", tags)
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
@@ -362,10 +308,6 @@ class ConsumerJwtAuth(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            ConsumerJwtAuthArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
