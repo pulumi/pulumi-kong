@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['PluginArgs', 'Plugin']
@@ -32,57 +32,22 @@ class PluginArgs:
         :param pulumi.Input[str] service_id: the service id that you want to configure the plugin for
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Plugin for grouping and filtering
         """
-        PluginArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            config_json=config_json,
-            consumer_id=consumer_id,
-            enabled=enabled,
-            name=name,
-            route_id=route_id,
-            service_id=service_id,
-            strict_match=strict_match,
-            tags=tags,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             config_json: Optional[pulumi.Input[str]] = None,
-             consumer_id: Optional[pulumi.Input[str]] = None,
-             enabled: Optional[pulumi.Input[bool]] = None,
-             name: Optional[pulumi.Input[str]] = None,
-             route_id: Optional[pulumi.Input[str]] = None,
-             service_id: Optional[pulumi.Input[str]] = None,
-             strict_match: Optional[pulumi.Input[bool]] = None,
-             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if config_json is None and 'configJson' in kwargs:
-            config_json = kwargs['configJson']
-        if consumer_id is None and 'consumerId' in kwargs:
-            consumer_id = kwargs['consumerId']
-        if route_id is None and 'routeId' in kwargs:
-            route_id = kwargs['routeId']
-        if service_id is None and 'serviceId' in kwargs:
-            service_id = kwargs['serviceId']
-        if strict_match is None and 'strictMatch' in kwargs:
-            strict_match = kwargs['strictMatch']
-
         if config_json is not None:
-            _setter("config_json", config_json)
+            pulumi.set(__self__, "config_json", config_json)
         if consumer_id is not None:
-            _setter("consumer_id", consumer_id)
+            pulumi.set(__self__, "consumer_id", consumer_id)
         if enabled is not None:
-            _setter("enabled", enabled)
+            pulumi.set(__self__, "enabled", enabled)
         if name is not None:
-            _setter("name", name)
+            pulumi.set(__self__, "name", name)
         if route_id is not None:
-            _setter("route_id", route_id)
+            pulumi.set(__self__, "route_id", route_id)
         if service_id is not None:
-            _setter("service_id", service_id)
+            pulumi.set(__self__, "service_id", service_id)
         if strict_match is not None:
-            _setter("strict_match", strict_match)
+            pulumi.set(__self__, "strict_match", strict_match)
         if tags is not None:
-            _setter("tags", tags)
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="configJson")
@@ -198,63 +163,24 @@ class _PluginState:
         :param pulumi.Input[str] service_id: the service id that you want to configure the plugin for
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Plugin for grouping and filtering
         """
-        _PluginState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            computed_config=computed_config,
-            config_json=config_json,
-            consumer_id=consumer_id,
-            enabled=enabled,
-            name=name,
-            route_id=route_id,
-            service_id=service_id,
-            strict_match=strict_match,
-            tags=tags,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             computed_config: Optional[pulumi.Input[str]] = None,
-             config_json: Optional[pulumi.Input[str]] = None,
-             consumer_id: Optional[pulumi.Input[str]] = None,
-             enabled: Optional[pulumi.Input[bool]] = None,
-             name: Optional[pulumi.Input[str]] = None,
-             route_id: Optional[pulumi.Input[str]] = None,
-             service_id: Optional[pulumi.Input[str]] = None,
-             strict_match: Optional[pulumi.Input[bool]] = None,
-             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if computed_config is None and 'computedConfig' in kwargs:
-            computed_config = kwargs['computedConfig']
-        if config_json is None and 'configJson' in kwargs:
-            config_json = kwargs['configJson']
-        if consumer_id is None and 'consumerId' in kwargs:
-            consumer_id = kwargs['consumerId']
-        if route_id is None and 'routeId' in kwargs:
-            route_id = kwargs['routeId']
-        if service_id is None and 'serviceId' in kwargs:
-            service_id = kwargs['serviceId']
-        if strict_match is None and 'strictMatch' in kwargs:
-            strict_match = kwargs['strictMatch']
-
         if computed_config is not None:
-            _setter("computed_config", computed_config)
+            pulumi.set(__self__, "computed_config", computed_config)
         if config_json is not None:
-            _setter("config_json", config_json)
+            pulumi.set(__self__, "config_json", config_json)
         if consumer_id is not None:
-            _setter("consumer_id", consumer_id)
+            pulumi.set(__self__, "consumer_id", consumer_id)
         if enabled is not None:
-            _setter("enabled", enabled)
+            pulumi.set(__self__, "enabled", enabled)
         if name is not None:
-            _setter("name", name)
+            pulumi.set(__self__, "name", name)
         if route_id is not None:
-            _setter("route_id", route_id)
+            pulumi.set(__self__, "route_id", route_id)
         if service_id is not None:
-            _setter("service_id", service_id)
+            pulumi.set(__self__, "service_id", service_id)
         if strict_match is not None:
-            _setter("strict_match", strict_match)
+            pulumi.set(__self__, "strict_match", strict_match)
         if tags is not None:
-            _setter("tags", tags)
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="computedConfig")
@@ -567,10 +493,6 @@ class Plugin(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            PluginArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

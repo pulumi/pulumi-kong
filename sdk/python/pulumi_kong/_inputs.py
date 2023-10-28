@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -27,23 +27,10 @@ class RouteDestinationArgs:
     def __init__(__self__, *,
                  ip: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None):
-        RouteDestinationArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            ip=ip,
-            port=port,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             ip: Optional[pulumi.Input[str]] = None,
-             port: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-
         if ip is not None:
-            _setter("ip", ip)
+            pulumi.set(__self__, "ip", ip)
         if port is not None:
-            _setter("port", port)
+            pulumi.set(__self__, "port", port)
 
     @property
     @pulumi.getter
@@ -72,25 +59,8 @@ class RouteHeaderArgs:
         """
         :param pulumi.Input[str] name: The name of the route
         """
-        RouteHeaderArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            name=name,
-            values=values,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             name: Optional[pulumi.Input[str]] = None,
-             values: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if name is None:
-            raise TypeError("Missing 'name' argument")
-        if values is None:
-            raise TypeError("Missing 'values' argument")
-
-        _setter("name", name)
-        _setter("values", values)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
 
     @property
     @pulumi.getter
@@ -119,23 +89,10 @@ class RouteSourceArgs:
     def __init__(__self__, *,
                  ip: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None):
-        RouteSourceArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            ip=ip,
-            port=port,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             ip: Optional[pulumi.Input[str]] = None,
-             port: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-
         if ip is not None:
-            _setter("ip", ip)
+            pulumi.set(__self__, "ip", ip)
         if port is not None:
-            _setter("port", port)
+            pulumi.set(__self__, "port", port)
 
     @property
     @pulumi.getter
@@ -161,23 +118,10 @@ class UpstreamHealthchecksArgs:
     def __init__(__self__, *,
                  active: Optional[pulumi.Input['UpstreamHealthchecksActiveArgs']] = None,
                  passive: Optional[pulumi.Input['UpstreamHealthchecksPassiveArgs']] = None):
-        UpstreamHealthchecksArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            active=active,
-            passive=passive,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             active: Optional[pulumi.Input['UpstreamHealthchecksActiveArgs']] = None,
-             passive: Optional[pulumi.Input['UpstreamHealthchecksPassiveArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-
         if active is not None:
-            _setter("active", active)
+            pulumi.set(__self__, "active", active)
         if passive is not None:
-            _setter("passive", passive)
+            pulumi.set(__self__, "passive", passive)
 
     @property
     @pulumi.getter
@@ -209,53 +153,22 @@ class UpstreamHealthchecksActiveArgs:
                  timeout: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  unhealthy: Optional[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgs']] = None):
-        UpstreamHealthchecksActiveArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            concurrency=concurrency,
-            healthy=healthy,
-            http_path=http_path,
-            https_sni=https_sni,
-            https_verify_certificate=https_verify_certificate,
-            timeout=timeout,
-            type=type,
-            unhealthy=unhealthy,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             concurrency: Optional[pulumi.Input[int]] = None,
-             healthy: Optional[pulumi.Input['UpstreamHealthchecksActiveHealthyArgs']] = None,
-             http_path: Optional[pulumi.Input[str]] = None,
-             https_sni: Optional[pulumi.Input[str]] = None,
-             https_verify_certificate: Optional[pulumi.Input[bool]] = None,
-             timeout: Optional[pulumi.Input[int]] = None,
-             type: Optional[pulumi.Input[str]] = None,
-             unhealthy: Optional[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if http_path is None and 'httpPath' in kwargs:
-            http_path = kwargs['httpPath']
-        if https_sni is None and 'httpsSni' in kwargs:
-            https_sni = kwargs['httpsSni']
-        if https_verify_certificate is None and 'httpsVerifyCertificate' in kwargs:
-            https_verify_certificate = kwargs['httpsVerifyCertificate']
-
         if concurrency is not None:
-            _setter("concurrency", concurrency)
+            pulumi.set(__self__, "concurrency", concurrency)
         if healthy is not None:
-            _setter("healthy", healthy)
+            pulumi.set(__self__, "healthy", healthy)
         if http_path is not None:
-            _setter("http_path", http_path)
+            pulumi.set(__self__, "http_path", http_path)
         if https_sni is not None:
-            _setter("https_sni", https_sni)
+            pulumi.set(__self__, "https_sni", https_sni)
         if https_verify_certificate is not None:
-            _setter("https_verify_certificate", https_verify_certificate)
+            pulumi.set(__self__, "https_verify_certificate", https_verify_certificate)
         if timeout is not None:
-            _setter("timeout", timeout)
+            pulumi.set(__self__, "timeout", timeout)
         if type is not None:
-            _setter("type", type)
+            pulumi.set(__self__, "type", type)
         if unhealthy is not None:
-            _setter("unhealthy", unhealthy)
+            pulumi.set(__self__, "unhealthy", unhealthy)
 
     @property
     @pulumi.getter
@@ -336,29 +249,12 @@ class UpstreamHealthchecksActiveHealthyArgs:
                  http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
                  successes: Optional[pulumi.Input[int]] = None):
-        UpstreamHealthchecksActiveHealthyArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            http_statuses=http_statuses,
-            interval=interval,
-            successes=successes,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
-             interval: Optional[pulumi.Input[int]] = None,
-             successes: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if http_statuses is None and 'httpStatuses' in kwargs:
-            http_statuses = kwargs['httpStatuses']
-
         if http_statuses is not None:
-            _setter("http_statuses", http_statuses)
+            pulumi.set(__self__, "http_statuses", http_statuses)
         if interval is not None:
-            _setter("interval", interval)
+            pulumi.set(__self__, "interval", interval)
         if successes is not None:
-            _setter("successes", successes)
+            pulumi.set(__self__, "successes", successes)
 
     @property
     @pulumi.getter(name="httpStatuses")
@@ -396,41 +292,16 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
                  interval: Optional[pulumi.Input[int]] = None,
                  tcp_failures: Optional[pulumi.Input[int]] = None,
                  timeouts: Optional[pulumi.Input[int]] = None):
-        UpstreamHealthchecksActiveUnhealthyArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            http_failures=http_failures,
-            http_statuses=http_statuses,
-            interval=interval,
-            tcp_failures=tcp_failures,
-            timeouts=timeouts,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             http_failures: Optional[pulumi.Input[int]] = None,
-             http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
-             interval: Optional[pulumi.Input[int]] = None,
-             tcp_failures: Optional[pulumi.Input[int]] = None,
-             timeouts: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if http_failures is None and 'httpFailures' in kwargs:
-            http_failures = kwargs['httpFailures']
-        if http_statuses is None and 'httpStatuses' in kwargs:
-            http_statuses = kwargs['httpStatuses']
-        if tcp_failures is None and 'tcpFailures' in kwargs:
-            tcp_failures = kwargs['tcpFailures']
-
         if http_failures is not None:
-            _setter("http_failures", http_failures)
+            pulumi.set(__self__, "http_failures", http_failures)
         if http_statuses is not None:
-            _setter("http_statuses", http_statuses)
+            pulumi.set(__self__, "http_statuses", http_statuses)
         if interval is not None:
-            _setter("interval", interval)
+            pulumi.set(__self__, "interval", interval)
         if tcp_failures is not None:
-            _setter("tcp_failures", tcp_failures)
+            pulumi.set(__self__, "tcp_failures", tcp_failures)
         if timeouts is not None:
-            _setter("timeouts", timeouts)
+            pulumi.set(__self__, "timeouts", timeouts)
 
     @property
     @pulumi.getter(name="httpFailures")
@@ -484,27 +355,12 @@ class UpstreamHealthchecksPassiveArgs:
                  healthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgs']] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  unhealthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgs']] = None):
-        UpstreamHealthchecksPassiveArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            healthy=healthy,
-            type=type,
-            unhealthy=unhealthy,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             healthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgs']] = None,
-             type: Optional[pulumi.Input[str]] = None,
-             unhealthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-
         if healthy is not None:
-            _setter("healthy", healthy)
+            pulumi.set(__self__, "healthy", healthy)
         if type is not None:
-            _setter("type", type)
+            pulumi.set(__self__, "type", type)
         if unhealthy is not None:
-            _setter("unhealthy", unhealthy)
+            pulumi.set(__self__, "unhealthy", unhealthy)
 
     @property
     @pulumi.getter
@@ -539,25 +395,10 @@ class UpstreamHealthchecksPassiveHealthyArgs:
     def __init__(__self__, *,
                  http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  successes: Optional[pulumi.Input[int]] = None):
-        UpstreamHealthchecksPassiveHealthyArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            http_statuses=http_statuses,
-            successes=successes,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
-             successes: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if http_statuses is None and 'httpStatuses' in kwargs:
-            http_statuses = kwargs['httpStatuses']
-
         if http_statuses is not None:
-            _setter("http_statuses", http_statuses)
+            pulumi.set(__self__, "http_statuses", http_statuses)
         if successes is not None:
-            _setter("successes", successes)
+            pulumi.set(__self__, "successes", successes)
 
     @property
     @pulumi.getter(name="httpStatuses")
@@ -585,37 +426,14 @@ class UpstreamHealthchecksPassiveUnhealthyArgs:
                  http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  tcp_failures: Optional[pulumi.Input[int]] = None,
                  timeouts: Optional[pulumi.Input[int]] = None):
-        UpstreamHealthchecksPassiveUnhealthyArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            http_failures=http_failures,
-            http_statuses=http_statuses,
-            tcp_failures=tcp_failures,
-            timeouts=timeouts,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             http_failures: Optional[pulumi.Input[int]] = None,
-             http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
-             tcp_failures: Optional[pulumi.Input[int]] = None,
-             timeouts: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if http_failures is None and 'httpFailures' in kwargs:
-            http_failures = kwargs['httpFailures']
-        if http_statuses is None and 'httpStatuses' in kwargs:
-            http_statuses = kwargs['httpStatuses']
-        if tcp_failures is None and 'tcpFailures' in kwargs:
-            tcp_failures = kwargs['tcpFailures']
-
         if http_failures is not None:
-            _setter("http_failures", http_failures)
+            pulumi.set(__self__, "http_failures", http_failures)
         if http_statuses is not None:
-            _setter("http_statuses", http_statuses)
+            pulumi.set(__self__, "http_statuses", http_statuses)
         if tcp_failures is not None:
-            _setter("tcp_failures", tcp_failures)
+            pulumi.set(__self__, "tcp_failures", tcp_failures)
         if timeouts is not None:
-            _setter("timeouts", timeouts)
+            pulumi.set(__self__, "timeouts", timeouts)
 
     @property
     @pulumi.getter(name="httpFailures")

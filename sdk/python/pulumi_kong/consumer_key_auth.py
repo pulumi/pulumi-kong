@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ConsumerKeyAuthArgs', 'ConsumerKeyAuth']
@@ -23,30 +23,11 @@ class ConsumerKeyAuthArgs:
         :param pulumi.Input[str] key: Unique key to authenticate the client; if omitted the plugin will generate one
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer key auth for grouping and filtering
         """
-        ConsumerKeyAuthArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            consumer_id=consumer_id,
-            key=key,
-            tags=tags,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             consumer_id: Optional[pulumi.Input[str]] = None,
-             key: Optional[pulumi.Input[str]] = None,
-             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if consumer_id is None and 'consumerId' in kwargs:
-            consumer_id = kwargs['consumerId']
-        if consumer_id is None:
-            raise TypeError("Missing 'consumer_id' argument")
-
-        _setter("consumer_id", consumer_id)
+        pulumi.set(__self__, "consumer_id", consumer_id)
         if key is not None:
-            _setter("key", key)
+            pulumi.set(__self__, "key", key)
         if tags is not None:
-            _setter("tags", tags)
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -97,29 +78,12 @@ class _ConsumerKeyAuthState:
         :param pulumi.Input[str] key: Unique key to authenticate the client; if omitted the plugin will generate one
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the consumer key auth for grouping and filtering
         """
-        _ConsumerKeyAuthState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            consumer_id=consumer_id,
-            key=key,
-            tags=tags,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             consumer_id: Optional[pulumi.Input[str]] = None,
-             key: Optional[pulumi.Input[str]] = None,
-             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if consumer_id is None and 'consumerId' in kwargs:
-            consumer_id = kwargs['consumerId']
-
         if consumer_id is not None:
-            _setter("consumer_id", consumer_id)
+            pulumi.set(__self__, "consumer_id", consumer_id)
         if key is not None:
-            _setter("key", key)
+            pulumi.set(__self__, "key", key)
         if tags is not None:
-            _setter("tags", tags)
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="consumerId")
@@ -237,10 +201,6 @@ class ConsumerKeyAuth(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            ConsumerKeyAuthArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
