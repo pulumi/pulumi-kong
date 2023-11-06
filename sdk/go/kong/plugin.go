@@ -9,7 +9,6 @@ import (
 
 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # Plugin
@@ -306,12 +305,6 @@ func (i *Plugin) ToPluginOutputWithContext(ctx context.Context) PluginOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PluginOutput)
 }
 
-func (i *Plugin) ToOutput(ctx context.Context) pulumix.Output[*Plugin] {
-	return pulumix.Output[*Plugin]{
-		OutputState: i.ToPluginOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PluginArrayInput is an input type that accepts PluginArray and PluginArrayOutput values.
 // You can construct a concrete instance of `PluginArrayInput` via:
 //
@@ -335,12 +328,6 @@ func (i PluginArray) ToPluginArrayOutput() PluginArrayOutput {
 
 func (i PluginArray) ToPluginArrayOutputWithContext(ctx context.Context) PluginArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PluginArrayOutput)
-}
-
-func (i PluginArray) ToOutput(ctx context.Context) pulumix.Output[[]*Plugin] {
-	return pulumix.Output[[]*Plugin]{
-		OutputState: i.ToPluginArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PluginMapInput is an input type that accepts PluginMap and PluginMapOutput values.
@@ -368,12 +355,6 @@ func (i PluginMap) ToPluginMapOutputWithContext(ctx context.Context) PluginMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(PluginMapOutput)
 }
 
-func (i PluginMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Plugin] {
-	return pulumix.Output[map[string]*Plugin]{
-		OutputState: i.ToPluginMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PluginOutput struct{ *pulumi.OutputState }
 
 func (PluginOutput) ElementType() reflect.Type {
@@ -386,12 +367,6 @@ func (o PluginOutput) ToPluginOutput() PluginOutput {
 
 func (o PluginOutput) ToPluginOutputWithContext(ctx context.Context) PluginOutput {
 	return o
-}
-
-func (o PluginOutput) ToOutput(ctx context.Context) pulumix.Output[*Plugin] {
-	return pulumix.Output[*Plugin]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PluginOutput) ComputedConfig() pulumi.StringOutput {
@@ -451,12 +426,6 @@ func (o PluginArrayOutput) ToPluginArrayOutputWithContext(ctx context.Context) P
 	return o
 }
 
-func (o PluginArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Plugin] {
-	return pulumix.Output[[]*Plugin]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PluginArrayOutput) Index(i pulumi.IntInput) PluginOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Plugin {
 		return vs[0].([]*Plugin)[vs[1].(int)]
@@ -475,12 +444,6 @@ func (o PluginMapOutput) ToPluginMapOutput() PluginMapOutput {
 
 func (o PluginMapOutput) ToPluginMapOutputWithContext(ctx context.Context) PluginMapOutput {
 	return o
-}
-
-func (o PluginMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Plugin] {
-	return pulumix.Output[map[string]*Plugin]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PluginMapOutput) MapIndex(k pulumi.StringInput) PluginOutput {

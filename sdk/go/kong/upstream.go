@@ -9,7 +9,6 @@ import (
 
 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -412,12 +411,6 @@ func (i *Upstream) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutp
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamOutput)
 }
 
-func (i *Upstream) ToOutput(ctx context.Context) pulumix.Output[*Upstream] {
-	return pulumix.Output[*Upstream]{
-		OutputState: i.ToUpstreamOutputWithContext(ctx).OutputState,
-	}
-}
-
 // UpstreamArrayInput is an input type that accepts UpstreamArray and UpstreamArrayOutput values.
 // You can construct a concrete instance of `UpstreamArrayInput` via:
 //
@@ -441,12 +434,6 @@ func (i UpstreamArray) ToUpstreamArrayOutput() UpstreamArrayOutput {
 
 func (i UpstreamArray) ToUpstreamArrayOutputWithContext(ctx context.Context) UpstreamArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamArrayOutput)
-}
-
-func (i UpstreamArray) ToOutput(ctx context.Context) pulumix.Output[[]*Upstream] {
-	return pulumix.Output[[]*Upstream]{
-		OutputState: i.ToUpstreamArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // UpstreamMapInput is an input type that accepts UpstreamMap and UpstreamMapOutput values.
@@ -474,12 +461,6 @@ func (i UpstreamMap) ToUpstreamMapOutputWithContext(ctx context.Context) Upstrea
 	return pulumi.ToOutputWithContext(ctx, i).(UpstreamMapOutput)
 }
 
-func (i UpstreamMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Upstream] {
-	return pulumix.Output[map[string]*Upstream]{
-		OutputState: i.ToUpstreamMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type UpstreamOutput struct{ *pulumi.OutputState }
 
 func (UpstreamOutput) ElementType() reflect.Type {
@@ -492,12 +473,6 @@ func (o UpstreamOutput) ToUpstreamOutput() UpstreamOutput {
 
 func (o UpstreamOutput) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutput {
 	return o
-}
-
-func (o UpstreamOutput) ToOutput(ctx context.Context) pulumix.Output[*Upstream] {
-	return pulumix.Output[*Upstream]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
@@ -594,12 +569,6 @@ func (o UpstreamArrayOutput) ToUpstreamArrayOutputWithContext(ctx context.Contex
 	return o
 }
 
-func (o UpstreamArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Upstream] {
-	return pulumix.Output[[]*Upstream]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o UpstreamArrayOutput) Index(i pulumi.IntInput) UpstreamOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Upstream {
 		return vs[0].([]*Upstream)[vs[1].(int)]
@@ -618,12 +587,6 @@ func (o UpstreamMapOutput) ToUpstreamMapOutput() UpstreamMapOutput {
 
 func (o UpstreamMapOutput) ToUpstreamMapOutputWithContext(ctx context.Context) UpstreamMapOutput {
 	return o
-}
-
-func (o UpstreamMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Upstream] {
-	return pulumix.Output[map[string]*Upstream]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o UpstreamMapOutput) MapIndex(k pulumi.StringInput) UpstreamOutput {
