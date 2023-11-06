@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ConsumerArgs', 'Consumer']
@@ -23,12 +23,29 @@ class ConsumerArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
+        ConsumerArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            custom_id=custom_id,
+            tags=tags,
+            username=username,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             custom_id: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             username: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if custom_id is None and 'customId' in kwargs:
+            custom_id = kwargs['customId']
+
         if custom_id is not None:
-            pulumi.set(__self__, "custom_id", custom_id)
+            _setter("custom_id", custom_id)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
         if username is not None:
-            pulumi.set(__self__, "username", username)
+            _setter("username", username)
 
     @property
     @pulumi.getter(name="customId")
@@ -79,12 +96,29 @@ class _ConsumerState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
         """
+        _ConsumerState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            custom_id=custom_id,
+            tags=tags,
+            username=username,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             custom_id: Optional[pulumi.Input[str]] = None,
+             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             username: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if custom_id is None and 'customId' in kwargs:
+            custom_id = kwargs['customId']
+
         if custom_id is not None:
-            pulumi.set(__self__, "custom_id", custom_id)
+            _setter("custom_id", custom_id)
         if tags is not None:
-            pulumi.set(__self__, "tags", tags)
+            _setter("tags", tags)
         if username is not None:
-            pulumi.set(__self__, "username", username)
+            _setter("username", username)
 
     @property
     @pulumi.getter(name="customId")
@@ -204,6 +238,10 @@ class Consumer(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ConsumerArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
