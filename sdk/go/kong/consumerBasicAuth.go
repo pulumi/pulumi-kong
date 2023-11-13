@@ -10,7 +10,6 @@ import (
 	"errors"
 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # ConsumerBasicAuth
@@ -182,12 +181,6 @@ func (i *ConsumerBasicAuth) ToConsumerBasicAuthOutputWithContext(ctx context.Con
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerBasicAuthOutput)
 }
 
-func (i *ConsumerBasicAuth) ToOutput(ctx context.Context) pulumix.Output[*ConsumerBasicAuth] {
-	return pulumix.Output[*ConsumerBasicAuth]{
-		OutputState: i.ToConsumerBasicAuthOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ConsumerBasicAuthArrayInput is an input type that accepts ConsumerBasicAuthArray and ConsumerBasicAuthArrayOutput values.
 // You can construct a concrete instance of `ConsumerBasicAuthArrayInput` via:
 //
@@ -211,12 +204,6 @@ func (i ConsumerBasicAuthArray) ToConsumerBasicAuthArrayOutput() ConsumerBasicAu
 
 func (i ConsumerBasicAuthArray) ToConsumerBasicAuthArrayOutputWithContext(ctx context.Context) ConsumerBasicAuthArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerBasicAuthArrayOutput)
-}
-
-func (i ConsumerBasicAuthArray) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerBasicAuth] {
-	return pulumix.Output[[]*ConsumerBasicAuth]{
-		OutputState: i.ToConsumerBasicAuthArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ConsumerBasicAuthMapInput is an input type that accepts ConsumerBasicAuthMap and ConsumerBasicAuthMapOutput values.
@@ -244,12 +231,6 @@ func (i ConsumerBasicAuthMap) ToConsumerBasicAuthMapOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerBasicAuthMapOutput)
 }
 
-func (i ConsumerBasicAuthMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerBasicAuth] {
-	return pulumix.Output[map[string]*ConsumerBasicAuth]{
-		OutputState: i.ToConsumerBasicAuthMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ConsumerBasicAuthOutput struct{ *pulumi.OutputState }
 
 func (ConsumerBasicAuthOutput) ElementType() reflect.Type {
@@ -262,12 +243,6 @@ func (o ConsumerBasicAuthOutput) ToConsumerBasicAuthOutput() ConsumerBasicAuthOu
 
 func (o ConsumerBasicAuthOutput) ToConsumerBasicAuthOutputWithContext(ctx context.Context) ConsumerBasicAuthOutput {
 	return o
-}
-
-func (o ConsumerBasicAuthOutput) ToOutput(ctx context.Context) pulumix.Output[*ConsumerBasicAuth] {
-	return pulumix.Output[*ConsumerBasicAuth]{
-		OutputState: o.OutputState,
-	}
 }
 
 // the id of the consumer to be configured with basic auth
@@ -304,12 +279,6 @@ func (o ConsumerBasicAuthArrayOutput) ToConsumerBasicAuthArrayOutputWithContext(
 	return o
 }
 
-func (o ConsumerBasicAuthArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerBasicAuth] {
-	return pulumix.Output[[]*ConsumerBasicAuth]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ConsumerBasicAuthArrayOutput) Index(i pulumi.IntInput) ConsumerBasicAuthOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ConsumerBasicAuth {
 		return vs[0].([]*ConsumerBasicAuth)[vs[1].(int)]
@@ -328,12 +297,6 @@ func (o ConsumerBasicAuthMapOutput) ToConsumerBasicAuthMapOutput() ConsumerBasic
 
 func (o ConsumerBasicAuthMapOutput) ToConsumerBasicAuthMapOutputWithContext(ctx context.Context) ConsumerBasicAuthMapOutput {
 	return o
-}
-
-func (o ConsumerBasicAuthMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerBasicAuth] {
-	return pulumix.Output[map[string]*ConsumerBasicAuth]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ConsumerBasicAuthMapOutput) MapIndex(k pulumi.StringInput) ConsumerBasicAuthOutput {
