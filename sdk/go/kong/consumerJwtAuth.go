@@ -10,7 +10,6 @@ import (
 	"errors"
 	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## # ConsumerJwtAuth
@@ -199,12 +198,6 @@ func (i *ConsumerJwtAuth) ToConsumerJwtAuthOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthOutput)
 }
 
-func (i *ConsumerJwtAuth) ToOutput(ctx context.Context) pulumix.Output[*ConsumerJwtAuth] {
-	return pulumix.Output[*ConsumerJwtAuth]{
-		OutputState: i.ToConsumerJwtAuthOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ConsumerJwtAuthArrayInput is an input type that accepts ConsumerJwtAuthArray and ConsumerJwtAuthArrayOutput values.
 // You can construct a concrete instance of `ConsumerJwtAuthArrayInput` via:
 //
@@ -228,12 +221,6 @@ func (i ConsumerJwtAuthArray) ToConsumerJwtAuthArrayOutput() ConsumerJwtAuthArra
 
 func (i ConsumerJwtAuthArray) ToConsumerJwtAuthArrayOutputWithContext(ctx context.Context) ConsumerJwtAuthArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthArrayOutput)
-}
-
-func (i ConsumerJwtAuthArray) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerJwtAuth] {
-	return pulumix.Output[[]*ConsumerJwtAuth]{
-		OutputState: i.ToConsumerJwtAuthArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ConsumerJwtAuthMapInput is an input type that accepts ConsumerJwtAuthMap and ConsumerJwtAuthMapOutput values.
@@ -261,12 +248,6 @@ func (i ConsumerJwtAuthMap) ToConsumerJwtAuthMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(ConsumerJwtAuthMapOutput)
 }
 
-func (i ConsumerJwtAuthMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerJwtAuth] {
-	return pulumix.Output[map[string]*ConsumerJwtAuth]{
-		OutputState: i.ToConsumerJwtAuthMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ConsumerJwtAuthOutput struct{ *pulumi.OutputState }
 
 func (ConsumerJwtAuthOutput) ElementType() reflect.Type {
@@ -279,12 +260,6 @@ func (o ConsumerJwtAuthOutput) ToConsumerJwtAuthOutput() ConsumerJwtAuthOutput {
 
 func (o ConsumerJwtAuthOutput) ToConsumerJwtAuthOutputWithContext(ctx context.Context) ConsumerJwtAuthOutput {
 	return o
-}
-
-func (o ConsumerJwtAuthOutput) ToOutput(ctx context.Context) pulumix.Output[*ConsumerJwtAuth] {
-	return pulumix.Output[*ConsumerJwtAuth]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
@@ -331,12 +306,6 @@ func (o ConsumerJwtAuthArrayOutput) ToConsumerJwtAuthArrayOutputWithContext(ctx 
 	return o
 }
 
-func (o ConsumerJwtAuthArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ConsumerJwtAuth] {
-	return pulumix.Output[[]*ConsumerJwtAuth]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ConsumerJwtAuthArrayOutput) Index(i pulumi.IntInput) ConsumerJwtAuthOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ConsumerJwtAuth {
 		return vs[0].([]*ConsumerJwtAuth)[vs[1].(int)]
@@ -355,12 +324,6 @@ func (o ConsumerJwtAuthMapOutput) ToConsumerJwtAuthMapOutput() ConsumerJwtAuthMa
 
 func (o ConsumerJwtAuthMapOutput) ToConsumerJwtAuthMapOutputWithContext(ctx context.Context) ConsumerJwtAuthMapOutput {
 	return o
-}
-
-func (o ConsumerJwtAuthMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ConsumerJwtAuth] {
-	return pulumix.Output[map[string]*ConsumerJwtAuth]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ConsumerJwtAuthMapOutput) MapIndex(k pulumi.StringInput) ConsumerJwtAuthOutput {
