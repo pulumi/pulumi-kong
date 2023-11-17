@@ -13,12 +13,30 @@ namespace Pulumi.Kong.Outputs
     [OutputType]
     public sealed class UpstreamHealthchecksActive
     {
+        /// <summary>
+        /// is a number of targets to check concurrently in active health checks. Defaults to `10`.
+        /// </summary>
         public readonly int? Concurrency;
         public readonly Outputs.UpstreamHealthchecksActiveHealthy? Healthy;
+        /// <summary>
+        /// is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+        /// </summary>
         public readonly string? HttpPath;
+        /// <summary>
+        /// is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+        /// </summary>
         public readonly string? HttpsSni;
+        /// <summary>
+        /// check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+        /// </summary>
         public readonly bool? HttpsVerifyCertificate;
+        /// <summary>
+        /// is a socket timeout for active health checks (in seconds). Defaults to `1`.
+        /// </summary>
         public readonly int? Timeout;
+        /// <summary>
+        /// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        /// </summary>
         public readonly string? Type;
         public readonly Outputs.UpstreamHealthchecksActiveUnhealthy? Unhealthy;
 

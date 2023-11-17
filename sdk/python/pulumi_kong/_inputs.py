@@ -153,6 +153,14 @@ class UpstreamHealthchecksActiveArgs:
                  timeout: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  unhealthy: Optional[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgs']] = None):
+        """
+        :param pulumi.Input[int] concurrency: is a number of targets to check concurrently in active health checks. Defaults to `10`.
+        :param pulumi.Input[str] http_path: is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+        :param pulumi.Input[str] https_sni: is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+        :param pulumi.Input[bool] https_verify_certificate: check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+        :param pulumi.Input[int] timeout: is a socket timeout for active health checks (in seconds). Defaults to `1`.
+        :param pulumi.Input[str] type: is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        """
         if concurrency is not None:
             pulumi.set(__self__, "concurrency", concurrency)
         if healthy is not None:
@@ -173,6 +181,9 @@ class UpstreamHealthchecksActiveArgs:
     @property
     @pulumi.getter
     def concurrency(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of targets to check concurrently in active health checks. Defaults to `10`.
+        """
         return pulumi.get(self, "concurrency")
 
     @concurrency.setter
@@ -191,6 +202,9 @@ class UpstreamHealthchecksActiveArgs:
     @property
     @pulumi.getter(name="httpPath")
     def http_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+        """
         return pulumi.get(self, "http_path")
 
     @http_path.setter
@@ -200,6 +214,9 @@ class UpstreamHealthchecksActiveArgs:
     @property
     @pulumi.getter(name="httpsSni")
     def https_sni(self) -> Optional[pulumi.Input[str]]:
+        """
+        is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+        """
         return pulumi.get(self, "https_sni")
 
     @https_sni.setter
@@ -209,6 +226,9 @@ class UpstreamHealthchecksActiveArgs:
     @property
     @pulumi.getter(name="httpsVerifyCertificate")
     def https_verify_certificate(self) -> Optional[pulumi.Input[bool]]:
+        """
+        check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+        """
         return pulumi.get(self, "https_verify_certificate")
 
     @https_verify_certificate.setter
@@ -218,6 +238,9 @@ class UpstreamHealthchecksActiveArgs:
     @property
     @pulumi.getter
     def timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a socket timeout for active health checks (in seconds). Defaults to `1`.
+        """
         return pulumi.get(self, "timeout")
 
     @timeout.setter
@@ -227,6 +250,9 @@ class UpstreamHealthchecksActiveArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -249,6 +275,11 @@ class UpstreamHealthchecksActiveHealthyArgs:
                  http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
                  successes: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] http_statuses: is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        :param pulumi.Input[int] interval: is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        :param pulumi.Input[int] successes: is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        """
         if http_statuses is not None:
             pulumi.set(__self__, "http_statuses", http_statuses)
         if interval is not None:
@@ -259,6 +290,9 @@ class UpstreamHealthchecksActiveHealthyArgs:
     @property
     @pulumi.getter(name="httpStatuses")
     def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        """
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
@@ -268,6 +302,9 @@ class UpstreamHealthchecksActiveHealthyArgs:
     @property
     @pulumi.getter
     def interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        """
         return pulumi.get(self, "interval")
 
     @interval.setter
@@ -277,6 +314,9 @@ class UpstreamHealthchecksActiveHealthyArgs:
     @property
     @pulumi.getter
     def successes(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        """
         return pulumi.get(self, "successes")
 
     @successes.setter
@@ -292,6 +332,13 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
                  interval: Optional[pulumi.Input[int]] = None,
                  tcp_failures: Optional[pulumi.Input[int]] = None,
                  timeouts: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] http_failures: is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] http_statuses: is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        :param pulumi.Input[int] interval: is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        :param pulumi.Input[int] tcp_failures: is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        :param pulumi.Input[int] timeouts: is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        """
         if http_failures is not None:
             pulumi.set(__self__, "http_failures", http_failures)
         if http_statuses is not None:
@@ -306,6 +353,9 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
     @property
     @pulumi.getter(name="httpFailures")
     def http_failures(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        """
         return pulumi.get(self, "http_failures")
 
     @http_failures.setter
@@ -315,6 +365,9 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
     @property
     @pulumi.getter(name="httpStatuses")
     def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        """
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
@@ -324,6 +377,9 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
     @property
     @pulumi.getter
     def interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        """
         return pulumi.get(self, "interval")
 
     @interval.setter
@@ -333,6 +389,9 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
     @property
     @pulumi.getter(name="tcpFailures")
     def tcp_failures(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        """
         return pulumi.get(self, "tcp_failures")
 
     @tcp_failures.setter
@@ -342,6 +401,9 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
     @property
     @pulumi.getter
     def timeouts(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        """
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
@@ -355,6 +417,9 @@ class UpstreamHealthchecksPassiveArgs:
                  healthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgs']] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  unhealthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgs']] = None):
+        """
+        :param pulumi.Input[str] type: is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        """
         if healthy is not None:
             pulumi.set(__self__, "healthy", healthy)
         if type is not None:
@@ -374,6 +439,9 @@ class UpstreamHealthchecksPassiveArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -395,6 +463,10 @@ class UpstreamHealthchecksPassiveHealthyArgs:
     def __init__(__self__, *,
                  http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  successes: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] http_statuses: is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        :param pulumi.Input[int] successes: is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        """
         if http_statuses is not None:
             pulumi.set(__self__, "http_statuses", http_statuses)
         if successes is not None:
@@ -403,6 +475,9 @@ class UpstreamHealthchecksPassiveHealthyArgs:
     @property
     @pulumi.getter(name="httpStatuses")
     def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        """
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
@@ -412,6 +487,9 @@ class UpstreamHealthchecksPassiveHealthyArgs:
     @property
     @pulumi.getter
     def successes(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        """
         return pulumi.get(self, "successes")
 
     @successes.setter
@@ -426,6 +504,12 @@ class UpstreamHealthchecksPassiveUnhealthyArgs:
                  http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  tcp_failures: Optional[pulumi.Input[int]] = None,
                  timeouts: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] http_failures: is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] http_statuses: is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        :param pulumi.Input[int] tcp_failures: is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        :param pulumi.Input[int] timeouts: is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        """
         if http_failures is not None:
             pulumi.set(__self__, "http_failures", http_failures)
         if http_statuses is not None:
@@ -438,6 +522,9 @@ class UpstreamHealthchecksPassiveUnhealthyArgs:
     @property
     @pulumi.getter(name="httpFailures")
     def http_failures(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        """
         return pulumi.get(self, "http_failures")
 
     @http_failures.setter
@@ -447,6 +534,9 @@ class UpstreamHealthchecksPassiveUnhealthyArgs:
     @property
     @pulumi.getter(name="httpStatuses")
     def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        """
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
@@ -456,6 +546,9 @@ class UpstreamHealthchecksPassiveUnhealthyArgs:
     @property
     @pulumi.getter(name="tcpFailures")
     def tcp_failures(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        """
         return pulumi.get(self, "tcp_failures")
 
     @tcp_failures.setter
@@ -465,6 +558,9 @@ class UpstreamHealthchecksPassiveUnhealthyArgs:
     @property
     @pulumi.getter
     def timeouts(self) -> Optional[pulumi.Input[int]]:
+        """
+        is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        """
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter

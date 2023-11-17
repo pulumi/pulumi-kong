@@ -12,25 +12,65 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class UpstreamHealthchecksActiveUnhealthy {
+    /**
+     * @return is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     private @Nullable Integer httpFailures;
+    /**
+     * @return is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     private @Nullable List<Integer> httpStatuses;
+    /**
+     * @return is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     * 
+     */
     private @Nullable Integer interval;
+    /**
+     * @return is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     private @Nullable Integer tcpFailures;
+    /**
+     * @return is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     private @Nullable Integer timeouts;
 
     private UpstreamHealthchecksActiveUnhealthy() {}
+    /**
+     * @return is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     public Optional<Integer> httpFailures() {
         return Optional.ofNullable(this.httpFailures);
     }
+    /**
+     * @return is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     public List<Integer> httpStatuses() {
         return this.httpStatuses == null ? List.of() : this.httpStatuses;
     }
+    /**
+     * @return is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     * 
+     */
     public Optional<Integer> interval() {
         return Optional.ofNullable(this.interval);
     }
+    /**
+     * @return is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     public Optional<Integer> tcpFailures() {
         return Optional.ofNullable(this.tcpFailures);
     }
+    /**
+     * @return is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     public Optional<Integer> timeouts() {
         return Optional.ofNullable(this.timeouts);
     }

@@ -95,27 +95,6 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
 
     /**
      * is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
-     * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
-     * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
-     * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
-     * * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
-     * * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
-     * * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
-     * * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
-     * * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
-     * * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
-     * * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
-     * * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
-     * * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
-     * * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
      * 
      */
     @Import(name="hashOnCookiePath")
@@ -123,27 +102,6 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
 
     /**
      * @return is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
-     * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
-     * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
-     * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
-     * * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
-     * * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
-     * * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
-     * * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
-     * * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
-     * * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
-     * * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
-     * * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
-     * * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
-     * * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
-     * * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-     * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
      * 
      */
     public Optional<Output<String>> hashOnCookiePath() {
@@ -374,27 +332,6 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
 
         /**
          * @param hashOnCookiePath is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
-         * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
-         * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
-         * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
-         * * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
-         * * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
-         * * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
-         * * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
-         * * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
-         * * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
-         * * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
-         * * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
-         * * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
-         * * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
          * 
          * @return builder
          * 
@@ -406,27 +343,6 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
 
         /**
          * @param hashOnCookiePath is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
-         * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
-         * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
-         * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
-         * * `healthchecks.active.http_path` - (Optional) is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
-         * * `healthchecks.active.https_verify_certificate` - (Optional) check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
-         * * `healthchecks.active.https_sni` - (Optional) is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
-         * * `healthchecks.active.healthy.interval` - (Optional) is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
-         * * `healthchecks.active.healthy.successes` - (Optional) is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
-         * * `healthchecks.active.healthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
-         * * `healthchecks.active.unhealthy.interval` - (Optional) is an interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for unhealthy targets should not be performed. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.http_failures` - (Optional) is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.timeouts` - (Optional) is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
-         * * `healthchecks.active.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses to consider a failure, indicating unhealthiness, when returned by a probe in active health checks. Defaults to `[429, 404, 500, 501, 502, 503, 504, 505]`.
-         * * `healthchecks.passive.type` - (Optional) is a passive health check type. Interpreting HTTP/HTTPS statuses, or just check for TCP connection success. Possible values are `tcp`, `http` or `https` (in passive checks, `http` and `https` options are equivalent.). Defaults to `http`.
-         * * `healthchecks.passive.healthy.successes` - (Optional) is a Number of successes in proxied traffic (as defined by `healthchecks.passive.healthy.http_statuses`) to consider a target healthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.healthy.http_statuses` - (Optional) is an array of HTTP statuses which represent healthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]`.
-         * * `healthchecks.passive.unhealthy.tcp_failures` - (Optional) is a number of TCP failures in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.unhealthy.http_failures` - (Optional) is a number of HTTP failures in proxied traffic (as defined by `healthchecks.passive.unhealthy.http_statuses`) to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
-         * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
          * 
          * @return builder
          * 

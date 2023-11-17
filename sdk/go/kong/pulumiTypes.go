@@ -465,14 +465,20 @@ func (o UpstreamHealthchecksPtrOutput) Passive() UpstreamHealthchecksPassivePtrO
 }
 
 type UpstreamHealthchecksActive struct {
-	Concurrency            *int                                 `pulumi:"concurrency"`
-	Healthy                *UpstreamHealthchecksActiveHealthy   `pulumi:"healthy"`
-	HttpPath               *string                              `pulumi:"httpPath"`
-	HttpsSni               *string                              `pulumi:"httpsSni"`
-	HttpsVerifyCertificate *bool                                `pulumi:"httpsVerifyCertificate"`
-	Timeout                *int                                 `pulumi:"timeout"`
-	Type                   *string                              `pulumi:"type"`
-	Unhealthy              *UpstreamHealthchecksActiveUnhealthy `pulumi:"unhealthy"`
+	// is a number of targets to check concurrently in active health checks. Defaults to `10`.
+	Concurrency *int                               `pulumi:"concurrency"`
+	Healthy     *UpstreamHealthchecksActiveHealthy `pulumi:"healthy"`
+	// is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+	HttpPath *string `pulumi:"httpPath"`
+	// is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+	HttpsSni *string `pulumi:"httpsSni"`
+	// check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+	HttpsVerifyCertificate *bool `pulumi:"httpsVerifyCertificate"`
+	// is a socket timeout for active health checks (in seconds). Defaults to `1`.
+	Timeout *int `pulumi:"timeout"`
+	// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+	Type      *string                              `pulumi:"type"`
+	Unhealthy *UpstreamHealthchecksActiveUnhealthy `pulumi:"unhealthy"`
 }
 
 // UpstreamHealthchecksActiveInput is an input type that accepts UpstreamHealthchecksActiveArgs and UpstreamHealthchecksActiveOutput values.
@@ -487,14 +493,20 @@ type UpstreamHealthchecksActiveInput interface {
 }
 
 type UpstreamHealthchecksActiveArgs struct {
-	Concurrency            pulumi.IntPtrInput                          `pulumi:"concurrency"`
-	Healthy                UpstreamHealthchecksActiveHealthyPtrInput   `pulumi:"healthy"`
-	HttpPath               pulumi.StringPtrInput                       `pulumi:"httpPath"`
-	HttpsSni               pulumi.StringPtrInput                       `pulumi:"httpsSni"`
-	HttpsVerifyCertificate pulumi.BoolPtrInput                         `pulumi:"httpsVerifyCertificate"`
-	Timeout                pulumi.IntPtrInput                          `pulumi:"timeout"`
-	Type                   pulumi.StringPtrInput                       `pulumi:"type"`
-	Unhealthy              UpstreamHealthchecksActiveUnhealthyPtrInput `pulumi:"unhealthy"`
+	// is a number of targets to check concurrently in active health checks. Defaults to `10`.
+	Concurrency pulumi.IntPtrInput                        `pulumi:"concurrency"`
+	Healthy     UpstreamHealthchecksActiveHealthyPtrInput `pulumi:"healthy"`
+	// is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+	HttpPath pulumi.StringPtrInput `pulumi:"httpPath"`
+	// is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+	HttpsSni pulumi.StringPtrInput `pulumi:"httpsSni"`
+	// check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+	HttpsVerifyCertificate pulumi.BoolPtrInput `pulumi:"httpsVerifyCertificate"`
+	// is a socket timeout for active health checks (in seconds). Defaults to `1`.
+	Timeout pulumi.IntPtrInput `pulumi:"timeout"`
+	// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+	Type      pulumi.StringPtrInput                       `pulumi:"type"`
+	Unhealthy UpstreamHealthchecksActiveUnhealthyPtrInput `pulumi:"unhealthy"`
 }
 
 func (UpstreamHealthchecksActiveArgs) ElementType() reflect.Type {
@@ -574,6 +586,7 @@ func (o UpstreamHealthchecksActiveOutput) ToUpstreamHealthchecksActivePtrOutputW
 	}).(UpstreamHealthchecksActivePtrOutput)
 }
 
+// is a number of targets to check concurrently in active health checks. Defaults to `10`.
 func (o UpstreamHealthchecksActiveOutput) Concurrency() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *int { return v.Concurrency }).(pulumi.IntPtrOutput)
 }
@@ -582,22 +595,27 @@ func (o UpstreamHealthchecksActiveOutput) Healthy() UpstreamHealthchecksActiveHe
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *UpstreamHealthchecksActiveHealthy { return v.Healthy }).(UpstreamHealthchecksActiveHealthyPtrOutput)
 }
 
+// is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
 func (o UpstreamHealthchecksActiveOutput) HttpPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *string { return v.HttpPath }).(pulumi.StringPtrOutput)
 }
 
+// is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
 func (o UpstreamHealthchecksActiveOutput) HttpsSni() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *string { return v.HttpsSni }).(pulumi.StringPtrOutput)
 }
 
+// check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
 func (o UpstreamHealthchecksActiveOutput) HttpsVerifyCertificate() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *bool { return v.HttpsVerifyCertificate }).(pulumi.BoolPtrOutput)
 }
 
+// is a socket timeout for active health checks (in seconds). Defaults to `1`.
 func (o UpstreamHealthchecksActiveOutput) Timeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *int { return v.Timeout }).(pulumi.IntPtrOutput)
 }
 
+// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
 func (o UpstreamHealthchecksActiveOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActive) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -630,6 +648,7 @@ func (o UpstreamHealthchecksActivePtrOutput) Elem() UpstreamHealthchecksActiveOu
 	}).(UpstreamHealthchecksActiveOutput)
 }
 
+// is a number of targets to check concurrently in active health checks. Defaults to `10`.
 func (o UpstreamHealthchecksActivePtrOutput) Concurrency() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActive) *int {
 		if v == nil {
@@ -648,6 +667,7 @@ func (o UpstreamHealthchecksActivePtrOutput) Healthy() UpstreamHealthchecksActiv
 	}).(UpstreamHealthchecksActiveHealthyPtrOutput)
 }
 
+// is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
 func (o UpstreamHealthchecksActivePtrOutput) HttpPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActive) *string {
 		if v == nil {
@@ -657,6 +677,7 @@ func (o UpstreamHealthchecksActivePtrOutput) HttpPath() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
 func (o UpstreamHealthchecksActivePtrOutput) HttpsSni() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActive) *string {
 		if v == nil {
@@ -666,6 +687,7 @@ func (o UpstreamHealthchecksActivePtrOutput) HttpsSni() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
 func (o UpstreamHealthchecksActivePtrOutput) HttpsVerifyCertificate() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActive) *bool {
 		if v == nil {
@@ -675,6 +697,7 @@ func (o UpstreamHealthchecksActivePtrOutput) HttpsVerifyCertificate() pulumi.Boo
 	}).(pulumi.BoolPtrOutput)
 }
 
+// is a socket timeout for active health checks (in seconds). Defaults to `1`.
 func (o UpstreamHealthchecksActivePtrOutput) Timeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActive) *int {
 		if v == nil {
@@ -684,6 +707,7 @@ func (o UpstreamHealthchecksActivePtrOutput) Timeout() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
 func (o UpstreamHealthchecksActivePtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActive) *string {
 		if v == nil {
@@ -703,9 +727,12 @@ func (o UpstreamHealthchecksActivePtrOutput) Unhealthy() UpstreamHealthchecksAct
 }
 
 type UpstreamHealthchecksActiveHealthy struct {
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses []int `pulumi:"httpStatuses"`
-	Interval     *int  `pulumi:"interval"`
-	Successes    *int  `pulumi:"successes"`
+	// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+	Interval *int `pulumi:"interval"`
+	// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+	Successes *int `pulumi:"successes"`
 }
 
 // UpstreamHealthchecksActiveHealthyInput is an input type that accepts UpstreamHealthchecksActiveHealthyArgs and UpstreamHealthchecksActiveHealthyOutput values.
@@ -720,9 +747,12 @@ type UpstreamHealthchecksActiveHealthyInput interface {
 }
 
 type UpstreamHealthchecksActiveHealthyArgs struct {
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses pulumi.IntArrayInput `pulumi:"httpStatuses"`
-	Interval     pulumi.IntPtrInput   `pulumi:"interval"`
-	Successes    pulumi.IntPtrInput   `pulumi:"successes"`
+	// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+	Interval pulumi.IntPtrInput `pulumi:"interval"`
+	// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+	Successes pulumi.IntPtrInput `pulumi:"successes"`
 }
 
 func (UpstreamHealthchecksActiveHealthyArgs) ElementType() reflect.Type {
@@ -802,14 +832,17 @@ func (o UpstreamHealthchecksActiveHealthyOutput) ToUpstreamHealthchecksActiveHea
 	}).(UpstreamHealthchecksActiveHealthyPtrOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksActiveHealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
 }
 
+// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
 func (o UpstreamHealthchecksActiveHealthyOutput) Interval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) *int { return v.Interval }).(pulumi.IntPtrOutput)
 }
 
+// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveHealthyOutput) Successes() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveHealthy) *int { return v.Successes }).(pulumi.IntPtrOutput)
 }
@@ -838,6 +871,7 @@ func (o UpstreamHealthchecksActiveHealthyPtrOutput) Elem() UpstreamHealthchecksA
 	}).(UpstreamHealthchecksActiveHealthyOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) []int {
 		if v == nil {
@@ -847,6 +881,7 @@ func (o UpstreamHealthchecksActiveHealthyPtrOutput) HttpStatuses() pulumi.IntArr
 	}).(pulumi.IntArrayOutput)
 }
 
+// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) Interval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) *int {
 		if v == nil {
@@ -856,6 +891,7 @@ func (o UpstreamHealthchecksActiveHealthyPtrOutput) Interval() pulumi.IntPtrOutp
 	}).(pulumi.IntPtrOutput)
 }
 
+// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveHealthyPtrOutput) Successes() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveHealthy) *int {
 		if v == nil {
@@ -866,11 +902,16 @@ func (o UpstreamHealthchecksActiveHealthyPtrOutput) Successes() pulumi.IntPtrOut
 }
 
 type UpstreamHealthchecksActiveUnhealthy struct {
-	HttpFailures *int  `pulumi:"httpFailures"`
+	// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+	HttpFailures *int `pulumi:"httpFailures"`
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses []int `pulumi:"httpStatuses"`
-	Interval     *int  `pulumi:"interval"`
-	TcpFailures  *int  `pulumi:"tcpFailures"`
-	Timeouts     *int  `pulumi:"timeouts"`
+	// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+	Interval *int `pulumi:"interval"`
+	// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+	TcpFailures *int `pulumi:"tcpFailures"`
+	// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+	Timeouts *int `pulumi:"timeouts"`
 }
 
 // UpstreamHealthchecksActiveUnhealthyInput is an input type that accepts UpstreamHealthchecksActiveUnhealthyArgs and UpstreamHealthchecksActiveUnhealthyOutput values.
@@ -885,11 +926,16 @@ type UpstreamHealthchecksActiveUnhealthyInput interface {
 }
 
 type UpstreamHealthchecksActiveUnhealthyArgs struct {
-	HttpFailures pulumi.IntPtrInput   `pulumi:"httpFailures"`
+	// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+	HttpFailures pulumi.IntPtrInput `pulumi:"httpFailures"`
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses pulumi.IntArrayInput `pulumi:"httpStatuses"`
-	Interval     pulumi.IntPtrInput   `pulumi:"interval"`
-	TcpFailures  pulumi.IntPtrInput   `pulumi:"tcpFailures"`
-	Timeouts     pulumi.IntPtrInput   `pulumi:"timeouts"`
+	// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+	Interval pulumi.IntPtrInput `pulumi:"interval"`
+	// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+	TcpFailures pulumi.IntPtrInput `pulumi:"tcpFailures"`
+	// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+	Timeouts pulumi.IntPtrInput `pulumi:"timeouts"`
 }
 
 func (UpstreamHealthchecksActiveUnhealthyArgs) ElementType() reflect.Type {
@@ -969,22 +1015,27 @@ func (o UpstreamHealthchecksActiveUnhealthyOutput) ToUpstreamHealthchecksActiveU
 	}).(UpstreamHealthchecksActiveUnhealthyPtrOutput)
 }
 
+// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyOutput) HttpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.HttpFailures }).(pulumi.IntPtrOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksActiveUnhealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
 }
 
+// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyOutput) Interval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.Interval }).(pulumi.IntPtrOutput)
 }
 
+// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyOutput) TcpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.TcpFailures }).(pulumi.IntPtrOutput)
 }
 
+// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyOutput) Timeouts() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksActiveUnhealthy) *int { return v.Timeouts }).(pulumi.IntPtrOutput)
 }
@@ -1013,6 +1064,7 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Elem() UpstreamHealthcheck
 	}).(UpstreamHealthchecksActiveUnhealthyOutput)
 }
 
+// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) HttpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
 		if v == nil {
@@ -1022,6 +1074,7 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) HttpFailures() pulumi.IntP
 	}).(pulumi.IntPtrOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) []int {
 		if v == nil {
@@ -1031,6 +1084,7 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) HttpStatuses() pulumi.IntA
 	}).(pulumi.IntArrayOutput)
 }
 
+// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Interval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
 		if v == nil {
@@ -1040,6 +1094,7 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Interval() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) TcpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
 		if v == nil {
@@ -1049,6 +1104,7 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) TcpFailures() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
+// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Timeouts() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksActiveUnhealthy) *int {
 		if v == nil {
@@ -1059,7 +1115,8 @@ func (o UpstreamHealthchecksActiveUnhealthyPtrOutput) Timeouts() pulumi.IntPtrOu
 }
 
 type UpstreamHealthchecksPassive struct {
-	Healthy   *UpstreamHealthchecksPassiveHealthy   `pulumi:"healthy"`
+	Healthy *UpstreamHealthchecksPassiveHealthy `pulumi:"healthy"`
+	// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
 	Type      *string                               `pulumi:"type"`
 	Unhealthy *UpstreamHealthchecksPassiveUnhealthy `pulumi:"unhealthy"`
 }
@@ -1076,7 +1133,8 @@ type UpstreamHealthchecksPassiveInput interface {
 }
 
 type UpstreamHealthchecksPassiveArgs struct {
-	Healthy   UpstreamHealthchecksPassiveHealthyPtrInput   `pulumi:"healthy"`
+	Healthy UpstreamHealthchecksPassiveHealthyPtrInput `pulumi:"healthy"`
+	// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
 	Type      pulumi.StringPtrInput                        `pulumi:"type"`
 	Unhealthy UpstreamHealthchecksPassiveUnhealthyPtrInput `pulumi:"unhealthy"`
 }
@@ -1162,6 +1220,7 @@ func (o UpstreamHealthchecksPassiveOutput) Healthy() UpstreamHealthchecksPassive
 	return o.ApplyT(func(v UpstreamHealthchecksPassive) *UpstreamHealthchecksPassiveHealthy { return v.Healthy }).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
 
+// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
 func (o UpstreamHealthchecksPassiveOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassive) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -1203,6 +1262,7 @@ func (o UpstreamHealthchecksPassivePtrOutput) Healthy() UpstreamHealthchecksPass
 	}).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
 
+// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
 func (o UpstreamHealthchecksPassivePtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksPassive) *string {
 		if v == nil {
@@ -1222,8 +1282,10 @@ func (o UpstreamHealthchecksPassivePtrOutput) Unhealthy() UpstreamHealthchecksPa
 }
 
 type UpstreamHealthchecksPassiveHealthy struct {
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses []int `pulumi:"httpStatuses"`
-	Successes    *int  `pulumi:"successes"`
+	// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+	Successes *int `pulumi:"successes"`
 }
 
 // UpstreamHealthchecksPassiveHealthyInput is an input type that accepts UpstreamHealthchecksPassiveHealthyArgs and UpstreamHealthchecksPassiveHealthyOutput values.
@@ -1238,8 +1300,10 @@ type UpstreamHealthchecksPassiveHealthyInput interface {
 }
 
 type UpstreamHealthchecksPassiveHealthyArgs struct {
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses pulumi.IntArrayInput `pulumi:"httpStatuses"`
-	Successes    pulumi.IntPtrInput   `pulumi:"successes"`
+	// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+	Successes pulumi.IntPtrInput `pulumi:"successes"`
 }
 
 func (UpstreamHealthchecksPassiveHealthyArgs) ElementType() reflect.Type {
@@ -1319,10 +1383,12 @@ func (o UpstreamHealthchecksPassiveHealthyOutput) ToUpstreamHealthchecksPassiveH
 	}).(UpstreamHealthchecksPassiveHealthyPtrOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksPassiveHealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveHealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
 }
 
+// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveHealthyOutput) Successes() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveHealthy) *int { return v.Successes }).(pulumi.IntPtrOutput)
 }
@@ -1351,6 +1417,7 @@ func (o UpstreamHealthchecksPassiveHealthyPtrOutput) Elem() UpstreamHealthchecks
 	}).(UpstreamHealthchecksPassiveHealthyOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksPassiveHealthy) []int {
 		if v == nil {
@@ -1360,6 +1427,7 @@ func (o UpstreamHealthchecksPassiveHealthyPtrOutput) HttpStatuses() pulumi.IntAr
 	}).(pulumi.IntArrayOutput)
 }
 
+// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveHealthyPtrOutput) Successes() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksPassiveHealthy) *int {
 		if v == nil {
@@ -1370,10 +1438,14 @@ func (o UpstreamHealthchecksPassiveHealthyPtrOutput) Successes() pulumi.IntPtrOu
 }
 
 type UpstreamHealthchecksPassiveUnhealthy struct {
-	HttpFailures *int  `pulumi:"httpFailures"`
+	// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+	HttpFailures *int `pulumi:"httpFailures"`
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses []int `pulumi:"httpStatuses"`
-	TcpFailures  *int  `pulumi:"tcpFailures"`
-	Timeouts     *int  `pulumi:"timeouts"`
+	// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+	TcpFailures *int `pulumi:"tcpFailures"`
+	// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+	Timeouts *int `pulumi:"timeouts"`
 }
 
 // UpstreamHealthchecksPassiveUnhealthyInput is an input type that accepts UpstreamHealthchecksPassiveUnhealthyArgs and UpstreamHealthchecksPassiveUnhealthyOutput values.
@@ -1388,10 +1460,14 @@ type UpstreamHealthchecksPassiveUnhealthyInput interface {
 }
 
 type UpstreamHealthchecksPassiveUnhealthyArgs struct {
-	HttpFailures pulumi.IntPtrInput   `pulumi:"httpFailures"`
+	// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+	HttpFailures pulumi.IntPtrInput `pulumi:"httpFailures"`
+	// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 	HttpStatuses pulumi.IntArrayInput `pulumi:"httpStatuses"`
-	TcpFailures  pulumi.IntPtrInput   `pulumi:"tcpFailures"`
-	Timeouts     pulumi.IntPtrInput   `pulumi:"timeouts"`
+	// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+	TcpFailures pulumi.IntPtrInput `pulumi:"tcpFailures"`
+	// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+	Timeouts pulumi.IntPtrInput `pulumi:"timeouts"`
 }
 
 func (UpstreamHealthchecksPassiveUnhealthyArgs) ElementType() reflect.Type {
@@ -1471,18 +1547,22 @@ func (o UpstreamHealthchecksPassiveUnhealthyOutput) ToUpstreamHealthchecksPassiv
 	}).(UpstreamHealthchecksPassiveUnhealthyPtrOutput)
 }
 
+// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveUnhealthyOutput) HttpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *int { return v.HttpFailures }).(pulumi.IntPtrOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksPassiveUnhealthyOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) []int { return v.HttpStatuses }).(pulumi.IntArrayOutput)
 }
 
+// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveUnhealthyOutput) TcpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *int { return v.TcpFailures }).(pulumi.IntPtrOutput)
 }
 
+// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveUnhealthyOutput) Timeouts() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v UpstreamHealthchecksPassiveUnhealthy) *int { return v.Timeouts }).(pulumi.IntPtrOutput)
 }
@@ -1511,6 +1591,7 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Elem() UpstreamHealthchec
 	}).(UpstreamHealthchecksPassiveUnhealthyOutput)
 }
 
+// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) HttpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) *int {
 		if v == nil {
@@ -1520,6 +1601,7 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) HttpFailures() pulumi.Int
 	}).(pulumi.IntPtrOutput)
 }
 
+// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) HttpStatuses() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) []int {
 		if v == nil {
@@ -1529,6 +1611,7 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) HttpStatuses() pulumi.Int
 	}).(pulumi.IntArrayOutput)
 }
 
+// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) TcpFailures() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) *int {
 		if v == nil {
@@ -1538,6 +1621,7 @@ func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) TcpFailures() pulumi.IntP
 	}).(pulumi.IntPtrOutput)
 }
 
+// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
 func (o UpstreamHealthchecksPassiveUnhealthyPtrOutput) Timeouts() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *UpstreamHealthchecksPassiveUnhealthy) *int {
 		if v == nil {

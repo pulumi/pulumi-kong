@@ -16,23 +16,47 @@ public final class UpstreamHealthchecksActiveHealthyArgs extends com.pulumi.reso
 
     public static final UpstreamHealthchecksActiveHealthyArgs Empty = new UpstreamHealthchecksActiveHealthyArgs();
 
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     @Import(name="httpStatuses")
     private @Nullable Output<List<Integer>> httpStatuses;
 
+    /**
+     * @return is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     public Optional<Output<List<Integer>>> httpStatuses() {
         return Optional.ofNullable(this.httpStatuses);
     }
 
+    /**
+     * is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     * 
+     */
     @Import(name="interval")
     private @Nullable Output<Integer> interval;
 
+    /**
+     * @return is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     * 
+     */
     public Optional<Output<Integer>> interval() {
         return Optional.ofNullable(this.interval);
     }
 
+    /**
+     * is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     * 
+     */
     @Import(name="successes")
     private @Nullable Output<Integer> successes;
 
+    /**
+     * @return is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     * 
+     */
     public Optional<Output<Integer>> successes() {
         return Optional.ofNullable(this.successes);
     }
@@ -63,33 +87,75 @@ public final class UpstreamHealthchecksActiveHealthyArgs extends com.pulumi.reso
             $ = new UpstreamHealthchecksActiveHealthyArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(@Nullable Output<List<Integer>> httpStatuses) {
             $.httpStatuses = httpStatuses;
             return this;
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(List<Integer> httpStatuses) {
             return httpStatuses(Output.of(httpStatuses));
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(Integer... httpStatuses) {
             return httpStatuses(List.of(httpStatuses));
         }
 
+        /**
+         * @param interval is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder interval(@Nullable Output<Integer> interval) {
             $.interval = interval;
             return this;
         }
 
+        /**
+         * @param interval is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder interval(Integer interval) {
             return interval(Output.of(interval));
         }
 
+        /**
+         * @param successes is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder successes(@Nullable Output<Integer> successes) {
             $.successes = successes;
             return this;
         }
 
+        /**
+         * @param successes is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder successes(Integer successes) {
             return successes(Output.of(successes));
         }

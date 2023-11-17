@@ -29,44 +29,107 @@ export interface UpstreamHealthchecks {
 }
 
 export interface UpstreamHealthchecksActive {
+    /**
+     * is a number of targets to check concurrently in active health checks. Defaults to `10`.
+     */
     concurrency?: pulumi.Input<number>;
     healthy?: pulumi.Input<inputs.UpstreamHealthchecksActiveHealthy>;
+    /**
+     * is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+     */
     httpPath?: pulumi.Input<string>;
+    /**
+     * is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+     */
     httpsSni?: pulumi.Input<string>;
+    /**
+     * check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+     */
     httpsVerifyCertificate?: pulumi.Input<boolean>;
+    /**
+     * is a socket timeout for active health checks (in seconds). Defaults to `1`.
+     */
     timeout?: pulumi.Input<number>;
+    /**
+     * is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     */
     type?: pulumi.Input<string>;
     unhealthy?: pulumi.Input<inputs.UpstreamHealthchecksActiveUnhealthy>;
 }
 
 export interface UpstreamHealthchecksActiveHealthy {
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     */
     interval?: pulumi.Input<number>;
+    /**
+     * is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     */
     successes?: pulumi.Input<number>;
 }
 
 export interface UpstreamHealthchecksActiveUnhealthy {
+    /**
+     * is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     */
     httpFailures?: pulumi.Input<number>;
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     */
     interval?: pulumi.Input<number>;
+    /**
+     * is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     tcpFailures?: pulumi.Input<number>;
+    /**
+     * is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     timeouts?: pulumi.Input<number>;
 }
 
 export interface UpstreamHealthchecksPassive {
     healthy?: pulumi.Input<inputs.UpstreamHealthchecksPassiveHealthy>;
+    /**
+     * is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     */
     type?: pulumi.Input<string>;
     unhealthy?: pulumi.Input<inputs.UpstreamHealthchecksPassiveUnhealthy>;
 }
 
 export interface UpstreamHealthchecksPassiveHealthy {
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     */
     successes?: pulumi.Input<number>;
 }
 
 export interface UpstreamHealthchecksPassiveUnhealthy {
+    /**
+     * is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     */
     httpFailures?: pulumi.Input<number>;
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     tcpFailures?: pulumi.Input<number>;
+    /**
+     * is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     timeouts?: pulumi.Input<number>;
 }

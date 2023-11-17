@@ -14,12 +14,19 @@ namespace Pulumi.Kong.Inputs
     {
         [Input("httpStatuses")]
         private InputList<int>? _httpStatuses;
+
+        /// <summary>
+        /// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        /// </summary>
         public InputList<int> HttpStatuses
         {
             get => _httpStatuses ?? (_httpStatuses = new InputList<int>());
             set => _httpStatuses = value;
         }
 
+        /// <summary>
+        /// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        /// </summary>
         [Input("successes")]
         public Input<int>? Successes { get; set; }
 

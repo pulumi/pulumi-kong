@@ -19,9 +19,17 @@ public final class UpstreamHealthchecksActiveArgs extends com.pulumi.resources.R
 
     public static final UpstreamHealthchecksActiveArgs Empty = new UpstreamHealthchecksActiveArgs();
 
+    /**
+     * is a number of targets to check concurrently in active health checks. Defaults to `10`.
+     * 
+     */
     @Import(name="concurrency")
     private @Nullable Output<Integer> concurrency;
 
+    /**
+     * @return is a number of targets to check concurrently in active health checks. Defaults to `10`.
+     * 
+     */
     public Optional<Output<Integer>> concurrency() {
         return Optional.ofNullable(this.concurrency);
     }
@@ -33,37 +41,77 @@ public final class UpstreamHealthchecksActiveArgs extends com.pulumi.resources.R
         return Optional.ofNullable(this.healthy);
     }
 
+    /**
+     * is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+     * 
+     */
     @Import(name="httpPath")
     private @Nullable Output<String> httpPath;
 
+    /**
+     * @return is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+     * 
+     */
     public Optional<Output<String>> httpPath() {
         return Optional.ofNullable(this.httpPath);
     }
 
+    /**
+     * is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+     * 
+     */
     @Import(name="httpsSni")
     private @Nullable Output<String> httpsSni;
 
+    /**
+     * @return is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+     * 
+     */
     public Optional<Output<String>> httpsSni() {
         return Optional.ofNullable(this.httpsSni);
     }
 
+    /**
+     * check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+     * 
+     */
     @Import(name="httpsVerifyCertificate")
     private @Nullable Output<Boolean> httpsVerifyCertificate;
 
+    /**
+     * @return check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+     * 
+     */
     public Optional<Output<Boolean>> httpsVerifyCertificate() {
         return Optional.ofNullable(this.httpsVerifyCertificate);
     }
 
+    /**
+     * is a socket timeout for active health checks (in seconds). Defaults to `1`.
+     * 
+     */
     @Import(name="timeout")
     private @Nullable Output<Integer> timeout;
 
+    /**
+     * @return is a socket timeout for active health checks (in seconds). Defaults to `1`.
+     * 
+     */
     public Optional<Output<Integer>> timeout() {
         return Optional.ofNullable(this.timeout);
     }
 
+    /**
+     * is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     * 
+     */
     @Import(name="type")
     private @Nullable Output<String> type;
 
+    /**
+     * @return is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     * 
+     */
     public Optional<Output<String>> type() {
         return Optional.ofNullable(this.type);
     }
@@ -106,11 +154,23 @@ public final class UpstreamHealthchecksActiveArgs extends com.pulumi.resources.R
             $ = new UpstreamHealthchecksActiveArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param concurrency is a number of targets to check concurrently in active health checks. Defaults to `10`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder concurrency(@Nullable Output<Integer> concurrency) {
             $.concurrency = concurrency;
             return this;
         }
 
+        /**
+         * @param concurrency is a number of targets to check concurrently in active health checks. Defaults to `10`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder concurrency(Integer concurrency) {
             return concurrency(Output.of(concurrency));
         }
@@ -124,47 +184,107 @@ public final class UpstreamHealthchecksActiveArgs extends com.pulumi.resources.R
             return healthy(Output.of(healthy));
         }
 
+        /**
+         * @param httpPath is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpPath(@Nullable Output<String> httpPath) {
             $.httpPath = httpPath;
             return this;
         }
 
+        /**
+         * @param httpPath is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpPath(String httpPath) {
             return httpPath(Output.of(httpPath));
         }
 
+        /**
+         * @param httpsSni is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpsSni(@Nullable Output<String> httpsSni) {
             $.httpsSni = httpsSni;
             return this;
         }
 
+        /**
+         * @param httpsSni is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpsSni(String httpsSni) {
             return httpsSni(Output.of(httpsSni));
         }
 
+        /**
+         * @param httpsVerifyCertificate check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpsVerifyCertificate(@Nullable Output<Boolean> httpsVerifyCertificate) {
             $.httpsVerifyCertificate = httpsVerifyCertificate;
             return this;
         }
 
+        /**
+         * @param httpsVerifyCertificate check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpsVerifyCertificate(Boolean httpsVerifyCertificate) {
             return httpsVerifyCertificate(Output.of(httpsVerifyCertificate));
         }
 
+        /**
+         * @param timeout is a socket timeout for active health checks (in seconds). Defaults to `1`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder timeout(@Nullable Output<Integer> timeout) {
             $.timeout = timeout;
             return this;
         }
 
+        /**
+         * @param timeout is a socket timeout for active health checks (in seconds). Defaults to `1`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder timeout(Integer timeout) {
             return timeout(Output.of(timeout));
         }
 
+        /**
+         * @param type is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder type(@Nullable Output<String> type) {
             $.type = type;
             return this;
         }
 
+        /**
+         * @param type is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder type(String type) {
             return type(Output.of(type));
         }

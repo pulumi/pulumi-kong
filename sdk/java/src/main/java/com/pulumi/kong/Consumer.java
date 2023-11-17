@@ -64,14 +64,14 @@ import javax.annotation.Nullable;
 @ResourceType(type="kong:index/consumer:Consumer")
 public class Consumer extends com.pulumi.resources.CustomResource {
     /**
-     * A custom id for the consumer, you must set either the username or custom_id
+     * (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
      * 
      */
     @Export(name="customId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> customId;
 
     /**
-     * @return A custom id for the consumer, you must set either the username or custom_id
+     * @return (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
      * 
      */
     public Output<Optional<String>> customId() {
@@ -92,14 +92,14 @@ public class Consumer extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.tags);
     }
     /**
-     * The username to use, you must set either the username or custom_id
+     * (Semi-optional) The username to use, you must set either the username or custom_id
      * 
      */
     @Export(name="username", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> username;
 
     /**
-     * @return The username to use, you must set either the username or custom_id
+     * @return (Semi-optional) The username to use, you must set either the username or custom_id
      * 
      */
     public Output<Optional<String>> username() {

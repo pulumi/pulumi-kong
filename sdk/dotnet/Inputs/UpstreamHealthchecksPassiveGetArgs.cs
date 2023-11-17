@@ -15,6 +15,9 @@ namespace Pulumi.Kong.Inputs
         [Input("healthy")]
         public Input<Inputs.UpstreamHealthchecksPassiveHealthyGetArgs>? Healthy { get; set; }
 
+        /// <summary>
+        /// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 

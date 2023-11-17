@@ -13,7 +13,13 @@ namespace Pulumi.Kong.Outputs
     [OutputType]
     public sealed class UpstreamHealthchecksPassiveHealthy
     {
+        /// <summary>
+        /// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        /// </summary>
         public readonly ImmutableArray<int> HttpStatuses;
+        /// <summary>
+        /// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        /// </summary>
         public readonly int? Successes;
 
         [OutputConstructor]

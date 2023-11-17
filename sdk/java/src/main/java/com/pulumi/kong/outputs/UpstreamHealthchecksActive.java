@@ -15,34 +15,82 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class UpstreamHealthchecksActive {
+    /**
+     * @return is a number of targets to check concurrently in active health checks. Defaults to `10`.
+     * 
+     */
     private @Nullable Integer concurrency;
     private @Nullable UpstreamHealthchecksActiveHealthy healthy;
+    /**
+     * @return is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+     * 
+     */
     private @Nullable String httpPath;
+    /**
+     * @return is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+     * 
+     */
     private @Nullable String httpsSni;
+    /**
+     * @return check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+     * 
+     */
     private @Nullable Boolean httpsVerifyCertificate;
+    /**
+     * @return is a socket timeout for active health checks (in seconds). Defaults to `1`.
+     * 
+     */
     private @Nullable Integer timeout;
+    /**
+     * @return is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     * 
+     */
     private @Nullable String type;
     private @Nullable UpstreamHealthchecksActiveUnhealthy unhealthy;
 
     private UpstreamHealthchecksActive() {}
+    /**
+     * @return is a number of targets to check concurrently in active health checks. Defaults to `10`.
+     * 
+     */
     public Optional<Integer> concurrency() {
         return Optional.ofNullable(this.concurrency);
     }
     public Optional<UpstreamHealthchecksActiveHealthy> healthy() {
         return Optional.ofNullable(this.healthy);
     }
+    /**
+     * @return is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+     * 
+     */
     public Optional<String> httpPath() {
         return Optional.ofNullable(this.httpPath);
     }
+    /**
+     * @return is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+     * 
+     */
     public Optional<String> httpsSni() {
         return Optional.ofNullable(this.httpsSni);
     }
+    /**
+     * @return check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+     * 
+     */
     public Optional<Boolean> httpsVerifyCertificate() {
         return Optional.ofNullable(this.httpsVerifyCertificate);
     }
+    /**
+     * @return is a socket timeout for active health checks (in seconds). Defaults to `1`.
+     * 
+     */
     public Optional<Integer> timeout() {
         return Optional.ofNullable(this.timeout);
     }
+    /**
+     * @return is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     * 
+     */
     public Optional<String> type() {
         return Optional.ofNullable(this.type);
     }

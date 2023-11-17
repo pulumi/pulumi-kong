@@ -49,7 +49,7 @@ namespace Pulumi.Kong
     public partial class Consumer : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// A custom id for the consumer, you must set either the username or custom_id
+        /// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         /// </summary>
         [Output("customId")]
         public Output<string?> CustomId { get; private set; } = null!;
@@ -61,7 +61,7 @@ namespace Pulumi.Kong
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The username to use, you must set either the username or custom_id
+        /// (Semi-optional) The username to use, you must set either the username or custom_id
         /// </summary>
         [Output("username")]
         public Output<string?> Username { get; private set; } = null!;
@@ -113,7 +113,7 @@ namespace Pulumi.Kong
     public sealed class ConsumerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// A custom id for the consumer, you must set either the username or custom_id
+        /// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         /// </summary>
         [Input("customId")]
         public Input<string>? CustomId { get; set; }
@@ -131,7 +131,7 @@ namespace Pulumi.Kong
         }
 
         /// <summary>
-        /// The username to use, you must set either the username or custom_id
+        /// (Semi-optional) The username to use, you must set either the username or custom_id
         /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
@@ -145,7 +145,7 @@ namespace Pulumi.Kong
     public sealed class ConsumerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// A custom id for the consumer, you must set either the username or custom_id
+        /// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         /// </summary>
         [Input("customId")]
         public Input<string>? CustomId { get; set; }
@@ -163,7 +163,7 @@ namespace Pulumi.Kong
         }
 
         /// <summary>
-        /// The username to use, you must set either the username or custom_id
+        /// (Semi-optional) The username to use, you must set either the username or custom_id
         /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }

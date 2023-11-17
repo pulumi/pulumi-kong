@@ -14,6 +14,10 @@ import javax.annotation.Nullable;
 @CustomType
 public final class UpstreamHealthchecksPassive {
     private @Nullable UpstreamHealthchecksPassiveHealthy healthy;
+    /**
+     * @return is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     * 
+     */
     private @Nullable String type;
     private @Nullable UpstreamHealthchecksPassiveUnhealthy unhealthy;
 
@@ -21,6 +25,10 @@ public final class UpstreamHealthchecksPassive {
     public Optional<UpstreamHealthchecksPassiveHealthy> healthy() {
         return Optional.ofNullable(this.healthy);
     }
+    /**
+     * @return is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     * 
+     */
     public Optional<String> type() {
         return Optional.ofNullable(this.type);
     }

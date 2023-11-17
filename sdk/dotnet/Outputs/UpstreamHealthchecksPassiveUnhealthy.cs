@@ -13,9 +13,21 @@ namespace Pulumi.Kong.Outputs
     [OutputType]
     public sealed class UpstreamHealthchecksPassiveUnhealthy
     {
+        /// <summary>
+        /// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        /// </summary>
         public readonly int? HttpFailures;
+        /// <summary>
+        /// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        /// </summary>
         public readonly ImmutableArray<int> HttpStatuses;
+        /// <summary>
+        /// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        /// </summary>
         public readonly int? TcpFailures;
+        /// <summary>
+        /// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        /// </summary>
         public readonly int? Timeouts;
 
         [OutputConstructor]

@@ -59,7 +59,7 @@ export class Consumer extends pulumi.CustomResource {
     }
 
     /**
-     * A custom id for the consumer, you must set either the username or custom_id
+     * (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
      */
     public readonly customId!: pulumi.Output<string | undefined>;
     /**
@@ -67,7 +67,7 @@ export class Consumer extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The username to use, you must set either the username or custom_id
+     * (Semi-optional) The username to use, you must set either the username or custom_id
      */
     public readonly username!: pulumi.Output<string | undefined>;
 
@@ -103,7 +103,7 @@ export class Consumer extends pulumi.CustomResource {
  */
 export interface ConsumerState {
     /**
-     * A custom id for the consumer, you must set either the username or custom_id
+     * (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
      */
     customId?: pulumi.Input<string>;
     /**
@@ -111,7 +111,7 @@ export interface ConsumerState {
      */
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The username to use, you must set either the username or custom_id
+     * (Semi-optional) The username to use, you must set either the username or custom_id
      */
     username?: pulumi.Input<string>;
 }
@@ -121,7 +121,7 @@ export interface ConsumerState {
  */
 export interface ConsumerArgs {
     /**
-     * A custom id for the consumer, you must set either the username or custom_id
+     * (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
      */
     customId?: pulumi.Input<string>;
     /**
@@ -129,7 +129,7 @@ export interface ConsumerArgs {
      */
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The username to use, you must set either the username or custom_id
+     * (Semi-optional) The username to use, you must set either the username or custom_id
      */
     username?: pulumi.Input<string>;
 }

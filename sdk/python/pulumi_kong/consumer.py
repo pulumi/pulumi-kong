@@ -19,9 +19,9 @@ class ConsumerArgs:
                  username: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Consumer resource.
-        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] custom_id: (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
-        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
+        :param pulumi.Input[str] username: (Semi-optional) The username to use, you must set either the username or custom_id
         """
         if custom_id is not None:
             pulumi.set(__self__, "custom_id", custom_id)
@@ -34,7 +34,7 @@ class ConsumerArgs:
     @pulumi.getter(name="customId")
     def custom_id(self) -> Optional[pulumi.Input[str]]:
         """
-        A custom id for the consumer, you must set either the username or custom_id
+        (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         """
         return pulumi.get(self, "custom_id")
 
@@ -58,7 +58,7 @@ class ConsumerArgs:
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
         """
-        The username to use, you must set either the username or custom_id
+        (Semi-optional) The username to use, you must set either the username or custom_id
         """
         return pulumi.get(self, "username")
 
@@ -75,9 +75,9 @@ class _ConsumerState:
                  username: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Consumer resources.
-        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] custom_id: (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
-        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
+        :param pulumi.Input[str] username: (Semi-optional) The username to use, you must set either the username or custom_id
         """
         if custom_id is not None:
             pulumi.set(__self__, "custom_id", custom_id)
@@ -90,7 +90,7 @@ class _ConsumerState:
     @pulumi.getter(name="customId")
     def custom_id(self) -> Optional[pulumi.Input[str]]:
         """
-        A custom id for the consumer, you must set either the username or custom_id
+        (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         """
         return pulumi.get(self, "custom_id")
 
@@ -114,7 +114,7 @@ class _ConsumerState:
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
         """
-        The username to use, you must set either the username or custom_id
+        (Semi-optional) The username to use, you must set either the username or custom_id
         """
         return pulumi.get(self, "username")
 
@@ -159,9 +159,9 @@ class Consumer(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] custom_id: (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
-        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
+        :param pulumi.Input[str] username: (Semi-optional) The username to use, you must set either the username or custom_id
         """
         ...
     @overload
@@ -244,9 +244,9 @@ class Consumer(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] custom_id: A custom id for the consumer, you must set either the username or custom_id
+        :param pulumi.Input[str] custom_id: (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A list of strings associated with the Consumer for grouping and filtering
-        :param pulumi.Input[str] username: The username to use, you must set either the username or custom_id
+        :param pulumi.Input[str] username: (Semi-optional) The username to use, you must set either the username or custom_id
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -261,7 +261,7 @@ class Consumer(pulumi.CustomResource):
     @pulumi.getter(name="customId")
     def custom_id(self) -> pulumi.Output[Optional[str]]:
         """
-        A custom id for the consumer, you must set either the username or custom_id
+        (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
         """
         return pulumi.get(self, "custom_id")
 
@@ -277,7 +277,7 @@ class Consumer(pulumi.CustomResource):
     @pulumi.getter
     def username(self) -> pulumi.Output[Optional[str]]:
         """
-        The username to use, you must set either the username or custom_id
+        (Semi-optional) The username to use, you must set either the username or custom_id
         """
         return pulumi.get(self, "username")
 

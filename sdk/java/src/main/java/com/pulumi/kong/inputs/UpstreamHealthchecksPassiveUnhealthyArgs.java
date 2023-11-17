@@ -16,30 +16,62 @@ public final class UpstreamHealthchecksPassiveUnhealthyArgs extends com.pulumi.r
 
     public static final UpstreamHealthchecksPassiveUnhealthyArgs Empty = new UpstreamHealthchecksPassiveUnhealthyArgs();
 
+    /**
+     * is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     @Import(name="httpFailures")
     private @Nullable Output<Integer> httpFailures;
 
+    /**
+     * @return is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     public Optional<Output<Integer>> httpFailures() {
         return Optional.ofNullable(this.httpFailures);
     }
 
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     @Import(name="httpStatuses")
     private @Nullable Output<List<Integer>> httpStatuses;
 
+    /**
+     * @return is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     public Optional<Output<List<Integer>>> httpStatuses() {
         return Optional.ofNullable(this.httpStatuses);
     }
 
+    /**
+     * is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     @Import(name="tcpFailures")
     private @Nullable Output<Integer> tcpFailures;
 
+    /**
+     * @return is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     public Optional<Output<Integer>> tcpFailures() {
         return Optional.ofNullable(this.tcpFailures);
     }
 
+    /**
+     * is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     @Import(name="timeouts")
     private @Nullable Output<Integer> timeouts;
 
+    /**
+     * @return is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     * 
+     */
     public Optional<Output<Integer>> timeouts() {
         return Optional.ofNullable(this.timeouts);
     }
@@ -71,42 +103,96 @@ public final class UpstreamHealthchecksPassiveUnhealthyArgs extends com.pulumi.r
             $ = new UpstreamHealthchecksPassiveUnhealthyArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param httpFailures is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpFailures(@Nullable Output<Integer> httpFailures) {
             $.httpFailures = httpFailures;
             return this;
         }
 
+        /**
+         * @param httpFailures is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpFailures(Integer httpFailures) {
             return httpFailures(Output.of(httpFailures));
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(@Nullable Output<List<Integer>> httpStatuses) {
             $.httpStatuses = httpStatuses;
             return this;
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(List<Integer> httpStatuses) {
             return httpStatuses(Output.of(httpStatuses));
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(Integer... httpStatuses) {
             return httpStatuses(List.of(httpStatuses));
         }
 
+        /**
+         * @param tcpFailures is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder tcpFailures(@Nullable Output<Integer> tcpFailures) {
             $.tcpFailures = tcpFailures;
             return this;
         }
 
+        /**
+         * @param tcpFailures is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder tcpFailures(Integer tcpFailures) {
             return tcpFailures(Output.of(tcpFailures));
         }
 
+        /**
+         * @param timeouts is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder timeouts(@Nullable Output<Integer> timeouts) {
             $.timeouts = timeouts;
             return this;
         }
 
+        /**
+         * @param timeouts is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder timeouts(Integer timeouts) {
             return timeouts(Output.of(timeouts));
         }

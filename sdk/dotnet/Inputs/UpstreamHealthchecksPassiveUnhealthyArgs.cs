@@ -12,20 +12,33 @@ namespace Pulumi.Kong.Inputs
 
     public sealed class UpstreamHealthchecksPassiveUnhealthyArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+        /// </summary>
         [Input("httpFailures")]
         public Input<int>? HttpFailures { get; set; }
 
         [Input("httpStatuses")]
         private InputList<int>? _httpStatuses;
+
+        /// <summary>
+        /// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        /// </summary>
         public InputList<int> HttpStatuses
         {
             get => _httpStatuses ?? (_httpStatuses = new InputList<int>());
             set => _httpStatuses = value;
         }
 
+        /// <summary>
+        /// is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+        /// </summary>
         [Input("tcpFailures")]
         public Input<int>? TcpFailures { get; set; }
 
+        /// <summary>
+        /// is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+        /// </summary>
         [Input("timeouts")]
         public Input<int>? Timeouts { get; set; }
 

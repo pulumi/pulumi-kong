@@ -17,14 +17,14 @@ public final class ConsumerState extends com.pulumi.resources.ResourceArgs {
     public static final ConsumerState Empty = new ConsumerState();
 
     /**
-     * A custom id for the consumer, you must set either the username or custom_id
+     * (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
      * 
      */
     @Import(name="customId")
     private @Nullable Output<String> customId;
 
     /**
-     * @return A custom id for the consumer, you must set either the username or custom_id
+     * @return (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
      * 
      */
     public Optional<Output<String>> customId() {
@@ -47,14 +47,14 @@ public final class ConsumerState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * The username to use, you must set either the username or custom_id
+     * (Semi-optional) The username to use, you must set either the username or custom_id
      * 
      */
     @Import(name="username")
     private @Nullable Output<String> username;
 
     /**
-     * @return The username to use, you must set either the username or custom_id
+     * @return (Semi-optional) The username to use, you must set either the username or custom_id
      * 
      */
     public Optional<Output<String>> username() {
@@ -88,7 +88,7 @@ public final class ConsumerState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param customId A custom id for the consumer, you must set either the username or custom_id
+         * @param customId (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
          * 
          * @return builder
          * 
@@ -99,7 +99,7 @@ public final class ConsumerState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param customId A custom id for the consumer, you must set either the username or custom_id
+         * @param customId (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
          * 
          * @return builder
          * 
@@ -140,7 +140,7 @@ public final class ConsumerState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param username The username to use, you must set either the username or custom_id
+         * @param username (Semi-optional) The username to use, you must set either the username or custom_id
          * 
          * @return builder
          * 
@@ -151,7 +151,7 @@ public final class ConsumerState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param username The username to use, you must set either the username or custom_id
+         * @param username (Semi-optional) The username to use, you must set either the username or custom_id
          * 
          * @return builder
          * 

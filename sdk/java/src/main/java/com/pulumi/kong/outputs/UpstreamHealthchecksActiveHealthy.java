@@ -12,17 +12,41 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class UpstreamHealthchecksActiveHealthy {
+    /**
+     * @return is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     private @Nullable List<Integer> httpStatuses;
+    /**
+     * @return is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     * 
+     */
     private @Nullable Integer interval;
+    /**
+     * @return is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     * 
+     */
     private @Nullable Integer successes;
 
     private UpstreamHealthchecksActiveHealthy() {}
+    /**
+     * @return is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     public List<Integer> httpStatuses() {
         return this.httpStatuses == null ? List.of() : this.httpStatuses;
     }
+    /**
+     * @return is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     * 
+     */
     public Optional<Integer> interval() {
         return Optional.ofNullable(this.interval);
     }
+    /**
+     * @return is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     * 
+     */
     public Optional<Integer> successes() {
         return Optional.ofNullable(this.successes);
     }

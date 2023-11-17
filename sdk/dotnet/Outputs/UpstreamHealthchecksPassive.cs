@@ -14,6 +14,9 @@ namespace Pulumi.Kong.Outputs
     public sealed class UpstreamHealthchecksPassive
     {
         public readonly Outputs.UpstreamHealthchecksPassiveHealthy? Healthy;
+        /// <summary>
+        /// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        /// </summary>
         public readonly string? Type;
         public readonly Outputs.UpstreamHealthchecksPassiveUnhealthy? Unhealthy;
 

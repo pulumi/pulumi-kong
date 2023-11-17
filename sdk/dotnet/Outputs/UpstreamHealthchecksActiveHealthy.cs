@@ -13,8 +13,17 @@ namespace Pulumi.Kong.Outputs
     [OutputType]
     public sealed class UpstreamHealthchecksActiveHealthy
     {
+        /// <summary>
+        /// is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+        /// </summary>
         public readonly ImmutableArray<int> HttpStatuses;
+        /// <summary>
+        /// is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+        /// </summary>
         public readonly int? Interval;
+        /// <summary>
+        /// is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+        /// </summary>
         public readonly int? Successes;
 
         [OutputConstructor]

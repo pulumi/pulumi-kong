@@ -12,24 +12,42 @@ namespace Pulumi.Kong.Inputs
 
     public sealed class UpstreamHealthchecksActiveGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// is a number of targets to check concurrently in active health checks. Defaults to `10`.
+        /// </summary>
         [Input("concurrency")]
         public Input<int>? Concurrency { get; set; }
 
         [Input("healthy")]
         public Input<Inputs.UpstreamHealthchecksActiveHealthyGetArgs>? Healthy { get; set; }
 
+        /// <summary>
+        /// is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+        /// </summary>
         [Input("httpPath")]
         public Input<string>? HttpPath { get; set; }
 
+        /// <summary>
+        /// is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+        /// </summary>
         [Input("httpsSni")]
         public Input<string>? HttpsSni { get; set; }
 
+        /// <summary>
+        /// check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+        /// </summary>
         [Input("httpsVerifyCertificate")]
         public Input<bool>? HttpsVerifyCertificate { get; set; }
 
+        /// <summary>
+        /// is a socket timeout for active health checks (in seconds). Defaults to `1`.
+        /// </summary>
         [Input("timeout")]
         public Input<int>? Timeout { get; set; }
 
+        /// <summary>
+        /// is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+        /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 

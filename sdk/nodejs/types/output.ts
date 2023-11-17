@@ -29,45 +29,108 @@ export interface UpstreamHealthchecks {
 }
 
 export interface UpstreamHealthchecksActive {
+    /**
+     * is a number of targets to check concurrently in active health checks. Defaults to `10`.
+     */
     concurrency?: number;
     healthy: outputs.UpstreamHealthchecksActiveHealthy;
+    /**
+     * is a path to use in GET HTTP request to run as a probe on active health checks. Defaults to `/`.
+     */
     httpPath?: string;
+    /**
+     * is the hostname to use as an SNI (Server Name Identification) when performing active health checks using HTTPS. This is particularly useful when Targets are configured using IPs, so that the target host’s certificate can be verified with the proper SNI. Default `nil`.
+     */
     httpsSni?: string;
+    /**
+     * check the validity of the SSL certificate of the remote host when performing active health checks using HTTPS. Defaults to `true`.
+     */
     httpsVerifyCertificate?: boolean;
+    /**
+     * is a socket timeout for active health checks (in seconds). Defaults to `1`.
+     */
     timeout?: number;
+    /**
+     * is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     */
     type?: string;
     unhealthy: outputs.UpstreamHealthchecksActiveUnhealthy;
 }
 
 export interface UpstreamHealthchecksActiveHealthy {
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses: number[];
+    /**
+     * is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     */
     interval: number;
+    /**
+     * is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     */
     successes: number;
 }
 
 export interface UpstreamHealthchecksActiveUnhealthy {
+    /**
+     * is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     */
     httpFailures: number;
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses: number[];
+    /**
+     * is an interval between active health checks for healthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed. Defaults to `0`.
+     */
     interval: number;
+    /**
+     * is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     tcpFailures: number;
+    /**
+     * is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     timeouts: number;
 }
 
 export interface UpstreamHealthchecksPassive {
     healthy: outputs.UpstreamHealthchecksPassiveHealthy;
+    /**
+     * is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
+     */
     type?: string;
     unhealthy: outputs.UpstreamHealthchecksPassiveUnhealthy;
 }
 
 export interface UpstreamHealthchecksPassiveHealthy {
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses?: number[];
+    /**
+     * is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     */
     successes?: number;
 }
 
 export interface UpstreamHealthchecksPassiveUnhealthy {
+    /**
+     * is a number of HTTP failures in active probes (as defined by `healthchecks.active.unhealthy.http_statuses`) to consider a target unhealthy. Defaults to `0`.
+     */
     httpFailures?: number;
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     */
     httpStatuses?: number[];
+    /**
+     * is a number of TCP failures in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     tcpFailures?: number;
+    /**
+     * is a number of timeouts in active probes to consider a target unhealthy. Defaults to `0`.
+     */
     timeouts?: number;
 }
 

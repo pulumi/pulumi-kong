@@ -16,16 +16,32 @@ public final class UpstreamHealthchecksPassiveHealthyArgs extends com.pulumi.res
 
     public static final UpstreamHealthchecksPassiveHealthyArgs Empty = new UpstreamHealthchecksPassiveHealthyArgs();
 
+    /**
+     * is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     @Import(name="httpStatuses")
     private @Nullable Output<List<Integer>> httpStatuses;
 
+    /**
+     * @return is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+     * 
+     */
     public Optional<Output<List<Integer>>> httpStatuses() {
         return Optional.ofNullable(this.httpStatuses);
     }
 
+    /**
+     * is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     * 
+     */
     @Import(name="successes")
     private @Nullable Output<Integer> successes;
 
+    /**
+     * @return is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+     * 
+     */
     public Optional<Output<Integer>> successes() {
         return Optional.ofNullable(this.successes);
     }
@@ -55,24 +71,54 @@ public final class UpstreamHealthchecksPassiveHealthyArgs extends com.pulumi.res
             $ = new UpstreamHealthchecksPassiveHealthyArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(@Nullable Output<List<Integer>> httpStatuses) {
             $.httpStatuses = httpStatuses;
             return this;
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(List<Integer> httpStatuses) {
             return httpStatuses(Output.of(httpStatuses));
         }
 
+        /**
+         * @param httpStatuses is an array of HTTP statuses to consider a success, indicating healthiness, when returned by a probe in active health checks. Defaults to `[200, 302]`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder httpStatuses(Integer... httpStatuses) {
             return httpStatuses(List.of(httpStatuses));
         }
 
+        /**
+         * @param successes is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder successes(@Nullable Output<Integer> successes) {
             $.successes = successes;
             return this;
         }
 
+        /**
+         * @param successes is a number of successes in active probes (as defined by `healthchecks.active.healthy.http_statuses`) to consider a target healthy. Defaults to `0`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder successes(Integer successes) {
             return successes(Output.of(successes));
         }

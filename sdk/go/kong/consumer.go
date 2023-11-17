@@ -57,11 +57,11 @@ import (
 type Consumer struct {
 	pulumi.CustomResourceState
 
-	// A custom id for the consumer, you must set either the username or custom_id
+	// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrOutput `pulumi:"customId"`
 	// A list of strings associated with the Consumer for grouping and filtering
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
-	// The username to use, you must set either the username or custom_id
+	// (Semi-optional) The username to use, you must set either the username or custom_id
 	Username pulumi.StringPtrOutput `pulumi:"username"`
 }
 
@@ -95,20 +95,20 @@ func GetConsumer(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Consumer resources.
 type consumerState struct {
-	// A custom id for the consumer, you must set either the username or custom_id
+	// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
 	CustomId *string `pulumi:"customId"`
 	// A list of strings associated with the Consumer for grouping and filtering
 	Tags []string `pulumi:"tags"`
-	// The username to use, you must set either the username or custom_id
+	// (Semi-optional) The username to use, you must set either the username or custom_id
 	Username *string `pulumi:"username"`
 }
 
 type ConsumerState struct {
-	// A custom id for the consumer, you must set either the username or custom_id
+	// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrInput
 	// A list of strings associated with the Consumer for grouping and filtering
 	Tags pulumi.StringArrayInput
-	// The username to use, you must set either the username or custom_id
+	// (Semi-optional) The username to use, you must set either the username or custom_id
 	Username pulumi.StringPtrInput
 }
 
@@ -117,21 +117,21 @@ func (ConsumerState) ElementType() reflect.Type {
 }
 
 type consumerArgs struct {
-	// A custom id for the consumer, you must set either the username or custom_id
+	// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
 	CustomId *string `pulumi:"customId"`
 	// A list of strings associated with the Consumer for grouping and filtering
 	Tags []string `pulumi:"tags"`
-	// The username to use, you must set either the username or custom_id
+	// (Semi-optional) The username to use, you must set either the username or custom_id
 	Username *string `pulumi:"username"`
 }
 
 // The set of arguments for constructing a Consumer resource.
 type ConsumerArgs struct {
-	// A custom id for the consumer, you must set either the username or custom_id
+	// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
 	CustomId pulumi.StringPtrInput
 	// A list of strings associated with the Consumer for grouping and filtering
 	Tags pulumi.StringArrayInput
-	// The username to use, you must set either the username or custom_id
+	// (Semi-optional) The username to use, you must set either the username or custom_id
 	Username pulumi.StringPtrInput
 }
 
@@ -222,7 +222,7 @@ func (o ConsumerOutput) ToConsumerOutputWithContext(ctx context.Context) Consume
 	return o
 }
 
-// A custom id for the consumer, you must set either the username or custom_id
+// (Semi-optional) A custom id for the consumer, you must set either the username or custom_id
 func (o ConsumerOutput) CustomId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Consumer) pulumi.StringPtrOutput { return v.CustomId }).(pulumi.StringPtrOutput)
 }
@@ -232,7 +232,7 @@ func (o ConsumerOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Consumer) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
-// The username to use, you must set either the username or custom_id
+// (Semi-optional) The username to use, you must set either the username or custom_id
 func (o ConsumerOutput) Username() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Consumer) pulumi.StringPtrOutput { return v.Username }).(pulumi.StringPtrOutput)
 }
