@@ -52,10 +52,10 @@ public final class UpstreamHealthchecks {
             return this;
         }
         public UpstreamHealthchecks build() {
-            final var o = new UpstreamHealthchecks();
-            o.active = active;
-            o.passive = passive;
-            return o;
+            final var _resultValue = new UpstreamHealthchecks();
+            _resultValue.active = active;
+            _resultValue.passive = passive;
+            return _resultValue;
         }
     }
 }

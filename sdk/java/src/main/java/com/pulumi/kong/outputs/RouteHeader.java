@@ -61,10 +61,10 @@ public final class RouteHeader {
             return values(List.of(values));
         }
         public RouteHeader build() {
-            final var o = new RouteHeader();
-            o.name = name;
-            o.values = values;
-            return o;
+            final var _resultValue = new RouteHeader();
+            _resultValue.name = name;
+            _resultValue.values = values;
+            return _resultValue;
         }
     }
 }

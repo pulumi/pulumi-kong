@@ -66,11 +66,11 @@ public final class UpstreamHealthchecksActiveHealthy {
             return this;
         }
         public UpstreamHealthchecksActiveHealthy build() {
-            final var o = new UpstreamHealthchecksActiveHealthy();
-            o.httpStatuses = httpStatuses;
-            o.interval = interval;
-            o.successes = successes;
-            return o;
+            final var _resultValue = new UpstreamHealthchecksActiveHealthy();
+            _resultValue.httpStatuses = httpStatuses;
+            _resultValue.interval = interval;
+            _resultValue.successes = successes;
+            return _resultValue;
         }
     }
 }

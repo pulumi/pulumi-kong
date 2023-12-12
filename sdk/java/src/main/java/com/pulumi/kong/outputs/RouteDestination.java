@@ -52,10 +52,10 @@ public final class RouteDestination {
             return this;
         }
         public RouteDestination build() {
-            final var o = new RouteDestination();
-            o.ip = ip;
-            o.port = port;
-            return o;
+            final var _resultValue = new RouteDestination();
+            _resultValue.ip = ip;
+            _resultValue.port = port;
+            return _resultValue;
         }
     }
 }
