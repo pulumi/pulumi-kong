@@ -64,11 +64,11 @@ public final class UpstreamHealthchecksPassive {
             return this;
         }
         public UpstreamHealthchecksPassive build() {
-            final var o = new UpstreamHealthchecksPassive();
-            o.healthy = healthy;
-            o.type = type;
-            o.unhealthy = unhealthy;
-            return o;
+            final var _resultValue = new UpstreamHealthchecksPassive();
+            _resultValue.healthy = healthy;
+            _resultValue.type = type;
+            _resultValue.unhealthy = unhealthy;
+            return _resultValue;
         }
     }
 }

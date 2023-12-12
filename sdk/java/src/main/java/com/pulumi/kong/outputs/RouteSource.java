@@ -52,10 +52,10 @@ public final class RouteSource {
             return this;
         }
         public RouteSource build() {
-            final var o = new RouteSource();
-            o.ip = ip;
-            o.port = port;
-            return o;
+            final var _resultValue = new RouteSource();
+            _resultValue.ip = ip;
+            _resultValue.port = port;
+            return _resultValue;
         }
     }
 }

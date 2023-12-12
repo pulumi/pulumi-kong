@@ -121,16 +121,16 @@ public final class UpstreamHealthchecksActive {
             return this;
         }
         public UpstreamHealthchecksActive build() {
-            final var o = new UpstreamHealthchecksActive();
-            o.concurrency = concurrency;
-            o.healthy = healthy;
-            o.httpPath = httpPath;
-            o.httpsSni = httpsSni;
-            o.httpsVerifyCertificate = httpsVerifyCertificate;
-            o.timeout = timeout;
-            o.type = type;
-            o.unhealthy = unhealthy;
-            return o;
+            final var _resultValue = new UpstreamHealthchecksActive();
+            _resultValue.concurrency = concurrency;
+            _resultValue.healthy = healthy;
+            _resultValue.httpPath = httpPath;
+            _resultValue.httpsSni = httpsSni;
+            _resultValue.httpsVerifyCertificate = httpsVerifyCertificate;
+            _resultValue.timeout = timeout;
+            _resultValue.type = type;
+            _resultValue.unhealthy = unhealthy;
+            return _resultValue;
         }
     }
 }

@@ -88,13 +88,13 @@ public final class UpstreamHealthchecksActiveUnhealthy {
             return this;
         }
         public UpstreamHealthchecksActiveUnhealthy build() {
-            final var o = new UpstreamHealthchecksActiveUnhealthy();
-            o.httpFailures = httpFailures;
-            o.httpStatuses = httpStatuses;
-            o.interval = interval;
-            o.tcpFailures = tcpFailures;
-            o.timeouts = timeouts;
-            return o;
+            final var _resultValue = new UpstreamHealthchecksActiveUnhealthy();
+            _resultValue.httpFailures = httpFailures;
+            _resultValue.httpStatuses = httpStatuses;
+            _resultValue.interval = interval;
+            _resultValue.tcpFailures = tcpFailures;
+            _resultValue.timeouts = timeouts;
+            return _resultValue;
         }
     }
 }
