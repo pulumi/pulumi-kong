@@ -2,4 +2,3 @@ provider: kong
 major-version: 4
 docker: true
 makeTemplate: bridged
-team: ecosystem
