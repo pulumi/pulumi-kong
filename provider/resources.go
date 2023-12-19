@@ -15,15 +15,15 @@
 package kong
 
 import (
+	_ "embed" // allow embedding metadata
 	"fmt"
-	"path/filepath"
-	"unicode"
+	"path"
 
 	"github.com/kevholditch/terraform-provider-kong/kong"
 	"github.com/pulumi/pulumi-kong/provider/v4/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 )
 
 // all of the token components used below.
@@ -34,32 +34,14 @@ const (
 	mainMod = "index" // the y module
 )
 
-// makeMember manufactures a type token for the package and the given module and type.
-func makeMember(mod string, mem string) tokens.ModuleMember {
-	return tokens.ModuleMember(mainPkg + ":" + mod + ":" + mem)
-}
+func ref[T any](t T) *T { return &t }
 
-// makeType manufactures a type token for the package and the given module and type.
-func makeType(mod string, typ string) tokens.Type {
-	return tokens.Type(makeMember(mod, typ))
-}
-
-// makeResource manufactures a standard resource token given a module and resource name.  It
-// automatically uses the main package and names the file by simply lower casing the resource's
-// first character.
-func makeResource(mod string, res string) tokens.Type {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return makeType(mod+"/"+fn, res)
-}
-
-func refProviderLicense(license tfbridge.TFProviderLicense) *tfbridge.TFProviderLicense {
-	return &license
-}
+//go:embed cmd/pulumi-resource-kong/bridge-metadata.json
+var metadata []byte
 
 func Provider() tfbridge.ProviderInfo {
-	p := shimv2.NewProvider(kong.Provider())
 	prov := tfbridge.ProviderInfo{
-		P:                 p,
+		P:                 shimv2.NewProvider(kong.Provider()),
 		Name:              "kong",
 		Description:       "A Pulumi package for creating and managing Kong resources.",
 		Keywords:          []string{"pulumi", "kong"},
@@ -67,7 +49,9 @@ func Provider() tfbridge.ProviderInfo {
 		License:           "Apache-2.0",
 		Homepage:          "https://pulumi.io",
 		Repository:        "https://github.com/pulumi/pulumi-kong",
-		TFProviderLicense: refProviderLicense(tfbridge.MITLicenseType),
+		TFProviderLicense: ref(tfbridge.MITLicenseType),
+		Version:           version.Version,
+		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
 		Config: map[string]*tfbridge.SchemaInfo{
 			"tls_skip_verify": {
 				Default: &tfbridge.DefaultInfo{
@@ -83,31 +67,19 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"kong_certificate": {
-				Tok: makeResource(mainMod, "Certificate"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"certificate": {
 						CSharpName: "Cert",
 					},
 				},
 			},
-			"kong_consumer": {Tok: makeResource(mainMod, "Consumer")},
-			"kong_plugin":   {Tok: makeResource(mainMod, "Plugin")},
-			"kong_upstream": {Tok: makeResource(mainMod, "Upstream")},
 			"kong_target": {
-				Tok: makeResource(mainMod, "Target"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"target": {
 						CSharpName: "TargetAddress",
 					},
 				},
 			},
-			"kong_service":             {Tok: makeResource(mainMod, "Service")},
-			"kong_route":               {Tok: makeResource(mainMod, "Route")},
-			"kong_consumer_acl":        {Tok: makeResource(mainMod, "ConsumerAcl")},
-			"kong_consumer_basic_auth": {Tok: makeResource(mainMod, "ConsumerBasicAuth")},
-			"kong_consumer_jwt_auth":   {Tok: makeResource(mainMod, "ConsumerJwtAuth")},
-			"kong_consumer_key_auth":   {Tok: makeResource(mainMod, "ConsumerKeyAuth")},
-			"kong_consumer_oauth2":     {Tok: makeResource(mainMod, "ConsumerOauth2")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
@@ -118,17 +90,15 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/mime": "^2.0.0",
 			},
 		},
-		Python: (func() *tfbridge.PythonInfo {
-			i := &tfbridge.PythonInfo{
-				Requires: map[string]string{
-					"pulumi": ">=3.0.0,<4.0.0",
-				}}
-			i.PyProject.Enabled = true
-			return i
-		})(),
+		Python: &tfbridge.PythonInfo{
+			Requires: map[string]string{
+				"pulumi": ">=3.0.0,<4.0.0",
+			},
+			PyProject: struct{ Enabled bool }{true},
+		},
 
 		Golang: &tfbridge.GolangInfo{
-			ImportBasePath: filepath.Join(
+			ImportBasePath: path.Join(
 				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
@@ -146,7 +116,11 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
+	prov.MustComputeTokens(tokens.SingleModule("kong_", mainMod, tokens.MakeStandard(mainPkg)))
+
 	prov.SetAutonaming(255, "-")
+
+	prov.MustApplyAutoAliases()
 
 	return prov
 }
