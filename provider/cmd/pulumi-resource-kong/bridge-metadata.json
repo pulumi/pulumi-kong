@@ -212,6 +212,7 @@
             }
         }
     },
+    "auto-settings": {},
     "renames": {
         "resources": {
             "kong:index/certificate:Certificate": "kong_certificate",
