@@ -5,6 +5,7 @@ package com.pulumi.kong;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
@@ -199,9 +200,15 @@ public final class TargetArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public TargetArgs build() {
-            $.target = Objects.requireNonNull($.target, "expected parameter 'target' to be non-null");
-            $.upstreamId = Objects.requireNonNull($.upstreamId, "expected parameter 'upstreamId' to be non-null");
-            $.weight = Objects.requireNonNull($.weight, "expected parameter 'weight' to be non-null");
+            if ($.target == null) {
+                throw new MissingRequiredPropertyException("TargetArgs", "target");
+            }
+            if ($.upstreamId == null) {
+                throw new MissingRequiredPropertyException("TargetArgs", "upstreamId");
+            }
+            if ($.weight == null) {
+                throw new MissingRequiredPropertyException("TargetArgs", "weight");
+            }
             return $;
         }
     }

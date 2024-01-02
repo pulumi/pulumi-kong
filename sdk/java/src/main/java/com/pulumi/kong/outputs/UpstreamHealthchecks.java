@@ -43,11 +43,13 @@ public final class UpstreamHealthchecks {
 
         @CustomType.Setter
         public Builder active(@Nullable UpstreamHealthchecksActive active) {
+
             this.active = active;
             return this;
         }
         @CustomType.Setter
         public Builder passive(@Nullable UpstreamHealthchecksPassive passive) {
+
             this.passive = passive;
             return this;
         }
