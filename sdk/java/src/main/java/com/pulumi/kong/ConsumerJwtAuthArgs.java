@@ -5,6 +5,7 @@ package com.pulumi.kong;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -272,8 +273,12 @@ public final class ConsumerJwtAuthArgs extends com.pulumi.resources.ResourceArgs
         }
 
         public ConsumerJwtAuthArgs build() {
-            $.consumerId = Objects.requireNonNull($.consumerId, "expected parameter 'consumerId' to be non-null");
-            $.rsaPublicKey = Objects.requireNonNull($.rsaPublicKey, "expected parameter 'rsaPublicKey' to be non-null");
+            if ($.consumerId == null) {
+                throw new MissingRequiredPropertyException("ConsumerJwtAuthArgs", "consumerId");
+            }
+            if ($.rsaPublicKey == null) {
+                throw new MissingRequiredPropertyException("ConsumerJwtAuthArgs", "rsaPublicKey");
+            }
             return $;
         }
     }

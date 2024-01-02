@@ -50,16 +50,19 @@ public final class UpstreamHealthchecksPassive {
 
         @CustomType.Setter
         public Builder healthy(@Nullable UpstreamHealthchecksPassiveHealthy healthy) {
+
             this.healthy = healthy;
             return this;
         }
         @CustomType.Setter
         public Builder type(@Nullable String type) {
+
             this.type = type;
             return this;
         }
         @CustomType.Setter
         public Builder unhealthy(@Nullable UpstreamHealthchecksPassiveUnhealthy unhealthy) {
+
             this.unhealthy = unhealthy;
             return this;
         }

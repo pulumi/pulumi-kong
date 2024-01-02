@@ -5,6 +5,7 @@ package com.pulumi.kong;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
@@ -320,8 +321,12 @@ public final class ConsumerOauth2Args extends com.pulumi.resources.ResourceArgs 
         }
 
         public ConsumerOauth2Args build() {
-            $.consumerId = Objects.requireNonNull($.consumerId, "expected parameter 'consumerId' to be non-null");
-            $.redirectUris = Objects.requireNonNull($.redirectUris, "expected parameter 'redirectUris' to be non-null");
+            if ($.consumerId == null) {
+                throw new MissingRequiredPropertyException("ConsumerOauth2Args", "consumerId");
+            }
+            if ($.redirectUris == null) {
+                throw new MissingRequiredPropertyException("ConsumerOauth2Args", "redirectUris");
+            }
             return $;
         }
     }

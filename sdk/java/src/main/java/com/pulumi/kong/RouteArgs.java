@@ -5,6 +5,7 @@ package com.pulumi.kong;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import com.pulumi.kong.inputs.RouteDestinationArgs;
 import com.pulumi.kong.inputs.RouteHeaderArgs;
 import com.pulumi.kong.inputs.RouteSourceArgs;
@@ -801,8 +802,12 @@ public final class RouteArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public RouteArgs build() {
-            $.protocols = Objects.requireNonNull($.protocols, "expected parameter 'protocols' to be non-null");
-            $.serviceId = Objects.requireNonNull($.serviceId, "expected parameter 'serviceId' to be non-null");
+            if ($.protocols == null) {
+                throw new MissingRequiredPropertyException("RouteArgs", "protocols");
+            }
+            if ($.serviceId == null) {
+                throw new MissingRequiredPropertyException("RouteArgs", "serviceId");
+            }
             return $;
         }
     }

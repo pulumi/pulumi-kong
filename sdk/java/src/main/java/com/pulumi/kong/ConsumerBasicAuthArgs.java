@@ -5,6 +5,7 @@ package com.pulumi.kong;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -198,9 +199,15 @@ public final class ConsumerBasicAuthArgs extends com.pulumi.resources.ResourceAr
         }
 
         public ConsumerBasicAuthArgs build() {
-            $.consumerId = Objects.requireNonNull($.consumerId, "expected parameter 'consumerId' to be non-null");
-            $.password = Objects.requireNonNull($.password, "expected parameter 'password' to be non-null");
-            $.username = Objects.requireNonNull($.username, "expected parameter 'username' to be non-null");
+            if ($.consumerId == null) {
+                throw new MissingRequiredPropertyException("ConsumerBasicAuthArgs", "consumerId");
+            }
+            if ($.password == null) {
+                throw new MissingRequiredPropertyException("ConsumerBasicAuthArgs", "password");
+            }
+            if ($.username == null) {
+                throw new MissingRequiredPropertyException("ConsumerBasicAuthArgs", "username");
+            }
             return $;
         }
     }

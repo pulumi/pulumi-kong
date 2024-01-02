@@ -43,6 +43,7 @@ public final class UpstreamHealthchecksPassiveHealthy {
 
         @CustomType.Setter
         public Builder httpStatuses(@Nullable List<Integer> httpStatuses) {
+
             this.httpStatuses = httpStatuses;
             return this;
         }
@@ -51,6 +52,7 @@ public final class UpstreamHealthchecksPassiveHealthy {
         }
         @CustomType.Setter
         public Builder successes(@Nullable Integer successes) {
+
             this.successes = successes;
             return this;
         }
