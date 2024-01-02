@@ -55,11 +55,13 @@ public final class UpstreamHealthchecksPassiveUnhealthy {
 
         @CustomType.Setter
         public Builder httpFailures(@Nullable Integer httpFailures) {
+
             this.httpFailures = httpFailures;
             return this;
         }
         @CustomType.Setter
         public Builder httpStatuses(@Nullable List<Integer> httpStatuses) {
+
             this.httpStatuses = httpStatuses;
             return this;
         }
@@ -68,11 +70,13 @@ public final class UpstreamHealthchecksPassiveUnhealthy {
         }
         @CustomType.Setter
         public Builder tcpFailures(@Nullable Integer tcpFailures) {
+
             this.tcpFailures = tcpFailures;
             return this;
         }
         @CustomType.Setter
         public Builder timeouts(@Nullable Integer timeouts) {
+
             this.timeouts = timeouts;
             return this;
         }

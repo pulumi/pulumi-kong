@@ -82,41 +82,49 @@ public final class UpstreamHealthchecksActive {
 
         @CustomType.Setter
         public Builder concurrency(@Nullable Integer concurrency) {
+
             this.concurrency = concurrency;
             return this;
         }
         @CustomType.Setter
         public Builder healthy(@Nullable UpstreamHealthchecksActiveHealthy healthy) {
+
             this.healthy = healthy;
             return this;
         }
         @CustomType.Setter
         public Builder httpPath(@Nullable String httpPath) {
+
             this.httpPath = httpPath;
             return this;
         }
         @CustomType.Setter
         public Builder httpsSni(@Nullable String httpsSni) {
+
             this.httpsSni = httpsSni;
             return this;
         }
         @CustomType.Setter
         public Builder httpsVerifyCertificate(@Nullable Boolean httpsVerifyCertificate) {
+
             this.httpsVerifyCertificate = httpsVerifyCertificate;
             return this;
         }
         @CustomType.Setter
         public Builder timeout(@Nullable Integer timeout) {
+
             this.timeout = timeout;
             return this;
         }
         @CustomType.Setter
         public Builder type(@Nullable String type) {
+
             this.type = type;
             return this;
         }
         @CustomType.Setter
         public Builder unhealthy(@Nullable UpstreamHealthchecksActiveUnhealthy unhealthy) {
+
             this.unhealthy = unhealthy;
             return this;
         }

@@ -5,6 +5,7 @@ package com.pulumi.kong;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -161,8 +162,12 @@ public final class ConsumerAclArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public ConsumerAclArgs build() {
-            $.consumerId = Objects.requireNonNull($.consumerId, "expected parameter 'consumerId' to be non-null");
-            $.group = Objects.requireNonNull($.group, "expected parameter 'group' to be non-null");
+            if ($.consumerId == null) {
+                throw new MissingRequiredPropertyException("ConsumerAclArgs", "consumerId");
+            }
+            if ($.group == null) {
+                throw new MissingRequiredPropertyException("ConsumerAclArgs", "group");
+            }
             return $;
         }
     }
