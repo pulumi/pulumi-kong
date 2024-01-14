@@ -15,15 +15,18 @@
 package kong
 
 import (
-	_ "embed" // allow embedding metadata
 	"fmt"
 	"path"
 
+	_ "embed" // allow embedding metadata
+
 	"github.com/kevholditch/terraform-provider-kong/kong"
-	"github.com/pulumi/pulumi-kong/provider/v4/pkg/version"
+
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
+
+	"github.com/pulumi/pulumi-kong/provider/v4/pkg/version"
 )
 
 // all of the token components used below.
