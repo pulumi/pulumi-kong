@@ -41,7 +41,7 @@ func GetKongWorkspace(ctx *pulumi.Context) string {
 	return config.Get(ctx, "kong:kongWorkspace")
 }
 
-// Should plugins `config_json` field strictly match plugin configuration
+// Should plugins `configJson` field strictly match plugin configuration
 func GetStrictPluginsMatch(ctx *pulumi.Context) bool {
 	v, err := config.TryBool(ctx, "kong:strictPluginsMatch")
 	if err == nil {
