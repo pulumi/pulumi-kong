@@ -74,7 +74,7 @@ Object.defineProperty(exports, "kongWorkspace", {
 });
 
 /**
- * Should plugins `config_json` field strictly match plugin configuration
+ * Should plugins `configJson` field strictly match plugin configuration
  */
 export declare const strictPluginsMatch: boolean | undefined;
 Object.defineProperty(exports, "strictPluginsMatch", {
