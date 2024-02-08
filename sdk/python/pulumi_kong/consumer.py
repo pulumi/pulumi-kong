@@ -151,10 +151,10 @@ class Consumer(pulumi.CustomResource):
 
         ## Import
 
-        To import a consumer
+        To import a consumer:
 
         ```sh
-         $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+        $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -188,10 +188,10 @@ class Consumer(pulumi.CustomResource):
 
         ## Import
 
-        To import a consumer
+        To import a consumer:
 
         ```sh
-         $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+        $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
         ```
 
         :param str resource_name: The name of the resource.

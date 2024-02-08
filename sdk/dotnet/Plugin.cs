@@ -130,10 +130,10 @@ namespace Pulumi.Kong
     /// 
     /// ## Import
     /// 
-    /// To import a plugin
+    /// To import a plugin:
     /// 
     /// ```sh
-    ///  $ pulumi import kong:index/plugin:Plugin &lt;plugin_identifier&gt; &lt;plugin_id&gt;
+    /// $ pulumi import kong:index/plugin:Plugin &lt;plugin_identifier&gt; &lt;plugin_id&gt;
     /// ```
     /// </summary>
     [KongResourceType("kong:index/plugin:Plugin")]

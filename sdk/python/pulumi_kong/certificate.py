@@ -179,10 +179,10 @@ class Certificate(pulumi.CustomResource):
 
         ## Import
 
-        To import a certificate
+        To import a certificate:
 
         ```sh
-         $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
+        $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -220,10 +220,10 @@ class Certificate(pulumi.CustomResource):
 
         ## Import
 
-        To import a certificate
+        To import a certificate:
 
         ```sh
-         $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
+        $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
         ```
 
         :param str resource_name: The name of the resource.

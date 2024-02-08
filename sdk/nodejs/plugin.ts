@@ -89,10 +89,10 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * To import a plugin
+ * To import a plugin:
  *
  * ```sh
- *  $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+ * $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
  * ```
  */
 export class Plugin extends pulumi.CustomResource {

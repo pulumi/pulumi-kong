@@ -74,10 +74,10 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * To import a route
+ * To import a route:
  *
  * ```sh
- *  $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+ * $ pulumi import kong:index/route:Route <route_identifier> <route_id>
  * ```
  */
 export class Route extends pulumi.CustomResource {

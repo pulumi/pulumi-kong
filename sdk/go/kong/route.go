@@ -121,12 +121,10 @@ import (
 //
 // ## Import
 //
-// # To import a route
+// To import a route:
 //
 // ```sh
-//
-//	$ pulumi import kong:index/route:Route <route_identifier> <route_id>
-//
+// $ pulumi import kong:index/route:Route <route_identifier> <route_id>
 // ```
 type Route struct {
 	pulumi.CustomResourceState

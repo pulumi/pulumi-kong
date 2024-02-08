@@ -553,10 +553,10 @@ class Service(pulumi.CustomResource):
 
         ## Import
 
-        To import a service
+        To import a service:
 
         ```sh
-         $ pulumi import kong:index/service:Service <service_identifier> <service_id>
+        $ pulumi import kong:index/service:Service <service_identifier> <service_id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -641,10 +641,10 @@ class Service(pulumi.CustomResource):
 
         ## Import
 
-        To import a service
+        To import a service:
 
         ```sh
-         $ pulumi import kong:index/service:Service <service_identifier> <service_id>
+        $ pulumi import kong:index/service:Service <service_identifier> <service_id>
         ```
 
         :param str resource_name: The name of the resource.

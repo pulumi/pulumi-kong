@@ -52,12 +52,10 @@ import (
 //
 // ## Import
 //
-// # To import a certificate
+// To import a certificate:
 //
 // ```sh
-//
-//	$ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
-//
+// $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
 // ```
 type Certificate struct {
 	pulumi.CustomResourceState

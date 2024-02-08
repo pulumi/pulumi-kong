@@ -92,10 +92,10 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * To import an upstream
+ * To import an upstream:
  *
  * ```sh
- *  $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
+ * $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
  * ```
  */
 export class Upstream extends pulumi.CustomResource {
