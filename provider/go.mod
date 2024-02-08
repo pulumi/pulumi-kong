@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20220328204855-9e50bd93437f
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.73.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.73.1-0.20240208124624-45cdb2507f38
 )
 
 require (
@@ -171,8 +171,8 @@ require (
 	github.com/pulumi/pulumi-java/pkg v0.9.9 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.7 // indirect
 	github.com/pulumi/pulumi-yaml v1.5.0 // indirect
-	github.com/pulumi/pulumi/pkg/v3 v3.104.2 // indirect
-	github.com/pulumi/pulumi/sdk/v3 v3.104.2 // indirect
+	github.com/pulumi/pulumi/pkg/v3 v3.105.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.105.0 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/pulumi/terraform-diff-reader v0.0.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
@@ -237,6 +237,6 @@ require (
 )
 
 replace (
-	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240129205329-74776a5cd5f9
+	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240202163305-e2a20ae13ef9
 	github.com/hashicorp/vault => github.com/hashicorp/vault v1.2.0
 )
