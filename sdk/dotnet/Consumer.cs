@@ -39,10 +39,10 @@ namespace Pulumi.Kong
     /// 
     /// ## Import
     /// 
-    /// To import a consumer
+    /// To import a consumer:
     /// 
     /// ```sh
-    ///  $ pulumi import kong:index/consumer:Consumer &lt;consumer_identifier&gt; &lt;consumer_id&gt;
+    /// $ pulumi import kong:index/consumer:Consumer &lt;consumer_identifier&gt; &lt;consumer_id&gt;
     /// ```
     /// </summary>
     [KongResourceType("kong:index/consumer:Consumer")]
