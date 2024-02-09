@@ -51,10 +51,10 @@ import javax.annotation.Nullable;
  * 
  * ## Import
  * 
- * To import a target use a combination of the upstream id and the target id as follows
+ * To import a target use a combination of the upstream id and the target id as follows:
  * 
  * ```sh
- *  $ pulumi import kong:index/target:Target &lt;target_identifier&gt; &lt;upstream_id&gt;/&lt;target_id&gt;
+ * $ pulumi import kong:index/target:Target &lt;target_identifier&gt; &lt;upstream_id&gt;/&lt;target_id&gt;
  * ```
  * 
  */

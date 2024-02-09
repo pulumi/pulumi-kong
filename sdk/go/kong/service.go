@@ -104,12 +104,10 @@ import (
 //
 // ## Import
 //
-// # To import a service
+// To import a service:
 //
 // ```sh
-//
-//	$ pulumi import kong:index/service:Service <service_identifier> <service_id>
-//
+// $ pulumi import kong:index/service:Service <service_identifier> <service_id>
 // ```
 type Service struct {
 	pulumi.CustomResourceState

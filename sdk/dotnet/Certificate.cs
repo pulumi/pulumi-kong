@@ -44,10 +44,10 @@ namespace Pulumi.Kong
     /// 
     /// ## Import
     /// 
-    /// To import a certificate
+    /// To import a certificate:
     /// 
     /// ```sh
-    ///  $ pulumi import kong:index/certificate:Certificate &lt;certifcate_identifier&gt; &lt;certificate_id&gt;
+    /// $ pulumi import kong:index/certificate:Certificate &lt;certifcate_identifier&gt; &lt;certificate_id&gt;
     /// ```
     /// </summary>
     [KongResourceType("kong:index/certificate:Certificate")]

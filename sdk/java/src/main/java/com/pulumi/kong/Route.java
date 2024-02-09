@@ -125,10 +125,10 @@ import javax.annotation.Nullable;
  * 
  * ## Import
  * 
- * To import a route
+ * To import a route:
  * 
  * ```sh
- *  $ pulumi import kong:index/route:Route &lt;route_identifier&gt; &lt;route_id&gt;
+ * $ pulumi import kong:index/route:Route &lt;route_identifier&gt; &lt;route_id&gt;
  * ```
  * 
  */

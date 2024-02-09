@@ -99,10 +99,10 @@ namespace Pulumi.Kong
     /// 
     /// ## Import
     /// 
-    /// To import a service
+    /// To import a service:
     /// 
     /// ```sh
-    ///  $ pulumi import kong:index/service:Service &lt;service_identifier&gt; &lt;service_id&gt;
+    /// $ pulumi import kong:index/service:Service &lt;service_identifier&gt; &lt;service_id&gt;
     /// ```
     /// </summary>
     [KongResourceType("kong:index/service:Service")]

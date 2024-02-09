@@ -591,10 +591,10 @@ class Upstream(pulumi.CustomResource):
 
         ## Import
 
-        To import an upstream
+        To import an upstream:
 
         ```sh
-         $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
+        $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -722,10 +722,10 @@ class Upstream(pulumi.CustomResource):
 
         ## Import
 
-        To import an upstream
+        To import an upstream:
 
         ```sh
-         $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
+        $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
         ```
 
         :param str resource_name: The name of the resource.

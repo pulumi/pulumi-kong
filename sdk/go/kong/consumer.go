@@ -47,12 +47,10 @@ import (
 //
 // ## Import
 //
-// # To import a consumer
+// To import a consumer:
 //
 // ```sh
-//
-//	$ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
-//
+// $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
 // ```
 type Consumer struct {
 	pulumi.CustomResourceState

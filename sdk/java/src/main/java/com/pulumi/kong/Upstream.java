@@ -129,10 +129,10 @@ import javax.annotation.Nullable;
  * 
  * ## Import
  * 
- * To import an upstream
+ * To import an upstream:
  * 
  * ```sh
- *  $ pulumi import kong:index/upstream:Upstream &lt;upstream_identifier&gt; &lt;upstream_id&gt;
+ * $ pulumi import kong:index/upstream:Upstream &lt;upstream_identifier&gt; &lt;upstream_id&gt;
  * ```
  * 
  */
