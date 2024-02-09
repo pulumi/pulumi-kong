@@ -117,10 +117,10 @@ namespace Pulumi.Kong
     /// 
     /// ## Import
     /// 
-    /// To import a route
+    /// To import a route:
     /// 
     /// ```sh
-    ///  $ pulumi import kong:index/route:Route &lt;route_identifier&gt; &lt;route_id&gt;
+    /// $ pulumi import kong:index/route:Route &lt;route_identifier&gt; &lt;route_id&gt;
     /// ```
     /// </summary>
     [KongResourceType("kong:index/route:Route")]

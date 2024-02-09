@@ -42,12 +42,10 @@ import (
 //
 // ## Import
 //
-// # To import a target use a combination of the upstream id and the target id as follows
+// To import a target use a combination of the upstream id and the target id as follows:
 //
 // ```sh
-//
-//	$ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
-//
+// $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
 // ```
 type Target struct {
 	pulumi.CustomResourceState

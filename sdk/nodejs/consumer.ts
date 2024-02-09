@@ -24,10 +24,10 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * To import a consumer
+ * To import a consumer:
  *
  * ```sh
- *  $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
+ * $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
  * ```
  */
 export class Consumer extends pulumi.CustomResource {

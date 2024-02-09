@@ -693,10 +693,10 @@ class Route(pulumi.CustomResource):
 
         ## Import
 
-        To import a route
+        To import a route:
 
         ```sh
-         $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+        $ pulumi import kong:index/route:Route <route_identifier> <route_id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -792,10 +792,10 @@ class Route(pulumi.CustomResource):
 
         ## Import
 
-        To import a route
+        To import a route:
 
         ```sh
-         $ pulumi import kong:index/route:Route <route_identifier> <route_id>
+        $ pulumi import kong:index/route:Route <route_identifier> <route_id>
         ```
 
         :param str resource_name: The name of the resource.

@@ -376,10 +376,10 @@ class Plugin(pulumi.CustomResource):
 
         ## Import
 
-        To import a plugin
+        To import a plugin:
 
         ```sh
-         $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+        $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -477,10 +477,10 @@ class Plugin(pulumi.CustomResource):
 
         ## Import
 
-        To import a plugin
+        To import a plugin:
 
         ```sh
-         $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
+        $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
         ```
 
         :param str resource_name: The name of the resource.

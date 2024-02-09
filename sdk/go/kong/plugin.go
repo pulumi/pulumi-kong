@@ -146,12 +146,10 @@ import (
 //
 // ## Import
 //
-// # To import a plugin
+// To import a plugin:
 //
 // ```sh
-//
-//	$ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
-//
+// $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
 // ```
 type Plugin struct {
 	pulumi.CustomResourceState

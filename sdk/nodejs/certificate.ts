@@ -28,10 +28,10 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * To import a certificate
+ * To import a certificate:
  *
  * ```sh
- *  $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
+ * $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
  * ```
  */
 export class Certificate extends pulumi.CustomResource {
