@@ -20,6 +20,7 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -69,9 +70,11 @@ import (
 //	}
 //
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -118,6 +121,7 @@ import (
 //	}
 //
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //

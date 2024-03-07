@@ -21,6 +21,8 @@ import javax.annotation.Nullable;
  * For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
  * 
  * ## Example Usage
+ * 
+ * &lt;!--Start PulumiCodeChooser --&gt;
  * ```java
  * package generated_program;
  * 
@@ -54,6 +56,7 @@ import javax.annotation.Nullable;
  *     }
  * }
  * ```
+ * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import
  * 

@@ -21,6 +21,8 @@ import javax.annotation.Nullable;
  * The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
  * 
  * ## Example Usage
+ * 
+ * &lt;!--Start PulumiCodeChooser --&gt;
  * ```java
  * package generated_program;
  * 
@@ -51,6 +53,7 @@ import javax.annotation.Nullable;
  *     }
  * }
  * ```
+ * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import
  * 
