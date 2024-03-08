@@ -12,6 +12,7 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -23,8 +24,10 @@ import * as utilities from "./utilities";
  *
  * `});
  * ```
+ * <!--End PulumiCodeChooser -->
  * To apply a plugin to a consumer use the `consumerId` property, for example:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -43,9 +46,11 @@ import * as utilities from "./utilities";
  *     consumerId: pluginConsumer.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * To apply a plugin to a service use the `serviceId` property, for example:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -64,9 +69,11 @@ import * as utilities from "./utilities";
  *     serviceId: service.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * To apply a plugin to a route use the `routeId` property, for example:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -86,6 +93,7 @@ import * as utilities from "./utilities";
  *     serviceId: service.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *

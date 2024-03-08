@@ -138,6 +138,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -154,6 +155,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
                 "anotherTag",
             ])
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -174,6 +176,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -190,6 +193,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
                 "anotherTag",
             ])
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param ConsumerKeyAuthArgs args: The arguments to use to populate this resource's properties.

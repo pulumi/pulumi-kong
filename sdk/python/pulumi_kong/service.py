@@ -501,6 +501,7 @@ class Service(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -515,9 +516,11 @@ class Service(pulumi.CustomResource):
             retries=5,
             write_timeout=2000)
         ```
+        <!--End PulumiCodeChooser -->
 
         To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -550,6 +553,7 @@ class Service(pulumi.CustomResource):
             client_certificate_id=certificate.id,
             ca_certificate_ids=[ca.id])
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -589,6 +593,7 @@ class Service(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -603,9 +608,11 @@ class Service(pulumi.CustomResource):
             retries=5,
             write_timeout=2000)
         ```
+        <!--End PulumiCodeChooser -->
 
         To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -638,6 +645,7 @@ class Service(pulumi.CustomResource):
             client_certificate_id=certificate.id,
             ca_certificate_ids=[ca.id])
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 

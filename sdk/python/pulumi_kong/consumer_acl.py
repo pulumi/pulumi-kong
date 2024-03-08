@@ -137,6 +137,7 @@ class ConsumerAcl(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -157,6 +158,7 @@ class ConsumerAcl(pulumi.CustomResource):
                 "otherTag",
             ])
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -177,6 +179,7 @@ class ConsumerAcl(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -197,6 +200,7 @@ class ConsumerAcl(pulumi.CustomResource):
                 "otherTag",
             ])
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param ConsumerAclArgs args: The arguments to use to populate this resource's properties.
