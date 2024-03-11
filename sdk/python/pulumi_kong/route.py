@@ -636,6 +636,7 @@ class Route(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -663,9 +664,11 @@ class Route(pulumi.CustomResource):
                 ],
             )])
         ```
+        <!--End PulumiCodeChooser -->
 
         To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -690,6 +693,7 @@ class Route(pulumi.CustomResource):
             snis=["foo.com"],
             service_id=kong_service["service"]["id"])
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -735,6 +739,7 @@ class Route(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -762,9 +767,11 @@ class Route(pulumi.CustomResource):
                 ],
             )])
         ```
+        <!--End PulumiCodeChooser -->
 
         To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -789,6 +796,7 @@ class Route(pulumi.CustomResource):
             snis=["foo.com"],
             service_id=kong_service["service"]["id"])
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 

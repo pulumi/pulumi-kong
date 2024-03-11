@@ -16,6 +16,7 @@ namespace Pulumi.Kong
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -50,6 +51,7 @@ namespace Pulumi.Kong
     /// 
     /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [KongResourceType("kong:index/consumerJwtAuth:ConsumerJwtAuth")]
     public partial class ConsumerJwtAuth : global::Pulumi.CustomResource
