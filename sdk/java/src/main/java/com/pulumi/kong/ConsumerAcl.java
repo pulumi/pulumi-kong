@@ -21,6 +21,8 @@ import javax.annotation.Nullable;
  * Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
  * 
  * ## Example Usage
+ * 
+ * &lt;!--Start PulumiCodeChooser --&gt;
  * ```java
  * package generated_program;
  * 
@@ -71,6 +73,7 @@ import javax.annotation.Nullable;
  *     }
  * }
  * ```
+ * &lt;!--End PulumiCodeChooser --&gt;
  * 
  */
 @ResourceType(type="kong:index/consumerAcl:ConsumerAcl")

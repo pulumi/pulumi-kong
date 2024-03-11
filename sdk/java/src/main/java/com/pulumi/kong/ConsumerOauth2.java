@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
  * Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
  * 
  * ## Example Usage
+ * 
+ * &lt;!--Start PulumiCodeChooser --&gt;
  * ```java
  * package generated_program;
  * 
@@ -78,6 +80,7 @@ import javax.annotation.Nullable;
  *     }
  * }
  * ```
+ * &lt;!--End PulumiCodeChooser --&gt;
  * 
  */
 @ResourceType(type="kong:index/consumerOauth2:ConsumerOauth2")

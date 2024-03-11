@@ -165,6 +165,7 @@ class Target(pulumi.CustomResource):
         """
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -174,6 +175,7 @@ class Target(pulumi.CustomResource):
             upstream_id=kong_upstream["upstream"]["id"],
             weight=10)
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -199,6 +201,7 @@ class Target(pulumi.CustomResource):
         """
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -208,6 +211,7 @@ class Target(pulumi.CustomResource):
             upstream_id=kong_upstream["upstream"]["id"],
             weight=10)
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 

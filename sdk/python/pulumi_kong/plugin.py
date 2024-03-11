@@ -305,6 +305,7 @@ class Plugin(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -316,8 +317,10 @@ class Plugin(pulumi.CustomResource):
 
         \"\"\")
         ```
+        <!--End PulumiCodeChooser -->
         To apply a plugin to a consumer use the `consumer_id` property, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -334,9 +337,11 @@ class Plugin(pulumi.CustomResource):
         \"\"\",
             consumer_id=plugin_consumer.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a service use the `service_id` property, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -353,9 +358,11 @@ class Plugin(pulumi.CustomResource):
         \"\"\",
             service_id=service.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a route use the `route_id` property, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -373,6 +380,7 @@ class Plugin(pulumi.CustomResource):
             enabled=True,
             service_id=service.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -406,6 +414,7 @@ class Plugin(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -417,8 +426,10 @@ class Plugin(pulumi.CustomResource):
 
         \"\"\")
         ```
+        <!--End PulumiCodeChooser -->
         To apply a plugin to a consumer use the `consumer_id` property, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -435,9 +446,11 @@ class Plugin(pulumi.CustomResource):
         \"\"\",
             consumer_id=plugin_consumer.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a service use the `service_id` property, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -454,9 +467,11 @@ class Plugin(pulumi.CustomResource):
         \"\"\",
             service_id=service.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a route use the `route_id` property, for example:
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -474,6 +489,7 @@ class Plugin(pulumi.CustomResource):
             enabled=True,
             service_id=service.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
