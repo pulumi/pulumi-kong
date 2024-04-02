@@ -18,33 +18,6 @@ import (
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := kong.NewConsumer(ctx, "consumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
-//				Tags: pulumi.StringArray{
-//					pulumi.String("mySuperTag"),
-//				},
-//				Username: pulumi.String("User1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 // <!--End PulumiCodeChooser -->
 //
 // ## Import

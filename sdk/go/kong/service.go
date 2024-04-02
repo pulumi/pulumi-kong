@@ -19,91 +19,11 @@ import (
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
-//				ConnectTimeout: pulumi.Int(1000),
-//				Host:           pulumi.String("test.org"),
-//				Path:           pulumi.String("/mypath"),
-//				Port:           pulumi.Int(8080),
-//				Protocol:       pulumi.String("http"),
-//				ReadTimeout:    pulumi.Int(3000),
-//				Retries:        pulumi.Int(5),
-//				WriteTimeout:   pulumi.Int(2000),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 // <!--End PulumiCodeChooser -->
 //
 // To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
 //
 // <!--Start PulumiCodeChooser -->
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			certificate, err := kong.NewCertificate(ctx, "certificate", &kong.CertificateArgs{
-//				Certificate: pulumi.String("    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n"),
-//				PrivateKey:  pulumi.String("    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n"),
-//				Snis: pulumi.StringArray{
-//					pulumi.String("foo.com"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ca, err := kong.NewCertificate(ctx, "ca", &kong.CertificateArgs{
-//				Certificate: pulumi.String("    -----BEGIN CERTIFICATE-----\n    ......\n    -----END CERTIFICATE-----\n"),
-//				PrivateKey:  pulumi.String("    -----BEGIN PRIVATE KEY-----\n    .....\n    -----END PRIVATE KEY-----\n"),
-//				Snis: pulumi.StringArray{
-//					pulumi.String("ca.com"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewService(ctx, "service", &kong.ServiceArgs{
-//				Protocol:            pulumi.String("https"),
-//				Host:                pulumi.String("test.org"),
-//				TlsVerify:           pulumi.Bool(true),
-//				TlsVerifyDepth:      pulumi.Int(2),
-//				ClientCertificateId: certificate.ID(),
-//				CaCertificateIds: pulumi.StringArray{
-//					ca.ID(),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 // <!--End PulumiCodeChooser -->
 //
 // ## Import

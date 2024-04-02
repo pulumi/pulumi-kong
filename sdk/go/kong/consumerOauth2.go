@@ -19,60 +19,6 @@ import (
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
-//				Username: pulumi.String("User1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewPlugin(ctx, "oauth2Plugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String(`	{
-//			"global_credentials": true,
-//			"enable_password_grant": true,
-//			"token_expiration": 180,
-//			"refresh_token_ttl": 180,
-//			"provision_key": "testprovisionkey"
-//		}
-//
-// `),
-//
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewConsumerOauth2(ctx, "consumerOauth2", &kong.ConsumerOauth2Args{
-//				ClientId:     pulumi.String("client_id"),
-//				ClientSecret: pulumi.String("client_secret"),
-//				ConsumerId:   myConsumer.ID(),
-//				RedirectUris: pulumi.StringArray{
-//					pulumi.String("https://asdf.com/callback"),
-//					pulumi.String("https://test.cl/callback"),
-//				},
-//				Tags: pulumi.StringArray{
-//					pulumi.String("myTag"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 // <!--End PulumiCodeChooser -->
 type ConsumerOauth2 struct {
 	pulumi.CustomResourceState

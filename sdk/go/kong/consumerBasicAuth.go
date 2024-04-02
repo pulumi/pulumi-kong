@@ -19,46 +19,6 @@ import (
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-kong/sdk/v4/go/kong"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
-//				Username: pulumi.String("User1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewPlugin(ctx, "basicAuthPlugin", nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = kong.NewConsumerBasicAuth(ctx, "consumerBasicAuth", &kong.ConsumerBasicAuthArgs{
-//				ConsumerId: myConsumer.ID(),
-//				Password:   pulumi.String("bar_updated"),
-//				Tags: pulumi.StringArray{
-//					pulumi.String("myTag"),
-//					pulumi.String("anotherTag"),
-//				},
-//				Username: pulumi.String("foo_updated"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 // <!--End PulumiCodeChooser -->
 type ConsumerBasicAuth struct {
 	pulumi.CustomResourceState
