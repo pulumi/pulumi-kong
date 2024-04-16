@@ -31,11 +31,11 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kong.NewConsumer(ctx, "consumer", &kong.ConsumerArgs{
+//				Username: pulumi.String("User1"),
 //				CustomId: pulumi.String("123"),
 //				Tags: pulumi.StringArray{
 //					pulumi.String("mySuperTag"),
 //				},
-//				Username: pulumi.String("User1"),
 //			})
 //			if err != nil {
 //				return err

@@ -66,6 +66,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var upstream = new Upstream(&#34;upstream&#34;, UpstreamArgs.builder()        
+ *             .name(&#34;sample_upstream&#34;)
  *             .slots(10)
  *             .hashOn(&#34;header&#34;)
  *             .hashFallback(&#34;cookie&#34;)

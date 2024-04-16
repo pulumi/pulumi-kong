@@ -25,22 +25,22 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     var myConsumer = new Kong.Consumer("my_consumer", new()
     ///     {
-    ///         CustomId = "123",
     ///         Username = "User1",
+    ///         CustomId = "123",
     ///     });
     /// 
-    ///     var aclPlugin = new Kong.Plugin("aclPlugin", new()
+    ///     var aclPlugin = new Kong.Plugin("acl_plugin", new()
     ///     {
+    ///         Name = "acl",
     ///         ConfigJson = @"	{
     /// 		""allow"": [""group1"", ""group2""]
     /// 	}
-    /// 
     /// ",
     ///     });
     /// 
-    ///     var consumerAcl = new Kong.ConsumerAcl("consumerAcl", new()
+    ///     var consumerAcl = new Kong.ConsumerAcl("consumer_acl", new()
     ///     {
     ///         ConsumerId = myConsumer.Id,
     ///         Group = "group2",

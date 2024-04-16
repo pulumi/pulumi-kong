@@ -16,12 +16,12 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const myConsumer = new kong.Consumer("myConsumer", {
+ * const myConsumer = new kong.Consumer("my_consumer", {
  *     username: "User1",
  *     customId: "123",
  * });
- * const keyAuthPlugin = new kong.Plugin("keyAuthPlugin", {});
- * const consumerKeyAuth = new kong.ConsumerKeyAuth("consumerKeyAuth", {
+ * const keyAuthPlugin = new kong.Plugin("key_auth_plugin", {name: "key-auth"});
+ * const consumerKeyAuth = new kong.ConsumerKeyAuth("consumer_key_auth", {
  *     consumerId: myConsumer.id,
  *     key: "secret",
  *     tags: [

@@ -274,22 +274,24 @@ class ConsumerOauth2(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"	{
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        oauth2_plugin = kong.Plugin("oauth2_plugin",
+            name="oauth2",
+            config_json=\"\"\"	{
         		"global_credentials": true,
         		"enable_password_grant": true,
         		"token_expiration": 180,
         		"refresh_token_ttl": 180,
         		"provision_key": "testprovisionkey"
         	}
-
         \"\"\")
-        consumer_oauth2 = kong.ConsumerOauth2("consumerOauth2",
+        consumer_oauth2 = kong.ConsumerOauth2("consumer_oauth2",
+            name="test_application",
+            consumer_id=my_consumer.id,
             client_id="client_id",
             client_secret="client_secret",
-            consumer_id=my_consumer.id,
             redirect_uris=[
                 "https://asdf.com/callback",
                 "https://test.cl/callback",
@@ -326,22 +328,24 @@ class ConsumerOauth2(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"	{
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        oauth2_plugin = kong.Plugin("oauth2_plugin",
+            name="oauth2",
+            config_json=\"\"\"	{
         		"global_credentials": true,
         		"enable_password_grant": true,
         		"token_expiration": 180,
         		"refresh_token_ttl": 180,
         		"provision_key": "testprovisionkey"
         	}
-
         \"\"\")
-        consumer_oauth2 = kong.ConsumerOauth2("consumerOauth2",
+        consumer_oauth2 = kong.ConsumerOauth2("consumer_oauth2",
+            name="test_application",
+            consumer_id=my_consumer.id,
             client_id="client_id",
             client_secret="client_secret",
-            consumer_id=my_consumer.id,
             redirect_uris=[
                 "https://asdf.com/callback",
                 "https://test.cl/callback",

@@ -26,13 +26,13 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
     ///     {
+    ///         Name = "rate-limiting",
     ///         ConfigJson = @"	{
     /// 		""second"": 5,
     /// 		""hour"" : 1000
     /// 	}
-    /// 
     /// ",
     ///     });
     /// 
@@ -50,21 +50,21 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var pluginConsumer = new Kong.Consumer("pluginConsumer", new()
+    ///     var pluginConsumer = new Kong.Consumer("plugin_consumer", new()
     ///     {
-    ///         CustomId = "567",
     ///         Username = "PluginUser",
+    ///         CustomId = "567",
     ///     });
     /// 
-    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
     ///     {
+    ///         Name = "rate-limiting",
+    ///         ConsumerId = pluginConsumer.Id,
     ///         ConfigJson = @"	{
     /// 		""second"": 5,
     /// 		""hour"" : 1000
     /// 	}
-    /// 
     /// ",
-    ///         ConsumerId = pluginConsumer.Id,
     ///     });
     /// 
     /// });
@@ -84,19 +84,20 @@ namespace Pulumi.Kong
     /// {
     ///     var service = new Kong.Service("service", new()
     ///     {
-    ///         Host = "test.org",
+    ///         Name = "test",
     ///         Protocol = "http",
+    ///         Host = "test.org",
     ///     });
     /// 
-    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
     ///     {
+    ///         Name = "rate-limiting",
+    ///         ServiceId = service.Id,
     ///         ConfigJson = @"	{
     /// 		""second"": 10,
     /// 		""hour"" : 2000
     /// 	}
-    /// 
     /// ",
-    ///         ServiceId = service.Id,
     ///     });
     /// 
     /// });
@@ -116,20 +117,21 @@ namespace Pulumi.Kong
     /// {
     ///     var service = new Kong.Service("service", new()
     ///     {
-    ///         Host = "test.org",
+    ///         Name = "test",
     ///         Protocol = "http",
+    ///         Host = "test.org",
     ///     });
     /// 
-    ///     var rateLimit = new Kong.Plugin("rateLimit", new()
+    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
     ///     {
+    ///         Name = "rate-limiting",
+    ///         Enabled = true,
+    ///         ServiceId = service.Id,
     ///         ConfigJson = @"	{
     /// 		""second"": 11,
     /// 		""hour"" : 4000
     /// 	}
-    /// 
     /// ",
-    ///         Enabled = true,
-    ///         ServiceId = service.Id,
     ///     });
     /// 
     /// });

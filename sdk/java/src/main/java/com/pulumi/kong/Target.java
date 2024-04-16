@@ -43,8 +43,8 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var target = new Target(&#34;target&#34;, TargetArgs.builder()        
  *             .target(&#34;sample_target:80&#34;)
- *             .upstreamId(kong_upstream.upstream().id())
  *             .weight(10)
+ *             .upstreamId(upstream.id())
  *             .build());
  * 
  *     }

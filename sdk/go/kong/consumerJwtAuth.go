@@ -31,22 +31,23 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
+//			myConsumer, err := kong.NewConsumer(ctx, "my_consumer", &kong.ConsumerArgs{
 //				Username: pulumi.String("User1"),
+//				CustomId: pulumi.String("123"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewPlugin(ctx, "jwtPlugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"claims_to_verify\": [\"exp\"]\n	}\n\n"),
+//			_, err = kong.NewPlugin(ctx, "jwt_plugin", &kong.PluginArgs{
+//				Name:       pulumi.String("jwt"),
+//				ConfigJson: pulumi.String("	{\n		\"claims_to_verify\": [\"exp\"]\n	}\n"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewConsumerJwtAuth(ctx, "consumerJwtConfig", &kong.ConsumerJwtAuthArgs{
-//				Algorithm:    pulumi.String("HS256"),
+//			_, err = kong.NewConsumerJwtAuth(ctx, "consumer_jwt_config", &kong.ConsumerJwtAuthArgs{
 //				ConsumerId:   myConsumer.ID(),
+//				Algorithm:    pulumi.String("HS256"),
 //				Key:          pulumi.String("my_key"),
 //				RsaPublicKey: pulumi.String("foo"),
 //				Secret:       pulumi.String("my_secret"),

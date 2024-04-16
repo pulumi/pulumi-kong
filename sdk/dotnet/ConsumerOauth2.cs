@@ -25,14 +25,15 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     var myConsumer = new Kong.Consumer("my_consumer", new()
     ///     {
-    ///         CustomId = "123",
     ///         Username = "User1",
+    ///         CustomId = "123",
     ///     });
     /// 
-    ///     var oauth2Plugin = new Kong.Plugin("oauth2Plugin", new()
+    ///     var oauth2Plugin = new Kong.Plugin("oauth2_plugin", new()
     ///     {
+    ///         Name = "oauth2",
     ///         ConfigJson = @"	{
     /// 		""global_credentials"": true,
     /// 		""enable_password_grant"": true,
@@ -40,15 +41,15 @@ namespace Pulumi.Kong
     /// 		""refresh_token_ttl"": 180,
     /// 		""provision_key"": ""testprovisionkey""
     /// 	}
-    /// 
     /// ",
     ///     });
     /// 
-    ///     var consumerOauth2 = new Kong.ConsumerOauth2("consumerOauth2", new()
+    ///     var consumerOauth2 = new Kong.ConsumerOauth2("consumer_oauth2", new()
     ///     {
+    ///         Name = "test_application",
+    ///         ConsumerId = myConsumer.Id,
     ///         ClientId = "client_id",
     ///         ClientSecret = "client_secret",
-    ///         ConsumerId = myConsumer.Id,
     ///         RedirectUris = new[]
     ///         {
     ///             "https://asdf.com/callback",

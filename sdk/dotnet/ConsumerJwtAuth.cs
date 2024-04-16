@@ -25,25 +25,25 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     var myConsumer = new Kong.Consumer("my_consumer", new()
     ///     {
-    ///         CustomId = "123",
     ///         Username = "User1",
+    ///         CustomId = "123",
     ///     });
     /// 
-    ///     var jwtPlugin = new Kong.Plugin("jwtPlugin", new()
+    ///     var jwtPlugin = new Kong.Plugin("jwt_plugin", new()
     ///     {
+    ///         Name = "jwt",
     ///         ConfigJson = @"	{
     /// 		""claims_to_verify"": [""exp""]
     /// 	}
-    /// 
     /// ",
     ///     });
     /// 
-    ///     var consumerJwtConfig = new Kong.ConsumerJwtAuth("consumerJwtConfig", new()
+    ///     var consumerJwtConfig = new Kong.ConsumerJwtAuth("consumer_jwt_config", new()
     ///     {
-    ///         Algorithm = "HS256",
     ///         ConsumerId = myConsumer.Id,
+    ///         Algorithm = "HS256",
     ///         Key = "my_key",
     ///         RsaPublicKey = "foo",
     ///         Secret = "my_secret",

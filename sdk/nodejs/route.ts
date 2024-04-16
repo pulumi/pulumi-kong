@@ -21,6 +21,7 @@ import * as utilities from "./utilities";
  * import * as kong from "@pulumi/kong";
  *
  * const route = new kong.Route("route", {
+ *     name: "MyRoute",
  *     protocols: [
  *         "http",
  *         "https",
@@ -34,7 +35,7 @@ import * as utilities from "./utilities";
  *     stripPath: false,
  *     preserveHost: true,
  *     regexPriority: 1,
- *     serviceId: kong_service.service.id,
+ *     serviceId: service.id,
  *     headers: [{
  *         name: "x-test-1",
  *         values: [
@@ -71,7 +72,7 @@ import * as utilities from "./utilities";
  *         port: 81,
  *     }],
  *     snis: ["foo.com"],
- *     serviceId: kong_service.service.id,
+ *     serviceId: service.id,
  * });
  * ```
  * <!--End PulumiCodeChooser -->

@@ -31,25 +31,27 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
+//			myConsumer, err := kong.NewConsumer(ctx, "my_consumer", &kong.ConsumerArgs{
 //				Username: pulumi.String("User1"),
+//				CustomId: pulumi.String("123"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewPlugin(ctx, "basicAuthPlugin", nil)
+//			_, err = kong.NewPlugin(ctx, "basic_auth_plugin", &kong.PluginArgs{
+//				Name: pulumi.String("basic-auth"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewConsumerBasicAuth(ctx, "consumerBasicAuth", &kong.ConsumerBasicAuthArgs{
+//			_, err = kong.NewConsumerBasicAuth(ctx, "consumer_basic_auth", &kong.ConsumerBasicAuthArgs{
 //				ConsumerId: myConsumer.ID(),
+//				Username:   pulumi.String("foo_updated"),
 //				Password:   pulumi.String("bar_updated"),
 //				Tags: pulumi.StringArray{
 //					pulumi.String("myTag"),
 //					pulumi.String("anotherTag"),
 //				},
-//				Username: pulumi.String("foo_updated"),
 //			})
 //			if err != nil {
 //				return err

@@ -142,15 +142,16 @@ class ConsumerAcl(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        acl_plugin = kong.Plugin("aclPlugin", config_json=\"\"\"	{
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        acl_plugin = kong.Plugin("acl_plugin",
+            name="acl",
+            config_json=\"\"\"	{
         		"allow": ["group1", "group2"]
         	}
-
         \"\"\")
-        consumer_acl = kong.ConsumerAcl("consumerAcl",
+        consumer_acl = kong.ConsumerAcl("consumer_acl",
             consumer_id=my_consumer.id,
             group="group2",
             tags=[
@@ -184,15 +185,16 @@ class ConsumerAcl(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        acl_plugin = kong.Plugin("aclPlugin", config_json=\"\"\"	{
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        acl_plugin = kong.Plugin("acl_plugin",
+            name="acl",
+            config_json=\"\"\"	{
         		"allow": ["group1", "group2"]
         	}
-
         \"\"\")
-        consumer_acl = kong.ConsumerAcl("consumerAcl",
+        consumer_acl = kong.ConsumerAcl("consumer_acl",
             consumer_id=my_consumer.id,
             group="group2",
             tags=[

@@ -310,11 +310,12 @@ class Plugin(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"	{
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            config_json=\"\"\"	{
         		"second": 5,
         		"hour" : 1000
         	}
-
         \"\"\")
         ```
         <!--End PulumiCodeChooser -->
@@ -325,17 +326,17 @@ class Plugin(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        plugin_consumer = kong.Consumer("pluginConsumer",
-            custom_id="567",
-            username="PluginUser")
-        rate_limit = kong.Plugin("rateLimit",
+        plugin_consumer = kong.Consumer("plugin_consumer",
+            username="PluginUser",
+            custom_id="567")
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            consumer_id=plugin_consumer.id,
             config_json=\"\"\"	{
         		"second": 5,
         		"hour" : 1000
         	}
-
-        \"\"\",
-            consumer_id=plugin_consumer.id)
+        \"\"\")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -347,16 +348,17 @@ class Plugin(pulumi.CustomResource):
         import pulumi_kong as kong
 
         service = kong.Service("service",
-            host="test.org",
-            protocol="http")
-        rate_limit = kong.Plugin("rateLimit",
+            name="test",
+            protocol="http",
+            host="test.org")
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            service_id=service.id,
             config_json=\"\"\"	{
         		"second": 10,
         		"hour" : 2000
         	}
-
-        \"\"\",
-            service_id=service.id)
+        \"\"\")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -368,17 +370,18 @@ class Plugin(pulumi.CustomResource):
         import pulumi_kong as kong
 
         service = kong.Service("service",
-            host="test.org",
-            protocol="http")
-        rate_limit = kong.Plugin("rateLimit",
+            name="test",
+            protocol="http",
+            host="test.org")
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            enabled=True,
+            service_id=service.id,
             config_json=\"\"\"	{
         		"second": 11,
         		"hour" : 4000
         	}
-
-        \"\"\",
-            enabled=True,
-            service_id=service.id)
+        \"\"\")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -419,11 +422,12 @@ class Plugin(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"	{
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            config_json=\"\"\"	{
         		"second": 5,
         		"hour" : 1000
         	}
-
         \"\"\")
         ```
         <!--End PulumiCodeChooser -->
@@ -434,17 +438,17 @@ class Plugin(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        plugin_consumer = kong.Consumer("pluginConsumer",
-            custom_id="567",
-            username="PluginUser")
-        rate_limit = kong.Plugin("rateLimit",
+        plugin_consumer = kong.Consumer("plugin_consumer",
+            username="PluginUser",
+            custom_id="567")
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            consumer_id=plugin_consumer.id,
             config_json=\"\"\"	{
         		"second": 5,
         		"hour" : 1000
         	}
-
-        \"\"\",
-            consumer_id=plugin_consumer.id)
+        \"\"\")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -456,16 +460,17 @@ class Plugin(pulumi.CustomResource):
         import pulumi_kong as kong
 
         service = kong.Service("service",
-            host="test.org",
-            protocol="http")
-        rate_limit = kong.Plugin("rateLimit",
+            name="test",
+            protocol="http",
+            host="test.org")
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            service_id=service.id,
             config_json=\"\"\"	{
         		"second": 10,
         		"hour" : 2000
         	}
-
-        \"\"\",
-            service_id=service.id)
+        \"\"\")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -477,17 +482,18 @@ class Plugin(pulumi.CustomResource):
         import pulumi_kong as kong
 
         service = kong.Service("service",
-            host="test.org",
-            protocol="http")
-        rate_limit = kong.Plugin("rateLimit",
+            name="test",
+            protocol="http",
+            host="test.org")
+        rate_limit = kong.Plugin("rate_limit",
+            name="rate-limiting",
+            enabled=True,
+            service_id=service.id,
             config_json=\"\"\"	{
         		"second": 11,
         		"hour" : 4000
         	}
-
-        \"\"\",
-            enabled=True,
-            service_id=service.id)
+        \"\"\")
         ```
         <!--End PulumiCodeChooser -->
 

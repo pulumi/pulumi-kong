@@ -29,6 +29,7 @@ namespace Pulumi.Kong
     /// {
     ///     var route = new Kong.Route("route", new()
     ///     {
+    ///         Name = "MyRoute",
     ///         Protocols = new[]
     ///         {
     ///             "http",
@@ -50,7 +51,7 @@ namespace Pulumi.Kong
     ///         StripPath = false,
     ///         PreserveHost = true,
     ///         RegexPriority = 1,
-    ///         ServiceId = kong_service.Service.Id,
+    ///         ServiceId = service.Id,
     ///         Headers = new[]
     ///         {
     ///             new Kong.Inputs.RouteHeaderArgs
@@ -112,7 +113,7 @@ namespace Pulumi.Kong
     ///         {
     ///             "foo.com",
     ///         },
-    ///         ServiceId = kong_service.Service.Id,
+    ///         ServiceId = service.Id,
     ///     });
     /// 
     /// });

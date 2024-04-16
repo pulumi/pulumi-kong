@@ -241,17 +241,18 @@ class ConsumerJwtAuth(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        jwt_plugin = kong.Plugin("jwtPlugin", config_json=\"\"\"	{
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        jwt_plugin = kong.Plugin("jwt_plugin",
+            name="jwt",
+            config_json=\"\"\"	{
         		"claims_to_verify": ["exp"]
         	}
-
         \"\"\")
-        consumer_jwt_config = kong.ConsumerJwtAuth("consumerJwtConfig",
-            algorithm="HS256",
+        consumer_jwt_config = kong.ConsumerJwtAuth("consumer_jwt_config",
             consumer_id=my_consumer.id,
+            algorithm="HS256",
             key="my_key",
             rsa_public_key="foo",
             secret="my_secret")
@@ -285,17 +286,18 @@ class ConsumerJwtAuth(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        jwt_plugin = kong.Plugin("jwtPlugin", config_json=\"\"\"	{
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        jwt_plugin = kong.Plugin("jwt_plugin",
+            name="jwt",
+            config_json=\"\"\"	{
         		"claims_to_verify": ["exp"]
         	}
-
         \"\"\")
-        consumer_jwt_config = kong.ConsumerJwtAuth("consumerJwtConfig",
-            algorithm="HS256",
+        consumer_jwt_config = kong.ConsumerJwtAuth("consumer_jwt_config",
             consumer_id=my_consumer.id,
+            algorithm="HS256",
             key="my_key",
             rsa_public_key="foo",
             secret="my_secret")

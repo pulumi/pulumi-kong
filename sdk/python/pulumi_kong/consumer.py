@@ -145,9 +145,9 @@ class Consumer(pulumi.CustomResource):
         import pulumi_kong as kong
 
         consumer = kong.Consumer("consumer",
+            username="User1",
             custom_id="123",
-            tags=["mySuperTag"],
-            username="User1")
+            tags=["mySuperTag"])
         ```
         <!--End PulumiCodeChooser -->
 
@@ -184,9 +184,9 @@ class Consumer(pulumi.CustomResource):
         import pulumi_kong as kong
 
         consumer = kong.Consumer("consumer",
+            username="User1",
             custom_id="123",
-            tags=["mySuperTag"],
-            username="User1")
+            tags=["mySuperTag"])
         ```
         <!--End PulumiCodeChooser -->
 

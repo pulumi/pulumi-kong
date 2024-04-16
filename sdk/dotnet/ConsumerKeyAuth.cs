@@ -25,15 +25,18 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myConsumer = new Kong.Consumer("myConsumer", new()
+    ///     var myConsumer = new Kong.Consumer("my_consumer", new()
     ///     {
     ///         Username = "User1",
     ///         CustomId = "123",
     ///     });
     /// 
-    ///     var keyAuthPlugin = new Kong.Plugin("keyAuthPlugin");
+    ///     var keyAuthPlugin = new Kong.Plugin("key_auth_plugin", new()
+    ///     {
+    ///         Name = "key-auth",
+    ///     });
     /// 
-    ///     var consumerKeyAuth = new Kong.ConsumerKeyAuth("consumerKeyAuth", new()
+    ///     var consumerKeyAuth = new Kong.ConsumerKeyAuth("consumer_key_auth", new()
     ///     {
     ///         ConsumerId = myConsumer.Id,
     ///         Key = "secret",

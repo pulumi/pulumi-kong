@@ -17,12 +17,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const rateLimit = new kong.Plugin("rateLimit", {configJson: `	{
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     name: "rate-limiting",
+ *     configJson: `	{
  * 		"second": 5,
  * 		"hour" : 1000
  * 	}
- *
- * `});
+ * `,
+ * });
  * ```
  * <!--End PulumiCodeChooser -->
  * To apply a plugin to a consumer use the `consumerId` property, for example:
@@ -32,18 +34,18 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const pluginConsumer = new kong.Consumer("pluginConsumer", {
- *     customId: "567",
+ * const pluginConsumer = new kong.Consumer("plugin_consumer", {
  *     username: "PluginUser",
+ *     customId: "567",
  * });
- * const rateLimit = new kong.Plugin("rateLimit", {
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     name: "rate-limiting",
+ *     consumerId: pluginConsumer.id,
  *     configJson: `	{
  * 		"second": 5,
  * 		"hour" : 1000
  * 	}
- *
  * `,
- *     consumerId: pluginConsumer.id,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -56,17 +58,18 @@ import * as utilities from "./utilities";
  * import * as kong from "@pulumi/kong";
  *
  * const service = new kong.Service("service", {
- *     host: "test.org",
+ *     name: "test",
  *     protocol: "http",
+ *     host: "test.org",
  * });
- * const rateLimit = new kong.Plugin("rateLimit", {
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     name: "rate-limiting",
+ *     serviceId: service.id,
  *     configJson: `	{
  * 		"second": 10,
  * 		"hour" : 2000
  * 	}
- *
  * `,
- *     serviceId: service.id,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -79,18 +82,19 @@ import * as utilities from "./utilities";
  * import * as kong from "@pulumi/kong";
  *
  * const service = new kong.Service("service", {
- *     host: "test.org",
+ *     name: "test",
  *     protocol: "http",
+ *     host: "test.org",
  * });
- * const rateLimit = new kong.Plugin("rateLimit", {
+ * const rateLimit = new kong.Plugin("rate_limit", {
+ *     name: "rate-limiting",
+ *     enabled: true,
+ *     serviceId: service.id,
  *     configJson: `	{
  * 		"second": 11,
  * 		"hour" : 4000
  * 	}
- *
  * `,
- *     enabled: true,
- *     serviceId: service.id,
  * });
  * ```
  * <!--End PulumiCodeChooser -->

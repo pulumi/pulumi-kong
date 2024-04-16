@@ -32,6 +32,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.kong.Consumer;
  * import com.pulumi.kong.ConsumerArgs;
  * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
  * import com.pulumi.kong.ConsumerKeyAuth;
  * import com.pulumi.kong.ConsumerKeyAuthArgs;
  * import java.util.List;
@@ -52,7 +53,9 @@ import javax.annotation.Nullable;
  *             .customId(&#34;123&#34;)
  *             .build());
  * 
- *         var keyAuthPlugin = new Plugin(&#34;keyAuthPlugin&#34;);
+ *         var keyAuthPlugin = new Plugin(&#34;keyAuthPlugin&#34;, PluginArgs.builder()        
+ *             .name(&#34;key-auth&#34;)
+ *             .build());
  * 
  *         var consumerKeyAuth = new ConsumerKeyAuth(&#34;consumerKeyAuth&#34;, ConsumerKeyAuthArgs.builder()        
  *             .consumerId(myConsumer.id())

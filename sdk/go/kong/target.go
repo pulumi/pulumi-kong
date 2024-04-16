@@ -29,8 +29,8 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kong.NewTarget(ctx, "target", &kong.TargetArgs{
 //				Target:     pulumi.String("sample_target:80"),
-//				UpstreamId: pulumi.Any(kong_upstream.Upstream.Id),
 //				Weight:     pulumi.Int(10),
+//				UpstreamId: pulumi.Any(upstream.Id),
 //			})
 //			if err != nil {
 //				return err
