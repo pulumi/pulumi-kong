@@ -20,9 +20,9 @@ import * as utilities from "./utilities";
  *     customId: "123",
  *     username: "User1",
  * });
- * const aclPlugin = new kong.Plugin("aclPlugin", {configJson: `	{
- * 		"allow": ["group1", "group2"]
- * 	}
+ * const aclPlugin = new kong.Plugin("aclPlugin", {configJson: `\x09{
+ * \x09\x09"allow": ["group1", "group2"]
+ * \x09}
  *
  * `});
  * const consumerAcl = new kong.ConsumerAcl("consumerAcl", {

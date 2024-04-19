@@ -20,9 +20,9 @@ import * as utilities from "./utilities";
  *     customId: "123",
  *     username: "User1",
  * });
- * const jwtPlugin = new kong.Plugin("jwtPlugin", {configJson: `	{
- * 		"claims_to_verify": ["exp"]
- * 	}
+ * const jwtPlugin = new kong.Plugin("jwtPlugin", {configJson: `\x09{
+ * \x09\x09"claims_to_verify": ["exp"]
+ * \x09}
  *
  * `});
  * const consumerJwtConfig = new kong.ConsumerJwtAuth("consumerJwtConfig", {

@@ -310,10 +310,10 @@ class Plugin(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
 
         \"\"\")
         ```
@@ -329,10 +329,10 @@ class Plugin(pulumi.CustomResource):
             custom_id="567",
             username="PluginUser")
         rate_limit = kong.Plugin("rateLimit",
-            config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
 
         \"\"\",
             consumer_id=plugin_consumer.id)
@@ -350,10 +350,10 @@ class Plugin(pulumi.CustomResource):
             host="test.org",
             protocol="http")
         rate_limit = kong.Plugin("rateLimit",
-            config_json=\"\"\"	{
-        		"second": 10,
-        		"hour" : 2000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 10,
+        \\x09\\x09"hour" : 2000
+        \\x09}
 
         \"\"\",
             service_id=service.id)
@@ -371,10 +371,10 @@ class Plugin(pulumi.CustomResource):
             host="test.org",
             protocol="http")
         rate_limit = kong.Plugin("rateLimit",
-            config_json=\"\"\"	{
-        		"second": 11,
-        		"hour" : 4000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 11,
+        \\x09\\x09"hour" : 4000
+        \\x09}
 
         \"\"\",
             enabled=True,
@@ -419,10 +419,10 @@ class Plugin(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+        rate_limit = kong.Plugin("rateLimit", config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
 
         \"\"\")
         ```
@@ -438,10 +438,10 @@ class Plugin(pulumi.CustomResource):
             custom_id="567",
             username="PluginUser")
         rate_limit = kong.Plugin("rateLimit",
-            config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
 
         \"\"\",
             consumer_id=plugin_consumer.id)
@@ -459,10 +459,10 @@ class Plugin(pulumi.CustomResource):
             host="test.org",
             protocol="http")
         rate_limit = kong.Plugin("rateLimit",
-            config_json=\"\"\"	{
-        		"second": 10,
-        		"hour" : 2000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 10,
+        \\x09\\x09"hour" : 2000
+        \\x09}
 
         \"\"\",
             service_id=service.id)
@@ -480,10 +480,10 @@ class Plugin(pulumi.CustomResource):
             host="test.org",
             protocol="http")
         rate_limit = kong.Plugin("rateLimit",
-            config_json=\"\"\"	{
-        		"second": 11,
-        		"hour" : 4000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 11,
+        \\x09\\x09"hour" : 4000
+        \\x09}
 
         \"\"\",
             enabled=True,
