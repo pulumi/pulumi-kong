@@ -11,7 +11,6 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -20,9 +19,9 @@ import * as utilities from "./utilities";
  *     customId: "123",
  *     username: "User1",
  * });
- * const jwtPlugin = new kong.Plugin("jwtPlugin", {configJson: `	{
- * 		"claims_to_verify": ["exp"]
- * 	}
+ * const jwtPlugin = new kong.Plugin("jwtPlugin", {configJson: `\x09{
+ * \x09\x09"claims_to_verify": ["exp"]
+ * \x09}
  *
  * `});
  * const consumerJwtConfig = new kong.ConsumerJwtAuth("consumerJwtConfig", {
@@ -33,7 +32,6 @@ import * as utilities from "./utilities";
  *     secret: "my_secret",
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  */
 export class ConsumerJwtAuth extends pulumi.CustomResource {
     /**

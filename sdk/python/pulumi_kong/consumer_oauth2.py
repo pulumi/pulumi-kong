@@ -269,7 +269,6 @@ class ConsumerOauth2(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -277,13 +276,13 @@ class ConsumerOauth2(pulumi.CustomResource):
         my_consumer = kong.Consumer("myConsumer",
             custom_id="123",
             username="User1")
-        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"	{
-        		"global_credentials": true,
-        		"enable_password_grant": true,
-        		"token_expiration": 180,
-        		"refresh_token_ttl": 180,
-        		"provision_key": "testprovisionkey"
-        	}
+        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"\\x09{
+        \\x09\\x09"global_credentials": true,
+        \\x09\\x09"enable_password_grant": true,
+        \\x09\\x09"token_expiration": 180,
+        \\x09\\x09"refresh_token_ttl": 180,
+        \\x09\\x09"provision_key": "testprovisionkey"
+        \\x09}
 
         \"\"\")
         consumer_oauth2 = kong.ConsumerOauth2("consumerOauth2",
@@ -296,7 +295,6 @@ class ConsumerOauth2(pulumi.CustomResource):
             ],
             tags=["myTag"])
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -321,7 +319,6 @@ class ConsumerOauth2(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -329,13 +326,13 @@ class ConsumerOauth2(pulumi.CustomResource):
         my_consumer = kong.Consumer("myConsumer",
             custom_id="123",
             username="User1")
-        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"	{
-        		"global_credentials": true,
-        		"enable_password_grant": true,
-        		"token_expiration": 180,
-        		"refresh_token_ttl": 180,
-        		"provision_key": "testprovisionkey"
-        	}
+        oauth2_plugin = kong.Plugin("oauth2Plugin", config_json=\"\"\"\\x09{
+        \\x09\\x09"global_credentials": true,
+        \\x09\\x09"enable_password_grant": true,
+        \\x09\\x09"token_expiration": 180,
+        \\x09\\x09"refresh_token_ttl": 180,
+        \\x09\\x09"provision_key": "testprovisionkey"
+        \\x09}
 
         \"\"\")
         consumer_oauth2 = kong.ConsumerOauth2("consumerOauth2",
@@ -348,7 +345,6 @@ class ConsumerOauth2(pulumi.CustomResource):
             ],
             tags=["myTag"])
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param ConsumerOauth2Args args: The arguments to use to populate this resource's properties.

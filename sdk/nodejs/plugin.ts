@@ -12,22 +12,19 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const rateLimit = new kong.Plugin("rateLimit", {configJson: `	{
- * 		"second": 5,
- * 		"hour" : 1000
- * 	}
+ * const rateLimit = new kong.Plugin("rateLimit", {configJson: `\x09{
+ * \x09\x09"second": 5,
+ * \x09\x09"hour" : 1000
+ * \x09}
  *
  * `});
  * ```
- * <!--End PulumiCodeChooser -->
  * To apply a plugin to a consumer use the `consumerId` property, for example:
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -37,20 +34,18 @@ import * as utilities from "./utilities";
  *     username: "PluginUser",
  * });
  * const rateLimit = new kong.Plugin("rateLimit", {
- *     configJson: `	{
- * 		"second": 5,
- * 		"hour" : 1000
- * 	}
+ *     configJson: `\x09{
+ * \x09\x09"second": 5,
+ * \x09\x09"hour" : 1000
+ * \x09}
  *
  * `,
  *     consumerId: pluginConsumer.id,
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  *
  * To apply a plugin to a service use the `serviceId` property, for example:
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -60,20 +55,18 @@ import * as utilities from "./utilities";
  *     protocol: "http",
  * });
  * const rateLimit = new kong.Plugin("rateLimit", {
- *     configJson: `	{
- * 		"second": 10,
- * 		"hour" : 2000
- * 	}
+ *     configJson: `\x09{
+ * \x09\x09"second": 10,
+ * \x09\x09"hour" : 2000
+ * \x09}
  *
  * `,
  *     serviceId: service.id,
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  *
  * To apply a plugin to a route use the `routeId` property, for example:
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -83,17 +76,16 @@ import * as utilities from "./utilities";
  *     protocol: "http",
  * });
  * const rateLimit = new kong.Plugin("rateLimit", {
- *     configJson: `	{
- * 		"second": 11,
- * 		"hour" : 4000
- * 	}
+ *     configJson: `\x09{
+ * \x09\x09"second": 11,
+ * \x09\x09"hour" : 4000
+ * \x09}
  *
  * `,
  *     enabled: true,
  *     serviceId: service.id,
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *

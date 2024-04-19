@@ -11,7 +11,6 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -20,9 +19,9 @@ import * as utilities from "./utilities";
  *     customId: "123",
  *     username: "User1",
  * });
- * const aclPlugin = new kong.Plugin("aclPlugin", {configJson: `	{
- * 		"allow": ["group1", "group2"]
- * 	}
+ * const aclPlugin = new kong.Plugin("aclPlugin", {configJson: `\x09{
+ * \x09\x09"allow": ["group1", "group2"]
+ * \x09}
  *
  * `});
  * const consumerAcl = new kong.ConsumerAcl("consumerAcl", {
@@ -34,7 +33,6 @@ import * as utilities from "./utilities";
  *     ],
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  */
 export class ConsumerAcl extends pulumi.CustomResource {
     /**

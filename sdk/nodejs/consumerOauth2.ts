@@ -11,7 +11,6 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -20,13 +19,13 @@ import * as utilities from "./utilities";
  *     customId: "123",
  *     username: "User1",
  * });
- * const oauth2Plugin = new kong.Plugin("oauth2Plugin", {configJson: `	{
- * 		"global_credentials": true,
- * 		"enable_password_grant": true,
- * 		"token_expiration": 180,
- * 		"refresh_token_ttl": 180,
- * 		"provision_key": "testprovisionkey"
- * 	}
+ * const oauth2Plugin = new kong.Plugin("oauth2Plugin", {configJson: `\x09{
+ * \x09\x09"global_credentials": true,
+ * \x09\x09"enable_password_grant": true,
+ * \x09\x09"token_expiration": 180,
+ * \x09\x09"refresh_token_ttl": 180,
+ * \x09\x09"provision_key": "testprovisionkey"
+ * \x09}
  *
  * `});
  * const consumerOauth2 = new kong.ConsumerOauth2("consumerOauth2", {
@@ -40,7 +39,6 @@ import * as utilities from "./utilities";
  *     tags: ["myTag"],
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  */
 export class ConsumerOauth2 extends pulumi.CustomResource {
     /**

@@ -18,7 +18,6 @@ import (
 //
 // ## Example Usage
 //
-// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -42,10 +41,8 @@ import (
 //	}
 //
 // ```
-// <!--End PulumiCodeChooser -->
 // To apply a plugin to a consumer use the `consumerId` property, for example:
 //
-// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -77,11 +74,9 @@ import (
 //	}
 //
 // ```
-// <!--End PulumiCodeChooser -->
 //
 // To apply a plugin to a service use the `serviceId` property, for example:
 //
-// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -113,11 +108,9 @@ import (
 //	}
 //
 // ```
-// <!--End PulumiCodeChooser -->
 //
 // To apply a plugin to a route use the `routeId` property, for example:
 //
-// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -150,7 +143,6 @@ import (
 //	}
 //
 // ```
-// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //

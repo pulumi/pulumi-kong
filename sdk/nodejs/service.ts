@@ -11,7 +11,6 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -27,11 +26,9 @@ import * as utilities from "./utilities";
  *     writeTimeout: 2000,
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  *
  * To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
@@ -67,7 +64,6 @@ import * as utilities from "./utilities";
  *     caCertificateIds: [ca.id],
  * });
  * ```
- * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
