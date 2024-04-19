@@ -32,14 +32,15 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
-//				ConnectTimeout: pulumi.Int(1000),
-//				Host:           pulumi.String("test.org"),
-//				Path:           pulumi.String("/mypath"),
-//				Port:           pulumi.Int(8080),
+//				Name:           pulumi.String("test"),
 //				Protocol:       pulumi.String("http"),
-//				ReadTimeout:    pulumi.Int(3000),
+//				Host:           pulumi.String("test.org"),
+//				Port:           pulumi.Int(8080),
+//				Path:           pulumi.String("/mypath"),
 //				Retries:        pulumi.Int(5),
+//				ConnectTimeout: pulumi.Int(1000),
 //				WriteTimeout:   pulumi.Int(2000),
+//				ReadTimeout:    pulumi.Int(3000),
 //			})
 //			if err != nil {
 //				return err
@@ -87,6 +88,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewService(ctx, "service", &kong.ServiceArgs{
+//				Name:                pulumi.String("test"),
 //				Protocol:            pulumi.String("https"),
 //				Host:                pulumi.String("test.org"),
 //				TlsVerify:           pulumi.Bool(true),

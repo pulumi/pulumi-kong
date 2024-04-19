@@ -47,14 +47,15 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
- *             .connectTimeout(1000)
- *             .host(&#34;test.org&#34;)
- *             .path(&#34;/mypath&#34;)
- *             .port(8080)
+ *             .name(&#34;test&#34;)
  *             .protocol(&#34;http&#34;)
- *             .readTimeout(3000)
+ *             .host(&#34;test.org&#34;)
+ *             .port(8080)
+ *             .path(&#34;/mypath&#34;)
  *             .retries(5)
+ *             .connectTimeout(1000)
  *             .writeTimeout(2000)
+ *             .readTimeout(3000)
  *             .build());
  * 
  *     }
@@ -117,6 +118,7 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
+ *             .name(&#34;test&#34;)
  *             .protocol(&#34;https&#34;)
  *             .host(&#34;test.org&#34;)
  *             .tlsVerify(true)

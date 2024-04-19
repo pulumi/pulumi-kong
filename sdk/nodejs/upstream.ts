@@ -26,6 +26,7 @@ import * as utilities from "./utilities";
  *     snis: ["foo.com"],
  * });
  * const upstream = new kong.Upstream("upstream", {
+ *     name: "sample_upstream",
  *     slots: 10,
  *     hashOn: "header",
  *     hashFallback: "cookie",

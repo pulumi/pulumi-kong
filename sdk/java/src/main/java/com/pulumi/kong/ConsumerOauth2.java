@@ -50,11 +50,12 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
- *             .customId(&#34;123&#34;)
  *             .username(&#34;User1&#34;)
+ *             .customId(&#34;123&#34;)
  *             .build());
  * 
  *         var oauth2Plugin = new Plugin(&#34;oauth2Plugin&#34;, PluginArgs.builder()        
+ *             .name(&#34;oauth2&#34;)
  *             .configJson(&#34;&#34;&#34;
  * 	{
  * 		&#34;global_credentials&#34;: true,
@@ -63,14 +64,14 @@ import javax.annotation.Nullable;
  * 		&#34;refresh_token_ttl&#34;: 180,
  * 		&#34;provision_key&#34;: &#34;testprovisionkey&#34;
  * 	}
- * 
  *             &#34;&#34;&#34;)
  *             .build());
  * 
  *         var consumerOauth2 = new ConsumerOauth2(&#34;consumerOauth2&#34;, ConsumerOauth2Args.builder()        
+ *             .name(&#34;test_application&#34;)
+ *             .consumerId(myConsumer.id())
  *             .clientId(&#34;client_id&#34;)
  *             .clientSecret(&#34;client_secret&#34;)
- *             .consumerId(myConsumer.id())
  *             .redirectUris(            
  *                 &#34;https://asdf.com/callback&#34;,
  *                 &#34;https://test.cl/callback&#34;)

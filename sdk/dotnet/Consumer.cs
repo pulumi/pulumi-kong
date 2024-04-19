@@ -27,12 +27,12 @@ namespace Pulumi.Kong
     /// {
     ///     var consumer = new Kong.Consumer("consumer", new()
     ///     {
+    ///         Username = "User1",
     ///         CustomId = "123",
     ///         Tags = new[]
     ///         {
     ///             "mySuperTag",
     ///         },
-    ///         Username = "User1",
     ///     });
     /// 
     /// });

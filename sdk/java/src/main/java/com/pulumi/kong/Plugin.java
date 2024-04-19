@@ -47,12 +47,12 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .name(&#34;rate-limiting&#34;)
  *             .configJson(&#34;&#34;&#34;
  * 	{
  * 		&#34;second&#34;: 5,
  * 		&#34;hour&#34; : 1000
  * 	}
- * 
  *             &#34;&#34;&#34;)
  *             .build());
  * 
@@ -87,19 +87,19 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var pluginConsumer = new Consumer(&#34;pluginConsumer&#34;, ConsumerArgs.builder()        
- *             .customId(&#34;567&#34;)
  *             .username(&#34;PluginUser&#34;)
+ *             .customId(&#34;567&#34;)
  *             .build());
  * 
  *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .name(&#34;rate-limiting&#34;)
+ *             .consumerId(pluginConsumer.id())
  *             .configJson(&#34;&#34;&#34;
  * 	{
  * 		&#34;second&#34;: 5,
  * 		&#34;hour&#34; : 1000
  * 	}
- * 
  *             &#34;&#34;&#34;)
- *             .consumerId(pluginConsumer.id())
  *             .build());
  * 
  *     }
@@ -134,19 +134,20 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
- *             .host(&#34;test.org&#34;)
+ *             .name(&#34;test&#34;)
  *             .protocol(&#34;http&#34;)
+ *             .host(&#34;test.org&#34;)
  *             .build());
  * 
  *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .name(&#34;rate-limiting&#34;)
+ *             .serviceId(service.id())
  *             .configJson(&#34;&#34;&#34;
  * 	{
  * 		&#34;second&#34;: 10,
  * 		&#34;hour&#34; : 2000
  * 	}
- * 
  *             &#34;&#34;&#34;)
- *             .serviceId(service.id())
  *             .build());
  * 
  *     }
@@ -181,20 +182,21 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
- *             .host(&#34;test.org&#34;)
+ *             .name(&#34;test&#34;)
  *             .protocol(&#34;http&#34;)
+ *             .host(&#34;test.org&#34;)
  *             .build());
  * 
  *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
+ *             .name(&#34;rate-limiting&#34;)
+ *             .enabled(true)
+ *             .serviceId(service.id())
  *             .configJson(&#34;&#34;&#34;
  * 	{
  * 		&#34;second&#34;: 11,
  * 		&#34;hour&#34; : 4000
  * 	}
- * 
  *             &#34;&#34;&#34;)
- *             .enabled(true)
- *             .serviceId(service.id())
  *             .build());
  * 
  *     }

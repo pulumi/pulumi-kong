@@ -17,9 +17,9 @@ import * as utilities from "./utilities";
  * import * as kong from "@pulumi/kong";
  *
  * const consumer = new kong.Consumer("consumer", {
+ *     username: "User1",
  *     customId: "123",
  *     tags: ["mySuperTag"],
- *     username: "User1",
  * });
  * ```
  * <!--End PulumiCodeChooser -->

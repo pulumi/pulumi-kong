@@ -31,8 +31,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"second\": 5,\n		\"hour\" : 1000\n	}\n\n"),
+//			_, err := kong.NewPlugin(ctx, "rate_limit", &kong.PluginArgs{
+//				Name:       pulumi.String("rate-limiting"),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 5,\n		\"hour\" : 1000\n	}\n"),
 //			})
 //			if err != nil {
 //				return err
@@ -58,16 +59,17 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			pluginConsumer, err := kong.NewConsumer(ctx, "pluginConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("567"),
+//			pluginConsumer, err := kong.NewConsumer(ctx, "plugin_consumer", &kong.ConsumerArgs{
 //				Username: pulumi.String("PluginUser"),
+//				CustomId: pulumi.String("567"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"second\": 5,\n		\"hour\" : 1000\n	}\n\n"),
+//			_, err = kong.NewPlugin(ctx, "rate_limit", &kong.PluginArgs{
+//				Name:       pulumi.String("rate-limiting"),
 //				ConsumerId: pluginConsumer.ID(),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 5,\n		\"hour\" : 1000\n	}\n"),
 //			})
 //			if err != nil {
 //				return err
@@ -95,15 +97,17 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
-//				Host:     pulumi.String("test.org"),
+//				Name:     pulumi.String("test"),
 //				Protocol: pulumi.String("http"),
+//				Host:     pulumi.String("test.org"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"second\": 10,\n		\"hour\" : 2000\n	}\n\n"),
+//			_, err = kong.NewPlugin(ctx, "rate_limit", &kong.PluginArgs{
+//				Name:       pulumi.String("rate-limiting"),
 //				ServiceId:  service.ID(),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 10,\n		\"hour\" : 2000\n	}\n"),
 //			})
 //			if err != nil {
 //				return err
@@ -131,16 +135,18 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			service, err := kong.NewService(ctx, "service", &kong.ServiceArgs{
-//				Host:     pulumi.String("test.org"),
+//				Name:     pulumi.String("test"),
 //				Protocol: pulumi.String("http"),
+//				Host:     pulumi.String("test.org"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewPlugin(ctx, "rateLimit", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"second\": 11,\n		\"hour\" : 4000\n	}\n\n"),
+//			_, err = kong.NewPlugin(ctx, "rate_limit", &kong.PluginArgs{
+//				Name:       pulumi.String("rate-limiting"),
 //				Enabled:    pulumi.Bool(true),
 //				ServiceId:  service.ID(),
+//				ConfigJson: pulumi.String("	{\n		\"second\": 11,\n		\"hour\" : 4000\n	}\n"),
 //			})
 //			if err != nil {
 //				return err

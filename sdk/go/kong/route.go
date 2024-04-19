@@ -34,6 +34,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
+//				Name: pulumi.String("MyRoute"),
 //				Protocols: pulumi.StringArray{
 //					pulumi.String("http"),
 //					pulumi.String("https"),
@@ -51,7 +52,7 @@ import (
 //				StripPath:     pulumi.Bool(false),
 //				PreserveHost:  pulumi.Bool(true),
 //				RegexPriority: pulumi.Int(1),
-//				ServiceId:     pulumi.Any(kong_service.Service.Id),
+//				ServiceId:     pulumi.Any(service.Id),
 //				Headers: kong.RouteHeaderArray{
 //					&kong.RouteHeaderArgs{
 //						Name: pulumi.String("x-test-1"),
@@ -111,7 +112,7 @@ import (
 //				Snis: pulumi.StringArray{
 //					pulumi.String("foo.com"),
 //				},
-//				ServiceId: pulumi.Any(kong_service.Service.Id),
+//				ServiceId: pulumi.Any(service.Id),
 //			})
 //			if err != nil {
 //				return err

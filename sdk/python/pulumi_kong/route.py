@@ -642,6 +642,7 @@ class Route(pulumi.CustomResource):
         import pulumi_kong as kong
 
         route = kong.Route("route",
+            name="MyRoute",
             protocols=[
                 "http",
                 "https",
@@ -655,7 +656,7 @@ class Route(pulumi.CustomResource):
             strip_path=False,
             preserve_host=True,
             regex_priority=1,
-            service_id=kong_service["service"]["id"],
+            service_id=service["id"],
             headers=[kong.RouteHeaderArgs(
                 name="x-test-1",
                 values=[
@@ -691,7 +692,7 @@ class Route(pulumi.CustomResource):
                 port=81,
             )],
             snis=["foo.com"],
-            service_id=kong_service["service"]["id"])
+            service_id=service["id"])
         ```
         <!--End PulumiCodeChooser -->
 
@@ -745,6 +746,7 @@ class Route(pulumi.CustomResource):
         import pulumi_kong as kong
 
         route = kong.Route("route",
+            name="MyRoute",
             protocols=[
                 "http",
                 "https",
@@ -758,7 +760,7 @@ class Route(pulumi.CustomResource):
             strip_path=False,
             preserve_host=True,
             regex_priority=1,
-            service_id=kong_service["service"]["id"],
+            service_id=service["id"],
             headers=[kong.RouteHeaderArgs(
                 name="x-test-1",
                 values=[
@@ -794,7 +796,7 @@ class Route(pulumi.CustomResource):
                 port=81,
             )],
             snis=["foo.com"],
-            service_id=kong_service["service"]["id"])
+            service_id=service["id"])
         ```
         <!--End PulumiCodeChooser -->
 

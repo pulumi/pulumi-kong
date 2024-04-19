@@ -143,11 +143,11 @@ class ConsumerKeyAuth(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
+        my_consumer = kong.Consumer("my_consumer",
             username="User1",
             custom_id="123")
-        key_auth_plugin = kong.Plugin("keyAuthPlugin")
-        consumer_key_auth = kong.ConsumerKeyAuth("consumerKeyAuth",
+        key_auth_plugin = kong.Plugin("key_auth_plugin", name="key-auth")
+        consumer_key_auth = kong.ConsumerKeyAuth("consumer_key_auth",
             consumer_id=my_consumer.id,
             key="secret",
             tags=[
@@ -181,11 +181,11 @@ class ConsumerKeyAuth(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
+        my_consumer = kong.Consumer("my_consumer",
             username="User1",
             custom_id="123")
-        key_auth_plugin = kong.Plugin("keyAuthPlugin")
-        consumer_key_auth = kong.ConsumerKeyAuth("consumerKeyAuth",
+        key_auth_plugin = kong.Plugin("key_auth_plugin", name="key-auth")
+        consumer_key_auth = kong.ConsumerKeyAuth("consumer_key_auth",
             consumer_id=my_consumer.id,
             key="secret",
             tags=[

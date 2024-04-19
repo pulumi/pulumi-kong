@@ -37,6 +37,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewUpstream(ctx, "upstream", &kong.UpstreamArgs{
+//				Name:               pulumi.String("sample_upstream"),
 //				Slots:              pulumi.Int(10),
 //				HashOn:             pulumi.String("header"),
 //				HashFallback:       pulumi.String("cookie"),

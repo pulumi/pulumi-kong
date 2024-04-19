@@ -49,22 +49,22 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
- *             .customId(&#34;123&#34;)
  *             .username(&#34;User1&#34;)
+ *             .customId(&#34;123&#34;)
  *             .build());
  * 
  *         var jwtPlugin = new Plugin(&#34;jwtPlugin&#34;, PluginArgs.builder()        
+ *             .name(&#34;jwt&#34;)
  *             .configJson(&#34;&#34;&#34;
  * 	{
  * 		&#34;claims_to_verify&#34;: [&#34;exp&#34;]
  * 	}
- * 
  *             &#34;&#34;&#34;)
  *             .build());
  * 
  *         var consumerJwtConfig = new ConsumerJwtAuth(&#34;consumerJwtConfig&#34;, ConsumerJwtAuthArgs.builder()        
- *             .algorithm(&#34;HS256&#34;)
  *             .consumerId(myConsumer.id())
+ *             .algorithm(&#34;HS256&#34;)
  *             .key(&#34;my_key&#34;)
  *             .rsaPublicKey(&#34;foo&#34;)
  *             .secret(&#34;my_secret&#34;)

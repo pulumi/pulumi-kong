@@ -16,23 +16,26 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const myConsumer = new kong.Consumer("myConsumer", {
- *     customId: "123",
+ * const myConsumer = new kong.Consumer("my_consumer", {
  *     username: "User1",
+ *     customId: "123",
  * });
- * const oauth2Plugin = new kong.Plugin("oauth2Plugin", {configJson: `	{
+ * const oauth2Plugin = new kong.Plugin("oauth2_plugin", {
+ *     name: "oauth2",
+ *     configJson: `	{
  * 		"global_credentials": true,
  * 		"enable_password_grant": true,
  * 		"token_expiration": 180,
  * 		"refresh_token_ttl": 180,
  * 		"provision_key": "testprovisionkey"
  * 	}
- *
- * `});
- * const consumerOauth2 = new kong.ConsumerOauth2("consumerOauth2", {
+ * `,
+ * });
+ * const consumerOauth2 = new kong.ConsumerOauth2("consumer_oauth2", {
+ *     name: "test_application",
+ *     consumerId: myConsumer.id,
  *     clientId: "client_id",
  *     clientSecret: "client_secret",
- *     consumerId: myConsumer.id,
  *     redirectUris: [
  *         "https://asdf.com/callback",
  *         "https://test.cl/callback",

@@ -172,8 +172,8 @@ class Target(pulumi.CustomResource):
 
         target = kong.Target("target",
             target="sample_target:80",
-            upstream_id=kong_upstream["upstream"]["id"],
-            weight=10)
+            weight=10,
+            upstream_id=upstream["id"])
         ```
         <!--End PulumiCodeChooser -->
 
@@ -208,8 +208,8 @@ class Target(pulumi.CustomResource):
 
         target = kong.Target("target",
             target="sample_target:80",
-            upstream_id=kong_upstream["upstream"]["id"],
-            weight=10)
+            weight=10,
+            upstream_id=upstream["id"])
         ```
         <!--End PulumiCodeChooser -->
 

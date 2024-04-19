@@ -17,14 +17,15 @@ import * as utilities from "./utilities";
  * import * as kong from "@pulumi/kong";
  *
  * const service = new kong.Service("service", {
- *     connectTimeout: 1000,
- *     host: "test.org",
- *     path: "/mypath",
- *     port: 8080,
+ *     name: "test",
  *     protocol: "http",
- *     readTimeout: 3000,
+ *     host: "test.org",
+ *     port: 8080,
+ *     path: "/mypath",
  *     retries: 5,
+ *     connectTimeout: 1000,
  *     writeTimeout: 2000,
+ *     readTimeout: 3000,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -59,6 +60,7 @@ import * as utilities from "./utilities";
  *     snis: ["ca.com"],
  * });
  * const service = new kong.Service("service", {
+ *     name: "test",
  *     protocol: "https",
  *     host: "test.org",
  *     tlsVerify: true,

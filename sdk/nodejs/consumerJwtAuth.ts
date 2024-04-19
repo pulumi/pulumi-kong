@@ -16,18 +16,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const myConsumer = new kong.Consumer("myConsumer", {
- *     customId: "123",
+ * const myConsumer = new kong.Consumer("my_consumer", {
  *     username: "User1",
+ *     customId: "123",
  * });
- * const jwtPlugin = new kong.Plugin("jwtPlugin", {configJson: `	{
+ * const jwtPlugin = new kong.Plugin("jwt_plugin", {
+ *     name: "jwt",
+ *     configJson: `	{
  * 		"claims_to_verify": ["exp"]
  * 	}
- *
- * `});
- * const consumerJwtConfig = new kong.ConsumerJwtAuth("consumerJwtConfig", {
- *     algorithm: "HS256",
+ * `,
+ * });
+ * const consumerJwtConfig = new kong.ConsumerJwtAuth("consumer_jwt_config", {
  *     consumerId: myConsumer.id,
+ *     algorithm: "HS256",
  *     key: "my_key",
  *     rsaPublicKey: "foo",
  *     secret: "my_secret",

@@ -53,6 +53,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var route = new Route(&#34;route&#34;, RouteArgs.builder()        
+ *             .name(&#34;MyRoute&#34;)
  *             .protocols(            
  *                 &#34;http&#34;,
  *                 &#34;https&#34;)
@@ -64,7 +65,7 @@ import javax.annotation.Nullable;
  *             .stripPath(false)
  *             .preserveHost(true)
  *             .regexPriority(1)
- *             .serviceId(kong_service.service().id())
+ *             .serviceId(service.id())
  *             .headers(RouteHeaderArgs.builder()
  *                 .name(&#34;x-test-1&#34;)
  *                 .values(                
@@ -121,7 +122,7 @@ import javax.annotation.Nullable;
  *                 .port(81)
  *                 .build())
  *             .snis(&#34;foo.com&#34;)
- *             .serviceId(kong_service.service().id())
+ *             .serviceId(service.id())
  *             .build());
  * 
  *     }

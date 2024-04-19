@@ -507,14 +507,15 @@ class Service(pulumi.CustomResource):
         import pulumi_kong as kong
 
         service = kong.Service("service",
-            connect_timeout=1000,
-            host="test.org",
-            path="/mypath",
-            port=8080,
+            name="test",
             protocol="http",
-            read_timeout=3000,
+            host="test.org",
+            port=8080,
+            path="/mypath",
             retries=5,
-            write_timeout=2000)
+            connect_timeout=1000,
+            write_timeout=2000,
+            read_timeout=3000)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -546,6 +547,7 @@ class Service(pulumi.CustomResource):
         \"\"\",
             snis=["ca.com"])
         service = kong.Service("service",
+            name="test",
             protocol="https",
             host="test.org",
             tls_verify=True,
@@ -599,14 +601,15 @@ class Service(pulumi.CustomResource):
         import pulumi_kong as kong
 
         service = kong.Service("service",
-            connect_timeout=1000,
-            host="test.org",
-            path="/mypath",
-            port=8080,
+            name="test",
             protocol="http",
-            read_timeout=3000,
+            host="test.org",
+            port=8080,
+            path="/mypath",
             retries=5,
-            write_timeout=2000)
+            connect_timeout=1000,
+            write_timeout=2000,
+            read_timeout=3000)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -638,6 +641,7 @@ class Service(pulumi.CustomResource):
         \"\"\",
             snis=["ca.com"])
         service = kong.Service("service",
+            name="test",
             protocol="https",
             host="test.org",
             tls_verify=True,

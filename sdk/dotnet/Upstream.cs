@@ -39,6 +39,7 @@ namespace Pulumi.Kong
     /// 
     ///     var upstream = new Kong.Upstream("upstream", new()
     ///     {
+    ///         Name = "sample_upstream",
     ///         Slots = 10,
     ///         HashOn = "header",
     ///         HashFallback = "cookie",

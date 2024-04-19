@@ -31,14 +31,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
+//			myConsumer, err := kong.NewConsumer(ctx, "my_consumer", &kong.ConsumerArgs{
 //				Username: pulumi.String("User1"),
+//				CustomId: pulumi.String("123"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewPlugin(ctx, "oauth2Plugin", &kong.PluginArgs{
+//			_, err = kong.NewPlugin(ctx, "oauth2_plugin", &kong.PluginArgs{
+//				Name: pulumi.String("oauth2"),
 //				ConfigJson: pulumi.String(`	{
 //			"global_credentials": true,
 //			"enable_password_grant": true,
@@ -53,10 +54,11 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewConsumerOauth2(ctx, "consumerOauth2", &kong.ConsumerOauth2Args{
+//			_, err = kong.NewConsumerOauth2(ctx, "consumer_oauth2", &kong.ConsumerOauth2Args{
+//				Name:         pulumi.String("test_application"),
+//				ConsumerId:   myConsumer.ID(),
 //				ClientId:     pulumi.String("client_id"),
 //				ClientSecret: pulumi.String("client_secret"),
-//				ConsumerId:   myConsumer.ID(),
 //				RedirectUris: pulumi.StringArray{
 //					pulumi.String("https://asdf.com/callback"),
 //					pulumi.String("https://test.cl/callback"),

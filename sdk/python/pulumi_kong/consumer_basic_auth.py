@@ -174,18 +174,18 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
-        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        basic_auth_plugin = kong.Plugin("basic_auth_plugin", name="basic-auth")
+        consumer_basic_auth = kong.ConsumerBasicAuth("consumer_basic_auth",
             consumer_id=my_consumer.id,
+            username="foo_updated",
             password="bar_updated",
             tags=[
                 "myTag",
                 "anotherTag",
-            ],
-            username="foo_updated")
+            ])
         ```
         <!--End PulumiCodeChooser -->
 
@@ -214,18 +214,18 @@ class ConsumerBasicAuth(pulumi.CustomResource):
         import pulumi
         import pulumi_kong as kong
 
-        my_consumer = kong.Consumer("myConsumer",
-            custom_id="123",
-            username="User1")
-        basic_auth_plugin = kong.Plugin("basicAuthPlugin")
-        consumer_basic_auth = kong.ConsumerBasicAuth("consumerBasicAuth",
+        my_consumer = kong.Consumer("my_consumer",
+            username="User1",
+            custom_id="123")
+        basic_auth_plugin = kong.Plugin("basic_auth_plugin", name="basic-auth")
+        consumer_basic_auth = kong.ConsumerBasicAuth("consumer_basic_auth",
             consumer_id=my_consumer.id,
+            username="foo_updated",
             password="bar_updated",
             tags=[
                 "myTag",
                 "anotherTag",
-            ],
-            username="foo_updated")
+            ])
         ```
         <!--End PulumiCodeChooser -->
 

@@ -31,20 +31,21 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myConsumer, err := kong.NewConsumer(ctx, "myConsumer", &kong.ConsumerArgs{
-//				CustomId: pulumi.String("123"),
+//			myConsumer, err := kong.NewConsumer(ctx, "my_consumer", &kong.ConsumerArgs{
 //				Username: pulumi.String("User1"),
+//				CustomId: pulumi.String("123"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewPlugin(ctx, "aclPlugin", &kong.PluginArgs{
-//				ConfigJson: pulumi.String("	{\n		\"allow\": [\"group1\", \"group2\"]\n	}\n\n"),
+//			_, err = kong.NewPlugin(ctx, "acl_plugin", &kong.PluginArgs{
+//				Name:       pulumi.String("acl"),
+//				ConfigJson: pulumi.String("	{\n		\"allow\": [\"group1\", \"group2\"]\n	}\n"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = kong.NewConsumerAcl(ctx, "consumerAcl", &kong.ConsumerAclArgs{
+//			_, err = kong.NewConsumerAcl(ctx, "consumer_acl", &kong.ConsumerAclArgs{
 //				ConsumerId: myConsumer.ID(),
 //				Group:      pulumi.String("group2"),
 //				Tags: pulumi.StringArray{

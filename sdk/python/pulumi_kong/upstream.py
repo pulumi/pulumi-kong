@@ -526,6 +526,7 @@ class Upstream(pulumi.CustomResource):
         \"\"\",
             snis=["foo.com"])
         upstream = kong.Upstream("upstream",
+            name="sample_upstream",
             slots=10,
             hash_on="header",
             hash_fallback="cookie",
@@ -659,6 +660,7 @@ class Upstream(pulumi.CustomResource):
         \"\"\",
             snis=["foo.com"])
         upstream = kong.Upstream("upstream",
+            name="sample_upstream",
             slots=10,
             hash_on="header",
             hash_fallback="cookie",

@@ -32,6 +32,7 @@ import javax.annotation.Nullable;
  * import com.pulumi.kong.Consumer;
  * import com.pulumi.kong.ConsumerArgs;
  * import com.pulumi.kong.Plugin;
+ * import com.pulumi.kong.PluginArgs;
  * import com.pulumi.kong.ConsumerBasicAuth;
  * import com.pulumi.kong.ConsumerBasicAuthArgs;
  * import java.util.List;
@@ -48,19 +49,21 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
- *             .customId(&#34;123&#34;)
  *             .username(&#34;User1&#34;)
+ *             .customId(&#34;123&#34;)
  *             .build());
  * 
- *         var basicAuthPlugin = new Plugin(&#34;basicAuthPlugin&#34;);
+ *         var basicAuthPlugin = new Plugin(&#34;basicAuthPlugin&#34;, PluginArgs.builder()        
+ *             .name(&#34;basic-auth&#34;)
+ *             .build());
  * 
  *         var consumerBasicAuth = new ConsumerBasicAuth(&#34;consumerBasicAuth&#34;, ConsumerBasicAuthArgs.builder()        
  *             .consumerId(myConsumer.id())
+ *             .username(&#34;foo_updated&#34;)
  *             .password(&#34;bar_updated&#34;)
  *             .tags(            
  *                 &#34;myTag&#34;,
  *                 &#34;anotherTag&#34;)
- *             .username(&#34;foo_updated&#34;)
  *             .build());
  * 
  *     }

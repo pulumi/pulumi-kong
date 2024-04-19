@@ -24,8 +24,8 @@ namespace Pulumi.Kong
     ///     var target = new Kong.Target("target", new()
     ///     {
     ///         TargetAddress = "sample_target:80",
-    ///         UpstreamId = kong_upstream.Upstream.Id,
     ///         Weight = 10,
+    ///         UpstreamId = upstream.Id,
     ///     });
     /// 
     /// });

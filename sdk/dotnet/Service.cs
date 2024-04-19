@@ -27,14 +27,15 @@ namespace Pulumi.Kong
     /// {
     ///     var service = new Kong.Service("service", new()
     ///     {
-    ///         ConnectTimeout = 1000,
-    ///         Host = "test.org",
-    ///         Path = "/mypath",
-    ///         Port = 8080,
+    ///         Name = "test",
     ///         Protocol = "http",
-    ///         ReadTimeout = 3000,
+    ///         Host = "test.org",
+    ///         Port = 8080,
+    ///         Path = "/mypath",
     ///         Retries = 5,
+    ///         ConnectTimeout = 1000,
     ///         WriteTimeout = 2000,
+    ///         ReadTimeout = 3000,
     ///     });
     /// 
     /// });
@@ -86,6 +87,7 @@ namespace Pulumi.Kong
     /// 
     ///     var service = new Kong.Service("service", new()
     ///     {
+    ///         Name = "test",
     ///         Protocol = "https",
     ///         Host = "test.org",
     ///         TlsVerify = true,

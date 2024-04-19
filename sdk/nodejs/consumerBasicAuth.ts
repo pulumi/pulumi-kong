@@ -16,19 +16,19 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as kong from "@pulumi/kong";
  *
- * const myConsumer = new kong.Consumer("myConsumer", {
- *     customId: "123",
+ * const myConsumer = new kong.Consumer("my_consumer", {
  *     username: "User1",
+ *     customId: "123",
  * });
- * const basicAuthPlugin = new kong.Plugin("basicAuthPlugin", {});
- * const consumerBasicAuth = new kong.ConsumerBasicAuth("consumerBasicAuth", {
+ * const basicAuthPlugin = new kong.Plugin("basic_auth_plugin", {name: "basic-auth"});
+ * const consumerBasicAuth = new kong.ConsumerBasicAuth("consumer_basic_auth", {
  *     consumerId: myConsumer.id,
+ *     username: "foo_updated",
  *     password: "bar_updated",
  *     tags: [
  *         "myTag",
  *         "anotherTag",
  *     ],
- *     username: "foo_updated",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
