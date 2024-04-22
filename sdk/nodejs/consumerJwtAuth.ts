@@ -22,9 +22,9 @@ import * as utilities from "./utilities";
  * });
  * const jwtPlugin = new kong.Plugin("jwt_plugin", {
  *     name: "jwt",
- *     configJson: `	{
- * 		"claims_to_verify": ["exp"]
- * 	}
+ *     configJson: `\x09{
+ * \x09\x09"claims_to_verify": ["exp"]
+ * \x09}
  * `,
  * });
  * const consumerJwtConfig = new kong.ConsumerJwtAuth("consumer_jwt_config", {

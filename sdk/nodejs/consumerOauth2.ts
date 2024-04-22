@@ -22,13 +22,13 @@ import * as utilities from "./utilities";
  * });
  * const oauth2Plugin = new kong.Plugin("oauth2_plugin", {
  *     name: "oauth2",
- *     configJson: `	{
- * 		"global_credentials": true,
- * 		"enable_password_grant": true,
- * 		"token_expiration": 180,
- * 		"refresh_token_ttl": 180,
- * 		"provision_key": "testprovisionkey"
- * 	}
+ *     configJson: `\x09{
+ * \x09\x09"global_credentials": true,
+ * \x09\x09"enable_password_grant": true,
+ * \x09\x09"token_expiration": 180,
+ * \x09\x09"refresh_token_ttl": 180,
+ * \x09\x09"provision_key": "testprovisionkey"
+ * \x09}
  * `,
  * });
  * const consumerOauth2 = new kong.ConsumerOauth2("consumer_oauth2", {

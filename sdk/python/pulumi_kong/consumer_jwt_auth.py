@@ -246,9 +246,9 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             custom_id="123")
         jwt_plugin = kong.Plugin("jwt_plugin",
             name="jwt",
-            config_json=\"\"\"	{
-        		"claims_to_verify": ["exp"]
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"claims_to_verify": ["exp"]
+        \\x09}
         \"\"\")
         consumer_jwt_config = kong.ConsumerJwtAuth("consumer_jwt_config",
             consumer_id=my_consumer.id,
@@ -291,9 +291,9 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             custom_id="123")
         jwt_plugin = kong.Plugin("jwt_plugin",
             name="jwt",
-            config_json=\"\"\"	{
-        		"claims_to_verify": ["exp"]
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"claims_to_verify": ["exp"]
+        \\x09}
         \"\"\")
         consumer_jwt_config = kong.ConsumerJwtAuth("consumer_jwt_config",
             consumer_id=my_consumer.id,
