@@ -236,7 +236,6 @@ class ConsumerJwtAuth(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -246,9 +245,9 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             custom_id="123")
         jwt_plugin = kong.Plugin("jwt_plugin",
             name="jwt",
-            config_json=\"\"\"	{
-        		"claims_to_verify": ["exp"]
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"claims_to_verify": ["exp"]
+        \\x09}
         \"\"\")
         consumer_jwt_config = kong.ConsumerJwtAuth("consumer_jwt_config",
             consumer_id=my_consumer.id,
@@ -257,7 +256,6 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             rsa_public_key="foo",
             secret="my_secret")
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -281,7 +279,6 @@ class ConsumerJwtAuth(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -291,9 +288,9 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             custom_id="123")
         jwt_plugin = kong.Plugin("jwt_plugin",
             name="jwt",
-            config_json=\"\"\"	{
-        		"claims_to_verify": ["exp"]
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"claims_to_verify": ["exp"]
+        \\x09}
         \"\"\")
         consumer_jwt_config = kong.ConsumerJwtAuth("consumer_jwt_config",
             consumer_id=my_consumer.id,
@@ -302,7 +299,6 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             rsa_public_key="foo",
             secret="my_secret")
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param ConsumerJwtAuthArgs args: The arguments to use to populate this resource's properties.

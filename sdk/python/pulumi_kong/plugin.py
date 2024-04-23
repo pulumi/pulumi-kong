@@ -305,23 +305,20 @@ class Plugin(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
 
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
-            config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
         To apply a plugin to a consumer use the `consumer_id` property, for example:
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -332,17 +329,15 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             consumer_id=plugin_consumer.id,
-            config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a service use the `service_id` property, for example:
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -354,17 +349,15 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             service_id=service.id,
-            config_json=\"\"\"	{
-        		"second": 10,
-        		"hour" : 2000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 10,
+        \\x09\\x09"hour" : 2000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a route use the `route_id` property, for example:
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -377,13 +370,12 @@ class Plugin(pulumi.CustomResource):
             name="rate-limiting",
             enabled=True,
             service_id=service.id,
-            config_json=\"\"\"	{
-        		"second": 11,
-        		"hour" : 4000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 11,
+        \\x09\\x09"hour" : 4000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -417,23 +409,20 @@ class Plugin(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
 
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
-            config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
         To apply a plugin to a consumer use the `consumer_id` property, for example:
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -444,17 +433,15 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             consumer_id=plugin_consumer.id,
-            config_json=\"\"\"	{
-        		"second": 5,
-        		"hour" : 1000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 5,
+        \\x09\\x09"hour" : 1000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a service use the `service_id` property, for example:
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -466,17 +453,15 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             service_id=service.id,
-            config_json=\"\"\"	{
-        		"second": 10,
-        		"hour" : 2000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 10,
+        \\x09\\x09"hour" : 2000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
 
         To apply a plugin to a route use the `route_id` property, for example:
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -489,13 +474,12 @@ class Plugin(pulumi.CustomResource):
             name="rate-limiting",
             enabled=True,
             service_id=service.id,
-            config_json=\"\"\"	{
-        		"second": 11,
-        		"hour" : 4000
-        	}
+            config_json=\"\"\"\\x09{
+        \\x09\\x09"second": 11,
+        \\x09\\x09"hour" : 4000
+        \\x09}
         \"\"\")
         ```
-        <!--End PulumiCodeChooser -->
 
         ## Import
 
