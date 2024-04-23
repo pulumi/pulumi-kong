@@ -163,7 +163,6 @@ class Certificate(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -177,7 +176,6 @@ class Certificate(pulumi.CustomResource):
             ],
             tags=["myTag"])
         ```
-        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -206,7 +204,6 @@ class Certificate(pulumi.CustomResource):
 
         ## Example Usage
 
-        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_kong as kong
@@ -220,7 +217,6 @@ class Certificate(pulumi.CustomResource):
             ],
             tags=["myTag"])
         ```
-        <!--End PulumiCodeChooser -->
 
         ## Import
 
