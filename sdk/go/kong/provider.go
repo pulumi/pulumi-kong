@@ -75,7 +75,7 @@ type providerArgs struct {
 	KongApiKey *string `pulumi:"kongApiKey"`
 	// Workspace context (Enterprise Edition)
 	KongWorkspace *string `pulumi:"kongWorkspace"`
-	// Should plugins `config_json` field strictly match plugin configuration
+	// Should plugins `configJson` field strictly match plugin configuration
 	StrictPluginsMatch *bool `pulumi:"strictPluginsMatch"`
 	// Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
 	TlsSkipVerify *bool `pulumi:"tlsSkipVerify"`
@@ -95,7 +95,7 @@ type ProviderArgs struct {
 	KongApiKey pulumi.StringPtrInput
 	// Workspace context (Enterprise Edition)
 	KongWorkspace pulumi.StringPtrInput
-	// Should plugins `config_json` field strictly match plugin configuration
+	// Should plugins `configJson` field strictly match plugin configuration
 	StrictPluginsMatch pulumi.BoolPtrInput
 	// Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
 	TlsSkipVerify pulumi.BoolPtrInput
