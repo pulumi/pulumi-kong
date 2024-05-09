@@ -107,7 +107,7 @@ export interface ProviderArgs {
      */
     kongWorkspace?: pulumi.Input<string>;
     /**
-     * Should plugins `config_json` field strictly match plugin configuration
+     * Should plugins `configJson` field strictly match plugin configuration
      */
     strictPluginsMatch?: pulumi.Input<boolean>;
     /**
