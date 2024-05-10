@@ -25,7 +25,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -46,12 +47,12 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
- *             .name(&#34;test&#34;)
- *             .protocol(&#34;http&#34;)
- *             .host(&#34;test.org&#34;)
+ *         var service = new Service("service", ServiceArgs.builder()        
+ *             .name("test")
+ *             .protocol("http")
+ *             .host("test.org")
  *             .port(8080)
- *             .path(&#34;/mypath&#34;)
+ *             .path("/mypath")
  *             .retries(5)
  *             .connectTimeout(1000)
  *             .writeTimeout(2000)
@@ -60,13 +61,15 @@ import javax.annotation.Nullable;
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -89,38 +92,38 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
- *             .certificate(&#34;&#34;&#34;
+ *         var certificate = new Certificate("certificate", CertificateArgs.builder()        
+ *             .certificate("""
  *     -----BEGIN CERTIFICATE-----
  *     ......
  *     -----END CERTIFICATE-----
- *             &#34;&#34;&#34;)
- *             .privateKey(&#34;&#34;&#34;
+ *             """)
+ *             .privateKey("""
  *     -----BEGIN PRIVATE KEY-----
  *     .....
  *     -----END PRIVATE KEY-----
- *             &#34;&#34;&#34;)
- *             .snis(&#34;foo.com&#34;)
+ *             """)
+ *             .snis("foo.com")
  *             .build());
  * 
- *         var ca = new Certificate(&#34;ca&#34;, CertificateArgs.builder()        
- *             .certificate(&#34;&#34;&#34;
+ *         var ca = new Certificate("ca", CertificateArgs.builder()        
+ *             .certificate("""
  *     -----BEGIN CERTIFICATE-----
  *     ......
  *     -----END CERTIFICATE-----
- *             &#34;&#34;&#34;)
- *             .privateKey(&#34;&#34;&#34;
+ *             """)
+ *             .privateKey("""
  *     -----BEGIN PRIVATE KEY-----
  *     .....
  *     -----END PRIVATE KEY-----
- *             &#34;&#34;&#34;)
- *             .snis(&#34;ca.com&#34;)
+ *             """)
+ *             .snis("ca.com")
  *             .build());
  * 
- *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
- *             .name(&#34;test&#34;)
- *             .protocol(&#34;https&#34;)
- *             .host(&#34;test.org&#34;)
+ *         var service = new Service("service", ServiceArgs.builder()        
+ *             .name("test")
+ *             .protocol("https")
+ *             .host("test.org")
  *             .tlsVerify(true)
  *             .tlsVerifyDepth(2)
  *             .clientCertificateId(certificate.id())
@@ -129,7 +132,8 @@ import javax.annotation.Nullable;
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import

@@ -30,7 +30,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -52,37 +53,39 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var route = new Route(&#34;route&#34;, RouteArgs.builder()        
- *             .name(&#34;MyRoute&#34;)
+ *         var route = new Route("route", RouteArgs.builder()        
+ *             .name("MyRoute")
  *             .protocols(            
- *                 &#34;http&#34;,
- *                 &#34;https&#34;)
+ *                 "http",
+ *                 "https")
  *             .methods(            
- *                 &#34;GET&#34;,
- *                 &#34;POST&#34;)
- *             .hosts(&#34;example2.com&#34;)
- *             .paths(&#34;/test&#34;)
+ *                 "GET",
+ *                 "POST")
+ *             .hosts("example2.com")
+ *             .paths("/test")
  *             .stripPath(false)
  *             .preserveHost(true)
  *             .regexPriority(1)
  *             .serviceId(service.id())
  *             .headers(RouteHeaderArgs.builder()
- *                 .name(&#34;x-test-1&#34;)
+ *                 .name("x-test-1")
  *                 .values(                
- *                     &#34;a&#34;,
- *                     &#34;b&#34;)
+ *                     "a",
+ *                     "b")
  *                 .build())
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -105,29 +108,30 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var route = new Route(&#34;route&#34;, RouteArgs.builder()        
- *             .protocols(&#34;tcp&#34;)
+ *         var route = new Route("route", RouteArgs.builder()        
+ *             .protocols("tcp")
  *             .stripPath(true)
  *             .preserveHost(false)
  *             .sources(            
  *                 RouteSourceArgs.builder()
- *                     .ip(&#34;192.168.1.1&#34;)
+ *                     .ip("192.168.1.1")
  *                     .port(80)
  *                     .build(),
  *                 RouteSourceArgs.builder()
- *                     .ip(&#34;192.168.1.2&#34;)
+ *                     .ip("192.168.1.2")
  *                     .build())
  *             .destinations(RouteDestinationArgs.builder()
- *                 .ip(&#34;172.10.1.1&#34;)
+ *                 .ip("172.10.1.1")
  *                 .port(81)
  *                 .build())
- *             .snis(&#34;foo.com&#34;)
+ *             .snis("foo.com")
  *             .serviceId(service.id())
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import
