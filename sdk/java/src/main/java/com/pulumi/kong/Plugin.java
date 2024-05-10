@@ -25,7 +25,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -46,24 +47,26 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
- *             .name(&#34;rate-limiting&#34;)
- *             .configJson(&#34;&#34;&#34;
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *             .name("rate-limiting")
+ *             .configJson("""
  * 	{
- * 		&#34;second&#34;: 5,
- * 		&#34;hour&#34; : 1000
+ * 		"second": 5,
+ * 		"hour" : 1000
  * 	}
- *             &#34;&#34;&#34;)
+ *             """)
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * To apply a plugin to a consumer use the `consumer_id` property, for example:
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -86,31 +89,33 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var pluginConsumer = new Consumer(&#34;pluginConsumer&#34;, ConsumerArgs.builder()        
- *             .username(&#34;PluginUser&#34;)
- *             .customId(&#34;567&#34;)
+ *         var pluginConsumer = new Consumer("pluginConsumer", ConsumerArgs.builder()        
+ *             .username("PluginUser")
+ *             .customId("567")
  *             .build());
  * 
- *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
- *             .name(&#34;rate-limiting&#34;)
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *             .name("rate-limiting")
  *             .consumerId(pluginConsumer.id())
- *             .configJson(&#34;&#34;&#34;
+ *             .configJson("""
  * 	{
- * 		&#34;second&#34;: 5,
- * 		&#34;hour&#34; : 1000
+ * 		"second": 5,
+ * 		"hour" : 1000
  * 	}
- *             &#34;&#34;&#34;)
+ *             """)
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * To apply a plugin to a service use the `service_id` property, for example:
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -133,32 +138,34 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
- *             .name(&#34;test&#34;)
- *             .protocol(&#34;http&#34;)
- *             .host(&#34;test.org&#34;)
+ *         var service = new Service("service", ServiceArgs.builder()        
+ *             .name("test")
+ *             .protocol("http")
+ *             .host("test.org")
  *             .build());
  * 
- *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
- *             .name(&#34;rate-limiting&#34;)
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *             .name("rate-limiting")
  *             .serviceId(service.id())
- *             .configJson(&#34;&#34;&#34;
+ *             .configJson("""
  * 	{
- * 		&#34;second&#34;: 10,
- * 		&#34;hour&#34; : 2000
+ * 		"second": 10,
+ * 		"hour" : 2000
  * 	}
- *             &#34;&#34;&#34;)
+ *             """)
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * To apply a plugin to a route use the `route_id` property, for example:
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -181,27 +188,28 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var service = new Service(&#34;service&#34;, ServiceArgs.builder()        
- *             .name(&#34;test&#34;)
- *             .protocol(&#34;http&#34;)
- *             .host(&#34;test.org&#34;)
+ *         var service = new Service("service", ServiceArgs.builder()        
+ *             .name("test")
+ *             .protocol("http")
+ *             .host("test.org")
  *             .build());
  * 
- *         var rateLimit = new Plugin(&#34;rateLimit&#34;, PluginArgs.builder()        
- *             .name(&#34;rate-limiting&#34;)
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *             .name("rate-limiting")
  *             .enabled(true)
  *             .serviceId(service.id())
- *             .configJson(&#34;&#34;&#34;
+ *             .configJson("""
  * 	{
- * 		&#34;second&#34;: 11,
- * 		&#34;hour&#34; : 4000
+ * 		"second": 11,
+ * 		"hour" : 4000
  * 	}
- *             &#34;&#34;&#34;)
+ *             """)
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import

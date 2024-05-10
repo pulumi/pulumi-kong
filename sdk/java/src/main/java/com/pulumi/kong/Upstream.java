@@ -21,7 +21,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -51,42 +52,42 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
- *             .certificate(&#34;&#34;&#34;
+ *         var certificate = new Certificate("certificate", CertificateArgs.builder()        
+ *             .certificate("""
  *     -----BEGIN CERTIFICATE-----
  *     ......
  *     -----END CERTIFICATE-----
- *             &#34;&#34;&#34;)
- *             .privateKey(&#34;&#34;&#34;
+ *             """)
+ *             .privateKey("""
  *     -----BEGIN PRIVATE KEY-----
  *     .....
  *     -----END PRIVATE KEY-----
- *             &#34;&#34;&#34;)
- *             .snis(&#34;foo.com&#34;)
+ *             """)
+ *             .snis("foo.com")
  *             .build());
  * 
- *         var upstream = new Upstream(&#34;upstream&#34;, UpstreamArgs.builder()        
- *             .name(&#34;sample_upstream&#34;)
+ *         var upstream = new Upstream("upstream", UpstreamArgs.builder()        
+ *             .name("sample_upstream")
  *             .slots(10)
- *             .hashOn(&#34;header&#34;)
- *             .hashFallback(&#34;cookie&#34;)
- *             .hashOnHeader(&#34;HeaderName&#34;)
- *             .hashFallbackHeader(&#34;FallbackHeaderName&#34;)
- *             .hashOnCookie(&#34;CookieName&#34;)
- *             .hashOnCookiePath(&#34;/path&#34;)
- *             .hostHeader(&#34;x-host&#34;)
+ *             .hashOn("header")
+ *             .hashFallback("cookie")
+ *             .hashOnHeader("HeaderName")
+ *             .hashFallbackHeader("FallbackHeaderName")
+ *             .hashOnCookie("CookieName")
+ *             .hashOnCookiePath("/path")
+ *             .hostHeader("x-host")
  *             .tags(            
- *                 &#34;a&#34;,
- *                 &#34;b&#34;)
+ *                 "a",
+ *                 "b")
  *             .clientCertificateId(certificate.id())
  *             .healthchecks(UpstreamHealthchecksArgs.builder()
  *                 .active(UpstreamHealthchecksActiveArgs.builder()
- *                     .type(&#34;https&#34;)
- *                     .httpPath(&#34;/status&#34;)
+ *                     .type("https")
+ *                     .httpPath("/status")
  *                     .timeout(10)
  *                     .concurrency(20)
  *                     .httpsVerifyCertificate(false)
- *                     .httpsSni(&#34;some.domain.com&#34;)
+ *                     .httpsSni("some.domain.com")
  *                     .healthy(UpstreamHealthchecksActiveHealthyArgs.builder()
  *                         .successes(1)
  *                         .interval(5)
@@ -105,7 +106,7 @@ import javax.annotation.Nullable;
  *                         .build())
  *                     .build())
  *                 .passive(UpstreamHealthchecksPassiveArgs.builder()
- *                     .type(&#34;https&#34;)
+ *                     .type("https")
  *                     .healthy(UpstreamHealthchecksPassiveHealthyArgs.builder()
  *                         .successes(1)
  *                         .httpStatuses(                        
@@ -128,7 +129,8 @@ import javax.annotation.Nullable;
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import

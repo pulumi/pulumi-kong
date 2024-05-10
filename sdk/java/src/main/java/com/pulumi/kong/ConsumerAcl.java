@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -48,31 +49,32 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
- *             .username(&#34;User1&#34;)
- *             .customId(&#34;123&#34;)
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *             .username("User1")
+ *             .customId("123")
  *             .build());
  * 
- *         var aclPlugin = new Plugin(&#34;aclPlugin&#34;, PluginArgs.builder()        
- *             .name(&#34;acl&#34;)
- *             .configJson(&#34;&#34;&#34;
+ *         var aclPlugin = new Plugin("aclPlugin", PluginArgs.builder()        
+ *             .name("acl")
+ *             .configJson("""
  * 	{
- * 		&#34;allow&#34;: [&#34;group1&#34;, &#34;group2&#34;]
+ * 		"allow": ["group1", "group2"]
  * 	}
- *             &#34;&#34;&#34;)
+ *             """)
  *             .build());
  * 
- *         var consumerAcl = new ConsumerAcl(&#34;consumerAcl&#34;, ConsumerAclArgs.builder()        
+ *         var consumerAcl = new ConsumerAcl("consumerAcl", ConsumerAclArgs.builder()        
  *             .consumerId(myConsumer.id())
- *             .group(&#34;group2&#34;)
+ *             .group("group2")
  *             .tags(            
- *                 &#34;myTag&#34;,
- *                 &#34;otherTag&#34;)
+ *                 "myTag",
+ *                 "otherTag")
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  */

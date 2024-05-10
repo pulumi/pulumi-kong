@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -44,15 +45,16 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var consumer = new Consumer(&#34;consumer&#34;, ConsumerArgs.builder()        
- *             .username(&#34;User1&#34;)
- *             .customId(&#34;123&#34;)
- *             .tags(&#34;mySuperTag&#34;)
+ *         var consumer = new Consumer("consumer", ConsumerArgs.builder()        
+ *             .username("User1")
+ *             .customId("123")
+ *             .tags("mySuperTag")
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import

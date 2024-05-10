@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -48,26 +49,27 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
- *             .username(&#34;User1&#34;)
- *             .customId(&#34;123&#34;)
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *             .username("User1")
+ *             .customId("123")
  *             .build());
  * 
- *         var keyAuthPlugin = new Plugin(&#34;keyAuthPlugin&#34;, PluginArgs.builder()        
- *             .name(&#34;key-auth&#34;)
+ *         var keyAuthPlugin = new Plugin("keyAuthPlugin", PluginArgs.builder()        
+ *             .name("key-auth")
  *             .build());
  * 
- *         var consumerKeyAuth = new ConsumerKeyAuth(&#34;consumerKeyAuth&#34;, ConsumerKeyAuthArgs.builder()        
+ *         var consumerKeyAuth = new ConsumerKeyAuth("consumerKeyAuth", ConsumerKeyAuthArgs.builder()        
  *             .consumerId(myConsumer.id())
- *             .key(&#34;secret&#34;)
+ *             .key("secret")
  *             .tags(            
- *                 &#34;myTag&#34;,
- *                 &#34;anotherTag&#34;)
+ *                 "myTag",
+ *                 "anotherTag")
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  */

@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -44,18 +45,19 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var certificate = new Certificate(&#34;certificate&#34;, CertificateArgs.builder()        
- *             .certificate(&#34;public key --- 123 ----&#34;)
- *             .privateKey(&#34;private key --- 456 ----&#34;)
+ *         var certificate = new Certificate("certificate", CertificateArgs.builder()        
+ *             .certificate("public key --- 123 ----")
+ *             .privateKey("private key --- 456 ----")
  *             .snis(            
- *                 &#34;foo.com&#34;,
- *                 &#34;bar.com&#34;)
- *             .tags(&#34;myTag&#34;)
+ *                 "foo.com",
+ *                 "bar.com")
+ *             .tags("myTag")
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Import

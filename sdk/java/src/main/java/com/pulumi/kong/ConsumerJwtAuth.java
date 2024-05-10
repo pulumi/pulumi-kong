@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -48,31 +49,32 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer(&#34;myConsumer&#34;, ConsumerArgs.builder()        
- *             .username(&#34;User1&#34;)
- *             .customId(&#34;123&#34;)
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *             .username("User1")
+ *             .customId("123")
  *             .build());
  * 
- *         var jwtPlugin = new Plugin(&#34;jwtPlugin&#34;, PluginArgs.builder()        
- *             .name(&#34;jwt&#34;)
- *             .configJson(&#34;&#34;&#34;
+ *         var jwtPlugin = new Plugin("jwtPlugin", PluginArgs.builder()        
+ *             .name("jwt")
+ *             .configJson("""
  * 	{
- * 		&#34;claims_to_verify&#34;: [&#34;exp&#34;]
+ * 		"claims_to_verify": ["exp"]
  * 	}
- *             &#34;&#34;&#34;)
+ *             """)
  *             .build());
  * 
- *         var consumerJwtConfig = new ConsumerJwtAuth(&#34;consumerJwtConfig&#34;, ConsumerJwtAuthArgs.builder()        
+ *         var consumerJwtConfig = new ConsumerJwtAuth("consumerJwtConfig", ConsumerJwtAuthArgs.builder()        
  *             .consumerId(myConsumer.id())
- *             .algorithm(&#34;HS256&#34;)
- *             .key(&#34;my_key&#34;)
- *             .rsaPublicKey(&#34;foo&#34;)
- *             .secret(&#34;my_secret&#34;)
+ *             .algorithm("HS256")
+ *             .key("my_key")
+ *             .rsaPublicKey("foo")
+ *             .secret("my_secret")
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  */
