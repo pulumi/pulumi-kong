@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()
  *             .name("rate-limiting")
  *             .configJson("""
  * 	{
@@ -89,12 +89,12 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var pluginConsumer = new Consumer("pluginConsumer", ConsumerArgs.builder()        
+ *         var pluginConsumer = new Consumer("pluginConsumer", ConsumerArgs.builder()
  *             .username("PluginUser")
  *             .customId("567")
  *             .build());
  * 
- *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()
  *             .name("rate-limiting")
  *             .consumerId(pluginConsumer.id())
  *             .configJson("""
@@ -138,13 +138,13 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var service = new Service("service", ServiceArgs.builder()        
+ *         var service = new Service("service", ServiceArgs.builder()
  *             .name("test")
  *             .protocol("http")
  *             .host("test.org")
  *             .build());
  * 
- *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()
  *             .name("rate-limiting")
  *             .serviceId(service.id())
  *             .configJson("""
@@ -188,13 +188,13 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var service = new Service("service", ServiceArgs.builder()        
+ *         var service = new Service("service", ServiceArgs.builder()
  *             .name("test")
  *             .protocol("http")
  *             .host("test.org")
  *             .build());
  * 
- *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()        
+ *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()
  *             .name("rate-limiting")
  *             .enabled(true)
  *             .serviceId(service.id())

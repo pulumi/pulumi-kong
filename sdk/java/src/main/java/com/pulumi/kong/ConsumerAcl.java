@@ -49,12 +49,12 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
  *             .build());
  * 
- *         var aclPlugin = new Plugin("aclPlugin", PluginArgs.builder()        
+ *         var aclPlugin = new Plugin("aclPlugin", PluginArgs.builder()
  *             .name("acl")
  *             .configJson("""
  * 	{
@@ -63,7 +63,7 @@ import javax.annotation.Nullable;
  *             """)
  *             .build());
  * 
- *         var consumerAcl = new ConsumerAcl("consumerAcl", ConsumerAclArgs.builder()        
+ *         var consumerAcl = new ConsumerAcl("consumerAcl", ConsumerAclArgs.builder()
  *             .consumerId(myConsumer.id())
  *             .group("group2")
  *             .tags(            
