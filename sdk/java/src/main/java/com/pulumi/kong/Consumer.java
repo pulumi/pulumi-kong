@@ -45,7 +45,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var consumer = new Consumer("consumer", ConsumerArgs.builder()        
+ *         var consumer = new Consumer("consumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
  *             .tags("mySuperTag")

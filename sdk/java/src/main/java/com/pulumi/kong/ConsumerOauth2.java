@@ -50,12 +50,12 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
  *             .build());
  * 
- *         var oauth2Plugin = new Plugin("oauth2Plugin", PluginArgs.builder()        
+ *         var oauth2Plugin = new Plugin("oauth2Plugin", PluginArgs.builder()
  *             .name("oauth2")
  *             .configJson("""
  * 	{
@@ -68,7 +68,7 @@ import javax.annotation.Nullable;
  *             """)
  *             .build());
  * 
- *         var consumerOauth2 = new ConsumerOauth2("consumerOauth2", ConsumerOauth2Args.builder()        
+ *         var consumerOauth2 = new ConsumerOauth2("consumerOauth2", ConsumerOauth2Args.builder()
  *             .name("test_application")
  *             .consumerId(myConsumer.id())
  *             .clientId("client_id")
