@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var service = new Service("service", ServiceArgs.builder()        
+ *         var service = new Service("service", ServiceArgs.builder()
  *             .name("test")
  *             .protocol("http")
  *             .host("test.org")
@@ -92,7 +92,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var certificate = new Certificate("certificate", CertificateArgs.builder()        
+ *         var certificate = new Certificate("certificate", CertificateArgs.builder()
  *             .certificate("""
  *     -----BEGIN CERTIFICATE-----
  *     ......
@@ -106,7 +106,7 @@ import javax.annotation.Nullable;
  *             .snis("foo.com")
  *             .build());
  * 
- *         var ca = new Certificate("ca", CertificateArgs.builder()        
+ *         var ca = new Certificate("ca", CertificateArgs.builder()
  *             .certificate("""
  *     -----BEGIN CERTIFICATE-----
  *     ......
@@ -120,7 +120,7 @@ import javax.annotation.Nullable;
  *             .snis("ca.com")
  *             .build());
  * 
- *         var service = new Service("service", ServiceArgs.builder()        
+ *         var service = new Service("service", ServiceArgs.builder()
  *             .name("test")
  *             .protocol("https")
  *             .host("test.org")

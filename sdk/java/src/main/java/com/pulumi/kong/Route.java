@@ -53,7 +53,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var route = new Route("route", RouteArgs.builder()        
+ *         var route = new Route("route", RouteArgs.builder()
  *             .name("MyRoute")
  *             .protocols(            
  *                 "http",
@@ -108,7 +108,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var route = new Route("route", RouteArgs.builder()        
+ *         var route = new Route("route", RouteArgs.builder()
  *             .protocols("tcp")
  *             .stripPath(true)
  *             .preserveHost(false)
