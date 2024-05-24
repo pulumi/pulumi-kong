@@ -49,16 +49,16 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
  *             .build());
  * 
- *         var basicAuthPlugin = new Plugin("basicAuthPlugin", PluginArgs.builder()        
+ *         var basicAuthPlugin = new Plugin("basicAuthPlugin", PluginArgs.builder()
  *             .name("basic-auth")
  *             .build());
  * 
- *         var consumerBasicAuth = new ConsumerBasicAuth("consumerBasicAuth", ConsumerBasicAuthArgs.builder()        
+ *         var consumerBasicAuth = new ConsumerBasicAuth("consumerBasicAuth", ConsumerBasicAuthArgs.builder()
  *             .consumerId(myConsumer.id())
  *             .username("foo_updated")
  *             .password("bar_updated")

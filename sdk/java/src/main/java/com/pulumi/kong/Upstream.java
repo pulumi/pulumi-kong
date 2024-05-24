@@ -52,7 +52,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var certificate = new Certificate("certificate", CertificateArgs.builder()        
+ *         var certificate = new Certificate("certificate", CertificateArgs.builder()
  *             .certificate("""
  *     -----BEGIN CERTIFICATE-----
  *     ......
@@ -66,7 +66,7 @@ import javax.annotation.Nullable;
  *             .snis("foo.com")
  *             .build());
  * 
- *         var upstream = new Upstream("upstream", UpstreamArgs.builder()        
+ *         var upstream = new Upstream("upstream", UpstreamArgs.builder()
  *             .name("sample_upstream")
  *             .slots(10)
  *             .hashOn("header")

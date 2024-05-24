@@ -49,12 +49,12 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
  *             .build());
  * 
- *         var jwtPlugin = new Plugin("jwtPlugin", PluginArgs.builder()        
+ *         var jwtPlugin = new Plugin("jwtPlugin", PluginArgs.builder()
  *             .name("jwt")
  *             .configJson("""
  * 	{
@@ -63,7 +63,7 @@ import javax.annotation.Nullable;
  *             """)
  *             .build());
  * 
- *         var consumerJwtConfig = new ConsumerJwtAuth("consumerJwtConfig", ConsumerJwtAuthArgs.builder()        
+ *         var consumerJwtConfig = new ConsumerJwtAuth("consumerJwtConfig", ConsumerJwtAuthArgs.builder()
  *             .consumerId(myConsumer.id())
  *             .algorithm("HS256")
  *             .key("my_key")

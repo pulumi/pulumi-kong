@@ -49,16 +49,16 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()        
+ *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
  *             .build());
  * 
- *         var keyAuthPlugin = new Plugin("keyAuthPlugin", PluginArgs.builder()        
+ *         var keyAuthPlugin = new Plugin("keyAuthPlugin", PluginArgs.builder()
  *             .name("key-auth")
  *             .build());
  * 
- *         var consumerKeyAuth = new ConsumerKeyAuth("consumerKeyAuth", ConsumerKeyAuthArgs.builder()        
+ *         var consumerKeyAuth = new ConsumerKeyAuth("consumerKeyAuth", ConsumerKeyAuthArgs.builder()
  *             .consumerId(myConsumer.id())
  *             .key("secret")
  *             .tags(            

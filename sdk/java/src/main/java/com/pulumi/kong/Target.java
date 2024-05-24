@@ -42,7 +42,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var target = new Target("target", TargetArgs.builder()        
+ *         var target = new Target("target", TargetArgs.builder()
  *             .target("sample_target:80")
  *             .weight(10)
  *             .upstreamId(upstream.id())
