@@ -191,7 +191,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public ConsumerOauth2(String name) {
+    public ConsumerOauth2(java.lang.String name) {
         this(name, ConsumerOauth2Args.Empty);
     }
     /**
@@ -199,7 +199,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public ConsumerOauth2(String name, ConsumerOauth2Args args) {
+    public ConsumerOauth2(java.lang.String name, ConsumerOauth2Args args) {
         this(name, args, null);
     }
     /**
@@ -208,15 +208,22 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public ConsumerOauth2(String name, ConsumerOauth2Args args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerOauth2:ConsumerOauth2", name, args == null ? ConsumerOauth2Args.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public ConsumerOauth2(java.lang.String name, ConsumerOauth2Args args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerOauth2:ConsumerOauth2", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private ConsumerOauth2(String name, Output<String> id, @Nullable ConsumerOauth2State state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerOauth2:ConsumerOauth2", name, state, makeResourceOptions(options, id));
+    private ConsumerOauth2(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerOauth2State state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerOauth2:ConsumerOauth2", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static ConsumerOauth2Args makeArgs(ConsumerOauth2Args args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? ConsumerOauth2Args.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .build();
@@ -232,7 +239,7 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static ConsumerOauth2 get(String name, Output<String> id, @Nullable ConsumerOauth2State state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static ConsumerOauth2 get(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerOauth2State state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new ConsumerOauth2(name, id, state, options);
     }
 }

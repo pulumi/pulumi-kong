@@ -122,7 +122,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public ConsumerKeyAuth(String name) {
+    public ConsumerKeyAuth(java.lang.String name) {
         this(name, ConsumerKeyAuthArgs.Empty);
     }
     /**
@@ -130,7 +130,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public ConsumerKeyAuth(String name, ConsumerKeyAuthArgs args) {
+    public ConsumerKeyAuth(java.lang.String name, ConsumerKeyAuthArgs args) {
         this(name, args, null);
     }
     /**
@@ -139,15 +139,22 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public ConsumerKeyAuth(String name, ConsumerKeyAuthArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerKeyAuth:ConsumerKeyAuth", name, args == null ? ConsumerKeyAuthArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public ConsumerKeyAuth(java.lang.String name, ConsumerKeyAuthArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerKeyAuth:ConsumerKeyAuth", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private ConsumerKeyAuth(String name, Output<String> id, @Nullable ConsumerKeyAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerKeyAuth:ConsumerKeyAuth", name, state, makeResourceOptions(options, id));
+    private ConsumerKeyAuth(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerKeyAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerKeyAuth:ConsumerKeyAuth", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static ConsumerKeyAuthArgs makeArgs(ConsumerKeyAuthArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? ConsumerKeyAuthArgs.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .additionalSecretOutputs(List.of(
@@ -166,7 +173,7 @@ public class ConsumerKeyAuth extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static ConsumerKeyAuth get(String name, Output<String> id, @Nullable ConsumerKeyAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static ConsumerKeyAuth get(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerKeyAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new ConsumerKeyAuth(name, id, state, options);
     }
 }
