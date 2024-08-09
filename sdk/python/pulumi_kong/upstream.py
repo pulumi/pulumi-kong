@@ -501,7 +501,7 @@ class Upstream(pulumi.CustomResource):
                  hash_on_cookie: Optional[pulumi.Input[str]] = None,
                  hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
                  hash_on_header: Optional[pulumi.Input[str]] = None,
-                 healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+                 healthchecks: Optional[pulumi.Input[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
                  host_header: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  slots: Optional[pulumi.Input[int]] = None,
@@ -539,55 +539,55 @@ class Upstream(pulumi.CustomResource):
                 "b",
             ],
             client_certificate_id=certificate.id,
-            healthchecks=kong.UpstreamHealthchecksArgs(
-                active=kong.UpstreamHealthchecksActiveArgs(
-                    type="https",
-                    http_path="/status",
-                    timeout=10,
-                    concurrency=20,
-                    https_verify_certificate=False,
-                    https_sni="some.domain.com",
-                    healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
-                        successes=1,
-                        interval=5,
-                        http_statuses=[
+            healthchecks={
+                "active": {
+                    "type": "https",
+                    "http_path": "/status",
+                    "timeout": 10,
+                    "concurrency": 20,
+                    "https_verify_certificate": False,
+                    "https_sni": "some.domain.com",
+                    "healthy": {
+                        "successes": 1,
+                        "interval": 5,
+                        "http_statuses": [
                             200,
                             201,
                         ],
-                    ),
-                    unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
-                        timeouts=7,
-                        interval=3,
-                        tcp_failures=1,
-                        http_failures=2,
-                        http_statuses=[
+                    },
+                    "unhealthy": {
+                        "timeouts": 7,
+                        "interval": 3,
+                        "tcp_failures": 1,
+                        "http_failures": 2,
+                        "http_statuses": [
                             500,
                             501,
                         ],
-                    ),
-                ),
-                passive=kong.UpstreamHealthchecksPassiveArgs(
-                    type="https",
-                    healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
-                        successes=1,
-                        http_statuses=[
+                    },
+                },
+                "passive": {
+                    "type": "https",
+                    "healthy": {
+                        "successes": 1,
+                        "http_statuses": [
                             200,
                             201,
                             202,
                         ],
-                    ),
-                    unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
-                        timeouts=3,
-                        tcp_failures=5,
-                        http_failures=6,
-                        http_statuses=[
+                    },
+                    "unhealthy": {
+                        "timeouts": 3,
+                        "tcp_failures": 5,
+                        "http_failures": 6,
+                        "http_statuses": [
                             500,
                             501,
                             502,
                         ],
-                    ),
-                ),
-            ))
+                    },
+                },
+            })
         ```
 
         ## Import
@@ -671,55 +671,55 @@ class Upstream(pulumi.CustomResource):
                 "b",
             ],
             client_certificate_id=certificate.id,
-            healthchecks=kong.UpstreamHealthchecksArgs(
-                active=kong.UpstreamHealthchecksActiveArgs(
-                    type="https",
-                    http_path="/status",
-                    timeout=10,
-                    concurrency=20,
-                    https_verify_certificate=False,
-                    https_sni="some.domain.com",
-                    healthy=kong.UpstreamHealthchecksActiveHealthyArgs(
-                        successes=1,
-                        interval=5,
-                        http_statuses=[
+            healthchecks={
+                "active": {
+                    "type": "https",
+                    "http_path": "/status",
+                    "timeout": 10,
+                    "concurrency": 20,
+                    "https_verify_certificate": False,
+                    "https_sni": "some.domain.com",
+                    "healthy": {
+                        "successes": 1,
+                        "interval": 5,
+                        "http_statuses": [
                             200,
                             201,
                         ],
-                    ),
-                    unhealthy=kong.UpstreamHealthchecksActiveUnhealthyArgs(
-                        timeouts=7,
-                        interval=3,
-                        tcp_failures=1,
-                        http_failures=2,
-                        http_statuses=[
+                    },
+                    "unhealthy": {
+                        "timeouts": 7,
+                        "interval": 3,
+                        "tcp_failures": 1,
+                        "http_failures": 2,
+                        "http_statuses": [
                             500,
                             501,
                         ],
-                    ),
-                ),
-                passive=kong.UpstreamHealthchecksPassiveArgs(
-                    type="https",
-                    healthy=kong.UpstreamHealthchecksPassiveHealthyArgs(
-                        successes=1,
-                        http_statuses=[
+                    },
+                },
+                "passive": {
+                    "type": "https",
+                    "healthy": {
+                        "successes": 1,
+                        "http_statuses": [
                             200,
                             201,
                             202,
                         ],
-                    ),
-                    unhealthy=kong.UpstreamHealthchecksPassiveUnhealthyArgs(
-                        timeouts=3,
-                        tcp_failures=5,
-                        http_failures=6,
-                        http_statuses=[
+                    },
+                    "unhealthy": {
+                        "timeouts": 3,
+                        "tcp_failures": 5,
+                        "http_failures": 6,
+                        "http_statuses": [
                             500,
                             501,
                             502,
                         ],
-                    ),
-                ),
-            ))
+                    },
+                },
+            })
         ```
 
         ## Import
@@ -752,7 +752,7 @@ class Upstream(pulumi.CustomResource):
                  hash_on_cookie: Optional[pulumi.Input[str]] = None,
                  hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
                  hash_on_header: Optional[pulumi.Input[str]] = None,
-                 healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+                 healthchecks: Optional[pulumi.Input[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
                  host_header: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  slots: Optional[pulumi.Input[int]] = None,
@@ -795,7 +795,7 @@ class Upstream(pulumi.CustomResource):
             hash_on_cookie: Optional[pulumi.Input[str]] = None,
             hash_on_cookie_path: Optional[pulumi.Input[str]] = None,
             hash_on_header: Optional[pulumi.Input[str]] = None,
-            healthchecks: Optional[pulumi.Input[pulumi.InputType['UpstreamHealthchecksArgs']]] = None,
+            healthchecks: Optional[pulumi.Input[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
             host_header: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             slots: Optional[pulumi.Input[int]] = None,

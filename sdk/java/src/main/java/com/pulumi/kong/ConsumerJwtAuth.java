@@ -169,7 +169,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public ConsumerJwtAuth(String name) {
+    public ConsumerJwtAuth(java.lang.String name) {
         this(name, ConsumerJwtAuthArgs.Empty);
     }
     /**
@@ -177,7 +177,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public ConsumerJwtAuth(String name, ConsumerJwtAuthArgs args) {
+    public ConsumerJwtAuth(java.lang.String name, ConsumerJwtAuthArgs args) {
         this(name, args, null);
     }
     /**
@@ -186,15 +186,22 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public ConsumerJwtAuth(String name, ConsumerJwtAuthArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerJwtAuth:ConsumerJwtAuth", name, args == null ? ConsumerJwtAuthArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public ConsumerJwtAuth(java.lang.String name, ConsumerJwtAuthArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerJwtAuth:ConsumerJwtAuth", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private ConsumerJwtAuth(String name, Output<String> id, @Nullable ConsumerJwtAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerJwtAuth:ConsumerJwtAuth", name, state, makeResourceOptions(options, id));
+    private ConsumerJwtAuth(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerJwtAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerJwtAuth:ConsumerJwtAuth", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static ConsumerJwtAuthArgs makeArgs(ConsumerJwtAuthArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? ConsumerJwtAuthArgs.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .build();
@@ -210,7 +217,7 @@ public class ConsumerJwtAuth extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static ConsumerJwtAuth get(String name, Output<String> id, @Nullable ConsumerJwtAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static ConsumerJwtAuth get(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerJwtAuthState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new ConsumerJwtAuth(name, id, state, options);
     }
 }
