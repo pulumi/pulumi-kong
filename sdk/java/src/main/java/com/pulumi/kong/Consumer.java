@@ -115,7 +115,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public Consumer(String name) {
+    public Consumer(java.lang.String name) {
         this(name, ConsumerArgs.Empty);
     }
     /**
@@ -123,7 +123,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public Consumer(String name, @Nullable ConsumerArgs args) {
+    public Consumer(java.lang.String name, @Nullable ConsumerArgs args) {
         this(name, args, null);
     }
     /**
@@ -132,15 +132,22 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public Consumer(String name, @Nullable ConsumerArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumer:Consumer", name, args == null ? ConsumerArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public Consumer(java.lang.String name, @Nullable ConsumerArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumer:Consumer", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private Consumer(String name, Output<String> id, @Nullable ConsumerState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumer:Consumer", name, state, makeResourceOptions(options, id));
+    private Consumer(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumer:Consumer", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static ConsumerArgs makeArgs(@Nullable ConsumerArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? ConsumerArgs.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .build();
@@ -156,7 +163,7 @@ public class Consumer extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static Consumer get(String name, Output<String> id, @Nullable ConsumerState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static Consumer get(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new Consumer(name, id, state, options);
     }
 }

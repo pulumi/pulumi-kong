@@ -127,7 +127,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public ConsumerAcl(String name) {
+    public ConsumerAcl(java.lang.String name) {
         this(name, ConsumerAclArgs.Empty);
     }
     /**
@@ -135,7 +135,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public ConsumerAcl(String name, ConsumerAclArgs args) {
+    public ConsumerAcl(java.lang.String name, ConsumerAclArgs args) {
         this(name, args, null);
     }
     /**
@@ -144,15 +144,22 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public ConsumerAcl(String name, ConsumerAclArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerAcl:ConsumerAcl", name, args == null ? ConsumerAclArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public ConsumerAcl(java.lang.String name, ConsumerAclArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerAcl:ConsumerAcl", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private ConsumerAcl(String name, Output<String> id, @Nullable ConsumerAclState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("kong:index/consumerAcl:ConsumerAcl", name, state, makeResourceOptions(options, id));
+    private ConsumerAcl(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerAclState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("kong:index/consumerAcl:ConsumerAcl", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static ConsumerAclArgs makeArgs(ConsumerAclArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? ConsumerAclArgs.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .build();
@@ -168,7 +175,7 @@ public class ConsumerAcl extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static ConsumerAcl get(String name, Output<String> id, @Nullable ConsumerAclState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static ConsumerAcl get(java.lang.String name, Output<java.lang.String> id, @Nullable ConsumerAclState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new ConsumerAcl(name, id, state, options);
     }
 }
