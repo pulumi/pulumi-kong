@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
-    /// ## # kong.ConsumerAcl
+    /// # kong.ConsumerAcl
     /// 
     /// Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
     /// 

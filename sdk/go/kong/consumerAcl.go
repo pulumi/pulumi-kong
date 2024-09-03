@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// ## # ConsumerAcl
+// # ConsumerAcl
 //
 // Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
 //

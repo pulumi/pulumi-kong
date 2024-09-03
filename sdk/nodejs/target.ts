@@ -5,6 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
+ * # kong.Target
+ *
  * ## Example Usage
  *
  * ```typescript

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
-    /// ## # kong.ConsumerBasicAuth
+    /// # kong.ConsumerBasicAuth
     /// 
     /// Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
     /// 

@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # kong.ConsumerJwtAuth
+ * # kong.ConsumerJwtAuth
  *
  * Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
  *

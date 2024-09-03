@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// ## # ConsumerBasicAuth
+// # ConsumerBasicAuth
 //
 // Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
 //

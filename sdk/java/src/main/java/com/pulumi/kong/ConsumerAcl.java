@@ -16,7 +16,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * ## # kong.ConsumerAcl
+ * # kong.ConsumerAcl
  * 
  * Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
  * 

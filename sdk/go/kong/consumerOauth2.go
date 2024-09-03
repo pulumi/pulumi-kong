@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// ## # ConsumerOauth2
+// # ConsumerOauth2
 //
 // Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
 //

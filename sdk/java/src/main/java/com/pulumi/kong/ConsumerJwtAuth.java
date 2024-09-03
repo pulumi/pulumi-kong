@@ -16,7 +16,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * ## # kong.ConsumerJwtAuth
+ * # kong.ConsumerJwtAuth
  * 
  * Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
  * 

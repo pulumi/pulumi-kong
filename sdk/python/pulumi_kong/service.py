@@ -495,7 +495,7 @@ class Service(pulumi.CustomResource):
                  write_timeout: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        ## # Service
+        # Service
 
         The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
 
@@ -585,7 +585,7 @@ class Service(pulumi.CustomResource):
                  args: ServiceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # Service
+        # Service
 
         The service resource maps directly onto the json for the service endpoint in Kong.  For more information on the parameters [see the Kong Service create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#service-object).
 

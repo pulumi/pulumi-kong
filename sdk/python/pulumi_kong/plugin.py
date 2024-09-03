@@ -298,7 +298,7 @@ class Plugin(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        ## # Plugin
+        # Plugin
 
         The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
         The `config_json` is passed through to the plugin to configure it as is.
@@ -402,7 +402,7 @@ class Plugin(pulumi.CustomResource):
                  args: Optional[PluginArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # Plugin
+        # Plugin
 
         The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
         The `config_json` is passed through to the plugin to configure it as is.

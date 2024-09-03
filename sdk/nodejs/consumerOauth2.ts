@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # kong.ConsumerOauth2
+ * # kong.ConsumerOauth2
  *
  * Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
  *

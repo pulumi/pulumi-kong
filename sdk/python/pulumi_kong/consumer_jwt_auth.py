@@ -230,7 +230,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        ## # ConsumerJwtAuth
+        # ConsumerJwtAuth
 
         Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
 
@@ -273,7 +273,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
                  args: ConsumerJwtAuthArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # ConsumerJwtAuth
+        # ConsumerJwtAuth
 
         Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
 

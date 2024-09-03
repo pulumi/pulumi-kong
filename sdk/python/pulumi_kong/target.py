@@ -163,6 +163,8 @@ class Target(pulumi.CustomResource):
                  weight: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
+        # Target
+
         ## Example Usage
 
         ```python
@@ -197,6 +199,8 @@ class Target(pulumi.CustomResource):
                  args: TargetArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
+        # Target
+
         ## Example Usage
 
         ```python
