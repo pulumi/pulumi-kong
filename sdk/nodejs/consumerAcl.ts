@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # kong.ConsumerAcl
+ * # kong.ConsumerAcl
  *
  * Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
  *

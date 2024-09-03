@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
-    /// ## # kong.ConsumerJwtAuth
+    /// # kong.ConsumerJwtAuth
     /// 
     /// Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
     /// 

@@ -10,6 +10,8 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
+    /// # kong.Upstream
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp

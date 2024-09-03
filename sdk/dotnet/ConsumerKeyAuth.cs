@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
-    /// ## # kong.ConsumerKeyAuth
+    /// # kong.ConsumerKeyAuth
     /// 
     /// Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
     /// 

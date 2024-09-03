@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # kong.ConsumerBasicAuth
+ * # kong.ConsumerBasicAuth
  *
  * Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
  *

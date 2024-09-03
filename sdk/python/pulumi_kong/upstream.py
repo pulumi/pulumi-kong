@@ -508,6 +508,8 @@ class Upstream(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
+        # Upstream
+
         ## Example Usage
 
         ```python
@@ -640,6 +642,8 @@ class Upstream(pulumi.CustomResource):
                  args: Optional[UpstreamArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
+        # Upstream
+
         ## Example Usage
 
         ```python

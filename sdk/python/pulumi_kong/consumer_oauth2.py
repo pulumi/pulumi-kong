@@ -263,7 +263,7 @@ class ConsumerOauth2(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        ## # ConsumerOauth2
+        # ConsumerOauth2
 
         Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
 
@@ -315,7 +315,7 @@ class ConsumerOauth2(pulumi.CustomResource):
                  args: ConsumerOauth2Args,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # ConsumerOauth2
+        # ConsumerOauth2
 
         Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
 

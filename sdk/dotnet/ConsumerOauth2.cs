@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
-    /// ## # kong.ConsumerOauth2
+    /// # kong.ConsumerOauth2
     /// 
     /// Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
     /// 

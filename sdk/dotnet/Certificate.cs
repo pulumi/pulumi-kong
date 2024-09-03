@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Kong
 {
     /// <summary>
-    /// ## # kong.Certificate
+    /// # kong.Certificate
     /// 
     /// For more information on creating certificates in Kong [see their documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#certificate-object)
     /// 

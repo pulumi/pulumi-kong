@@ -17,7 +17,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * ## # kong.ConsumerOauth2
+ * # kong.ConsumerOauth2
  * 
  * Resource that allows you to configure the OAuth2 plugin credentials for a consumer.
  * 

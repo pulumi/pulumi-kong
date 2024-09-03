@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// ## # ConsumerJwtAuth
+// # ConsumerJwtAuth
 //
 // Consumer jwt auth is a resource that allows you to configure the jwt auth plugin for a consumer.
 //

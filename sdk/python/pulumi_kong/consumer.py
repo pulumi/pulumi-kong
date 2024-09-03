@@ -133,7 +133,7 @@ class Consumer(pulumi.CustomResource):
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # Consumer
+        # Consumer
 
         The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
 
@@ -170,7 +170,7 @@ class Consumer(pulumi.CustomResource):
                  args: Optional[ConsumerArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # Consumer
+        # Consumer
 
         The consumer resource maps directly onto the json for creating a Consumer in Kong.  For more information on the parameters [see the Kong Consumer create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#consumer-object).
 

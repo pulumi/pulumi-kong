@@ -131,7 +131,7 @@ class ConsumerAcl(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        ## # ConsumerAcl
+        # ConsumerAcl
 
         Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
 
@@ -172,7 +172,7 @@ class ConsumerAcl(pulumi.CustomResource):
                  args: ConsumerAclArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # ConsumerAcl
+        # ConsumerAcl
 
         Consumer ACL is a resource that allows you to configure the acl plugin for a consumer.
 

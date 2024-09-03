@@ -163,7 +163,7 @@ class ConsumerBasicAuth(pulumi.CustomResource):
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # ConsumerBasicAuth
+        # ConsumerBasicAuth
 
         Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
 
@@ -201,7 +201,7 @@ class ConsumerBasicAuth(pulumi.CustomResource):
                  args: ConsumerBasicAuthArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # ConsumerBasicAuth
+        # ConsumerBasicAuth
 
         Consumer basic auth is a resource that allows you to configure the basic auth plugin for a consumer.
 

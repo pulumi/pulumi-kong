@@ -132,7 +132,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        ## # ConsumerKeyAuth
+        # ConsumerKeyAuth
 
         Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
 
@@ -168,7 +168,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
                  args: ConsumerKeyAuthArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # ConsumerKeyAuth
+        # ConsumerKeyAuth
 
         Resource that allows you to configure the [Key Authentication](https://docs.konghq.com/hub/kong-inc/key-auth/) plugin for a consumer.
 
