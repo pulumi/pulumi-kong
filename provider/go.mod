@@ -6,7 +6,7 @@ toolchain go1.22.7
 
 require (
 	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20240411073741-c76ec533a0e5
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.91.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.91.1
 )
 
 require (
