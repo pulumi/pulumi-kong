@@ -4,23 +4,47 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'RouteDestinationArgs',
+    'RouteDestinationArgsDict',
     'RouteHeaderArgs',
+    'RouteHeaderArgsDict',
     'RouteSourceArgs',
+    'RouteSourceArgsDict',
     'UpstreamHealthchecksArgs',
+    'UpstreamHealthchecksArgsDict',
     'UpstreamHealthchecksActiveArgs',
+    'UpstreamHealthchecksActiveArgsDict',
     'UpstreamHealthchecksActiveHealthyArgs',
+    'UpstreamHealthchecksActiveHealthyArgsDict',
     'UpstreamHealthchecksActiveUnhealthyArgs',
+    'UpstreamHealthchecksActiveUnhealthyArgsDict',
     'UpstreamHealthchecksPassiveArgs',
+    'UpstreamHealthchecksPassiveArgsDict',
     'UpstreamHealthchecksPassiveHealthyArgs',
+    'UpstreamHealthchecksPassiveHealthyArgsDict',
     'UpstreamHealthchecksPassiveUnhealthyArgs',
+    'UpstreamHealthchecksPassiveUnhealthyArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class RouteDestinationArgsDict(TypedDict):
+        ip: NotRequired[pulumi.Input[str]]
+        port: NotRequired[pulumi.Input[int]]
+elif False:
+    RouteDestinationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class RouteDestinationArgs:
@@ -50,6 +74,16 @@ class RouteDestinationArgs:
     def port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "port", value)
 
+
+if not MYPY:
+    class RouteHeaderArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        The name of the route
+        """
+        values: pulumi.Input[Sequence[pulumi.Input[str]]]
+elif False:
+    RouteHeaderArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class RouteHeaderArgs:
@@ -84,6 +118,13 @@ class RouteHeaderArgs:
         pulumi.set(self, "values", value)
 
 
+if not MYPY:
+    class RouteSourceArgsDict(TypedDict):
+        ip: NotRequired[pulumi.Input[str]]
+        port: NotRequired[pulumi.Input[int]]
+elif False:
+    RouteSourceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class RouteSourceArgs:
     def __init__(__self__, *,
@@ -113,6 +154,13 @@ class RouteSourceArgs:
         pulumi.set(self, "port", value)
 
 
+if not MYPY:
+    class UpstreamHealthchecksArgsDict(TypedDict):
+        active: NotRequired[pulumi.Input['UpstreamHealthchecksActiveArgsDict']]
+        passive: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveArgsDict']]
+elif False:
+    UpstreamHealthchecksArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class UpstreamHealthchecksArgs:
     def __init__(__self__, *,
@@ -141,6 +189,19 @@ class UpstreamHealthchecksArgs:
     def passive(self, value: Optional[pulumi.Input['UpstreamHealthchecksPassiveArgs']]):
         pulumi.set(self, "passive", value)
 
+
+if not MYPY:
+    class UpstreamHealthchecksActiveArgsDict(TypedDict):
+        concurrency: NotRequired[pulumi.Input[int]]
+        healthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveHealthyArgsDict']]
+        http_path: NotRequired[pulumi.Input[str]]
+        https_sni: NotRequired[pulumi.Input[str]]
+        https_verify_certificate: NotRequired[pulumi.Input[bool]]
+        timeout: NotRequired[pulumi.Input[int]]
+        type: NotRequired[pulumi.Input[str]]
+        unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgsDict']]
+elif False:
+    UpstreamHealthchecksActiveArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveArgs:
@@ -243,6 +304,14 @@ class UpstreamHealthchecksActiveArgs:
         pulumi.set(self, "unhealthy", value)
 
 
+if not MYPY:
+    class UpstreamHealthchecksActiveHealthyArgsDict(TypedDict):
+        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[int]]]]
+        interval: NotRequired[pulumi.Input[int]]
+        successes: NotRequired[pulumi.Input[int]]
+elif False:
+    UpstreamHealthchecksActiveHealthyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class UpstreamHealthchecksActiveHealthyArgs:
     def __init__(__self__, *,
@@ -283,6 +352,16 @@ class UpstreamHealthchecksActiveHealthyArgs:
     def successes(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "successes", value)
 
+
+if not MYPY:
+    class UpstreamHealthchecksActiveUnhealthyArgsDict(TypedDict):
+        http_failures: NotRequired[pulumi.Input[int]]
+        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[int]]]]
+        interval: NotRequired[pulumi.Input[int]]
+        tcp_failures: NotRequired[pulumi.Input[int]]
+        timeouts: NotRequired[pulumi.Input[int]]
+elif False:
+    UpstreamHealthchecksActiveUnhealthyArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveUnhealthyArgs:
@@ -349,6 +428,14 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
         pulumi.set(self, "timeouts", value)
 
 
+if not MYPY:
+    class UpstreamHealthchecksPassiveArgsDict(TypedDict):
+        healthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgsDict']]
+        type: NotRequired[pulumi.Input[str]]
+        unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgsDict']]
+elif False:
+    UpstreamHealthchecksPassiveArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class UpstreamHealthchecksPassiveArgs:
     def __init__(__self__, *,
@@ -390,6 +477,13 @@ class UpstreamHealthchecksPassiveArgs:
         pulumi.set(self, "unhealthy", value)
 
 
+if not MYPY:
+    class UpstreamHealthchecksPassiveHealthyArgsDict(TypedDict):
+        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[int]]]]
+        successes: NotRequired[pulumi.Input[int]]
+elif False:
+    UpstreamHealthchecksPassiveHealthyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class UpstreamHealthchecksPassiveHealthyArgs:
     def __init__(__self__, *,
@@ -418,6 +512,15 @@ class UpstreamHealthchecksPassiveHealthyArgs:
     def successes(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "successes", value)
 
+
+if not MYPY:
+    class UpstreamHealthchecksPassiveUnhealthyArgsDict(TypedDict):
+        http_failures: NotRequired[pulumi.Input[int]]
+        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[int]]]]
+        tcp_failures: NotRequired[pulumi.Input[int]]
+        timeouts: NotRequired[pulumi.Input[int]]
+elif False:
+    UpstreamHealthchecksPassiveUnhealthyArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveUnhealthyArgs:
