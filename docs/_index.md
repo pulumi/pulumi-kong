@@ -196,7 +196,7 @@ config:
 {{< /chooser >}}
 ## Configuration Reference
 
-In addition to generic provider arguments (e.g. alias and version), the following arguments are supported in the Kong provider block:
+In addition to generic provider arguments (e.g. alias and version), the following arguments are supported in the Kong provider configuration:
 
 * `kongAdminUri` - (Required) The URI of the Kong admin API, can be sourced from the `KONG_ADMIN_ADDR` environment variable
 * `kongAdminUsername` - (Optional) The username for the Kong admin API if set, can be sourced from the `KONG_ADMIN_USERNAME` environment variable
