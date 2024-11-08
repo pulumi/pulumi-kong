@@ -6,7 +6,7 @@ toolchain go1.22.7
 
 require (
 	github.com/kevholditch/terraform-provider-kong v1.9.2-0.20240411073741-c76ec533a0e5
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.94.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.94.1-0.20241108214517-af9ccb5aa383
 )
 
 require (
@@ -114,6 +114,7 @@ require (
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/natefinch/atomic v1.0.1 // indirect
+	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/opentracing/basictracer-go v1.1.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pgavlin/fx v0.1.6 // indirect
