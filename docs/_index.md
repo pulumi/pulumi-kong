@@ -6,7 +6,7 @@ layout: package
 ---
 ## Installation
 
-The kong provider is available as a package in all Pulumi languages:
+The Kong provider is available as a package in all Pulumi languages:
 
 * JavaScript/TypeScript: [`@pulumi/kong`](https://www.npmjs.com/package/@pulumi/kong)
 * Python: [`pulumi-kong`](https://pypi.org/project/pulumi-kong/)
