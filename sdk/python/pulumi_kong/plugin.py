@@ -290,6 +290,9 @@ class _PluginState:
 
 
 class Plugin(pulumi.CustomResource):
+
+    pulumi_type = "kong:index/plugin:Plugin"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

@@ -128,6 +128,9 @@ class _ConsumerAclState:
 
 
 class ConsumerAcl(pulumi.CustomResource):
+
+    pulumi_type = "kong:index/consumerAcl:ConsumerAcl"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
