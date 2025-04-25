@@ -129,6 +129,9 @@ class _ConsumerKeyAuthState:
 
 
 class ConsumerKeyAuth(pulumi.CustomResource):
+
+    pulumi_type = "kong:index/consumerKeyAuth:ConsumerKeyAuth"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
