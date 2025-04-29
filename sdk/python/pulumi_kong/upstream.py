@@ -496,6 +496,9 @@ class _UpstreamState:
 
 
 class Upstream(pulumi.CustomResource):
+
+    pulumi_type = "kong:index/upstream:Upstream"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

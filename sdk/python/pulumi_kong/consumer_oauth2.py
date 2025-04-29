@@ -256,6 +256,9 @@ class _ConsumerOauth2State:
 
 
 class ConsumerOauth2(pulumi.CustomResource):
+
+    pulumi_type = "kong:index/consumerOauth2:ConsumerOauth2"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
