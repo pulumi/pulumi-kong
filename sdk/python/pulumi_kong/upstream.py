@@ -495,10 +495,8 @@ class _UpstreamState:
         pulumi.set(self, "tags", value)
 
 
+@pulumi.type_token("kong:index/upstream:Upstream")
 class Upstream(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/upstream:Upstream"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

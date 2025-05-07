@@ -158,10 +158,8 @@ class _ConsumerBasicAuthState:
         pulumi.set(self, "username", value)
 
 
+@pulumi.type_token("kong:index/consumerBasicAuth:ConsumerBasicAuth")
 class ConsumerBasicAuth(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/consumerBasicAuth:ConsumerBasicAuth"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

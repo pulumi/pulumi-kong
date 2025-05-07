@@ -480,10 +480,8 @@ class _ServiceState:
         pulumi.set(self, "write_timeout", value)
 
 
+@pulumi.type_token("kong:index/service:Service")
 class Service(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/service:Service"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

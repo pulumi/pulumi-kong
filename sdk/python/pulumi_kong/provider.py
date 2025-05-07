@@ -20,9 +20,9 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 kong_admin_uri: pulumi.Input[builtins.str],
                  kong_admin_password: Optional[pulumi.Input[builtins.str]] = None,
                  kong_admin_token: Optional[pulumi.Input[builtins.str]] = None,
+                 kong_admin_uri: Optional[pulumi.Input[builtins.str]] = None,
                  kong_admin_username: Optional[pulumi.Input[builtins.str]] = None,
                  kong_api_key: Optional[pulumi.Input[builtins.str]] = None,
                  kong_workspace: Optional[pulumi.Input[builtins.str]] = None,
@@ -30,20 +30,21 @@ class ProviderArgs:
                  tls_skip_verify: Optional[pulumi.Input[builtins.bool]] = None):
         """
         The set of arguments for constructing a Provider resource.
-        :param pulumi.Input[builtins.str] kong_admin_uri: The address of the kong admin url e.g. http://localhost:8001
         :param pulumi.Input[builtins.str] kong_admin_password: An basic auth password for kong admin
         :param pulumi.Input[builtins.str] kong_admin_token: API key for the kong api (Enterprise Edition)
+        :param pulumi.Input[builtins.str] kong_admin_uri: The address of the kong admin url e.g. http://localhost:8001
         :param pulumi.Input[builtins.str] kong_admin_username: An basic auth user for kong admin
         :param pulumi.Input[builtins.str] kong_api_key: API key for the kong api (if you have locked it down)
         :param pulumi.Input[builtins.str] kong_workspace: Workspace context (Enterprise Edition)
         :param pulumi.Input[builtins.bool] strict_plugins_match: Should plugins `config_json` field strictly match plugin configuration
         :param pulumi.Input[builtins.bool] tls_skip_verify: Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
         """
-        pulumi.set(__self__, "kong_admin_uri", kong_admin_uri)
         if kong_admin_password is not None:
             pulumi.set(__self__, "kong_admin_password", kong_admin_password)
         if kong_admin_token is not None:
             pulumi.set(__self__, "kong_admin_token", kong_admin_token)
+        if kong_admin_uri is not None:
+            pulumi.set(__self__, "kong_admin_uri", kong_admin_uri)
         if kong_admin_username is not None:
             pulumi.set(__self__, "kong_admin_username", kong_admin_username)
         if kong_api_key is not None:
@@ -58,18 +59,6 @@ class ProviderArgs:
             tls_skip_verify = (_utilities.get_env_bool('TLS_SKIP_VERIFY') or False)
         if tls_skip_verify is not None:
             pulumi.set(__self__, "tls_skip_verify", tls_skip_verify)
-
-    @property
-    @pulumi.getter(name="kongAdminUri")
-    def kong_admin_uri(self) -> pulumi.Input[builtins.str]:
-        """
-        The address of the kong admin url e.g. http://localhost:8001
-        """
-        return pulumi.get(self, "kong_admin_uri")
-
-    @kong_admin_uri.setter
-    def kong_admin_uri(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "kong_admin_uri", value)
 
     @property
     @pulumi.getter(name="kongAdminPassword")
@@ -94,6 +83,18 @@ class ProviderArgs:
     @kong_admin_token.setter
     def kong_admin_token(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "kong_admin_token", value)
+
+    @property
+    @pulumi.getter(name="kongAdminUri")
+    def kong_admin_uri(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The address of the kong admin url e.g. http://localhost:8001
+        """
+        return pulumi.get(self, "kong_admin_uri")
+
+    @kong_admin_uri.setter
+    def kong_admin_uri(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "kong_admin_uri", value)
 
     @property
     @pulumi.getter(name="kongAdminUsername")
@@ -156,10 +157,8 @@ class ProviderArgs:
         pulumi.set(self, "tls_skip_verify", value)
 
 
+@pulumi.type_token("pulumi:providers:kong")
 class Provider(pulumi.ProviderResource):
-
-    pulumi_type = "pulumi:providers:kong"
-
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -194,7 +193,7 @@ class Provider(pulumi.ProviderResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ProviderArgs,
+                 args: Optional[ProviderArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         The provider type for the kong package. By default, resources use package-wide configuration
@@ -236,8 +235,6 @@ class Provider(pulumi.ProviderResource):
 
             __props__.__dict__["kong_admin_password"] = kong_admin_password
             __props__.__dict__["kong_admin_token"] = kong_admin_token
-            if kong_admin_uri is None and not opts.urn:
-                raise TypeError("Missing required property 'kong_admin_uri'")
             __props__.__dict__["kong_admin_uri"] = kong_admin_uri
             __props__.__dict__["kong_admin_username"] = kong_admin_username
             __props__.__dict__["kong_api_key"] = kong_api_key
@@ -272,7 +269,7 @@ class Provider(pulumi.ProviderResource):
 
     @property
     @pulumi.getter(name="kongAdminUri")
-    def kong_admin_uri(self) -> pulumi.Output[builtins.str]:
+    def kong_admin_uri(self) -> pulumi.Output[Optional[builtins.str]]:
         """
         The address of the kong admin url e.g. http://localhost:8001
         """
@@ -301,4 +298,24 @@ class Provider(pulumi.ProviderResource):
         Workspace context (Enterprise Edition)
         """
         return pulumi.get(self, "kong_workspace")
+
+    @pulumi.output_type
+    class TerraformConfigResult:
+        def __init__(__self__, result=None):
+            if result and not isinstance(result, dict):
+                raise TypeError("Expected argument 'result' to be a dict")
+            pulumi.set(__self__, "result", result)
+
+        @property
+        @pulumi.getter
+        def result(self) -> Mapping[str, Any]:
+            return pulumi.get(self, "result")
+
+    def terraform_config(__self__) -> pulumi.Output['Provider.TerraformConfigResult']:
+        """
+        This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.
+        """
+        __args__ = dict()
+        __args__['__self__'] = __self__
+        return pulumi.runtime.call('pulumi:providers:kong/terraformConfig', __args__, res=__self__, typ=Provider.TerraformConfigResult)
 

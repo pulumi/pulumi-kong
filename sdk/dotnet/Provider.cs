@@ -34,7 +34,7 @@ namespace Pulumi.Kong
         /// The address of the kong admin url e.g. http://localhost:8001
         /// </summary>
         [Output("kongAdminUri")]
-        public Output<string> KongAdminUri { get; private set; } = null!;
+        public Output<string?> KongAdminUri { get; private set; } = null!;
 
         /// <summary>
         /// An basic auth user for kong admin
@@ -62,7 +62,7 @@ namespace Pulumi.Kong
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Provider(string name, ProviderArgs args, CustomResourceOptions? options = null)
+        public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
             : base("kong", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -78,6 +78,12 @@ namespace Pulumi.Kong
             merged.Id = id ?? merged.Id;
             return merged;
         }
+
+        /// <summary>
+        /// This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.
+        /// </summary>
+        public global::Pulumi.Output<ProviderTerraformConfigResult> TerraformConfig()
+            => global::Pulumi.Deployment.Instance.Call<ProviderTerraformConfigResult>("pulumi:providers:kong/terraformConfig", CallArgs.Empty, this);
     }
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
@@ -97,8 +103,8 @@ namespace Pulumi.Kong
         /// <summary>
         /// The address of the kong admin url e.g. http://localhost:8001
         /// </summary>
-        [Input("kongAdminUri", required: true)]
-        public Input<string> KongAdminUri { get; set; } = null!;
+        [Input("kongAdminUri")]
+        public Input<string>? KongAdminUri { get; set; }
 
         /// <summary>
         /// An basic auth user for kong admin
@@ -136,5 +142,20 @@ namespace Pulumi.Kong
             TlsSkipVerify = Utilities.GetEnvBoolean("TLS_SKIP_VERIFY") ?? false;
         }
         public static new ProviderArgs Empty => new ProviderArgs();
+    }
+
+    /// <summary>
+    /// The results of the <see cref="Provider.TerraformConfig"/> method.
+    /// </summary>
+    [OutputType]
+    public sealed class ProviderTerraformConfigResult
+    {
+        public readonly ImmutableDictionary<string, object> Result;
+
+        [OutputConstructor]
+        private ProviderTerraformConfigResult(ImmutableDictionary<string, object> result)
+        {
+            Result = result;
+        }
     }
 }
