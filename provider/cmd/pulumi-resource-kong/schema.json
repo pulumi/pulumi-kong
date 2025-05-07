@@ -350,9 +350,6 @@
                 "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs\n"
             }
         },
-        "required": [
-            "kongAdminUri"
-        ],
         "inputProperties": {
             "kongAdminPassword": {
                 "type": "string",
@@ -398,9 +395,9 @@
                 }
             }
         },
-        "requiredInputs": [
-            "kongAdminUri"
-        ]
+        "methods": {
+            "terraformConfig": "pulumi:providers:kong/terraformConfig"
+        }
     },
     "resources": {
         "kong:index/certificate:Certificate": {
@@ -1917,6 +1914,37 @@
                         "description": "A list of strings associated with the Upstream for grouping and filtering.\n"
                     }
                 },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "pulumi:providers:kong/terraformConfig": {
+            "description": "This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.",
+            "inputs": {
+                "properties": {
+                    "__self__": {
+                        "type": "ref",
+                        "$ref": "#/resources/pulumi:providers:kong"
+                    }
+                },
+                "type": "pulumi:providers:kong/terraformConfig",
+                "required": [
+                    "__self__"
+                ]
+            },
+            "outputs": {
+                "properties": {
+                    "result": {
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
                 "type": "object"
             }
         }
