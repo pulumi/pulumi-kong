@@ -127,10 +127,8 @@ class _ConsumerAclState:
         pulumi.set(self, "tags", value)
 
 
+@pulumi.type_token("kong:index/consumerAcl:ConsumerAcl")
 class ConsumerAcl(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/consumerAcl:ConsumerAcl"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

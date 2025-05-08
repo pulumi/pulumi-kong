@@ -609,10 +609,8 @@ class _RouteState:
         pulumi.set(self, "tags", value)
 
 
+@pulumi.type_token("kong:index/route:Route")
 class Route(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/route:Route"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

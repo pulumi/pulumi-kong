@@ -158,10 +158,8 @@ class _TargetState:
         pulumi.set(self, "weight", value)
 
 
+@pulumi.type_token("kong:index/target:Target")
 class Target(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/target:Target"
-
     @overload
     def __init__(__self__,
                  resource_name: str,
