@@ -289,10 +289,8 @@ class _PluginState:
         pulumi.set(self, "tags", value)
 
 
+@pulumi.type_token("kong:index/plugin:Plugin")
 class Plugin(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/plugin:Plugin"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

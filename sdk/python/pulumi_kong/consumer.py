@@ -129,10 +129,8 @@ class _ConsumerState:
         pulumi.set(self, "username", value)
 
 
+@pulumi.type_token("kong:index/consumer:Consumer")
 class Consumer(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/consumer:Consumer"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

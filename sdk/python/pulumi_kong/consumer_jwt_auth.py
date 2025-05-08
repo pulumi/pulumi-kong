@@ -223,10 +223,8 @@ class _ConsumerJwtAuthState:
         pulumi.set(self, "tags", value)
 
 
+@pulumi.type_token("kong:index/consumerJwtAuth:ConsumerJwtAuth")
 class ConsumerJwtAuth(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/consumerJwtAuth:ConsumerJwtAuth"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

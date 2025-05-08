@@ -255,10 +255,8 @@ class _ConsumerOauth2State:
         pulumi.set(self, "tags", value)
 
 
+@pulumi.type_token("kong:index/consumerOauth2:ConsumerOauth2")
 class ConsumerOauth2(pulumi.CustomResource):
-
-    pulumi_type = "kong:index/consumerOauth2:ConsumerOauth2"
-
     @overload
     def __init__(__self__,
                  resource_name: str,
