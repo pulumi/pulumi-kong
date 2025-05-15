@@ -36,7 +36,7 @@ export class Provider extends pulumi.ProviderResource {
     /**
      * The address of the kong admin url e.g. http://localhost:8001
      */
-    public readonly kongAdminUri!: pulumi.Output<string>;
+    public readonly kongAdminUri!: pulumi.Output<string | undefined>;
     /**
      * An basic auth user for kong admin
      */
@@ -57,13 +57,10 @@ export class Provider extends pulumi.ProviderResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ProviderArgs, opts?: pulumi.ResourceOptions) {
+    constructor(name: string, args?: ProviderArgs, opts?: pulumi.ResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            if ((!args || args.kongAdminUri === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'kongAdminUri'");
-            }
             resourceInputs["kongAdminPassword"] = args ? args.kongAdminPassword : undefined;
             resourceInputs["kongAdminToken"] = args ? args.kongAdminToken : undefined;
             resourceInputs["kongAdminUri"] = args ? args.kongAdminUri : undefined;
@@ -102,7 +99,7 @@ export interface ProviderArgs {
     /**
      * The address of the kong admin url e.g. http://localhost:8001
      */
-    kongAdminUri: pulumi.Input<string>;
+    kongAdminUri?: pulumi.Input<string>;
     /**
      * An basic auth user for kong admin
      */
