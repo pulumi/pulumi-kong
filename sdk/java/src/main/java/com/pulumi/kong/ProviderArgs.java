@@ -6,7 +6,6 @@ package com.pulumi.kong;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.core.internal.Codegen;
-import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.Objects;
@@ -52,15 +51,15 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
      * The address of the kong admin url e.g. http://localhost:8001
      * 
      */
-    @Import(name="kongAdminUri", required=true)
-    private Output<String> kongAdminUri;
+    @Import(name="kongAdminUri")
+    private @Nullable Output<String> kongAdminUri;
 
     /**
      * @return The address of the kong admin url e.g. http://localhost:8001
      * 
      */
-    public Output<String> kongAdminUri() {
-        return this.kongAdminUri;
+    public Optional<Output<String>> kongAdminUri() {
+        return Optional.ofNullable(this.kongAdminUri);
     }
 
     /**
@@ -217,7 +216,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder kongAdminUri(Output<String> kongAdminUri) {
+        public Builder kongAdminUri(@Nullable Output<String> kongAdminUri) {
             $.kongAdminUri = kongAdminUri;
             return this;
         }
@@ -338,9 +337,6 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public ProviderArgs build() {
-            if ($.kongAdminUri == null) {
-                throw new MissingRequiredPropertyException("ProviderArgs", "kongAdminUri");
-            }
             $.strictPluginsMatch = Codegen.booleanProp("strictPluginsMatch").output().arg($.strictPluginsMatch).env("STRICT_PLUGINS_MATCH").getNullable();
             $.tlsSkipVerify = Codegen.booleanProp("tlsSkipVerify").output().arg($.tlsSkipVerify).env("TLS_SKIP_VERIFY").def(false).getNullable();
             return $;

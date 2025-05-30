@@ -350,9 +350,6 @@
                 "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs\n"
             }
         },
-        "required": [
-            "kongAdminUri"
-        ],
         "inputProperties": {
             "kongAdminPassword": {
                 "type": "string",
@@ -398,9 +395,6 @@
                 }
             }
         },
-        "requiredInputs": [
-            "kongAdminUri"
-        ],
         "methods": {
             "terraformConfig": "pulumi:providers:kong/terraformConfig"
         }
