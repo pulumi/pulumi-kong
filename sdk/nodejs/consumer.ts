@@ -61,15 +61,15 @@ export class Consumer extends pulumi.CustomResource {
     /**
      * A custom id for the consumer, you must set either the username or custom_id
      */
-    public readonly customId!: pulumi.Output<string | undefined>;
+    declare public readonly customId: pulumi.Output<string | undefined>;
     /**
      * A list of strings associated with the Consumer for grouping and filtering
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
     /**
      * The username to use, you must set either the username or custom_id
      */
-    public readonly username!: pulumi.Output<string | undefined>;
+    declare public readonly username: pulumi.Output<string | undefined>;
 
     /**
      * Create a Consumer resource with the given unique name, arguments, and options.
@@ -84,14 +84,14 @@ export class Consumer extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerState | undefined;
-            resourceInputs["customId"] = state ? state.customId : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["username"] = state ? state.username : undefined;
+            resourceInputs["customId"] = state?.customId;
+            resourceInputs["tags"] = state?.tags;
+            resourceInputs["username"] = state?.username;
         } else {
             const args = argsOrState as ConsumerArgs | undefined;
-            resourceInputs["customId"] = args ? args.customId : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["username"] = args ? args.username : undefined;
+            resourceInputs["customId"] = args?.customId;
+            resourceInputs["tags"] = args?.tags;
+            resourceInputs["username"] = args?.username;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Consumer.__pulumiType, name, resourceInputs, opts);

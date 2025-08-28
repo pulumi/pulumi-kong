@@ -66,27 +66,27 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
     /**
      * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
-    public readonly algorithm!: pulumi.Output<string | undefined>;
+    declare public readonly algorithm: pulumi.Output<string | undefined>;
     /**
      * the id of the consumer to be configured with jwt auth
      */
-    public readonly consumerId!: pulumi.Output<string>;
+    declare public readonly consumerId: pulumi.Output<string>;
     /**
      * A unique string identifying the credential. If left out, it will be auto-generated.
      */
-    public readonly key!: pulumi.Output<string | undefined>;
+    declare public readonly key: pulumi.Output<string | undefined>;
     /**
      * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
-    public readonly rsaPublicKey!: pulumi.Output<string>;
+    declare public readonly rsaPublicKey: pulumi.Output<string>;
     /**
      * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
-    public readonly secret!: pulumi.Output<string | undefined>;
+    declare public readonly secret: pulumi.Output<string | undefined>;
     /**
      * A list of strings associated with the consumer JWT auth for grouping and filtering
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a ConsumerJwtAuth resource with the given unique name, arguments, and options.
@@ -101,26 +101,26 @@ export class ConsumerJwtAuth extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerJwtAuthState | undefined;
-            resourceInputs["algorithm"] = state ? state.algorithm : undefined;
-            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
-            resourceInputs["key"] = state ? state.key : undefined;
-            resourceInputs["rsaPublicKey"] = state ? state.rsaPublicKey : undefined;
-            resourceInputs["secret"] = state ? state.secret : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["algorithm"] = state?.algorithm;
+            resourceInputs["consumerId"] = state?.consumerId;
+            resourceInputs["key"] = state?.key;
+            resourceInputs["rsaPublicKey"] = state?.rsaPublicKey;
+            resourceInputs["secret"] = state?.secret;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as ConsumerJwtAuthArgs | undefined;
-            if ((!args || args.consumerId === undefined) && !opts.urn) {
+            if (args?.consumerId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            if ((!args || args.rsaPublicKey === undefined) && !opts.urn) {
+            if (args?.rsaPublicKey === undefined && !opts.urn) {
                 throw new Error("Missing required property 'rsaPublicKey'");
             }
-            resourceInputs["algorithm"] = args ? args.algorithm : undefined;
-            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
-            resourceInputs["key"] = args ? args.key : undefined;
-            resourceInputs["rsaPublicKey"] = args ? args.rsaPublicKey : undefined;
-            resourceInputs["secret"] = args ? args.secret : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["algorithm"] = args?.algorithm;
+            resourceInputs["consumerId"] = args?.consumerId;
+            resourceInputs["key"] = args?.key;
+            resourceInputs["rsaPublicKey"] = args?.rsaPublicKey;
+            resourceInputs["secret"] = args?.secret;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConsumerJwtAuth.__pulumiType, name, resourceInputs, opts);

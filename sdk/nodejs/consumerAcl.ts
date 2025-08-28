@@ -67,15 +67,15 @@ export class ConsumerAcl extends pulumi.CustomResource {
     /**
      * the id of the consumer to be configured
      */
-    public readonly consumerId!: pulumi.Output<string>;
+    declare public readonly consumerId: pulumi.Output<string>;
     /**
      * the acl group
      */
-    public readonly group!: pulumi.Output<string>;
+    declare public readonly group: pulumi.Output<string>;
     /**
      * A list of strings associated with the consumer acl for grouping and filtering
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a ConsumerAcl resource with the given unique name, arguments, and options.
@@ -90,20 +90,20 @@ export class ConsumerAcl extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerAclState | undefined;
-            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
-            resourceInputs["group"] = state ? state.group : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["consumerId"] = state?.consumerId;
+            resourceInputs["group"] = state?.group;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as ConsumerAclArgs | undefined;
-            if ((!args || args.consumerId === undefined) && !opts.urn) {
+            if (args?.consumerId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            if ((!args || args.group === undefined) && !opts.urn) {
+            if (args?.group === undefined && !opts.urn) {
                 throw new Error("Missing required property 'group'");
             }
-            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
-            resourceInputs["group"] = args ? args.group : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["consumerId"] = args?.consumerId;
+            resourceInputs["group"] = args?.group;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConsumerAcl.__pulumiType, name, resourceInputs, opts);

@@ -127,34 +127,34 @@ export class Plugin extends pulumi.CustomResource {
         return obj['__pulumiType'] === Plugin.__pulumiType;
     }
 
-    public /*out*/ readonly computedConfig!: pulumi.Output<string>;
+    declare public /*out*/ readonly computedConfig: pulumi.Output<string>;
     /**
      * this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
      * page of the plugin you are configuring
      */
-    public readonly configJson!: pulumi.Output<string | undefined>;
+    declare public readonly configJson: pulumi.Output<string | undefined>;
     /**
      * the consumer id you want to configure the plugin for
      */
-    public readonly consumerId!: pulumi.Output<string | undefined>;
+    declare public readonly consumerId: pulumi.Output<string | undefined>;
     /**
      * whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
      */
-    public readonly enabled!: pulumi.Output<boolean | undefined>;
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly enabled: pulumi.Output<boolean | undefined>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * the route id that you want to configure the plugin for
      */
-    public readonly routeId!: pulumi.Output<string | undefined>;
+    declare public readonly routeId: pulumi.Output<string | undefined>;
     /**
      * the service id that you want to configure the plugin for
      */
-    public readonly serviceId!: pulumi.Output<string | undefined>;
-    public readonly strictMatch!: pulumi.Output<boolean | undefined>;
+    declare public readonly serviceId: pulumi.Output<string | undefined>;
+    declare public readonly strictMatch: pulumi.Output<boolean | undefined>;
     /**
      * A list of strings associated with the Plugin for grouping and filtering
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Plugin resource with the given unique name, arguments, and options.
@@ -169,25 +169,25 @@ export class Plugin extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PluginState | undefined;
-            resourceInputs["computedConfig"] = state ? state.computedConfig : undefined;
-            resourceInputs["configJson"] = state ? state.configJson : undefined;
-            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
-            resourceInputs["enabled"] = state ? state.enabled : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["routeId"] = state ? state.routeId : undefined;
-            resourceInputs["serviceId"] = state ? state.serviceId : undefined;
-            resourceInputs["strictMatch"] = state ? state.strictMatch : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["computedConfig"] = state?.computedConfig;
+            resourceInputs["configJson"] = state?.configJson;
+            resourceInputs["consumerId"] = state?.consumerId;
+            resourceInputs["enabled"] = state?.enabled;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["routeId"] = state?.routeId;
+            resourceInputs["serviceId"] = state?.serviceId;
+            resourceInputs["strictMatch"] = state?.strictMatch;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as PluginArgs | undefined;
-            resourceInputs["configJson"] = args ? args.configJson : undefined;
-            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
-            resourceInputs["enabled"] = args ? args.enabled : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["routeId"] = args ? args.routeId : undefined;
-            resourceInputs["serviceId"] = args ? args.serviceId : undefined;
-            resourceInputs["strictMatch"] = args ? args.strictMatch : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["configJson"] = args?.configJson;
+            resourceInputs["consumerId"] = args?.consumerId;
+            resourceInputs["enabled"] = args?.enabled;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["routeId"] = args?.routeId;
+            resourceInputs["serviceId"] = args?.serviceId;
+            resourceInputs["strictMatch"] = args?.strictMatch;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["computedConfig"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);

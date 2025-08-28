@@ -65,16 +65,16 @@ export class Certificate extends pulumi.CustomResource {
     /**
      * should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
      */
-    public readonly certificate!: pulumi.Output<string>;
+    declare public readonly certificate: pulumi.Output<string>;
     /**
      * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
      */
-    public readonly privateKey!: pulumi.Output<string | undefined>;
+    declare public readonly privateKey: pulumi.Output<string | undefined>;
     /**
      * A list of strings associated with the Certificate for grouping and filtering
      */
-    public readonly snis!: pulumi.Output<string[] | undefined>;
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly snis: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Certificate resource with the given unique name, arguments, and options.
@@ -89,19 +89,19 @@ export class Certificate extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CertificateState | undefined;
-            resourceInputs["certificate"] = state ? state.certificate : undefined;
-            resourceInputs["privateKey"] = state ? state.privateKey : undefined;
-            resourceInputs["snis"] = state ? state.snis : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["certificate"] = state?.certificate;
+            resourceInputs["privateKey"] = state?.privateKey;
+            resourceInputs["snis"] = state?.snis;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as CertificateArgs | undefined;
-            if ((!args || args.certificate === undefined) && !opts.urn) {
+            if (args?.certificate === undefined && !opts.urn) {
                 throw new Error("Missing required property 'certificate'");
             }
-            resourceInputs["certificate"] = args ? args.certificate : undefined;
+            resourceInputs["certificate"] = args?.certificate;
             resourceInputs["privateKey"] = args?.privateKey ? pulumi.secret(args.privateKey) : undefined;
-            resourceInputs["snis"] = args ? args.snis : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["snis"] = args?.snis;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["privateKey"] };

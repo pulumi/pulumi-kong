@@ -74,31 +74,31 @@ export class ConsumerOauth2 extends pulumi.CustomResource {
     /**
      * Unique oauth2 client id. If not set, the oauth2 plugin will generate one
      */
-    public readonly clientId!: pulumi.Output<string | undefined>;
+    declare public readonly clientId: pulumi.Output<string | undefined>;
     /**
      * Unique oauth2 client secret. If not set, the oauth2 plugin will generate one
      */
-    public readonly clientSecret!: pulumi.Output<string | undefined>;
+    declare public readonly clientSecret: pulumi.Output<string | undefined>;
     /**
      * The id of the consumer to be configured with oauth2.
      */
-    public readonly consumerId!: pulumi.Output<string>;
+    declare public readonly consumerId: pulumi.Output<string>;
     /**
      * A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      */
-    public readonly hashSecret!: pulumi.Output<boolean | undefined>;
+    declare public readonly hashSecret: pulumi.Output<boolean | undefined>;
     /**
      * The name associated with the credential.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).
      */
-    public readonly redirectUris!: pulumi.Output<string[]>;
+    declare public readonly redirectUris: pulumi.Output<string[]>;
     /**
      * A list of strings associated with the consumer for grouping and filtering.
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a ConsumerOauth2 resource with the given unique name, arguments, and options.
@@ -113,28 +113,28 @@ export class ConsumerOauth2 extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerOauth2State | undefined;
-            resourceInputs["clientId"] = state ? state.clientId : undefined;
-            resourceInputs["clientSecret"] = state ? state.clientSecret : undefined;
-            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
-            resourceInputs["hashSecret"] = state ? state.hashSecret : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["redirectUris"] = state ? state.redirectUris : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["clientId"] = state?.clientId;
+            resourceInputs["clientSecret"] = state?.clientSecret;
+            resourceInputs["consumerId"] = state?.consumerId;
+            resourceInputs["hashSecret"] = state?.hashSecret;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["redirectUris"] = state?.redirectUris;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as ConsumerOauth2Args | undefined;
-            if ((!args || args.consumerId === undefined) && !opts.urn) {
+            if (args?.consumerId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            if ((!args || args.redirectUris === undefined) && !opts.urn) {
+            if (args?.redirectUris === undefined && !opts.urn) {
                 throw new Error("Missing required property 'redirectUris'");
             }
-            resourceInputs["clientId"] = args ? args.clientId : undefined;
-            resourceInputs["clientSecret"] = args ? args.clientSecret : undefined;
-            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
-            resourceInputs["hashSecret"] = args ? args.hashSecret : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["redirectUris"] = args ? args.redirectUris : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["clientId"] = args?.clientId;
+            resourceInputs["clientSecret"] = args?.clientSecret;
+            resourceInputs["consumerId"] = args?.consumerId;
+            resourceInputs["hashSecret"] = args?.hashSecret;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["redirectUris"] = args?.redirectUris;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConsumerOauth2.__pulumiType, name, resourceInputs, opts);

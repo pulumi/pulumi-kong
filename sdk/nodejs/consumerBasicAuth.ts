@@ -62,19 +62,19 @@ export class ConsumerBasicAuth extends pulumi.CustomResource {
     /**
      * the id of the consumer to be configured with basic auth
      */
-    public readonly consumerId!: pulumi.Output<string>;
+    declare public readonly consumerId: pulumi.Output<string>;
     /**
      * password to be used for basic auth
      */
-    public readonly password!: pulumi.Output<string>;
+    declare public readonly password: pulumi.Output<string>;
     /**
      * A list of strings associated with the consumer basic auth for grouping and filtering
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
     /**
      * username to be used for basic auth
      */
-    public readonly username!: pulumi.Output<string>;
+    declare public readonly username: pulumi.Output<string>;
 
     /**
      * Create a ConsumerBasicAuth resource with the given unique name, arguments, and options.
@@ -89,25 +89,25 @@ export class ConsumerBasicAuth extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerBasicAuthState | undefined;
-            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
-            resourceInputs["password"] = state ? state.password : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["username"] = state ? state.username : undefined;
+            resourceInputs["consumerId"] = state?.consumerId;
+            resourceInputs["password"] = state?.password;
+            resourceInputs["tags"] = state?.tags;
+            resourceInputs["username"] = state?.username;
         } else {
             const args = argsOrState as ConsumerBasicAuthArgs | undefined;
-            if ((!args || args.consumerId === undefined) && !opts.urn) {
+            if (args?.consumerId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            if ((!args || args.password === undefined) && !opts.urn) {
+            if (args?.password === undefined && !opts.urn) {
                 throw new Error("Missing required property 'password'");
             }
-            if ((!args || args.username === undefined) && !opts.urn) {
+            if (args?.username === undefined && !opts.urn) {
                 throw new Error("Missing required property 'username'");
             }
-            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["username"] = args ? args.username : undefined;
+            resourceInputs["consumerId"] = args?.consumerId;
+            resourceInputs["password"] = args?.password;
+            resourceInputs["tags"] = args?.tags;
+            resourceInputs["username"] = args?.username;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConsumerBasicAuth.__pulumiType, name, resourceInputs, opts);
