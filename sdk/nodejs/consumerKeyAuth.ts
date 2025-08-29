@@ -61,15 +61,15 @@ export class ConsumerKeyAuth extends pulumi.CustomResource {
     /**
      * the id of the consumer to associate the credentials to
      */
-    public readonly consumerId!: pulumi.Output<string>;
+    declare public readonly consumerId: pulumi.Output<string>;
     /**
      * Unique key to authenticate the client; if omitted the plugin will generate one
      */
-    public readonly key!: pulumi.Output<string>;
+    declare public readonly key: pulumi.Output<string>;
     /**
      * A list of strings associated with the consumer key auth for grouping and filtering
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a ConsumerKeyAuth resource with the given unique name, arguments, and options.
@@ -84,17 +84,17 @@ export class ConsumerKeyAuth extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConsumerKeyAuthState | undefined;
-            resourceInputs["consumerId"] = state ? state.consumerId : undefined;
-            resourceInputs["key"] = state ? state.key : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["consumerId"] = state?.consumerId;
+            resourceInputs["key"] = state?.key;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as ConsumerKeyAuthArgs | undefined;
-            if ((!args || args.consumerId === undefined) && !opts.urn) {
+            if (args?.consumerId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'consumerId'");
             }
-            resourceInputs["consumerId"] = args ? args.consumerId : undefined;
+            resourceInputs["consumerId"] = args?.consumerId;
             resourceInputs["key"] = args?.key ? pulumi.secret(args.key) : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["key"] };

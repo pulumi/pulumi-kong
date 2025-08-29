@@ -4,6 +4,7 @@ title: Kong Provider
 meta_desc: Provides an overview on how to configure the Pulumi Kong provider.
 layout: package
 ---
+
 ## Installation
 
 The Kong provider is available as a package in all Pulumi languages:
@@ -13,6 +14,7 @@ The Kong provider is available as a package in all Pulumi languages:
 * Go: [`github.com/pulumi/pulumi-kong/sdk/v4/go/kong`](https://github.com/pulumi/pulumi-kong)
 * .NET: [`Pulumi.Kong`](https://www.nuget.org/packages/Pulumi.Kong)
 * Java: [`com.pulumi/kong`](https://central.sonatype.com/artifact/com.pulumi/kong)
+
 ## Overview
 
 The Kong Pulumi Provider tested against real Kong (using Docker)!
@@ -21,88 +23,21 @@ Pulumi provider tested to work against Kong 2.X.
 ## Usage
 
 To configure the provider:
-{{< chooser language "typescript,python,go,csharp,java,yaml" >}}
-{{% choosable language typescript %}}
 ```yaml
 # Pulumi.yaml provider configuration file
 name: configuration-example
-runtime: nodejs
+runtime:
 config:
     kong:kongAdminUri:
         value: http://localhost:8001
 
 ```
-
-{{% /choosable %}}
-{{% choosable language python %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: python
-config:
-    kong:kongAdminUri:
-        value: http://localhost:8001
-
-```
-
-{{% /choosable %}}
-{{% choosable language csharp %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: dotnet
-config:
-    kong:kongAdminUri:
-        value: http://localhost:8001
-
-```
-
-{{% /choosable %}}
-{{% choosable language go %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: go
-config:
-    kong:kongAdminUri:
-        value: http://localhost:8001
-
-```
-
-{{% /choosable %}}
-{{% choosable language yaml %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: yaml
-config:
-    kong:kongAdminUri:
-        value: http://localhost:8001
-
-```
-
-{{% /choosable %}}
-{{% choosable language java %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: java
-config:
-    kong:kongAdminUri:
-        value: http://localhost:8001
-
-```
-
-{{% /choosable %}}
-{{< /chooser >}}
 
 Optionally you can configure Username and Password for BasicAuth:
-{{< chooser language "typescript,python,go,csharp,java,yaml" >}}
-{{% choosable language typescript %}}
 ```yaml
 # Pulumi.yaml provider configuration file
 name: configuration-example
-runtime: nodejs
+runtime:
 config:
     kong:kongAdminPassword:
         value: yourpass
@@ -112,89 +47,6 @@ config:
         value: youruser
 
 ```
-
-{{% /choosable %}}
-{{% choosable language python %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: python
-config:
-    kong:kongAdminPassword:
-        value: yourpass
-    kong:kongAdminUri:
-        value: http://localhost:8001
-    kong:kongAdminUsername:
-        value: youruser
-
-```
-
-{{% /choosable %}}
-{{% choosable language csharp %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: dotnet
-config:
-    kong:kongAdminPassword:
-        value: yourpass
-    kong:kongAdminUri:
-        value: http://localhost:8001
-    kong:kongAdminUsername:
-        value: youruser
-
-```
-
-{{% /choosable %}}
-{{% choosable language go %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: go
-config:
-    kong:kongAdminPassword:
-        value: yourpass
-    kong:kongAdminUri:
-        value: http://localhost:8001
-    kong:kongAdminUsername:
-        value: youruser
-
-```
-
-{{% /choosable %}}
-{{% choosable language yaml %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: yaml
-config:
-    kong:kongAdminPassword:
-        value: yourpass
-    kong:kongAdminUri:
-        value: http://localhost:8001
-    kong:kongAdminUsername:
-        value: youruser
-
-```
-
-{{% /choosable %}}
-{{% choosable language java %}}
-```yaml
-# Pulumi.yaml provider configuration file
-name: configuration-example
-runtime: java
-config:
-    kong:kongAdminPassword:
-        value: yourpass
-    kong:kongAdminUri:
-        value: http://localhost:8001
-    kong:kongAdminUsername:
-        value: youruser
-
-```
-
-{{% /choosable %}}
-{{< /chooser >}}
 ## Configuration Reference
 
 In addition to generic provider arguments (e.g. alias and version), the following arguments are supported in the Kong provider configuration:

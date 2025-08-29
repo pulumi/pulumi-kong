@@ -130,23 +130,23 @@ export class Upstream extends pulumi.CustomResource {
     /**
      * The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
      */
-    public readonly clientCertificateId!: pulumi.Output<string | undefined>;
+    declare public readonly clientCertificateId: pulumi.Output<string | undefined>;
     /**
      * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      */
-    public readonly hashFallback!: pulumi.Output<string | undefined>;
+    declare public readonly hashFallback: pulumi.Output<string | undefined>;
     /**
      * is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
      */
-    public readonly hashFallbackHeader!: pulumi.Output<string | undefined>;
+    declare public readonly hashFallbackHeader: pulumi.Output<string | undefined>;
     /**
      * is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      */
-    public readonly hashOn!: pulumi.Output<string | undefined>;
+    declare public readonly hashOn: pulumi.Output<string | undefined>;
     /**
      * is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      */
-    public readonly hashOnCookie!: pulumi.Output<string | undefined>;
+    declare public readonly hashOnCookie: pulumi.Output<string | undefined>;
     /**
      * is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
      * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -171,28 +171,28 @@ export class Upstream extends pulumi.CustomResource {
      * * `healthchecks.passive.unhealthy.timeouts` - (Optional) is a number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks. Defaults to `0`.
      * * `healthchecks.passive.unhealthy.http_statuses` - (Optional) is an array of HTTP statuses which represent unhealthiness when produced by proxied traffic, as observed by passive health checks. Defaults to `[429, 500, 503]`.
      */
-    public readonly hashOnCookiePath!: pulumi.Output<string | undefined>;
+    declare public readonly hashOnCookiePath: pulumi.Output<string | undefined>;
     /**
      * is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
      */
-    public readonly hashOnHeader!: pulumi.Output<string | undefined>;
-    public readonly healthchecks!: pulumi.Output<outputs.UpstreamHealthchecks>;
+    declare public readonly hashOnHeader: pulumi.Output<string | undefined>;
+    declare public readonly healthchecks: pulumi.Output<outputs.UpstreamHealthchecks>;
     /**
      * The hostname to be used as Host header when proxying requests through Kong.
      */
-    public readonly hostHeader!: pulumi.Output<string | undefined>;
+    declare public readonly hostHeader: pulumi.Output<string | undefined>;
     /**
      * is a hostname, which must be equal to the host of a Service.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
      */
-    public readonly slots!: pulumi.Output<number | undefined>;
+    declare public readonly slots: pulumi.Output<number | undefined>;
     /**
      * A list of strings associated with the Upstream for grouping and filtering.
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Upstream resource with the given unique name, arguments, and options.
@@ -207,32 +207,32 @@ export class Upstream extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as UpstreamState | undefined;
-            resourceInputs["clientCertificateId"] = state ? state.clientCertificateId : undefined;
-            resourceInputs["hashFallback"] = state ? state.hashFallback : undefined;
-            resourceInputs["hashFallbackHeader"] = state ? state.hashFallbackHeader : undefined;
-            resourceInputs["hashOn"] = state ? state.hashOn : undefined;
-            resourceInputs["hashOnCookie"] = state ? state.hashOnCookie : undefined;
-            resourceInputs["hashOnCookiePath"] = state ? state.hashOnCookiePath : undefined;
-            resourceInputs["hashOnHeader"] = state ? state.hashOnHeader : undefined;
-            resourceInputs["healthchecks"] = state ? state.healthchecks : undefined;
-            resourceInputs["hostHeader"] = state ? state.hostHeader : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["slots"] = state ? state.slots : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["clientCertificateId"] = state?.clientCertificateId;
+            resourceInputs["hashFallback"] = state?.hashFallback;
+            resourceInputs["hashFallbackHeader"] = state?.hashFallbackHeader;
+            resourceInputs["hashOn"] = state?.hashOn;
+            resourceInputs["hashOnCookie"] = state?.hashOnCookie;
+            resourceInputs["hashOnCookiePath"] = state?.hashOnCookiePath;
+            resourceInputs["hashOnHeader"] = state?.hashOnHeader;
+            resourceInputs["healthchecks"] = state?.healthchecks;
+            resourceInputs["hostHeader"] = state?.hostHeader;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["slots"] = state?.slots;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as UpstreamArgs | undefined;
-            resourceInputs["clientCertificateId"] = args ? args.clientCertificateId : undefined;
-            resourceInputs["hashFallback"] = args ? args.hashFallback : undefined;
-            resourceInputs["hashFallbackHeader"] = args ? args.hashFallbackHeader : undefined;
-            resourceInputs["hashOn"] = args ? args.hashOn : undefined;
-            resourceInputs["hashOnCookie"] = args ? args.hashOnCookie : undefined;
-            resourceInputs["hashOnCookiePath"] = args ? args.hashOnCookiePath : undefined;
-            resourceInputs["hashOnHeader"] = args ? args.hashOnHeader : undefined;
-            resourceInputs["healthchecks"] = args ? args.healthchecks : undefined;
-            resourceInputs["hostHeader"] = args ? args.hostHeader : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["slots"] = args ? args.slots : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["clientCertificateId"] = args?.clientCertificateId;
+            resourceInputs["hashFallback"] = args?.hashFallback;
+            resourceInputs["hashFallbackHeader"] = args?.hashFallbackHeader;
+            resourceInputs["hashOn"] = args?.hashOn;
+            resourceInputs["hashOnCookie"] = args?.hashOnCookie;
+            resourceInputs["hashOnCookiePath"] = args?.hashOnCookiePath;
+            resourceInputs["hashOnHeader"] = args?.hashOnHeader;
+            resourceInputs["healthchecks"] = args?.healthchecks;
+            resourceInputs["hostHeader"] = args?.hostHeader;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["slots"] = args?.slots;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Upstream.__pulumiType, name, resourceInputs, opts);
