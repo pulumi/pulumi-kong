@@ -28,27 +28,27 @@ export class Provider extends pulumi.ProviderResource {
     /**
      * An basic auth password for kong admin
      */
-    public readonly kongAdminPassword!: pulumi.Output<string | undefined>;
+    declare public readonly kongAdminPassword: pulumi.Output<string | undefined>;
     /**
      * API key for the kong api (Enterprise Edition)
      */
-    public readonly kongAdminToken!: pulumi.Output<string | undefined>;
+    declare public readonly kongAdminToken: pulumi.Output<string | undefined>;
     /**
      * The address of the kong admin url e.g. http://localhost:8001
      */
-    public readonly kongAdminUri!: pulumi.Output<string | undefined>;
+    declare public readonly kongAdminUri: pulumi.Output<string | undefined>;
     /**
      * An basic auth user for kong admin
      */
-    public readonly kongAdminUsername!: pulumi.Output<string | undefined>;
+    declare public readonly kongAdminUsername: pulumi.Output<string | undefined>;
     /**
      * API key for the kong api (if you have locked it down)
      */
-    public readonly kongApiKey!: pulumi.Output<string | undefined>;
+    declare public readonly kongApiKey: pulumi.Output<string | undefined>;
     /**
      * Workspace context (Enterprise Edition)
      */
-    public readonly kongWorkspace!: pulumi.Output<string | undefined>;
+    declare public readonly kongWorkspace: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -61,14 +61,14 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["kongAdminPassword"] = args ? args.kongAdminPassword : undefined;
-            resourceInputs["kongAdminToken"] = args ? args.kongAdminToken : undefined;
-            resourceInputs["kongAdminUri"] = args ? args.kongAdminUri : undefined;
-            resourceInputs["kongAdminUsername"] = args ? args.kongAdminUsername : undefined;
-            resourceInputs["kongApiKey"] = args ? args.kongApiKey : undefined;
-            resourceInputs["kongWorkspace"] = args ? args.kongWorkspace : undefined;
-            resourceInputs["strictPluginsMatch"] = pulumi.output((args ? args.strictPluginsMatch : undefined) ?? utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
-            resourceInputs["tlsSkipVerify"] = pulumi.output((args ? args.tlsSkipVerify : undefined) ?? (utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
+            resourceInputs["kongAdminPassword"] = args?.kongAdminPassword;
+            resourceInputs["kongAdminToken"] = args?.kongAdminToken;
+            resourceInputs["kongAdminUri"] = args?.kongAdminUri;
+            resourceInputs["kongAdminUsername"] = args?.kongAdminUsername;
+            resourceInputs["kongApiKey"] = args?.kongApiKey;
+            resourceInputs["kongWorkspace"] = args?.kongWorkspace;
+            resourceInputs["strictPluginsMatch"] = pulumi.output((args?.strictPluginsMatch) ?? utilities.getEnvBoolean("STRICT_PLUGINS_MATCH")).apply(JSON.stringify);
+            resourceInputs["tlsSkipVerify"] = pulumi.output((args?.tlsSkipVerify) ?? (utilities.getEnvBoolean("TLS_SKIP_VERIFY") || false)).apply(JSON.stringify);
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);

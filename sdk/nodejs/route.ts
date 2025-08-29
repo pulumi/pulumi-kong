@@ -112,75 +112,75 @@ export class Route extends pulumi.CustomResource {
     /**
      * A list of destination `ip` and `port`
      */
-    public readonly destinations!: pulumi.Output<outputs.RouteDestination[] | undefined>;
+    declare public readonly destinations: pulumi.Output<outputs.RouteDestination[] | undefined>;
     /**
      * One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
      */
-    public readonly headers!: pulumi.Output<outputs.RouteHeader[] | undefined>;
+    declare public readonly headers: pulumi.Output<outputs.RouteHeader[] | undefined>;
     /**
      * A list of domain names that match this Route
      */
-    public readonly hosts!: pulumi.Output<string[] | undefined>;
+    declare public readonly hosts: pulumi.Output<string[] | undefined>;
     /**
      * The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
      */
-    public readonly httpsRedirectStatusCode!: pulumi.Output<number | undefined>;
+    declare public readonly httpsRedirectStatusCode: pulumi.Output<number | undefined>;
     /**
      * A list of HTTP methods that match this Route
      */
-    public readonly methods!: pulumi.Output<string[] | undefined>;
+    declare public readonly methods: pulumi.Output<string[] | undefined>;
     /**
      * The name of the route
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
      */
-    public readonly pathHandling!: pulumi.Output<string | undefined>;
+    declare public readonly pathHandling: pulumi.Output<string | undefined>;
     /**
      * A list of paths that match this Route
      */
-    public readonly paths!: pulumi.Output<string[] | undefined>;
+    declare public readonly paths: pulumi.Output<string[] | undefined>;
     /**
      * When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
      */
-    public readonly preserveHost!: pulumi.Output<boolean | undefined>;
+    declare public readonly preserveHost: pulumi.Output<boolean | undefined>;
     /**
      * The list of protocols to use
      */
-    public readonly protocols!: pulumi.Output<string[]>;
+    declare public readonly protocols: pulumi.Output<string[]>;
     /**
      * A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
      */
-    public readonly regexPriority!: pulumi.Output<number | undefined>;
+    declare public readonly regexPriority: pulumi.Output<number | undefined>;
     /**
      * Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
      */
-    public readonly requestBuffering!: pulumi.Output<boolean | undefined>;
+    declare public readonly requestBuffering: pulumi.Output<boolean | undefined>;
     /**
      * Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
      */
-    public readonly responseBuffering!: pulumi.Output<boolean | undefined>;
+    declare public readonly responseBuffering: pulumi.Output<boolean | undefined>;
     /**
      * Service ID to map to
      */
-    public readonly serviceId!: pulumi.Output<string>;
+    declare public readonly serviceId: pulumi.Output<string>;
     /**
      * A list of SNIs that match this Route when using stream routing.
      */
-    public readonly snis!: pulumi.Output<string[] | undefined>;
+    declare public readonly snis: pulumi.Output<string[] | undefined>;
     /**
      * A list of source `ip` and `port`
      */
-    public readonly sources!: pulumi.Output<outputs.RouteSource[] | undefined>;
+    declare public readonly sources: pulumi.Output<outputs.RouteSource[] | undefined>;
     /**
      * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
      */
-    public readonly stripPath!: pulumi.Output<boolean | undefined>;
+    declare public readonly stripPath: pulumi.Output<boolean | undefined>;
     /**
      * A list of strings associated with the Route for grouping and filtering.
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Route resource with the given unique name, arguments, and options.
@@ -195,50 +195,50 @@ export class Route extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as RouteState | undefined;
-            resourceInputs["destinations"] = state ? state.destinations : undefined;
-            resourceInputs["headers"] = state ? state.headers : undefined;
-            resourceInputs["hosts"] = state ? state.hosts : undefined;
-            resourceInputs["httpsRedirectStatusCode"] = state ? state.httpsRedirectStatusCode : undefined;
-            resourceInputs["methods"] = state ? state.methods : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["pathHandling"] = state ? state.pathHandling : undefined;
-            resourceInputs["paths"] = state ? state.paths : undefined;
-            resourceInputs["preserveHost"] = state ? state.preserveHost : undefined;
-            resourceInputs["protocols"] = state ? state.protocols : undefined;
-            resourceInputs["regexPriority"] = state ? state.regexPriority : undefined;
-            resourceInputs["requestBuffering"] = state ? state.requestBuffering : undefined;
-            resourceInputs["responseBuffering"] = state ? state.responseBuffering : undefined;
-            resourceInputs["serviceId"] = state ? state.serviceId : undefined;
-            resourceInputs["snis"] = state ? state.snis : undefined;
-            resourceInputs["sources"] = state ? state.sources : undefined;
-            resourceInputs["stripPath"] = state ? state.stripPath : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["destinations"] = state?.destinations;
+            resourceInputs["headers"] = state?.headers;
+            resourceInputs["hosts"] = state?.hosts;
+            resourceInputs["httpsRedirectStatusCode"] = state?.httpsRedirectStatusCode;
+            resourceInputs["methods"] = state?.methods;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["pathHandling"] = state?.pathHandling;
+            resourceInputs["paths"] = state?.paths;
+            resourceInputs["preserveHost"] = state?.preserveHost;
+            resourceInputs["protocols"] = state?.protocols;
+            resourceInputs["regexPriority"] = state?.regexPriority;
+            resourceInputs["requestBuffering"] = state?.requestBuffering;
+            resourceInputs["responseBuffering"] = state?.responseBuffering;
+            resourceInputs["serviceId"] = state?.serviceId;
+            resourceInputs["snis"] = state?.snis;
+            resourceInputs["sources"] = state?.sources;
+            resourceInputs["stripPath"] = state?.stripPath;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as RouteArgs | undefined;
-            if ((!args || args.protocols === undefined) && !opts.urn) {
+            if (args?.protocols === undefined && !opts.urn) {
                 throw new Error("Missing required property 'protocols'");
             }
-            if ((!args || args.serviceId === undefined) && !opts.urn) {
+            if (args?.serviceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'serviceId'");
             }
-            resourceInputs["destinations"] = args ? args.destinations : undefined;
-            resourceInputs["headers"] = args ? args.headers : undefined;
-            resourceInputs["hosts"] = args ? args.hosts : undefined;
-            resourceInputs["httpsRedirectStatusCode"] = args ? args.httpsRedirectStatusCode : undefined;
-            resourceInputs["methods"] = args ? args.methods : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["pathHandling"] = args ? args.pathHandling : undefined;
-            resourceInputs["paths"] = args ? args.paths : undefined;
-            resourceInputs["preserveHost"] = args ? args.preserveHost : undefined;
-            resourceInputs["protocols"] = args ? args.protocols : undefined;
-            resourceInputs["regexPriority"] = args ? args.regexPriority : undefined;
-            resourceInputs["requestBuffering"] = args ? args.requestBuffering : undefined;
-            resourceInputs["responseBuffering"] = args ? args.responseBuffering : undefined;
-            resourceInputs["serviceId"] = args ? args.serviceId : undefined;
-            resourceInputs["snis"] = args ? args.snis : undefined;
-            resourceInputs["sources"] = args ? args.sources : undefined;
-            resourceInputs["stripPath"] = args ? args.stripPath : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["destinations"] = args?.destinations;
+            resourceInputs["headers"] = args?.headers;
+            resourceInputs["hosts"] = args?.hosts;
+            resourceInputs["httpsRedirectStatusCode"] = args?.httpsRedirectStatusCode;
+            resourceInputs["methods"] = args?.methods;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["pathHandling"] = args?.pathHandling;
+            resourceInputs["paths"] = args?.paths;
+            resourceInputs["preserveHost"] = args?.preserveHost;
+            resourceInputs["protocols"] = args?.protocols;
+            resourceInputs["regexPriority"] = args?.regexPriority;
+            resourceInputs["requestBuffering"] = args?.requestBuffering;
+            resourceInputs["responseBuffering"] = args?.responseBuffering;
+            resourceInputs["serviceId"] = args?.serviceId;
+            resourceInputs["snis"] = args?.snis;
+            resourceInputs["sources"] = args?.sources;
+            resourceInputs["stripPath"] = args?.stripPath;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Route.__pulumiType, name, resourceInputs, opts);

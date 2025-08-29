@@ -53,31 +53,31 @@
         "variables": {
             "kongAdminPassword": {
                 "type": "string",
-                "description": "An basic auth password for kong admin\n"
+                "description": "An basic auth password for kong admin"
             },
             "kongAdminToken": {
                 "type": "string",
-                "description": "API key for the kong api (Enterprise Edition)\n"
+                "description": "API key for the kong api (Enterprise Edition)"
             },
             "kongAdminUri": {
                 "type": "string",
-                "description": "The address of the kong admin url e.g. http://localhost:8001\n"
+                "description": "The address of the kong admin url e.g. http://localhost:8001"
             },
             "kongAdminUsername": {
                 "type": "string",
-                "description": "An basic auth user for kong admin\n"
+                "description": "An basic auth user for kong admin"
             },
             "kongApiKey": {
                 "type": "string",
-                "description": "API key for the kong api (if you have locked it down)\n"
+                "description": "API key for the kong api (if you have locked it down)"
             },
             "kongWorkspace": {
                 "type": "string",
-                "description": "Workspace context (Enterprise Edition)\n"
+                "description": "Workspace context (Enterprise Edition)"
             },
             "strictPluginsMatch": {
                 "type": "boolean",
-                "description": "Should plugins `config_json` field strictly match plugin configuration\n",
+                "description": "Should plugins `config_json` field strictly match plugin configuration",
                 "defaultInfo": {
                     "environment": [
                         "STRICT_PLUGINS_MATCH"
@@ -86,7 +86,7 @@
             },
             "tlsSkipVerify": {
                 "type": "boolean",
-                "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs\n",
+                "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs",
                 "default": false,
                 "defaultInfo": {
                     "environment": [
@@ -319,65 +319,65 @@
         "properties": {
             "kongAdminPassword": {
                 "type": "string",
-                "description": "An basic auth password for kong admin\n"
+                "description": "An basic auth password for kong admin"
             },
             "kongAdminToken": {
                 "type": "string",
-                "description": "API key for the kong api (Enterprise Edition)\n"
+                "description": "API key for the kong api (Enterprise Edition)"
             },
             "kongAdminUri": {
                 "type": "string",
-                "description": "The address of the kong admin url e.g. http://localhost:8001\n"
+                "description": "The address of the kong admin url e.g. http://localhost:8001"
             },
             "kongAdminUsername": {
                 "type": "string",
-                "description": "An basic auth user for kong admin\n"
+                "description": "An basic auth user for kong admin"
             },
             "kongApiKey": {
                 "type": "string",
-                "description": "API key for the kong api (if you have locked it down)\n"
+                "description": "API key for the kong api (if you have locked it down)"
             },
             "kongWorkspace": {
                 "type": "string",
-                "description": "Workspace context (Enterprise Edition)\n"
+                "description": "Workspace context (Enterprise Edition)"
             },
             "strictPluginsMatch": {
                 "type": "boolean",
-                "description": "Should plugins `config_json` field strictly match plugin configuration\n"
+                "description": "Should plugins `config_json` field strictly match plugin configuration"
             },
             "tlsSkipVerify": {
                 "type": "boolean",
-                "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs\n"
+                "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs"
             }
         },
         "inputProperties": {
             "kongAdminPassword": {
                 "type": "string",
-                "description": "An basic auth password for kong admin\n"
+                "description": "An basic auth password for kong admin"
             },
             "kongAdminToken": {
                 "type": "string",
-                "description": "API key for the kong api (Enterprise Edition)\n"
+                "description": "API key for the kong api (Enterprise Edition)"
             },
             "kongAdminUri": {
                 "type": "string",
-                "description": "The address of the kong admin url e.g. http://localhost:8001\n"
+                "description": "The address of the kong admin url e.g. http://localhost:8001"
             },
             "kongAdminUsername": {
                 "type": "string",
-                "description": "An basic auth user for kong admin\n"
+                "description": "An basic auth user for kong admin"
             },
             "kongApiKey": {
                 "type": "string",
-                "description": "API key for the kong api (if you have locked it down)\n"
+                "description": "API key for the kong api (if you have locked it down)"
             },
             "kongWorkspace": {
                 "type": "string",
-                "description": "Workspace context (Enterprise Edition)\n"
+                "description": "Workspace context (Enterprise Edition)"
             },
             "strictPluginsMatch": {
                 "type": "boolean",
-                "description": "Should plugins `config_json` field strictly match plugin configuration\n",
+                "description": "Should plugins `config_json` field strictly match plugin configuration",
                 "defaultInfo": {
                     "environment": [
                         "STRICT_PLUGINS_MATCH"
@@ -386,7 +386,7 @@
             },
             "tlsSkipVerify": {
                 "type": "boolean",
-                "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs\n",
+                "description": "Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs",
                 "default": false,
                 "defaultInfo": {
                     "environment": [

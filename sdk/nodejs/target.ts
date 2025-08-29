@@ -57,19 +57,19 @@ export class Target extends pulumi.CustomResource {
     /**
      * A list set of strings associated with the Plugin for grouping and filtering
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
     /**
      * is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
      */
-    public readonly target!: pulumi.Output<string>;
+    declare public readonly target: pulumi.Output<string>;
     /**
      * is the id of the upstream to apply this target to.
      */
-    public readonly upstreamId!: pulumi.Output<string>;
+    declare public readonly upstreamId: pulumi.Output<string>;
     /**
      * is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
      */
-    public readonly weight!: pulumi.Output<number>;
+    declare public readonly weight: pulumi.Output<number>;
 
     /**
      * Create a Target resource with the given unique name, arguments, and options.
@@ -84,25 +84,25 @@ export class Target extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TargetState | undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["target"] = state ? state.target : undefined;
-            resourceInputs["upstreamId"] = state ? state.upstreamId : undefined;
-            resourceInputs["weight"] = state ? state.weight : undefined;
+            resourceInputs["tags"] = state?.tags;
+            resourceInputs["target"] = state?.target;
+            resourceInputs["upstreamId"] = state?.upstreamId;
+            resourceInputs["weight"] = state?.weight;
         } else {
             const args = argsOrState as TargetArgs | undefined;
-            if ((!args || args.target === undefined) && !opts.urn) {
+            if (args?.target === undefined && !opts.urn) {
                 throw new Error("Missing required property 'target'");
             }
-            if ((!args || args.upstreamId === undefined) && !opts.urn) {
+            if (args?.upstreamId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'upstreamId'");
             }
-            if ((!args || args.weight === undefined) && !opts.urn) {
+            if (args?.weight === undefined && !opts.urn) {
                 throw new Error("Missing required property 'weight'");
             }
-            resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["target"] = args ? args.target : undefined;
-            resourceInputs["upstreamId"] = args ? args.upstreamId : undefined;
-            resourceInputs["weight"] = args ? args.weight : undefined;
+            resourceInputs["tags"] = args?.tags;
+            resourceInputs["target"] = args?.target;
+            resourceInputs["upstreamId"] = args?.upstreamId;
+            resourceInputs["weight"] = args?.weight;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Target.__pulumiType, name, resourceInputs, opts);

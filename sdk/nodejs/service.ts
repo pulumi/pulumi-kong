@@ -106,59 +106,59 @@ export class Service extends pulumi.CustomResource {
     /**
      * A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
      */
-    public readonly caCertificateIds!: pulumi.Output<string[] | undefined>;
+    declare public readonly caCertificateIds: pulumi.Output<string[] | undefined>;
     /**
      * ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
      */
-    public readonly clientCertificateId!: pulumi.Output<string | undefined>;
+    declare public readonly clientCertificateId: pulumi.Output<string | undefined>;
     /**
      * Connection timeout. Default(ms): 60000
      */
-    public readonly connectTimeout!: pulumi.Output<number | undefined>;
+    declare public readonly connectTimeout: pulumi.Output<number | undefined>;
     /**
      * Host to map to
      */
-    public readonly host!: pulumi.Output<string | undefined>;
+    declare public readonly host: pulumi.Output<string | undefined>;
     /**
      * Service name
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Path to map to
      */
-    public readonly path!: pulumi.Output<string | undefined>;
+    declare public readonly path: pulumi.Output<string | undefined>;
     /**
      * Port to map to. Default: 80
      */
-    public readonly port!: pulumi.Output<number | undefined>;
+    declare public readonly port: pulumi.Output<number | undefined>;
     /**
      * Protocol to use
      */
-    public readonly protocol!: pulumi.Output<string>;
+    declare public readonly protocol: pulumi.Output<string>;
     /**
      * Read timeout. Default(ms): 60000
      */
-    public readonly readTimeout!: pulumi.Output<number | undefined>;
+    declare public readonly readTimeout: pulumi.Output<number | undefined>;
     /**
      * Number of retries. Default: 5
      */
-    public readonly retries!: pulumi.Output<number | undefined>;
+    declare public readonly retries: pulumi.Output<number | undefined>;
     /**
      * A list of strings associated with the Service for grouping and filtering.
      */
-    public readonly tags!: pulumi.Output<string[] | undefined>;
+    declare public readonly tags: pulumi.Output<string[] | undefined>;
     /**
      * Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
      */
-    public readonly tlsVerify!: pulumi.Output<boolean | undefined>;
+    declare public readonly tlsVerify: pulumi.Output<boolean | undefined>;
     /**
      * Maximum depth of chain while verifying Upstream server’s TLS certificate.
      */
-    public readonly tlsVerifyDepth!: pulumi.Output<number | undefined>;
+    declare public readonly tlsVerifyDepth: pulumi.Output<number | undefined>;
     /**
      * Write timout. Default(ms): 60000
      */
-    public readonly writeTimeout!: pulumi.Output<number | undefined>;
+    declare public readonly writeTimeout: pulumi.Output<number | undefined>;
 
     /**
      * Create a Service resource with the given unique name, arguments, and options.
@@ -173,39 +173,39 @@ export class Service extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ServiceState | undefined;
-            resourceInputs["caCertificateIds"] = state ? state.caCertificateIds : undefined;
-            resourceInputs["clientCertificateId"] = state ? state.clientCertificateId : undefined;
-            resourceInputs["connectTimeout"] = state ? state.connectTimeout : undefined;
-            resourceInputs["host"] = state ? state.host : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["path"] = state ? state.path : undefined;
-            resourceInputs["port"] = state ? state.port : undefined;
-            resourceInputs["protocol"] = state ? state.protocol : undefined;
-            resourceInputs["readTimeout"] = state ? state.readTimeout : undefined;
-            resourceInputs["retries"] = state ? state.retries : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["tlsVerify"] = state ? state.tlsVerify : undefined;
-            resourceInputs["tlsVerifyDepth"] = state ? state.tlsVerifyDepth : undefined;
-            resourceInputs["writeTimeout"] = state ? state.writeTimeout : undefined;
+            resourceInputs["caCertificateIds"] = state?.caCertificateIds;
+            resourceInputs["clientCertificateId"] = state?.clientCertificateId;
+            resourceInputs["connectTimeout"] = state?.connectTimeout;
+            resourceInputs["host"] = state?.host;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["path"] = state?.path;
+            resourceInputs["port"] = state?.port;
+            resourceInputs["protocol"] = state?.protocol;
+            resourceInputs["readTimeout"] = state?.readTimeout;
+            resourceInputs["retries"] = state?.retries;
+            resourceInputs["tags"] = state?.tags;
+            resourceInputs["tlsVerify"] = state?.tlsVerify;
+            resourceInputs["tlsVerifyDepth"] = state?.tlsVerifyDepth;
+            resourceInputs["writeTimeout"] = state?.writeTimeout;
         } else {
             const args = argsOrState as ServiceArgs | undefined;
-            if ((!args || args.protocol === undefined) && !opts.urn) {
+            if (args?.protocol === undefined && !opts.urn) {
                 throw new Error("Missing required property 'protocol'");
             }
-            resourceInputs["caCertificateIds"] = args ? args.caCertificateIds : undefined;
-            resourceInputs["clientCertificateId"] = args ? args.clientCertificateId : undefined;
-            resourceInputs["connectTimeout"] = args ? args.connectTimeout : undefined;
-            resourceInputs["host"] = args ? args.host : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["path"] = args ? args.path : undefined;
-            resourceInputs["port"] = args ? args.port : undefined;
-            resourceInputs["protocol"] = args ? args.protocol : undefined;
-            resourceInputs["readTimeout"] = args ? args.readTimeout : undefined;
-            resourceInputs["retries"] = args ? args.retries : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["tlsVerify"] = args ? args.tlsVerify : undefined;
-            resourceInputs["tlsVerifyDepth"] = args ? args.tlsVerifyDepth : undefined;
-            resourceInputs["writeTimeout"] = args ? args.writeTimeout : undefined;
+            resourceInputs["caCertificateIds"] = args?.caCertificateIds;
+            resourceInputs["clientCertificateId"] = args?.clientCertificateId;
+            resourceInputs["connectTimeout"] = args?.connectTimeout;
+            resourceInputs["host"] = args?.host;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["path"] = args?.path;
+            resourceInputs["port"] = args?.port;
+            resourceInputs["protocol"] = args?.protocol;
+            resourceInputs["readTimeout"] = args?.readTimeout;
+            resourceInputs["retries"] = args?.retries;
+            resourceInputs["tags"] = args?.tags;
+            resourceInputs["tlsVerify"] = args?.tlsVerify;
+            resourceInputs["tlsVerifyDepth"] = args?.tlsVerifyDepth;
+            resourceInputs["writeTimeout"] = args?.writeTimeout;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Service.__pulumiType, name, resourceInputs, opts);
