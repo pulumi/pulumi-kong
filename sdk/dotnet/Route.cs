@@ -14,7 +14,7 @@ namespace Pulumi.Kong
     /// 
     /// The route resource maps directly onto the json for the route endpoint in Kong. For more information on the parameters [see the Kong Route create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#route-object).
     /// 
-    /// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want.
+    /// To create a tcp/tls route you set `Sources` and `Destinations` by repeating the corresponding element (`Source` or `Destination`) for each source or destination you want.
     /// 
     /// ## Example Usage
     /// 
@@ -68,7 +68,7 @@ namespace Pulumi.Kong
     /// });
     /// ```
     /// 
-    /// To create a tcp/tls route you set `sources` and `destinations` by repeating the corresponding element (`source` or `destination`) for each source or destination you want, for example:
+    /// To create a tcp/tls route you set `Sources` and `Destinations` by repeating the corresponding element (`Source` or `Destination`) for each source or destination you want, for example:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -128,13 +128,13 @@ namespace Pulumi.Kong
     public partial class Route : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// A list of destination `ip` and `port`
+        /// A list of destination `Ip` and `Port`
         /// </summary>
         [Output("destinations")]
         public Output<ImmutableArray<Outputs.RouteDestination>> Destinations { get; private set; } = null!;
 
         /// <summary>
-        /// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+        /// One or more blocks of `Name` to set name of header and `Values` which is a list of `String` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
         /// </summary>
         [Output("headers")]
         public Output<ImmutableArray<Outputs.RouteHeader>> Headers { get; private set; } = null!;
@@ -218,7 +218,7 @@ namespace Pulumi.Kong
         public Output<ImmutableArray<string>> Snis { get; private set; } = null!;
 
         /// <summary>
-        /// A list of source `ip` and `port`
+        /// A list of source `Ip` and `Port`
         /// </summary>
         [Output("sources")]
         public Output<ImmutableArray<Outputs.RouteSource>> Sources { get; private set; } = null!;
@@ -285,7 +285,7 @@ namespace Pulumi.Kong
         private InputList<Inputs.RouteDestinationArgs>? _destinations;
 
         /// <summary>
-        /// A list of destination `ip` and `port`
+        /// A list of destination `Ip` and `Port`
         /// </summary>
         public InputList<Inputs.RouteDestinationArgs> Destinations
         {
@@ -297,7 +297,7 @@ namespace Pulumi.Kong
         private InputList<Inputs.RouteHeaderArgs>? _headers;
 
         /// <summary>
-        /// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+        /// One or more blocks of `Name` to set name of header and `Values` which is a list of `String` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
         /// </summary>
         public InputList<Inputs.RouteHeaderArgs> Headers
         {
@@ -417,7 +417,7 @@ namespace Pulumi.Kong
         private InputList<Inputs.RouteSourceArgs>? _sources;
 
         /// <summary>
-        /// A list of source `ip` and `port`
+        /// A list of source `Ip` and `Port`
         /// </summary>
         public InputList<Inputs.RouteSourceArgs> Sources
         {
@@ -455,7 +455,7 @@ namespace Pulumi.Kong
         private InputList<Inputs.RouteDestinationGetArgs>? _destinations;
 
         /// <summary>
-        /// A list of destination `ip` and `port`
+        /// A list of destination `Ip` and `Port`
         /// </summary>
         public InputList<Inputs.RouteDestinationGetArgs> Destinations
         {
@@ -467,7 +467,7 @@ namespace Pulumi.Kong
         private InputList<Inputs.RouteHeaderGetArgs>? _headers;
 
         /// <summary>
-        /// One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
+        /// One or more blocks of `Name` to set name of header and `Values` which is a list of `String` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
         /// </summary>
         public InputList<Inputs.RouteHeaderGetArgs> Headers
         {
@@ -587,7 +587,7 @@ namespace Pulumi.Kong
         private InputList<Inputs.RouteSourceGetArgs>? _sources;
 
         /// <summary>
-        /// A list of source `ip` and `port`
+        /// A list of source `Ip` and `Port`
         /// </summary>
         public InputList<Inputs.RouteSourceGetArgs> Sources
         {

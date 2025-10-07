@@ -129,14 +129,14 @@ public class ConsumerOauth2 extends com.pulumi.resources.CustomResource {
         return this.consumerId;
     }
     /**
-     * A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+     * A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      * 
      */
     @Export(name="hashSecret", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> hashSecret;
 
     /**
-     * @return A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+     * @return A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      * 
      */
     public Output<Optional<Boolean>> hashSecret() {

@@ -94,7 +94,7 @@ namespace Pulumi.Kong
 
         private static readonly __Value<bool?> _strictPluginsMatch = new __Value<bool?>(() => __config.GetBoolean("strictPluginsMatch") ?? Utilities.GetEnvBoolean("STRICT_PLUGINS_MATCH"));
         /// <summary>
-        /// Should plugins `config_json` field strictly match plugin configuration
+        /// Should plugins `ConfigJson` field strictly match plugin configuration
         /// </summary>
         public static bool? StrictPluginsMatch
         {
