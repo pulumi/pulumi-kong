@@ -125,7 +125,7 @@ namespace Pulumi.Kong
         public Input<string>? KongWorkspace { get; set; }
 
         /// <summary>
-        /// Should plugins `config_json` field strictly match plugin configuration
+        /// Should plugins `ConfigJson` field strictly match plugin configuration
         /// </summary>
         [Input("strictPluginsMatch", json: true)]
         public Input<bool>? StrictPluginsMatch { get; set; }
