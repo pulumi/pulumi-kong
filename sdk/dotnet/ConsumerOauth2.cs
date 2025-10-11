@@ -85,7 +85,7 @@ namespace Pulumi.Kong
         public Output<string> ConsumerId { get; private set; } = null!;
 
         /// <summary>
-        /// A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+        /// A boolean flag that indicates whether the ClientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `False`.
         /// </summary>
         [Output("hashSecret")]
         public Output<bool?> HashSecret { get; private set; } = null!;
@@ -173,7 +173,7 @@ namespace Pulumi.Kong
         public Input<string> ConsumerId { get; set; } = null!;
 
         /// <summary>
-        /// A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+        /// A boolean flag that indicates whether the ClientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `False`.
         /// </summary>
         [Input("hashSecret")]
         public Input<bool>? HashSecret { get; set; }
@@ -235,7 +235,7 @@ namespace Pulumi.Kong
         public Input<string>? ConsumerId { get; set; }
 
         /// <summary>
-        /// A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+        /// A boolean flag that indicates whether the ClientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `False`.
         /// </summary>
         [Input("hashSecret")]
         public Input<bool>? HashSecret { get; set; }

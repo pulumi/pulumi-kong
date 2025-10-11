@@ -108,14 +108,14 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Should plugins `config_json` field strictly match plugin configuration
+     * Should plugins `configJson` field strictly match plugin configuration
      * 
      */
     @Import(name="strictPluginsMatch", json=true)
     private @Nullable Output<Boolean> strictPluginsMatch;
 
     /**
-     * @return Should plugins `config_json` field strictly match plugin configuration
+     * @return Should plugins `configJson` field strictly match plugin configuration
      * 
      */
     public Optional<Output<Boolean>> strictPluginsMatch() {
@@ -295,7 +295,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param strictPluginsMatch Should plugins `config_json` field strictly match plugin configuration
+         * @param strictPluginsMatch Should plugins `configJson` field strictly match plugin configuration
          * 
          * @return builder
          * 
@@ -306,7 +306,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param strictPluginsMatch Should plugins `config_json` field strictly match plugin configuration
+         * @param strictPluginsMatch Should plugins `configJson` field strictly match plugin configuration
          * 
          * @return builder
          * 

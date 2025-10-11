@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
  * ## # kong.Plugin
  * 
  * The plugin resource maps directly onto the json for the API endpoint in Kong.  For more information on the parameters [see the Kong Api create documentation](https://docs.konghq.com/gateway-oss/2.5.x/admin-api/#plugin-object).
- * The `config_json` is passed through to the plugin to configure it as is.
+ * The `configJson` is passed through to the plugin to configure it as is.
  * 
  * ## Example Usage
  * 
@@ -60,7 +60,7 @@ import javax.annotation.Nullable;
  * }
  * }
  * </pre>
- * To apply a plugin to a consumer use the `consumer_id` property, for example:
+ * To apply a plugin to a consumer use the `consumerId` property, for example:
  * 
  * <pre>
  * {@code
@@ -107,7 +107,7 @@ import javax.annotation.Nullable;
  * }
  * </pre>
  * 
- * To apply a plugin to a service use the `service_id` property, for example:
+ * To apply a plugin to a service use the `serviceId` property, for example:
  * 
  * <pre>
  * {@code
@@ -155,7 +155,7 @@ import javax.annotation.Nullable;
  * }
  * </pre>
  * 
- * To apply a plugin to a route use the `route_id` property, for example:
+ * To apply a plugin to a route use the `routeId` property, for example:
  * 
  * <pre>
  * {@code
