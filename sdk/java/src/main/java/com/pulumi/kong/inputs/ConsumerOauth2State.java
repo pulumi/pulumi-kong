@@ -63,14 +63,14 @@ public final class ConsumerOauth2State extends com.pulumi.resources.ResourceArgs
     }
 
     /**
-     * A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+     * A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      * 
      */
     @Import(name="hashSecret")
     private @Nullable Output<Boolean> hashSecret;
 
     /**
-     * @return A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+     * @return A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      * 
      */
     public Optional<Output<Boolean>> hashSecret() {
@@ -216,7 +216,7 @@ public final class ConsumerOauth2State extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param hashSecret A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+         * @param hashSecret A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
          * 
          * @return builder
          * 
@@ -227,7 +227,7 @@ public final class ConsumerOauth2State extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param hashSecret A boolean flag that indicates whether the client_secret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
+         * @param hashSecret A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
          * 
          * @return builder
          * 

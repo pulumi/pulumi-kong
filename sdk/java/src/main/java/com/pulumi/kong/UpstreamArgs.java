@@ -34,14 +34,14 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+     * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      * 
      */
     @Import(name="hashFallback")
     private @Nullable Output<String> hashFallback;
 
     /**
-     * @return is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+     * @return is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      * 
      */
     public Optional<Output<String>> hashFallback() {
@@ -49,14 +49,14 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+     * is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
      * 
      */
     @Import(name="hashFallbackHeader")
     private @Nullable Output<String> hashFallbackHeader;
 
     /**
-     * @return is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+     * @return is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
      * 
      */
     public Optional<Output<String>> hashFallbackHeader() {
@@ -79,14 +79,14 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+     * is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      * 
      */
     @Import(name="hashOnCookie")
     private @Nullable Output<String> hashOnCookie;
 
     /**
-     * @return is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+     * @return is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      * 
      */
     public Optional<Output<String>> hashOnCookie() {
@@ -94,7 +94,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+     * is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
      * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
      * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
      * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
@@ -122,7 +122,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
     private @Nullable Output<String> hashOnCookiePath;
 
     /**
-     * @return is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+     * @return is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
      * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
      * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
      * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
@@ -151,14 +151,14 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+     * is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
      * 
      */
     @Import(name="hashOnHeader")
     private @Nullable Output<String> hashOnHeader;
 
     /**
-     * @return is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+     * @return is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
      * 
      */
     public Optional<Output<String>> hashOnHeader() {
@@ -289,7 +289,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashFallback is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+         * @param hashFallback is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
          * 
          * @return builder
          * 
@@ -300,7 +300,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashFallback is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+         * @param hashFallback is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
          * 
          * @return builder
          * 
@@ -310,7 +310,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashFallbackHeader is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+         * @param hashFallbackHeader is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
          * 
          * @return builder
          * 
@@ -321,7 +321,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashFallbackHeader is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+         * @param hashFallbackHeader is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
          * 
          * @return builder
          * 
@@ -352,7 +352,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashOnCookie is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+         * @param hashOnCookie is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
          * 
          * @return builder
          * 
@@ -363,7 +363,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashOnCookie is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+         * @param hashOnCookie is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
          * 
          * @return builder
          * 
@@ -373,7 +373,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashOnCookiePath is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+         * @param hashOnCookiePath is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
          * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
          * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
          * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
@@ -405,7 +405,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashOnCookiePath is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+         * @param hashOnCookiePath is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
          * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
          * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
          * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
@@ -436,7 +436,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashOnHeader is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+         * @param hashOnHeader is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
          * 
          * @return builder
          * 
@@ -447,7 +447,7 @@ public final class UpstreamArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param hashOnHeader is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+         * @param hashOnHeader is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
          * 
          * @return builder
          * 

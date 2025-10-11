@@ -40,7 +40,7 @@ namespace Pulumi.Kong
     /// });
     /// ```
     /// 
-    /// To use a client certificate and ca certificates combine with certificate resource (note protocol must be `https`):
+    /// To use a client certificate and ca certificates combine with certificate resource (note protocol must be `Https`):
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
