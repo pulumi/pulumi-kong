@@ -54,7 +54,7 @@ public final class Config {
         return Codegen.stringProp("kongWorkspace").config(config).get();
     }
 /**
- * Should plugins `config_json` field strictly match plugin configuration
+ * Should plugins `configJson` field strictly match plugin configuration
  * 
  */
     public Optional<Boolean> strictPluginsMatch() {

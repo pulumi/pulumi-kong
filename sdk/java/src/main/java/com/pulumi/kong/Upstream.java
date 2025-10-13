@@ -157,28 +157,28 @@ public class Upstream extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.clientCertificateId);
     }
     /**
-     * is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+     * is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      * 
      */
     @Export(name="hashFallback", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashFallback;
 
     /**
-     * @return is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
+     * @return is a hashing input type if the primary `hashOn` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hashOn` is set to `cookie`. Defaults to `none`.
      * 
      */
     public Output<Optional<String>> hashFallback() {
         return Codegen.optional(this.hashFallback);
     }
     /**
-     * is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+     * is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
      * 
      */
     @Export(name="hashFallbackHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashFallbackHeader;
 
     /**
-     * @return is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
+     * @return is a header name to take the value from as hash input. Only required when `hashFallback` is set to `header`. Default `nil`.
      * 
      */
     public Output<Optional<String>> hashFallbackHeader() {
@@ -199,21 +199,21 @@ public class Upstream extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.hashOn);
     }
     /**
-     * is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+     * is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      * 
      */
     @Export(name="hashOnCookie", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnCookie;
 
     /**
-     * @return is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
+     * @return is a cookie name to take the value from as hash input. Only required when `hashOn` or `hashFallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
      * 
      */
     public Output<Optional<String>> hashOnCookie() {
         return Codegen.optional(this.hashOnCookie);
     }
     /**
-     * is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+     * is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
      * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
      * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
      * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
@@ -241,7 +241,7 @@ public class Upstream extends com.pulumi.resources.CustomResource {
     private Output</* @Nullable */ String> hashOnCookiePath;
 
     /**
-     * @return is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
+     * @return is a cookie path to set in the response headers. Only required when `hashOn` or `hashFallback` is set to `cookie`. Defaults to `/`.
      * * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
      * * `healthchecks.active.timeout` - (Optional) is a socket timeout for active health checks (in seconds). Defaults to `1`.
      * * `healthchecks.active.concurrency` - (Optional) is a number of targets to check concurrently in active health checks. Defaults to `10`.
@@ -269,14 +269,14 @@ public class Upstream extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.hashOnCookiePath);
     }
     /**
-     * is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+     * is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
      * 
      */
     @Export(name="hashOnHeader", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> hashOnHeader;
 
     /**
-     * @return is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
+     * @return is a header name to take the value from as hash input. Only required when `hashOn` is set to `header`. Default `nil`.
      * 
      */
     public Output<Optional<String>> hashOnHeader() {
