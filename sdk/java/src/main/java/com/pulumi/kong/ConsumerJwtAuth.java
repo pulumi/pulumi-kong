@@ -56,9 +56,9 @@ import javax.annotation.Nullable;
  *         var jwtPlugin = new Plugin("jwtPlugin", PluginArgs.builder()
  *             .name("jwt")
  *             .configJson("""
- * 	{
- * 		"claims_to_verify": ["exp"]
- * 	}
+ * \t{
+ * \t\t\"claims_to_verify\": [\"exp\"]
+ * \t}
  *             """)
  *             .build());
  * 

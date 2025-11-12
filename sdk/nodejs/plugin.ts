@@ -18,10 +18,10 @@ import * as utilities from "./utilities";
  *
  * const rateLimit = new kong.Plugin("rate_limit", {
  *     name: "rate-limiting",
- *     configJson: `\x09{
- * \x09\x09"second": 5,
- * \x09\x09"hour" : 1000
- * \x09}
+ *     configJson: `\\t{
+ * \\t\\t\\"second\\": 5,
+ * \\t\\t\\"hour\\" : 1000
+ * \\t}
  * `,
  * });
  * ```
@@ -38,10 +38,10 @@ import * as utilities from "./utilities";
  * const rateLimit = new kong.Plugin("rate_limit", {
  *     name: "rate-limiting",
  *     consumerId: pluginConsumer.id,
- *     configJson: `\x09{
- * \x09\x09"second": 5,
- * \x09\x09"hour" : 1000
- * \x09}
+ *     configJson: `\\t{
+ * \\t\\t\\"second\\": 5,
+ * \\t\\t\\"hour\\" : 1000
+ * \\t}
  * `,
  * });
  * ```
@@ -60,10 +60,10 @@ import * as utilities from "./utilities";
  * const rateLimit = new kong.Plugin("rate_limit", {
  *     name: "rate-limiting",
  *     serviceId: service.id,
- *     configJson: `\x09{
- * \x09\x09"second": 10,
- * \x09\x09"hour" : 2000
- * \x09}
+ *     configJson: `\\t{
+ * \\t\\t\\"second\\": 10,
+ * \\t\\t\\"hour\\" : 2000
+ * \\t}
  * `,
  * });
  * ```
@@ -83,10 +83,10 @@ import * as utilities from "./utilities";
  *     name: "rate-limiting",
  *     enabled: true,
  *     serviceId: service.id,
- *     configJson: `\x09{
- * \x09\x09"second": 11,
- * \x09\x09"hour" : 4000
- * \x09}
+ *     configJson: `\\t{
+ * \\t\\t\\"second\\": 11,
+ * \\t\\t\\"hour\\" : 4000
+ * \\t}
  * `,
  * });
  * ```
