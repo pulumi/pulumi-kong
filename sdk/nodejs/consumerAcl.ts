@@ -21,9 +21,9 @@ import * as utilities from "./utilities";
  * });
  * const aclPlugin = new kong.Plugin("acl_plugin", {
  *     name: "acl",
- *     configJson: `\x09{
- * \x09\x09"allow": ["group1", "group2"]
- * \x09}
+ *     configJson: `\\t{
+ * \\t\\t\\"allow\\": [\\"group1\\", \\"group2\\"]
+ * \\t}
  * `,
  * });
  * const consumerAcl = new kong.ConsumerAcl("consumer_acl", {

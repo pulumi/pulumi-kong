@@ -56,9 +56,9 @@ import javax.annotation.Nullable;
  *         var aclPlugin = new Plugin("aclPlugin", PluginArgs.builder()
  *             .name("acl")
  *             .configJson("""
- * 	{
- * 		"allow": ["group1", "group2"]
- * 	}
+ * \t{
+ * \t\t\"allow\": [\"group1\", \"group2\"]
+ * \t}
  *             """)
  *             .build());
  * 

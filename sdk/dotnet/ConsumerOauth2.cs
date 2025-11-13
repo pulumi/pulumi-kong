@@ -33,13 +33,13 @@ namespace Pulumi.Kong
     ///     var oauth2Plugin = new Kong.Plugin("oauth2_plugin", new()
     ///     {
     ///         Name = "oauth2",
-    ///         ConfigJson = @"	{
-    /// 		""global_credentials"": true,
-    /// 		""enable_password_grant"": true,
-    /// 		""token_expiration"": 180,
-    /// 		""refresh_token_ttl"": 180,
-    /// 		""provision_key"": ""testprovisionkey""
-    /// 	}
+    ///         ConfigJson = @"\t{
+    /// \t\t\""global_credentials\"": true,
+    /// \t\t\""enable_password_grant\"": true,
+    /// \t\t\""token_expiration\"": 180,
+    /// \t\t\""refresh_token_ttl\"": 180,
+    /// \t\t\""provision_key\"": \""testprovisionkey\""
+    /// \t}
     /// ",
     ///     });
     /// 

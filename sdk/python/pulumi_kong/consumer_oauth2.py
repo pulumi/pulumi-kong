@@ -284,13 +284,13 @@ class ConsumerOauth2(pulumi.CustomResource):
             custom_id="123")
         oauth2_plugin = kong.Plugin("oauth2_plugin",
             name="oauth2",
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"global_credentials": true,
-        \\x09\\x09"enable_password_grant": true,
-        \\x09\\x09"token_expiration": 180,
-        \\x09\\x09"refresh_token_ttl": 180,
-        \\x09\\x09"provision_key": "testprovisionkey"
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"global_credentials\\": true,
+        \\t\\t\\"enable_password_grant\\": true,
+        \\t\\t\\"token_expiration\\": 180,
+        \\t\\t\\"refresh_token_ttl\\": 180,
+        \\t\\t\\"provision_key\\": \\"testprovisionkey\\"
+        \\t}
         \"\"\")
         consumer_oauth2 = kong.ConsumerOauth2("consumer_oauth2",
             name="test_application",
@@ -336,13 +336,13 @@ class ConsumerOauth2(pulumi.CustomResource):
             custom_id="123")
         oauth2_plugin = kong.Plugin("oauth2_plugin",
             name="oauth2",
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"global_credentials": true,
-        \\x09\\x09"enable_password_grant": true,
-        \\x09\\x09"token_expiration": 180,
-        \\x09\\x09"refresh_token_ttl": 180,
-        \\x09\\x09"provision_key": "testprovisionkey"
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"global_credentials\\": true,
+        \\t\\t\\"enable_password_grant\\": true,
+        \\t\\t\\"token_expiration\\": 180,
+        \\t\\t\\"refresh_token_ttl\\": 180,
+        \\t\\t\\"provision_key\\": \\"testprovisionkey\\"
+        \\t}
         \"\"\")
         consumer_oauth2 = kong.ConsumerOauth2("consumer_oauth2",
             name="test_application",

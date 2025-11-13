@@ -39,7 +39,7 @@ import (
 //			}
 //			_, err = kong.NewPlugin(ctx, "acl_plugin", &kong.PluginArgs{
 //				Name:       pulumi.String("acl"),
-//				ConfigJson: pulumi.String("	{\n		\"allow\": [\"group1\", \"group2\"]\n	}\n"),
+//				ConfigJson: pulumi.String("\\t{\n\\t\\t\\\"allow\\\": [\\\"group1\\\", \\\"group2\\\"]\n\\t}\n"),
 //			})
 //			if err != nil {
 //				return err

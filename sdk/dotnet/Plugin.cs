@@ -28,10 +28,10 @@ namespace Pulumi.Kong
     ///     var rateLimit = new Kong.Plugin("rate_limit", new()
     ///     {
     ///         Name = "rate-limiting",
-    ///         ConfigJson = @"	{
-    /// 		""second"": 5,
-    /// 		""hour"" : 1000
-    /// 	}
+    ///         ConfigJson = @"\t{
+    /// \t\t\""second\"": 5,
+    /// \t\t\""hour\"" : 1000
+    /// \t}
     /// ",
     ///     });
     /// 
@@ -57,10 +57,10 @@ namespace Pulumi.Kong
     ///     {
     ///         Name = "rate-limiting",
     ///         ConsumerId = pluginConsumer.Id,
-    ///         ConfigJson = @"	{
-    /// 		""second"": 5,
-    /// 		""hour"" : 1000
-    /// 	}
+    ///         ConfigJson = @"\t{
+    /// \t\t\""second\"": 5,
+    /// \t\t\""hour\"" : 1000
+    /// \t}
     /// ",
     ///     });
     /// 
@@ -88,10 +88,10 @@ namespace Pulumi.Kong
     ///     {
     ///         Name = "rate-limiting",
     ///         ServiceId = service.Id,
-    ///         ConfigJson = @"	{
-    /// 		""second"": 10,
-    /// 		""hour"" : 2000
-    /// 	}
+    ///         ConfigJson = @"\t{
+    /// \t\t\""second\"": 10,
+    /// \t\t\""hour\"" : 2000
+    /// \t}
     /// ",
     ///     });
     /// 
@@ -120,10 +120,10 @@ namespace Pulumi.Kong
     ///         Name = "rate-limiting",
     ///         Enabled = true,
     ///         ServiceId = service.Id,
-    ///         ConfigJson = @"	{
-    /// 		""second"": 11,
-    /// 		""hour"" : 4000
-    /// 	}
+    ///         ConfigJson = @"\t{
+    /// \t\t\""second\"": 11,
+    /// \t\t\""hour\"" : 4000
+    /// \t}
     /// ",
     ///     });
     /// 

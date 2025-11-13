@@ -317,10 +317,10 @@ class Plugin(pulumi.CustomResource):
 
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 5,
-        \\x09\\x09"hour" : 1000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 5,
+        \\t\\t\\"hour\\" : 1000
+        \\t}
         \"\"\")
         ```
         To apply a plugin to a consumer use the `consumer_id` property, for example:
@@ -335,10 +335,10 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             consumer_id=plugin_consumer.id,
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 5,
-        \\x09\\x09"hour" : 1000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 5,
+        \\t\\t\\"hour\\" : 1000
+        \\t}
         \"\"\")
         ```
 
@@ -355,10 +355,10 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             service_id=service.id,
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 10,
-        \\x09\\x09"hour" : 2000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 10,
+        \\t\\t\\"hour\\" : 2000
+        \\t}
         \"\"\")
         ```
 
@@ -376,10 +376,10 @@ class Plugin(pulumi.CustomResource):
             name="rate-limiting",
             enabled=True,
             service_id=service.id,
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 11,
-        \\x09\\x09"hour" : 4000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 11,
+        \\t\\t\\"hour\\" : 4000
+        \\t}
         \"\"\")
         ```
 
@@ -421,10 +421,10 @@ class Plugin(pulumi.CustomResource):
 
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 5,
-        \\x09\\x09"hour" : 1000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 5,
+        \\t\\t\\"hour\\" : 1000
+        \\t}
         \"\"\")
         ```
         To apply a plugin to a consumer use the `consumer_id` property, for example:
@@ -439,10 +439,10 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             consumer_id=plugin_consumer.id,
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 5,
-        \\x09\\x09"hour" : 1000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 5,
+        \\t\\t\\"hour\\" : 1000
+        \\t}
         \"\"\")
         ```
 
@@ -459,10 +459,10 @@ class Plugin(pulumi.CustomResource):
         rate_limit = kong.Plugin("rate_limit",
             name="rate-limiting",
             service_id=service.id,
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 10,
-        \\x09\\x09"hour" : 2000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 10,
+        \\t\\t\\"hour\\" : 2000
+        \\t}
         \"\"\")
         ```
 
@@ -480,10 +480,10 @@ class Plugin(pulumi.CustomResource):
             name="rate-limiting",
             enabled=True,
             service_id=service.id,
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"second": 11,
-        \\x09\\x09"hour" : 4000
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"second\\": 11,
+        \\t\\t\\"hour\\" : 4000
+        \\t}
         \"\"\")
         ```
 

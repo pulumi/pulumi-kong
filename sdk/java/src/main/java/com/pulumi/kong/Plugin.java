@@ -49,10 +49,10 @@ import javax.annotation.Nullable;
  *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()
  *             .name("rate-limiting")
  *             .configJson("""
- * 	{
- * 		"second": 5,
- * 		"hour" : 1000
- * 	}
+ * \t{
+ * \t\t\"second\": 5,
+ * \t\t\"hour\" : 1000
+ * \t}
  *             """)
  *             .build());
  * 
@@ -95,10 +95,10 @@ import javax.annotation.Nullable;
  *             .name("rate-limiting")
  *             .consumerId(pluginConsumer.id())
  *             .configJson("""
- * 	{
- * 		"second": 5,
- * 		"hour" : 1000
- * 	}
+ * \t{
+ * \t\t\"second\": 5,
+ * \t\t\"hour\" : 1000
+ * \t}
  *             """)
  *             .build());
  * 
@@ -143,10 +143,10 @@ import javax.annotation.Nullable;
  *             .name("rate-limiting")
  *             .serviceId(service.id())
  *             .configJson("""
- * 	{
- * 		"second": 10,
- * 		"hour" : 2000
- * 	}
+ * \t{
+ * \t\t\"second\": 10,
+ * \t\t\"hour\" : 2000
+ * \t}
  *             """)
  *             .build());
  * 
@@ -192,10 +192,10 @@ import javax.annotation.Nullable;
  *             .enabled(true)
  *             .serviceId(service.id())
  *             .configJson("""
- * 	{
- * 		"second": 11,
- * 		"hour" : 4000
- * 	}
+ * \t{
+ * \t\t\"second\": 11,
+ * \t\t\"hour\" : 4000
+ * \t}
  *             """)
  *             .build());
  * 
