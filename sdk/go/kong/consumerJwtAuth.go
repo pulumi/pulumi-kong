@@ -39,7 +39,7 @@ import (
 //			}
 //			_, err = kong.NewPlugin(ctx, "jwt_plugin", &kong.PluginArgs{
 //				Name:       pulumi.String("jwt"),
-//				ConfigJson: pulumi.String("	{\n		\"claims_to_verify\": [\"exp\"]\n	}\n"),
+//				ConfigJson: pulumi.String("\\t{\n\\t\\t\\\"claims_to_verify\\\": [\\\"exp\\\"]\n\\t}\n"),
 //			})
 //			if err != nil {
 //				return err

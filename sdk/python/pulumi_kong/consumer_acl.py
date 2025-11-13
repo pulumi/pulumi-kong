@@ -152,9 +152,9 @@ class ConsumerAcl(pulumi.CustomResource):
             custom_id="123")
         acl_plugin = kong.Plugin("acl_plugin",
             name="acl",
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"allow": ["group1", "group2"]
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"allow\\": [\\"group1\\", \\"group2\\"]
+        \\t}
         \"\"\")
         consumer_acl = kong.ConsumerAcl("consumer_acl",
             consumer_id=my_consumer.id,
@@ -193,9 +193,9 @@ class ConsumerAcl(pulumi.CustomResource):
             custom_id="123")
         acl_plugin = kong.Plugin("acl_plugin",
             name="acl",
-            config_json=\"\"\"\\x09{
-        \\x09\\x09"allow": ["group1", "group2"]
-        \\x09}
+            config_json=\"\"\"\\t{
+        \\t\\t\\"allow\\": [\\"group1\\", \\"group2\\"]
+        \\t}
         \"\"\")
         consumer_acl = kong.ConsumerAcl("consumer_acl",
             consumer_id=my_consumer.id,

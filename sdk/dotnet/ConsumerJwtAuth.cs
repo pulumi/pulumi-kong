@@ -33,9 +33,9 @@ namespace Pulumi.Kong
     ///     var jwtPlugin = new Kong.Plugin("jwt_plugin", new()
     ///     {
     ///         Name = "jwt",
-    ///         ConfigJson = @"	{
-    /// 		""claims_to_verify"": [""exp""]
-    /// 	}
+    ///         ConfigJson = @"\t{
+    /// \t\t\""claims_to_verify\"": [\""exp\""]
+    /// \t}
     /// ",
     ///     });
     /// 

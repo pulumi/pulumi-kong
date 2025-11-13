@@ -33,9 +33,9 @@ namespace Pulumi.Kong
     ///     var aclPlugin = new Kong.Plugin("acl_plugin", new()
     ///     {
     ///         Name = "acl",
-    ///         ConfigJson = @"	{
-    /// 		""allow"": [""group1"", ""group2""]
-    /// 	}
+    ///         ConfigJson = @"\t{
+    /// \t\t\""allow\"": [\""group1\"", \""group2\""]
+    /// \t}
     /// ",
     ///     });
     /// 

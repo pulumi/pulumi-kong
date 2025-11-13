@@ -21,9 +21,9 @@ import * as utilities from "./utilities";
  * });
  * const jwtPlugin = new kong.Plugin("jwt_plugin", {
  *     name: "jwt",
- *     configJson: `\x09{
- * \x09\x09"claims_to_verify": ["exp"]
- * \x09}
+ *     configJson: `\\t{
+ * \\t\\t\\"claims_to_verify\\": [\\"exp\\"]
+ * \\t}
  * `,
  * });
  * const consumerJwtConfig = new kong.ConsumerJwtAuth("consumer_jwt_config", {
