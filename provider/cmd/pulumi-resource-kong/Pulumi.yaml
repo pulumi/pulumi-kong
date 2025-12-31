@@ -1,3 +1,0 @@
-name: kong
-description: A Pulumi resource provider for kong.
-language: schema
