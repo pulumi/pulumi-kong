@@ -37,14 +37,9 @@ __all__ = [
     'UpstreamHealthchecksPassiveUnhealthyArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class RouteDestinationArgsDict(TypedDict):
-        ip: NotRequired[pulumi.Input[_builtins.str]]
-        port: NotRequired[pulumi.Input[_builtins.int]]
-elif False:
-    RouteDestinationArgsDict: TypeAlias = Mapping[str, Any]
+class RouteDestinationArgsDict(TypedDict):
+    ip: NotRequired[pulumi.Input[_builtins.str]]
+    port: NotRequired[pulumi.Input[_builtins.int]]
 
 @pulumi.input_type
 class RouteDestinationArgs:
@@ -75,15 +70,12 @@ class RouteDestinationArgs:
         pulumi.set(self, "port", value)
 
 
-if not MYPY:
-    class RouteHeaderArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        The name of the route
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-elif False:
-    RouteHeaderArgsDict: TypeAlias = Mapping[str, Any]
+class RouteHeaderArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the route
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
 
 @pulumi.input_type
 class RouteHeaderArgs:
@@ -118,12 +110,9 @@ class RouteHeaderArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class RouteSourceArgsDict(TypedDict):
-        ip: NotRequired[pulumi.Input[_builtins.str]]
-        port: NotRequired[pulumi.Input[_builtins.int]]
-elif False:
-    RouteSourceArgsDict: TypeAlias = Mapping[str, Any]
+class RouteSourceArgsDict(TypedDict):
+    ip: NotRequired[pulumi.Input[_builtins.str]]
+    port: NotRequired[pulumi.Input[_builtins.int]]
 
 @pulumi.input_type
 class RouteSourceArgs:
@@ -154,12 +143,9 @@ class RouteSourceArgs:
         pulumi.set(self, "port", value)
 
 
-if not MYPY:
-    class UpstreamHealthchecksArgsDict(TypedDict):
-        active: NotRequired[pulumi.Input['UpstreamHealthchecksActiveArgsDict']]
-        passive: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveArgsDict']]
-elif False:
-    UpstreamHealthchecksArgsDict: TypeAlias = Mapping[str, Any]
+class UpstreamHealthchecksArgsDict(TypedDict):
+    active: NotRequired[pulumi.Input['UpstreamHealthchecksActiveArgsDict']]
+    passive: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveArgsDict']]
 
 @pulumi.input_type
 class UpstreamHealthchecksArgs:
@@ -190,18 +176,15 @@ class UpstreamHealthchecksArgs:
         pulumi.set(self, "passive", value)
 
 
-if not MYPY:
-    class UpstreamHealthchecksActiveArgsDict(TypedDict):
-        concurrency: NotRequired[pulumi.Input[_builtins.int]]
-        healthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveHealthyArgsDict']]
-        http_path: NotRequired[pulumi.Input[_builtins.str]]
-        https_sni: NotRequired[pulumi.Input[_builtins.str]]
-        https_verify_certificate: NotRequired[pulumi.Input[_builtins.bool]]
-        timeout: NotRequired[pulumi.Input[_builtins.int]]
-        type: NotRequired[pulumi.Input[_builtins.str]]
-        unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgsDict']]
-elif False:
-    UpstreamHealthchecksActiveArgsDict: TypeAlias = Mapping[str, Any]
+class UpstreamHealthchecksActiveArgsDict(TypedDict):
+    concurrency: NotRequired[pulumi.Input[_builtins.int]]
+    healthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveHealthyArgsDict']]
+    http_path: NotRequired[pulumi.Input[_builtins.str]]
+    https_sni: NotRequired[pulumi.Input[_builtins.str]]
+    https_verify_certificate: NotRequired[pulumi.Input[_builtins.bool]]
+    timeout: NotRequired[pulumi.Input[_builtins.int]]
+    type: NotRequired[pulumi.Input[_builtins.str]]
+    unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgsDict']]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveArgs:
@@ -304,13 +287,10 @@ class UpstreamHealthchecksActiveArgs:
         pulumi.set(self, "unhealthy", value)
 
 
-if not MYPY:
-    class UpstreamHealthchecksActiveHealthyArgsDict(TypedDict):
-        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-        interval: NotRequired[pulumi.Input[_builtins.int]]
-        successes: NotRequired[pulumi.Input[_builtins.int]]
-elif False:
-    UpstreamHealthchecksActiveHealthyArgsDict: TypeAlias = Mapping[str, Any]
+class UpstreamHealthchecksActiveHealthyArgsDict(TypedDict):
+    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
+    interval: NotRequired[pulumi.Input[_builtins.int]]
+    successes: NotRequired[pulumi.Input[_builtins.int]]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveHealthyArgs:
@@ -353,15 +333,12 @@ class UpstreamHealthchecksActiveHealthyArgs:
         pulumi.set(self, "successes", value)
 
 
-if not MYPY:
-    class UpstreamHealthchecksActiveUnhealthyArgsDict(TypedDict):
-        http_failures: NotRequired[pulumi.Input[_builtins.int]]
-        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-        interval: NotRequired[pulumi.Input[_builtins.int]]
-        tcp_failures: NotRequired[pulumi.Input[_builtins.int]]
-        timeouts: NotRequired[pulumi.Input[_builtins.int]]
-elif False:
-    UpstreamHealthchecksActiveUnhealthyArgsDict: TypeAlias = Mapping[str, Any]
+class UpstreamHealthchecksActiveUnhealthyArgsDict(TypedDict):
+    http_failures: NotRequired[pulumi.Input[_builtins.int]]
+    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
+    interval: NotRequired[pulumi.Input[_builtins.int]]
+    tcp_failures: NotRequired[pulumi.Input[_builtins.int]]
+    timeouts: NotRequired[pulumi.Input[_builtins.int]]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveUnhealthyArgs:
@@ -428,13 +405,10 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
         pulumi.set(self, "timeouts", value)
 
 
-if not MYPY:
-    class UpstreamHealthchecksPassiveArgsDict(TypedDict):
-        healthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgsDict']]
-        type: NotRequired[pulumi.Input[_builtins.str]]
-        unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgsDict']]
-elif False:
-    UpstreamHealthchecksPassiveArgsDict: TypeAlias = Mapping[str, Any]
+class UpstreamHealthchecksPassiveArgsDict(TypedDict):
+    healthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgsDict']]
+    type: NotRequired[pulumi.Input[_builtins.str]]
+    unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgsDict']]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveArgs:
@@ -477,12 +451,9 @@ class UpstreamHealthchecksPassiveArgs:
         pulumi.set(self, "unhealthy", value)
 
 
-if not MYPY:
-    class UpstreamHealthchecksPassiveHealthyArgsDict(TypedDict):
-        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-        successes: NotRequired[pulumi.Input[_builtins.int]]
-elif False:
-    UpstreamHealthchecksPassiveHealthyArgsDict: TypeAlias = Mapping[str, Any]
+class UpstreamHealthchecksPassiveHealthyArgsDict(TypedDict):
+    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
+    successes: NotRequired[pulumi.Input[_builtins.int]]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveHealthyArgs:
@@ -513,14 +484,11 @@ class UpstreamHealthchecksPassiveHealthyArgs:
         pulumi.set(self, "successes", value)
 
 
-if not MYPY:
-    class UpstreamHealthchecksPassiveUnhealthyArgsDict(TypedDict):
-        http_failures: NotRequired[pulumi.Input[_builtins.int]]
-        http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-        tcp_failures: NotRequired[pulumi.Input[_builtins.int]]
-        timeouts: NotRequired[pulumi.Input[_builtins.int]]
-elif False:
-    UpstreamHealthchecksPassiveUnhealthyArgsDict: TypeAlias = Mapping[str, Any]
+class UpstreamHealthchecksPassiveUnhealthyArgsDict(TypedDict):
+    http_failures: NotRequired[pulumi.Input[_builtins.int]]
+    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
+    tcp_failures: NotRequired[pulumi.Input[_builtins.int]]
+    timeouts: NotRequired[pulumi.Input[_builtins.int]]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveUnhealthyArgs:
