@@ -28,6 +28,7 @@ class ConsumerOauth2Args:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a ConsumerOauth2 resource.
+
         :param pulumi.Input[_builtins.str] consumer_id: The id of the consumer to be configured with oauth2.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] redirect_uris: An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).
         :param pulumi.Input[_builtins.str] client_id: Unique oauth2 client id. If not set, the oauth2 plugin will generate one
@@ -146,6 +147,7 @@ class _ConsumerOauth2State:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering ConsumerOauth2 resources.
+
         :param pulumi.Input[_builtins.str] client_id: Unique oauth2 client id. If not set, the oauth2 plugin will generate one
         :param pulumi.Input[_builtins.str] client_secret: Unique oauth2 client secret. If not set, the oauth2 plugin will generate one
         :param pulumi.Input[_builtins.str] consumer_id: The id of the consumer to be configured with oauth2.
@@ -304,6 +306,7 @@ class ConsumerOauth2(pulumi.CustomResource):
             tags=["myTag"])
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] client_id: Unique oauth2 client id. If not set, the oauth2 plugin will generate one
@@ -355,6 +358,7 @@ class ConsumerOauth2(pulumi.CustomResource):
             ],
             tags=["myTag"])
         ```
+
 
         :param str resource_name: The name of the resource.
         :param ConsumerOauth2Args args: The arguments to use to populate this resource's properties.

@@ -35,6 +35,7 @@ class ServiceArgs:
                  write_timeout: Optional[pulumi.Input[_builtins.int]] = None):
         """
         The set of arguments for constructing a Service resource.
+
         :param pulumi.Input[_builtins.str] protocol: Protocol to use
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ca_certificate_ids: A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
         :param pulumi.Input[_builtins.str] client_certificate_id: ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
@@ -266,6 +267,7 @@ class _ServiceState:
                  write_timeout: Optional[pulumi.Input[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering Service resources.
+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ca_certificate_ids: A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
         :param pulumi.Input[_builtins.str] client_certificate_id: ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
         :param pulumi.Input[_builtins.int] connect_timeout: Connection timeout. Default(ms): 60000
@@ -567,6 +569,7 @@ class Service(pulumi.CustomResource):
         $ pulumi import kong:index/service:Service <service_identifier> <service_id>
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ca_certificate_ids: A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
@@ -656,6 +659,7 @@ class Service(pulumi.CustomResource):
         ```sh
         $ pulumi import kong:index/service:Service <service_identifier> <service_id>
         ```
+
 
         :param str resource_name: The name of the resource.
         :param ServiceArgs args: The arguments to use to populate this resource's properties.

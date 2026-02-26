@@ -24,6 +24,7 @@ class ConsumerArgs:
                  username: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a Consumer resource.
+
         :param pulumi.Input[_builtins.str] custom_id: A custom id for the consumer, you must set either the username or custom_id
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[_builtins.str] username: The username to use, you must set either the username or custom_id
@@ -80,6 +81,7 @@ class _ConsumerState:
                  username: Optional[pulumi.Input[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Consumer resources.
+
         :param pulumi.Input[_builtins.str] custom_id: A custom id for the consumer, you must set either the username or custom_id
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list of strings associated with the Consumer for grouping and filtering
         :param pulumi.Input[_builtins.str] username: The username to use, you must set either the username or custom_id
@@ -163,6 +165,7 @@ class Consumer(pulumi.CustomResource):
         $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] custom_id: A custom id for the consumer, you must set either the username or custom_id
@@ -199,6 +202,7 @@ class Consumer(pulumi.CustomResource):
         ```sh
         $ pulumi import kong:index/consumer:Consumer <consumer_identifier> <consumer_id>
         ```
+
 
         :param str resource_name: The name of the resource.
         :param ConsumerArgs args: The arguments to use to populate this resource's properties.

@@ -25,6 +25,7 @@ class ConsumerBasicAuthArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a ConsumerBasicAuth resource.
+
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured with basic auth
         :param pulumi.Input[_builtins.str] password: password to be used for basic auth
         :param pulumi.Input[_builtins.str] username: username to be used for basic auth
@@ -94,6 +95,7 @@ class _ConsumerBasicAuthState:
                  username: Optional[pulumi.Input[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ConsumerBasicAuth resources.
+
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured with basic auth
         :param pulumi.Input[_builtins.str] password: password to be used for basic auth
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list of strings associated with the consumer basic auth for grouping and filtering
@@ -193,6 +195,7 @@ class ConsumerBasicAuth(pulumi.CustomResource):
             ])
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured with basic auth
@@ -230,6 +233,7 @@ class ConsumerBasicAuth(pulumi.CustomResource):
                 "anotherTag",
             ])
         ```
+
 
         :param str resource_name: The name of the resource.
         :param ConsumerBasicAuthArgs args: The arguments to use to populate this resource's properties.
