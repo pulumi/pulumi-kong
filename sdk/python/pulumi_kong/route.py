@@ -41,6 +41,7 @@ class RouteArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Route resource.
+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] protocols: The list of protocols to use
         :param pulumi.Input[_builtins.str] service_id: Service ID to map to
         :param pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]] destinations: A list of destination `ip` and `port`
@@ -335,6 +336,7 @@ class _RouteState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Route resources.
+
         :param pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]] destinations: A list of destination `ip` and `port`
         :param pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]] headers: One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] hosts: A list of domain names that match this Route
@@ -706,6 +708,7 @@ class Route(pulumi.CustomResource):
         $ pulumi import kong:index/route:Route <route_identifier> <route_id>
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict']]]] destinations: A list of destination `ip` and `port`
@@ -805,6 +808,7 @@ class Route(pulumi.CustomResource):
         ```sh
         $ pulumi import kong:index/route:Route <route_identifier> <route_id>
         ```
+
 
         :param str resource_name: The name of the resource.
         :param RouteArgs args: The arguments to use to populate this resource's properties.

@@ -24,6 +24,7 @@ class ConsumerKeyAuthArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a ConsumerKeyAuth resource.
+
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to associate the credentials to
         :param pulumi.Input[_builtins.str] key: Unique key to authenticate the client; if omitted the plugin will generate one
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list of strings associated with the consumer key auth for grouping and filtering
@@ -79,6 +80,7 @@ class _ConsumerKeyAuthState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering ConsumerKeyAuth resources.
+
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to associate the credentials to
         :param pulumi.Input[_builtins.str] key: Unique key to authenticate the client; if omitted the plugin will generate one
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list of strings associated with the consumer key auth for grouping and filtering
@@ -161,6 +163,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
             ])
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to associate the credentials to
@@ -196,6 +199,7 @@ class ConsumerKeyAuth(pulumi.CustomResource):
                 "anotherTag",
             ])
         ```
+
 
         :param str resource_name: The name of the resource.
         :param ConsumerKeyAuthArgs args: The arguments to use to populate this resource's properties.

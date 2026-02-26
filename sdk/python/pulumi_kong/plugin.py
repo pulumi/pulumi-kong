@@ -29,6 +29,7 @@ class PluginArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Plugin resource.
+
         :param pulumi.Input[_builtins.str] config_json: this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
                page of the plugin you are configuring
         :param pulumi.Input[_builtins.str] consumer_id: the consumer id you want to configure the plugin for
@@ -160,6 +161,7 @@ class _PluginState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Plugin resources.
+
         :param pulumi.Input[_builtins.str] config_json: this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
                page of the plugin you are configuring
         :param pulumi.Input[_builtins.str] consumer_id: the consumer id you want to configure the plugin for
@@ -391,6 +393,7 @@ class Plugin(pulumi.CustomResource):
         $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] config_json: this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
@@ -494,6 +497,7 @@ class Plugin(pulumi.CustomResource):
         ```sh
         $ pulumi import kong:index/plugin:Plugin <plugin_identifier> <plugin_id>
         ```
+
 
         :param str resource_name: The name of the resource.
         :param PluginArgs args: The arguments to use to populate this resource's properties.

@@ -25,6 +25,7 @@ class CertificateArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Certificate resource.
+
         :param pulumi.Input[_builtins.str] certificate: should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
         :param pulumi.Input[_builtins.str] private_key: should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] snis: A list of strings associated with the Certificate for grouping and filtering
@@ -92,6 +93,7 @@ class _CertificateState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Certificate resources.
+
         :param pulumi.Input[_builtins.str] certificate: should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
         :param pulumi.Input[_builtins.str] private_key: should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] snis: A list of strings associated with the Certificate for grouping and filtering
@@ -191,6 +193,7 @@ class Certificate(pulumi.CustomResource):
         $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] certificate: should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
@@ -231,6 +234,7 @@ class Certificate(pulumi.CustomResource):
         ```sh
         $ pulumi import kong:index/certificate:Certificate <certifcate_identifier> <certificate_id>
         ```
+
 
         :param str resource_name: The name of the resource.
         :param CertificateArgs args: The arguments to use to populate this resource's properties.

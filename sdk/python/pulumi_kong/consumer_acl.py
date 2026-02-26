@@ -24,6 +24,7 @@ class ConsumerAclArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a ConsumerAcl resource.
+
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured
         :param pulumi.Input[_builtins.str] group: the acl group
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list of strings associated with the consumer acl for grouping and filtering
@@ -78,6 +79,7 @@ class _ConsumerAclState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering ConsumerAcl resources.
+
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured
         :param pulumi.Input[_builtins.str] group: the acl group
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list of strings associated with the consumer acl for grouping and filtering
@@ -165,6 +167,7 @@ class ConsumerAcl(pulumi.CustomResource):
             ])
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured
@@ -205,6 +208,7 @@ class ConsumerAcl(pulumi.CustomResource):
                 "otherTag",
             ])
         ```
+
 
         :param str resource_name: The name of the resource.
         :param ConsumerAclArgs args: The arguments to use to populate this resource's properties.

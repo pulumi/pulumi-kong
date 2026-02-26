@@ -27,6 +27,7 @@ class ConsumerJwtAuthArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a ConsumerJwtAuth resource.
+
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured with jwt auth
         :param pulumi.Input[_builtins.str] rsa_public_key: If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
         :param pulumi.Input[_builtins.str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
@@ -129,6 +130,7 @@ class _ConsumerJwtAuthState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering ConsumerJwtAuth resources.
+
         :param pulumi.Input[_builtins.str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
         :param pulumi.Input[_builtins.str] consumer_id: the id of the consumer to be configured with jwt auth
         :param pulumi.Input[_builtins.str] key: A unique string identifying the credential. If left out, it will be auto-generated.
@@ -263,6 +265,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             secret="my_secret")
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] algorithm: The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
@@ -305,6 +308,7 @@ class ConsumerJwtAuth(pulumi.CustomResource):
             rsa_public_key="foo",
             secret="my_secret")
         ```
+
 
         :param str resource_name: The name of the resource.
         :param ConsumerJwtAuthArgs args: The arguments to use to populate this resource's properties.

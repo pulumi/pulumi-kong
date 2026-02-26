@@ -25,6 +25,7 @@ class TargetArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Target resource.
+
         :param pulumi.Input[_builtins.str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         :param pulumi.Input[_builtins.str] upstream_id: is the id of the upstream to apply this target to.
         :param pulumi.Input[_builtins.int] weight: is the weight this target gets within the upstream load balancer (0-1000, defaults to 100).
@@ -94,6 +95,7 @@ class _TargetState:
                  weight: Optional[pulumi.Input[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering Target resources.
+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list set of strings associated with the Plugin for grouping and filtering
         :param pulumi.Input[_builtins.str] target: is the target address (IP or hostname) and port. If omitted the port defaults to 8000.
         :param pulumi.Input[_builtins.str] upstream_id: is the id of the upstream to apply this target to.
@@ -189,6 +191,7 @@ class Target(pulumi.CustomResource):
         $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: A list set of strings associated with the Plugin for grouping and filtering
@@ -222,6 +225,7 @@ class Target(pulumi.CustomResource):
         ```sh
         $ pulumi import kong:index/target:Target <target_identifier> <upstream_id>/<target_id>
         ```
+
 
         :param str resource_name: The name of the resource.
         :param TargetArgs args: The arguments to use to populate this resource's properties.

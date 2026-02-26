@@ -35,6 +35,7 @@ class UpstreamArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Upstream resource.
+
         :param pulumi.Input[_builtins.str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[_builtins.str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
@@ -273,6 +274,7 @@ class _UpstreamState:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Upstream resources.
+
         :param pulumi.Input[_builtins.str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[_builtins.str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
@@ -604,6 +606,7 @@ class Upstream(pulumi.CustomResource):
         $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
@@ -735,6 +738,7 @@ class Upstream(pulumi.CustomResource):
         ```sh
         $ pulumi import kong:index/upstream:Upstream <upstream_identifier> <upstream_id>
         ```
+
 
         :param str resource_name: The name of the resource.
         :param UpstreamArgs args: The arguments to use to populate this resource's properties.
