@@ -20,7 +20,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var target = new Kong.Target("target", new()
+    ///     var target = new Kong.Index.Target("target", new()
     ///     {
     ///         TargetAddress = "sample_target:80",
     ///         Weight = 10,

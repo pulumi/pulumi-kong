@@ -26,7 +26,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var route = new Kong.Route("route", new()
+    ///     var route = new Kong.Index.Route("route", new()
     ///     {
     ///         Name = "MyRoute",
     ///         Protocols = new[]
@@ -78,7 +78,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var route = new Kong.Route("route", new()
+    ///     var route = new Kong.Index.Route("route", new()
     ///     {
     ///         Protocols = new[]
     ///         {

@@ -24,13 +24,13 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myConsumer = new Kong.Consumer("my_consumer", new()
+    ///     var myConsumer = new Kong.Index.Consumer("my_consumer", new()
     ///     {
     ///         Username = "User1",
     ///         CustomId = "123",
     ///     });
     /// 
-    ///     var oauth2Plugin = new Kong.Plugin("oauth2_plugin", new()
+    ///     var oauth2Plugin = new Kong.Index.Plugin("oauth2_plugin", new()
     ///     {
     ///         Name = "oauth2",
     ///         ConfigJson = @"\t{
@@ -43,7 +43,7 @@ namespace Pulumi.Kong
     /// ",
     ///     });
     /// 
-    ///     var consumerOauth2 = new Kong.ConsumerOauth2("consumer_oauth2", new()
+    ///     var consumerOauth2 = new Kong.Index.ConsumerOauth2("consumer_oauth2", new()
     ///     {
     ///         Name = "test_application",
     ///         ConsumerId = myConsumer.Id,
