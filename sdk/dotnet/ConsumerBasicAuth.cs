@@ -24,18 +24,18 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myConsumer = new Kong.Consumer("my_consumer", new()
+    ///     var myConsumer = new Kong.Index.Consumer("my_consumer", new()
     ///     {
     ///         Username = "User1",
     ///         CustomId = "123",
     ///     });
     /// 
-    ///     var basicAuthPlugin = new Kong.Plugin("basic_auth_plugin", new()
+    ///     var basicAuthPlugin = new Kong.Index.Plugin("basic_auth_plugin", new()
     ///     {
     ///         Name = "basic-auth",
     ///     });
     /// 
-    ///     var consumerBasicAuth = new Kong.ConsumerBasicAuth("consumer_basic_auth", new()
+    ///     var consumerBasicAuth = new Kong.Index.ConsumerBasicAuth("consumer_basic_auth", new()
     ///     {
     ///         ConsumerId = myConsumer.Id,
     ///         Username = "foo_updated",

@@ -24,7 +24,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var consumer = new Kong.Consumer("consumer", new()
+    ///     var consumer = new Kong.Index.Consumer("consumer", new()
     ///     {
     ///         Username = "User1",
     ///         CustomId = "123",

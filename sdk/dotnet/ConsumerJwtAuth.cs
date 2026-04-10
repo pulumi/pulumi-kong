@@ -24,13 +24,13 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myConsumer = new Kong.Consumer("my_consumer", new()
+    ///     var myConsumer = new Kong.Index.Consumer("my_consumer", new()
     ///     {
     ///         Username = "User1",
     ///         CustomId = "123",
     ///     });
     /// 
-    ///     var jwtPlugin = new Kong.Plugin("jwt_plugin", new()
+    ///     var jwtPlugin = new Kong.Index.Plugin("jwt_plugin", new()
     ///     {
     ///         Name = "jwt",
     ///         ConfigJson = @"\t{
@@ -39,7 +39,7 @@ namespace Pulumi.Kong
     /// ",
     ///     });
     /// 
-    ///     var consumerJwtConfig = new Kong.ConsumerJwtAuth("consumer_jwt_config", new()
+    ///     var consumerJwtConfig = new Kong.Index.ConsumerJwtAuth("consumer_jwt_config", new()
     ///     {
     ///         ConsumerId = myConsumer.Id,
     ///         Algorithm = "HS256",

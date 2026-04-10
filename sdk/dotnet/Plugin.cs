@@ -25,7 +25,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
+    ///     var rateLimit = new Kong.Index.Plugin("rate_limit", new()
     ///     {
     ///         Name = "rate-limiting",
     ///         ConfigJson = @"\t{
@@ -47,13 +47,13 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var pluginConsumer = new Kong.Consumer("plugin_consumer", new()
+    ///     var pluginConsumer = new Kong.Index.Consumer("plugin_consumer", new()
     ///     {
     ///         Username = "PluginUser",
     ///         CustomId = "567",
     ///     });
     /// 
-    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
+    ///     var rateLimit = new Kong.Index.Plugin("rate_limit", new()
     ///     {
     ///         Name = "rate-limiting",
     ///         ConsumerId = pluginConsumer.Id,
@@ -77,14 +77,14 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var service = new Kong.Service("service", new()
+    ///     var service = new Kong.Index.Service("service", new()
     ///     {
     ///         Name = "test",
     ///         Protocol = "http",
     ///         Host = "test.org",
     ///     });
     /// 
-    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
+    ///     var rateLimit = new Kong.Index.Plugin("rate_limit", new()
     ///     {
     ///         Name = "rate-limiting",
     ///         ServiceId = service.Id,
@@ -108,14 +108,14 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var service = new Kong.Service("service", new()
+    ///     var service = new Kong.Index.Service("service", new()
     ///     {
     ///         Name = "test",
     ///         Protocol = "http",
     ///         Host = "test.org",
     ///     });
     /// 
-    ///     var rateLimit = new Kong.Plugin("rate_limit", new()
+    ///     var rateLimit = new Kong.Index.Plugin("rate_limit", new()
     ///     {
     ///         Name = "rate-limiting",
     ///         Enabled = true,

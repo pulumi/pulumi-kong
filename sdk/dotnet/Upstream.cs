@@ -20,7 +20,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var certificate = new Kong.Certificate("certificate", new()
+    ///     var certificate = new Kong.Index.Certificate("certificate", new()
     ///     {
     ///         Cert = @"    -----BEGIN CERTIFICATE-----
     ///     ......
@@ -36,7 +36,7 @@ namespace Pulumi.Kong
     ///         },
     ///     });
     /// 
-    ///     var upstream = new Kong.Upstream("upstream", new()
+    ///     var upstream = new Kong.Index.Upstream("upstream", new()
     ///     {
     ///         Name = "sample_upstream",
     ///         Slots = 10,

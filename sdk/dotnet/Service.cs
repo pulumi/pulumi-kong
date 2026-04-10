@@ -24,7 +24,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var service = new Kong.Service("service", new()
+    ///     var service = new Kong.Index.Service("service", new()
     ///     {
     ///         Name = "test",
     ///         Protocol = "http",
@@ -50,7 +50,7 @@ namespace Pulumi.Kong
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var certificate = new Kong.Certificate("certificate", new()
+    ///     var certificate = new Kong.Index.Certificate("certificate", new()
     ///     {
     ///         Cert = @"    -----BEGIN CERTIFICATE-----
     ///     ......
@@ -66,7 +66,7 @@ namespace Pulumi.Kong
     ///         },
     ///     });
     /// 
-    ///     var ca = new Kong.Certificate("ca", new()
+    ///     var ca = new Kong.Index.Certificate("ca", new()
     ///     {
     ///         Cert = @"    -----BEGIN CERTIFICATE-----
     ///     ......
@@ -82,7 +82,7 @@ namespace Pulumi.Kong
     ///         },
     ///     });
     /// 
-    ///     var service = new Kong.Service("service", new()
+    ///     var service = new Kong.Index.Service("service", new()
     ///     {
     ///         Name = "test",
     ///         Protocol = "https",
