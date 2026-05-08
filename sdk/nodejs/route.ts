@@ -252,75 +252,75 @@ export interface RouteState {
     /**
      * A list of destination `ip` and `port`
      */
-    destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[]>;
+    destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[] | undefined>;
     /**
      * One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.RouteHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.RouteHeader>[] | undefined>;
     /**
      * A list of domain names that match this Route
      */
-    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
      */
-    httpsRedirectStatusCode?: pulumi.Input<number>;
+    httpsRedirectStatusCode?: pulumi.Input<number | undefined>;
     /**
      * A list of HTTP methods that match this Route
      */
-    methods?: pulumi.Input<pulumi.Input<string>[]>;
+    methods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The name of the route
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
      */
-    pathHandling?: pulumi.Input<string>;
+    pathHandling?: pulumi.Input<string | undefined>;
     /**
      * A list of paths that match this Route
      */
-    paths?: pulumi.Input<pulumi.Input<string>[]>;
+    paths?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
      */
-    preserveHost?: pulumi.Input<boolean>;
+    preserveHost?: pulumi.Input<boolean | undefined>;
     /**
      * The list of protocols to use
      */
-    protocols?: pulumi.Input<pulumi.Input<string>[]>;
+    protocols?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
      */
-    regexPriority?: pulumi.Input<number>;
+    regexPriority?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
      */
-    requestBuffering?: pulumi.Input<boolean>;
+    requestBuffering?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
      */
-    responseBuffering?: pulumi.Input<boolean>;
+    responseBuffering?: pulumi.Input<boolean | undefined>;
     /**
      * Service ID to map to
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * A list of SNIs that match this Route when using stream routing.
      */
-    snis?: pulumi.Input<pulumi.Input<string>[]>;
+    snis?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A list of source `ip` and `port`
      */
-    sources?: pulumi.Input<pulumi.Input<inputs.RouteSource>[]>;
+    sources?: pulumi.Input<pulumi.Input<inputs.RouteSource>[] | undefined>;
     /**
      * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
      */
-    stripPath?: pulumi.Input<boolean>;
+    stripPath?: pulumi.Input<boolean | undefined>;
     /**
      * A list of strings associated with the Route for grouping and filtering.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -330,39 +330,39 @@ export interface RouteArgs {
     /**
      * A list of destination `ip` and `port`
      */
-    destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[]>;
+    destinations?: pulumi.Input<pulumi.Input<inputs.RouteDestination>[] | undefined>;
     /**
      * One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.RouteHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.RouteHeader>[] | undefined>;
     /**
      * A list of domain names that match this Route
      */
-    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
      */
-    httpsRedirectStatusCode?: pulumi.Input<number>;
+    httpsRedirectStatusCode?: pulumi.Input<number | undefined>;
     /**
      * A list of HTTP methods that match this Route
      */
-    methods?: pulumi.Input<pulumi.Input<string>[]>;
+    methods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The name of the route
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
      */
-    pathHandling?: pulumi.Input<string>;
+    pathHandling?: pulumi.Input<string | undefined>;
     /**
      * A list of paths that match this Route
      */
-    paths?: pulumi.Input<pulumi.Input<string>[]>;
+    paths?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
      */
-    preserveHost?: pulumi.Input<boolean>;
+    preserveHost?: pulumi.Input<boolean | undefined>;
     /**
      * The list of protocols to use
      */
@@ -370,15 +370,15 @@ export interface RouteArgs {
     /**
      * A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
      */
-    regexPriority?: pulumi.Input<number>;
+    regexPriority?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
      */
-    requestBuffering?: pulumi.Input<boolean>;
+    requestBuffering?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
      */
-    responseBuffering?: pulumi.Input<boolean>;
+    responseBuffering?: pulumi.Input<boolean | undefined>;
     /**
      * Service ID to map to
      */
@@ -386,17 +386,17 @@ export interface RouteArgs {
     /**
      * A list of SNIs that match this Route when using stream routing.
      */
-    snis?: pulumi.Input<pulumi.Input<string>[]>;
+    snis?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A list of source `ip` and `port`
      */
-    sources?: pulumi.Input<pulumi.Input<inputs.RouteSource>[]>;
+    sources?: pulumi.Input<pulumi.Input<inputs.RouteSource>[] | undefined>;
     /**
      * When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
      */
-    stripPath?: pulumi.Input<boolean>;
+    stripPath?: pulumi.Input<boolean | undefined>;
     /**
      * A list of strings associated with the Route for grouping and filtering.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

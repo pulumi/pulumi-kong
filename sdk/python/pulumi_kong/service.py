@@ -20,19 +20,19 @@ __all__ = ['ServiceArgs', 'Service']
 class ServiceArgs:
     def __init__(__self__, *,
                  protocol: pulumi.Input[_builtins.str],
-                 ca_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 connect_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 host: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None,
-                 read_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 retries: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 tls_verify: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_verify_depth: Optional[pulumi.Input[_builtins.int]] = None,
-                 write_timeout: Optional[pulumi.Input[_builtins.int]] = None):
+                 ca_certificate_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 connect_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 host: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None,
+                 read_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 retries: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 tls_verify: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_verify_depth: pulumi.Input[Optional[_builtins.int]] = None,
+                 write_timeout: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a Service resource.
 
@@ -93,178 +93,178 @@ class ServiceArgs:
 
     @_builtins.property
     @pulumi.getter(name="caCertificateIds")
-    def ca_certificate_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def ca_certificate_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
         """
         return pulumi.get(self, "ca_certificate_ids")
 
     @ca_certificate_ids.setter
-    def ca_certificate_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def ca_certificate_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "ca_certificate_ids", value)
 
     @_builtins.property
     @pulumi.getter(name="clientCertificateId")
-    def client_certificate_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_certificate_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
         """
         return pulumi.get(self, "client_certificate_id")
 
     @client_certificate_id.setter
-    def client_certificate_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_certificate_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_certificate_id", value)
 
     @_builtins.property
     @pulumi.getter(name="connectTimeout")
-    def connect_timeout(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def connect_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Connection timeout. Default(ms): 60000
         """
         return pulumi.get(self, "connect_timeout")
 
     @connect_timeout.setter
-    def connect_timeout(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def connect_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "connect_timeout", value)
 
     @_builtins.property
     @pulumi.getter
-    def host(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def host(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Host to map to
         """
         return pulumi.get(self, "host")
 
     @host.setter
-    def host(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def host(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "host", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Service name
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def path(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def path(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Path to map to
         """
         return pulumi.get(self, "path")
 
     @path.setter
-    def path(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def path(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "path", value)
 
     @_builtins.property
     @pulumi.getter
-    def port(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def port(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Port to map to. Default: 80
         """
         return pulumi.get(self, "port")
 
     @port.setter
-    def port(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def port(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "port", value)
 
     @_builtins.property
     @pulumi.getter(name="readTimeout")
-    def read_timeout(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def read_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Read timeout. Default(ms): 60000
         """
         return pulumi.get(self, "read_timeout")
 
     @read_timeout.setter
-    def read_timeout(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def read_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "read_timeout", value)
 
     @_builtins.property
     @pulumi.getter
-    def retries(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def retries(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Number of retries. Default: 5
         """
         return pulumi.get(self, "retries")
 
     @retries.setter
-    def retries(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def retries(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "retries", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Service for grouping and filtering.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsVerify")
-    def tls_verify(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def tls_verify(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
         """
         return pulumi.get(self, "tls_verify")
 
     @tls_verify.setter
-    def tls_verify(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def tls_verify(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "tls_verify", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsVerifyDepth")
-    def tls_verify_depth(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def tls_verify_depth(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum depth of chain while verifying Upstream server’s TLS certificate.
         """
         return pulumi.get(self, "tls_verify_depth")
 
     @tls_verify_depth.setter
-    def tls_verify_depth(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def tls_verify_depth(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "tls_verify_depth", value)
 
     @_builtins.property
     @pulumi.getter(name="writeTimeout")
-    def write_timeout(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def write_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Write timout. Default(ms): 60000
         """
         return pulumi.get(self, "write_timeout")
 
     @write_timeout.setter
-    def write_timeout(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def write_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "write_timeout", value)
 
 
 @pulumi.input_type
 class _ServiceState:
     def __init__(__self__, *,
-                 ca_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 connect_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 host: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None,
-                 protocol: Optional[pulumi.Input[_builtins.str]] = None,
-                 read_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 retries: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 tls_verify: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_verify_depth: Optional[pulumi.Input[_builtins.int]] = None,
-                 write_timeout: Optional[pulumi.Input[_builtins.int]] = None):
+                 ca_certificate_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 connect_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 host: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None,
+                 protocol: pulumi.Input[Optional[_builtins.str]] = None,
+                 read_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 retries: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 tls_verify: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_verify_depth: pulumi.Input[Optional[_builtins.int]] = None,
+                 write_timeout: pulumi.Input[Optional[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering Service resources.
 
@@ -314,170 +314,170 @@ class _ServiceState:
 
     @_builtins.property
     @pulumi.getter(name="caCertificateIds")
-    def ca_certificate_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def ca_certificate_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
         """
         return pulumi.get(self, "ca_certificate_ids")
 
     @ca_certificate_ids.setter
-    def ca_certificate_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def ca_certificate_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "ca_certificate_ids", value)
 
     @_builtins.property
     @pulumi.getter(name="clientCertificateId")
-    def client_certificate_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_certificate_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `Certificate` resource
         """
         return pulumi.get(self, "client_certificate_id")
 
     @client_certificate_id.setter
-    def client_certificate_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_certificate_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_certificate_id", value)
 
     @_builtins.property
     @pulumi.getter(name="connectTimeout")
-    def connect_timeout(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def connect_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Connection timeout. Default(ms): 60000
         """
         return pulumi.get(self, "connect_timeout")
 
     @connect_timeout.setter
-    def connect_timeout(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def connect_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "connect_timeout", value)
 
     @_builtins.property
     @pulumi.getter
-    def host(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def host(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Host to map to
         """
         return pulumi.get(self, "host")
 
     @host.setter
-    def host(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def host(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "host", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Service name
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def path(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def path(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Path to map to
         """
         return pulumi.get(self, "path")
 
     @path.setter
-    def path(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def path(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "path", value)
 
     @_builtins.property
     @pulumi.getter
-    def port(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def port(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Port to map to. Default: 80
         """
         return pulumi.get(self, "port")
 
     @port.setter
-    def port(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def port(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "port", value)
 
     @_builtins.property
     @pulumi.getter
-    def protocol(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def protocol(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Protocol to use
         """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
-    def protocol(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def protocol(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "protocol", value)
 
     @_builtins.property
     @pulumi.getter(name="readTimeout")
-    def read_timeout(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def read_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Read timeout. Default(ms): 60000
         """
         return pulumi.get(self, "read_timeout")
 
     @read_timeout.setter
-    def read_timeout(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def read_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "read_timeout", value)
 
     @_builtins.property
     @pulumi.getter
-    def retries(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def retries(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Number of retries. Default: 5
         """
         return pulumi.get(self, "retries")
 
     @retries.setter
-    def retries(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def retries(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "retries", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Service for grouping and filtering.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsVerify")
-    def tls_verify(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def tls_verify(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
         """
         return pulumi.get(self, "tls_verify")
 
     @tls_verify.setter
-    def tls_verify(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def tls_verify(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "tls_verify", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsVerifyDepth")
-    def tls_verify_depth(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def tls_verify_depth(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum depth of chain while verifying Upstream server’s TLS certificate.
         """
         return pulumi.get(self, "tls_verify_depth")
 
     @tls_verify_depth.setter
-    def tls_verify_depth(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def tls_verify_depth(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "tls_verify_depth", value)
 
     @_builtins.property
     @pulumi.getter(name="writeTimeout")
-    def write_timeout(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def write_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Write timout. Default(ms): 60000
         """
         return pulumi.get(self, "write_timeout")
 
     @write_timeout.setter
-    def write_timeout(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def write_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "write_timeout", value)
 
 
@@ -487,20 +487,20 @@ class Service(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 ca_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 connect_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 host: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None,
-                 protocol: Optional[pulumi.Input[_builtins.str]] = None,
-                 read_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 retries: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 tls_verify: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_verify_depth: Optional[pulumi.Input[_builtins.int]] = None,
-                 write_timeout: Optional[pulumi.Input[_builtins.int]] = None,
+                 ca_certificate_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 connect_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 host: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None,
+                 protocol: pulumi.Input[Optional[_builtins.str]] = None,
+                 read_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 retries: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 tls_verify: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_verify_depth: pulumi.Input[Optional[_builtins.int]] = None,
+                 write_timeout: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         """
         ## # Service
@@ -676,20 +676,20 @@ class Service(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 ca_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 connect_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 host: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None,
-                 protocol: Optional[pulumi.Input[_builtins.str]] = None,
-                 read_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 retries: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 tls_verify: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_verify_depth: Optional[pulumi.Input[_builtins.int]] = None,
-                 write_timeout: Optional[pulumi.Input[_builtins.int]] = None,
+                 ca_certificate_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 connect_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 host: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None,
+                 protocol: pulumi.Input[Optional[_builtins.str]] = None,
+                 read_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 retries: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 tls_verify: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_verify_depth: pulumi.Input[Optional[_builtins.int]] = None,
+                 write_timeout: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -725,20 +725,20 @@ class Service(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            ca_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-            connect_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-            host: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            path: Optional[pulumi.Input[_builtins.str]] = None,
-            port: Optional[pulumi.Input[_builtins.int]] = None,
-            protocol: Optional[pulumi.Input[_builtins.str]] = None,
-            read_timeout: Optional[pulumi.Input[_builtins.int]] = None,
-            retries: Optional[pulumi.Input[_builtins.int]] = None,
-            tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            tls_verify: Optional[pulumi.Input[_builtins.bool]] = None,
-            tls_verify_depth: Optional[pulumi.Input[_builtins.int]] = None,
-            write_timeout: Optional[pulumi.Input[_builtins.int]] = None) -> 'Service':
+            ca_certificate_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+            connect_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+            host: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            port: pulumi.Input[Optional[_builtins.int]] = None,
+            protocol: pulumi.Input[Optional[_builtins.str]] = None,
+            read_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+            retries: pulumi.Input[Optional[_builtins.int]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            tls_verify: pulumi.Input[Optional[_builtins.bool]] = None,
+            tls_verify_depth: pulumi.Input[Optional[_builtins.int]] = None,
+            write_timeout: pulumi.Input[Optional[_builtins.int]] = None) -> 'Service':
         """
         Get an existing Service resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

@@ -117,16 +117,16 @@ export interface CertificateState {
     /**
      * should be the public key of your certificate it is mapped to the `Cert` parameter on the Kong API.
      */
-    certificate?: pulumi.Input<string>;
+    certificate?: pulumi.Input<string | undefined>;
     /**
      * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
      */
-    privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string | undefined>;
     /**
      * A list of strings associated with the Certificate for grouping and filtering
      */
-    snis?: pulumi.Input<pulumi.Input<string>[]>;
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    snis?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -140,10 +140,10 @@ export interface CertificateArgs {
     /**
      * should be the private key of your certificate it is mapped to the `Key` parameter on the Kong API.
      */
-    privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string | undefined>;
     /**
      * A list of strings associated with the Certificate for grouping and filtering
      */
-    snis?: pulumi.Input<pulumi.Input<string>[]>;
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    snis?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

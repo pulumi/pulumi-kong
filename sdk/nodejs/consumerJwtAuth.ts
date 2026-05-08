@@ -134,27 +134,27 @@ export interface ConsumerJwtAuthState {
     /**
      * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
-    algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string | undefined>;
     /**
      * the id of the consumer to be configured with jwt auth
      */
-    consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string | undefined>;
     /**
      * A unique string identifying the credential. If left out, it will be auto-generated.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
-    rsaPublicKey?: pulumi.Input<string>;
+    rsaPublicKey?: pulumi.Input<string | undefined>;
     /**
      * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
-    secret?: pulumi.Input<string>;
+    secret?: pulumi.Input<string | undefined>;
     /**
      * A list of strings associated with the consumer JWT auth for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -164,7 +164,7 @@ export interface ConsumerJwtAuthArgs {
     /**
      * The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
      */
-    algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string | undefined>;
     /**
      * the id of the consumer to be configured with jwt auth
      */
@@ -172,7 +172,7 @@ export interface ConsumerJwtAuthArgs {
     /**
      * A unique string identifying the credential. If left out, it will be auto-generated.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * If algorithm is `RS256` or `ES256`, the public key (in PEM format) to use to verify the token’s signature
      */
@@ -180,9 +180,9 @@ export interface ConsumerJwtAuthArgs {
     /**
      * If algorithm is `HS256` or `ES256`, the secret used to sign JWTs for this credential. If left out, will be auto-generated
      */
-    secret?: pulumi.Input<string>;
+    secret?: pulumi.Input<string | undefined>;
     /**
      * A list of strings associated with the consumer JWT auth for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

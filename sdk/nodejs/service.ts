@@ -219,59 +219,59 @@ export interface ServiceState {
     /**
      * A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
      */
-    caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    caCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
      */
-    clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Connection timeout. Default(ms): 60000
      */
-    connectTimeout?: pulumi.Input<number>;
+    connectTimeout?: pulumi.Input<number | undefined>;
     /**
      * Host to map to
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Service name
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Path to map to
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Port to map to. Default: 80
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Protocol to use
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Read timeout. Default(ms): 60000
      */
-    readTimeout?: pulumi.Input<number>;
+    readTimeout?: pulumi.Input<number | undefined>;
     /**
      * Number of retries. Default: 5
      */
-    retries?: pulumi.Input<number>;
+    retries?: pulumi.Input<number | undefined>;
     /**
      * A list of strings associated with the Service for grouping and filtering.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
      */
-    tlsVerify?: pulumi.Input<boolean>;
+    tlsVerify?: pulumi.Input<boolean | undefined>;
     /**
      * Maximum depth of chain while verifying Upstream server’s TLS certificate.
      */
-    tlsVerifyDepth?: pulumi.Input<number>;
+    tlsVerifyDepth?: pulumi.Input<number | undefined>;
     /**
      * Write timout. Default(ms): 60000
      */
-    writeTimeout?: pulumi.Input<number>;
+    writeTimeout?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -281,31 +281,31 @@ export interface ServiceArgs {
     /**
      * A of CA Certificate IDs (created from the certificate resource). that are used to build the trust store while verifying upstream server’s TLS certificate.
      */
-    caCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    caCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of Certificate to be used as client certificate while TLS handshaking to the upstream server. Use ID from `kong.Certificate` resource
      */
-    clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Connection timeout. Default(ms): 60000
      */
-    connectTimeout?: pulumi.Input<number>;
+    connectTimeout?: pulumi.Input<number | undefined>;
     /**
      * Host to map to
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Service name
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Path to map to
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Port to map to. Default: 80
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Protocol to use
      */
@@ -313,25 +313,25 @@ export interface ServiceArgs {
     /**
      * Read timeout. Default(ms): 60000
      */
-    readTimeout?: pulumi.Input<number>;
+    readTimeout?: pulumi.Input<number | undefined>;
     /**
      * Number of retries. Default: 5
      */
-    retries?: pulumi.Input<number>;
+    retries?: pulumi.Input<number | undefined>;
     /**
      * A list of strings associated with the Service for grouping and filtering.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to enable verification of upstream server TLS certificate. If not set then the nginx default is respected.
      */
-    tlsVerify?: pulumi.Input<boolean>;
+    tlsVerify?: pulumi.Input<boolean | undefined>;
     /**
      * Maximum depth of chain while verifying Upstream server’s TLS certificate.
      */
-    tlsVerifyDepth?: pulumi.Input<number>;
+    tlsVerifyDepth?: pulumi.Input<number | undefined>;
     /**
      * Write timout. Default(ms): 60000
      */
-    writeTimeout?: pulumi.Input<number>;
+    writeTimeout?: pulumi.Input<number | undefined>;
 }

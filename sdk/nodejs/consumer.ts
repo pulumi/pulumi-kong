@@ -105,15 +105,15 @@ export interface ConsumerState {
     /**
      * A custom id for the consumer, you must set either the username or custom_id
      */
-    customId?: pulumi.Input<string>;
+    customId?: pulumi.Input<string | undefined>;
     /**
      * A list of strings associated with the Consumer for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The username to use, you must set either the username or custom_id
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -123,13 +123,13 @@ export interface ConsumerArgs {
     /**
      * A custom id for the consumer, you must set either the username or custom_id
      */
-    customId?: pulumi.Input<string>;
+    customId?: pulumi.Input<string | undefined>;
     /**
      * A list of strings associated with the Consumer for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The username to use, you must set either the username or custom_id
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }

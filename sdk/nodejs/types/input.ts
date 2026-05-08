@@ -6,8 +6,8 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface RouteDestination {
-    ip?: pulumi.Input<string>;
-    port?: pulumi.Input<number>;
+    ip?: pulumi.Input<string | undefined>;
+    port?: pulumi.Input<number | undefined>;
 }
 
 export interface RouteHeader {
@@ -19,54 +19,54 @@ export interface RouteHeader {
 }
 
 export interface RouteSource {
-    ip?: pulumi.Input<string>;
-    port?: pulumi.Input<number>;
+    ip?: pulumi.Input<string | undefined>;
+    port?: pulumi.Input<number | undefined>;
 }
 
 export interface UpstreamHealthchecks {
-    active?: pulumi.Input<inputs.UpstreamHealthchecksActive>;
-    passive?: pulumi.Input<inputs.UpstreamHealthchecksPassive>;
+    active?: pulumi.Input<inputs.UpstreamHealthchecksActive | undefined>;
+    passive?: pulumi.Input<inputs.UpstreamHealthchecksPassive | undefined>;
 }
 
 export interface UpstreamHealthchecksActive {
-    concurrency?: pulumi.Input<number>;
-    healthy?: pulumi.Input<inputs.UpstreamHealthchecksActiveHealthy>;
-    httpPath?: pulumi.Input<string>;
-    httpsSni?: pulumi.Input<string>;
-    httpsVerifyCertificate?: pulumi.Input<boolean>;
-    timeout?: pulumi.Input<number>;
-    type?: pulumi.Input<string>;
-    unhealthy?: pulumi.Input<inputs.UpstreamHealthchecksActiveUnhealthy>;
+    concurrency?: pulumi.Input<number | undefined>;
+    healthy?: pulumi.Input<inputs.UpstreamHealthchecksActiveHealthy | undefined>;
+    httpPath?: pulumi.Input<string | undefined>;
+    httpsSni?: pulumi.Input<string | undefined>;
+    httpsVerifyCertificate?: pulumi.Input<boolean | undefined>;
+    timeout?: pulumi.Input<number | undefined>;
+    type?: pulumi.Input<string | undefined>;
+    unhealthy?: pulumi.Input<inputs.UpstreamHealthchecksActiveUnhealthy | undefined>;
 }
 
 export interface UpstreamHealthchecksActiveHealthy {
-    httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
-    interval?: pulumi.Input<number>;
-    successes?: pulumi.Input<number>;
+    httpStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    interval?: pulumi.Input<number | undefined>;
+    successes?: pulumi.Input<number | undefined>;
 }
 
 export interface UpstreamHealthchecksActiveUnhealthy {
-    httpFailures?: pulumi.Input<number>;
-    httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
-    interval?: pulumi.Input<number>;
-    tcpFailures?: pulumi.Input<number>;
-    timeouts?: pulumi.Input<number>;
+    httpFailures?: pulumi.Input<number | undefined>;
+    httpStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    interval?: pulumi.Input<number | undefined>;
+    tcpFailures?: pulumi.Input<number | undefined>;
+    timeouts?: pulumi.Input<number | undefined>;
 }
 
 export interface UpstreamHealthchecksPassive {
-    healthy?: pulumi.Input<inputs.UpstreamHealthchecksPassiveHealthy>;
-    type?: pulumi.Input<string>;
-    unhealthy?: pulumi.Input<inputs.UpstreamHealthchecksPassiveUnhealthy>;
+    healthy?: pulumi.Input<inputs.UpstreamHealthchecksPassiveHealthy | undefined>;
+    type?: pulumi.Input<string | undefined>;
+    unhealthy?: pulumi.Input<inputs.UpstreamHealthchecksPassiveUnhealthy | undefined>;
 }
 
 export interface UpstreamHealthchecksPassiveHealthy {
-    httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
-    successes?: pulumi.Input<number>;
+    httpStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    successes?: pulumi.Input<number | undefined>;
 }
 
 export interface UpstreamHealthchecksPassiveUnhealthy {
-    httpFailures?: pulumi.Input<number>;
-    httpStatuses?: pulumi.Input<pulumi.Input<number>[]>;
-    tcpFailures?: pulumi.Input<number>;
-    timeouts?: pulumi.Input<number>;
+    httpFailures?: pulumi.Input<number | undefined>;
+    httpStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    tcpFailures?: pulumi.Input<number | undefined>;
+    timeouts?: pulumi.Input<number | undefined>;
 }
