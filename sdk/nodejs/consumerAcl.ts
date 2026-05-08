@@ -117,15 +117,15 @@ export interface ConsumerAclState {
     /**
      * the id of the consumer to be configured
      */
-    consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string | undefined>;
     /**
      * the acl group
      */
-    group?: pulumi.Input<string>;
+    group?: pulumi.Input<string | undefined>;
     /**
      * A list of strings associated with the consumer acl for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -143,5 +143,5 @@ export interface ConsumerAclArgs {
     /**
      * A list of strings associated with the consumer acl for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

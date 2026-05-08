@@ -38,14 +38,14 @@ __all__ = [
 ]
 
 class RouteDestinationArgsDict(TypedDict):
-    ip: NotRequired[pulumi.Input[_builtins.str]]
-    port: NotRequired[pulumi.Input[_builtins.int]]
+    ip: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    port: NotRequired[pulumi.Input[Optional[_builtins.int]]]
 
 @pulumi.input_type
 class RouteDestinationArgs:
     def __init__(__self__, *,
-                 ip: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None):
+                 ip: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None):
         if ip is not None:
             pulumi.set(__self__, "ip", ip)
         if port is not None:
@@ -53,20 +53,20 @@ class RouteDestinationArgs:
 
     @_builtins.property
     @pulumi.getter
-    def ip(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def ip(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "ip")
 
     @ip.setter
-    def ip(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def ip(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "ip", value)
 
     @_builtins.property
     @pulumi.getter
-    def port(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def port(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "port")
 
     @port.setter
-    def port(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def port(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "port", value)
 
 
@@ -111,14 +111,14 @@ class RouteHeaderArgs:
 
 
 class RouteSourceArgsDict(TypedDict):
-    ip: NotRequired[pulumi.Input[_builtins.str]]
-    port: NotRequired[pulumi.Input[_builtins.int]]
+    ip: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    port: NotRequired[pulumi.Input[Optional[_builtins.int]]]
 
 @pulumi.input_type
 class RouteSourceArgs:
     def __init__(__self__, *,
-                 ip: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None):
+                 ip: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None):
         if ip is not None:
             pulumi.set(__self__, "ip", ip)
         if port is not None:
@@ -126,32 +126,32 @@ class RouteSourceArgs:
 
     @_builtins.property
     @pulumi.getter
-    def ip(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def ip(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "ip")
 
     @ip.setter
-    def ip(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def ip(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "ip", value)
 
     @_builtins.property
     @pulumi.getter
-    def port(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def port(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "port")
 
     @port.setter
-    def port(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def port(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "port", value)
 
 
 class UpstreamHealthchecksArgsDict(TypedDict):
-    active: NotRequired[pulumi.Input['UpstreamHealthchecksActiveArgsDict']]
-    passive: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveArgsDict']]
+    active: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveArgs']]]
+    passive: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveArgs']]]
 
 @pulumi.input_type
 class UpstreamHealthchecksArgs:
     def __init__(__self__, *,
-                 active: Optional[pulumi.Input['UpstreamHealthchecksActiveArgs']] = None,
-                 passive: Optional[pulumi.Input['UpstreamHealthchecksPassiveArgs']] = None):
+                 active: pulumi.Input[Optional['UpstreamHealthchecksActiveArgs']] = None,
+                 passive: pulumi.Input[Optional['UpstreamHealthchecksPassiveArgs']] = None):
         if active is not None:
             pulumi.set(__self__, "active", active)
         if passive is not None:
@@ -159,44 +159,44 @@ class UpstreamHealthchecksArgs:
 
     @_builtins.property
     @pulumi.getter
-    def active(self) -> Optional[pulumi.Input['UpstreamHealthchecksActiveArgs']]:
+    def active(self) -> pulumi.Input[Optional['UpstreamHealthchecksActiveArgs']]:
         return pulumi.get(self, "active")
 
     @active.setter
-    def active(self, value: Optional[pulumi.Input['UpstreamHealthchecksActiveArgs']]):
+    def active(self, value: pulumi.Input[Optional['UpstreamHealthchecksActiveArgs']]):
         pulumi.set(self, "active", value)
 
     @_builtins.property
     @pulumi.getter
-    def passive(self) -> Optional[pulumi.Input['UpstreamHealthchecksPassiveArgs']]:
+    def passive(self) -> pulumi.Input[Optional['UpstreamHealthchecksPassiveArgs']]:
         return pulumi.get(self, "passive")
 
     @passive.setter
-    def passive(self, value: Optional[pulumi.Input['UpstreamHealthchecksPassiveArgs']]):
+    def passive(self, value: pulumi.Input[Optional['UpstreamHealthchecksPassiveArgs']]):
         pulumi.set(self, "passive", value)
 
 
 class UpstreamHealthchecksActiveArgsDict(TypedDict):
-    concurrency: NotRequired[pulumi.Input[_builtins.int]]
-    healthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveHealthyArgsDict']]
-    http_path: NotRequired[pulumi.Input[_builtins.str]]
-    https_sni: NotRequired[pulumi.Input[_builtins.str]]
-    https_verify_certificate: NotRequired[pulumi.Input[_builtins.bool]]
-    timeout: NotRequired[pulumi.Input[_builtins.int]]
-    type: NotRequired[pulumi.Input[_builtins.str]]
-    unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgsDict']]
+    concurrency: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    healthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveHealthyArgs']]]
+    http_path: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    https_sni: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    https_verify_certificate: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    timeout: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    unhealthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveUnhealthyArgs']]]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveArgs:
     def __init__(__self__, *,
-                 concurrency: Optional[pulumi.Input[_builtins.int]] = None,
-                 healthy: Optional[pulumi.Input['UpstreamHealthchecksActiveHealthyArgs']] = None,
-                 http_path: Optional[pulumi.Input[_builtins.str]] = None,
-                 https_sni: Optional[pulumi.Input[_builtins.str]] = None,
-                 https_verify_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
-                 timeout: Optional[pulumi.Input[_builtins.int]] = None,
-                 type: Optional[pulumi.Input[_builtins.str]] = None,
-                 unhealthy: Optional[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgs']] = None):
+                 concurrency: pulumi.Input[Optional[_builtins.int]] = None,
+                 healthy: pulumi.Input[Optional['UpstreamHealthchecksActiveHealthyArgs']] = None,
+                 http_path: pulumi.Input[Optional[_builtins.str]] = None,
+                 https_sni: pulumi.Input[Optional[_builtins.str]] = None,
+                 https_verify_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+                 timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 type: pulumi.Input[Optional[_builtins.str]] = None,
+                 unhealthy: pulumi.Input[Optional['UpstreamHealthchecksActiveUnhealthyArgs']] = None):
         if concurrency is not None:
             pulumi.set(__self__, "concurrency", concurrency)
         if healthy is not None:
@@ -216,88 +216,88 @@ class UpstreamHealthchecksActiveArgs:
 
     @_builtins.property
     @pulumi.getter
-    def concurrency(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def concurrency(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "concurrency")
 
     @concurrency.setter
-    def concurrency(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def concurrency(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "concurrency", value)
 
     @_builtins.property
     @pulumi.getter
-    def healthy(self) -> Optional[pulumi.Input['UpstreamHealthchecksActiveHealthyArgs']]:
+    def healthy(self) -> pulumi.Input[Optional['UpstreamHealthchecksActiveHealthyArgs']]:
         return pulumi.get(self, "healthy")
 
     @healthy.setter
-    def healthy(self, value: Optional[pulumi.Input['UpstreamHealthchecksActiveHealthyArgs']]):
+    def healthy(self, value: pulumi.Input[Optional['UpstreamHealthchecksActiveHealthyArgs']]):
         pulumi.set(self, "healthy", value)
 
     @_builtins.property
     @pulumi.getter(name="httpPath")
-    def http_path(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def http_path(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "http_path")
 
     @http_path.setter
-    def http_path(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def http_path(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "http_path", value)
 
     @_builtins.property
     @pulumi.getter(name="httpsSni")
-    def https_sni(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def https_sni(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "https_sni")
 
     @https_sni.setter
-    def https_sni(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def https_sni(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "https_sni", value)
 
     @_builtins.property
     @pulumi.getter(name="httpsVerifyCertificate")
-    def https_verify_certificate(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def https_verify_certificate(self) -> pulumi.Input[Optional[_builtins.bool]]:
         return pulumi.get(self, "https_verify_certificate")
 
     @https_verify_certificate.setter
-    def https_verify_certificate(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def https_verify_certificate(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "https_verify_certificate", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeout(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "timeout")
 
     @timeout.setter
-    def timeout(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "timeout", value)
 
     @_builtins.property
     @pulumi.getter
-    def type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "type")
 
     @type.setter
-    def type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "type", value)
 
     @_builtins.property
     @pulumi.getter
-    def unhealthy(self) -> Optional[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgs']]:
+    def unhealthy(self) -> pulumi.Input[Optional['UpstreamHealthchecksActiveUnhealthyArgs']]:
         return pulumi.get(self, "unhealthy")
 
     @unhealthy.setter
-    def unhealthy(self, value: Optional[pulumi.Input['UpstreamHealthchecksActiveUnhealthyArgs']]):
+    def unhealthy(self, value: pulumi.Input[Optional['UpstreamHealthchecksActiveUnhealthyArgs']]):
         pulumi.set(self, "unhealthy", value)
 
 
 class UpstreamHealthchecksActiveHealthyArgsDict(TypedDict):
-    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-    interval: NotRequired[pulumi.Input[_builtins.int]]
-    successes: NotRequired[pulumi.Input[_builtins.int]]
+    http_statuses: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]]
+    interval: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    successes: NotRequired[pulumi.Input[Optional[_builtins.int]]]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveHealthyArgs:
     def __init__(__self__, *,
-                 http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]] = None,
-                 interval: Optional[pulumi.Input[_builtins.int]] = None,
-                 successes: Optional[pulumi.Input[_builtins.int]] = None):
+                 http_statuses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 interval: pulumi.Input[Optional[_builtins.int]] = None,
+                 successes: pulumi.Input[Optional[_builtins.int]] = None):
         if http_statuses is not None:
             pulumi.set(__self__, "http_statuses", http_statuses)
         if interval is not None:
@@ -307,47 +307,47 @@ class UpstreamHealthchecksActiveHealthyArgs:
 
     @_builtins.property
     @pulumi.getter(name="httpStatuses")
-    def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]:
+    def http_statuses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
-    def http_statuses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]):
+    def http_statuses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
         pulumi.set(self, "http_statuses", value)
 
     @_builtins.property
     @pulumi.getter
-    def interval(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def interval(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "interval")
 
     @interval.setter
-    def interval(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def interval(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "interval", value)
 
     @_builtins.property
     @pulumi.getter
-    def successes(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def successes(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "successes")
 
     @successes.setter
-    def successes(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def successes(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "successes", value)
 
 
 class UpstreamHealthchecksActiveUnhealthyArgsDict(TypedDict):
-    http_failures: NotRequired[pulumi.Input[_builtins.int]]
-    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-    interval: NotRequired[pulumi.Input[_builtins.int]]
-    tcp_failures: NotRequired[pulumi.Input[_builtins.int]]
-    timeouts: NotRequired[pulumi.Input[_builtins.int]]
+    http_failures: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    http_statuses: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]]
+    interval: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    tcp_failures: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    timeouts: NotRequired[pulumi.Input[Optional[_builtins.int]]]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveUnhealthyArgs:
     def __init__(__self__, *,
-                 http_failures: Optional[pulumi.Input[_builtins.int]] = None,
-                 http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]] = None,
-                 interval: Optional[pulumi.Input[_builtins.int]] = None,
-                 tcp_failures: Optional[pulumi.Input[_builtins.int]] = None,
-                 timeouts: Optional[pulumi.Input[_builtins.int]] = None):
+                 http_failures: pulumi.Input[Optional[_builtins.int]] = None,
+                 http_statuses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 interval: pulumi.Input[Optional[_builtins.int]] = None,
+                 tcp_failures: pulumi.Input[Optional[_builtins.int]] = None,
+                 timeouts: pulumi.Input[Optional[_builtins.int]] = None):
         if http_failures is not None:
             pulumi.set(__self__, "http_failures", http_failures)
         if http_statuses is not None:
@@ -361,61 +361,61 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
 
     @_builtins.property
     @pulumi.getter(name="httpFailures")
-    def http_failures(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def http_failures(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "http_failures")
 
     @http_failures.setter
-    def http_failures(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def http_failures(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "http_failures", value)
 
     @_builtins.property
     @pulumi.getter(name="httpStatuses")
-    def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]:
+    def http_statuses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
-    def http_statuses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]):
+    def http_statuses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
         pulumi.set(self, "http_statuses", value)
 
     @_builtins.property
     @pulumi.getter
-    def interval(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def interval(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "interval")
 
     @interval.setter
-    def interval(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def interval(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "interval", value)
 
     @_builtins.property
     @pulumi.getter(name="tcpFailures")
-    def tcp_failures(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def tcp_failures(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "tcp_failures")
 
     @tcp_failures.setter
-    def tcp_failures(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def tcp_failures(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "tcp_failures", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def timeouts(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def timeouts(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "timeouts", value)
 
 
 class UpstreamHealthchecksPassiveArgsDict(TypedDict):
-    healthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgsDict']]
-    type: NotRequired[pulumi.Input[_builtins.str]]
-    unhealthy: NotRequired[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgsDict']]
+    healthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveHealthyArgs']]]
+    type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    unhealthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveUnhealthyArgs']]]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveArgs:
     def __init__(__self__, *,
-                 healthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgs']] = None,
-                 type: Optional[pulumi.Input[_builtins.str]] = None,
-                 unhealthy: Optional[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgs']] = None):
+                 healthy: pulumi.Input[Optional['UpstreamHealthchecksPassiveHealthyArgs']] = None,
+                 type: pulumi.Input[Optional[_builtins.str]] = None,
+                 unhealthy: pulumi.Input[Optional['UpstreamHealthchecksPassiveUnhealthyArgs']] = None):
         if healthy is not None:
             pulumi.set(__self__, "healthy", healthy)
         if type is not None:
@@ -425,41 +425,41 @@ class UpstreamHealthchecksPassiveArgs:
 
     @_builtins.property
     @pulumi.getter
-    def healthy(self) -> Optional[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgs']]:
+    def healthy(self) -> pulumi.Input[Optional['UpstreamHealthchecksPassiveHealthyArgs']]:
         return pulumi.get(self, "healthy")
 
     @healthy.setter
-    def healthy(self, value: Optional[pulumi.Input['UpstreamHealthchecksPassiveHealthyArgs']]):
+    def healthy(self, value: pulumi.Input[Optional['UpstreamHealthchecksPassiveHealthyArgs']]):
         pulumi.set(self, "healthy", value)
 
     @_builtins.property
     @pulumi.getter
-    def type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "type")
 
     @type.setter
-    def type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "type", value)
 
     @_builtins.property
     @pulumi.getter
-    def unhealthy(self) -> Optional[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgs']]:
+    def unhealthy(self) -> pulumi.Input[Optional['UpstreamHealthchecksPassiveUnhealthyArgs']]:
         return pulumi.get(self, "unhealthy")
 
     @unhealthy.setter
-    def unhealthy(self, value: Optional[pulumi.Input['UpstreamHealthchecksPassiveUnhealthyArgs']]):
+    def unhealthy(self, value: pulumi.Input[Optional['UpstreamHealthchecksPassiveUnhealthyArgs']]):
         pulumi.set(self, "unhealthy", value)
 
 
 class UpstreamHealthchecksPassiveHealthyArgsDict(TypedDict):
-    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-    successes: NotRequired[pulumi.Input[_builtins.int]]
+    http_statuses: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]]
+    successes: NotRequired[pulumi.Input[Optional[_builtins.int]]]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveHealthyArgs:
     def __init__(__self__, *,
-                 http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]] = None,
-                 successes: Optional[pulumi.Input[_builtins.int]] = None):
+                 http_statuses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 successes: pulumi.Input[Optional[_builtins.int]] = None):
         if http_statuses is not None:
             pulumi.set(__self__, "http_statuses", http_statuses)
         if successes is not None:
@@ -467,36 +467,36 @@ class UpstreamHealthchecksPassiveHealthyArgs:
 
     @_builtins.property
     @pulumi.getter(name="httpStatuses")
-    def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]:
+    def http_statuses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
-    def http_statuses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]):
+    def http_statuses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
         pulumi.set(self, "http_statuses", value)
 
     @_builtins.property
     @pulumi.getter
-    def successes(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def successes(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "successes")
 
     @successes.setter
-    def successes(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def successes(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "successes", value)
 
 
 class UpstreamHealthchecksPassiveUnhealthyArgsDict(TypedDict):
-    http_failures: NotRequired[pulumi.Input[_builtins.int]]
-    http_statuses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]
-    tcp_failures: NotRequired[pulumi.Input[_builtins.int]]
-    timeouts: NotRequired[pulumi.Input[_builtins.int]]
+    http_failures: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    http_statuses: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]]
+    tcp_failures: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    timeouts: NotRequired[pulumi.Input[Optional[_builtins.int]]]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveUnhealthyArgs:
     def __init__(__self__, *,
-                 http_failures: Optional[pulumi.Input[_builtins.int]] = None,
-                 http_statuses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]] = None,
-                 tcp_failures: Optional[pulumi.Input[_builtins.int]] = None,
-                 timeouts: Optional[pulumi.Input[_builtins.int]] = None):
+                 http_failures: pulumi.Input[Optional[_builtins.int]] = None,
+                 http_statuses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 tcp_failures: pulumi.Input[Optional[_builtins.int]] = None,
+                 timeouts: pulumi.Input[Optional[_builtins.int]] = None):
         if http_failures is not None:
             pulumi.set(__self__, "http_failures", http_failures)
         if http_statuses is not None:
@@ -508,38 +508,38 @@ class UpstreamHealthchecksPassiveUnhealthyArgs:
 
     @_builtins.property
     @pulumi.getter(name="httpFailures")
-    def http_failures(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def http_failures(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "http_failures")
 
     @http_failures.setter
-    def http_failures(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def http_failures(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "http_failures", value)
 
     @_builtins.property
     @pulumi.getter(name="httpStatuses")
-    def http_statuses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]:
+    def http_statuses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
         return pulumi.get(self, "http_statuses")
 
     @http_statuses.setter
-    def http_statuses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]]):
+    def http_statuses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
         pulumi.set(self, "http_statuses", value)
 
     @_builtins.property
     @pulumi.getter(name="tcpFailures")
-    def tcp_failures(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def tcp_failures(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "tcp_failures")
 
     @tcp_failures.setter
-    def tcp_failures(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def tcp_failures(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "tcp_failures", value)
 
     @_builtins.property
     @pulumi.getter
-    def timeouts(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def timeouts(self) -> pulumi.Input[Optional[_builtins.int]]:
         return pulumi.get(self, "timeouts")
 
     @timeouts.setter
-    def timeouts(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def timeouts(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "timeouts", value)
 
 

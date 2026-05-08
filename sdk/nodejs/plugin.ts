@@ -199,34 +199,34 @@ export class Plugin extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Plugin resources.
  */
 export interface PluginState {
-    computedConfig?: pulumi.Input<string>;
+    computedConfig?: pulumi.Input<string | undefined>;
     /**
      * this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
      * page of the plugin you are configuring
      */
-    configJson?: pulumi.Input<string>;
+    configJson?: pulumi.Input<string | undefined>;
     /**
      * the consumer id you want to configure the plugin for
      */
-    consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string | undefined>;
     /**
      * whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
      */
-    enabled?: pulumi.Input<boolean>;
-    name?: pulumi.Input<string>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * the route id that you want to configure the plugin for
      */
-    routeId?: pulumi.Input<string>;
+    routeId?: pulumi.Input<string | undefined>;
     /**
      * the service id that you want to configure the plugin for
      */
-    serviceId?: pulumi.Input<string>;
-    strictMatch?: pulumi.Input<boolean>;
+    serviceId?: pulumi.Input<string | undefined>;
+    strictMatch?: pulumi.Input<boolean | undefined>;
     /**
      * A list of strings associated with the Plugin for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -237,27 +237,27 @@ export interface PluginArgs {
      * this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
      * page of the plugin you are configuring
      */
-    configJson?: pulumi.Input<string>;
+    configJson?: pulumi.Input<string | undefined>;
     /**
      * the consumer id you want to configure the plugin for
      */
-    consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string | undefined>;
     /**
      * whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
      */
-    enabled?: pulumi.Input<boolean>;
-    name?: pulumi.Input<string>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * the route id that you want to configure the plugin for
      */
-    routeId?: pulumi.Input<string>;
+    routeId?: pulumi.Input<string | undefined>;
     /**
      * the service id that you want to configure the plugin for
      */
-    serviceId?: pulumi.Input<string>;
-    strictMatch?: pulumi.Input<boolean>;
+    serviceId?: pulumi.Input<string | undefined>;
+    strictMatch?: pulumi.Input<boolean | undefined>;
     /**
      * A list of strings associated with the Plugin for grouping and filtering
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

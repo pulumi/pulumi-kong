@@ -91,35 +91,35 @@ export interface ProviderArgs {
     /**
      * An basic auth password for kong admin
      */
-    kongAdminPassword?: pulumi.Input<string>;
+    kongAdminPassword?: pulumi.Input<string | undefined>;
     /**
      * API key for the kong api (Enterprise Edition)
      */
-    kongAdminToken?: pulumi.Input<string>;
+    kongAdminToken?: pulumi.Input<string | undefined>;
     /**
      * The address of the kong admin url e.g. http://localhost:8001
      */
-    kongAdminUri?: pulumi.Input<string>;
+    kongAdminUri?: pulumi.Input<string | undefined>;
     /**
      * An basic auth user for kong admin
      */
-    kongAdminUsername?: pulumi.Input<string>;
+    kongAdminUsername?: pulumi.Input<string | undefined>;
     /**
      * API key for the kong api (if you have locked it down)
      */
-    kongApiKey?: pulumi.Input<string>;
+    kongApiKey?: pulumi.Input<string | undefined>;
     /**
      * Workspace context (Enterprise Edition)
      */
-    kongWorkspace?: pulumi.Input<string>;
+    kongWorkspace?: pulumi.Input<string | undefined>;
     /**
      * Should plugins `configJson` field strictly match plugin configuration
      */
-    strictPluginsMatch?: pulumi.Input<boolean>;
+    strictPluginsMatch?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
      */
-    tlsSkipVerify?: pulumi.Input<boolean>;
+    tlsSkipVerify?: pulumi.Input<boolean | undefined>;
 }
 
 export namespace Provider {

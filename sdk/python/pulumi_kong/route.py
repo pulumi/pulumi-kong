@@ -23,22 +23,22 @@ class RouteArgs:
     def __init__(__self__, *,
                  protocols: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
                  service_id: pulumi.Input[_builtins.str],
-                 destinations: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]] = None,
-                 headers: Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]] = None,
-                 hosts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 https_redirect_status_code: Optional[pulumi.Input[_builtins.int]] = None,
-                 methods: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path_handling: Optional[pulumi.Input[_builtins.str]] = None,
-                 paths: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 preserve_host: Optional[pulumi.Input[_builtins.bool]] = None,
-                 regex_priority: Optional[pulumi.Input[_builtins.int]] = None,
-                 request_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 response_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 sources: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]] = None,
-                 strip_path: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 destinations: pulumi.Input[Optional[Sequence[pulumi.Input['RouteDestinationArgs']]]] = None,
+                 headers: pulumi.Input[Optional[Sequence[pulumi.Input['RouteHeaderArgs']]]] = None,
+                 hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 https_redirect_status_code: pulumi.Input[Optional[_builtins.int]] = None,
+                 methods: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path_handling: pulumi.Input[Optional[_builtins.str]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 preserve_host: pulumi.Input[Optional[_builtins.bool]] = None,
+                 regex_priority: pulumi.Input[Optional[_builtins.int]] = None,
+                 request_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 response_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 snis: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 sources: pulumi.Input[Optional[Sequence[pulumi.Input['RouteSourceArgs']]]] = None,
+                 strip_path: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Route resource.
 
@@ -122,218 +122,218 @@ class RouteArgs:
 
     @_builtins.property
     @pulumi.getter
-    def destinations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]:
+    def destinations(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['RouteDestinationArgs']]]]:
         """
         A list of destination `ip` and `port`
         """
         return pulumi.get(self, "destinations")
 
     @destinations.setter
-    def destinations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]):
+    def destinations(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['RouteDestinationArgs']]]]):
         pulumi.set(self, "destinations", value)
 
     @_builtins.property
     @pulumi.getter
-    def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]]:
+    def headers(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['RouteHeaderArgs']]]]:
         """
         One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
         """
         return pulumi.get(self, "headers")
 
     @headers.setter
-    def headers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]]):
+    def headers(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['RouteHeaderArgs']]]]):
         pulumi.set(self, "headers", value)
 
     @_builtins.property
     @pulumi.getter
-    def hosts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def hosts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of domain names that match this Route
         """
         return pulumi.get(self, "hosts")
 
     @hosts.setter
-    def hosts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def hosts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "hosts", value)
 
     @_builtins.property
     @pulumi.getter(name="httpsRedirectStatusCode")
-    def https_redirect_status_code(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def https_redirect_status_code(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
         """
         return pulumi.get(self, "https_redirect_status_code")
 
     @https_redirect_status_code.setter
-    def https_redirect_status_code(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def https_redirect_status_code(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "https_redirect_status_code", value)
 
     @_builtins.property
     @pulumi.getter
-    def methods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def methods(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of HTTP methods that match this Route
         """
         return pulumi.get(self, "methods")
 
     @methods.setter
-    def methods(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def methods(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "methods", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the route
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="pathHandling")
-    def path_handling(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def path_handling(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
         """
         return pulumi.get(self, "path_handling")
 
     @path_handling.setter
-    def path_handling(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def path_handling(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "path_handling", value)
 
     @_builtins.property
     @pulumi.getter
-    def paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def paths(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of paths that match this Route
         """
         return pulumi.get(self, "paths")
 
     @paths.setter
-    def paths(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def paths(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "paths", value)
 
     @_builtins.property
     @pulumi.getter(name="preserveHost")
-    def preserve_host(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def preserve_host(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
         """
         return pulumi.get(self, "preserve_host")
 
     @preserve_host.setter
-    def preserve_host(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def preserve_host(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "preserve_host", value)
 
     @_builtins.property
     @pulumi.getter(name="regexPriority")
-    def regex_priority(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def regex_priority(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
         """
         return pulumi.get(self, "regex_priority")
 
     @regex_priority.setter
-    def regex_priority(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def regex_priority(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "regex_priority", value)
 
     @_builtins.property
     @pulumi.getter(name="requestBuffering")
-    def request_buffering(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def request_buffering(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
         """
         return pulumi.get(self, "request_buffering")
 
     @request_buffering.setter
-    def request_buffering(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def request_buffering(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "request_buffering", value)
 
     @_builtins.property
     @pulumi.getter(name="responseBuffering")
-    def response_buffering(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def response_buffering(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
         """
         return pulumi.get(self, "response_buffering")
 
     @response_buffering.setter
-    def response_buffering(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def response_buffering(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "response_buffering", value)
 
     @_builtins.property
     @pulumi.getter
-    def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def snis(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of SNIs that match this Route when using stream routing.
         """
         return pulumi.get(self, "snis")
 
     @snis.setter
-    def snis(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def snis(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "snis", value)
 
     @_builtins.property
     @pulumi.getter
-    def sources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]:
+    def sources(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['RouteSourceArgs']]]]:
         """
         A list of source `ip` and `port`
         """
         return pulumi.get(self, "sources")
 
     @sources.setter
-    def sources(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]):
+    def sources(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['RouteSourceArgs']]]]):
         pulumi.set(self, "sources", value)
 
     @_builtins.property
     @pulumi.getter(name="stripPath")
-    def strip_path(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def strip_path(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         """
         return pulumi.get(self, "strip_path")
 
     @strip_path.setter
-    def strip_path(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def strip_path(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "strip_path", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Route for grouping and filtering.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
 
 @pulumi.input_type
 class _RouteState:
     def __init__(__self__, *,
-                 destinations: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]] = None,
-                 headers: Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]] = None,
-                 hosts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 https_redirect_status_code: Optional[pulumi.Input[_builtins.int]] = None,
-                 methods: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path_handling: Optional[pulumi.Input[_builtins.str]] = None,
-                 paths: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 preserve_host: Optional[pulumi.Input[_builtins.bool]] = None,
-                 protocols: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 regex_priority: Optional[pulumi.Input[_builtins.int]] = None,
-                 request_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 response_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 service_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 sources: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]] = None,
-                 strip_path: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 destinations: pulumi.Input[Optional[Sequence[pulumi.Input['RouteDestinationArgs']]]] = None,
+                 headers: pulumi.Input[Optional[Sequence[pulumi.Input['RouteHeaderArgs']]]] = None,
+                 hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 https_redirect_status_code: pulumi.Input[Optional[_builtins.int]] = None,
+                 methods: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path_handling: pulumi.Input[Optional[_builtins.str]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 preserve_host: pulumi.Input[Optional[_builtins.bool]] = None,
+                 protocols: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 regex_priority: pulumi.Input[Optional[_builtins.int]] = None,
+                 request_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 response_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 service_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 snis: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 sources: pulumi.Input[Optional[Sequence[pulumi.Input['RouteSourceArgs']]]] = None,
+                 strip_path: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Route resources.
 
@@ -395,218 +395,218 @@ class _RouteState:
 
     @_builtins.property
     @pulumi.getter
-    def destinations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]:
+    def destinations(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['RouteDestinationArgs']]]]:
         """
         A list of destination `ip` and `port`
         """
         return pulumi.get(self, "destinations")
 
     @destinations.setter
-    def destinations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteDestinationArgs']]]]):
+    def destinations(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['RouteDestinationArgs']]]]):
         pulumi.set(self, "destinations", value)
 
     @_builtins.property
     @pulumi.getter
-    def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]]:
+    def headers(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['RouteHeaderArgs']]]]:
         """
         One or more blocks of `name` to set name of header and `values` which is a list of `string` for the header values to match on.  See above example of how to set.  These headers will cause this Route to match if present in the request. The Host header cannot be used with this attribute: hosts should be specified using the hosts attribute.
         """
         return pulumi.get(self, "headers")
 
     @headers.setter
-    def headers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteHeaderArgs']]]]):
+    def headers(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['RouteHeaderArgs']]]]):
         pulumi.set(self, "headers", value)
 
     @_builtins.property
     @pulumi.getter
-    def hosts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def hosts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of domain names that match this Route
         """
         return pulumi.get(self, "hosts")
 
     @hosts.setter
-    def hosts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def hosts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "hosts", value)
 
     @_builtins.property
     @pulumi.getter(name="httpsRedirectStatusCode")
-    def https_redirect_status_code(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def https_redirect_status_code(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The status code Kong responds with when all properties of a Route match except the protocol i.e. if the protocol of the request is HTTP instead of HTTPS. Location header is injected by Kong if the field is set to `301`, `302`, `307` or `308`. Accepted values are: `426`, `301`, `302`, `307`, `308`. Default: `426`.
         """
         return pulumi.get(self, "https_redirect_status_code")
 
     @https_redirect_status_code.setter
-    def https_redirect_status_code(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def https_redirect_status_code(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "https_redirect_status_code", value)
 
     @_builtins.property
     @pulumi.getter
-    def methods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def methods(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of HTTP methods that match this Route
         """
         return pulumi.get(self, "methods")
 
     @methods.setter
-    def methods(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def methods(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "methods", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the route
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="pathHandling")
-    def path_handling(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def path_handling(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Controls how the Service path, Route path and requested path are combined when sending a request to the upstream.
         """
         return pulumi.get(self, "path_handling")
 
     @path_handling.setter
-    def path_handling(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def path_handling(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "path_handling", value)
 
     @_builtins.property
     @pulumi.getter
-    def paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def paths(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of paths that match this Route
         """
         return pulumi.get(self, "paths")
 
     @paths.setter
-    def paths(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def paths(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "paths", value)
 
     @_builtins.property
     @pulumi.getter(name="preserveHost")
-    def preserve_host(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def preserve_host(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When matching a Route via one of the hosts domain names, use the request Host header in the upstream request headers. If set to false, the upstream Host header will be that of the Service’s host.
         """
         return pulumi.get(self, "preserve_host")
 
     @preserve_host.setter
-    def preserve_host(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def preserve_host(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "preserve_host", value)
 
     @_builtins.property
     @pulumi.getter
-    def protocols(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def protocols(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         The list of protocols to use
         """
         return pulumi.get(self, "protocols")
 
     @protocols.setter
-    def protocols(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def protocols(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "protocols", value)
 
     @_builtins.property
     @pulumi.getter(name="regexPriority")
-    def regex_priority(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def regex_priority(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         A number used to choose which route resolves a given request when several routes match it using regexes simultaneously.
         """
         return pulumi.get(self, "regex_priority")
 
     @regex_priority.setter
-    def regex_priority(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def regex_priority(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "regex_priority", value)
 
     @_builtins.property
     @pulumi.getter(name="requestBuffering")
-    def request_buffering(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def request_buffering(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to enable request body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that receive data with chunked transfer encoding. Default: true.
         """
         return pulumi.get(self, "request_buffering")
 
     @request_buffering.setter
-    def request_buffering(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def request_buffering(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "request_buffering", value)
 
     @_builtins.property
     @pulumi.getter(name="responseBuffering")
-    def response_buffering(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def response_buffering(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to enable response body buffering or not. With HTTP 1.1, it may make sense to turn this off on services that send data with chunked transfer encoding. Default: true.
         """
         return pulumi.get(self, "response_buffering")
 
     @response_buffering.setter
-    def response_buffering(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def response_buffering(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "response_buffering", value)
 
     @_builtins.property
     @pulumi.getter(name="serviceId")
-    def service_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def service_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Service ID to map to
         """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
-    def service_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def service_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "service_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def snis(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def snis(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of SNIs that match this Route when using stream routing.
         """
         return pulumi.get(self, "snis")
 
     @snis.setter
-    def snis(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def snis(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "snis", value)
 
     @_builtins.property
     @pulumi.getter
-    def sources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]:
+    def sources(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['RouteSourceArgs']]]]:
         """
         A list of source `ip` and `port`
         """
         return pulumi.get(self, "sources")
 
     @sources.setter
-    def sources(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RouteSourceArgs']]]]):
+    def sources(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['RouteSourceArgs']]]]):
         pulumi.set(self, "sources", value)
 
     @_builtins.property
     @pulumi.getter(name="stripPath")
-    def strip_path(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def strip_path(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When matching a Route via one of the paths, strip the matching prefix from the upstream request URL. Default: true.
         """
         return pulumi.get(self, "strip_path")
 
     @strip_path.setter
-    def strip_path(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def strip_path(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "strip_path", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Route for grouping and filtering.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
 
@@ -616,24 +616,24 @@ class Route(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 destinations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict']]]]] = None,
-                 headers: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteHeaderArgs', 'RouteHeaderArgsDict']]]]] = None,
-                 hosts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 https_redirect_status_code: Optional[pulumi.Input[_builtins.int]] = None,
-                 methods: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path_handling: Optional[pulumi.Input[_builtins.str]] = None,
-                 paths: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 preserve_host: Optional[pulumi.Input[_builtins.bool]] = None,
-                 protocols: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 regex_priority: Optional[pulumi.Input[_builtins.int]] = None,
-                 request_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 response_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 service_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 sources: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteSourceArgs', 'RouteSourceArgsDict']]]]] = None,
-                 strip_path: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 destinations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict']]]]] = None,
+                 headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteHeaderArgs', 'RouteHeaderArgsDict']]]]] = None,
+                 hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 https_redirect_status_code: pulumi.Input[Optional[_builtins.int]] = None,
+                 methods: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path_handling: pulumi.Input[Optional[_builtins.str]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 preserve_host: pulumi.Input[Optional[_builtins.bool]] = None,
+                 protocols: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 regex_priority: pulumi.Input[Optional[_builtins.int]] = None,
+                 request_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 response_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 service_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 snis: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 sources: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteSourceArgs', 'RouteSourceArgsDict']]]]] = None,
+                 strip_path: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
         ## # Route
@@ -825,24 +825,24 @@ class Route(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 destinations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict']]]]] = None,
-                 headers: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteHeaderArgs', 'RouteHeaderArgsDict']]]]] = None,
-                 hosts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 https_redirect_status_code: Optional[pulumi.Input[_builtins.int]] = None,
-                 methods: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 path_handling: Optional[pulumi.Input[_builtins.str]] = None,
-                 paths: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 preserve_host: Optional[pulumi.Input[_builtins.bool]] = None,
-                 protocols: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 regex_priority: Optional[pulumi.Input[_builtins.int]] = None,
-                 request_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 response_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-                 service_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 snis: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 sources: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteSourceArgs', 'RouteSourceArgsDict']]]]] = None,
-                 strip_path: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 destinations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict']]]]] = None,
+                 headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteHeaderArgs', 'RouteHeaderArgsDict']]]]] = None,
+                 hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 https_redirect_status_code: pulumi.Input[Optional[_builtins.int]] = None,
+                 methods: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 path_handling: pulumi.Input[Optional[_builtins.str]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 preserve_host: pulumi.Input[Optional[_builtins.bool]] = None,
+                 protocols: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 regex_priority: pulumi.Input[Optional[_builtins.int]] = None,
+                 request_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 response_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+                 service_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 snis: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 sources: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteSourceArgs', 'RouteSourceArgsDict']]]]] = None,
+                 strip_path: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -884,24 +884,24 @@ class Route(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            destinations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict']]]]] = None,
-            headers: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteHeaderArgs', 'RouteHeaderArgsDict']]]]] = None,
-            hosts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            https_redirect_status_code: Optional[pulumi.Input[_builtins.int]] = None,
-            methods: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            path_handling: Optional[pulumi.Input[_builtins.str]] = None,
-            paths: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            preserve_host: Optional[pulumi.Input[_builtins.bool]] = None,
-            protocols: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            regex_priority: Optional[pulumi.Input[_builtins.int]] = None,
-            request_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-            response_buffering: Optional[pulumi.Input[_builtins.bool]] = None,
-            service_id: Optional[pulumi.Input[_builtins.str]] = None,
-            snis: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            sources: Optional[pulumi.Input[Sequence[pulumi.Input[Union['RouteSourceArgs', 'RouteSourceArgsDict']]]]] = None,
-            strip_path: Optional[pulumi.Input[_builtins.bool]] = None,
-            tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Route':
+            destinations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict']]]]] = None,
+            headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteHeaderArgs', 'RouteHeaderArgsDict']]]]] = None,
+            hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            https_redirect_status_code: pulumi.Input[Optional[_builtins.int]] = None,
+            methods: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path_handling: pulumi.Input[Optional[_builtins.str]] = None,
+            paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            preserve_host: pulumi.Input[Optional[_builtins.bool]] = None,
+            protocols: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            regex_priority: pulumi.Input[Optional[_builtins.int]] = None,
+            request_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+            response_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+            service_id: pulumi.Input[Optional[_builtins.str]] = None,
+            snis: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            sources: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteSourceArgs', 'RouteSourceArgsDict']]]]] = None,
+            strip_path: pulumi.Input[Optional[_builtins.bool]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Route':
         """
         Get an existing Route resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

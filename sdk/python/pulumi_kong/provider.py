@@ -19,14 +19,14 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 kong_admin_password: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_token: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_uri: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_username: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_api_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_workspace: Optional[pulumi.Input[_builtins.str]] = None,
-                 strict_plugins_match: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_skip_verify: Optional[pulumi.Input[_builtins.bool]] = None):
+                 kong_admin_password: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_uri: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_username: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_workspace: pulumi.Input[Optional[_builtins.str]] = None,
+                 strict_plugins_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_skip_verify: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Provider resource.
 
@@ -62,98 +62,98 @@ class ProviderArgs:
 
     @_builtins.property
     @pulumi.getter(name="kongAdminPassword")
-    def kong_admin_password(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def kong_admin_password(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         An basic auth password for kong admin
         """
         return pulumi.get(self, "kong_admin_password")
 
     @kong_admin_password.setter
-    def kong_admin_password(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def kong_admin_password(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "kong_admin_password", value)
 
     @_builtins.property
     @pulumi.getter(name="kongAdminToken")
-    def kong_admin_token(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def kong_admin_token(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         API key for the kong api (Enterprise Edition)
         """
         return pulumi.get(self, "kong_admin_token")
 
     @kong_admin_token.setter
-    def kong_admin_token(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def kong_admin_token(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "kong_admin_token", value)
 
     @_builtins.property
     @pulumi.getter(name="kongAdminUri")
-    def kong_admin_uri(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def kong_admin_uri(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The address of the kong admin url e.g. http://localhost:8001
         """
         return pulumi.get(self, "kong_admin_uri")
 
     @kong_admin_uri.setter
-    def kong_admin_uri(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def kong_admin_uri(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "kong_admin_uri", value)
 
     @_builtins.property
     @pulumi.getter(name="kongAdminUsername")
-    def kong_admin_username(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def kong_admin_username(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         An basic auth user for kong admin
         """
         return pulumi.get(self, "kong_admin_username")
 
     @kong_admin_username.setter
-    def kong_admin_username(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def kong_admin_username(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "kong_admin_username", value)
 
     @_builtins.property
     @pulumi.getter(name="kongApiKey")
-    def kong_api_key(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def kong_api_key(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         API key for the kong api (if you have locked it down)
         """
         return pulumi.get(self, "kong_api_key")
 
     @kong_api_key.setter
-    def kong_api_key(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def kong_api_key(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "kong_api_key", value)
 
     @_builtins.property
     @pulumi.getter(name="kongWorkspace")
-    def kong_workspace(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def kong_workspace(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Workspace context (Enterprise Edition)
         """
         return pulumi.get(self, "kong_workspace")
 
     @kong_workspace.setter
-    def kong_workspace(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def kong_workspace(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "kong_workspace", value)
 
     @_builtins.property
     @pulumi.getter(name="strictPluginsMatch")
-    def strict_plugins_match(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def strict_plugins_match(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Should plugins `config_json` field strictly match plugin configuration
         """
         return pulumi.get(self, "strict_plugins_match")
 
     @strict_plugins_match.setter
-    def strict_plugins_match(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def strict_plugins_match(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "strict_plugins_match", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsSkipVerify")
-    def tls_skip_verify(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def tls_skip_verify(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to skip tls verify for https kong api endpoint using self signed or untrusted certs
         """
         return pulumi.get(self, "tls_skip_verify")
 
     @tls_skip_verify.setter
-    def tls_skip_verify(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def tls_skip_verify(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "tls_skip_verify", value)
 
 
@@ -163,14 +163,14 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 kong_admin_password: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_token: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_uri: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_username: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_api_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_workspace: Optional[pulumi.Input[_builtins.str]] = None,
-                 strict_plugins_match: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_skip_verify: Optional[pulumi.Input[_builtins.bool]] = None,
+                 kong_admin_password: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_uri: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_username: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_workspace: pulumi.Input[Optional[_builtins.str]] = None,
+                 strict_plugins_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_skip_verify: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         The provider type for the kong package. By default, resources use package-wide configuration
@@ -218,14 +218,14 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 kong_admin_password: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_token: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_uri: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_admin_username: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_api_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 kong_workspace: Optional[pulumi.Input[_builtins.str]] = None,
-                 strict_plugins_match: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_skip_verify: Optional[pulumi.Input[_builtins.bool]] = None,
+                 kong_admin_password: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_uri: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_admin_username: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 kong_workspace: pulumi.Input[Optional[_builtins.str]] = None,
+                 strict_plugins_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_skip_verify: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):

@@ -148,31 +148,31 @@ export interface ConsumerOauth2State {
     /**
      * Unique oauth2 client id. If not set, the oauth2 plugin will generate one
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * Unique oauth2 client secret. If not set, the oauth2 plugin will generate one
      */
-    clientSecret?: pulumi.Input<string>;
+    clientSecret?: pulumi.Input<string | undefined>;
     /**
      * The id of the consumer to be configured with oauth2.
      */
-    consumerId?: pulumi.Input<string>;
+    consumerId?: pulumi.Input<string | undefined>;
     /**
      * A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      */
-    hashSecret?: pulumi.Input<boolean>;
+    hashSecret?: pulumi.Input<boolean | undefined>;
     /**
      * The name associated with the credential.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).
      */
-    redirectUris?: pulumi.Input<pulumi.Input<string>[]>;
+    redirectUris?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A list of strings associated with the consumer for grouping and filtering.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -182,11 +182,11 @@ export interface ConsumerOauth2Args {
     /**
      * Unique oauth2 client id. If not set, the oauth2 plugin will generate one
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * Unique oauth2 client secret. If not set, the oauth2 plugin will generate one
      */
-    clientSecret?: pulumi.Input<string>;
+    clientSecret?: pulumi.Input<string | undefined>;
     /**
      * The id of the consumer to be configured with oauth2.
      */
@@ -194,11 +194,11 @@ export interface ConsumerOauth2Args {
     /**
      * A boolean flag that indicates whether the clientSecret field will be stored in hashed form. If enabled on existing plugin instances, client secrets are hashed on the fly upon first usage. Default: `false`.
      */
-    hashSecret?: pulumi.Input<boolean>;
+    hashSecret?: pulumi.Input<boolean | undefined>;
     /**
      * The name associated with the credential.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * An array with one or more URLs in your app where users will be sent after authorization ([RFC 6742 Section 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)).
      */
@@ -206,5 +206,5 @@ export interface ConsumerOauth2Args {
     /**
      * A list of strings associated with the consumer for grouping and filtering.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

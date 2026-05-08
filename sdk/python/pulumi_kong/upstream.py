@@ -21,18 +21,18 @@ __all__ = ['UpstreamArgs', 'Upstream']
 @pulumi.input_type
 class UpstreamArgs:
     def __init__(__self__, *,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie_path: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
-                 host_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 slots: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie_path: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 healthchecks: pulumi.Input[Optional['UpstreamHealthchecksArgs']] = None,
+                 host_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 slots: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Upstream resource.
 
@@ -96,67 +96,67 @@ class UpstreamArgs:
 
     @_builtins.property
     @pulumi.getter(name="clientCertificateId")
-    def client_certificate_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_certificate_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         """
         return pulumi.get(self, "client_certificate_id")
 
     @client_certificate_id.setter
-    def client_certificate_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_certificate_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_certificate_id", value)
 
     @_builtins.property
     @pulumi.getter(name="hashFallback")
-    def hash_fallback(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_fallback(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         """
         return pulumi.get(self, "hash_fallback")
 
     @hash_fallback.setter
-    def hash_fallback(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_fallback(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_fallback", value)
 
     @_builtins.property
     @pulumi.getter(name="hashFallbackHeader")
-    def hash_fallback_header(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_fallback_header(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
         """
         return pulumi.get(self, "hash_fallback_header")
 
     @hash_fallback_header.setter
-    def hash_fallback_header(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_fallback_header(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_fallback_header", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOn")
-    def hash_on(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         """
         return pulumi.get(self, "hash_on")
 
     @hash_on.setter
-    def hash_on(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOnCookie")
-    def hash_on_cookie(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on_cookie(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
         """
         return pulumi.get(self, "hash_on_cookie")
 
     @hash_on_cookie.setter
-    def hash_on_cookie(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on_cookie(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on_cookie", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOnCookiePath")
-    def hash_on_cookie_path(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on_cookie_path(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
         * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -184,94 +184,94 @@ class UpstreamArgs:
         return pulumi.get(self, "hash_on_cookie_path")
 
     @hash_on_cookie_path.setter
-    def hash_on_cookie_path(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on_cookie_path(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on_cookie_path", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOnHeader")
-    def hash_on_header(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on_header(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
         """
         return pulumi.get(self, "hash_on_header")
 
     @hash_on_header.setter
-    def hash_on_header(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on_header(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on_header", value)
 
     @_builtins.property
     @pulumi.getter
-    def healthchecks(self) -> Optional[pulumi.Input['UpstreamHealthchecksArgs']]:
+    def healthchecks(self) -> pulumi.Input[Optional['UpstreamHealthchecksArgs']]:
         return pulumi.get(self, "healthchecks")
 
     @healthchecks.setter
-    def healthchecks(self, value: Optional[pulumi.Input['UpstreamHealthchecksArgs']]):
+    def healthchecks(self, value: pulumi.Input[Optional['UpstreamHealthchecksArgs']]):
         pulumi.set(self, "healthchecks", value)
 
     @_builtins.property
     @pulumi.getter(name="hostHeader")
-    def host_header(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def host_header(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The hostname to be used as Host header when proxying requests through Kong.
         """
         return pulumi.get(self, "host_header")
 
     @host_header.setter
-    def host_header(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def host_header(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "host_header", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a hostname, which must be equal to the host of a Service.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def slots(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def slots(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         """
         return pulumi.get(self, "slots")
 
     @slots.setter
-    def slots(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def slots(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "slots", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Upstream for grouping and filtering.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
 
 @pulumi.input_type
 class _UpstreamState:
     def __init__(__self__, *,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie_path: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 healthchecks: Optional[pulumi.Input['UpstreamHealthchecksArgs']] = None,
-                 host_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 slots: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie_path: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 healthchecks: pulumi.Input[Optional['UpstreamHealthchecksArgs']] = None,
+                 host_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 slots: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Upstream resources.
 
@@ -335,67 +335,67 @@ class _UpstreamState:
 
     @_builtins.property
     @pulumi.getter(name="clientCertificateId")
-    def client_certificate_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_certificate_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         """
         return pulumi.get(self, "client_certificate_id")
 
     @client_certificate_id.setter
-    def client_certificate_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_certificate_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_certificate_id", value)
 
     @_builtins.property
     @pulumi.getter(name="hashFallback")
-    def hash_fallback(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_fallback(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         """
         return pulumi.get(self, "hash_fallback")
 
     @hash_fallback.setter
-    def hash_fallback(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_fallback(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_fallback", value)
 
     @_builtins.property
     @pulumi.getter(name="hashFallbackHeader")
-    def hash_fallback_header(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_fallback_header(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
         """
         return pulumi.get(self, "hash_fallback_header")
 
     @hash_fallback_header.setter
-    def hash_fallback_header(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_fallback_header(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_fallback_header", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOn")
-    def hash_on(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         """
         return pulumi.get(self, "hash_on")
 
     @hash_on.setter
-    def hash_on(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOnCookie")
-    def hash_on_cookie(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on_cookie(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
         """
         return pulumi.get(self, "hash_on_cookie")
 
     @hash_on_cookie.setter
-    def hash_on_cookie(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on_cookie(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on_cookie", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOnCookiePath")
-    def hash_on_cookie_path(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on_cookie_path(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
         * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -423,76 +423,76 @@ class _UpstreamState:
         return pulumi.get(self, "hash_on_cookie_path")
 
     @hash_on_cookie_path.setter
-    def hash_on_cookie_path(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on_cookie_path(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on_cookie_path", value)
 
     @_builtins.property
     @pulumi.getter(name="hashOnHeader")
-    def hash_on_header(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hash_on_header(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a header name to take the value from as hash input. Only required when `hash_on` is set to `header`. Default `nil`.
         """
         return pulumi.get(self, "hash_on_header")
 
     @hash_on_header.setter
-    def hash_on_header(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hash_on_header(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hash_on_header", value)
 
     @_builtins.property
     @pulumi.getter
-    def healthchecks(self) -> Optional[pulumi.Input['UpstreamHealthchecksArgs']]:
+    def healthchecks(self) -> pulumi.Input[Optional['UpstreamHealthchecksArgs']]:
         return pulumi.get(self, "healthchecks")
 
     @healthchecks.setter
-    def healthchecks(self, value: Optional[pulumi.Input['UpstreamHealthchecksArgs']]):
+    def healthchecks(self, value: pulumi.Input[Optional['UpstreamHealthchecksArgs']]):
         pulumi.set(self, "healthchecks", value)
 
     @_builtins.property
     @pulumi.getter(name="hostHeader")
-    def host_header(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def host_header(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The hostname to be used as Host header when proxying requests through Kong.
         """
         return pulumi.get(self, "host_header")
 
     @host_header.setter
-    def host_header(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def host_header(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "host_header", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         is a hostname, which must be equal to the host of a Service.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def slots(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def slots(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         is the number of slots in the load balancer algorithm (10*65536, defaults to 10000).
         """
         return pulumi.get(self, "slots")
 
     @slots.setter
-    def slots(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def slots(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "slots", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Upstream for grouping and filtering.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
 
@@ -502,18 +502,18 @@ class Upstream(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie_path: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 healthchecks: Optional[pulumi.Input[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
-                 host_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 slots: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie_path: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 healthchecks: pulumi.Input[Optional[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
+                 host_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 slots: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
         ## Example Usage
@@ -755,18 +755,18 @@ class Upstream(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_fallback_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_cookie_path: Optional[pulumi.Input[_builtins.str]] = None,
-                 hash_on_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 healthchecks: Optional[pulumi.Input[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
-                 host_header: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 slots: Optional[pulumi.Input[_builtins.int]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_fallback_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_cookie_path: pulumi.Input[Optional[_builtins.str]] = None,
+                 hash_on_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 healthchecks: pulumi.Input[Optional[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
+                 host_header: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 slots: pulumi.Input[Optional[_builtins.int]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -798,18 +798,18 @@ class Upstream(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            client_certificate_id: Optional[pulumi.Input[_builtins.str]] = None,
-            hash_fallback: Optional[pulumi.Input[_builtins.str]] = None,
-            hash_fallback_header: Optional[pulumi.Input[_builtins.str]] = None,
-            hash_on: Optional[pulumi.Input[_builtins.str]] = None,
-            hash_on_cookie: Optional[pulumi.Input[_builtins.str]] = None,
-            hash_on_cookie_path: Optional[pulumi.Input[_builtins.str]] = None,
-            hash_on_header: Optional[pulumi.Input[_builtins.str]] = None,
-            healthchecks: Optional[pulumi.Input[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
-            host_header: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            slots: Optional[pulumi.Input[_builtins.int]] = None,
-            tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Upstream':
+            client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_fallback: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_fallback_header: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on_cookie: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on_cookie_path: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on_header: pulumi.Input[Optional[_builtins.str]] = None,
+            healthchecks: pulumi.Input[Optional[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict']]] = None,
+            host_header: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            slots: pulumi.Input[Optional[_builtins.int]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Upstream':
         """
         Get an existing Upstream resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

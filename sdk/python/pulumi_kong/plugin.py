@@ -19,14 +19,14 @@ __all__ = ['PluginArgs', 'Plugin']
 @pulumi.input_type
 class PluginArgs:
     def __init__(__self__, *,
-                 config_json: Optional[pulumi.Input[_builtins.str]] = None,
-                 consumer_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 enabled: Optional[pulumi.Input[_builtins.bool]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 route_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 service_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 strict_match: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 config_json: pulumi.Input[Optional[_builtins.str]] = None,
+                 consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 route_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 service_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 strict_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Plugin resource.
 
@@ -57,7 +57,7 @@ class PluginArgs:
 
     @_builtins.property
     @pulumi.getter(name="configJson")
-    def config_json(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def config_json(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
         page of the plugin you are configuring
@@ -65,100 +65,100 @@ class PluginArgs:
         return pulumi.get(self, "config_json")
 
     @config_json.setter
-    def config_json(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def config_json(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "config_json", value)
 
     @_builtins.property
     @pulumi.getter(name="consumerId")
-    def consumer_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def consumer_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         the consumer id you want to configure the plugin for
         """
         return pulumi.get(self, "consumer_id")
 
     @consumer_id.setter
-    def consumer_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def consumer_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "consumer_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def enabled(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
         """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
-    def enabled(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enabled", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="routeId")
-    def route_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def route_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         the route id that you want to configure the plugin for
         """
         return pulumi.get(self, "route_id")
 
     @route_id.setter
-    def route_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def route_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "route_id", value)
 
     @_builtins.property
     @pulumi.getter(name="serviceId")
-    def service_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def service_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         the service id that you want to configure the plugin for
         """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
-    def service_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def service_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "service_id", value)
 
     @_builtins.property
     @pulumi.getter(name="strictMatch")
-    def strict_match(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def strict_match(self) -> pulumi.Input[Optional[_builtins.bool]]:
         return pulumi.get(self, "strict_match")
 
     @strict_match.setter
-    def strict_match(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def strict_match(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "strict_match", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Plugin for grouping and filtering
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
 
 @pulumi.input_type
 class _PluginState:
     def __init__(__self__, *,
-                 computed_config: Optional[pulumi.Input[_builtins.str]] = None,
-                 config_json: Optional[pulumi.Input[_builtins.str]] = None,
-                 consumer_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 enabled: Optional[pulumi.Input[_builtins.bool]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 route_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 service_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 strict_match: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 computed_config: pulumi.Input[Optional[_builtins.str]] = None,
+                 config_json: pulumi.Input[Optional[_builtins.str]] = None,
+                 consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 route_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 service_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 strict_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Plugin resources.
 
@@ -191,16 +191,16 @@ class _PluginState:
 
     @_builtins.property
     @pulumi.getter(name="computedConfig")
-    def computed_config(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def computed_config(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "computed_config")
 
     @computed_config.setter
-    def computed_config(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def computed_config(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "computed_config", value)
 
     @_builtins.property
     @pulumi.getter(name="configJson")
-    def config_json(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def config_json(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         this is the configuration json for how you want to configure the plugin.  The json is passed straight through to kong as is.  You can get the json config from the Kong documentation
         page of the plugin you are configuring
@@ -208,85 +208,85 @@ class _PluginState:
         return pulumi.get(self, "config_json")
 
     @config_json.setter
-    def config_json(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def config_json(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "config_json", value)
 
     @_builtins.property
     @pulumi.getter(name="consumerId")
-    def consumer_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def consumer_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         the consumer id you want to configure the plugin for
         """
         return pulumi.get(self, "consumer_id")
 
     @consumer_id.setter
-    def consumer_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def consumer_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "consumer_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def enabled(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         whether the plugin is enabled or not, use if you want to keep the plugin installed but disable it
         """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
-    def enabled(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enabled", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="routeId")
-    def route_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def route_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         the route id that you want to configure the plugin for
         """
         return pulumi.get(self, "route_id")
 
     @route_id.setter
-    def route_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def route_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "route_id", value)
 
     @_builtins.property
     @pulumi.getter(name="serviceId")
-    def service_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def service_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         the service id that you want to configure the plugin for
         """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
-    def service_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def service_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "service_id", value)
 
     @_builtins.property
     @pulumi.getter(name="strictMatch")
-    def strict_match(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def strict_match(self) -> pulumi.Input[Optional[_builtins.bool]]:
         return pulumi.get(self, "strict_match")
 
     @strict_match.setter
-    def strict_match(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def strict_match(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "strict_match", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of strings associated with the Plugin for grouping and filtering
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
 
@@ -296,14 +296,14 @@ class Plugin(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 config_json: Optional[pulumi.Input[_builtins.str]] = None,
-                 consumer_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 enabled: Optional[pulumi.Input[_builtins.bool]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 route_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 service_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 strict_match: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 config_json: pulumi.Input[Optional[_builtins.str]] = None,
+                 consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 route_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 service_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 strict_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
         ## # Plugin
@@ -514,14 +514,14 @@ class Plugin(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 config_json: Optional[pulumi.Input[_builtins.str]] = None,
-                 consumer_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 enabled: Optional[pulumi.Input[_builtins.bool]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 route_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 service_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 strict_match: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 config_json: pulumi.Input[Optional[_builtins.str]] = None,
+                 consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 route_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 service_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 strict_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -550,15 +550,15 @@ class Plugin(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            computed_config: Optional[pulumi.Input[_builtins.str]] = None,
-            config_json: Optional[pulumi.Input[_builtins.str]] = None,
-            consumer_id: Optional[pulumi.Input[_builtins.str]] = None,
-            enabled: Optional[pulumi.Input[_builtins.bool]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            route_id: Optional[pulumi.Input[_builtins.str]] = None,
-            service_id: Optional[pulumi.Input[_builtins.str]] = None,
-            strict_match: Optional[pulumi.Input[_builtins.bool]] = None,
-            tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Plugin':
+            computed_config: pulumi.Input[Optional[_builtins.str]] = None,
+            config_json: pulumi.Input[Optional[_builtins.str]] = None,
+            consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+            enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            route_id: pulumi.Input[Optional[_builtins.str]] = None,
+            service_id: pulumi.Input[Optional[_builtins.str]] = None,
+            strict_match: pulumi.Input[Optional[_builtins.bool]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Plugin':
         """
         Get an existing Plugin resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
