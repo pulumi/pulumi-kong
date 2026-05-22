@@ -144,8 +144,8 @@ class RouteSourceArgs:
 
 
 class UpstreamHealthchecksArgsDict(TypedDict):
-    active: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveArgs']]]
-    passive: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveArgs']]]
+    active: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveArgsDict']]]
+    passive: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveArgsDict']]]
 
 @pulumi.input_type
 class UpstreamHealthchecksArgs:
@@ -178,13 +178,13 @@ class UpstreamHealthchecksArgs:
 
 class UpstreamHealthchecksActiveArgsDict(TypedDict):
     concurrency: NotRequired[pulumi.Input[Optional[_builtins.int]]]
-    healthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveHealthyArgs']]]
+    healthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveHealthyArgsDict']]]
     http_path: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     https_sni: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     https_verify_certificate: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     timeout: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
-    unhealthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveUnhealthyArgs']]]
+    unhealthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksActiveUnhealthyArgsDict']]]
 
 @pulumi.input_type
 class UpstreamHealthchecksActiveArgs:
@@ -406,9 +406,9 @@ class UpstreamHealthchecksActiveUnhealthyArgs:
 
 
 class UpstreamHealthchecksPassiveArgsDict(TypedDict):
-    healthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveHealthyArgs']]]
+    healthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveHealthyArgsDict']]]
     type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
-    unhealthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveUnhealthyArgs']]]
+    unhealthy: NotRequired[pulumi.Input[Optional['UpstreamHealthchecksPassiveUnhealthyArgsDict']]]
 
 @pulumi.input_type
 class UpstreamHealthchecksPassiveArgs:
