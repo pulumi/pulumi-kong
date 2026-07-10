@@ -39,7 +39,7 @@ class UpstreamArgs:
         :param pulumi.Input[_builtins.str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[_builtins.str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
-        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
         :param pulumi.Input[_builtins.str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
                * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -134,7 +134,7 @@ class UpstreamArgs:
     @pulumi.getter(name="hashOn")
     def hash_on(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         """
         return pulumi.get(self, "hash_on")
 
@@ -278,7 +278,7 @@ class _UpstreamState:
         :param pulumi.Input[_builtins.str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[_builtins.str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
-        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
         :param pulumi.Input[_builtins.str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
                * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -373,7 +373,7 @@ class _UpstreamState:
     @pulumi.getter(name="hashOn")
     def hash_on(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         """
         return pulumi.get(self, "hash_on")
 
@@ -612,7 +612,7 @@ class Upstream(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[_builtins.str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
-        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
         :param pulumi.Input[_builtins.str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
                * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -820,7 +820,7 @@ class Upstream(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] client_certificate_id: The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
         :param pulumi.Input[_builtins.str] hash_fallback: is a hashing input type if the primary `hash_on` does not return a hash (eg. header is missing, or no consumer identified). One of: `none`, `consumer`, `ip`, `header`, or `cookie`. Not available if `hash_on` is set to `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_fallback_header: is a header name to take the value from as hash input. Only required when `hash_fallback` is set to `header`. Default `nil`.
-        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        :param pulumi.Input[_builtins.str] hash_on: is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         :param pulumi.Input[_builtins.str] hash_on_cookie: is a cookie name to take the value from as hash input. Only required when `hash_on` or `hash_fallback` is set to `cookie`. If the specified cookie is not in the request, Kong will generate a value and set the cookie in the response. Default `nil`.
         :param pulumi.Input[_builtins.str] hash_on_cookie_path: is a cookie path to set in the response headers. Only required when `hash_on` or `hash_fallback` is set to `cookie`. Defaults to `/`.
                * `healthchecks.active.type` - (Optional) is a active health check type. HTTP or HTTPS, or just attempt a TCP connection. Possible values are `tcp`, `http` or `https`. Defaults to `http`.
@@ -896,7 +896,7 @@ class Upstream(pulumi.CustomResource):
     @pulumi.getter(name="hashOn")
     def hash_on(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+        is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
         """
         return pulumi.get(self, "hash_on")
 
