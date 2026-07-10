@@ -140,7 +140,7 @@ export class Upstream extends pulumi.CustomResource {
      */
     declare public readonly hashFallbackHeader: pulumi.Output<string | undefined>;
     /**
-     * is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+     * is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      */
     declare public readonly hashOn: pulumi.Output<string | undefined>;
     /**
@@ -256,7 +256,7 @@ export interface UpstreamState {
      */
     hashFallbackHeader?: pulumi.Input<string | undefined>;
     /**
-     * is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+     * is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      */
     hashOn?: pulumi.Input<string | undefined>;
     /**
@@ -328,7 +328,7 @@ export interface UpstreamArgs {
      */
     hashFallbackHeader?: pulumi.Input<string | undefined>;
     /**
-     * is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
+     * is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `consumer`, `ip`, `header`, or `cookie`. Defaults to `none`.
      */
     hashOn?: pulumi.Input<string | undefined>;
     /**

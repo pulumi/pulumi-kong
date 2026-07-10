@@ -95,7 +95,7 @@ publishing {
                 inceptionYear = "2022"
                 name = "pulumi-kong"
                 packaging = "jar"
-                description = "A Pulumi package for creating and managing Kong resources."
+                description = $/A Pulumi package for creating and managing Kong resources./$
 
                 url = "https://github.com/pulumi/pulumi-kong"
 
