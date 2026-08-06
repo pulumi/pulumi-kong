@@ -44,7 +44,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewConsumerKeyAuth(ctx, "consumer_key_auth", &kong.ConsumerKeyAuthArgs{
-//				ConsumerId: myConsumer.ID(),
+//				ConsumerId: myConsumer.ID().ToIDOutput().ToStringOutput(),
 //				Key:        pulumi.String("secret"),
 //				Tags: pulumi.StringArray{
 //					pulumi.String("myTag"),
