@@ -65,7 +65,7 @@ import (
 //			}
 //			_, err = kong.NewPlugin(ctx, "rate_limit", &kong.PluginArgs{
 //				Name:       pulumi.String("rate-limiting"),
-//				ConsumerId: pluginConsumer.ID(),
+//				ConsumerId: pluginConsumer.ID().ToIDOutput().ToStringOutput(),
 //				ConfigJson: pulumi.String("\\t{\n\\t\\t\\\"second\\\": 5,\n\\t\\t\\\"hour\\\" : 1000\n\\t}\n"),
 //			})
 //			if err != nil {
@@ -101,7 +101,7 @@ import (
 //			}
 //			_, err = kong.NewPlugin(ctx, "rate_limit", &kong.PluginArgs{
 //				Name:       pulumi.String("rate-limiting"),
-//				ServiceId:  service.ID(),
+//				ServiceId:  service.ID().ToIDOutput().ToStringOutput(),
 //				ConfigJson: pulumi.String("\\t{\n\\t\\t\\\"second\\\": 10,\n\\t\\t\\\"hour\\\" : 2000\n\\t}\n"),
 //			})
 //			if err != nil {
@@ -138,7 +138,7 @@ import (
 //			_, err = kong.NewPlugin(ctx, "rate_limit", &kong.PluginArgs{
 //				Name:       pulumi.String("rate-limiting"),
 //				Enabled:    pulumi.Bool(true),
-//				ServiceId:  service.ID(),
+//				ServiceId:  service.ID().ToIDOutput().ToStringOutput(),
 //				ConfigJson: pulumi.String("\\t{\n\\t\\t\\\"second\\\": 11,\n\\t\\t\\\"hour\\\" : 4000\n\\t}\n"),
 //			})
 //			if err != nil {

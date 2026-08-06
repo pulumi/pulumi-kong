@@ -45,7 +45,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewConsumerAcl(ctx, "consumer_acl", &kong.ConsumerAclArgs{
-//				ConsumerId: myConsumer.ID(),
+//				ConsumerId: myConsumer.ID().ToIDOutput().ToStringOutput(),
 //				Group:      pulumi.String("group2"),
 //				Tags: pulumi.StringArray{
 //					pulumi.String("myTag"),

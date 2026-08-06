@@ -49,7 +49,7 @@ import (
 //					pulumi.String("a"),
 //					pulumi.String("b"),
 //				},
-//				ClientCertificateId: certificate.ID(),
+//				ClientCertificateId: certificate.ID().ToIDOutput().ToStringOutput(),
 //				Healthchecks: &kong.UpstreamHealthchecksArgs{
 //					Active: &kong.UpstreamHealthchecksActiveArgs{
 //						Type:                   pulumi.String("https"),

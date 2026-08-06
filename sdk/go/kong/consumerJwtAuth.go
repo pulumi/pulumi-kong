@@ -45,7 +45,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewConsumerJwtAuth(ctx, "consumer_jwt_config", &kong.ConsumerJwtAuthArgs{
-//				ConsumerId:   myConsumer.ID(),
+//				ConsumerId:   myConsumer.ID().ToIDOutput().ToStringOutput(),
 //				Algorithm:    pulumi.String("HS256"),
 //				Key:          pulumi.String("my_key"),
 //				RsaPublicKey: pulumi.String("foo"),
