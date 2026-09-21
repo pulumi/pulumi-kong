@@ -66,27 +66,8 @@ import javax.annotation.Nullable;
  *             .build());
  * 
  *         var upstream = new Upstream("upstream", UpstreamArgs.builder()
- *             .name("sample_upstream")
- *             .slots(10)
- *             .hashOn("header")
- *             .hashFallback("cookie")
- *             .hashOnHeader("HeaderName")
- *             .hashFallbackHeader("FallbackHeaderName")
- *             .hashOnCookie("CookieName")
- *             .hashOnCookiePath("/path")
- *             .hostHeader("x-host")
- *             .tags(            
- *                 "a",
- *                 "b")
- *             .clientCertificateId(certificate.id())
  *             .healthchecks(UpstreamHealthchecksArgs.builder()
  *                 .active(UpstreamHealthchecksActiveArgs.builder()
- *                     .type("https")
- *                     .httpPath("/status")
- *                     .timeout(10)
- *                     .concurrency(20)
- *                     .httpsVerifyCertificate(false)
- *                     .httpsSni("some.domain.com")
  *                     .healthy(UpstreamHealthchecksActiveHealthyArgs.builder()
  *                         .successes(1)
  *                         .interval(5)
@@ -103,9 +84,14 @@ import javax.annotation.Nullable;
  *                             500,
  *                             501)
  *                         .build())
+ *                     .type("https")
+ *                     .httpPath("/status")
+ *                     .timeout(10)
+ *                     .concurrency(20)
+ *                     .httpsVerifyCertificate(false)
+ *                     .httpsSni("some.domain.com")
  *                     .build())
  *                 .passive(UpstreamHealthchecksPassiveArgs.builder()
- *                     .type("https")
  *                     .healthy(UpstreamHealthchecksPassiveHealthyArgs.builder()
  *                         .successes(1)
  *                         .httpStatuses(                        
@@ -122,8 +108,22 @@ import javax.annotation.Nullable;
  *                             501,
  *                             502)
  *                         .build())
+ *                     .type("https")
  *                     .build())
  *                 .build())
+ *             .name("sample_upstream")
+ *             .slots(10)
+ *             .hashOn("header")
+ *             .hashFallback("cookie")
+ *             .hashOnHeader("HeaderName")
+ *             .hashFallbackHeader("FallbackHeaderName")
+ *             .hashOnCookie("CookieName")
+ *             .hashOnCookiePath("/path")
+ *             .hostHeader("x-host")
+ *             .tags(            
+ *                 "a",
+ *                 "b")
+ *             .clientCertificateId(certificate.id())
  *             .build());
  * 
  *     }

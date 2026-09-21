@@ -20,6 +20,13 @@ import * as utilities from "./utilities";
  * import * as kong from "@pulumi/kong";
  *
  * const route = new kong.Route("route", {
+ *     headers: [{
+ *         name: "x-test-1",
+ *         values: [
+ *             "a",
+ *             "b",
+ *         ],
+ *     }],
  *     name: "MyRoute",
  *     protocols: [
  *         "http",
@@ -35,13 +42,6 @@ import * as utilities from "./utilities";
  *     preserveHost: true,
  *     regexPriority: 1,
  *     serviceId: service.id,
- *     headers: [{
- *         name: "x-test-1",
- *         values: [
- *             "a",
- *             "b",
- *         ],
- *     }],
  * });
  * ```
  *
@@ -52,9 +52,10 @@ import * as utilities from "./utilities";
  * import * as kong from "@pulumi/kong";
  *
  * const route = new kong.Route("route", {
- *     protocols: ["tcp"],
- *     stripPath: true,
- *     preserveHost: false,
+ *     destinations: [{
+ *         ip: "172.10.1.1",
+ *         port: 81,
+ *     }],
  *     sources: [
  *         {
  *             ip: "192.168.1.1",
@@ -64,10 +65,9 @@ import * as utilities from "./utilities";
  *             ip: "192.168.1.2",
  *         },
  *     ],
- *     destinations: [{
- *         ip: "172.10.1.1",
- *         port: 81,
- *     }],
+ *     protocols: ["tcp"],
+ *     stripPath: true,
+ *     preserveHost: false,
  *     snis: ["foo.com"],
  *     serviceId: service.id,
  * });

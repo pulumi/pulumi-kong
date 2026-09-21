@@ -28,6 +28,18 @@ namespace Pulumi.Kong
     /// {
     ///     var route = new Kong.Route("route", new()
     ///     {
+    ///         Headers = new[]
+    ///         {
+    ///             new Kong.Inputs.RouteHeaderArgs
+    ///             {
+    ///                 Name = "x-test-1",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "a",
+    ///                     "b",
+    ///                 },
+    ///             },
+    ///         },
     ///         Name = "MyRoute",
     ///         Protocols = new[]
     ///         {
@@ -51,18 +63,6 @@ namespace Pulumi.Kong
     ///         PreserveHost = true,
     ///         RegexPriority = 1,
     ///         ServiceId = service.Id,
-    ///         Headers = new[]
-    ///         {
-    ///             new Kong.Inputs.RouteHeaderArgs
-    ///             {
-    ///                 Name = "x-test-1",
-    ///                 Values = new[]
-    ///                 {
-    ///                     "a",
-    ///                     "b",
-    ///                 },
-    ///             },
-    ///         },
     ///     });
     /// 
     /// });
@@ -80,12 +80,14 @@ namespace Pulumi.Kong
     /// {
     ///     var route = new Kong.Route("route", new()
     ///     {
-    ///         Protocols = new[]
+    ///         Destinations = new[]
     ///         {
-    ///             "tcp",
+    ///             new Kong.Inputs.RouteDestinationArgs
+    ///             {
+    ///                 Ip = "172.10.1.1",
+    ///                 Port = 81,
+    ///             },
     ///         },
-    ///         StripPath = true,
-    ///         PreserveHost = false,
     ///         Sources = new[]
     ///         {
     ///             new Kong.Inputs.RouteSourceArgs
@@ -98,14 +100,12 @@ namespace Pulumi.Kong
     ///                 Ip = "192.168.1.2",
     ///             },
     ///         },
-    ///         Destinations = new[]
+    ///         Protocols = new[]
     ///         {
-    ///             new Kong.Inputs.RouteDestinationArgs
-    ///             {
-    ///                 Ip = "172.10.1.1",
-    ///                 Port = 81,
-    ///             },
+    ///             "tcp",
     ///         },
+    ///         StripPath = true,
+    ///         PreserveHost = false,
     ///         Snis = new[]
     ///         {
     ///             "foo.com",

@@ -25,28 +25,8 @@ import * as utilities from "./utilities";
  *     snis: ["foo.com"],
  * });
  * const upstream = new kong.Upstream("upstream", {
- *     name: "sample_upstream",
- *     slots: 10,
- *     hashOn: "header",
- *     hashFallback: "cookie",
- *     hashOnHeader: "HeaderName",
- *     hashFallbackHeader: "FallbackHeaderName",
- *     hashOnCookie: "CookieName",
- *     hashOnCookiePath: "/path",
- *     hostHeader: "x-host",
- *     tags: [
- *         "a",
- *         "b",
- *     ],
- *     clientCertificateId: certificate.id,
  *     healthchecks: {
  *         active: {
- *             type: "https",
- *             httpPath: "/status",
- *             timeout: 10,
- *             concurrency: 20,
- *             httpsVerifyCertificate: false,
- *             httpsSni: "some.domain.com",
  *             healthy: {
  *                 successes: 1,
  *                 interval: 5,
@@ -65,9 +45,14 @@ import * as utilities from "./utilities";
  *                     501,
  *                 ],
  *             },
+ *             type: "https",
+ *             httpPath: "/status",
+ *             timeout: 10,
+ *             concurrency: 20,
+ *             httpsVerifyCertificate: false,
+ *             httpsSni: "some.domain.com",
  *         },
  *         passive: {
- *             type: "https",
  *             healthy: {
  *                 successes: 1,
  *                 httpStatuses: [
@@ -86,8 +71,23 @@ import * as utilities from "./utilities";
  *                     502,
  *                 ],
  *             },
+ *             type: "https",
  *         },
  *     },
+ *     name: "sample_upstream",
+ *     slots: 10,
+ *     hashOn: "header",
+ *     hashFallback: "cookie",
+ *     hashOnHeader: "HeaderName",
+ *     hashFallbackHeader: "FallbackHeaderName",
+ *     hashOnCookie: "CookieName",
+ *     hashOnCookiePath: "/path",
+ *     hostHeader: "x-host",
+ *     tags: [
+ *         "a",
+ *         "b",
+ *     ],
+ *     clientCertificateId: certificate.id,
  * });
  * ```
  *

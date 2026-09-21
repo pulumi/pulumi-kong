@@ -36,28 +36,8 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewUpstream(ctx, "upstream", &kong.UpstreamArgs{
-//				Name:               pulumi.String("sample_upstream"),
-//				Slots:              pulumi.Int(10),
-//				HashOn:             pulumi.String("header"),
-//				HashFallback:       pulumi.String("cookie"),
-//				HashOnHeader:       pulumi.String("HeaderName"),
-//				HashFallbackHeader: pulumi.String("FallbackHeaderName"),
-//				HashOnCookie:       pulumi.String("CookieName"),
-//				HashOnCookiePath:   pulumi.String("/path"),
-//				HostHeader:         pulumi.String("x-host"),
-//				Tags: pulumi.StringArray{
-//					pulumi.String("a"),
-//					pulumi.String("b"),
-//				},
-//				ClientCertificateId: certificate.ID().ToIDOutput().ToStringOutput(),
 //				Healthchecks: &kong.UpstreamHealthchecksArgs{
 //					Active: &kong.UpstreamHealthchecksActiveArgs{
-//						Type:                   pulumi.String("https"),
-//						HttpPath:               pulumi.String("/status"),
-//						Timeout:                pulumi.Int(10),
-//						Concurrency:            pulumi.Int(20),
-//						HttpsVerifyCertificate: pulumi.Bool(false),
-//						HttpsSni:               pulumi.String("some.domain.com"),
 //						Healthy: &kong.UpstreamHealthchecksActiveHealthyArgs{
 //							Successes: pulumi.Int(1),
 //							Interval:  pulumi.Int(5),
@@ -76,9 +56,14 @@ import (
 //								pulumi.Int(501),
 //							},
 //						},
+//						Type:                   pulumi.String("https"),
+//						HttpPath:               pulumi.String("/status"),
+//						Timeout:                pulumi.Int(10),
+//						Concurrency:            pulumi.Int(20),
+//						HttpsVerifyCertificate: pulumi.Bool(false),
+//						HttpsSni:               pulumi.String("some.domain.com"),
 //					},
 //					Passive: &kong.UpstreamHealthchecksPassiveArgs{
-//						Type: pulumi.String("https"),
 //						Healthy: &kong.UpstreamHealthchecksPassiveHealthyArgs{
 //							Successes: pulumi.Int(1),
 //							HttpStatuses: pulumi.IntArray{
@@ -97,8 +82,23 @@ import (
 //								pulumi.Int(502),
 //							},
 //						},
+//						Type: pulumi.String("https"),
 //					},
 //				},
+//				Name:               pulumi.String("sample_upstream"),
+//				Slots:              pulumi.Int(10),
+//				HashOn:             pulumi.String("header"),
+//				HashFallback:       pulumi.String("cookie"),
+//				HashOnHeader:       pulumi.String("HeaderName"),
+//				HashFallbackHeader: pulumi.String("FallbackHeaderName"),
+//				HashOnCookie:       pulumi.String("CookieName"),
+//				HashOnCookiePath:   pulumi.String("/path"),
+//				HostHeader:         pulumi.String("x-host"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("a"),
+//					pulumi.String("b"),
+//				},
+//				ClientCertificateId: certificate.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
