@@ -33,6 +33,15 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
+//				Headers: kong.RouteHeaderArray{
+//					&kong.RouteHeaderArgs{
+//						Name: pulumi.String("x-test-1"),
+//						Values: pulumi.StringArray{
+//							pulumi.String("a"),
+//							pulumi.String("b"),
+//						},
+//					},
+//				},
 //				Name: pulumi.String("MyRoute"),
 //				Protocols: pulumi.StringArray{
 //					pulumi.String("http"),
@@ -52,15 +61,6 @@ import (
 //				PreserveHost:  pulumi.Bool(true),
 //				RegexPriority: pulumi.Int(1),
 //				ServiceId:     pulumi.Any(service.Id),
-//				Headers: kong.RouteHeaderArray{
-//					&kong.RouteHeaderArgs{
-//						Name: pulumi.String("x-test-1"),
-//						Values: pulumi.StringArray{
-//							pulumi.String("a"),
-//							pulumi.String("b"),
-//						},
-//					},
-//				},
 //			})
 //			if err != nil {
 //				return err
@@ -86,11 +86,12 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kong.NewRoute(ctx, "route", &kong.RouteArgs{
-//				Protocols: pulumi.StringArray{
-//					pulumi.String("tcp"),
+//				Destinations: kong.RouteDestinationArray{
+//					&kong.RouteDestinationArgs{
+//						Ip:   pulumi.String("172.10.1.1"),
+//						Port: pulumi.Int(81),
+//					},
 //				},
-//				StripPath:    pulumi.Bool(true),
-//				PreserveHost: pulumi.Bool(false),
 //				Sources: kong.RouteSourceArray{
 //					&kong.RouteSourceArgs{
 //						Ip:   pulumi.String("192.168.1.1"),
@@ -100,12 +101,11 @@ import (
 //						Ip: pulumi.String("192.168.1.2"),
 //					},
 //				},
-//				Destinations: kong.RouteDestinationArray{
-//					&kong.RouteDestinationArgs{
-//						Ip:   pulumi.String("172.10.1.1"),
-//						Port: pulumi.Int(81),
-//					},
+//				Protocols: pulumi.StringArray{
+//					pulumi.String("tcp"),
 //				},
+//				StripPath:    pulumi.Bool(true),
+//				PreserveHost: pulumi.Bool(false),
 //				Snis: pulumi.StringArray{
 //					pulumi.String("foo.com"),
 //				},

@@ -53,6 +53,12 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var route = new Route("route", RouteArgs.builder()
+ *             .headers(RouteHeaderArgs.builder()
+ *                 .name("x-test-1")
+ *                 .values(                
+ *                     "a",
+ *                     "b")
+ *                 .build())
  *             .name("MyRoute")
  *             .protocols(            
  *                 "http",
@@ -66,12 +72,6 @@ import javax.annotation.Nullable;
  *             .preserveHost(true)
  *             .regexPriority(1)
  *             .serviceId(service.id())
- *             .headers(RouteHeaderArgs.builder()
- *                 .name("x-test-1")
- *                 .values(                
- *                     "a",
- *                     "b")
- *                 .build())
  *             .build());
  * 
  *     }
@@ -90,8 +90,8 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.pulumi.kong.Route;
  * import com.pulumi.kong.RouteArgs;
- * import com.pulumi.kong.inputs.RouteSourceArgs;
  * import com.pulumi.kong.inputs.RouteDestinationArgs;
+ * import com.pulumi.kong.inputs.RouteSourceArgs;
  * import java.util.ArrayList;
  * import java.util.Arrays;
  * import java.util.Map;
@@ -106,9 +106,10 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var route = new Route("route", RouteArgs.builder()
- *             .protocols("tcp")
- *             .stripPath(true)
- *             .preserveHost(false)
+ *             .destinations(RouteDestinationArgs.builder()
+ *                 .ip("172.10.1.1")
+ *                 .port(81)
+ *                 .build())
  *             .sources(            
  *                 RouteSourceArgs.builder()
  *                     .ip("192.168.1.1")
@@ -117,10 +118,9 @@ import javax.annotation.Nullable;
  *                 RouteSourceArgs.builder()
  *                     .ip("192.168.1.2")
  *                     .build())
- *             .destinations(RouteDestinationArgs.builder()
- *                 .ip("172.10.1.1")
- *                 .port(81)
- *                 .build())
+ *             .protocols("tcp")
+ *             .stripPath(true)
+ *             .preserveHost(false)
  *             .snis("foo.com")
  *             .serviceId(service.id())
  *             .build());

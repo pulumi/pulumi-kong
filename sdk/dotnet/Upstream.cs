@@ -38,31 +38,10 @@ namespace Pulumi.Kong
     /// 
     ///     var upstream = new Kong.Upstream("upstream", new()
     ///     {
-    ///         Name = "sample_upstream",
-    ///         Slots = 10,
-    ///         HashOn = "header",
-    ///         HashFallback = "cookie",
-    ///         HashOnHeader = "HeaderName",
-    ///         HashFallbackHeader = "FallbackHeaderName",
-    ///         HashOnCookie = "CookieName",
-    ///         HashOnCookiePath = "/path",
-    ///         HostHeader = "x-host",
-    ///         Tags = new[]
-    ///         {
-    ///             "a",
-    ///             "b",
-    ///         },
-    ///         ClientCertificateId = certificate.Id,
     ///         Healthchecks = new Kong.Inputs.UpstreamHealthchecksArgs
     ///         {
     ///             Active = new Kong.Inputs.UpstreamHealthchecksActiveArgs
     ///             {
-    ///                 Type = "https",
-    ///                 HttpPath = "/status",
-    ///                 Timeout = 10,
-    ///                 Concurrency = 20,
-    ///                 HttpsVerifyCertificate = false,
-    ///                 HttpsSni = "some.domain.com",
     ///                 Healthy = new Kong.Inputs.UpstreamHealthchecksActiveHealthyArgs
     ///                 {
     ///                     Successes = 1,
@@ -85,10 +64,15 @@ namespace Pulumi.Kong
     ///                         501,
     ///                     },
     ///                 },
+    ///                 Type = "https",
+    ///                 HttpPath = "/status",
+    ///                 Timeout = 10,
+    ///                 Concurrency = 20,
+    ///                 HttpsVerifyCertificate = false,
+    ///                 HttpsSni = "some.domain.com",
     ///             },
     ///             Passive = new Kong.Inputs.UpstreamHealthchecksPassiveArgs
     ///             {
-    ///                 Type = "https",
     ///                 Healthy = new Kong.Inputs.UpstreamHealthchecksPassiveHealthyArgs
     ///                 {
     ///                     Successes = 1,
@@ -111,8 +95,24 @@ namespace Pulumi.Kong
     ///                         502,
     ///                     },
     ///                 },
+    ///                 Type = "https",
     ///             },
     ///         },
+    ///         Name = "sample_upstream",
+    ///         Slots = 10,
+    ///         HashOn = "header",
+    ///         HashFallback = "cookie",
+    ///         HashOnHeader = "HeaderName",
+    ///         HashFallbackHeader = "FallbackHeaderName",
+    ///         HashOnCookie = "CookieName",
+    ///         HashOnCookiePath = "/path",
+    ///         HostHeader = "x-host",
+    ///         Tags = new[]
+    ///         {
+    ///             "a",
+    ///             "b",
+    ///         },
+    ///         ClientCertificateId = certificate.Id,
     ///     });
     /// 
     /// });
