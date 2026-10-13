@@ -71,7 +71,7 @@ import javax.annotation.Nullable;
  *             .stripPath(false)
  *             .preserveHost(true)
  *             .regexPriority(1)
- *             .serviceId(service.id())
+ *             .serviceId(service.get("id"))
  *             .build());
  * 
  *     }
@@ -122,7 +122,7 @@ import javax.annotation.Nullable;
  *             .stripPath(true)
  *             .preserveHost(false)
  *             .snis("foo.com")
- *             .serviceId(service.id())
+ *             .serviceId(service.get("id"))
  *             .build());
  * 
  *     }
