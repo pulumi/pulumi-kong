@@ -44,7 +44,7 @@ import javax.annotation.Nullable;
  *         var target = new Target("target", TargetArgs.builder()
  *             .target("sample_target:80")
  *             .weight(10)
- *             .upstreamId(upstream.id())
+ *             .upstreamId(upstream.get("id"))
  *             .build());
  * 
  *     }
