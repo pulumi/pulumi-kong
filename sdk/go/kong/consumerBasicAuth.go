@@ -44,7 +44,7 @@ import (
 //				return err
 //			}
 //			_, err = kong.NewConsumerBasicAuth(ctx, "consumer_basic_auth", &kong.ConsumerBasicAuthArgs{
-//				ConsumerId: myConsumer.ID().ToIDOutput().ToStringOutput(),
+//				ConsumerId: myConsumer.ID(),
 //				Username:   pulumi.String("foo_updated"),
 //				Password:   pulumi.String("bar_updated"),
 //				Tags: pulumi.StringArray{

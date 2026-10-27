@@ -98,7 +98,7 @@ import (
 //					pulumi.String("a"),
 //					pulumi.String("b"),
 //				},
-//				ClientCertificateId: certificate.ID().ToIDOutput().ToStringOutput(),
+//				ClientCertificateId: certificate.ID(),
 //			})
 //			if err != nil {
 //				return err

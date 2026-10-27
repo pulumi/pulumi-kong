@@ -55,7 +55,7 @@ import (
 //			}
 //			_, err = kong.NewConsumerOauth2(ctx, "consumer_oauth2", &kong.ConsumerOauth2Args{
 //				Name:         pulumi.String("test_application"),
-//				ConsumerId:   myConsumer.ID().ToIDOutput().ToStringOutput(),
+//				ConsumerId:   myConsumer.ID(),
 //				ClientId:     pulumi.String("client_id"),
 //				ClientSecret: pulumi.String("client_secret"),
 //				RedirectUris: pulumi.StringArray{

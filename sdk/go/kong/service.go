@@ -90,9 +90,9 @@ import (
 //				Host:                pulumi.String("test.org"),
 //				TlsVerify:           pulumi.Bool(true),
 //				TlsVerifyDepth:      pulumi.Int(2),
-//				ClientCertificateId: certificate.ID().ToIDOutput().ToStringOutput(),
+//				ClientCertificateId: certificate.ID(),
 //				CaCertificateIds: pulumi.StringArray{
-//					ca.ID().ToIDOutput().ToStringOutput(),
+//					ca.ID(),
 //				},
 //			})
 //			if err != nil {
