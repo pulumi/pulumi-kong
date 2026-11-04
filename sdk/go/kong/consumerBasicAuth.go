@@ -137,6 +137,12 @@ func (ConsumerBasicAuthState) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerBasicAuthState)(nil)).Elem()
 }
 
+// ConsumerBasicAuthExists checks whether an existing ConsumerBasicAuth resource with the given ID exists.
+func ConsumerBasicAuthExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConsumerBasicAuthState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/consumerBasicAuth:ConsumerBasicAuth", id, state, "", opts...)
+}
+
 type consumerBasicAuthArgs struct {
 	// the id of the consumer to be configured with basic auth
 	ConsumerId string `pulumi:"consumerId"`

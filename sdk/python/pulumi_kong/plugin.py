@@ -589,6 +589,30 @@ class Plugin(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         return Plugin(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            computed_config: pulumi.Input[Optional[_builtins.str]] = None,
+            config_json: pulumi.Input[Optional[_builtins.str]] = None,
+            consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+            enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            route_id: pulumi.Input[Optional[_builtins.str]] = None,
+            service_id: pulumi.Input[Optional[_builtins.str]] = None,
+            strict_match: pulumi.Input[Optional[_builtins.bool]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["computedConfig"] = computed_config
+        __props__["configJson"] = config_json
+        __props__["consumerId"] = consumer_id
+        __props__["enabled"] = enabled
+        __props__["name"] = name
+        __props__["routeId"] = route_id
+        __props__["serviceId"] = service_id
+        __props__["strictMatch"] = strict_match
+        __props__["tags"] = tags
+        return pulumi.runtime.exists_resource(None, 'kong:index/plugin:Plugin', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="computedConfig")
     def computed_config(self) -> pulumi.Output[_builtins.str]:

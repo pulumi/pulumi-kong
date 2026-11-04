@@ -42,12 +42,12 @@ import javax.annotation.Nullable;
  * import java.nio.file.Files;
  * import java.nio.file.Paths;
  * 
- * public class App {
- *     public static void main(String[] args) {
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
  *         Pulumi.run(App::stack);
- *     }
+ *     }}{@code
  * 
- *     public static void stack(Context ctx) {
+ *     public static void stack(Context ctx) }{{@code
  *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
@@ -56,9 +56,9 @@ import javax.annotation.Nullable;
  *         var jwtPlugin = new Plugin("jwtPlugin", PluginArgs.builder()
  *             .name("jwt")
  *             .configJson("""
- * \t{
- * \t\t\"claims_to_verify\": [\"exp\"]
- * \t}
+ * }&#92;{@code t}{{@code
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "claims_to_verify}&#92;{@code ": [}&#92;{@code "exp}&#92;{@code "]
+ * }&#92;{@code t}}{@code
  *             """)
  *             .build());
  * 
@@ -70,8 +70,8 @@ import javax.annotation.Nullable;
  *             .secret("my_secret")
  *             .build());
  * 
- *     }
- * }
+ *     }}{@code
+ * }}{@code
  * }
  * </pre>
  * 

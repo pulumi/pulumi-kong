@@ -781,6 +781,40 @@ class Service(pulumi.CustomResource):
         __props__.__dict__["write_timeout"] = write_timeout
         return Service(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            ca_certificate_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+            connect_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+            host: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            port: pulumi.Input[Optional[_builtins.int]] = None,
+            protocol: pulumi.Input[Optional[_builtins.str]] = None,
+            read_timeout: pulumi.Input[Optional[_builtins.int]] = None,
+            retries: pulumi.Input[Optional[_builtins.int]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            tls_verify: pulumi.Input[Optional[_builtins.bool]] = None,
+            tls_verify_depth: pulumi.Input[Optional[_builtins.int]] = None,
+            write_timeout: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["caCertificateIds"] = ca_certificate_ids
+        __props__["clientCertificateId"] = client_certificate_id
+        __props__["connectTimeout"] = connect_timeout
+        __props__["host"] = host
+        __props__["name"] = name
+        __props__["path"] = path
+        __props__["port"] = port
+        __props__["protocol"] = protocol
+        __props__["readTimeout"] = read_timeout
+        __props__["retries"] = retries
+        __props__["tags"] = tags
+        __props__["tlsVerify"] = tls_verify
+        __props__["tlsVerifyDepth"] = tls_verify_depth
+        __props__["writeTimeout"] = write_timeout
+        return pulumi.runtime.exists_resource(None, 'kong:index/service:Service', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="caCertificateIds")
     def ca_certificate_ids(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:

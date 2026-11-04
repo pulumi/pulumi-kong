@@ -128,6 +128,12 @@ func (ConsumerAclState) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerAclState)(nil)).Elem()
 }
 
+// ConsumerAclExists checks whether an existing ConsumerAcl resource with the given ID exists.
+func ConsumerAclExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConsumerAclState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/consumerAcl:ConsumerAcl", id, state, "", opts...)
+}
+
 type consumerAclArgs struct {
 	// the id of the consumer to be configured
 	ConsumerId string `pulumi:"consumerId"`

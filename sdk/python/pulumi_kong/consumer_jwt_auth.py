@@ -392,6 +392,24 @@ class ConsumerJwtAuth(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         return ConsumerJwtAuth(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+            key: pulumi.Input[Optional[_builtins.str]] = None,
+            rsa_public_key: pulumi.Input[Optional[_builtins.str]] = None,
+            secret: pulumi.Input[Optional[_builtins.str]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["algorithm"] = algorithm
+        __props__["consumerId"] = consumer_id
+        __props__["key"] = key
+        __props__["rsaPublicKey"] = rsa_public_key
+        __props__["secret"] = secret
+        __props__["tags"] = tags
+        return pulumi.runtime.exists_resource(None, 'kong:index/consumerJwtAuth:ConsumerJwtAuth', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def algorithm(self) -> pulumi.Output[Optional[_builtins.str]]:

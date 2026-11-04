@@ -292,6 +292,12 @@ func (UpstreamState) ElementType() reflect.Type {
 	return reflect.TypeOf((*upstreamState)(nil)).Elem()
 }
 
+// UpstreamExists checks whether an existing Upstream resource with the given ID exists.
+func UpstreamExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *UpstreamState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/upstream:Upstream", id, state, "", opts...)
+}
+
 type upstreamArgs struct {
 	// The ID of the client certificate to use (from certificate resource) while TLS handshaking to the upstream server.
 	ClientCertificateId *string `pulumi:"clientCertificateId"`

@@ -166,6 +166,12 @@ func (ConsumerOauth2State) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerOauth2State)(nil)).Elem()
 }
 
+// ConsumerOauth2Exists checks whether an existing ConsumerOauth2 resource with the given ID exists.
+func ConsumerOauth2Exists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConsumerOauth2State, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/consumerOauth2:ConsumerOauth2", id, state, "", opts...)
+}
+
 type consumerOauth2Args struct {
 	// Unique oauth2 client id. If not set, the oauth2 plugin will generate one
 	ClientId *string `pulumi:"clientId"`

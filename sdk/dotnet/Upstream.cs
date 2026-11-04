@@ -148,7 +148,7 @@ namespace Pulumi.Kong
         public Output<string?> HashFallbackHeader { get; private set; } = null!;
 
         /// <summary>
-        /// is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `Consumer`, `Ip`, `Header`, or `Cookie`. Defaults to `None`.
+        /// is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `Consumer`, `Ip`, `Header`, or `Cookie`. Defaults to `None`.
         /// </summary>
         [Output("hashOn")]
         public Output<string?> HashOn { get; private set; } = null!;
@@ -284,7 +284,7 @@ namespace Pulumi.Kong
         public Input<string>? HashFallbackHeader { get; set; }
 
         /// <summary>
-        /// is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `Consumer`, `Ip`, `Header`, or `Cookie`. Defaults to `None`.
+        /// is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `Consumer`, `Ip`, `Header`, or `Cookie`. Defaults to `None`.
         /// </summary>
         [Input("hashOn")]
         public Input<string>? HashOn { get; set; }
@@ -388,7 +388,7 @@ namespace Pulumi.Kong
         public Input<string>? HashFallbackHeader { get; set; }
 
         /// <summary>
-        /// is a hashing input type: `none `(resulting in a weighted*round*robin scheme with no hashing), `Consumer`, `Ip`, `Header`, or `Cookie`. Defaults to `None`.
+        /// is a hashing input type: ` none  `(resulting in a weighted*round*robin scheme with no hashing), `Consumer`, `Ip`, `Header`, or `Cookie`. Defaults to `None`.
         /// </summary>
         [Input("hashOn")]
         public Input<string>? HashOn { get; set; }

@@ -114,6 +114,12 @@ func (ConsumerState) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerState)(nil)).Elem()
 }
 
+// ConsumerExists checks whether an existing Consumer resource with the given ID exists.
+func ConsumerExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConsumerState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/consumer:Consumer", id, state, "", opts...)
+}
+
 type consumerArgs struct {
 	// A custom id for the consumer, you must set either the username or custom_id
 	CustomId *string `pulumi:"customId"`

@@ -268,6 +268,18 @@ class ConsumerKeyAuth(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         return ConsumerKeyAuth(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+            key: pulumi.Input[Optional[_builtins.str]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["consumerId"] = consumer_id
+        __props__["key"] = key
+        __props__["tags"] = tags
+        return pulumi.runtime.exists_resource(None, 'kong:index/consumerKeyAuth:ConsumerKeyAuth', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="consumerId")
     def consumer_id(self) -> pulumi.Output[_builtins.str]:
