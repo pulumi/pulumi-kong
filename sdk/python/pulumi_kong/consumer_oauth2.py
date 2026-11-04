@@ -447,6 +447,26 @@ class ConsumerOauth2(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         return ConsumerOauth2(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            consumer_id: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_secret: pulumi.Input[Optional[_builtins.bool]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            redirect_uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["clientId"] = client_id
+        __props__["clientSecret"] = client_secret
+        __props__["consumerId"] = consumer_id
+        __props__["hashSecret"] = hash_secret
+        __props__["name"] = name
+        __props__["redirectUris"] = redirect_uris
+        __props__["tags"] = tags
+        return pulumi.runtime.exists_resource(None, 'kong:index/consumerOauth2:ConsumerOauth2', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Output[Optional[_builtins.str]]:

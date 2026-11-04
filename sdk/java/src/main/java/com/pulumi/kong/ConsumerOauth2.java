@@ -43,12 +43,12 @@ import javax.annotation.Nullable;
  * import java.nio.file.Files;
  * import java.nio.file.Paths;
  * 
- * public class App {
- *     public static void main(String[] args) {
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
  *         Pulumi.run(App::stack);
- *     }
+ *     }}{@code
  * 
- *     public static void stack(Context ctx) {
+ *     public static void stack(Context ctx) }{{@code
  *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
@@ -57,13 +57,13 @@ import javax.annotation.Nullable;
  *         var oauth2Plugin = new Plugin("oauth2Plugin", PluginArgs.builder()
  *             .name("oauth2")
  *             .configJson("""
- * \t{
- * \t\t\"global_credentials\": true,
- * \t\t\"enable_password_grant\": true,
- * \t\t\"token_expiration\": 180,
- * \t\t\"refresh_token_ttl\": 180,
- * \t\t\"provision_key\": \"testprovisionkey\"
- * \t}
+ * }&#92;{@code t}{{@code
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "global_credentials}&#92;{@code ": true,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "enable_password_grant}&#92;{@code ": true,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "token_expiration}&#92;{@code ": 180,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "refresh_token_ttl}&#92;{@code ": 180,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "provision_key}&#92;{@code ": }&#92;{@code "testprovisionkey}&#92;{@code "
+ * }&#92;{@code t}}{@code
  *             """)
  *             .build());
  * 
@@ -78,8 +78,8 @@ import javax.annotation.Nullable;
  *             .tags("myTag")
  *             .build());
  * 
- *     }
- * }
+ *     }}{@code
+ * }}{@code
  * }
  * </pre>
  * 

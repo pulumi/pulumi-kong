@@ -124,6 +124,12 @@ func (TargetState) ElementType() reflect.Type {
 	return reflect.TypeOf((*targetState)(nil)).Elem()
 }
 
+// TargetExists checks whether an existing Target resource with the given ID exists.
+func TargetExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *TargetState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/target:Target", id, state, "", opts...)
+}
+
 type targetArgs struct {
 	// A list set of strings associated with the Plugin for grouping and filtering
 	Tags []string `pulumi:"tags"`

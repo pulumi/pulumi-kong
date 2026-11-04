@@ -868,6 +868,36 @@ class Upstream(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         return Upstream(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            client_certificate_id: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_fallback: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_fallback_header: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on_cookie: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on_cookie_path: pulumi.Input[Optional[_builtins.str]] = None,
+            hash_on_header: pulumi.Input[Optional[_builtins.str]] = None,
+            healthchecks: pulumi.Input[Optional[Union['UpstreamHealthchecksArgs', 'UpstreamHealthchecksArgsDict', 'outputs.UpstreamHealthchecks']]] = None,
+            host_header: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            slots: pulumi.Input[Optional[_builtins.int]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["clientCertificateId"] = client_certificate_id
+        __props__["hashFallback"] = hash_fallback
+        __props__["hashFallbackHeader"] = hash_fallback_header
+        __props__["hashOn"] = hash_on
+        __props__["hashOnCookie"] = hash_on_cookie
+        __props__["hashOnCookiePath"] = hash_on_cookie_path
+        __props__["hashOnHeader"] = hash_on_header
+        __props__["healthchecks"] = healthchecks
+        __props__["hostHeader"] = host_header
+        __props__["name"] = name
+        __props__["slots"] = slots
+        __props__["tags"] = tags
+        return pulumi.runtime.exists_resource(None, 'kong:index/upstream:Upstream', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> pulumi.Output[Optional[_builtins.str]]:

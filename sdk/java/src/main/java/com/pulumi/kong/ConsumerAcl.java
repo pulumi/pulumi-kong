@@ -42,12 +42,12 @@ import javax.annotation.Nullable;
  * import java.nio.file.Files;
  * import java.nio.file.Paths;
  * 
- * public class App {
- *     public static void main(String[] args) {
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
  *         Pulumi.run(App::stack);
- *     }
+ *     }}{@code
  * 
- *     public static void stack(Context ctx) {
+ *     public static void stack(Context ctx) }{{@code
  *         var myConsumer = new Consumer("myConsumer", ConsumerArgs.builder()
  *             .username("User1")
  *             .customId("123")
@@ -56,9 +56,9 @@ import javax.annotation.Nullable;
  *         var aclPlugin = new Plugin("aclPlugin", PluginArgs.builder()
  *             .name("acl")
  *             .configJson("""
- * \t{
- * \t\t\"allow\": [\"group1\", \"group2\"]
- * \t}
+ * }&#92;{@code t}{{@code
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "allow}&#92;{@code ": [}&#92;{@code "group1}&#92;{@code ", }&#92;{@code "group2}&#92;{@code "]
+ * }&#92;{@code t}}{@code
  *             """)
  *             .build());
  * 
@@ -70,8 +70,8 @@ import javax.annotation.Nullable;
  *                 "otherTag")
  *             .build());
  * 
- *     }
- * }
+ *     }}{@code
+ * }}{@code
  * }
  * </pre>
  * 

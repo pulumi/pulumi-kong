@@ -952,6 +952,48 @@ class Route(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         return Route(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            destinations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteDestinationArgs', 'RouteDestinationArgsDict', 'outputs.RouteDestination']]]]] = None,
+            headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteHeaderArgs', 'RouteHeaderArgsDict', 'outputs.RouteHeader']]]]] = None,
+            hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            https_redirect_status_code: pulumi.Input[Optional[_builtins.int]] = None,
+            methods: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path_handling: pulumi.Input[Optional[_builtins.str]] = None,
+            paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            preserve_host: pulumi.Input[Optional[_builtins.bool]] = None,
+            protocols: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            regex_priority: pulumi.Input[Optional[_builtins.int]] = None,
+            request_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+            response_buffering: pulumi.Input[Optional[_builtins.bool]] = None,
+            service_id: pulumi.Input[Optional[_builtins.str]] = None,
+            snis: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            sources: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteSourceArgs', 'RouteSourceArgsDict', 'outputs.RouteSource']]]]] = None,
+            strip_path: pulumi.Input[Optional[_builtins.bool]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["destinations"] = destinations
+        __props__["headers"] = headers
+        __props__["hosts"] = hosts
+        __props__["httpsRedirectStatusCode"] = https_redirect_status_code
+        __props__["methods"] = methods
+        __props__["name"] = name
+        __props__["pathHandling"] = path_handling
+        __props__["paths"] = paths
+        __props__["preserveHost"] = preserve_host
+        __props__["protocols"] = protocols
+        __props__["regexPriority"] = regex_priority
+        __props__["requestBuffering"] = request_buffering
+        __props__["responseBuffering"] = response_buffering
+        __props__["serviceId"] = service_id
+        __props__["snis"] = snis
+        __props__["sources"] = sources
+        __props__["stripPath"] = strip_path
+        __props__["tags"] = tags
+        return pulumi.runtime.exists_resource(None, 'kong:index/route:Route', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def destinations(self) -> pulumi.Output[Optional[Sequence['outputs.RouteDestination']]]:

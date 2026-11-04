@@ -40,24 +40,24 @@ import javax.annotation.Nullable;
  * import java.nio.file.Files;
  * import java.nio.file.Paths;
  * 
- * public class App {
- *     public static void main(String[] args) {
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
  *         Pulumi.run(App::stack);
- *     }
+ *     }}{@code
  * 
- *     public static void stack(Context ctx) {
+ *     public static void stack(Context ctx) }{{@code
  *         var rateLimit = new Plugin("rateLimit", PluginArgs.builder()
  *             .name("rate-limiting")
  *             .configJson("""
- * \t{
- * \t\t\"second\": 5,
- * \t\t\"hour\" : 1000
- * \t}
+ * }&#92;{@code t}{{@code
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "second}&#92;{@code ": 5,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "hour}&#92;{@code " : 1000
+ * }&#92;{@code t}}{@code
  *             """)
  *             .build());
  * 
- *     }
- * }
+ *     }}{@code
+ * }}{@code
  * }
  * </pre>
  * To apply a plugin to a consumer use the `consumerId` property, for example:
@@ -80,12 +80,12 @@ import javax.annotation.Nullable;
  * import java.nio.file.Files;
  * import java.nio.file.Paths;
  * 
- * public class App {
- *     public static void main(String[] args) {
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
  *         Pulumi.run(App::stack);
- *     }
+ *     }}{@code
  * 
- *     public static void stack(Context ctx) {
+ *     public static void stack(Context ctx) }{{@code
  *         var pluginConsumer = new Consumer("pluginConsumer", ConsumerArgs.builder()
  *             .username("PluginUser")
  *             .customId("567")
@@ -95,15 +95,15 @@ import javax.annotation.Nullable;
  *             .name("rate-limiting")
  *             .consumerId(pluginConsumer.id())
  *             .configJson("""
- * \t{
- * \t\t\"second\": 5,
- * \t\t\"hour\" : 1000
- * \t}
+ * }&#92;{@code t}{{@code
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "second}&#92;{@code ": 5,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "hour}&#92;{@code " : 1000
+ * }&#92;{@code t}}{@code
  *             """)
  *             .build());
  * 
- *     }
- * }
+ *     }}{@code
+ * }}{@code
  * }
  * </pre>
  * 
@@ -127,12 +127,12 @@ import javax.annotation.Nullable;
  * import java.nio.file.Files;
  * import java.nio.file.Paths;
  * 
- * public class App {
- *     public static void main(String[] args) {
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
  *         Pulumi.run(App::stack);
- *     }
+ *     }}{@code
  * 
- *     public static void stack(Context ctx) {
+ *     public static void stack(Context ctx) }{{@code
  *         var service = new Service("service", ServiceArgs.builder()
  *             .name("test")
  *             .protocol("http")
@@ -143,15 +143,15 @@ import javax.annotation.Nullable;
  *             .name("rate-limiting")
  *             .serviceId(service.id())
  *             .configJson("""
- * \t{
- * \t\t\"second\": 10,
- * \t\t\"hour\" : 2000
- * \t}
+ * }&#92;{@code t}{{@code
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "second}&#92;{@code ": 10,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "hour}&#92;{@code " : 2000
+ * }&#92;{@code t}}{@code
  *             """)
  *             .build());
  * 
- *     }
- * }
+ *     }}{@code
+ * }}{@code
  * }
  * </pre>
  * 
@@ -175,12 +175,12 @@ import javax.annotation.Nullable;
  * import java.nio.file.Files;
  * import java.nio.file.Paths;
  * 
- * public class App {
- *     public static void main(String[] args) {
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
  *         Pulumi.run(App::stack);
- *     }
+ *     }}{@code
  * 
- *     public static void stack(Context ctx) {
+ *     public static void stack(Context ctx) }{{@code
  *         var service = new Service("service", ServiceArgs.builder()
  *             .name("test")
  *             .protocol("http")
@@ -192,15 +192,15 @@ import javax.annotation.Nullable;
  *             .enabled(true)
  *             .serviceId(service.id())
  *             .configJson("""
- * \t{
- * \t\t\"second\": 11,
- * \t\t\"hour\" : 4000
- * \t}
+ * }&#92;{@code t}{{@code
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "second}&#92;{@code ": 11,
+ * }&#92;{@code t}&#92;{@code t}&#92;{@code "hour}&#92;{@code " : 4000
+ * }&#92;{@code t}}{@code
  *             """)
  *             .build());
  * 
- *     }
- * }
+ *     }}{@code
+ * }}{@code
  * }
  * </pre>
  * 

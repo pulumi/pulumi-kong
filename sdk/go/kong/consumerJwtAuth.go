@@ -145,6 +145,12 @@ func (ConsumerJwtAuthState) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerJwtAuthState)(nil)).Elem()
 }
 
+// ConsumerJwtAuthExists checks whether an existing ConsumerJwtAuth resource with the given ID exists.
+func ConsumerJwtAuthExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConsumerJwtAuthState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/consumerJwtAuth:ConsumerJwtAuth", id, state, "", opts...)
+}
+
 type consumerJwtAuthArgs struct {
 	// The algorithm used to verify the token’s signature. Can be HS256, HS384, HS512, RS256, or ES256, Default is `HS256`
 	Algorithm *string `pulumi:"algorithm"`

@@ -131,6 +131,12 @@ func (ConsumerKeyAuthState) ElementType() reflect.Type {
 	return reflect.TypeOf((*consumerKeyAuthState)(nil)).Elem()
 }
 
+// ConsumerKeyAuthExists checks whether an existing ConsumerKeyAuth resource with the given ID exists.
+func ConsumerKeyAuthExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConsumerKeyAuthState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("kong:index/consumerKeyAuth:ConsumerKeyAuth", id, state, "", opts...)
+}
+
 type consumerKeyAuthArgs struct {
 	// the id of the consumer to associate the credentials to
 	ConsumerId string `pulumi:"consumerId"`
